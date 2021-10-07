@@ -26,8 +26,10 @@ build instructions will arrive later.
 
 ## Contribute
 
-Since I've been cleaning up and improving the codebase recently, please open an issue before
-contributing. It would avoid some repetitive work.
+If you have any questions or suggestions, feel free
+to [open an issue](https://github.com/timer-machine/timer-machine-android/issues/new).
+
+If you would like to create a pull request, please open an issue before contributing because I'm cleaning up and improving the codebase. It would avoid some repetitive work.
 
 ## License
 
