@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="Widget.AppTheme.LinearLayout.VoiceVariableTable" parent="">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:divider">@drawable/voice_variable_table_divider</item>
+        <item name="android:gravity">center</item>
+        <item name="android:orientation">vertical</item>
+        <item name="android:showDividers">beginning|middle|end</item>
+    </style>
+
+    <style name="Widget.AppTheme.TextView.VoiceVariableTable.GroupTitle" parent="">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textAppearance">?textAppearanceSubtitle2</item>
+    </style>
+
+    <style name="Widget.AppTheme.Chip.VoiceVariableTable" parent="">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textAlignment">center</item>
+        <item name="chipBackgroundColor">@android:color/transparent</item>
+        <item name="chipStrokeColor">@color/voice_variable_chip_stroke</item>
+        <item name="chipStrokeWidth">1dp</item>
+        <item name="ensureMinTouchTargetSize">false</item>
+    </style>
+
+    <style name="Widget.AppTheme.TextInputLayout.VoiceVariableContent" parent="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense.ExposedDropdownMenu">
+        <item name="android:hint">@string/voice_content_title</item>
+        <item name="endIconMode">none</item>
+    </style>
+
+    <style name="Widget.AppTheme.AutoCompleteTextView.VoiceVariableContent" parent="">
+        <item name="android:imeOptions">actionDone|flagNoFullscreen</item>
+        <item name="android:inputType">text|textMultiLine|textNoSuggestions</item>
+    </style>
+
+    <style name="Widget.AppTheme.MaterialAlertDialog.VoiceVariable">
+        <item name="android:windowMinWidthMajor">100%</item>
+        <item name="android:windowMinWidthMinor">100%</item>
+    </style>
+
+</resources>

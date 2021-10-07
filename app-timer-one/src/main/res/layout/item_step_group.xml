@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="?listPreferredItemHeightSmall"
+    android:minHeight="?listPreferredItemHeightSmall">
+
+    <FrameLayout
+        android:id="@+id/layoutStepGroupIndicator"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="24dp"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintBottom_toBottomOf="@id/viewStepGroupDivider"
+        app:layout_constraintEnd_toStartOf="@id/textStepGroupName"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/textStepGroupNumber"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:maxLength="2"
+            android:maxLines="1"
+            android:textColor="?android:textColorPrimary"
+            android:textSize="12sp"
+            tools:text="1" />
+
+    </FrameLayout>
+
+    <TextView
+        android:id="@+id/textStepGroupName"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:textAppearance="@style/TextAppearance.Stepper.NonSelected"
+        android:textColor="?android:textColorPrimary"
+        app:layout_constraintBottom_toBottomOf="@id/layoutStepGroupIndicator"
+        app:layout_constraintEnd_toStartOf="@id/textStepGroupLoop"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@id/layoutStepGroupIndicator"
+        app:layout_constraintTop_toTopOf="@id/layoutStepGroupIndicator"
+        tools:text="@tools:sample/lorem" />
+
+    <TextView
+        android:id="@+id/textStepGroupLoop"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="16dp"
+        android:textAppearance="@style/TextAppearance.Stepper.NonSelected"
+        android:textColor="?android:textColorPrimary"
+        app:layout_constraintBottom_toBottomOf="@id/layoutStepGroupIndicator"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@id/textStepGroupName"
+        app:layout_constraintTop_toTopOf="@id/layoutStepGroupIndicator"
+        tools:text="1/3" />
+
+    <View
+        android:id="@+id/viewStepGroupDivider"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="?android:listDivider"
+        android:importantForAccessibility="no"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

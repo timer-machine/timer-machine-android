@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:paddingTop="8dp">
+
+    <FrameLayout
+        android:id="@+id/frameVibrationPatternShort"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingStart="20dp"
+        android:paddingEnd="20dp">
+
+        <RadioButton
+            android:layout_width="match_parent"
+            android:layout_height="?listPreferredItemHeightSmall"
+            android:gravity="center_vertical"
+            android:paddingStart="20dp"
+            android:paddingEnd="0dp"
+            android:text="@string/vibration_short"
+            android:textAppearance="?android:textAppearanceMedium"
+            android:textColor="?textColorAlertDialogListItem" />
+
+        <ImageButton
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_gravity="center_vertical|end"
+            android:background="?selectableItemBackgroundBorderless"
+            android:contentDescription="@string/vibration_short"
+            android:padding="12dp"
+            android:scaleType="fitXY"
+            app:srcCompat="@drawable/ic_vibration"
+            app:tint="?colorSecondary" />
+
+    </FrameLayout>
+
+    <FrameLayout
+        android:id="@+id/frameVibrationPatternNormal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingStart="20dp"
+        android:paddingEnd="20dp">
+
+        <RadioButton
+            android:layout_width="match_parent"
+            android:layout_height="?listPreferredItemHeightSmall"
+            android:gravity="center_vertical"
+            android:paddingStart="20dp"
+            android:paddingEnd="0dp"
+            android:text="@string/vibration_normal"
+            android:textAppearance="?android:textAppearanceMedium"
+            android:textColor="?textColorAlertDialogListItem" />
+
+        <ImageButton
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_gravity="center_vertical|end"
+            android:background="?selectableItemBackgroundBorderless"
+            android:contentDescription="@string/vibration_normal"
+            android:padding="12dp"
+            android:scaleType="fitXY"
+            app:srcCompat="@drawable/ic_vibration"
+            app:tint="?colorSecondary" />
+
+    </FrameLayout>
+
+    <FrameLayout
+        android:id="@+id/frameVibrationPatternLong"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingStart="20dp"
+        android:paddingEnd="20dp">
+
+        <RadioButton
+            android:layout_width="match_parent"
+            android:layout_height="?listPreferredItemHeightSmall"
+            android:gravity="center_vertical"
+            android:paddingStart="20dp"
+            android:paddingEnd="0dp"
+            android:text="@string/vibration_long"
+            android:textAppearance="?android:textAppearanceMedium"
+            android:textColor="?textColorAlertDialogListItem" />
+
+        <ImageButton
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_gravity="center_vertical|end"
+            android:background="?selectableItemBackgroundBorderless"
+            android:contentDescription="@string/vibration_long"
+            android:padding="12dp"
+            android:scaleType="fitXY"
+            app:srcCompat="@drawable/ic_vibration"
+            app:tint="?colorSecondary" />
+
+    </FrameLayout>
+
+</LinearLayout>

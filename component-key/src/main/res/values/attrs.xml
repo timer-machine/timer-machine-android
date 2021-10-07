@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="RoundTextView">
+        <attr name="bgColor" format="color" />
+        <attr name="topLeftCorner" format="dimension" />
+        <attr name="topRightCorner" format="dimension" />
+        <attr name="bottomRightCorner" format="dimension" />
+        <attr name="bottomLeftCorner" format="dimension" />
+        <attr name="allCorner" format="dimension" />
+    </declare-styleable>
+
+    <declare-styleable name="NameLoopView">
+        <attr name="nlv_view_color" format="color" />
+    </declare-styleable>
+
+</resources>

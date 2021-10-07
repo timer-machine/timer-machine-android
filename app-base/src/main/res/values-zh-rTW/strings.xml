@@ -1,0 +1,751 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="app_name">計時機器</string>
+
+    <!--Common actions-->
+    <string name="understand">明白啦</string>
+    <string name="add">新增</string>
+    <string name="discard">丟棄</string>
+    <string name="save">儲存</string>
+    <string name="duplicate">複製</string>
+    <string name="enable">啟用</string>
+    <string name="disable">禁用</string>
+    <string name="nav_up">轉到上一層級</string>
+    <string name="open_menu">開啟選單</string>
+    <string name="edit">編輯</string>
+    <string name="previous">上一步</string>
+    <string name="next">下一步</string>
+    <string name="exit">退出</string>
+    <string name="move">移動</string>
+    <string name="expand">展開</string>
+    <string name="deselect">取消選擇</string>
+    <string name="share">分享</string>
+    <string name="dismiss">關閉</string>
+
+    <!--App actions-->
+    <string name="start">開始</string>
+    <string name="pause">暫停</string>
+    <string name="stop">重設</string>
+    <string name="plus_one_minute">增加 1 分鐘</string>
+
+    <!--Common-->
+    <string name="unknown">不明</string>
+    <string name="never_show_again">不再提示</string>
+    <string name="thanks">謝謝支援！</string>
+    <string name="consume_data_warning">此操作會開啟一個網頁並消耗移動資料</string>
+    <string name="no_action_found">沒有應用可執行此操作</string>
+    <string name="empty">什麼都沒有</string>
+    <string name="delete_confirmation_template">刪除 %s?</string>
+    <string name="delete_done_template">%s 已刪除</string>
+    <string name="trash_done_template">%s 已移至垃圾桶</string>
+    <string name="save_changes">儲存修改？</string>
+    <string name="privacy_policy">隱私保護政策</string>
+    <string name="terms_of_service">服務條款</string>
+
+    <!--Main actions-->
+    <string name="main_action_timers">計時器</string>
+    <string name="main_action_schedulers">計劃任務</string>
+    <string name="main_action_backup">備份與還原</string>
+    <string name="main_action_help">幫助與反饋</string>
+    <string name="main_action_settings">設定</string>
+    <string name="main_action_dark">深色主題</string>
+    <string name="main_action_record">執行記錄</string>
+
+    <!--Permission-->
+    <string name="perm_rational_shortcut">要建立計時器快捷方式，請授予應用“建立快捷方式”的許可權</string>
+    <string name="perm_rational_floating">要顯示懸浮窗，請授予應用“懸浮窗”的許可權</string>
+
+    <!--Timer list-->
+    <plurals name="timers">
+        <item quantity="other">%1$s 個計時器</item>
+    </plurals>
+    <string name="timer_pick_required">點此選擇一個計時器</string>
+    <string name="timer_pick_hint">選擇一個計時器</string>
+
+    <!--Folder-->
+    <string name="folder_default">預設合集</string>
+    <string name="folder_new_folder">新建合集</string>
+    <string name="folder_trash">垃圾桶</string>
+    <string name="folder_name">合集名稱</string>
+    <string name="folder_rename">重新命名合集</string>
+    <string name="folder_delete">刪除合集</string>
+    <string name="folder_delete_timer_explanation">計時器及其執行記錄和計劃任務會被永久刪除</string>
+    <string name="folder_trash_folder_confirmation">移至垃圾桶中？</string>
+    <string name="folder_empty_trash_confirmation">清空垃圾桶？</string>
+    <string name="folder_sort">排序依據</string>
+    <string name="folder_sort_added_newest">新增日期（從新到舊）</string>
+    <string name="folder_sort_added_oldest">新增日期（從舊到新）</string>
+    <string name="folder_sort_run_newest">執行日期（從新到舊）</string>
+    <string name="folder_sort_run_oldest">執行日期（從舊到新）</string>
+    <string name="folder_sort_a_to_z">名稱（從 A 到 Z）</string>
+    <string name="folder_sort_z_to_a">名稱（從 Z 到 A）</string>
+    <string name="folder_to_list_view">切換為清單檢視</string>
+    <string name="folder_to_grid_view">切換為格狀檢視</string>
+
+    <!--Edit screen-->
+    <string name="edit_create_timer">建立計時器</string>
+    <string name="edit_edit_timer">編輯計時器</string>
+    <string name="edit_default_timer_name">計時器</string>
+    <string name="edit_step_name">步驟名稱</string>
+    <string name="edit_default_step_name">步驟</string>
+    <string name="edit_default_notifier_name">通知步驟</string>
+    <string name="edit_group">組</string>
+    <string name="edit_start_step">計時器開始</string>
+    <string name="edit_end_step">計時器結束</string>
+    <string name="edit_group_start">組開始</string>
+    <string name="edit_group_end">組結束</string>
+    <string name="edit_delete_group">刪除組</string>
+    <string name="edit_step">編輯步驟</string>
+    <string name="edit_add_step">新增新步驟</string>
+    <string name="edit_add_normal">普通步驟</string>
+    <string name="edit_add_normal_desp">新增一個普通步驟</string>
+    <string name="edit_add_notifier">通知步驟</string>
+    <string name="edit_add_notifier_desp">一個方便的用於提醒的步驟，會記憶編輯的內容</string>
+    <string name="edit_add_group">組</string>
+    <string name="edit_add_group_desp">有著自己的名字和循環，並可以包含多個步驟</string>
+    <string name="edit_add_start">起始步驟</string>
+    <string name="edit_add_start_desp">當且僅當整個計時器開始時，執行此步驟一次</string>
+    <string name="edit_add_start_too_many">已經有一個起始步驟啦</string>
+    <string name="edit_add_end">結束步驟</string>
+    <string name="edit_add_end_desp">當且僅當整個計時器結束時，執行此步驟一次</string>
+    <string name="edit_add_end_too_many">已經有一個結束步驟啦</string>
+    <string name="edit_at_least_1s">步驟最短時長是1秒鐘</string>
+    <string name="edit_wrong_empty_name">計時器名字不應為空</string>
+    <string name="edit_wrong_negative_loop">循環應為一個正整數</string>
+    <string name="edit_wrong_empty_steps">計時器應至少有一個步驟</string>
+    <string name="edit_more_show_notif">顯示計時通知</string>
+    <string name="edit_more_notif_count">在計時通知中顯示剩餘時間</string>
+    <string name="edit_more_trigger">此計時器結束時，啟動</string>
+    <string name="edit_more_a11y">更多計時器設定</string>
+    <string name="edit_cant_move_start">不能移動起始步驟呀</string>
+    <string name="edit_cant_move_end">不能移動結束步驟呀</string>
+    <string name="edit_cant_move_group">不能移動組呀</string>
+    <string name="edit_cant_move_footer">不能移動這些按鈕呀</string>
+    <string name="edit_share_as_text">以文字分享</string>
+    <string name="edit_import_from_the_clipboard">從剪貼簿匯入</string>
+
+    <!--Edit widgets-->
+    <string name="name_loop_name_hint">名稱</string>
+    <string name="name_loop_loop_hint">循環</string>
+
+    <string name="time_picker_type_panel">面板</string>
+    <string name="time_picker_type_scroll">滾動</string>
+
+    <!--Behaviour-->
+    <string name="behaviour_no_behaviours">一個安靜的步驟</string>
+    <string name="behaviour_add_new">新增提醒方式</string>
+
+    <string name="behaviour_music">音樂</string>
+    <string name="behaviour_music_help">在此步驟播放音樂</string>
+    <string name="music_pick_ringtone">選擇步驟鈴聲</string>
+    <string name="music_loop">循環</string>
+    <string name="music_saf_pick">SAF音樂選擇</string>
+    <string name="music_saf_pick_desp">如果你想在不授予許可權的情況下挑選音樂，或者預設的鈴聲挑選器不顯示你的音樂，啟用此選項可能有幫助。</string>
+
+    <string name="behaviour_vibration">振動</string>
+    <string name="behaviour_vibration_help">在此步驟振動手機</string>
+    <string name="vibration_count">次數</string>
+    <string name="vibration_count_desp_0">0 代表一直振動到步驟結束</string>
+    <string name="vibration_count_desp_range">振動次數需要在0到100之間</string>
+    <string name="vibration_pattern">模式</string>
+    <string name="vibration_short">短振動</string>
+    <string name="vibration_normal">正常振動</string>
+    <string name="vibration_long">長振動</string>
+
+    <string name="behaviour_screen">螢幕</string>
+    <string name="behaviour_screen_help">喚醒螢幕並彈出提醒介面</string>
+    <string name="screen_fullscreen">總是全屏</string>
+
+    <string name="behaviour_halt">中斷</string>
+    <string name="behaviour_halt_help">停留在此步驟等待手動下一步，並將倒計時轉換為正向計時</string>
+
+    <string name="behaviour_voice">朗讀</string>
+    <string name="behaviour_voice_help">朗讀步驟名稱</string>
+    <string name="voice_content_title">朗讀內容</string>
+    <string name="voice_content_info_empty">* 此項為空時，將會朗讀步驟名稱。</string>
+    <string name="voice_content_info_variables_intro">* 點選左下角的“變數”來選擇新增變數，它們會在執行時被替換為相應的值。</string>
+    <string name="voice_content_group_variables">* 描述以“(組)”開頭的變數表示，當步驟在組中時，將會計算相對於該組的值。</string>
+    <string name="voice_variables">變數</string>
+    <string name="voice_loop">當前循環</string>
+    <string name="voice_total_loop">總循環</string>
+    <string name="voice_step_name">步驟名稱</string>
+    <string name="voice_step_duration">步驟時長</string>
+    <string name="voice_time_variable">時間</string>
+    <string name="voice_current_time">當前時間（例如：%s）</string>
+    <string name="voice_group_end_time">組結束時間</string>
+    <string name="voice_content2_enable">使用新變數</string>
+    <string name="voice_content2_disable">使用舊變數</string>
+
+    <string name="voice_variable_info_usage">* 變數會在執行時被替換為相應的值。</string>
+    <string name="voice_variable_info_operations">* 點選變數插入其至輸入框。長按變數檢視其解釋。</string>
+
+    <string name="voice_variable_timer_group">計時器</string>
+    <string name="voice_variable_timer_name_desp">計時器名稱</string>
+    <string name="voice_variable_timer_loop_desp">計時器當前循環</string>
+    <string name="voice_variable_timer_total_loop_desp">計時器總循環</string>
+    <string name="voice_variable_timer_duration_desp">計時器總時長</string>
+    <string name="voice_variable_timer_elapsed_desp">計時器已用時間</string>
+    <string name="voice_variable_timer_elapsed_percent_desp">計時器已用時間百分比</string>
+    <string name="voice_variable_timer_remaining_desp">計時器剩餘時間</string>
+    <string name="voice_variable_timer_remaining_percent_desp">計時器剩餘時間百分比</string>
+    <string name="voice_variable_timer_end_time_desp">計時器結束時間</string>
+
+    <string name="voice_variable_group_group">組</string>
+    <string name="voice_variable_group_name_desp">組名稱</string>
+    <string name="voice_variable_group_loop_desp">組當前循環</string>
+    <string name="voice_variable_group_total_loop_desp">組總循環</string>
+    <string name="voice_variable_group_duration_desp">組總時長</string>
+    <string name="voice_variable_group_elapsed_desp">組已用時間</string>
+    <string name="voice_variable_group_elapsed_percent_desp">組已用時間百分比</string>
+    <string name="voice_variable_group_remaining_desp">組剩餘時間</string>
+    <string name="voice_variable_group_remaining_percent_desp">組剩餘時間百分比</string>
+    <string name="voice_variable_group_end_time_desp">組結束時間</string>
+
+    <string name="voice_variable_step_group">步驟</string>
+    <string name="voice_variable_step_name_desp">步驟名稱</string>
+    <string name="voice_variable_step_duration_desp">步驟時長</string>
+    <string name="voice_variable_step_end_time_desp">步驟結束時間</string>
+
+    <string name="voice_variable_other_group">其他</string>
+    <string name="voice_variable_other_clock_time_desp">當前時間</string>
+
+    <string name="behaviour_beep">嘟嘟</string>
+    <string name="behaviour_beep_help">每秒播放嘟嘟音</string>
+    <string name="beep_count_title">嘟嘟次數</string>
+    <string name="beep_count_intro">* 輸入在嘟嘟播放幾次後停止\n* 0 代表一直嘟嘟到步驟結束</string>
+    <string name="beep_sound">嘟嘟音</string>
+    <string name="beep_respect_other">尊重其他背景音</string>
+
+    <string name="behaviour_half">過半</string>
+    <string name="behaviour_half_help">在步驟過半時朗讀\"一半時間\"</string>
+    <string name="half_option">過半提醒</string>
+    <string name="half_option_voice">朗讀</string>
+    <string name="half_option_voice_desp">（預設）朗讀“一半時間”</string>
+    <string name="half_option_music">音樂</string>
+    <string name="half_option_music_desp">播放預設鈴聲</string>
+    <string name="half_option_vibration">振動</string>
+    <string name="half_option_vibration_desp">正常模式，兩次</string>
+    <string name="half_content">一半時間</string>
+
+    <string name="behaviour_count">倒數</string>
+    <string name="behaviour_count_help">倒數最後幾秒鐘</string>
+    <string name="count_times">倒數次數</string>
+    <string name="count_times_desp">* 輸入步驟結束時，倒數的次數</string>
+
+    <string name="behaviour_notification">通知</string>
+    <string name="behaviour_notification_help">步驟開始時顯示一個新的通知</string>
+    <string name="notification_duration">持續時間</string>
+    <string name="notification_duration_desp">* 輸入通知的持續秒數\n* 0 代表一直顯示到步驟結束</string>
+    <string name="notification_settings">修改通知設定</string>
+
+    <string name="behaviour_flashlight">閃光</string>
+    <string name="behaviour_flashlight_help">交替開關閃光燈</string>
+
+    <!--Sample timers strings-->
+    <string name="sample_timer_template_title">計時器模板</string>
+    <string name="sample_timer_template_prepare">準備</string>
+    <string name="sample_timer_template_finish">結束</string>
+    <string name="sample_timer_template_done">完成</string>
+
+    <string name="sample_timer_template_1_stage_name">一階段計時器</string>
+    <string name="sample_timer_template_1_stage_work">任務</string>
+
+    <string name="sample_timer_template_2_stages_name">兩階段計時器</string>
+    <string name="sample_timer_template_2_stages_start">熱身</string>
+    <string name="sample_timer_template_2_stages_high">高強度</string>
+    <string name="sample_timer_template_2_stages_low">低強度</string>
+    <string name="sample_timer_template_2_stages_end">休息</string>
+
+    <string name="sample_timer_template_3_stages_name">三階段計時器</string>
+    <string name="sample_timer_template_3_stages_1">階段1</string>
+    <string name="sample_timer_template_3_stages_2">階段2</string>
+    <string name="sample_timer_template_3_stages_3">階段3</string>
+
+    <!--Record-->
+    <string name="record_all_timers">所有計時器</string>
+    <string name="record_overview">概況</string>
+    <string name="record_overview_total_time">總執行時間</string>
+    <string name="record_overview_total_count">總執行次數</string>
+    <string name="record_timeline">時間線</string>
+    <string name="record_timeline_time">執行時間</string>
+    <string name="record_timeline_count">執行次數</string>
+    <string name="record_calendar">日曆</string>
+    <string name="record_other_data">其他</string>
+    <string name="record_today">今天</string>
+    <string name="record_this_week">本週</string>
+    <string name="record_this_month">本月</string>
+    <string name="record_this_year">本年</string>
+    <string name="record_total_time">從頭開始</string>
+
+    <!--Timer running screen-->
+    <string name="one_action_lock_ui">鎖定介面</string>
+    <string name="one_action_unlock_ui">解鎖介面</string>
+    <string name="one_action_show_float">懸浮窗</string>
+    <string name="one_action_pip">畫中畫</string>
+    <string name="one_action_edit_layout">自定義頁面</string>
+    <string name="one_action_add_shortcut">建立快捷方式</string>
+    <string name="one_action_edit_timer">編輯計時器</string>
+    <string name="one_action_stop">停止計時器</string>
+    <string name="one_action_prev">移動到上一步</string>
+    <string name="one_action_next">移動到下一步</string>
+    <string name="one_action_more">更多選項</string>
+    <string name="one_action_tweak_time">微調時間</string>
+    <string name="one_unable_to_start_timers_in_the_trash">無法啟動垃圾桶中的計時器</string>
+
+    <string name="one_ui_locked">介面已鎖定</string>
+    <string name="one_ui_unlock">解鎖</string>
+
+    <string name="one_shortcut_name">快捷方式名稱</string>
+    <string name="one_shortcut_open_on_click">點選時開啟計時介面</string>
+
+    <string name="one_layout_bar">計時條</string>
+    <string name="one_layout_time_size">時間文字大小</string>
+    <string name="one_layout_click_hint">到處點一點，找一找可以設定哪些東西</string>
+
+    <string name="one_layout_edit">編輯頁面</string>
+
+    <!--Time panels-->
+    <string name="time_panel_picker">時間標籤選擇</string>
+    <string name="time_panel_elapsed_time">已用時間</string>
+    <string name="time_panel_elapsed_percent">已用時間百分比</string>
+    <string name="time_panel_remaining_time">剩餘時間</string>
+    <string name="time_panel_remaining_percent">剩餘時間百分比</string>
+    <string name="time_panel_step_end_time">步驟結束時間</string>
+    <string name="time_panel_timer_end_time">計時器結束時間</string>
+
+    <!--Notifications-->
+    <string name="notif_timer_title">%1$s: %2$s</string>
+    <string name="notif_timer_running">%1$s 執行中</string>
+    <string name="notif_timer_paused">%1$s 已暫停</string>
+    <string name="notif_timer_screen_showing">%1$s 正在喚醒螢幕</string>
+
+    <string name="notif_channel_fore_title">前臺服務</string>
+    <string name="notif_channel_fore_desp">管理所有通知</string>
+    <string name="notif_channel_timing_title">計時通知</string>
+    <string name="notif_channel_timing_desp">顯示正在執行的計時器資訊和操作</string>
+    <string name="notif_channel_screen_title">螢幕通知</string>
+    <string name="notif_channel_screen_desp">用於喚醒螢幕的步驟提醒方式</string>
+    <string name="notif_channel_b_notif_title">\"通知\"提醒方式通知</string>
+    <string name="notif_channel_b_notif_desp">用於通知提醒方式</string>
+    <string name="notif_channel_app_info_title">應用資訊</string>
+    <string name="notif_channel_app_info_desp">用於通知應用錯誤、付款問題、賬號問題等</string>
+
+    <string name="notif_timers_running">%1$s個執行中</string>
+    <string name="notif_timers_paused">%1$s個已暫停</string>
+    <string name="notif_a11y_start_ally">啟動所有計時器</string>
+    <string name="notif_a11y_pause_ally">暫停所有計時器</string>
+    <string name="notif_a11y_stop_ally">停止所有計時器</string>
+
+    <!--Scheduler-->
+    <string name="scheduler_alert_title">請謹慎使用計劃任務</string>
+    <string name="scheduler_alert_content">有很多原因會導致計劃任務無法正常觸發，請在使用前自行測試</string>
+
+    <string name="scheduler_default_name">計劃任務</string>
+    <string name="scheduler_title">編輯計劃任務</string>
+    <string name="scheduler_name">計劃任務名稱</string>
+    <string name="scheduler_timer">計時器</string>
+    <string name="scheduler_action">任務</string>
+    <string name="scheduler_start">啟動計時器</string>
+    <string name="scheduler_end">結束計時器</string>
+    <string name="scheduler_time">時間</string>
+    <string name="scheduler_repeat">重複</string>
+    <string name="scheduler_repeat_once">單次</string>
+    <string name="scheduler_repeat_every_week">每週重複</string>
+    <string name="scheduler_repeat_every_days">每幾天重複</string>
+    <string name="scheduler_repeat_every">每</string>
+    <plurals name="scheduler_repeat_days">
+        <item quantity="other">天</item>
+    </plurals>
+    <string name="scheduler_repeat_every_day">每天</string>
+    <string name="scheduler_repeat_tomorrow">明天</string>
+    <string name="scheduler_repeat_today">今天</string>
+    <string name="scheduler_wrong_timer_id">計劃任務需要一個計時器</string>
+    <string name="scheduler_wrong_every_days">這個數值應在1到127之間</string>
+
+    <string-array name="scheduler_set">
+        <item>"計劃任務設定在 1 分鐘內啟動"</item>
+        <item>"計劃任務設定在 <xliff:g id="DAYS">%1$s</xliff:g>後啟動"</item>
+        <item>"計劃任務設定在 <xliff:g id="HOURS">%2$s</xliff:g>後啟動"</item>
+        <item>"計劃任務設定在 <xliff:g id="DAYS">%1$s</xliff:g><xliff:g id="HOURS">%2$s</xliff:g>後啟動"</item>
+        <item>"計劃任務設定在 <xliff:g id="MINUTES">%3$s</xliff:g>後啟動"</item>
+        <item>"計劃任務設定在 <xliff:g id="DAYS">%1$s</xliff:g><xliff:g id="MINUTES">%3$s</xliff:g>後啟動"</item>
+        <item>"計劃任務設定在 <xliff:g id="HOURS">%2$s</xliff:g><xliff:g id="MINUTES">%3$s</xliff:g>後啟動"</item>
+        <item>"計劃任務設定在 <xliff:g id="DAYS">%1$s</xliff:g><xliff:g id="HOURS">%2$s</xliff:g><xliff:g id="MINUTES">%3$s</xliff:g>後啟動"</item>
+    </string-array>
+
+    <string name="scheduler_schedule_failed">設定計劃失敗，重試一下？</string>
+    <string name="scheduler_canceled_template">%1$s 已取消</string>
+    <string name="scheduler_starts_action_template">開啟 %1$s</string>
+    <string name="scheduler_stops_action_template">停止 %1$s</string>
+
+    <plurals name="schedulers">
+        <item quantity="other">%1$s個計劃任務</item>
+    </plurals>
+
+    <plurals name="days">
+        <item quantity="other"><xliff:g id="NUMBER">%1$s</xliff:g> 天</item>
+    </plurals>
+    <plurals name="hours">
+        <item quantity="other"><xliff:g id="NUMBER">%1$s</xliff:g> 小時</item>
+    </plurals>
+    <plurals name="minutes">
+        <item quantity="other"><xliff:g id="NUMBER">%1$s</xliff:g> 分鐘</item>
+    </plurals>
+    <string name="seconds_0">0 秒</string>
+    <plurals name="seconds">
+        <item quantity="other"><xliff:g id="NUMBER">%s</xliff:g> 秒</item>
+    </plurals>
+
+    <!--Shortcut-->
+    <string name="shortcut_created">快捷方式已建立</string>
+    <string name="shortcut_disabled">找不到計時器，需重新新增</string>
+    <string name="shortcut_not_support">當前桌面不支援快捷方式</string>
+    <string name="shortcut_remove_old">請先手動刪除此計時器的舊快捷方式</string>
+    <string name="shortcut_timer_started">計時器已啟動</string>
+
+    <!--Theme-->
+    <string name="theme_title">應用主題</string>
+    <string name="theme_light_status_bar">淺色狀態列</string>
+    <string name="theme_theme_nav_bar">導航欄著色</string>
+    <string name="theme_custom_title">自定義主題</string>
+    <string name="theme_custom_primary">主顏色</string>
+    <string name="theme_custom_secondary">強調色</string>
+
+    <string name="theme_pick_colors">自定義</string>
+    <string name="theme_pick_presets">預設值</string>
+    <string name="theme_pick_back">返回</string>
+
+    <string name="theme_step_color_dialog_title">選擇步驟顏色</string>
+    <string name="theme_step_color_title">步驟顏色</string>
+    <string name="theme_step_color_normal">普通步驟</string>
+    <string name="theme_step_color_notifier">通知步驟</string>
+    <string name="theme_step_color_start">起始步驟</string>
+    <string name="theme_step_color_end">結束步驟</string>
+
+    <!--Backup-->
+    <string name="backup_local_backup">本地</string>
+    <string name="backup_app_data">應用資料</string>
+    <string name="backup_app_settings">應用設定</string>
+    <string name="backup_next_step">下一步</string>
+    <string name="backup_wrong_saf">找不到儲存訪問框架\n此裝置不支援匯入匯出</string>
+
+    <!--Cloud Backup-->
+    <string name="cloud_backup_title">雲備份</string>
+
+    <string name="cloud_backup_account_issue_notif_title">雲備份失敗</string>
+    <string name="cloud_backup_account_issue_notif_desp">找不到賬號資訊。點此登入賬號</string>
+    <string name="cloud_backup_billing_issue_notif_title">雲備份失敗</string>
+    <string name="cloud_backup_billing_issue_notif_desp">找不到付款資訊。點此管理訂閱</string>
+
+    <string name="cloud_backup_state_required">需要備份</string>
+    <string name="cloud_backup_state_scheduled">已計劃</string>
+    <string name="cloud_backup_state_running">備份中</string>
+    <string name="cloud_backup_state_up_to_date">已備份</string>
+    <string name="cloud_backup_state_error">備份錯誤</string>
+
+    <string name="cloud_backup_account_required">建立一個賬號來跟蹤備份資料</string>
+    <string name="cloud_backup_backup_options">備份選項</string>
+    <string name="cloud_backup_backup_state">備份狀態</string>
+    <string name="cloud_backup_backup_now">立刻備份</string>
+    <string name="cloud_backup_backup_now_failed">備份失敗</string>
+    <string name="cloud_backup_uploading">備份中……</string>
+    <string name="cloud_backup_finished">備份結束</string>
+    <string name="cloud_backup_auto_backup_title">自動雲備份</string>
+    <string name="cloud_backup_auto_backup_enabled">自動雲備份已開啟</string>
+    <string name="cloud_backup_restore">還原資料</string>
+    <string name="cloud_backup_restoring">還原中……</string>
+    <string name="cloud_backup_restore_failed">還原失敗</string>
+    <string name="cloud_backup_restore_alert">應用資料將和設定會被覆蓋。繼續嗎？</string>
+    <string name="cloud_backup_other_options">其他選項</string>
+    <string name="cloud_backup_recent_error">最近的錯誤</string>
+
+    <!--Export-->
+    <string name="export_data_title">匯出應用資料</string>
+    <string name="export_data_summary">將本應用資料儲存為一個檔案</string>
+    <string name="export_error">匯出失敗，請重試。</string>
+    <string name="export_path_title">匯出位置</string>
+    <string name="export_select_location">選擇匯出位置</string>
+    <string name="export_content_title">匯出內容選擇</string>
+    <string name="export_begin">開始匯出</string>
+    <string name="export_action">匯出</string>
+    <string name="export_done">匯出成功</string>
+
+    <!--Import-->
+    <string name="import_data_title">匯入應用資料</string>
+    <string name="import_data_summary">將檔案中的資料新增到本應用</string>
+    <string name="import_error">匯入失敗，請重試。\n\n可能的解決方案：\n1. 重新匯入一次。\n2. 更新應用到最新版。\n3. 清空應用資料，然後再次匯入。</string>
+    <string name="import_path_title">選擇匯入檔案(.json/.tmd)</string>
+    <string name="import_select_location">選擇檔案</string>
+    <string name="import_no_file">需要選擇一個匯入檔案</string>
+    <string name="import_empty_file">檔案為空</string>
+    <string name="import_wipe_first">匯入前清空資料</string>
+    <string name="import_wipe_warning">此選項將會刪除當前資料，然後新增新資料</string>
+    <string name="import_content_title">匯入內容選擇</string>
+    <string name="import_begin">開始匯入</string>
+    <string name="import_action">匯入</string>
+    <string name="import_done">匯入完成</string>
+    <string name="import_restart_content">重啟應用啟用新資料？</string>
+    <string name="import_restart">重啟應用</string>
+
+    <!--Help-->
+    <string name="help_email_title">計時機器反饋</string>
+    <string name="help_tutorial">使用教程</string>
+    <string name="help_tutorial_desp">從這裡開始</string>
+    <string name="help_tips_tricks">技巧和竅門</string>
+    <string name="help_tips_tricks_desp">高效使用此應用</string>
+    <string name="help_whitelist">白名單指南</string>
+    <string name="help_whitelist_desp">防止手機供應商在此應用執行時殺死此應用</string>
+    <string name="help_tts">配置文字轉語音</string>
+    <string name="help_tts_desp">朗讀和倒數提醒方式依賴於此</string>
+    <string name="help_tts_test_read_content">點選此處嘗試將本段文字轉換為語音</string>
+    <string name="help_tts_test_question">你的裝置閱讀了上一段文字了嗎？</string>
+    <string name="help_tts_test_yes">是的！</string>
+    <string name="help_tts_test_instruction">沒有，我想要閱讀配置說明書</string>
+    <string name="help_tts_test_system_settings">沒有，我想要進入系統設定</string>
+    <string name="help_tts_test_system_settings_manual">你需要在系統設定中搜索\"文字轉語音\"然後進行設定</string>
+    <string name="help_qa">一些常見的問題</string>
+    <string name="help_feedback">反饋</string>
+    <string name="help_feedback_desp">傳送一份郵件並在24小時內得到回覆</string>
+
+    <!--Dark theme-->
+    <string name="dark_theme_title">深色主題</string>
+    <string name="dark_theme_manual">手動控制</string>
+    <string name="dark_theme_scheduled">自動切換</string>
+    <string name="dark_theme_scheduled_from">開始時間</string>
+    <string name="dark_theme_scheduled_to">結束時間</string>
+    <string name="dark_theme_system_default">系統預設</string>
+    <string name="dark_theme_battery_saver">由省電模式設定</string>
+    <string name="dark_theme_scheduled_dark_now">已切換至深色主題</string>
+    <string name="dark_theme_scheduled_light_now">已切換至淺色主題</string>
+
+    <!--Tweak time-->
+    <string name="tweak_time_title">微調時間選項設定</string>
+    <string name="tweak_time_main_title">主按鈕</string>
+    <string name="tweak_time_overflow_title">選單按鈕</string>
+
+    <!--App preferences-->
+    <string name="pref_category_title_app">應用設定</string>
+
+    <string name="pref_app_language">語言</string>
+    <string name="pref_app_language_default">跟隨系統</string>
+    <string name="pref_help_translation">幫助翻譯此應用</string>
+
+    <!--Timer preferences-->
+    <string name="pref_category_title_timer_setting">計時器設定</string>
+
+    <string name="pref_screen_title">螢幕亮度</string>
+    <string-array name="pref_screen_titles">
+        <item>常亮</item>
+        <item>暗淡</item>
+        <item>預設</item>
+    </string-array>
+
+    <string name="pref_screen_timing_title">螢幕亮度應用時機</string>
+    <string-array name="pref_screen_timing_titles">
+        <item>當使用應用時</item>
+        <item>當使用應用且有計時器執行時</item>
+    </string-array>
+
+    <string name="pref_notifier_plus_title">在通知步驟增加時間時</string>
+    <string-array name="pref_notifier_plus_titles">
+        <item>返回上一步並將時間設為1分鐘</item>
+        <item>在當前步驟增加時間</item>
+    </string-array>
+
+    <string name="pref_tweak_time_title">更多的時間微調選項</string>
+    <string name="pref_tweak_time_on">已啟用</string>
+    <string name="pref_tweak_time_off">已禁用</string>
+
+    <string name="settings_floating_window_pip">懸浮窗和畫中畫</string>
+    <string name="settings_floating_window_pip_auto_close">自動關閉懸浮窗/畫中畫</string>
+    <string name="settings_floating_window_pip_auto_close_on">計時器結束時，關閉懸浮窗或畫中畫</string>
+    <string name="settings_floating_window_pip_auto_close_off">計時器結束時，保持懸浮窗或畫中畫開啟</string>
+    <string name="settings_floating_window_pip_floating">懸浮窗</string>
+    <string name="settings_floating_window_pip_floating_alpha">懸浮窗透明度</string>
+    <string name="settings_floating_window_pip_floating_size">懸浮窗大小</string>
+    <string name="settings_floating_window_pip_pip">畫中畫</string>
+    <string name="settings_floating_window_pip_floating_failed">建立懸浮窗失敗，重試一下吧</string>
+
+    <string name="pref_phone_call">當手機在通話時</string>
+    <string-array name="pref_phone_call_titles">
+        <item>什麼也不做</item>
+        <item>暫停所有計時器</item>
+        <item>暫停並在通話後恢復所有計時器</item>
+    </string-array>
+
+    <string name="pref_show_timer_total_time">編輯時的總時間</string>
+    <string name="pref_show_timer_total_time_on">顯示計時器和組的總時間</string>
+    <string name="pref_show_timer_total_time_off">隱藏</string>
+
+    <string name="pref_media_style_notification">媒體樣式通知</string>
+
+    <!--Reminder preferences-->
+    <string name="pref_reminder">提醒方式</string>
+
+    <string name="pref_reminder_baked_count_title">預置倒數音</string>
+    <string name="pref_reminder_baked_count_desp">從20倒數至0時，使用錄製好的聲音而非從文字合成語音。\n\n更快更一致。</string>
+    <string name="pref_reminder_baked_count_on">已啟用</string>
+    <string name="pref_reminder_baked_count_off">已禁用</string>
+    <string name="pref_reminder_baked_count_downloading">下載資源中…</string>
+
+    <!--Scheduler preferences-->
+    <string name="pref_category_title_scheduler_setting">計劃任務設定</string>
+
+    <string name="pref_week_start_title">一週的第一天</string>
+    <string-array name="pref_week_start_titles">
+        <item>星期一</item>
+        <item>星期二</item>
+        <item>星期三</item>
+        <item>星期四</item>
+        <item>星期五</item>
+        <item>星期六</item>
+        <item>星期日</item>
+    </string-array>
+
+    <!--Notification preferences-->
+    <string name="pref_category_notif">通知</string>
+
+    <string name="pref_open_notif_setting">開啟通知設定</string>
+
+    <!--Audio preferences-->
+    <string name="pref_category_title_audio">音訊</string>
+
+    <string name="pref_audio_focus_type_title">音訊焦點型別</string>
+    <string-array name="pref_audio_focus_titles">
+        <item>暫停其它播放</item>
+        <item>停止其他播放</item>
+        <item>降低其他播放音量</item>
+        <item>什麼也不做</item>
+    </string-array>
+
+    <string name="pref_audio_type_title">音訊型別</string>
+    <string-array name="pref_audio_type_titles">
+        <item>鬧鐘</item>
+        <item>媒體</item>
+        <item>通知</item>
+    </string-array>
+
+    <string name="pref_audio_volume_title">音量</string>
+
+    <!--Other preferences-->
+    <string name="pref_title_other">其他</string>
+
+    <string name="rate_five_stars">給應用打個5星</string>
+    <string name="pref_recommend">推薦本應用給朋友</string>
+    <string name="pref_about_title">關於</string>
+
+    <string name="about_version">版本</string>
+    <string name="about_developer">開發者</string>
+    <string name="about_more_apps_from_me">更多應用</string>
+
+    <string name="share_content">計時機器，一個可高度自定義的循環/鍛鍊計時器</string>
+
+    <!--Log-->
+    <string name="log_title">應用日誌</string>
+
+    <!--App intro-->
+    <string name="intro_start_sample_timer_name">鍛鍊計劃</string>
+    <string name="intro_start_sample_timer_step1">跑步3分鐘</string>
+    <string name="intro_start_sample_timer_step2">跑步結束</string>
+    <string name="intro_start_sample_timer_step3">步行2分鐘</string>
+    <string name="intro_start_sample_timer_step4">步行結束</string>
+    <string name="intro_start_welcome">你好！\n點選下方的<b>右箭頭</b>來開始使用教程。</string>
+    <string name="intro_start_our_plan">讓我們來建立一個鍛鍊計劃：<b>跑步3分鐘</b>，接著<b>步行2分鐘</b>，然後<b>一共循環5次</b>。</string>
+    <string name="intro_start_create_timer">點選 ➕ 來建立一個計時器。</string>
+    <string name="intro_start_enter_loop">首先，設定<b>循環</b>為<b>5</b>。</string>
+    <string name="intro_start_step_card">一個卡片代表計劃中的一個步驟。</string>
+    <string name="intro_start_step_time">點選<b>步驟名稱旁邊的時間</b>，把時間修改為<b>3分鐘</b>。</string>
+    <string name="intro_start_notifier">在本應用中，您<b>必須在步驟之後新增提醒方式，否則本應用不會自動提醒您</b>。</string>
+    <string name="intro_start_add_notifier">點選<b>通知步驟</b>來新增一個在跑步結束後提醒您的步驟。</string>
+    <string name="intro_start_add_reminder">點選步驟時間下方的 ➕ 來新增提醒方式。這裡新增<b>音樂</b>和<b>振動</b>。</string>
+    <string name="intro_start_reminder_usage">您可以<b>長按提醒方式來檢視其用法</b>，既可以在已新增的提醒方式上，也可以在選擇時。</string>
+    <string name="intro_start_add_walk_step">新增一個<b>普通步驟</b>用於步行。</string>
+    <string name="intro_start_walk_step_name">設定步行時間為<b>2分鐘</b>。</string>
+    <string name="intro_start_walk_notifier">新增<b>另一個提醒步驟</b>用於<b>提醒步行的結束</b>。</string>
+    <string name="intro_start_timer_done">設定完成！點選螢幕頂部的 ✔ 來<b>儲存計時器</b>。</string>
+    <string name="intro_start_run_timer"><b>點選計時器</b>來進入執行介面。</string>
+    <string name="intro_start_timer_time">這一部分顯示<b>剩餘時間</b>，剩餘循環和微調時間按鈕。</string>
+    <string name="intro_start_timer_steps">這一部分顯示<b>步驟列表</b>，並標註了<b>正在執行中的步驟</b>。</string>
+    <string name="intro_start_timer_buttons">這一部分是控制面板。它們分別是<b>停止，上一步，啟動或暫停，下一步</b>，和更多選項。</string>
+    <string name="intro_start_finish"><b>祝賀您完成了使用教程！</b></string>
+
+    <string name="intro_start_edit_behaviour">點選這裡可以設定提醒方式，但現在請先完成使用教程</string>
+    <string name="intro_start_quick_start_pause">點選這裡可以快速啟動計時器，但現在請點選計時器名稱來進入執行介面</string>
+    <string name="intro_save_for_later">你可以在使用教程結束後自行嘗試</string>
+
+    <string name="intro_exit_confirmation">退出使用教程嗎？</string>
+    <string name="intro_exit_difficult_app_alert">如果不完成使用教程的話，應用可能會難以上手。</string>
+    <string name="intro_exit_previous_hint">如果要返回上一步，請點選螢幕底端的<b>左箭頭</b>。</string>
+
+    <string name="intro_location">你可以在“幫助與反饋”中找到該使用教程。</string>
+
+    <string name="missed_timer_desp"><b>計時器被非正常地停止了！</b>\n\n這很有可能是系統殺掉了在後臺的應用。<b>為了解決該問題，請考慮將本應用在系統設定中白名單。</b></string>
+
+    <!--Updates-->
+    <string name="update_title">更新內容</string>
+    <string name="update_more">更多更新內容</string>
+
+    <!--Tasker-->
+    <string name="tasker_edit_title">計時機器外掛</string>
+
+    <!--Whitelist-->
+    <string name="whitelist_disclaimer"><b>許多Android製造商可能會在鎖屏或切換到其他應用時，強行停止正在執行中應用</b>。這是Android上一個棘手的問題。\n\n本應用盡最大努力完成工作，但仍有可能失效。\n\n<b>請在系統設定中將本應用白名單</b>。</string>
+    <string name="whitelist_disclaimer_yes">檢視白名單指南</string>
+    <string name="whitelist_disclaimer_no">不，我已瞭解潛在的後果</string>
+    <string name="whitelist_disclaimer_no_confirmation">跳過該指南？</string>
+    <string name="whitelist_location">你可以在“幫助與反饋”中找到該白名單指南。</string>
+
+    <string name="whitelist_intro">許多Android製造商會強制關閉執行中的後臺應用，從而導致該應用無法正常提醒。\n\n請在設定中允許自啟動、允許後臺執行、關閉電池最佳化等。\n\n這裡有一些具體方法：</string>
+    <string name="whitelist_don_t_kill_desp">一個提供了很多設定方法的英文網站</string>
+    <string name="whitelist_setting">設定</string>
+    <string name="whitelist_links">連結</string>
+    <string name="whitelist_quick_settings">一些快捷設定</string>
+    <string name="whitelist_ignore_battery_optimization">忽略電池最佳化</string>
+
+    <string name="whitelist_settings_template" formatted="false">系統設定 %d</string>
+
+    <!--Rate-->
+    <string name="rate_title">野生的開發者出現了！！</string>
+    <string name="rate_content">你似乎很喜歡本應用，請給應用評分或留下你的想法</string>
+    <string name="rate_yes">評分</string>
+    <string name="rate_no">離開</string>
+
+    <!--Account-->
+    <string name="account_sign_out_confirmation">退出登入？</string>
+    <string name="account_sign_out">退出登入</string>
+    <string name="account_signing_out">正在退出登入……</string>
+    <string name="account_delete">刪除賬號和所有備份資料</string>
+    <string name="account_delete_confirmation">刪除賬號和所有備份資料？\n\n這<b>不會</b>影響您的訂閱。您可以在Google Play Store中管理訂閱。</string>
+    <string name="account_deleting">刪除賬號中……</string>
+    <string name="account_sign_in">註冊 / 登入</string>
+
+    <!--Billing-->
+    <string name="billing_iap">應用內購商品</string>
+    <string name="billing_loading">載入中</string>
+    <string name="billing_purchase">購買</string>
+    <string name="billing_subscribe">訂閱</string>
+    <string name="billing_owned">已擁有</string>
+    <string name="billing_per_year">/年</string>
+    <string name="billing_explanation" formatted="false">"輕觸「訂閱」，您的Google Play Store帳戶將會被收取相應的費用。您的訂購將會以相同的價格並根據方案的週期自動續訂，直到您在當前訂購週期過期前至少24個小時從Google Play Store的訂購中取消它。輕觸「訂閱」意味著您同意我們的%s和%s。"</string>
+    <string name="billing_cancel_anytime">定期支付，隨時可以取消。</string>
+    <string name="billing_not_supported">目前暫時不支援訂閱</string>
+    <string name="billing_connect_issue">連接到Google Play的時候發生了一個錯誤。\n\n這個問題可能只是暫時的，因此請稍後重試。</string>
+    <string name="billing_manage_subscription">管理訂閱</string>
+    <string name="billing_under_maintenance">維護中</string>
+
+    <string name="billing_cloud_backup_title">雲備份</string>
+    <string name="billing_cloud_backup_desp">不再丟失個人努力的記錄</string>
+    <string name="billing_more_themes_title">更多主題</string>
+    <string name="billing_more_themes_desp">精挑細選的應用主題</string>
+    <string name="billing_baked_count_title">預置倒數音</string>
+    <string name="billing_baked_count_desp">更快更一致的倒數音</string>
+    <string name="billing_future_title">未來會有更多功能</string>
+    <string name="billing_future_desp">你的幫助讓應用更好地成長！</string>
+    <string name="billing_a_part_of_iap">這是應用內購的一部分。</string>
+    <string name="billing_subscription_service">這是一項訂閱服務。</string>
+
+    <string name="billing_help_title">幫助</string>
+    <string name="billing_help_contact">反饋</string>
+    <string name="billing_help_email_title">計時機器付款問題</string>
+
+</resources>

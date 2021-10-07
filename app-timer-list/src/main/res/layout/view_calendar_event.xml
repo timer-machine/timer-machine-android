@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    tools:layout_gravity="center"
+    tools:orientation="horizontal"
+    tools:parentTag="android.widget.LinearLayout">
+
+    <ImageView
+        android:id="@+id/imageCalendarEvent1"
+        android:layout_width="5dp"
+        android:layout_height="5dp"
+        android:importantForAccessibility="no"
+        app:srcCompat="@drawable/background_record_calendar_circle"
+        app:tint="?colorSecondary" />
+
+    <ImageView
+        android:id="@+id/imageCalendarEvent2"
+        android:layout_width="5dp"
+        android:layout_height="5dp"
+        android:layout_marginStart="2dp"
+        android:layout_marginEnd="2dp"
+        android:importantForAccessibility="no"
+        app:srcCompat="@drawable/background_record_calendar_circle"
+        app:tint="?colorSecondary" />
+
+    <ImageView
+        android:id="@+id/imageCalendarEvent3"
+        android:layout_width="5dp"
+        android:layout_height="5dp"
+        android:importantForAccessibility="no"
+        app:srcCompat="@drawable/background_record_calendar_circle"
+        app:tint="?colorSecondary"
+        tools:srcCompat="@drawable/ic_calendar_more_events" />
+
+</merge>

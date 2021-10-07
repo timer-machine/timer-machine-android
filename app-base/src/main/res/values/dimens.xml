@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="min_button_height">56dp</dimen>
+
+    <!-- Lollipop and later normal floating action button container height. -->
+    <dimen name="fab_height">88dp</dimen>
+
+</resources>

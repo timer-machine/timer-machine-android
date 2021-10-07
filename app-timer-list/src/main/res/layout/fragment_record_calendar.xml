@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@null"
+        app:elevation="0dp">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_scrollFlags="scroll">
+
+            <ImageButton
+                android:id="@+id/btnRecordCalendarPreviousMonth"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:layout_marginStart="16dp"
+                android:background="?selectableItemBackgroundBorderless"
+                android:contentDescription="@string/record_previous_month_a11y"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/ic_left"
+                app:tint="?colorControlNormal" />
+
+            <TextView
+                android:id="@+id/textRecordCalendarYearMonth"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:gravity="center"
+                android:textAppearance="?textAppearanceHeadline6"
+                app:layout_constraintBottom_toBottomOf="@id/btnRecordCalendarPreviousMonth"
+                app:layout_constraintEnd_toStartOf="@id/btnRecordCalendarNextMonth"
+                app:layout_constraintStart_toEndOf="@id/btnRecordCalendarPreviousMonth"
+                app:layout_constraintTop_toTopOf="@id/btnRecordCalendarPreviousMonth"
+                tools:text="@tools:sample/lorem" />
+
+            <ImageButton
+                android:id="@+id/btnRecordCalendarNextMonth"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:layout_marginEnd="16dp"
+                android:background="?selectableItemBackgroundBorderless"
+                android:contentDescription="@string/record_next_month_a11y"
+                android:scaleX="-1"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/ic_left"
+                app:tint="?colorControlNormal" />
+
+            <com.kizitonwose.calendarview.CalendarView
+                android:id="@+id/calendarRecord"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                app:cv_dayViewResource="@layout/list_item_record_calendar"
+                app:cv_inDateStyle="allMonths"
+                app:cv_monthHeaderResource="@layout/list_item_record_calendar_legend"
+                app:cv_orientation="horizontal"
+                app:cv_outDateStyle="endOfGrid"
+                app:cv_scrollMode="paged"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/btnRecordCalendarPreviousMonth"
+                tools:layout_height="300dp" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/listRecordCalendarEvents"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layoutManager="LinearLayoutManager"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        tools:listitem="@layout/list_item_calendar_day_event" />
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

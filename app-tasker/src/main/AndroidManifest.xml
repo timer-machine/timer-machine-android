@@ -1,0 +1,27 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="xyz.aprildown.timer.app.tasker">
+
+    <application android:theme="@style/AppTheme.LibraryPreview">
+
+        <activity
+            android:name=".TaskerEditActivity"
+            android:exported="true"
+            android:icon="@drawable/ic_launcher"
+            android:label="@string/tasker_edit_title">
+            <intent-filter>
+                <action android:name="com.twofortyfouram.locale.intent.action.EDIT_SETTING" />
+            </intent-filter>
+        </activity>
+
+        <receiver
+            android:name=".TaskerRunReceiver"
+            android:exported="true"
+            tools:ignore="ExportedReceiver">
+            <intent-filter>
+                <action android:name="com.twofortyfouram.locale.intent.action.FIRE_SETTING" />
+            </intent-filter>
+        </receiver>
+
+    </application>
+</manifest>

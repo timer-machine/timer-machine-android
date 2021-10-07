@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <xyz.aprildown.tools.view.ListItemWithLayout
+        android:id="@+id/itemOneLayoutOneBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:li_divider="margin"
+        app:li_layout="@layout/widget_switch"
+        app:li_textPrimary="@string/one_layout_bar" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/keyline_icon"
+            android:layout_marginEnd="@dimen/keyline_icon"
+            android:layout_marginBottom="8dp"
+            android:paddingTop="8dp"
+            android:text="@string/one_layout_time_size"
+            android:textAppearance="?textAppearanceBody1" />
+
+        <SeekBar
+            android:id="@+id/seekOneLayoutOneTimeSize"
+            android:layout_width="match_parent"
+            android:layout_height="24dp"
+            android:layout_marginBottom="8dp"
+            android:max="100" />
+
+        <include
+            style="@style/Widget.MarginDivider"
+            layout="@layout/divider" />
+
+    </LinearLayout>
+
+    <xyz.aprildown.tools.view.ListItemWithLayout
+        android:id="@+id/itemOneLayoutOneTimePanels"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:li_divider="margin"
+        app:li_textPrimary="@string/time_panel_picker" />
+
+    <xyz.aprildown.tools.view.ListItemWithLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:li_divider="margin"
+        app:li_textPrimary="@string/one_layout_click_hint" />
+
+</LinearLayout>

@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingStart="8dp"
+    android:paddingEnd="8dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            style="@style/Widget.ListHeader"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/tweak_time_main_title" />
+
+        <include
+            android:id="@+id/layoutTweakTimeMain"
+            layout="@layout/layout_tweak_time_item" />
+
+        <include
+            android:id="@+id/layoutTweakTimeSecond"
+            layout="@layout/layout_tweak_time_item" />
+
+        <TextView
+            style="@style/Widget.ListHeader"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/tweak_time_overflow_title" />
+
+        <include
+            android:id="@+id/layoutTweakTimeOverflow1"
+            layout="@layout/layout_tweak_time_item" />
+
+        <include
+            android:id="@+id/layoutTweakTimeOverflow2"
+            layout="@layout/layout_tweak_time_item" />
+
+        <include
+            android:id="@+id/layoutTweakTimeOverflow3"
+            layout="@layout/layout_tweak_time_item" />
+
+        <include
+            android:id="@+id/layoutTweakTimeOverflow4"
+            layout="@layout/layout_tweak_time_item" />
+
+    </LinearLayout>
+
+</ScrollView>

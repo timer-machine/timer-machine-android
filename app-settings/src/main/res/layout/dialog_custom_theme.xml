@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:paddingTop="8dp"
+    android:paddingBottom="8dp">
+
+    <xyz.aprildown.tools.view.ListItemWithLayout
+        android:id="@+id/itemCustomThemePrimary"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingStart="8dp"
+        android:paddingEnd="8dp"
+        app:li_layout="@layout/widget_color_swatch"
+        app:li_textPrimary="@string/theme_custom_primary" />
+
+    <xyz.aprildown.tools.view.ListItemWithLayout
+        android:id="@+id/itemCustomThemeSecondary"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingStart="8dp"
+        android:paddingEnd="8dp"
+        app:li_layout="@layout/widget_color_swatch"
+        app:li_textPrimary="@string/theme_custom_secondary" />
+
+</LinearLayout>

@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    app:startDestination="@id/dest_timer">
+
+    <fragment
+        android:id="@id/dest_timer"
+        android:name="xyz.aprildown.timer.app.timer.list.TimerFragment"
+        android:label="@string/main_action_timers"
+        tools:layout="@layout/fragment_timer" />
+
+    <fragment
+        android:id="@id/dest_record"
+        android:name="xyz.aprildown.timer.app.timer.list.record.RecordFragment"
+        android:label="@string/main_action_record"
+        tools:layout="@layout/fragment_record" />
+
+    <fragment
+        android:id="@id/dest_scheduler"
+        android:name="xyz.aprildown.timer.app.scheduler.SchedulerFragment"
+        android:label="@string/main_action_schedulers"
+        tools:layout="@layout/fragment_scheduler" />
+
+    <fragment
+        android:id="@id/dest_edit_scheduler"
+        android:name="xyz.aprildown.timer.app.scheduler.EditSchedulerFragment"
+        android:label="@string/scheduler_title"
+        tools:layout="@layout/fragment_edit_scheduler" />
+
+    <fragment
+        android:id="@id/dest_backup_restore"
+        android:name="xyz.aprildown.timer.app.backup.BackupFragment"
+        android:label="@string/main_action_backup" />
+
+    <fragment
+        android:id="@id/dest_settings"
+        android:name="xyz.aprildown.timer.app.settings.SettingsFragment"
+        android:label="@string/main_action_settings" />
+
+    <fragment
+        android:id="@id/dest_settings_floating_window_pip"
+        android:name="xyz.aprildown.timer.app.timer.one.float.FloatingWindowPipFragment"
+        android:label="@string/settings_floating_window_pip"
+        tools:layout="@layout/fragment_floating_window_pip" />
+
+    <fragment
+        android:id="@id/dest_whitelist"
+        android:name="xyz.aprildown.timer.workshop.WhitelistFragment"
+        android:label="@string/help_whitelist" />
+
+    <fragment
+        android:id="@id/dest_theme"
+        android:name="xyz.aprildown.timer.app.settings.theme.ThemeFragment"
+        android:label="@string/theme_title" />
+
+    <fragment
+        android:id="@id/dest_help"
+        android:name="io.github.deweyreed.timer.ui.single.HelpFragment"
+        android:label="@string/main_action_help" />
+
+    <fragment
+        android:id="@id/dest_export"
+        android:name="xyz.aprildown.timer.app.backup.ExportFragment"
+        android:label="@string/export_data_title"
+        tools:layout="@layout/layout_vertical_form" />
+
+    <fragment
+        android:id="@id/dest_import"
+        android:name="xyz.aprildown.timer.app.backup.ImportFragment"
+        android:label="@string/import_data_title"
+        tools:layout="@layout/layout_vertical_form" />
+
+    <fragment
+        android:id="@id/dest_one_layout"
+        android:name="xyz.aprildown.timer.app.timer.one.layout.OneLayoutFragment"
+        android:label="@string/one_action_edit_layout"
+        tools:layout="@layout/fragment_one_layout" />
+
+    <fragment
+        android:id="@id/dest_about"
+        android:name="io.github.deweyreed.timer.ui.single.AboutFragment"
+        android:label="@string/pref_about_title"
+        tools:layout="@layout/fragment_about" />
+
+</navigation>

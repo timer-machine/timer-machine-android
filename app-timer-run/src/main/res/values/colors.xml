@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="color_notification_background_light">#FFFFFF</color>
+    <color name="color_notification_background_dark">#000000</color>
+    <color name="color_notification_background">@color/color_notification_background_light</color>
+</resources>

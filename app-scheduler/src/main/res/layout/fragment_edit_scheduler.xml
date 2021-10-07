@@ -1,0 +1,218 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/layoutSchedulerEditRoot"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="@dimen/keyline_icon">
+
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:hint="@string/scheduler_name">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/editSchedulerName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/scheduler_name"
+                android:imeOptions="actionDone"
+                android:inputType="text"
+                android:selectAllOnFocus="true" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <include layout="@layout/divider" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="8dp"
+            android:text="@string/scheduler_timer"
+            android:textAppearance="?textAppearanceSubtitle2"
+            android:textColor="?android:textColorSecondary" />
+
+        <Button
+            android:id="@+id/btnSchedulerEditTimers"
+            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAllCaps="false"
+            tools:text="@string/timer_pick_required" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="16dp"
+            android:text="@string/scheduler_action"
+            android:textAppearance="?textAppearanceSubtitle2"
+            android:textColor="?android:textColorSecondary" />
+
+        <RadioGroup
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:gravity="center_horizontal"
+            android:orientation="horizontal">
+
+            <RadioButton
+                android:id="@+id/checkSchedulerEditActionStart"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checked="false"
+                android:text="@string/scheduler_start"
+                android:textAppearance="?textAppearanceBody1" />
+
+            <RadioButton
+                android:id="@+id/checkSchedulerEditActionEnd"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checked="false"
+                android:text="@string/scheduler_end"
+                android:textAppearance="?textAppearanceBody1" />
+        </RadioGroup>
+
+        <include layout="@layout/divider" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="@string/scheduler_time"
+            android:textAppearance="?textAppearanceSubtitle2"
+            android:textColor="?android:textColorSecondary" />
+
+        <xyz.aprildown.timer.app.base.widgets.TimePickerFix
+            android:id="@+id/timePickerSchedulerEdit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:timePickerMode="spinner" />
+
+        <include layout="@layout/divider" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_weight="1"
+                android:text="@string/scheduler_repeat"
+                android:textAppearance="?textAppearanceSubtitle2"
+                android:textColor="?android:textColorSecondary" />
+
+            <Button
+                android:id="@+id/btnSchedulerEditRepeat"
+                style="@style/Widget.MaterialComponents.Button.TextButton"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                android:layout_weight="3"
+                android:text="@string/scheduler_repeat_once"
+                android:textAllCaps="false" />
+
+        </LinearLayout>
+
+        <!-- Day buttons are put here programmatically -->
+        <com.nex3z.togglebuttongroup.MultiSelectToggleGroup
+            android:id="@+id/layoutSchedulerRepeatEveryWeek"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:visibility="gone"
+            app:tbgChildSpacing="8dp"
+            app:tbgFlow="true"
+            tools:visibility="visible">
+
+            <com.nex3z.togglebuttongroup.button.CircularToggle
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                tools:text="M" />
+
+            <com.nex3z.togglebuttongroup.button.CircularToggle
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                tools:text="T" />
+
+            <com.nex3z.togglebuttongroup.button.CircularToggle
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                tools:text="W" />
+
+            <com.nex3z.togglebuttongroup.button.CircularToggle
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                tools:text="T" />
+
+            <com.nex3z.togglebuttongroup.button.CircularToggle
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                tools:text="F" />
+
+            <com.nex3z.togglebuttongroup.button.CircularToggle
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                tools:text="S" />
+
+            <com.nex3z.togglebuttongroup.button.CircularToggle
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                tools:text="S" />
+
+        </com.nex3z.togglebuttongroup.MultiSelectToggleGroup>
+
+        <LinearLayout
+            android:id="@+id/layoutSchedulerEditRepeatEveryDays"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:visibility="gone"
+            tools:visibility="visible">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/scheduler_repeat_every"
+                android:textAppearance="?textAppearanceBody1" />
+
+            <EditText
+                android:id="@+id/editSchedulerEditRepeatEveryDays"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:imeOptions="actionDone"
+                android:importantForAutofill="no"
+                android:inputType="number"
+                android:minWidth="48dp"
+                android:selectAllOnFocus="true"
+                android:textAlignment="center"
+                tools:ignore="LabelFor,UnusedAttribute"
+                tools:text="3" />
+
+            <TextView
+                android:id="@+id/textSchedulerEditRepeatEveryDays"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?textAppearanceBody1"
+                tools:text="Days" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+</ScrollView>

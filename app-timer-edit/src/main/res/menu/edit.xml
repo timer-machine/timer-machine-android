@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/action_save_timer"
+        android:icon="@drawable/ic_check"
+        android:orderInCategory="10"
+        android:title="@string/save"
+        app:showAsAction="ifRoom" />
+
+    <item
+        android:id="@+id/action_delete_timer"
+        android:icon="@drawable/ic_delete"
+        android:orderInCategory="20"
+        android:title="@string/delete"
+        app:showAsAction="ifRoom" />
+
+    <item
+        android:id="@+id/action_timer_template"
+        android:icon="@drawable/settings_file"
+        android:orderInCategory="25"
+        android:title="@string/sample_timer_template_title"
+        app:showAsAction="never" />
+
+    <group
+        android:id="@+id/menu_group_timer_share"
+        android:orderInCategory="30">
+        <item
+            android:id="@+id/action_timer_copy_to_clipboard"
+            android:title="@string/edit_share_as_text"
+            app:showAsAction="never" />
+
+        <item
+            android:id="@+id/action_timer_create_from_clipboard"
+            android:title="@string/edit_import_from_the_clipboard"
+            app:showAsAction="never" />
+    </group>
+</menu>

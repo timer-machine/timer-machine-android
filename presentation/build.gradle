@@ -1,0 +1,44 @@
+plugins {
+    id 'com.android.library'
+    id 'kotlin-android'
+    id 'kotlin-kapt'
+    id 'dagger.hilt.android.plugin'
+}
+
+android {
+    sourceSets {
+        String sharedTestDir = "src/sharedTest/java"
+        test {
+            java.srcDir sharedTestDir
+        }
+        androidTest {
+            java.srcDir sharedTestDir
+        }
+    }
+}
+
+dependencies {
+    api project(':domain')
+    api project(':data')
+
+    testImplementation libs.junit
+    testImplementation libs.mockito
+    testImplementation libs.mockito_inline
+    testImplementation libs.mockito_kotlin
+    testImplementation libs.androidx_arch_test
+
+    androidTestImplementation libs.mockito
+    androidTestImplementation libs.mockito_android
+    androidTestImplementation libs.mockito_kotlin
+    androidTestImplementation libs.androidx_test_runner
+    androidTestImplementation libs.androidx_test_junit
+    androidTestImplementation libs.androidx_test_espresso
+
+    api libs.androidx_lifecycle_runtime
+    api libs.androidx_lifecycle_livedata
+    api libs.androidx_lifecycle_viewmodel
+
+    implementation libs.hilt_android
+    kapt libs.hilt_compiler
+
+}

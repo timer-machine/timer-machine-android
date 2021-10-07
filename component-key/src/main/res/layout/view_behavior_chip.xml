@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.chip.Chip xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:textColor="@android:color/white"
+    app:chipCornerRadius="@dimen/normal_chip_radius"
+    app:chipIconTint="@android:color/white"
+    app:closeIcon="@drawable/ic_settings"
+    app:closeIconTint="@android:color/white"
+    app:closeIconVisible="true"
+    app:ensureMinTouchTargetSize="false"
+    app:textEndPadding="@dimen/behaviour_chip_text_padding"
+    app:textStartPadding="@dimen/behaviour_chip_text_padding"
+    tools:chipBackgroundColor="?colorSecondary"
+    tools:chipIcon="@drawable/ic_music"
+    tools:text="@string/behaviour_music" />

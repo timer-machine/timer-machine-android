@@ -1,0 +1,14 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="xyz.aprildown.timer.app.base">
+
+    <queries>
+        <intent>
+            <action android:name="android.intent.action.TTS_SERVICE" />
+        </intent>
+    </queries>
+
+    <uses-permission android:name="android.permission.VIBRATE" />
+
+    <application android:theme="@style/AppTheme.LibraryPreview" />
+
+</manifest>

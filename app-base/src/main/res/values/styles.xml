@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="Widget.AppTheme.Button" parent="@style/Widget.MaterialComponents.Button">
+        <item name="cornerRadius">8dp</item>
+    </style>
+
+    <style name="Widget.AppTheme.MaterialCardView" parent="Widget.MaterialComponents.CardView">
+        <!--MaterialCardView will use colorControlHighlight if null-->
+        <item name="rippleColor">@null</item>
+    </style>
+
+    <style name="Widget.AppTheme.MaterialAlertDialog" parent="ThemeOverlay.MaterialComponents.MaterialAlertDialog">
+        <item name="alertDialogStyle">@style/Widget.AppTheme.MaterialAlertDialog.Content</item>
+    </style>
+
+    <style name="Widget.AppTheme.MaterialAlertDialog.Content" parent="MaterialAlertDialog.MaterialComponents">
+        <!--24dp and 80dp take too much space on small devices.-->
+        <item name="backgroundInsetStart">16dp</item>
+        <item name="backgroundInsetTop">16dp</item>
+        <item name="backgroundInsetEnd">16dp</item>
+        <item name="backgroundInsetBottom">16dp</item>
+    </style>
+
+    <style name="Widget.AppTheme.MaterialPopupMenu" parent="Widget.MPM.Menu" />
+
+</resources>

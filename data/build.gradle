@@ -1,0 +1,51 @@
+plugins {
+    id 'com.android.library'
+    id 'kotlin-android'
+    id 'kotlin-kapt'
+    id 'dagger.hilt.android.plugin'
+}
+
+android {
+    defaultConfig {
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments += [
+                        "room.schemaLocation"  : "$projectDir/schemas".toString(),
+                        "room.incremental"     : "true",
+                        "room.expandProjection": "true"
+                ]
+            }
+        }
+    }
+
+    sourceSets {
+        androidTest.assets.srcDirs += files("$projectDir/schemas".toString())
+    }
+}
+
+dependencies {
+    implementation project(':domain')
+
+    testImplementation libs.junit
+    testImplementation libs.mockito
+    testImplementation libs.mockito_kotlin
+
+    androidTestImplementation libs.androidx_test_core
+    androidTestImplementation libs.androidx_test_runner
+    androidTestImplementation libs.androidx_test_junit
+    androidTestImplementation libs.androidx_test_espresso
+    androidTestImplementation libs.androidx_room_test
+
+    implementation libs.androidx_room_runtime
+    implementation libs.androidx_room_ktx
+    kapt libs.androidx_room_compiler
+
+    implementation libs.hilt_android
+    kapt libs.hilt_compiler
+
+    implementation libs.moshi
+    kapt libs.moshi_kotlin_gen
+
+    implementation libs.android_job
+
+}

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ImageButton xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="36dp"
+    android:layout_height="36dp"
+    android:background="?selectableItemBackgroundBorderless"
+    android:contentDescription="@string/one_action_tweak_time"
+    app:srcCompat="@drawable/settings_tweak_time"
+    app:tint="?colorSecondary" />

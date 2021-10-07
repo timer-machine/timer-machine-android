@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?><!--ViewStub ignores width and height so we use minWidth and minHeight to set size.-->
+<ImageView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:importantForAccessibility="no"
+    android:minWidth="24dp"
+    android:minHeight="24dp"
+    tools:background="@color/colorPrimary" />

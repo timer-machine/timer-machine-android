@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <Preference
+        app:icon="@drawable/settings_tutorial"
+        app:key="@string/help_key_tutorial"
+        app:persistent="false"
+        app:singleLineTitle="false"
+        app:summary="@string/help_tutorial_desp"
+        app:title="@string/help_tutorial" />
+
+    <Preference
+        app:icon="@drawable/settings_tips_and_tricks"
+        app:key="@string/help_key_tips"
+        app:persistent="false"
+        app:singleLineTitle="false"
+        app:summary="@string/help_tips_tricks_desp"
+        app:title="@string/help_tips_tricks" />
+
+    <Preference
+        app:icon="@drawable/settings_help"
+        app:key="@string/help_key_qa"
+        app:persistent="false"
+        app:singleLineTitle="false"
+        app:title="@string/help_qa" />
+
+    <Preference
+        app:icon="@drawable/settings_voice"
+        app:key="@string/help_key_tts"
+        app:persistent="false"
+        app:singleLineTitle="false"
+        app:summary="@string/help_tts_desp"
+        app:title="@string/help_tts" />
+
+    <Preference
+        app:icon="@drawable/settings_system_settings"
+        app:key="@string/help_key_whitelist"
+        app:persistent="false"
+        app:singleLineTitle="false"
+        app:summary="@string/help_whitelist_desp"
+        app:title="@string/help_whitelist" />
+
+    <Preference
+        app:icon="@drawable/settings_email"
+        app:key="@string/help_key_feedback"
+        app:persistent="false"
+        app:singleLineTitle="false"
+        app:summary="@string/help_feedback_desp"
+        app:title="@string/help_feedback" />
+
+</PreferenceScreen>

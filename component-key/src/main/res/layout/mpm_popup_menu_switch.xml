@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <!--We need to wrap the content to a FrameLayout to hijack LinearLayout on click event.-->
+    <LinearLayout
+        android:id="@+id/layoutPopupMenuSwitch"
+        style="@style/Widget.MPM.Item"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/mpm_popup_menu_item_height"
+        android:clickable="true"
+        android:focusable="true"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingStart="@dimen/mpm_popup_menu_item_padding_horizontal"
+        android:paddingLeft="@dimen/mpm_popup_menu_item_padding_horizontal"
+        android:paddingEnd="@dimen/mpm_popup_menu_item_padding_horizontal"
+        android:paddingRight="@dimen/mpm_popup_menu_item_padding_horizontal"
+        tools:theme="@style/Widget.MPM.Menu">
+
+        <TextView
+            android:id="@+id/mpmSwitchLabel"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:ellipsize="end"
+            android:lines="1"
+            android:textColor="?android:textColorPrimary"
+            android:textSize="@dimen/mpm_popup_menu_item_label_text_size"
+            tools:text="@tools:sample/lorem" />
+
+        <include
+            android:id="@+id/mpmSwitchSwitch"
+            layout="@layout/widget_switch"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+    </LinearLayout>
+
+</FrameLayout>

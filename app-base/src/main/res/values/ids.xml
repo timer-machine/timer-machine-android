@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="dest_timer" type="id" />
+    <item name="dest_record" type="id" />
+    <item name="dest_scheduler" type="id" />
+    <item name="dest_edit_scheduler" type="id" />
+    <item name="dest_backup_restore" type="id" />
+    <item name="dest_theme" type="id" />
+    <item name="dest_whitelist" type="id" />
+    <item name="dest_export" type="id" />
+    <item name="dest_import" type="id" />
+    <item name="dest_settings" type="id" />
+    <item name="dest_settings_floating_window_pip" type="id" />
+    <item name="dest_help" type="id" />
+    <item name="dest_one_layout" type="id" />
+    <item name="dest_about" type="id" />
+    <item name="dest_cloud_backup" type="id" />
+
+    <item name="type_step_step" type="id" />
+    <item name="type_step_group" type="id" />
+    <item name="type_step_group_end" type="id" />
+    <item name="type_step_footer" type="id" />
+</resources>

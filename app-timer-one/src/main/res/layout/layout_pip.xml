@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="?colorPrimarySurface">
+
+    <TextView
+        android:id="@+id/textPipLoop"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:ellipsize="end"
+        android:gravity="center"
+        android:maxLines="1"
+        android:textAppearance="?textAppearanceSubtitle1"
+        android:textColor="?colorOnPrimarySurface"
+        app:layout_constraintBottom_toTopOf="@id/textPipStepName"
+        app:layout_constraintEnd_toEndOf="@id/textPipTime"
+        app:layout_constraintStart_toStartOf="@id/textPipTime"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.4"
+        app:layout_constraintVertical_chainStyle="packed"
+        tools:text="1/3" />
+
+    <TextView
+        android:id="@+id/textPipStepName"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:ellipsize="end"
+        android:gravity="center"
+        android:maxLines="2"
+        android:textAppearance="?textAppearanceSubtitle1"
+        android:textColor="?colorOnPrimarySurface"
+        app:layout_constraintBottom_toTopOf="@id/textPipTime"
+        app:layout_constraintEnd_toEndOf="@id/textPipTime"
+        app:layout_constraintStart_toStartOf="@id/textPipTime"
+        app:layout_constraintTop_toBottomOf="@id/textPipLoop"
+        tools:text="Hello" />
+
+    <TextView
+        android:id="@+id/textPipTime"
+        android:layout_width="0dp"
+        android:layout_height="36dp"
+        android:fontFamily="@font/digital_numbers_colon"
+        android:gravity="center"
+        android:textColor="?colorOnPrimarySurface"
+        app:autoSizeTextType="uniform"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/textPipStepName"
+        tools:text="12:34" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

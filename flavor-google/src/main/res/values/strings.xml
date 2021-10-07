@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="backup_key_backup_state" translatable="false">backup_key_backup_state</string>
+    <string name="backup_key_subscribe" translatable="false">backup_key_subscribe</string>
+    <string name="backup_key_sign_in" translatable="false">backup_key_sign_in</string>
+    <string name="backup_key_backup_now" translatable="false">backup_key_backup_now</string>
+    <string name="backup_key_restore" translatable="false">backup_key_restore</string>
+    <string name="backup_key_sign_out" translatable="false">backup_key_sign_out</string>
+    <string name="backup_key_delete" translatable="false">backup_key_delete</string>
+    <string name="backup_key_contact" translatable="false">backup_key_contact</string>
+    <string name="backup_key_manage_subscription" translatable="false">backup_key_manage_subscription</string>
+
+    <string name="backup_key_auto_cloud_backup" translatable="false">pref_auto_cloud_backup</string>
+
+</resources>

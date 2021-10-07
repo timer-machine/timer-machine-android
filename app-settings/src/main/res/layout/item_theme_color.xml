@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/cardThemeItem"
+    android:layout_width="match_parent"
+    android:layout_height="112dp"
+    android:layout_marginStart="16dp"
+    android:layout_marginTop="8dp"
+    android:layout_marginEnd="16dp"
+    android:layout_marginBottom="8dp"
+    android:clickable="true"
+    android:focusable="true"
+    app:cardCornerRadius="6dp"
+    app:cardElevation="2dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <FrameLayout
+            android:id="@+id/frameThemeItemBar"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:enabled="false"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:background="@color/colorPrimary">
+
+            <TextView
+                android:id="@+id/textThemeItemTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                android:drawablePadding="8dp"
+                android:textAppearance="?textAppearanceHeadline6"
+                tools:drawableStartCompat="@drawable/settings_subscription"
+                tools:drawableTint="@android:color/white"
+                tools:text="@tools:sample/lorem"
+                tools:textColor="@android:color/white" />
+
+        </FrameLayout>
+
+        <View
+            android:id="@+id/lineThemeItem1"
+            android:layout_width="0dp"
+            android:layout_height="3dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="32dp"
+            android:alpha="0.5"
+            android:background="@drawable/theme_bg_round_corner_line"
+            app:layout_constraintBottom_toTopOf="@id/lineThemeItem2"
+            app:layout_constraintEnd_toStartOf="@id/fabThemeItem"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/frameThemeItemBar" />
+
+        <View
+            android:id="@+id/lineThemeItem2"
+            android:layout_width="0dp"
+            android:layout_height="3dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="112dp"
+            android:alpha="0.4"
+            android:background="@drawable/theme_bg_round_corner_line"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/fabThemeItem"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/lineThemeItem1" />
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fabThemeItem"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|end"
+            android:layout_marginEnd="8dp"
+            android:clickable="false"
+            android:focusable="false"
+            android:importantForAccessibility="no"
+            app:fabSize="mini"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/frameThemeItemBar"
+            app:srcCompat="@drawable/ic_add" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:foreground="@drawable/theme_white_ripple"
+        tools:ignore="UnusedAttribute" />
+
+</com.google.android.material.card.MaterialCardView>

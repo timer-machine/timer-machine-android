@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <xyz.aprildown.timer.component.key.TimePanelLayout
+        android:id="@+id/layoutTimePanel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="20dp"
+        android:minHeight="24dp" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:id="@+id/layoutTimePanelContainer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <xyz.aprildown.tools.view.ListItemWithLayout
+                style="@style/Widget.AppTheme.ListItem.TimePanelPickerItem"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <xyz.aprildown.tools.view.ListItemWithLayout
+                style="@style/Widget.AppTheme.ListItem.TimePanelPickerItem"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <xyz.aprildown.tools.view.ListItemWithLayout
+                style="@style/Widget.AppTheme.ListItem.TimePanelPickerItem"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <xyz.aprildown.tools.view.ListItemWithLayout
+                style="@style/Widget.AppTheme.ListItem.TimePanelPickerItem"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <xyz.aprildown.tools.view.ListItemWithLayout
+                style="@style/Widget.AppTheme.ListItem.TimePanelPickerItem"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <xyz.aprildown.tools.view.ListItemWithLayout
+                style="@style/Widget.AppTheme.ListItem.TimePanelPickerItem"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="edit_default_timer_name" type="string" />
+    <item name="edit_wrong_empty_name" type="string" />
+    <item name="edit_wrong_negative_loop" type="string" />
+    <item name="edit_wrong_empty_steps" type="string" />
+    <item name="one_unable_to_start_timers_in_the_trash" type="string" />
+    <item name="one_ui_locked" type="string" />
+    <item name="half_content" type="string" />
+</resources>

@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="io.github.deweyreed.timer">
+
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <!-- music playing -->
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <!-- vibrate -->
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <!-- keep cpu on -->
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <!-- create shortcut for timers -->
+    <uses-permission android:name="com.android.launcher.permission.INSTALL_SHORTCUT" />
+
+    <!-- start and pause all timers for incoming calls, not needed since M -->
+    <uses-permission
+        android:name="android.permission.READ_PHONE_STATE"
+        android:maxSdkVersion="22" />
+
+    <!-- Android P requires this -->
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+
+    <!-- Android Q requires this-->
+    <uses-permission android:name="android.permission.USE_FULL_SCREEN_INTENT" />
+
+    <!--Floating window-->
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+
+    <uses-permission android:name="com.android.vending.BILLING" />
+
+    <!--For desperate users to whitelist-->
+    <uses-permission android:name="android.permission.REQUEST_IGNORE_BATTERY_OPTIMIZATIONS" />
+
+    <application
+        android:name=".App"
+        android:allowBackup="true"
+        android:fullBackupContent="@xml/auto_backup_rules"
+        android:icon="@drawable/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@drawable/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme"
+        tools:replace="android:theme">
+
+        <activity
+            android:name=".ui.MainActivity"
+            android:label="@string/app_name"
+            android:theme="@style/AppTheme.Main">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <!--From feature modules.-->
+        <!--We have to declare them here because we don't know parentActivityName-->
+
+        <activity
+            android:name="xyz.aprildown.timer.app.timer.edit.EditActivity"
+            android:parentActivityName=".ui.MainActivity" />
+
+        <activity
+            android:name="xyz.aprildown.timer.app.timer.one.OneActivity"
+            android:configChanges="screenSize|smallestScreenSize|screenLayout|orientation"
+            android:parentActivityName=".ui.MainActivity"
+            android:resizeableActivity="true"
+            android:supportsPictureInPicture="true"
+            android:windowSoftInputMode="adjustPan"
+            tools:targetApi="n" />
+
+        <provider
+            android:name="androidx.startup.InitializationProvider"
+            android:authorities="${applicationId}.androidx-startup"
+            android:exported="false"
+            tools:node="merge">
+            <meta-data
+                android:name="androidx.work.WorkManagerInitializer"
+                android:value="androidx.startup"
+                tools:node="remove" />
+        </provider>
+
+    </application>
+
+</manifest>

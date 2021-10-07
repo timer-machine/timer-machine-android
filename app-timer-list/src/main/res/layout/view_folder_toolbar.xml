@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    tools:cardCornerRadius="0dp"
+    tools:cardElevation="@dimen/elevation_timer_card"
+    tools:parentTag="com.google.android.material.card.MaterialCardView">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="36dp">
+
+        <TextView
+            android:id="@+id/textFolderToolbarCurrent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="72dp"
+            android:layout_marginEnd="8dp"
+            android:background="?selectableItemBackgroundBorderless"
+            android:ellipsize="end"
+            android:gravity="center_vertical"
+            android:maxLines="1"
+            android:textAppearance="?textAppearanceSubtitle2"
+            android:textColor="?android:textColorSecondary"
+            app:drawableEndCompat="@drawable/ic_expand"
+            app:drawableTint="?android:textColorSecondary"
+            app:layout_constrainedWidth="true"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/btnFolderToolbarSort"
+            app:layout_constraintHorizontal_bias="0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="@string/folder_default" />
+
+        <ImageView
+            android:id="@+id/btnFolderToolbarMore"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="12dp"
+            android:background="?selectableItemBackgroundBorderless"
+            android:contentDescription="@string/more"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/ic_overflow"
+            app:tint="?android:textColorSecondary" />
+
+        <ImageView
+            android:id="@+id/btnFolderToolbarSort"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:background="?selectableItemBackgroundBorderless"
+            android:contentDescription="@string/folder_sort"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/btnFolderToolbarMore"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/ic_sort"
+            app:tint="?android:textColorSecondary" />
+
+        <ImageView
+            android:id="@+id/btnFolderToolbarGridList"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:background="?selectableItemBackgroundBorderless"
+            android:contentDescription="@string/folder_to_grid_view"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/btnFolderToolbarSort"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/ic_grid_view"
+            app:tint="?android:textColorSecondary" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</merge>

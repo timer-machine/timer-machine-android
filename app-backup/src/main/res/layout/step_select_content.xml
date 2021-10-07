@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <xyz.aprildown.tools.view.ListItemWithLayout
+        android:id="@+id/itemSelectAppContentWipe"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:li_layout="@layout/widget_check"
+        app:li_textPrimary="@string/import_wipe_first" />
+
+    <TextView
+        style="@style/Widget.ListHeader"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/backup_app_data" />
+
+    <xyz.aprildown.tools.view.ListItemWithLayout
+        android:id="@+id/itemSelectAppContentTimer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:li_layout="@layout/widget_check"
+        app:li_textPrimary="@string/main_action_timers" />
+
+    <xyz.aprildown.tools.view.ListItemWithLayout
+        android:id="@+id/itemSelectAppContentTimerStamp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:li_layout="@layout/widget_check"
+        app:li_textPrimary="@string/main_action_record" />
+
+    <xyz.aprildown.tools.view.ListItemWithLayout
+        android:id="@+id/itemSelectAppContentScheduler"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:li_layout="@layout/widget_check"
+        app:li_textPrimary="@string/main_action_schedulers" />
+
+    <TextView
+        style="@style/Widget.ListHeader"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/backup_app_settings" />
+
+    <xyz.aprildown.tools.view.ListItemWithLayout
+        android:id="@+id/itemSelectAppContentSettings"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:li_layout="@layout/widget_check"
+        app:li_textPrimary="@string/backup_app_settings" />
+
+</LinearLayout>

@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="128dp"
+    android:layout_height="108dp"
+    app:cardBackgroundColor="?colorPrimary"
+    app:cardCornerRadius="4dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="4dp"
+        android:orientation="vertical">
+
+        <!--We use AppCompat.* to fix a bug where drawables aren't shown-->
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/textFloatingTitle"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginTop="2dp"
+            android:layout_marginBottom="2dp"
+            android:ellipsize="end"
+            android:gravity="start"
+            android:maxLines="1"
+            android:textAppearance="?textAppearanceCaption"
+            android:textColor="?colorOnPrimary"
+            app:autoSizeTextType="uniform"
+            app:layout_constraintBottom_toBottomOf="@id/btnFloatingClose"
+            app:layout_constraintEnd_toStartOf="@id/textFloatingLoop"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintHorizontal_chainStyle="spread_inside"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/btnFloatingClose"
+            tools:text="Timer" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/textFloatingLoop"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_marginStart="4dp"
+            android:layout_marginEnd="4dp"
+            android:gravity="center"
+            android:maxLines="1"
+            android:textAppearance="?textAppearanceCaption"
+            android:textColor="?colorOnPrimary"
+            android:textSize="12sp"
+            app:layout_constraintBottom_toBottomOf="@id/btnFloatingClose"
+            app:layout_constraintEnd_toStartOf="@id/btnFloatingClose"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@id/textFloatingTitle"
+            app:layout_constraintTop_toTopOf="@id/btnFloatingClose"
+            tools:text="1/3" />
+
+        <androidx.appcompat.widget.AppCompatImageButton
+            android:id="@+id/btnFloatingClose"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:background="?selectableItemBackgroundBorderless"
+            android:scaleType="fitXY"
+            app:layout_constraintBottom_toTopOf="@id/textFloatingStepName"
+            app:layout_constraintDimensionRatio="1"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@id/textFloatingLoop"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/ic_cross"
+            app:tint="?colorOnPrimary" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/textFloatingStepName"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:ellipsize="end"
+            android:gravity="center"
+            android:maxLines="1"
+            android:textAppearance="?textAppearanceSubtitle2"
+            android:textColor="?colorOnPrimary"
+            app:autoSizeTextType="uniform"
+            app:layout_constraintBottom_toTopOf="@id/textFloatingTime"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/btnFloatingClose"
+            tools:text="StepName" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/textFloatingTime"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:gravity="center"
+            android:maxLines="1"
+            android:textAppearance="?textAppearanceHeadline6"
+            android:textColor="?colorOnPrimary"
+            app:autoSizeTextType="uniform"
+            app:layout_constraintBottom_toTopOf="@id/btnFloatingStop"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/textFloatingStepName"
+            tools:text="34:56" />
+
+        <androidx.appcompat.widget.AppCompatImageButton
+            android:id="@+id/btnFloatingStartPause"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="?selectableItemBackgroundBorderless"
+            android:contentDescription="@string/pause"
+            app:layout_constraintBottom_toBottomOf="@id/btnFloatingStop"
+            app:layout_constraintDimensionRatio="w,1:1"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@id/btnFloatingNext"
+            app:layout_constraintTop_toTopOf="@id/btnFloatingStop"
+            app:srcCompat="@drawable/ic_pause"
+            app:tint="?colorOnPrimary" />
+
+        <androidx.appcompat.widget.AppCompatImageButton
+            android:id="@+id/btnFloatingPrev"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="?selectableItemBackgroundBorderless"
+            android:contentDescription="@string/one_action_prev"
+            app:layout_constraintBottom_toBottomOf="@id/btnFloatingStartPause"
+            app:layout_constraintDimensionRatio="1"
+            app:layout_constraintEnd_toStartOf="@id/btnFloatingNext"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@id/btnFloatingStop"
+            app:layout_constraintTop_toTopOf="@id/btnFloatingStop"
+            app:srcCompat="@drawable/ic_arrow_up"
+            app:tint="?colorOnPrimary" />
+
+        <androidx.appcompat.widget.AppCompatImageButton
+            android:id="@+id/btnFloatingStop"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="?selectableItemBackgroundBorderless"
+            android:contentDescription="@string/one_action_stop"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintDimensionRatio="1"
+            app:layout_constraintEnd_toStartOf="@id/btnFloatingPrev"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/textFloatingTime"
+            app:layout_wrapBefore="true"
+            app:srcCompat="@drawable/ic_stop"
+            app:tint="?colorOnPrimary" />
+
+        <androidx.appcompat.widget.AppCompatImageButton
+            android:id="@+id/btnFloatingNext"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="?selectableItemBackgroundBorderless"
+            android:contentDescription="@string/one_action_next"
+            app:layout_constraintBottom_toBottomOf="@id/btnFloatingStop"
+            app:layout_constraintDimensionRatio="w,1:1"
+            app:layout_constraintEnd_toStartOf="@id/btnFloatingStartPause"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@id/btnFloatingPrev"
+            app:layout_constraintTop_toTopOf="@id/btnFloatingStop"
+            app:srcCompat="@drawable/ic_arrow_down"
+            app:tint="?colorOnPrimary" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</com.google.android.material.card.MaterialCardView>

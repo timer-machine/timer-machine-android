@@ -1,0 +1,40 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="xyz.aprildown.timer.app.timer.run">
+
+    <application android:theme="@style/AppTheme.LibraryPreview">
+        <service
+            android:name=".MachineService"
+            android:enabled="true"
+            android:exported="false"
+            android:stopWithTask="false" />
+
+        <receiver
+            android:name=".receiver.SchedulerReceiver"
+            android:enabled="true"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="xyz.aprildown.timer.data.job.scheduler" />
+            </intent-filter>
+        </receiver>
+
+        <activity
+            android:name=".PhantomActivity"
+            android:excludeFromRecents="true"
+            android:exported="true"
+            android:launchMode="singleTask"
+            android:taskAffinity=""
+            android:theme="@android:style/Theme.NoDisplay" />
+
+        <activity
+            android:name=".screen.ScreenActivity"
+            android:configChanges="screenSize|keyboardHidden|keyboard|navigation"
+            android:directBootAware="true"
+            android:excludeFromRecents="true"
+            android:launchMode="singleInstance"
+            android:showOnLockScreen="true"
+            android:taskAffinity=""
+            android:theme="@style/AppTheme.Screen"
+            tools:ignore="UnusedAttribute" />
+    </application>
+</manifest>

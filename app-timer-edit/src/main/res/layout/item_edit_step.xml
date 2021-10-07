@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <View
+        android:id="@+id/viewStepGroupIndicatorStart"
+        android:layout_width="@dimen/step_group_indicator_width"
+        android:layout_height="0dp"
+        android:background="?colorPrimary"
+        android:elevation="4dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <View
+        android:id="@+id/viewStepGroupIndicatorEnd"
+        android:layout_width="@dimen/step_group_indicator_width"
+        android:layout_height="0dp"
+        android:background="?colorPrimary"
+        android:elevation="4dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/cardEditStep"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="8dp"
+        app:cardCornerRadius="4dp"
+        app:cardElevation="4dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:rippleColor="@android:color/transparent"
+        tools:cardBackgroundColor="@android:color/holo_orange_dark">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/colorStep"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:layout_marginStart="12dp"
+                android:layout_marginTop="12dp"
+                android:layout_marginEnd="12dp"
+                android:importantForAccessibility="no"
+                app:layout_constraintEnd_toStartOf="@id/editStepName"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/background_step_number"
+                tools:tint="?colorPrimary" />
+
+            <EditText
+                android:id="@+id/editStepName"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:hint="@string/edit_step_name"
+                android:imeOptions="actionDone"
+                android:importantForAutofill="no"
+                android:inputType="text|textMultiLine"
+                android:selectAllOnFocus="true"
+                app:layout_constraintEnd_toStartOf="@id/textStepLength"
+                app:layout_constraintStart_toEndOf="@id/colorStep"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:ignore="UnusedAttribute" />
+
+            <xyz.aprildown.timer.component.key.RoundTextView
+                android:id="@+id/textStepLength"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:elevation="4dp"
+                android:padding="8dp"
+                android:textColor="@android:color/white"
+                app:allCorner="8dp"
+                app:layout_constraintBottom_toBottomOf="@id/editStepName"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/editStepName"
+                app:layout_constraintTop_toTopOf="@id/editStepName"
+                tools:ignore="UnusedAttribute"
+                tools:text="00:00" />
+
+            <xyz.aprildown.timer.component.key.behaviour.EditableBehaviourLayout
+                android:id="@+id/layoutBehaviour"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginBottom="8dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@id/editStepName"
+                app:layout_constraintTop_toBottomOf="@id/editStepName" />
+
+            <ImageButton
+                android:id="@+id/btnStepAdd"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:layout_marginBottom="8dp"
+                android:background="?selectableItemBackgroundBorderless"
+                android:contentDescription="@string/edit_add_step"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="@id/colorStep"
+                app:layout_constraintTop_toBottomOf="@id/colorStep"
+                app:layout_constraintVertical_bias="1"
+                app:srcCompat="@drawable/ic_add" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

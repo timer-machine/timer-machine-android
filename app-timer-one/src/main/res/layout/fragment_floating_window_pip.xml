@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <xyz.aprildown.tools.view.ListItemWithLayout
+            android:id="@+id/itemFloatingWindowPipAutoClose"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:li_divider="margin"
+            app:li_layout="@layout/widget_switch"
+            app:li_textPrimary="@string/settings_floating_window_pip_auto_close" />
+
+        <TextView
+            style="@style/Widget.ListHeader"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/settings_floating_window_pip_floating" />
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:minHeight="192dp">
+
+            <include
+                android:id="@+id/viewFloatingWindowPipFloating"
+                layout="@layout/layout_floating_window"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center" />
+
+        </FrameLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/keyline_icon"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="@dimen/keyline_icon"
+            android:text="@string/settings_floating_window_pip_floating_alpha"
+            android:textAppearance="?textAppearanceSubtitle2" />
+
+        <SeekBar
+            android:id="@+id/seekFloatingWindowPipFloatingAlpha"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:minHeight="46dp"
+            tools:progress="100" />
+
+        <include
+            style="@style/Widget.MarginDivider"
+            layout="@layout/divider" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/keyline_icon"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="@dimen/keyline_icon"
+            android:text="@string/settings_floating_window_pip_floating_size"
+            android:textAppearance="?textAppearanceSubtitle2" />
+
+        <SeekBar
+            android:id="@+id/seekFloatingWindowPipFloatingSize"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:minHeight="46dp"
+            tools:progress="100" />
+
+    </LinearLayout>
+
+</ScrollView>

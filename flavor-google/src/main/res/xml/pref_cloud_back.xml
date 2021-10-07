@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <Preference
+        app:icon="@drawable/backup_cloud_state"
+        app:key="@string/backup_key_backup_state"
+        app:persistent="false"
+        app:summary=" "
+        app:title="@string/cloud_backup_backup_state" />
+
+    <PreferenceCategory app:title="@string/cloud_backup_backup_options">
+
+        <Preference
+            app:icon="@drawable/settings_premium"
+            app:isPreferenceVisible="false"
+            app:key="@string/backup_key_subscribe"
+            app:persistent="false"
+            app:title="@string/billing_subscribe"
+            tools:isPreferenceVisible="true" />
+
+        <Preference
+            app:icon="@drawable/backup_sign_in"
+            app:isPreferenceVisible="false"
+            app:key="@string/backup_key_sign_in"
+            app:persistent="false"
+            app:summary="@string/cloud_backup_account_required"
+            app:title="@string/account_sign_in"
+            tools:isPreferenceVisible="true" />
+
+        <Preference
+            app:enabled="false"
+            app:icon="@drawable/settings_cloud_backup"
+            app:key="@string/backup_key_backup_now"
+            app:persistent="false"
+            app:title="@string/cloud_backup_backup_now" />
+
+        <Preference
+            app:icon="@drawable/backup_cloud_restore"
+            app:key="@string/backup_key_restore"
+            app:persistent="false"
+            app:title="@string/cloud_backup_restore" />
+
+        <SwitchPreferenceCompat
+            app:defaultValue="false"
+            app:icon="@drawable/backup_auto_backup"
+            app:key="@string/backup_key_auto_cloud_backup"
+            app:title="@string/cloud_backup_auto_backup_title" />
+
+    </PreferenceCategory>
+
+    <PreferenceCategory app:title="@string/cloud_backup_other_options">
+
+        <Preference
+            app:icon="@drawable/backup_sign_out"
+            app:key="@string/backup_key_sign_out"
+            app:persistent="false"
+            app:title="@string/account_sign_out" />
+
+        <Preference
+            app:icon="@drawable/backup_delete"
+            app:key="@string/backup_key_delete"
+            app:persistent="false"
+            app:title="@string/account_delete" />
+
+        <Preference
+            app:icon="@drawable/settings_email"
+            app:key="@string/backup_key_contact"
+            app:persistent="false"
+            app:title="@string/billing_help_contact" />
+
+        <Preference
+            app:icon="@drawable/settings_google_play"
+            app:key="@string/backup_key_manage_subscription"
+            app:persistent="false"
+            app:title="@string/billing_manage_subscription" />
+
+    </PreferenceCategory>
+
+</PreferenceScreen>

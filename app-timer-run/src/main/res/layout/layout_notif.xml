@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/color_notification_background"
+        android:paddingTop="8dp"
+        android:paddingBottom="8dp"
+        tools:ignore="ContentDescription,UselessParent">
+
+        <ImageView
+            android:id="@+id/imageNotifIcon"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="16dp"
+            android:contentDescription="@string/app_name"
+            android:src="@mipmap/app_icon_square" />
+
+        <TextView
+            android:id="@+id/textNotifMessage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_toStartOf="@id/imageNotifStopAll"
+            android:layout_toEndOf="@id/imageNotifIcon"
+            android:ellipsize="end"
+            android:maxLines="2"
+            android:textAppearance="@style/TextAppearance.Compat.Notification.Title"
+            tools:text="1 timer is running" />
+
+        <ImageView
+            android:id="@+id/imageNotifStopAll"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="8dp"
+            android:layout_toStartOf="@id/imageNotifPauseAll"
+            android:src="@drawable/ic_stop"
+            android:tint="@color/md_purple_500"
+            tools:ignore="UseAppTint" />
+
+        <ImageView
+            android:id="@+id/imageNotifPauseAll"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="16dp"
+            android:tint="@color/md_purple_500"
+            tools:ignore="UseAppTint"
+            tools:src="@drawable/ic_pause" />
+    </RelativeLayout>
+
+</FrameLayout>

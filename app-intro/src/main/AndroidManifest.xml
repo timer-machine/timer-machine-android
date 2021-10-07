@@ -1,0 +1,7 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="xyz.aprildown.timer.app.intro">
+
+    <application android:theme="@style/AppTheme.LibraryPreview">
+        <activity android:name=".IntroActivity" />
+    </application>
+</manifest>

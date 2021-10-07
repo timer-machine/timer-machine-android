@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center_vertical"
+    android:orientation="horizontal"
+    tools:parentTag="android.widget.LinearLayout">
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/inputNameLoopName"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="4dp"
+        android:layout_weight="3"
+        android:hint="@string/name_loop_name_hint">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/editNameLoopName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textMultiLine"
+            android:nextFocusForward="@id/editNameLoopLoop"
+            android:theme="@style/Widget.AppTheme.NameLoopView.Overlay" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/inputNameLoopLoop"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="4dp"
+        android:layout_weight="1"
+        android:hint="@string/name_loop_loop_hint">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/editNameLoopLoop"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:digits="0123456789"
+            android:gravity="center"
+            android:imeOptions="actionDone"
+            android:inputType="number"
+            android:selectAllOnFocus="true"
+            android:theme="@style/Widget.AppTheme.NameLoopView.Overlay" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+</merge>

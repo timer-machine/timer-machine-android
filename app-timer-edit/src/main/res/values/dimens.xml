@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="step_group_indicator_width">8dp</dimen>
+</resources>

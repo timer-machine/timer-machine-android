@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="AppTheme" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryVariant">@color/colorPrimaryVariant</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryVariant</item>
+        <item name="android:statusBarColor">@color/colorStatusBar</item>
+        <item name="colorOnPrimary">@color/colorOnPrimary</item>
+        <item name="colorSecondary">@color/colorSecondary</item>
+        <item name="colorSecondaryVariant">@color/colorSecondaryVariant</item>
+        <item name="colorOnSecondary">@color/colorOnSecondary</item>
+
+        <item name="materialButtonStyle">@style/Widget.AppTheme.Button</item>
+        <item name="materialCardViewStyle">@style/Widget.AppTheme.MaterialCardView</item>
+        <item name="materialAlertDialogTheme">@style/Widget.AppTheme.MaterialAlertDialog</item>
+
+        <item name="viewInflaterClass">xyz.aprildown.theme.ThemeViewInflater</item>
+
+        <item name="materialPopupMenuStyle">@style/Widget.AppTheme.MaterialPopupMenu</item>
+    </style>
+
+    <style name="AppTheme.LibraryPreview">
+        <item name="viewInflaterClass">
+            com.google.android.material.theme.MaterialComponentsViewInflater
+        </item>
+    </style>
+
+</resources>

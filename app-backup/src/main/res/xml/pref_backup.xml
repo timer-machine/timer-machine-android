@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <xyz.aprildown.timer.app.backup.CloudBackupPreference
+        app:icon="@drawable/settings_cloud_backup"
+        app:key="@string/backup_key_cloud"
+        app:persistent="false"
+        app:title="@string/cloud_backup_title"
+        app:widgetLayout="@layout/layout_cloud_backup_widget" />
+
+    <PreferenceCategory app:title="@string/backup_local_backup">
+
+        <Preference
+            app:icon="@drawable/settings_export"
+            app:key="@string/backup_key_export"
+            app:persistent="false"
+            app:singleLineTitle="false"
+            app:summary="@string/export_data_summary"
+            app:title="@string/export_data_title" />
+
+        <Preference
+            app:icon="@drawable/settings_import"
+            app:key="@string/backup_key_import"
+            app:persistent="false"
+            app:singleLineTitle="false"
+            app:summary="@string/import_data_summary"
+            app:title="@string/import_data_title" />
+
+    </PreferenceCategory>
+
+</PreferenceScreen>

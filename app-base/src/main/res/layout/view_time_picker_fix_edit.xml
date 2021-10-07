@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:gravity="center"
+    android:orientation="horizontal">
+
+    <EditText
+        android:id="@+id/editTimePickerFixHour"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="4dp"
+        android:gravity="center"
+        android:hint="HH"
+        android:imeOptions="actionNext"
+        android:importantForAutofill="no"
+        android:inputType="number"
+        android:maxLength="2"
+        android:nextFocusForward="@id/editTimePickerFixMinute"
+        android:selectAllOnFocus="true"
+        tools:ignore="HardcodedText" />
+
+    <EditText
+        android:id="@+id/editTimePickerFixMinute"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:gravity="center"
+        android:hint="MM"
+        android:importantForAutofill="no"
+        android:inputType="number"
+        android:maxLength="2"
+        android:selectAllOnFocus="true"
+        tools:ignore="HardcodedText" />
+
+</LinearLayout>

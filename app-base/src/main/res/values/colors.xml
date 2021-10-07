@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- purple 500 -->
+    <color name="colorPrimary">#9C27B0</color>
+    <color name="colorPrimaryVariant">#6A0080</color>
+    <color name="colorOnPrimary">#FFFFFF</color>
+    <!-- light blue 500 -->
+    <color name="colorSecondary">#03A9F4</color>
+    <color name="colorSecondaryVariant">#007AC1</color>
+    <color name="colorOnSecondary">#FFFFFF</color>
+
+    <color name="colorStatusBarLight">@color/colorPrimary</color>
+    <color name="colorStatusBarNight">@android:color/black</color>
+    <color name="colorStatusBar">@color/colorStatusBarLight</color>
+
+    <color name="colorPremium">@color/md_amber_500</color>
+
+</resources>

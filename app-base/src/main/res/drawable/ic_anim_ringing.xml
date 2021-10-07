@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<animated-vector xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:appt="http://schemas.android.com/aapt"
+    android:drawable="@drawable/ic_anim_ring">
+    <target android:name="ic_ringtone_active_outlines_0">
+        <appt:attr name="android:animation">
+            <objectAnimator
+                android:duration="140"
+                android:interpolator="@anim/ic_anim_ringing"
+                android:propertyName="rotation"
+                android:repeatCount="-1"
+                android:repeatMode="reverse"
+                android:valueFrom="12.0"
+                android:valueTo="-12.0"
+                android:valueType="floatType" />
+        </appt:attr>
+    </target>
+    <target android:name="ic_ringtone_active_outlines_1">
+        <appt:attr name="android:animation">
+            <objectAnimator
+                android:duration="140"
+                android:interpolator="@anim/ic_anim_ringing"
+                android:propertyName="rotation"
+                android:repeatCount="-1"
+                android:repeatMode="reverse"
+                android:valueFrom="-8.0"
+                android:valueTo="8.0"
+                android:valueType="floatType" />
+        </appt:attr>
+    </target>
+    <target android:name="ic_ringtone_active_outlines_2">
+        <appt:attr name="android:animation">
+            <objectAnimator
+                android:duration="140"
+                android:interpolator="@anim/ic_anim_ringing"
+                android:propertyName="translateX"
+                android:repeatCount="-1"
+                android:repeatMode="reverse"
+                android:valueFrom="-3"
+                android:valueTo="3"
+                android:valueType="floatType" />
+        </appt:attr>
+    </target>
+</animated-vector>

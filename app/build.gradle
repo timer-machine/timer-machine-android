@@ -1,0 +1,162 @@
+plugins {
+    id 'com.android.application'
+    id 'kotlin-android'
+    id 'kotlin-kapt'
+    id 'dagger.hilt.android.plugin'
+    id 'com.google.gms.google-services'
+}
+
+android {
+    compileSdkVersion versions.compile_sdk
+    defaultConfig {
+        applicationId "io.github.deweyreed.timer"
+        minSdkVersion versions.min_sdk
+        targetSdkVersion versions.target_sdk
+        versionCode versions.version_code
+        versionName versions.version_name
+        testInstrumentationRunner "io.github.deweyreed.timer.TestRunner"
+        vectorDrawables.useSupportLibrary true
+
+        archivesBaseName = "TimeR Machine-v${versionName}(${versionCode})"
+    }
+
+    compileOptions {
+        coreLibraryDesugaringEnabled true
+    }
+
+    buildTypes {
+        debug {
+            versionNameSuffix "-dev"
+            applicationIdSuffix '.dev'
+        }
+        release {
+            minifyEnabled true
+            shrinkResources true
+            // TODO: (2021-07-04): proguard-android-optimize.txt removes used resources.
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    flavorDimensions "market"
+    productFlavors {
+
+        dog {
+            dimension "market"
+            versionNameSuffix "-dog"
+            applicationIdSuffix ".dog"
+        }
+
+        google {
+            dimension "market"
+            applicationIdSuffix ".google"
+        }
+
+        other {
+            dimension "market"
+            applicationIdSuffix ".other"
+        }
+    }
+
+    buildFeatures {
+        dataBinding = true
+        viewBinding = true
+    }
+
+    packagingOptions {
+        exclude 'META-INF/library_release.kotlin_module'
+        exclude 'META-INF/library-core_release.kotlin_module'
+    }
+
+    lintOptions {
+        warningsAsErrors true
+    }
+}
+
+dependencies {
+    coreLibraryDesugaring libs.desugar_jdk_libs
+
+    implementation project(':domain')
+    implementation project(':data')
+    implementation project(':presentation')
+    implementation project(':app-base')
+    implementation project(':app-scheduler')
+    implementation project(':app-backup')
+    implementation project(':app-settings')
+    implementation project(':app-tasker')
+    implementation project(':app-intro')
+    implementation project(':app-timer-edit')
+    implementation project(':app-timer-run')
+    implementation project(':app-timer-list')
+    implementation project(':app-timer-one')
+    implementation project(':component-key')
+    implementation project(':component-main')
+    implementation project(':component-settings')
+    googleImplementation project(':flavor-google')
+    dogImplementation project(':app-analytics-fake')
+    googleImplementation project(':app-analytics')
+    otherImplementation project(':app-analytics')
+
+    implementation libs.tools
+
+    implementation libs.kotlin_coroutines_core
+    implementation libs.kotlin_coroutines_android
+
+    testImplementation libs.junit
+    androidTestImplementation libs.mockito
+    androidTestImplementation libs.mockito_android
+    androidTestImplementation libs.mockito_kotlin
+
+    androidTestImplementation libs.androidx_test_core
+    androidTestImplementation libs.androidx_test_runner
+    androidTestImplementation libs.androidx_test_rules
+    androidTestImplementation libs.androidx_test_junit
+    androidTestImplementation libs.androidx_test_espresso
+    androidTestImplementation libs.androidx_test_espresso_contrib
+    androidTestImplementation libs.androidx_test_espresso_intents
+    androidTestImplementation libs.hms_picker
+    androidTestImplementation libs.scroll_hms_picker
+    androidTestImplementation libs.hilt_android_test
+    kaptAndroidTest libs.hilt_compiler
+
+    implementation libs.androidx_appcompat
+    implementation libs.androidx_recyclerview
+    implementation libs.androidx_preference
+    implementation libs.androidx_constraintlayout
+    implementation libs.androidx_lifecycle_runtime
+    implementation libs.androidx_lifecycle_livedata
+    implementation libs.androidx_lifecycle_viewmodel
+
+    implementation libs.material
+
+    debugImplementation libs.leak_cannary
+    // debugImplementation libs.pandora
+
+    implementation libs.androidx_room_runtime
+
+    implementation libs.androidx_navigation_fragment
+    implementation libs.androidx_navigation_ui
+
+    implementation libs.androidx_work
+
+    implementation libs.hilt_android
+    kapt libs.hilt_compiler
+    implementation libs.hilt_workmanager
+
+    implementation libs.okio
+    implementation libs.permission
+
+    implementation libs.flexbox
+    implementation libs.material_drawer
+    implementation libs.scroll_hms_picker
+    implementation libs.theme
+    implementation libs.toggle_button_group
+    implementation libs.ultimate_ringtone_picker
+    implementation libs.vertical_stepper_form
+
+}
+
+android.applicationVariants.all { variant ->
+    if (variant.name.contains('dog')) {
+        project.tasks.getByName('process' + variant.name.capitalize() + 'GoogleServices').enabled = false
+    }
+}

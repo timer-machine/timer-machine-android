@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    tools:divider="@drawable/voice_variable_table_divider"
+    tools:orientation="horizontal"
+    tools:parentTag="android.widget.LinearLayout"
+    tools:showDividers="beginning|middle|end">
+
+    <LinearLayout
+        android:id="@+id/layoutTimer"
+        style="@style/Widget.AppTheme.LinearLayout.VoiceVariableTable">
+
+        <TextView
+            style="@style/Widget.AppTheme.TextView.VoiceVariableTable.GroupTitle"
+            android:text="@string/voice_variable_timer_group" />
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/variableTimerName"
+            style="@style/Widget.AppTheme.Chip.VoiceVariableTable"
+            android:text="@string/voice_variable_timer_name" />
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/variableTimerLoop"
+            style="@style/Widget.AppTheme.Chip.VoiceVariableTable"
+            android:text="@string/voice_variable_timer_loop" />
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/variableTimerTotalLoop"
+            style="@style/Widget.AppTheme.Chip.VoiceVariableTable"
+            android:text="@string/voice_variable_timer_total_loop" />
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/variableTimerDuration"
+            style="@style/Widget.AppTheme.Chip.VoiceVariableTable"
+            android:text="@string/voice_variable_timer_duration" />
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/variableTimerElapsed"
+            style="@style/Widget.AppTheme.Chip.VoiceVariableTable"
+            android:text="@string/voice_variable_timer_elapsed" />
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/variableTimerElapsedPercent"
+            style="@style/Widget.AppTheme.Chip.VoiceVariableTable"
+            android:text="@string/voice_variable_timer_elapsed_percent" />
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/variableTimerRemaining"
+            style="@style/Widget.AppTheme.Chip.VoiceVariableTable"
+            android:text="@string/voice_variable_timer_remaining" />
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/variableTimerRemainingPercent"
+            style="@style/Widget.AppTheme.Chip.VoiceVariableTable"
+            android:layout_width="wrap_content"
+            android:text="@string/voice_variable_timer_remaining_percent" />
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/variableTimerEndTime"
+            style="@style/Widget.AppTheme.Chip.VoiceVariableTable"
+            android:text="@string/voice_variable_timer_end_time" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/layoutGroup"
+        style="@style/Widget.AppTheme.LinearLayout.VoiceVariableTable">
+
+        <TextView
+            style="@style/Widget.AppTheme.TextView.VoiceVariableTable.GroupTitle"
+            android:text="@string/voice_variable_group_group" />
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/variableGroupName"
+            style="@style/Widget.AppTheme.Chip.VoiceVariableTable"
+            android:text="@string/voice_variable_group_name" />
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/variableGroupLoop"
+            style="@style/Widget.AppTheme.Chip.VoiceVariableTable"
+            android:text="@string/voice_variable_group_loop" />
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/variableGroupTotalLoop"
+            style="@style/Widget.AppTheme.Chip.VoiceVariableTable"
+            android:text="@string/voice_variable_group_total_loop" />
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/variableGroupDuration"
+            style="@style/Widget.AppTheme.Chip.VoiceVariableTable"
+            android:text="@string/voice_variable_group_duration" />
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/variableGroupElapsed"
+            style="@style/Widget.AppTheme.Chip.VoiceVariableTable"
+            android:text="@string/voice_variable_group_elapsed" />
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/variableGroupElapsedPercent"
+            style="@style/Widget.AppTheme.Chip.VoiceVariableTable"
+            android:text="@string/voice_variable_group_elapsed_percent" />
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/variableGroupRemaining"
+            style="@style/Widget.AppTheme.Chip.VoiceVariableTable"
+            android:text="@string/voice_variable_group_remaining" />
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/variableGroupRemainingPercent"
+            style="@style/Widget.AppTheme.Chip.VoiceVariableTable"
+            android:layout_width="wrap_content"
+            android:text="@string/voice_variable_group_remaining_percent" />
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/variableGroupEndTime"
+            style="@style/Widget.AppTheme.Chip.VoiceVariableTable"
+            android:text="@string/voice_variable_group_end_time" />
+
+    </LinearLayout>
+
+    <FrameLayout
+        android:id="@+id/layoutStep"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent">
+
+        <TextView
+            style="@style/Widget.AppTheme.TextView.VoiceVariableTable.GroupTitle"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="8dp"
+            android:text="@string/voice_variable_step_group" />
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/variableStepName"
+            style="@style/Widget.AppTheme.Chip.VoiceVariableTable"
+            android:text="@string/voice_variable_step_name"
+            tools:layout_marginTop="50dp" />
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/variableStepDuration"
+            style="@style/Widget.AppTheme.Chip.VoiceVariableTable"
+            android:text="@string/voice_variable_step_duration"
+            tools:layout_marginTop="100dp" />
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/variableStepEndTime"
+            style="@style/Widget.AppTheme.Chip.VoiceVariableTable"
+            android:text="@string/voice_variable_step_end_time"
+            tools:layout_marginTop="150dp" />
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/variableStepWidthPlaceholder"
+            style="@style/Widget.AppTheme.Chip.VoiceVariableTable"
+            android:layout_width="wrap_content"
+            android:clickable="false"
+            android:focusable="false"
+            android:text="@string/voice_variable_timer_remaining_percent"
+            android:visibility="invisible"
+            tools:layout_marginTop="200dp" />
+
+    </FrameLayout>
+
+    <LinearLayout
+        android:id="@+id/layoutOther"
+        style="@style/Widget.AppTheme.LinearLayout.VoiceVariableTable">
+
+        <TextView
+            style="@style/Widget.AppTheme.TextView.VoiceVariableTable.GroupTitle"
+            android:text="@string/voice_variable_other_group" />
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/variableOtherClockTime"
+            style="@style/Widget.AppTheme.Chip.VoiceVariableTable"
+            android:text="@string/voice_variable_other_clock_time" />
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/variableOtherWidthPlaceholder"
+            style="@style/Widget.AppTheme.Chip.VoiceVariableTable"
+            android:layout_width="wrap_content"
+            android:clickable="false"
+            android:focusable="false"
+            android:text="@string/voice_variable_timer_remaining_percent"
+            android:visibility="invisible" />
+
+    </LinearLayout>
+
+</merge>

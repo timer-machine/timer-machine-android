@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/cardTimer"
+        android:layout_width="match_parent"
+        android:layout_height="96dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        app:cardCornerRadius="0dp"
+        app:cardElevation="@dimen/elevation_timer_card">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:paddingTop="8dp"
+            android:paddingBottom="8dp">
+
+            <TextView
+                android:id="@+id/textTimerName"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                android:layout_weight="1"
+                android:ellipsize="end"
+                android:gravity="center_vertical"
+                android:maxLines="2"
+                android:textAppearance="?textAppearanceHeadline4"
+                android:textColor="?android:textColorPrimary"
+                android:textSize="34sp"
+                app:autoSizeMaxTextSize="34sp"
+                app:autoSizeMinTextSize="20sp"
+                app:autoSizeTextType="uniform"
+                tools:text="@tools:sample/lorem/random" />
+
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/imageTimerStartPause"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_margin="16dp"
+                android:contentDescription="@string/start"
+                app:elevation="0dp"
+                app:fabSize="mini"
+                app:srcCompat="@drawable/ic_start" />
+
+        </LinearLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+
+</FrameLayout>

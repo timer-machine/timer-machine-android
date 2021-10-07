@@ -1,0 +1,36 @@
+complexity:
+  ComplexCondition:
+    threshold: 6
+  ComplexMethod:
+    active: false
+  LargeClass:
+    threshold: 1000
+  LongMethod:
+    active: false
+  LongParameterList:
+    functionThreshold: 22
+    constructorThreshold: 22
+  NestedBlockDepth:
+    active: false
+  TooManyFunctions:
+    active: false
+
+exceptions:
+  TooGenericExceptionCaught:
+    active: false
+  TooGenericExceptionThrown:
+    active: false
+
+style:
+  LoopWithTooManyJumpStatements:
+    maxJumpCount: 2
+  MagicNumber:
+    active: false
+  ReturnCount:
+    active: false
+  ThrowsCount:
+    max: 10
+  UnnecessaryAbstractClass:
+    active: false
+  UnusedPrivateMember:
+    active: false

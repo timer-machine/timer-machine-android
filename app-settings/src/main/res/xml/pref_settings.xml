@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+    <PreferenceCategory app:title="@string/pref_category_title_app">
+
+        <Preference
+            app:icon="@drawable/settings_day_night"
+            app:key="pref_dark_theme"
+            app:persistent="false"
+            app:title="@string/dark_theme_title" />
+
+        <Preference
+            app:icon="@drawable/settings_customize"
+            app:key="key_edit_layout"
+            app:persistent="false"
+            app:title="@string/one_action_edit_layout" />
+
+        <Preference
+            app:icon="@drawable/settings_theme"
+            app:key="key_theme"
+            app:persistent="false"
+            app:title="@string/theme_title" />
+
+        <DropDownPreference
+            app:defaultValue="default"
+            app:enabled="false"
+            app:entries="@array/pref_app_language_titles"
+            app:entryValues="@array/pref_app_language_values"
+            app:icon="@drawable/settings_translate"
+            app:isPreferenceVisible="false"
+            app:key="key_app_language"
+            app:title="@string/pref_app_language"
+            app:useSimpleSummaryProvider="true" />
+
+        <Preference
+            app:enabled="false"
+            app:isPreferenceVisible="false"
+            app:key="key_help_translation"
+            app:persistent="false"
+            app:title="@string/pref_help_translation" />
+
+    </PreferenceCategory>
+
+    <PreferenceCategory app:title="@string/pref_category_title_timer_setting">
+
+        <DropDownPreference
+            app:defaultValue="@string/pref_screen_value_default"
+            app:entries="@array/pref_screen_titles"
+            app:entryValues="@array/pref_screen_values"
+            app:icon="@drawable/settings_brightness"
+            app:key="key_screen"
+            app:title="@string/pref_screen_title"
+            app:useSimpleSummaryProvider="true" />
+
+        <ListPreference
+            app:defaultValue="@string/pref_screen_timing_value_default"
+            app:entries="@array/pref_screen_timing_titles"
+            app:entryValues="@array/pref_screen_timing_values"
+            app:isPreferenceVisible="false"
+            app:key="key_screen_timing"
+            app:singleLineTitle="false"
+            app:title="@string/pref_screen_timing_title"
+            app:useSimpleSummaryProvider="true"
+            tools:isPreferenceVisible="true" />
+
+        <DropDownPreference
+            app:defaultValue="1"
+            app:entries="@array/pref_notifier_plus_titles"
+            app:entryValues="@array/pref_notifier_plus_values"
+            app:icon="@drawable/settings_plus_time"
+            app:key="key_notifier_plus"
+            app:singleLineTitle="false"
+            app:title="@string/pref_notifier_plus_title"
+            app:useSimpleSummaryProvider="true" />
+
+        <Preference
+            app:icon="@drawable/settings_tweak_time"
+            app:key="key_tweak_time"
+            app:persistent="false"
+            app:singleLineTitle="false"
+            app:title="@string/pref_tweak_time_title" />
+
+        <Preference
+            app:icon="@drawable/settings_pip"
+            app:key="key_floating_window_pip"
+            app:persistent="false"
+            app:singleLineTitle="false"
+            app:title="@string/settings_floating_window_pip" />
+
+        <DropDownPreference
+            app:defaultValue="2"
+            app:entries="@array/pref_phone_call_titles"
+            app:entryValues="@array/pref_phone_call_values"
+            app:icon="@drawable/settings_phone_call"
+            app:key="key_phone_call"
+            app:singleLineTitle="false"
+            app:title="@string/pref_phone_call"
+            app:useSimpleSummaryProvider="true" />
+
+        <SwitchPreferenceCompat
+            app:defaultValue="false"
+            app:icon="@drawable/settings_time_duration"
+            app:key="key_show_timer_total_time"
+            app:singleLineTitle="false"
+            app:summaryOff="@string/pref_show_timer_total_time_off"
+            app:summaryOn="@string/pref_show_timer_total_time_on"
+            app:title="@string/pref_show_timer_total_time" />
+
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        app:key="pref_group_reminder"
+        app:title="@string/pref_reminder">
+
+        <xyz.aprildown.timer.app.settings.BakedCountPreference
+            app:icon="@drawable/settings_count"
+            app:key="pref_baked_count"
+            app:persistent="false"
+            app:title="@string/pref_reminder_baked_count_title"
+            app:widgetLayout="@layout/layout_baked_count_widget"
+            tools:summary="@string/pref_reminder_baked_count_off" />
+
+    </PreferenceCategory>
+
+    <PreferenceCategory app:title="@string/pref_category_title_scheduler_setting">
+
+        <DropDownPreference
+            app:defaultValue="2"
+            app:entries="@array/pref_week_start_titles"
+            app:entryValues="@array/pref_week_start_values"
+            app:icon="@drawable/settings_week_start"
+            app:key="key_week_start"
+            app:title="@string/pref_week_start_title"
+            app:useSimpleSummaryProvider="true" />
+    </PreferenceCategory>
+
+    <PreferenceCategory app:title="@string/pref_category_notif">
+
+        <Preference
+            app:icon="@drawable/settings_notifications"
+            app:key="key_notif_setting"
+            app:persistent="false"
+            app:singleLineTitle="false"
+            app:title="@string/pref_open_notif_setting" />
+
+        <SwitchPreferenceCompat
+            app:defaultValue="false"
+            app:icon="@drawable/settings_media_style_notification"
+            app:key="key_media_style_notification"
+            app:title="@string/pref_media_style_notification" />
+
+    </PreferenceCategory>
+
+    <PreferenceCategory app:title="@string/pref_category_title_audio">
+
+        <DropDownPreference
+            app:defaultValue="@string/pref_audio_focus_type_default"
+            app:entries="@array/pref_audio_focus_titles"
+            app:entryValues="@array/pref_audio_focus_values"
+            app:icon="@drawable/settings_audio_focus"
+            app:key="key_audio_focus_key"
+            app:title="@string/pref_audio_focus_type_title"
+            app:useSimpleSummaryProvider="true" />
+
+        <DropDownPreference
+            app:defaultValue="3"
+            app:entries="@array/pref_audio_type_titles"
+            app:entryValues="@array/pref_audio_type_values"
+            app:icon="@drawable/settings_audio_type"
+            app:key="key_audio_key"
+            app:title="@string/pref_audio_type_title"
+            app:useSimpleSummaryProvider="true" />
+
+        <Preference
+            app:icon="@drawable/settings_volume_on"
+            app:key="key_audio_volume"
+            app:persistent="false"
+            app:title="@string/pref_audio_volume_title" />
+
+    </PreferenceCategory>
+
+    <PreferenceCategory app:title="@string/pref_title_other">
+
+        <Preference
+            app:icon="@drawable/settings_rate"
+            app:key="key_rate"
+            app:persistent="false"
+            app:title="@string/rate_five_stars" />
+
+        <Preference
+            app:icon="@drawable/settings_share"
+            app:key="key_recommend"
+            app:persistent="false"
+            app:title="@string/pref_recommend" />
+
+        <Preference
+            app:icon="@drawable/settings_about"
+            app:key="key_about"
+            app:persistent="false"
+            app:summary="@string/app_name"
+            app:title="@string/pref_about_title" />
+
+    </PreferenceCategory>
+</PreferenceScreen>

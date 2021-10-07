@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <xyz.aprildown.tools.view.ListItemWithLayout
+        android:id="@+id/itemEditShowNotif"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:li_divider="margin"
+        app:li_layout="@layout/widget_switch"
+        app:li_textPrimary="@string/edit_more_show_notif" />
+
+    <xyz.aprildown.tools.view.ListItemWithLayout
+        android:id="@+id/itemEditNotifCount"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:li_divider="margin"
+        app:li_layout="@layout/widget_switch"
+        app:li_textPrimary="@string/edit_more_notif_count" />
+
+    <xyz.aprildown.tools.view.ListItemWithLayout
+        android:id="@+id/itemEditTrigger"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:li_layout="@layout/widget_switch"
+        app:li_textPrimary="@string/edit_more_trigger" />
+
+    <Button
+        android:id="@+id/btnEditTrigger"
+        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/keyline_icon"
+        android:layout_marginEnd="@dimen/keyline_icon"
+        android:textAllCaps="false"
+        tools:text="@string/timer_pick_required" />
+
+</LinearLayout>

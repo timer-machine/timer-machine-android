@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <PreferenceCategory app:title="@string/app_name">
+
+        <Preference
+            app:key="key_about_version"
+            app:persistent="false"
+            app:title="@string/about_version"
+            tools:summary="1.1.0" />
+
+        <Preference
+            app:key="key_about_crash"
+            app:persistent="false"
+            app:title="Test crash" />
+
+        <Preference
+            app:key="key_about_changelog"
+            app:persistent="false"
+            app:title="@string/update_title" />
+
+        <Preference
+            app:key="key_about_log"
+            app:persistent="false"
+            app:title="@string/log_title" />
+
+        <Preference
+            app:key="key_about_privacy_policy"
+            app:persistent="false"
+            app:title="@string/privacy_policy" />
+
+        <Preference
+            app:key="key_about_terms_of_service"
+            app:persistent="false"
+            app:title="@string/terms_of_service" />
+
+    </PreferenceCategory>
+
+    <PreferenceCategory app:title="@string/about_developer">
+
+        <Preference
+            app:icon="@drawable/ic_dewey_reed"
+            app:key="key_about_me"
+            app:persistent="false"
+            app:title="Dewey Reed" />
+
+        <Preference
+            app:key="key_about_more_apps"
+            app:persistent="false"
+            app:title="@string/about_more_apps_from_me" />
+
+        <Preference
+            app:key="key_about_github"
+            app:persistent="false"
+            app:title="Github" />
+
+    </PreferenceCategory>
+
+</PreferenceScreen>

@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/cardTimer"
+        android:layout_width="match_parent"
+        android:layout_height="96dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        app:cardCornerRadius="0dp"
+        app:cardElevation="@dimen/elevation_timer_card">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/textTimerName"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="16dp"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:textAppearance="?textAppearanceBody1"
+                app:layout_constraintEnd_toStartOf="@id/textTimerLoop"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="@tools:sample/lorem/random" />
+
+            <TextView
+                android:id="@+id/textTimerLoop"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="16dp"
+                android:textAppearance="?textAppearanceBody1"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/textTimerName"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="1/3" />
+
+            <include
+                android:id="@+id/dividerTimer"
+                style="@style/Widget.MarginDivider"
+                layout="@layout/divider"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="8dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/textTimerName" />
+
+            <TextView
+                android:id="@+id/textTimerRemainingTime"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:includeFontPadding="false"
+                android:textAppearance="?textAppearanceHeadline4"
+                android:textColor="?android:textColorPrimary"
+                android:textSize="36sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/dividerTimer"
+                tools:text="10:30" />
+
+            <TextView
+                android:id="@+id/textTimerStepName"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:textAppearance="?textAppearanceCaption"
+                app:layout_constraintBaseline_toBaselineOf="@id/textTimerRemainingTime"
+                app:layout_constraintEnd_toStartOf="@id/imageTimerStop"
+                app:layout_constraintStart_toEndOf="@id/textTimerRemainingTime"
+                tools:text="Run, Run, Run" />
+
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/imageTimerStop"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:contentDescription="@string/start"
+                app:elevation="0dp"
+                app:fabSize="mini"
+                app:layout_constraintBottom_toBottomOf="@id/imageTimerStartPause"
+                app:layout_constraintEnd_toStartOf="@id/imageTimerStartPause"
+                app:layout_constraintTop_toTopOf="@id/imageTimerStartPause"
+                app:srcCompat="@drawable/ic_stop" />
+
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/imageTimerStartPause"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="16dp"
+                android:contentDescription="@string/stop"
+                app:elevation="0dp"
+                app:fabSize="mini"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/dividerTimer"
+                app:srcCompat="@drawable/ic_pause" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+
+</FrameLayout>

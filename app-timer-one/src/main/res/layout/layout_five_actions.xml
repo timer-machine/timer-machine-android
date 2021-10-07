@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    tools:ignore="ContentDescription"
+    tools:parentTag="androidx.constraintlayout.widget.ConstraintLayout">
+
+    <View
+        android:id="@+id/viewFiveBackground"
+        android:layout_width="match_parent"
+        android:layout_height="64dp"
+        android:background="?colorPrimarySurface"
+        android:elevation="4dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fabFiveMain"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="12dp"
+        android:contentDescription="@string/start"
+        app:fabCustomSize="72dp"
+        app:layout_constraintBottom_toBottomOf="@id/viewFiveBackground"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:maxImageSize="36dp"
+        app:srcCompat="@drawable/ic_anim_play" />
+
+    <FrameLayout
+        android:id="@+id/frameFiveAction1"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="?selectableItemBackground"
+        android:clickable="true"
+        android:elevation="4dp"
+        android:focusable="true"
+        app:layout_constraintBottom_toBottomOf="@id/viewFiveBackground"
+        app:layout_constraintEnd_toStartOf="@id/frameFiveAction2"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/viewFiveBackground">
+
+        <ImageView
+            android:id="@+id/imageFiveAction1"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_gravity="center"
+            android:scaleType="fitXY"
+            app:tint="?colorOnPrimarySurface"
+            tools:src="@drawable/ic_delete" />
+    </FrameLayout>
+
+    <FrameLayout
+        android:id="@+id/frameFiveAction2"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginEnd="8dp"
+        android:background="?selectableItemBackground"
+        android:clickable="true"
+        android:elevation="4dp"
+        android:focusable="true"
+        app:layout_constraintBottom_toBottomOf="@id/viewFiveBackground"
+        app:layout_constraintEnd_toStartOf="@id/fabFiveMain"
+        app:layout_constraintStart_toEndOf="@id/frameFiveAction1"
+        app:layout_constraintTop_toTopOf="@id/viewFiveBackground">
+
+        <ImageView
+            android:id="@+id/imageFiveAction2"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_gravity="center"
+            android:scaleType="fitXY"
+            app:tint="?colorOnPrimarySurface"
+            tools:src="@drawable/ic_delete" />
+    </FrameLayout>
+
+    <FrameLayout
+        android:id="@+id/frameFiveAction3"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="8dp"
+        android:background="?selectableItemBackground"
+        android:clickable="true"
+        android:elevation="4dp"
+        android:focusable="true"
+        app:layout_constraintBottom_toBottomOf="@id/viewFiveBackground"
+        app:layout_constraintEnd_toStartOf="@id/frameFiveAction4"
+        app:layout_constraintStart_toEndOf="@id/fabFiveMain"
+        app:layout_constraintTop_toTopOf="@id/viewFiveBackground">
+
+        <ImageView
+            android:id="@+id/imageFiveAction3"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_gravity="center"
+            android:scaleType="fitXY"
+            app:tint="?colorOnPrimarySurface"
+            tools:src="@drawable/ic_delete" />
+    </FrameLayout>
+
+    <FrameLayout
+        android:id="@+id/frameFiveAction4"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="?selectableItemBackground"
+        android:clickable="true"
+        android:elevation="4dp"
+        android:focusable="true"
+        app:layout_constraintBottom_toBottomOf="@id/viewFiveBackground"
+        app:layout_constraintEnd_toEndOf="@id/viewFiveBackground"
+        app:layout_constraintStart_toEndOf="@id/frameFiveAction3"
+        app:layout_constraintTop_toTopOf="@id/viewFiveBackground">
+
+        <ImageView
+            android:id="@+id/imageFiveAction4"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_gravity="center"
+            android:scaleType="fitXY"
+            app:tint="?colorOnPrimarySurface"
+            tools:src="@drawable/ic_delete" />
+    </FrameLayout>
+
+</merge>

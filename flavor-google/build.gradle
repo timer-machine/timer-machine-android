@@ -1,0 +1,42 @@
+plugins {
+    id 'com.android.library'
+    id 'kotlin-android'
+    id 'kotlin-kapt'
+    id 'dagger.hilt.android.plugin'
+}
+
+android {
+    buildFeatures {
+        viewBinding = true
+    }
+}
+
+dependencies {
+    implementation project(':app-base')
+    implementation project(':component-key')
+
+    implementation libs.kotlin_coroutines_play
+
+    implementation libs.androidx_preference
+
+    implementation libs.androidx_work
+
+    implementation libs.hilt_android
+    kapt libs.hilt_compiler
+    implementation libs.hilt_navigation
+    implementation libs.hilt_workmanager
+    kapt libs.hilt_workmanager_compiler
+
+    implementation libs.billing
+
+    implementation platform(libs.firebase_bom)
+    implementation libs.firebase_auth
+    implementation libs.firebase_auth_ui
+    implementation libs.firebase_storage
+
+    implementation libs.fastadapter
+    implementation libs.fastadapter_binding
+
+    implementation libs.zip4j
+
+}

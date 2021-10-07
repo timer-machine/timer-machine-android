@@ -1,0 +1,44 @@
+plugins {
+    id 'com.android.library'
+    id 'kotlin-android'
+    id 'kotlin-kapt'
+    id 'dagger.hilt.android.plugin'
+}
+
+android {
+    buildTypes {
+        debug {
+            buildConfigField "boolean", "SHOW_FIRST_TIME", "Boolean.parseBoolean(\"false\")"
+            buildConfigField "boolean", "OPEN_DEBUG", "Boolean.parseBoolean(\"true\")"
+        }
+        release {
+            buildConfigField "boolean", "SHOW_FIRST_TIME", "true"
+            buildConfigField "boolean", "OPEN_DEBUG", "false"
+        }
+    }
+}
+
+dependencies {
+    api libs.tools
+
+    api libs.kotlin_coroutines_core
+    api libs.kotlin_coroutines_android
+
+    testImplementation libs.junit
+    testImplementation libs.mockito
+    testImplementation libs.mockito_inline
+    testImplementation libs.mockito_kotlin
+
+    api libs.androidx_appcompat
+    implementation libs.androidx_preference
+    api libs.androidx_core_ktx
+    api libs.androidx_collection_ktx
+
+    api libs.androidx_lifecycle_livedata
+
+    api libs.timber
+
+    implementation libs.hilt_android
+    kapt libs.hilt_compiler
+
+}

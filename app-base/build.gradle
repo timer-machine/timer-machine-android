@@ -1,0 +1,33 @@
+plugins {
+    id 'com.android.library'
+    id 'kotlin-android'
+    id 'kotlin-kapt'
+    id 'dagger.hilt.android.plugin'
+}
+
+dependencies {
+    api project(':presentation')
+
+    testImplementation libs.junit
+
+    implementation libs.androidx_preference
+    api libs.androidx_constraintlayout
+    api libs.androidx_lifecycle_compiler
+    implementation libs.androidx_custom_tabs
+    api libs.androidx_fragment_ktx
+
+    api libs.material
+
+    api libs.androidx_navigation_fragment
+    api libs.androidx_navigation_ui
+
+    implementation libs.hilt_android
+    kapt libs.hilt_compiler
+
+    implementation libs.fastadapter
+
+    implementation libs.material_popup_menu
+    api libs.materialize
+    implementation libs.theme
+
+}

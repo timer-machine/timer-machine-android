@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="normal_chip_radius">8dp</dimen>
+    <dimen name="behaviour_chip_text_padding">4dp</dimen>
+</resources>

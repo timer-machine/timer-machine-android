@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".ui.edit.EditActivity">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="xyz.aprildown.timer.presentation.edit.EditViewModel" />
+    </data>
+
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:id="@+id/layoutEditRoot"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <com.google.android.material.appbar.AppBarLayout
+            style="@style/Widget.MaterialComponents.AppBarLayout.PrimarySurface"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <com.google.android.material.appbar.CollapsingToolbarLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:contentScrim="?colorPrimarySurface"
+                app:layout_scrollFlags="scroll|exitUntilCollapsed"
+                app:titleEnabled="false"
+                app:toolbarId="@id/toolbar">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/layoutEditTop"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:focusable="true"
+                    android:focusableInTouchMode="true"
+                    android:paddingStart="0dp"
+                    android:paddingTop="?actionBarSize"
+                    android:paddingEnd="16dp"
+                    app:layout_collapseMode="parallax">
+
+                    <androidx.constraintlayout.widget.Guideline
+                        android:id="@+id/guidelineEditHeader"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        app:layout_constraintGuide_begin="72dp" />
+
+                    <xyz.aprildown.timer.component.key.NameLoopView
+                        android:id="@+id/viewEditNameLoop"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="8dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="@id/guidelineEditHeader"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:loop="@={viewModel.loop}"
+                        app:name="@={viewModel.name}"
+                        app:nlv_view_color="?colorOnPrimarySurface" />
+
+                    <ImageButton
+                        android:id="@+id/btnEditMore"
+                        android:layout_width="?actionBarSize"
+                        android:layout_height="?actionBarSize"
+                        android:background="?selectableItemBackgroundBorderless"
+                        android:contentDescription="@string/edit_more_a11y"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toStartOf="@id/guidelineEditHeader"
+                        app:layout_constraintHorizontal_bias="0"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:srcCompat="@drawable/ic_settings"
+                        app:tint="?colorOnPrimarySurface" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <com.google.android.material.appbar.MaterialToolbar
+                    android:id="@+id/toolbar"
+                    style="@style/Widget.MaterialComponents.Toolbar.PrimarySurface"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@null"
+                    android:elevation="@null"
+                    app:layout_collapseMode="pin" />
+
+            </com.google.android.material.appbar.CollapsingToolbarLayout>
+
+        </com.google.android.material.appbar.AppBarLayout>
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/listEditSteps"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:clipChildren="false"
+                android:clipToPadding="false"
+                android:paddingTop="64dp"
+                tools:listitem="@layout/item_edit_step" />
+
+            <xyz.aprildown.timer.app.timer.edit.StepInfoView
+                android:id="@+id/viewEditStepInfo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+        </FrameLayout>
+
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+</layout>
+

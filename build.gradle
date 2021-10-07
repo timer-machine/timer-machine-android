@@ -1,0 +1,107 @@
+// Top-level build file where you can add configuration options common to all sub-projects/modules.
+
+buildscript {
+    apply from: 'dependencies.gradle'
+    repositories {
+        google()
+        gradlePluginPortal()
+        mavenCentral()
+    }
+    dependencies {
+        classpath "com.android.tools.build:gradle:${versions.agp}"
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:${versions.kotlin}"
+
+        classpath "com.google.dagger:hilt-android-gradle-plugin:${versions.hilt}"
+        classpath "com.github.ben-manes:gradle-versions-plugin:${versions.versions}"
+        classpath "com.google.android.libraries.mapsplatform.secrets-gradle-plugin:secrets-gradle-plugin:${versions.secrets}"
+        classpath "io.gitlab.arturbosch.detekt:detekt-gradle-plugin:${versions.detekt}"
+        classpath "com.google.gms:google-services:${versions.gms}"
+    }
+}
+
+apply plugin: 'com.github.ben-manes.versions'
+apply plugin: "io.gitlab.arturbosch.detekt"
+//apply from: 'https://raw.githubusercontent.com/JakeWharton/SdkSearch/master/gradle/projectDependencyGraph.gradle'
+
+allprojects {
+    repositories {
+        google()
+        mavenCentral()
+        jcenter {
+            content {
+                includeModule "com.afollestad.material-dialogs", "core"
+                includeModule "com.afollestad.material-dialogs", "commons"
+                includeModule "com.github.zawadz88.materialpopupmenu", "material-popup-menu"
+                includeModule "cn.carbswang.android", "NumberPickerView"
+            }
+        }
+        maven {
+            url "https://jitpack.io"
+            content {
+                includeGroup "xyz.aprildown"
+                includeModule "com.github.PhilJay", "MPAndroidChart"
+                includeModule "com.github.kizitonwose", "CalendarView"
+                includeGroup "com.github.whataa"
+            }
+        }
+    }
+}
+
+subprojects {
+
+    apply from: rootProject.file('detekt.gradle')
+
+    afterEvaluate {
+        if (project.plugins.hasPlugin('com.android.library')) {
+            android {
+                compileSdkVersion versions.compile_sdk
+
+                defaultConfig {
+                    minSdkVersion versions.min_sdk
+                    targetSdkVersion versions.target_sdk
+                    versionCode versions.version_code
+                    versionName versions.version_name
+                    testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+                    vectorDrawables.useSupportLibrary true
+                }
+
+                compileOptions {
+                    coreLibraryDesugaringEnabled true
+                }
+
+                buildFeatures {
+                    viewBinding = true
+                }
+            }
+
+            dependencies {
+                coreLibraryDesugaring libs.desugar_jdk_libs
+            }
+        }
+        if (project.plugins.hasPlugin("kotlin-kapt")) {
+            kapt {
+                javacOptions {
+                    option("-Xmaxerrs", 500)
+                }
+                useBuildCache = true
+            }
+        }
+    }
+}
+
+task clean(type: Delete) {
+    delete rootProject.buildDir
+}
+
+def isNonStable = { String version ->
+    def stableKeyword = ['RELEASE', 'FINAL', 'GA'].any { it -> version.toUpperCase().contains(it) }
+    def regex = /^[0-9,.v-]+(-r)?$/
+    return !stableKeyword && !(version ==~ regex)
+}
+
+dependencyUpdates {
+    rejectVersionIf {
+        !it.currentVersion.contains(".") ||
+                (isNonStable(it.candidate.version) && !isNonStable(it.currentVersion))
+    }
+}

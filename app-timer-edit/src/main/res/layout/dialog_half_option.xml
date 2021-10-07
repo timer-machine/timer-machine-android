@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:paddingTop="8dp">
+
+    <xyz.aprildown.tools.view.ListItemWithLayout
+        android:id="@+id/itemHalfOptionVoice"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingStart="8dp"
+        android:paddingEnd="8dp"
+        app:li_layout="@layout/widget_radio"
+        app:li_textPrimary="@string/half_option_voice"
+        app:li_textSecondary="@string/half_option_voice_desp" />
+
+    <xyz.aprildown.tools.view.ListItemWithLayout
+        android:id="@+id/itemHalfOptionMusic"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingStart="8dp"
+        android:paddingEnd="8dp"
+        app:li_layout="@layout/widget_radio"
+        app:li_textPrimary="@string/half_option_music"
+        app:li_textSecondary="@string/half_option_music_desp" />
+
+    <xyz.aprildown.tools.view.ListItemWithLayout
+        android:id="@+id/itemHalfOptionVibration"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingStart="8dp"
+        android:paddingEnd="8dp"
+        app:li_layout="@layout/widget_radio"
+        app:li_textPrimary="@string/half_option_vibration"
+        app:li_textSecondary="@string/half_option_vibration_desp" />
+
+</LinearLayout>

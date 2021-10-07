@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    tools:ignore="UseCompoundDrawables">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="96dp"
+        android:layout_gravity="center"
+        android:background="@color/md_amber_600"
+        android:importantForAccessibility="no"
+        android:padding="24dp"
+        app:srcCompat="@drawable/settings_premium"
+        app:tint="@android:color/white" />
+
+    <TextView
+        android:id="@+id/textTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingStart="24dp"
+        android:paddingTop="16dp"
+        android:paddingEnd="24dp"
+        android:textAppearance="?textAppearanceSubtitle1"
+        tools:text="@tools:sample/lorem" />
+
+</LinearLayout>
