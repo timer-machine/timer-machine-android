@@ -1,5 +1,7 @@
 # TimeR Machine
 
+[![Android CI](https://github.com/timer-machine/timer-machine-android/actions/workflows/android.yml/badge.svg?branch=main)](https://github.com/timer-machine/timer-machine-android/actions/workflows/android.yml)
+
 A highly customizable interval timer app for Android
 
 ![Showcase](images/showcase.jpg)
