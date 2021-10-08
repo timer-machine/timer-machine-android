@@ -1,12 +1,12 @@
 ext {
     //noinspection SpellCheckingInspection
     versions = [
-            agp         : '4.2.2',
-            kotlin      : '1.5.30',
+            agp         : '7.0.2',
+            kotlin      : '1.5.31',
             versions    : '0.39.0',
             detekt      : '1.18.1',
-            hilt        : '2.38.1',
-            secrets     : '1.3.0',
+            hilt        : '2.39.1',
+            secrets     : '2.0.0',
             gms         : '4.3.10',
 
             compile_sdk : 30,
@@ -47,13 +47,13 @@ ext {
             androidx_test_espresso_contrib: 'androidx.test.espresso:espresso-contrib:3.4.0',
             androidx_test_espresso_intents: 'androidx.test.espresso:espresso-intents:3.4.0',
             androidx_arch_test            : 'androidx.arch.core:core-testing:2.1.0',
-            androidx_media                : 'androidx.media:media:1.4.1',
+            androidx_media                : 'androidx.media:media:1.4.2',
 
             // AndroidX
             androidx_appcompat            : 'androidx.appcompat:appcompat:1.3.1',
             androidx_recyclerview         : 'androidx.recyclerview:recyclerview:1.2.1',
             androidx_preference           : 'androidx.preference:preference:1.1.1',
-            androidx_constraintlayout     : 'androidx.constraintlayout:constraintlayout:2.1.0',
+            androidx_constraintlayout     : 'androidx.constraintlayout:constraintlayout:2.1.1',
             androidx_lifecycle_runtime    : 'androidx.lifecycle:lifecycle-runtime-ktx:2.3.1',
             androidx_lifecycle_livedata   : 'androidx.lifecycle:lifecycle-livedata-ktx:2.3.1',
             androidx_lifecycle_viewmodel  : 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.3.1',
@@ -71,7 +71,7 @@ ext {
 
             // Assistants
             leak_cannary                  : 'com.squareup.leakcanary:leakcanary-android:2.7',
-            timber                        : 'com.jakewharton.timber:timber:4.7.1',
+            timber                        : 'com.jakewharton.timber:timber:5.0.1',
             pandora                       : 'com.github.whataa:pandora:2.1.0',
 
             // Room
@@ -104,10 +104,10 @@ ext {
 
             // Internet - Google
             billing                       : 'com.android.billingclient:billing-ktx:3.0.3',
-            firebase_bom                  : 'com.google.firebase:firebase-bom:28.4.0',
+            firebase_bom                  : 'com.google.firebase:firebase-bom:28.4.2',
             firebase_analytics            : 'com.google.firebase:firebase-analytics-ktx',
             firebase_auth                 : 'com.google.firebase:firebase-auth-ktx',
-            firebase_auth_ui              : 'com.firebaseui:firebase-ui-auth:7.2.0',
+            firebase_auth_ui              : 'com.firebaseui:firebase-ui-auth:8.0.0',
             firebase_storage              : 'com.google.firebase:firebase-storage-ktx',
 
             // Internet - Other
@@ -119,9 +119,9 @@ ext {
             permission                    : 'pub.devrel:easypermissions:3.0.0',
 
             // Other UI Components
-            fastadapter                   : 'com.mikepenz:fastadapter:5.5.0',
-            fastadapter_binding           : 'com.mikepenz:fastadapter-extensions-binding:5.5.0',
-            fastadapter_expandable        : 'com.mikepenz:fastadapter-extensions-expandable:5.5.0',
+            fastadapter                   : 'com.mikepenz:fastadapter:5.5.1',
+            fastadapter_binding           : 'com.mikepenz:fastadapter-extensions-binding:5.5.1',
+            fastadapter_expandable        : 'com.mikepenz:fastadapter-extensions-expandable:5.5.1',
 
             material_dialog               : 'com.afollestad.material-dialogs:core:0.9.6.0',
             material_common               : 'com.afollestad.material-dialogs:commons:0.9.6.0',
@@ -132,7 +132,7 @@ ext {
             flexbox                       : 'com.google.android.flexbox:flexbox:3.0.0',
             hms_picker                    : 'xyz.aprildown:HmsPickerView:0.2.0',
             konfetti                      : 'nl.dionsegijn:konfetti:1.3.2',
-            material_drawer               : 'com.mikepenz:materialdrawer:8.4.3',
+            material_drawer               : 'com.mikepenz:materialdrawer:8.4.4',
             material_popup_menu           : 'com.github.zawadz88.materialpopupmenu:material-popup-menu:4.1.0',
             materialize                   : 'com.mikepenz:materialize:1.2.1',
             scroll_hms_picker             : 'xyz.aprildown:ScrollHmsPicker:2.0.3',
