@@ -143,13 +143,13 @@ class App : Application(), Configuration.Provider {
         }
         // Old user
         sharedPreferences.edit {
-            copySharedPreferences(from = deviceStorageSp, edtior = this)
+            copySharedPreferences(from = deviceStorageSp, editor = this)
             copySharedPreferences(
                 from = deviceStorageContext.getSharedPreferences(
                     "app_reminder_pref_file",
                     Context.MODE_PRIVATE
                 ),
-                edtior = this
+                editor = this
             )
             putBoolean(PREF_SP_MIGRATED, true)
         }
@@ -188,15 +188,15 @@ class App : Application(), Configuration.Provider {
 private const val PREF_FIRST_START = "pref_first_start_app"
 private const val PREF_SP_MIGRATED = "pref_sp_migrated"
 
-private fun copySharedPreferences(from: SharedPreferences, edtior: SharedPreferences.Editor) {
+private fun copySharedPreferences(from: SharedPreferences, editor: SharedPreferences.Editor) {
     from.all.forEach { (key, value) ->
         when (value) {
-            is Int -> edtior.putInt(key, value)
-            is Long -> edtior.putLong(key, value)
-            is Float -> edtior.putFloat(key, value)
-            is Boolean -> edtior.putBoolean(key, value)
-            is String -> edtior.putString(key, value)
-            is Set<*> -> edtior.putStringSet(key, value.map { it.toString() }.toSet())
+            is Int -> editor.putInt(key, value)
+            is Long -> editor.putLong(key, value)
+            is Float -> editor.putFloat(key, value)
+            is Boolean -> editor.putBoolean(key, value)
+            is String -> editor.putString(key, value)
+            is Set<*> -> editor.putStringSet(key, value.map { it.toString() }.toSet())
         }
     }
 }

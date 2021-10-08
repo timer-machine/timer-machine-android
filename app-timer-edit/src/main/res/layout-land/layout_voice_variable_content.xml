@@ -57,14 +57,20 @@
         android:orientation="vertical"
         app:layout_constraintGuide_percent="0.5" />
 
-    <include
-        android:id="@+id/layoutButtons"
-        layout="@layout/layout_voice_variable_dialog_buttons"
+    <FrameLayout
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/guideline" />
+        app:layout_constraintStart_toEndOf="@id/guideline">
+
+        <include
+            android:id="@+id/layoutButtons"
+            layout="@layout/layout_voice_variable_dialog_buttons"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+    </FrameLayout>
 
     <xyz.aprildown.timer.app.timer.edit.voice.TwoWayNestedScrollView
         android:layout_width="0dp"
