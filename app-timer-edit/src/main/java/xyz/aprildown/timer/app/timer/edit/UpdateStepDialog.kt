@@ -32,6 +32,8 @@ import xyz.aprildown.tools.helper.gone
 import xyz.aprildown.tools.helper.toColorStateList
 import xyz.aprildown.ultimateringtonepicker.RingtonePickerDialog
 import xyz.aprildown.ultimateringtonepicker.UltimateRingtonePicker
+import xyz.aprildown.timer.app.base.R as RBase
+import xyz.aprildown.tools.R as RTools
 
 class UpdateStepDialog : DialogFragment(),
     EditableBehaviourLayout.Listener {
@@ -60,7 +62,7 @@ class UpdateStepDialog : DialogFragment(),
         view.setUpUpdateStepView(step)
         return MaterialAlertDialogBuilder(context)
             .setCancelable(false)
-            .setTitle(R.string.edit_step)
+            .setTitle(RBase.string.edit_step)
             .setView(view)
             .setPositiveButton(android.R.string.ok) { _, _ ->
                 onUpdate.invoke(
@@ -127,7 +129,7 @@ class UpdateStepDialog : DialogFragment(),
                                 settings = context.generateRingtonePickerSettings(
                                     select = action.uri.toUri().takeIf { it != Uri.EMPTY }
                                 ),
-                                dialogTitle = getString(R.string.music_pick_ringtone),
+                                dialogTitle = getString(RBase.string.music_pick_ringtone),
                                 listener = object : UltimateRingtonePicker.RingtonePickerListener {
                                     override fun onRingtonePicked(
                                         ringtones: List<UltimateRingtonePicker.RingtoneEntry>
@@ -253,8 +255,8 @@ class UpdateStepDialog : DialogFragment(),
             }
             section {
                 item {
-                    label = getString(R.string.delete)
-                    icon = R.drawable.ic_delete
+                    label = getString(RTools.string.delete)
+                    icon = RBase.drawable.ic_delete
                     callback = { layout.removeBehaviour(type) }
                 }
             }

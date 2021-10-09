@@ -13,7 +13,6 @@ import androidx.core.net.toUri
 import androidx.core.os.bundleOf
 import androidx.core.os.postDelayed
 import timber.log.Timber
-import xyz.aprildown.timer.app.base.R
 import xyz.aprildown.timer.app.base.data.PreferenceData
 import xyz.aprildown.timer.app.base.data.PreferenceData.storedAudioFocusType
 import xyz.aprildown.timer.app.base.data.PreferenceData.storedAudioTypeValue
@@ -23,6 +22,7 @@ import xyz.aprildown.tools.helper.HandlerHelper
 import xyz.aprildown.tools.helper.safeSharedPreference
 import xyz.aprildown.tools.music.AudioFocusManager
 import java.io.File
+import xyz.aprildown.timer.app.base.R as RBase
 
 /**
  * It handles states itself.
@@ -273,13 +273,13 @@ object TtsSpeaker : AudioManager.OnAudioFocusChangeListener {
 
 @StringRes
 private fun Int.getErrorMessage() = when (this) {
-    TextToSpeech.ERROR_SYNTHESIS -> R.string.tts_error_synthesis
-    TextToSpeech.ERROR_SERVICE -> R.string.tts_error_service
-    TextToSpeech.ERROR_OUTPUT -> R.string.tts_error_output
-    TextToSpeech.ERROR_NETWORK -> R.string.tts_error_network
-    TextToSpeech.ERROR_NETWORK_TIMEOUT -> R.string.tts_error_network_timeout
-    TextToSpeech.ERROR_INVALID_REQUEST -> R.string.tts_error_invalid_request
-    TextToSpeech.ERROR_NOT_INSTALLED_YET -> R.string.tts_error_not_installed_yet
+    TextToSpeech.ERROR_SYNTHESIS -> RBase.string.tts_error_synthesis
+    TextToSpeech.ERROR_SERVICE -> RBase.string.tts_error_service
+    TextToSpeech.ERROR_OUTPUT -> RBase.string.tts_error_output
+    TextToSpeech.ERROR_NETWORK -> RBase.string.tts_error_network
+    TextToSpeech.ERROR_NETWORK_TIMEOUT -> RBase.string.tts_error_network_timeout
+    TextToSpeech.ERROR_INVALID_REQUEST -> RBase.string.tts_error_invalid_request
+    TextToSpeech.ERROR_NOT_INSTALLED_YET -> RBase.string.tts_error_not_installed_yet
     // TextToSpeech.ERROR -> R.string.tts_unknown_error
-    else -> R.string.tts_unknown_error
+    else -> RBase.string.tts_unknown_error
 }

@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment
 import xyz.aprildown.timer.app.base.data.PreferenceData.lastBackupUri
 import xyz.aprildown.timer.domain.utils.AppTracker
 import xyz.aprildown.tools.anko.longSnackbar
+import xyz.aprildown.timer.app.base.R as RBase
 
 internal class SafIntentSafeBelt(
     private val fragment: Fragment,
@@ -33,6 +34,6 @@ internal class SafIntentSafeBelt(
      * On some devices(Mi, etc.), SAF may not work.
      */
     private fun onCrash() {
-        viewForSnackbar.longSnackbar(R.string.backup_wrong_saf)
+        viewForSnackbar.longSnackbar(RBase.string.backup_wrong_saf)
     }
 }

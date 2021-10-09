@@ -27,6 +27,7 @@ import xyz.aprildown.timer.domain.entities.VoiceAction
 import xyz.aprildown.timer.domain.utils.Constants
 import xyz.aprildown.tools.helper.safeSharedPreference
 import xyz.aprildown.tools.view.SimpleInputDialog
+import xyz.aprildown.timer.app.base.R as RBase
 
 internal fun MaterialPopupMenuBuilder.addMusicItems(
     context: Context,
@@ -36,13 +37,13 @@ internal fun MaterialPopupMenuBuilder.addMusicItems(
 ) {
     section {
         item {
-            label = context.getString(R.string.music_pick_ringtone)
+            label = context.getString(RBase.string.music_pick_ringtone)
             callback = {
                 onPickMusicClick.invoke()
             }
         }
         switchItem {
-            label = context.getString(R.string.music_loop)
+            label = context.getString(RBase.string.music_loop)
             onBind = {
                 it.isChecked = action.loop == true
             }
@@ -61,12 +62,12 @@ internal fun MaterialPopupMenuBuilder.addVibrationItems(
 ) {
     section {
         item {
-            label = "${context.getString(R.string.vibration_pattern)}: ${
+            label = "${context.getString(RBase.string.vibration_pattern)}: ${
                 context.getString(
                     when (action.vibrationPattern) {
-                        is VibrationAction.VibrationPattern.Short -> R.string.vibration_short
-                        is VibrationAction.VibrationPattern.Normal -> R.string.vibration_normal
-                        is VibrationAction.VibrationPattern.Long -> R.string.vibration_long
+                        is VibrationAction.VibrationPattern.Short -> RBase.string.vibration_short
+                        is VibrationAction.VibrationPattern.Normal -> RBase.string.vibration_normal
+                        is VibrationAction.VibrationPattern.Long -> RBase.string.vibration_long
                     }
                 )
             }"
@@ -77,7 +78,7 @@ internal fun MaterialPopupMenuBuilder.addVibrationItems(
             }
         }
         item {
-            label = "${context.getString(R.string.vibration_count)}: ${action.count}"
+            label = "${context.getString(RBase.string.vibration_count)}: ${action.count}"
             callback = {
                 VibrationDialog(context).showCountDialog(action.count) {
                     onNewCount.invoke(it)
@@ -94,7 +95,7 @@ internal fun MaterialPopupMenuBuilder.addScreenItems(
 ) {
     section {
         switchItem {
-            label = context.getString(R.string.screen_fullscreen)
+            label = context.getString(RBase.string.screen_fullscreen)
             onBind = {
                 it.isChecked = action.fullScreen == true
             }
@@ -113,7 +114,7 @@ internal fun MaterialPopupMenuBuilder.addVoiceItems(
 ) {
     section {
         item {
-            label = context.getString(R.string.voice_content_title)
+            label = context.getString(RBase.string.voice_content_title)
             callback = {
                 if (action.content2.isNotBlank() || context.safeSharedPreference.useVoiceContent2) {
                     VoiceVariableDialog(context).show(
@@ -142,7 +143,7 @@ internal fun MaterialPopupMenuBuilder.addBeepItems(
 ) {
     section {
         item {
-            label = "${context.getString(R.string.beep_count_title)}: ${action.count}"
+            label = "${context.getString(RBase.string.beep_count_title)}: ${action.count}"
             callback = {
                 BeepDialog(context).showBeepCountDialog(action.count) {
                     onBeepCount.invoke(it)
@@ -150,7 +151,7 @@ internal fun MaterialPopupMenuBuilder.addBeepItems(
             }
         }
         item {
-            label = context.getString(R.string.beep_sound)
+            label = context.getString(RBase.string.beep_sound)
             callback = {
                 BeepDialog(context).showBeepPicker(
                     select = action.soundIndex,
@@ -162,7 +163,7 @@ internal fun MaterialPopupMenuBuilder.addBeepItems(
             }
         }
         switchItem {
-            label = context.getString(R.string.beep_respect_other)
+            label = context.getString(RBase.string.beep_respect_other)
             onBind = {
                 it.isChecked = action.respectOtherSound == true
             }
@@ -180,11 +181,11 @@ internal fun MaterialPopupMenuBuilder.addHalfItems(
 ) {
     section {
         item {
-            label = "${context.getString(R.string.half_option)}: ${
+            label = "${context.getString(RBase.string.half_option)}: ${
                 when (action.option) {
-                    HalfAction.OPTION_VOICE -> context.getString(R.string.half_option_voice)
-                    HalfAction.OPTION_MUSIC -> context.getString(R.string.half_option_music)
-                    HalfAction.OPTION_VIBRATION -> context.getString(R.string.half_option_vibration)
+                    HalfAction.OPTION_VOICE -> context.getString(RBase.string.half_option_voice)
+                    HalfAction.OPTION_MUSIC -> context.getString(RBase.string.half_option_music)
+                    HalfAction.OPTION_VIBRATION -> context.getString(RBase.string.half_option_vibration)
                     else -> ""
                 }
             }"
@@ -204,13 +205,13 @@ internal fun MaterialPopupMenuBuilder.addCountItems(
 ) {
     section {
         item {
-            label = "${context.getString(R.string.count_times)}: ${action.times}"
+            label = "${context.getString(RBase.string.count_times)}: ${action.times}"
             callback = {
                 SimpleInputDialog(context).show(
-                    titleRes = R.string.count_times,
+                    titleRes = RBase.string.count_times,
                     preFill = action.times.toString(),
                     inputType = InputType.TYPE_CLASS_NUMBER,
-                    messageRes = R.string.count_times_desp
+                    messageRes = RBase.string.count_times_desp
                 ) {
                     onCountTimes.invoke(it.toIntOrNull() ?: CountAction.DEFAULT_TIMES)
                 }
@@ -226,20 +227,20 @@ internal fun MaterialPopupMenuBuilder.addNotificationItems(
 ) {
     section {
         item {
-            label = "${context.getString(R.string.notification_duration)}: ${action.duration}"
+            label = "${context.getString(RBase.string.notification_duration)}: ${action.duration}"
             callback = {
                 SimpleInputDialog(context).show(
-                    titleRes = R.string.notification_duration,
+                    titleRes = RBase.string.notification_duration,
                     preFill = action.duration.toString(),
                     inputType = InputType.TYPE_CLASS_NUMBER,
-                    messageRes = R.string.notification_duration_desp
+                    messageRes = RBase.string.notification_duration_desp
                 ) {
                     onNotificationDuring.invoke(it.toIntOrNull() ?: 0)
                 }
             }
         }
         item {
-            label = context.getString(R.string.notification_settings)
+            label = context.getString(RBase.string.notification_settings)
             callback = {
                 val settingsIntent = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
                     Intent(Settings.ACTION_CHANNEL_NOTIFICATION_SETTINGS)

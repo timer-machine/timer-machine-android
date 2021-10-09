@@ -68,6 +68,8 @@ import xyz.aprildown.tools.helper.gone
 import xyz.aprildown.tools.helper.show
 import xyz.aprildown.tools.helper.startActivitySafely
 import javax.inject.Inject
+import xyz.aprildown.timer.app.base.R as RBase
+import xyz.aprildown.tools.R as RTools
 
 @AndroidEntryPoint
 class EditActivity : BaseActivity(),
@@ -153,8 +155,8 @@ class EditActivity : BaseActivity(),
                     menu.findItem(R.id.action_delete_timer)?.isVisible = false
                 }
             }
-            setNavigationIcon(R.drawable.ic_back)
-            setNavigationContentDescription(R.string.nav_up)
+            setNavigationIcon(RBase.drawable.ic_back)
+            setNavigationContentDescription(RBase.string.nav_up)
             setNavigationOnClickListener { onBackPressed() }
             setOnMenuItemClickListener { item ->
                 when (item.itemId) {
@@ -166,27 +168,27 @@ class EditActivity : BaseActivity(),
                             .setMessage(
                                 buildSpannedString {
                                     append(
-                                        getString(R.string.delete_confirmation_template)
+                                        getString(RBase.string.delete_confirmation_template)
                                             .format(viewModel.name.value)
                                     )
                                     append("\n\n")
                                     append(
-                                        getString(R.string.folder_delete_timer_explanation),
+                                        getString(RBase.string.folder_delete_timer_explanation),
                                         StyleSpan(Typeface.BOLD),
                                         Spanned.SPAN_INCLUSIVE_INCLUSIVE
                                     )
                                 }
                             )
-                            .setPositiveButton(R.string.delete) { _, _ ->
+                            .setPositiveButton(RTools.string.delete) { _, _ ->
                                 ShortcutHelper.disableTimerShortcut(this@EditActivity, viewModel.id)
                                 viewModel.deleteTimer()
                             }
-                            .setNegativeButton(R.string.cancel, null)
+                            .setNegativeButton(RTools.string.cancel, null)
                             .show()
                     }
                     R.id.action_timer_template -> MaterialAlertDialogBuilder(this@EditActivity)
-                        .setTitle(R.string.sample_timer_template_title)
-                        .setItems(R.array.sample_timers) { _, which ->
+                        .setTitle(RBase.string.sample_timer_template_title)
+                        .setItems(RBase.array.sample_timers) { _, which ->
                             userLeave {
                                 when (which) {
                                     0 -> viewModel.loadSampleTimer(SampleTimerProvider.TEMPLATE_ONE_STAGE)
@@ -219,8 +221,8 @@ class EditActivity : BaseActivity(),
                 true
             }
             setTitle(
-                if (viewModel.isNewTimer) R.string.edit_create_timer
-                else R.string.edit_edit_timer
+                if (viewModel.isNewTimer) RBase.string.edit_create_timer
+                else RBase.string.edit_edit_timer
             )
         }
     }
@@ -295,16 +297,16 @@ class EditActivity : BaseActivity(),
                         } else {
                             val msgRes = when {
                                 item is EditableStep && item.stepType == StepType.START -> {
-                                    R.string.edit_cant_move_start
+                                    RBase.string.edit_cant_move_start
                                 }
                                 item is EditableStep && item.stepType == StepType.END -> {
-                                    R.string.edit_cant_move_end
+                                    RBase.string.edit_cant_move_end
                                 }
                                 item is EditableGroup || item is EditableGroupEnd -> {
-                                    R.string.edit_cant_move_group
+                                    RBase.string.edit_cant_move_group
                                 }
                                 item is EditableFooter -> {
-                                    R.string.edit_cant_move_footer
+                                    RBase.string.edit_cant_move_footer
                                 }
                                 else -> throw IllegalStateException("What are you moving? $item")
                             }
@@ -346,14 +348,14 @@ class EditActivity : BaseActivity(),
             dropdownGravity = Gravity.START or Gravity.TOP
             section {
                 item {
-                    label = getString(R.string.edit_add_normal)
+                    label = getString(RBase.string.edit_add_normal)
                     callback = {
                         if (isInAGroup) addNormalStepToGroup(position + 1)
                         else addNormalStep(position + 1)
                     }
                 }
                 item {
-                    label = getString(R.string.edit_add_notifier)
+                    label = getString(RBase.string.edit_add_notifier)
                     callback = {
                         if (isInAGroup) addNotifierStepToGroup(position + 1)
                         else addNotifierStep(position + 1)
@@ -361,14 +363,14 @@ class EditActivity : BaseActivity(),
                 }
                 if (!isInAGroup) {
                     item {
-                        label = getString(R.string.edit_add_group)
+                        label = getString(RBase.string.edit_add_group)
                         callback = { addGroup(position + 1) }
                     }
                 }
             }
             section {
                 item {
-                    label = getString(R.string.duplicate)
+                    label = getString(RBase.string.duplicate)
                     callback = {
                         val currentStep = editableStep.toStep()
                         addStep(
@@ -413,25 +415,25 @@ class EditActivity : BaseActivity(),
             dropdownGravity = Gravity.START or Gravity.TOP
             section {
                 item {
-                    label = getString(R.string.edit_add_normal)
+                    label = getString(RBase.string.edit_add_normal)
                     callback = {
                         addNormalStep(position + 1)
                     }
                 }
                 item {
-                    label = getString(R.string.edit_add_notifier)
+                    label = getString(RBase.string.edit_add_notifier)
                     callback = {
                         addNotifierStep(position + 1)
                     }
                 }
                 item {
-                    label = getString(R.string.edit_add_group)
+                    label = getString(RBase.string.edit_add_group)
                     callback = { addGroup(position + 1) }
                 }
             }
             section {
                 item {
-                    label = getString(R.string.duplicate)
+                    label = getString(RBase.string.duplicate)
                     callback = {
                         val adapter = fastAdapter
                         var groupItem: EditableGroup? = null
@@ -560,7 +562,7 @@ class EditActivity : BaseActivity(),
                                     settings = generateRingtonePickerSettings(
                                         select = action.uri.toUri().takeIf { it != Uri.EMPTY }
                                     ),
-                                    windowTitle = getString(R.string.music_pick_ringtone),
+                                    windowTitle = getString(RBase.string.music_pick_ringtone),
                                     reference = position
                                 )
                             )
@@ -671,8 +673,8 @@ class EditActivity : BaseActivity(),
             }
             section {
                 item {
-                    label = getString(R.string.delete)
-                    icon = R.drawable.ic_delete
+                    label = getString(RTools.string.delete)
+                    icon = RBase.drawable.ic_delete
                     callback = { layout.removeBehaviour(type) }
                 }
             }
@@ -808,7 +810,7 @@ class EditActivity : BaseActivity(),
         val groupItems = mutableListOf<IItem<*>>().apply {
             add(
                 EditableGroup(
-                    name = getString(R.string.edit_group),
+                    name = getString(RBase.string.edit_group),
                     loop = 1,
                     handler = this@EditActivity,
                     showTotalTime = shouldUpdateTotalTime
@@ -844,11 +846,11 @@ class EditActivity : BaseActivity(),
         if (startAdapter.adapterItemCount == 0) {
             startAdapter.add(
                 EditableStep(
-                    getString(R.string.edit_start_step), 10_000, listOf(), StepType.START, this
+                    getString(RBase.string.edit_start_step), 10_000, listOf(), StepType.START, this
                 )
             )
         } else {
-            binding.root.snackbar(R.string.edit_add_start_too_many)
+            binding.root.snackbar(RBase.string.edit_add_start_too_many)
         }
         postListScrollAction(0)
         postUpdateTotalTime()
@@ -859,11 +861,11 @@ class EditActivity : BaseActivity(),
         if (endAdapter.adapterItemCount == 0) {
             endAdapter.add(
                 EditableStep(
-                    getString(R.string.edit_end_step), 10_000, listOf(), StepType.END, this
+                    getString(RBase.string.edit_end_step), 10_000, listOf(), StepType.END, this
                 )
             )
         } else {
-            binding.root.snackbar(R.string.edit_add_end_too_many)
+            binding.root.snackbar(RBase.string.edit_add_end_too_many)
         }
         postListScrollAction(fastAdapter.itemCount - 2)
         postUpdateTotalTime()
@@ -871,7 +873,7 @@ class EditActivity : BaseActivity(),
 
     private fun getDefaultNaiveStep(isInAGroup: Boolean): EditableStep {
         return EditableStep(
-            getString(R.string.edit_default_step_name), 60000, mutableListOf(), StepType.NORMAL,
+            getString(RBase.string.edit_default_step_name), 60000, mutableListOf(), StepType.NORMAL,
             this, isInAGroup = isInAGroup
         )
     }
@@ -1018,11 +1020,11 @@ class EditActivity : BaseActivity(),
             onLeave.invoke()
         } else {
             MaterialAlertDialogBuilder(this)
-                .setTitle(R.string.save_changes)
-                .setPositiveButton(R.string.save) { _, _ ->
+                .setTitle(RBase.string.save_changes)
+                .setPositiveButton(RBase.string.save) { _, _ ->
                     saveTimer()
                 }
-                .setNegativeButton(R.string.discard) { _, _ ->
+                .setNegativeButton(RBase.string.discard) { _, _ ->
                     onLeave.invoke()
                 }
                 .setNeutralButton(android.R.string.cancel, null)

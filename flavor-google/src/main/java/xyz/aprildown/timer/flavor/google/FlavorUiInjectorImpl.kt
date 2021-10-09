@@ -17,6 +17,7 @@ import xyz.aprildown.timer.flavor.google.utils.IapPromotionDialog
 import xyz.aprildown.tools.anko.toast
 import xyz.aprildown.tools.arch.observeEvent
 import javax.inject.Inject
+import xyz.aprildown.timer.app.base.R as RBase
 
 @Reusable
 class FlavorUiInjectorImpl @Inject constructor() : FlavorUiInjector {
@@ -28,7 +29,7 @@ class FlavorUiInjectorImpl @Inject constructor() : FlavorUiInjector {
     override val cloudBackupNavGraphId: Int = R.navigation.backup_graph
 
     override fun toCloudBackupFragment(currentFragment: Fragment) {
-        currentFragment.findNavController().subLevelNavigate(R.id.dest_cloud_backup)
+        currentFragment.findNavController().subLevelNavigate(RBase.id.dest_cloud_backup)
     }
 
     override fun toBakedCountDialog(fragment: Fragment) {
@@ -72,17 +73,17 @@ class FlavorUiInjectorImpl @Inject constructor() : FlavorUiInjector {
             } else {
                 val context = fragment.requireContext()
                 IapPromotionDialog(context).show(
-                    title = context.getString(R.string.billing_more_themes_title),
+                    title = context.getString(RBase.string.billing_more_themes_title),
                     message = buildSpannedString {
-                        append(context.getString(R.string.billing_more_themes_desp))
+                        append(context.getString(RBase.string.billing_more_themes_desp))
                         append("\n\n")
                         append(
-                            context.getString(R.string.billing_a_part_of_iap),
+                            context.getString(RBase.string.billing_a_part_of_iap),
                             StyleSpan(Typeface.BOLD),
                             Spanned.SPAN_EXCLUSIVE_EXCLUSIVE
                         )
                     },
-                    positiveButtonTextRes = R.string.billing_purchase
+                    positiveButtonTextRes = RBase.string.billing_purchase
                 ) {
                     context.startActivity(BillingActivity.getIntent(context))
                 }

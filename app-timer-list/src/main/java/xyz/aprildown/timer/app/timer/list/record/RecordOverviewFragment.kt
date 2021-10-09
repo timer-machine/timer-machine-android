@@ -20,6 +20,8 @@ import xyz.aprildown.tools.helper.gone
 import xyz.aprildown.tools.helper.setTextIfChanged
 import xyz.aprildown.tools.helper.show
 import xyz.aprildown.tools.helper.themeColor
+import com.mikepenz.materialize.R as RMaterialize
+import xyz.aprildown.timer.app.base.R as RBase
 
 internal class RecordOverviewFragment : Fragment(R.layout.fragment_record_overview) {
 
@@ -90,7 +92,7 @@ internal class RecordOverviewFragment : Fragment(R.layout.fragment_record_overvi
                                 PieEntry(
                                     percent,
                                     if (timerId == null) {
-                                        getString(R.string.record_other_data)
+                                        getString(RBase.string.record_other_data)
                                     } else {
                                         viewModel?.queryTimerName(timerId).toString()
                                     },
@@ -115,7 +117,7 @@ internal class RecordOverviewFragment : Fragment(R.layout.fragment_record_overvi
                                 PieEntry(
                                     value.percent,
                                     if (timerId == null) {
-                                        getString(R.string.record_other_data)
+                                        getString(RBase.string.record_other_data)
                                     } else {
                                         viewModel?.queryTimerName(timerId).toString()
                                     },
@@ -166,15 +168,15 @@ internal class RecordOverviewFragment : Fragment(R.layout.fragment_record_overvi
     private fun getChartColors(): List<Int> {
         val context = requireContext()
         return listOf(
-            context.color(R.color.md_red_500),
-            context.color(R.color.md_amber_700),
-            context.color(R.color.md_light_green_700),
-            context.color(R.color.md_light_blue_600),
-            context.color(R.color.md_brown_500),
-            context.color(R.color.md_green_500),
-            context.color(R.color.md_indigo_500),
-            context.color(R.color.md_teal_500),
-            context.color(R.color.md_blue_grey_500)
+            context.color(RMaterialize.color.md_red_500),
+            context.color(RMaterialize.color.md_amber_700),
+            context.color(RMaterialize.color.md_light_green_700),
+            context.color(RMaterialize.color.md_light_blue_600),
+            context.color(RMaterialize.color.md_brown_500),
+            context.color(RMaterialize.color.md_green_500),
+            context.color(RMaterialize.color.md_indigo_500),
+            context.color(RMaterialize.color.md_teal_500),
+            context.color(RMaterialize.color.md_blue_grey_500)
         )
     }
 }

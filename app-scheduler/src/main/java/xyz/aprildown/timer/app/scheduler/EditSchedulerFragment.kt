@@ -44,6 +44,7 @@ import xyz.aprildown.tools.helper.show
 import java.text.DateFormatSymbols
 import java.time.LocalDateTime
 import javax.inject.Inject
+import xyz.aprildown.timer.app.base.R as RBase
 
 @AndroidEntryPoint
 class EditSchedulerFragment : Fragment(R.layout.fragment_edit_scheduler) {
@@ -85,11 +86,11 @@ class EditSchedulerFragment : Fragment(R.layout.fragment_edit_scheduler) {
                     onBackPressedDispatcher.onBackPressed()
                 } else {
                     MaterialAlertDialogBuilder(requireContext())
-                        .setTitle(R.string.save_changes)
-                        .setPositiveButton(R.string.save) { _, _ ->
+                        .setTitle(RBase.string.save_changes)
+                        .setPositiveButton(RBase.string.save) { _, _ ->
                             saveScheduler()
                         }
-                        .setNegativeButton(R.string.discard) { _, _ ->
+                        .setNegativeButton(RBase.string.discard) { _, _ ->
                             isEnabled = false
                             onBackPressedDispatcher.onBackPressed()
                         }
@@ -145,7 +146,7 @@ class EditSchedulerFragment : Fragment(R.layout.fragment_edit_scheduler) {
     ) {
         editName?.run {
             if (scheduler.isNull) {
-                setText(R.string.scheduler_default_name)
+                setText(RBase.string.scheduler_default_name)
             } else {
                 setText(scheduler.label)
             }
@@ -168,7 +169,7 @@ class EditSchedulerFragment : Fragment(R.layout.fragment_edit_scheduler) {
             if (timerInfo != null) {
                 text = timerInfo.name
             } else {
-                setText(R.string.timer_pick_required)
+                setText(RBase.string.timer_pick_required)
             }
         }
 
@@ -226,7 +227,7 @@ class EditSchedulerFragment : Fragment(R.layout.fragment_edit_scheduler) {
         editRepeatEveryDays?.doAfterTextChanged { s ->
             var days = s.toString().toIntOrNull() ?: 1
             if (days !in 1..127) {
-                mainCallback.snackbarView.longSnackbar(R.string.scheduler_wrong_every_days)
+                mainCallback.snackbarView.longSnackbar(RBase.string.scheduler_wrong_every_days)
                 days = 1
                 editRepeatEveryDays?.setText(days.toString())
             }
@@ -237,15 +238,15 @@ class EditSchedulerFragment : Fragment(R.layout.fragment_edit_scheduler) {
             popupMenu {
                 section {
                     item {
-                        label = context.getString(R.string.scheduler_repeat_once)
+                        label = context.getString(RBase.string.scheduler_repeat_once)
                         callback = { toRepeatOnce() }
                     }
                     item {
-                        label = context.getString(R.string.scheduler_repeat_every_week)
+                        label = context.getString(RBase.string.scheduler_repeat_every_week)
                         callback = { toRepeatEveryWeek() }
                     }
                     item {
-                        label = context.getString(R.string.scheduler_repeat_every_days)
+                        label = context.getString(RBase.string.scheduler_repeat_every_days)
                         callback = { toRepeatEveryDays() }
                     }
                 }
@@ -288,7 +289,7 @@ class EditSchedulerFragment : Fragment(R.layout.fragment_edit_scheduler) {
     override fun onOptionsItemSelected(item: MenuItem): Boolean = when (item.itemId) {
         R.id.action_save_scheduler -> {
             if (selectedTimerId == TimerEntity.NULL_ID) {
-                mainCallback.snackbarView.longSnackbar(R.string.scheduler_wrong_timer_id)
+                mainCallback.snackbarView.longSnackbar(RBase.string.scheduler_wrong_timer_id)
             } else {
                 saveScheduler()
             }
@@ -341,21 +342,21 @@ class EditSchedulerFragment : Fragment(R.layout.fragment_edit_scheduler) {
 
     private fun updateRepeatEveryDaysLabel(newValue: Int) {
         textRepeatEveryDaysLabel?.text = resources.getNumberFormattedQuantityString(
-            R.plurals.scheduler_repeat_days,
+            RBase.plurals.scheduler_repeat_days,
             newValue
         )
     }
 
     private fun toRepeatOnce() {
         repeatMode = SchedulerRepeatMode.ONCE
-        btnRepeat?.setText(R.string.scheduler_repeat_once)
+        btnRepeat?.setText(RBase.string.scheduler_repeat_once)
         layoutRepeatEveryWeek?.gone()
         layoutRepeatEveryDays?.gone()
     }
 
     private fun toRepeatEveryWeek(scroll: Boolean = true) {
         repeatMode = SchedulerRepeatMode.EVERY_WEEK
-        btnRepeat?.setText(R.string.scheduler_repeat_every_week)
+        btnRepeat?.setText(RBase.string.scheduler_repeat_every_week)
         layoutRepeatEveryWeek?.show()
         layoutRepeatEveryDays?.gone()
         if (scroll) layoutScrollRoot?.scrollToBottom()
@@ -363,7 +364,7 @@ class EditSchedulerFragment : Fragment(R.layout.fragment_edit_scheduler) {
 
     private fun toRepeatEveryDays(scroll: Boolean = true) {
         repeatMode = SchedulerRepeatMode.EVERY_DAYS
-        btnRepeat?.setText(R.string.scheduler_repeat_every_days)
+        btnRepeat?.setText(RBase.string.scheduler_repeat_every_days)
         layoutRepeatEveryWeek?.gone()
         layoutRepeatEveryDays?.show()
         if (scroll) layoutScrollRoot?.scrollToBottom()

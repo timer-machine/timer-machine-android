@@ -11,6 +11,7 @@ import xyz.aprildown.timer.app.base.utils.produceTime
 import xyz.aprildown.timer.component.key.DurationPicker
 import xyz.aprildown.timer.component.settings.databinding.DialogTweakTimeBinding
 import kotlin.math.abs
+import xyz.aprildown.timer.app.base.R as RBase
 
 class TweakTimeDialog {
 
@@ -19,7 +20,7 @@ class TweakTimeDialog {
     fun show(context: Context, onDone: () -> Unit) {
         val binding = DialogTweakTimeBinding.inflate(LayoutInflater.from(context))
         MaterialAlertDialogBuilder(context)
-            .setTitle(R.string.tweak_time_title)
+            .setTitle(RBase.string.tweak_time_title)
             .setView(binding.root)
             .setPositiveButton(android.R.string.ok) { _, _ ->
                 val items = itemsToAmounts()
@@ -32,7 +33,7 @@ class TweakTimeDialog {
                 onDone.invoke()
             }
             .setNegativeButton(android.R.string.cancel, null)
-            .setNeutralButton(R.string.disable) { _, _ ->
+            .setNeutralButton(RBase.string.disable) { _, _ ->
                 PreferenceData.TweakTimeSettings.saveNewSettings(
                     context,
                     60_000L,
@@ -63,7 +64,7 @@ class TweakTimeDialog {
     private fun View.setUpWithIndex(index: Int) {
         findViewById<MaterialButton>(R.id.btnAddTimeSettingItem).run {
             fun changeImage(positive: Boolean) {
-                setIconResource(if (positive) R.drawable.ic_add else R.drawable.ic_minus)
+                setIconResource(if (positive) RBase.drawable.ic_add else RBase.drawable.ic_minus)
             }
             changeImage(items[index].first)
             setOnClickListener {

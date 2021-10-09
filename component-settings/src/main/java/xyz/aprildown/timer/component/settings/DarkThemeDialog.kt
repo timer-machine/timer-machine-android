@@ -13,12 +13,13 @@ import xyz.aprildown.timer.component.settings.databinding.DialogDarkThemeBinding
 import xyz.aprildown.timer.domain.TimeUtils
 import xyz.aprildown.tools.helper.gone
 import xyz.aprildown.tools.helper.show
+import xyz.aprildown.timer.app.base.R as RBase
 
 class DarkThemeDialog(private val context: Context) {
     fun showSettingsDialog(onDone: (() -> Unit)? = null) {
         val binding = DialogDarkThemeBinding.inflate(LayoutInflater.from(context))
         val dialog = MaterialAlertDialogBuilder(context)
-            .setTitle(R.string.dark_theme_title)
+            .setTitle(RBase.string.dark_theme_title)
             .setView(binding.root)
             .setPositiveButton(android.R.string.ok, null)
             .setNegativeButton(android.R.string.cancel, null)

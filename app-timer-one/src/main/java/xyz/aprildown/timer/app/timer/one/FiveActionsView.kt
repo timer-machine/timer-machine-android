@@ -10,6 +10,7 @@ import androidx.annotation.StringRes
 import androidx.constraintlayout.widget.ConstraintLayout
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import xyz.aprildown.tools.helper.startDrawableAnimation
+import xyz.aprildown.timer.app.base.R as RBase
 
 typealias ButtonImageView = Pair<View, ImageView>
 
@@ -79,10 +80,10 @@ class FiveActionsView constructor(
             currentState = newState
             when {
                 oldState == STATE_PLAY && newState == STATE_PAUSE -> {
-                    changeMainFab(R.drawable.ic_anim_play_to_pause, R.string.pause)
+                    changeMainFab(RBase.drawable.ic_anim_play_to_pause, RBase.string.pause)
                 }
                 oldState == STATE_PAUSE && newState == STATE_PLAY -> {
-                    changeMainFab(R.drawable.ic_anim_pause_to_play, R.string.start)
+                    changeMainFab(RBase.drawable.ic_anim_pause_to_play, RBase.string.start)
                 }
             }
             mainFab.startDrawableAnimation()

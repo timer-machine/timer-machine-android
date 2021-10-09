@@ -34,6 +34,7 @@ import xyz.aprildown.tools.helper.color
 import xyz.aprildown.tools.helper.pendingActivityIntent
 import xyz.aprildown.tools.helper.pendingServiceIntent
 import xyz.aprildown.tools.helper.safeSharedPreference
+import xyz.aprildown.timer.app.base.R as RBase
 
 internal fun Context.serviceBuilder(
     appNavigator: AppNavigator,
@@ -47,49 +48,49 @@ internal fun Context.serviceBuilder(
     val content = when {
         isAllRunning -> {
             if (totalRunningTimerCount > 1) {
-                getString(R.string.notif_timers_running, totalRunningTimerCount.toString())
+                getString(RBase.string.notif_timers_running, totalRunningTimerCount.toString())
             } else {
-                getString(R.string.notif_timer_running, theOnlyTimerName.toString())
+                getString(RBase.string.notif_timer_running, theOnlyTimerName.toString())
             }
         }
         isAllPaused -> {
             if (totalRunningTimerCount > 1) {
-                getString(R.string.notif_timers_paused, totalRunningTimerCount.toString())
+                getString(RBase.string.notif_timers_paused, totalRunningTimerCount.toString())
             } else {
-                getString(R.string.notif_timer_paused, theOnlyTimerName.toString())
+                getString(RBase.string.notif_timer_paused, theOnlyTimerName.toString())
             }
         }
         else -> (getString(
-            R.string.notif_timers_running,
+            RBase.string.notif_timers_running,
             (totalRunningTimerCount - pausedTimerCount).toString()
-        )) + ' ' + getString(R.string.notif_timers_paused, pausedTimerCount.toString())
+        )) + ' ' + getString(RBase.string.notif_timers_paused, pausedTimerCount.toString())
     }
 
     val customView = RemoteViews(packageName, R.layout.layout_notif)
     customView.setTextViewText(R.id.textNotifMessage, content)
     customView.setContentDescription(
         R.id.imageNotifStopAll,
-        getString(R.string.notif_a11y_stop_ally)
+        getString(RBase.string.notif_a11y_stop_ally)
     )
     customView.setOnClickPendingIntent(
         R.id.imageNotifStopAll,
         pendingServiceIntent(MachineService.stopAllIntent(this))
     )
     if (isAllPaused) {
-        customView.setImageViewResource(R.id.imageNotifPauseAll, R.drawable.ic_start)
+        customView.setImageViewResource(R.id.imageNotifPauseAll, RBase.drawable.ic_start)
         customView.setContentDescription(
             R.id.imageNotifStopAll,
-            getString(R.string.notif_a11y_start_ally)
+            getString(RBase.string.notif_a11y_start_ally)
         )
         customView.setOnClickPendingIntent(
             R.id.imageNotifPauseAll,
             pendingServiceIntent(MachineService.startAllIntent(this))
         )
     } else {
-        customView.setImageViewResource(R.id.imageNotifPauseAll, R.drawable.ic_pause)
+        customView.setImageViewResource(R.id.imageNotifPauseAll, RBase.drawable.ic_pause)
         customView.setContentDescription(
             R.id.imageNotifStopAll,
-            getString(R.string.notif_a11y_pause_ally)
+            getString(RBase.string.notif_a11y_pause_ally)
         )
         customView.setOnClickPendingIntent(
             R.id.imageNotifPauseAll,
@@ -101,7 +102,7 @@ internal fun Context.serviceBuilder(
 
     return Builder(this, CHANNEL_SERVICE)
         .setShowWhen(false)
-        .setSmallIcon(R.drawable.ic_watch)
+        .setSmallIcon(RBase.drawable.ic_watch)
         .setContentIntent(contentPi)
         .setOngoing(true)
         .setAutoCancel(false)
@@ -110,7 +111,7 @@ internal fun Context.serviceBuilder(
         .setPriority(NotificationCompat.PRIORITY_DEFAULT)
         .setGroup("service")
         .setSortKey("a_service")
-        .setColor(color(R.color.colorPrimary))
+        .setColor(color(RBase.color.colorPrimary))
         .setVisibility(NotificationCompat.VISIBILITY_PUBLIC)
         .setCustomContentView(customView)
         .setCustomBigContentView(customView)
@@ -131,20 +132,21 @@ internal fun Context.buildTimerNotificationBuilder(
     val actions = mutableListOf<Action>()
     var title = ""
 
-    val timerNamePlusStep = res.getString(R.string.notif_timer_title, timer.name, currentStepName)
+    val timerNamePlusStep =
+        res.getString(RBase.string.notif_timer_title, timer.name, currentStepName)
     if (state.isRunning) {
         title = timerNamePlusStep
         actions.add(
             Action(
-                R.drawable.ic_pause,
-                res.getString(R.string.pause),
+                RBase.drawable.ic_pause,
+                res.getString(RBase.string.pause),
                 pendingServiceIntent(MachineService.pauseTimingIntent(this, timerId), timerId)
             )
         )
         actions.add(
             Action(
-                R.drawable.ic_plus_one,
-                res.getString(R.string.plus_one_minute),
+                RBase.drawable.ic_plus_one,
+                res.getString(RBase.string.plus_one_minute),
                 pendingServiceIntent(
                     MachineService.adjustAmountIntent(this, timerId, 60_000L),
                     timerId
@@ -152,26 +154,26 @@ internal fun Context.buildTimerNotificationBuilder(
             )
         )
     } else if (state.isPaused) {
-        title = res.getString(R.string.notif_timer_paused, timerNamePlusStep)
+        title = res.getString(RBase.string.notif_timer_paused, timerNamePlusStep)
         actions.add(
             Action(
-                R.drawable.ic_start,
-                res.getString(R.string.start),
+                RBase.drawable.ic_start,
+                res.getString(RBase.string.start),
                 pendingServiceIntent(MachineService.startTimingIntent(this, timerId), timerId)
             )
         )
         actions.add(
             Action(
-                R.drawable.ic_stop,
-                res.getString(R.string.stop),
+                RBase.drawable.ic_stop,
+                res.getString(RBase.string.stop),
                 pendingServiceIntent(MachineService.resetTimingIntent(this, timerId), timerId)
             )
         )
     }
     actions.add(
         Action(
-            R.drawable.ic_arrow_down,
-            res.getString(R.string.next),
+            RBase.drawable.ic_arrow_down,
+            res.getString(RBase.string.next),
             pendingServiceIntent(MachineService.increTimingIntent(this, timer.id), timerId)
         )
     )
@@ -184,7 +186,7 @@ internal fun Context.buildTimerNotificationBuilder(
 
     return Builder(this, CHANNEL_TIMING)
         .setShowWhen(false)
-        .setSmallIcon(R.drawable.ic_watch)
+        .setSmallIcon(RBase.drawable.ic_watch)
         .setContentTitle(title)
         .setContentIntent(pi)
         .setOngoing(true)
@@ -193,7 +195,7 @@ internal fun Context.buildTimerNotificationBuilder(
         .setCategory(NotificationCompat.CATEGORY_ALARM)
         .setPriority(NotificationCompat.PRIORITY_LOW)
         .setSortKey("t_$timerId")
-        .setColor(color(R.color.colorPrimary))
+        .setColor(color(RBase.color.colorPrimary))
         .setVisibility(NotificationCompat.VISIBILITY_PUBLIC)
         .apply {
             actions.forEach { addAction(it) }
@@ -226,20 +228,20 @@ internal fun Context.buildScreenNotificationBuilder(
 ): Builder {
     val res = resources
     val actions = arrayListOf<Action>()
-    val title = resources.getString(R.string.notif_timer_screen_showing, currentStepName)
+    val title = resources.getString(RBase.string.notif_timer_screen_showing, currentStepName)
     val timerId = timerItem.id
 
     actions.add(
         Action(
-            R.drawable.ic_arrow_down,
-            res.getString(R.string.next),
+            RBase.drawable.ic_arrow_down,
+            res.getString(RBase.string.next),
             pendingServiceIntent(MachineService.increTimingIntent(this, timerId), timerId)
         )
     )
     actions.add(
         Action(
-            R.drawable.ic_plus_one,
-            res.getString(R.string.plus_one_minute),
+            RBase.drawable.ic_plus_one,
+            res.getString(RBase.string.plus_one_minute),
             pendingServiceIntent(MachineService.adjustAmountIntent(this, timerId, 60_000L), timerId)
         )
     )
@@ -256,7 +258,7 @@ internal fun Context.buildScreenNotificationBuilder(
 
     return Builder(this, CHANNEL_SCREEN)
         .setShowWhen(false)
-        .setSmallIcon(R.drawable.ic_watch)
+        .setSmallIcon(RBase.drawable.ic_watch)
         .setContentTitle(title)
         .setContentIntent(pendingShowScreenIntent)
         .setFullScreenIntent(pendingFullScreen, true)
@@ -265,7 +267,7 @@ internal fun Context.buildScreenNotificationBuilder(
         .setLocalOnly(false)
         .setCategory(NotificationCompat.CATEGORY_REMINDER)
         .setPriority(NotificationCompat.PRIORITY_MAX)
-        .setColor(color(R.color.colorPrimary))
+        .setColor(color(RBase.color.colorPrimary))
         .setVisibility(NotificationCompat.VISIBILITY_PUBLIC)
         .apply {
             actions.forEach { addAction(it) }
@@ -293,7 +295,7 @@ internal fun Context.buildBehaviourNotification(
 
     return Builder(this, CHANNEL_B_NOTIF)
         .setShowWhen(true)
-        .setSmallIcon(R.drawable.ic_notification)
+        .setSmallIcon(RBase.drawable.ic_notification)
         .setContentTitle(timer.name)
         .setContentText("${step.label} ${step.length.produceTime()}")
         .setContentIntent(pi)
@@ -308,8 +310,8 @@ internal fun Context.buildBehaviourNotification(
             NotificationCompat.WearableExtender()
                 .addAction(
                     Action(
-                        R.drawable.ic_pause,
-                        context.getString(R.string.pause),
+                        RBase.drawable.ic_pause,
+                        context.getString(RBase.string.pause),
                         pendingServiceIntent(
                             MachineService.pauseTimingIntent(this, timerId),
                             timerId
@@ -318,8 +320,8 @@ internal fun Context.buildBehaviourNotification(
                 )
                 .addAction(
                     Action(
-                        R.drawable.ic_plus_one,
-                        context.getString(R.string.plus_one_minute),
+                        RBase.drawable.ic_plus_one,
+                        context.getString(RBase.string.plus_one_minute),
                         pendingServiceIntent(
                             MachineService.adjustAmountIntent(this, timerId, 60_000L),
                             timerId
@@ -328,8 +330,8 @@ internal fun Context.buildBehaviourNotification(
                 )
                 .addAction(
                     Action(
-                        R.drawable.ic_stop,
-                        context.getString(R.string.stop),
+                        RBase.drawable.ic_stop,
+                        context.getString(RBase.string.stop),
                         pendingServiceIntent(
                             MachineService.resetTimingIntent(this, timerId),
                             timerId
@@ -355,15 +357,15 @@ internal fun Builder.updateStateToPaused(context: Context, id: Int): Builder = a
     mActions.clear()
     addAction(
         Action(
-            R.drawable.ic_start,
-            res.getString(R.string.start),
+            RBase.drawable.ic_start,
+            res.getString(RBase.string.start),
             context.pendingServiceIntent(MachineService.startTimingIntent(context, id), id)
         )
     )
     addAction(
         Action(
-            R.drawable.ic_stop,
-            res.getString(R.string.stop),
+            RBase.drawable.ic_stop,
+            res.getString(RBase.string.stop),
             context.pendingServiceIntent(MachineService.resetTimingIntent(context, id), id)
         )
     )
@@ -375,10 +377,10 @@ internal fun NotificationManager.buildChannelIfNecessary(context: Context): Unit
         if (getNotificationChannel(CHANNEL_SERVICE) == null) {
             createNotificationChannel(
                 NotificationChannel(
-                    CHANNEL_SERVICE, getString(R.string.notif_channel_fore_title),
+                    CHANNEL_SERVICE, getString(RBase.string.notif_channel_fore_title),
                     NotificationManager.IMPORTANCE_DEFAULT
                 ).apply {
-                    description = getString(R.string.notif_channel_fore_desp)
+                    description = getString(RBase.string.notif_channel_fore_desp)
                     enableLights(false)
                     enableVibration(false)
                     setShowBadge(false)
@@ -389,10 +391,10 @@ internal fun NotificationManager.buildChannelIfNecessary(context: Context): Unit
             )
             createNotificationChannel(
                 NotificationChannel(
-                    CHANNEL_TIMING, getString(R.string.notif_channel_timing_title),
+                    CHANNEL_TIMING, getString(RBase.string.notif_channel_timing_title),
                     NotificationManager.IMPORTANCE_LOW
                 ).apply {
-                    description = getString(R.string.notif_channel_timing_desp)
+                    description = getString(RBase.string.notif_channel_timing_desp)
                     enableLights(false)
                     enableVibration(false)
                     setShowBadge(false)
@@ -403,10 +405,10 @@ internal fun NotificationManager.buildChannelIfNecessary(context: Context): Unit
             )
             createNotificationChannel(
                 NotificationChannel(
-                    CHANNEL_SCREEN, getString(R.string.notif_channel_screen_title),
+                    CHANNEL_SCREEN, getString(RBase.string.notif_channel_screen_title),
                     NotificationManager.IMPORTANCE_HIGH
                 ).apply {
-                    description = getString(R.string.notif_channel_screen_desp)
+                    description = getString(RBase.string.notif_channel_screen_desp)
                     enableLights(true)
                     lightColor = Color.YELLOW
                     enableVibration(false)
@@ -424,10 +426,10 @@ internal fun NotificationManager.buildChannelIfNecessary(context: Context): Unit
             sp.edit { putBoolean(wearOsChannelKey, true) }
             createNotificationChannel(
                 NotificationChannel(
-                    CHANNEL_B_NOTIF, getString(R.string.notif_channel_b_notif_title),
+                    CHANNEL_B_NOTIF, getString(RBase.string.notif_channel_b_notif_title),
                     NotificationManager.IMPORTANCE_HIGH
                 ).apply {
-                    description = getString(R.string.notif_channel_b_notif_desp)
+                    description = getString(RBase.string.notif_channel_b_notif_desp)
                     enableLights(true)
                     enableVibration(false)
                     setShowBadge(false)

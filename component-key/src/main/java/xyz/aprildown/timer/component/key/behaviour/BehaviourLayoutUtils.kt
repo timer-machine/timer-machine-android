@@ -1,7 +1,6 @@
 package xyz.aprildown.timer.component.key.behaviour
 
 import android.content.Context
-import xyz.aprildown.timer.component.key.R
 import xyz.aprildown.timer.domain.entities.BehaviourEntity
 import xyz.aprildown.timer.domain.entities.BehaviourType
 import xyz.aprildown.timer.domain.entities.CountAction
@@ -14,6 +13,7 @@ import xyz.aprildown.timer.domain.entities.toMusicAction
 import xyz.aprildown.timer.domain.entities.toNotificationAction
 import xyz.aprildown.timer.domain.entities.toVibrationAction
 import xyz.aprildown.timer.domain.entities.toVoiceAction
+import xyz.aprildown.timer.app.base.R as RBase
 
 internal fun BehaviourEntity.getChipText(context: Context): String {
 
@@ -29,8 +29,8 @@ internal fun BehaviourEntity.getChipText(context: Context): String {
                 val action = toVibrationAction()
                 append(
                     when (action.vibrationPattern) {
-                        is VibrationAction.VibrationPattern.Short -> context.getString(R.string.vibration_short)
-                        is VibrationAction.VibrationPattern.Long -> context.getString(R.string.vibration_long)
+                        is VibrationAction.VibrationPattern.Short -> context.getString(RBase.string.vibration_short)
+                        is VibrationAction.VibrationPattern.Long -> context.getString(RBase.string.vibration_long)
                         else -> getDefaultName()
                     }
                 )
@@ -58,8 +58,8 @@ internal fun BehaviourEntity.getChipText(context: Context): String {
             val option = toHalfAction().option
             if (option != HalfAction.OPTION_VOICE) "${getDefaultName()} ${
                 when (option) {
-                    HalfAction.OPTION_MUSIC -> context.getString(R.string.half_option_music)
-                    HalfAction.OPTION_VIBRATION -> context.getString(R.string.half_option_vibration)
+                    HalfAction.OPTION_MUSIC -> context.getString(RBase.string.half_option_music)
+                    HalfAction.OPTION_VIBRATION -> context.getString(RBase.string.half_option_vibration)
                     else -> ""
                 }
             }" else null

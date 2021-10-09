@@ -8,6 +8,7 @@ import xyz.aprildown.timer.domain.entities.TimerEntity
 import xyz.aprildown.timer.presentation.stream.StreamState
 import xyz.aprildown.timer.presentation.stream.TimerIndex
 import xyz.aprildown.timer.presentation.stream.getStep
+import xyz.aprildown.timer.app.base.R as RBase
 
 internal abstract class MachineNotif(protected val context: Context) {
     lateinit var builder: Builder
@@ -83,7 +84,7 @@ internal class TimerNotif(
 
     override fun withPauseEvent(b: Builder): Builder {
         return builder.apply {
-            setContentTitle(context.getString(R.string.notif_timer_paused, timer.name))
+            setContentTitle(context.getString(RBase.string.notif_timer_paused, timer.name))
             updateStateToPaused(context, timer.id)
         }
     }

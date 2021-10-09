@@ -6,6 +6,8 @@ import android.widget.TextView
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
 import xyz.aprildown.timer.domain.entities.FolderEntity
+import xyz.aprildown.timer.app.base.R as RBase
+import xyz.aprildown.tools.R as RTools
 
 internal class CollapsedViewHolder(
     view: View,
@@ -22,11 +24,11 @@ internal class CollapsedViewHolder(
         view.findViewById<View>(R.id.cardTimer).setOnCreateContextMenuListener { menu, _, _ ->
             callback.onTimerAction(this, TimerAdapter.ACTION_CONTEXT_MENU)
             menu?.run {
-                add(0, MENU_ID_EDIT, MENU_ID_EDIT, R.string.edit)
-                add(0, MENU_ID_DUPLICATE, MENU_ID_DUPLICATE, R.string.duplicate)
-                add(0, MENU_ID_MOVE, MENU_ID_MOVE, R.string.move)
-                add(0, MENU_ID_DELETE, MENU_ID_DELETE, R.string.delete)
-                add(0, MENU_ID_SHARE, MENU_ID_SHARE, R.string.share)
+                add(0, MENU_ID_EDIT, MENU_ID_EDIT, RBase.string.edit)
+                add(0, MENU_ID_DUPLICATE, MENU_ID_DUPLICATE, RBase.string.duplicate)
+                add(0, MENU_ID_MOVE, MENU_ID_MOVE, RBase.string.move)
+                add(0, MENU_ID_DELETE, MENU_ID_DELETE, RTools.string.delete)
+                add(0, MENU_ID_SHARE, MENU_ID_SHARE, RBase.string.share)
             }
         }
     }

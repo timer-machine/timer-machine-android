@@ -16,6 +16,7 @@ import xyz.aprildown.timer.app.base.utils.ScreenWakeLock
 import xyz.aprildown.timer.domain.entities.TimerEntity
 import xyz.aprildown.timer.domain.utils.Constants
 import xyz.aprildown.timer.presentation.one.OneViewModel
+import xyz.aprildown.timer.app.base.R as RBase
 
 internal interface OneActivityInterface {
     fun setToolbarTitle(title: String)
@@ -63,7 +64,7 @@ class OneActivity : BaseActivity(), OneActivityInterface {
         super.onResume()
         ScreenWakeLock.acquireScreenWakeLock(
             context = this,
-            screenTiming = getString(R.string.pref_screen_timing_value_timer)
+            screenTiming = getString(RBase.string.pref_screen_timing_value_timer)
         )
     }
 
@@ -78,7 +79,7 @@ class OneActivity : BaseActivity(), OneActivityInterface {
         super.onPause()
         ScreenWakeLock.releaseScreenLock(
             context = this,
-            screenTiming = getString(R.string.pref_screen_timing_value_timer)
+            screenTiming = getString(RBase.string.pref_screen_timing_value_timer)
         )
     }
 

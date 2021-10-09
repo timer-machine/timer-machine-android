@@ -14,6 +14,8 @@ import xyz.aprildown.tools.helper.color
 import xyz.aprildown.tools.helper.drawable
 import xyz.aprildown.tools.utils.ThemeColorUtils
 import kotlin.math.abs
+import com.mikepenz.materialize.R as RMaterialize
+import xyz.aprildown.tools.R as RTools
 
 class SpecialItemTouchHelperCallback(
     private val context: Context,
@@ -57,15 +59,15 @@ class SpecialItemTouchHelperCallback(
 
         companion object {
             fun getEditDeleteConfig(context: Context): Config = Config().apply {
-                inactiveBackgroundColor = context.color(R.color.md_grey_300)
-                inactiveIconColor = context.color(R.color.md_grey_700)
+                inactiveBackgroundColor = context.color(RMaterialize.color.md_grey_300)
+                inactiveIconColor = context.color(RMaterialize.color.md_grey_700)
 
                 startIconRes = R.drawable.ic_edit
-                startActiveIconColor = context.color(R.color.md_green_800)
-                startActiveBackgroundColor = context.color(R.color.md_green_200)
+                startActiveIconColor = context.color(RMaterialize.color.md_green_800)
+                startActiveBackgroundColor = context.color(RMaterialize.color.md_green_200)
 
                 endIconRes = R.drawable.ic_delete
-                endActiveIconColor = context.color(R.color.md_red_500)
+                endActiveIconColor = context.color(RMaterialize.color.md_red_500)
                 endActiveBackgroundColor = ThemeColorUtils.adjustAlpha(endActiveIconColor, 0.2f)
             }
         }
@@ -80,7 +82,8 @@ class SpecialItemTouchHelperCallback(
     private lateinit var startIcon: Drawable
     private lateinit var endIcon: Drawable
 
-    private val iconPadding: Int = context.resources.getDimensionPixelSize(R.dimen.keyline_icon)
+    private val iconPadding: Int =
+        context.resources.getDimensionPixelSize(RTools.dimen.keyline_icon)
 
     override fun onMove(
         recyclerView: RecyclerView,

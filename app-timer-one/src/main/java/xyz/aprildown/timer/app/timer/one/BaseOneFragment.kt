@@ -47,6 +47,7 @@ import xyz.aprildown.tools.view.ListItemWithLayout
 import xyz.aprildown.tools.view.SimpleInputDialog
 import javax.inject.Inject
 import javax.inject.Provider
+import xyz.aprildown.timer.app.base.R as RBase
 
 abstract class BaseOneFragment<T : ViewDataBinding> : Fragment() {
 
@@ -144,7 +145,7 @@ abstract class BaseOneFragment<T : ViewDataBinding> : Fragment() {
         val step = viewModel.timer.value?.getStep(index) ?: return
 
         if (viewModel.uiLocked.value == true) {
-            viewModel.messageEvent.value = Event(R.string.one_ui_locked)
+            viewModel.messageEvent.value = Event(RBase.string.one_ui_locked)
             return
         }
 
@@ -161,7 +162,7 @@ abstract class BaseOneFragment<T : ViewDataBinding> : Fragment() {
         val step = viewModel.timer.value?.getStep(index) ?: return
 
         if (viewModel.uiLocked.value == true) {
-            viewModel.messageEvent.value = Event(R.string.one_ui_locked)
+            viewModel.messageEvent.value = Event(RBase.string.one_ui_locked)
             return
         }
 
@@ -200,7 +201,7 @@ abstract class BaseOneFragment<T : ViewDataBinding> : Fragment() {
                     .setData(Uri.parse("package:${context.packageName}"))
                     .createChooserIntentIfDead(context)
             )
-            context.longToast(R.string.perm_rational_floating)
+            context.longToast(RBase.string.perm_rational_floating)
         }
     }
 
@@ -216,13 +217,13 @@ abstract class BaseOneFragment<T : ViewDataBinding> : Fragment() {
 
     protected fun actionToOneLayoutSetting() {
         NavHostFragment.findNavController(this).navigate(
-            R.id.dest_one_layout,
+            RBase.id.dest_one_layout,
             null,
             NavOptions.Builder()
-                .setEnterAnim(R.anim.slide_in_bottom)
-                .setExitAnim(R.anim.slide_out_bottom)
-                .setPopEnterAnim(R.anim.slide_in_bottom)
-                .setPopExitAnim(R.anim.slide_out_bottom)
+                .setEnterAnim(RBase.anim.slide_in_bottom)
+                .setExitAnim(RBase.anim.slide_out_bottom)
+                .setPopEnterAnim(RBase.anim.slide_in_bottom)
+                .setPopExitAnim(RBase.anim.slide_out_bottom)
                 .build()
         )
     }
@@ -234,7 +235,7 @@ abstract class BaseOneFragment<T : ViewDataBinding> : Fragment() {
     protected fun actionCreateShortcut() {
         EasyPermissions.requestPermissions(
             PermissionRequest.Builder(this, 0, Manifest.permission.INSTALL_SHORTCUT)
-                .setRationale(R.string.perm_rational_shortcut)
+                .setRationale(RBase.string.perm_rational_shortcut)
                 .build()
         )
     }
@@ -249,8 +250,8 @@ abstract class BaseOneFragment<T : ViewDataBinding> : Fragment() {
         val context = requireContext()
 
         val builder = MaterialAlertDialogBuilder(context)
-            .setTitle(R.string.one_action_add_shortcut)
-            .setPositiveButton(R.string.add, null)
+            .setTitle(RBase.string.one_action_add_shortcut)
+            .setPositiveButton(RBase.string.add, null)
             .setNegativeButton(android.R.string.cancel, null)
 
         val view = View.inflate(context, R.layout.dialog_one_create_shortcut, null) as ViewGroup
@@ -285,7 +286,7 @@ abstract class BaseOneFragment<T : ViewDataBinding> : Fragment() {
     protected fun showPickLoopDialog(maxLoop: Int, onPick: (Int) -> Unit) {
         SimpleInputDialog(requireContext()).show(
             inputType = InputType.TYPE_CLASS_NUMBER,
-            hint = getString(R.string.name_loop_loop_hint)
+            hint = getString(RBase.string.name_loop_loop_hint)
         ) { input ->
             input.toIntOrNull()
                 ?.takeIf { it in 1..maxLoop }

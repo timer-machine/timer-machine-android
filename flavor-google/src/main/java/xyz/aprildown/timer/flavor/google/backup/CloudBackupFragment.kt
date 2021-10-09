@@ -54,11 +54,13 @@ import xyz.aprildown.tools.helper.createChooserIntentIfDead
 import xyz.aprildown.tools.helper.safeSharedPreference
 import xyz.aprildown.tools.helper.startActivitySafely
 import javax.inject.Inject
+import xyz.aprildown.timer.app.base.R as RBase
+import xyz.aprildown.tools.R as RTools
 
 @AndroidEntryPoint
 internal class CloudBackupFragment : PreferenceFragmentCompat() {
 
-    private val viewModel by hiltNavGraphViewModels<CloudBackupViewModel>(R.id.dest_cloud_backup)
+    private val viewModel by hiltNavGraphViewModels<CloudBackupViewModel>(RBase.id.dest_cloud_backup)
 
     @Inject
     lateinit var currentBackupState: CurrentBackupState
@@ -148,7 +150,7 @@ internal class CloudBackupFragment : PreferenceFragmentCompat() {
                 startActivitySafely(
                     IntentHelper.email(
                         email = flavorData.email,
-                        subject = getString(R.string.billing_help_email_title)
+                        subject = getString(RBase.string.billing_help_email_title)
                     ).createChooserIntentIfDead(context)
                 )
                 true
@@ -211,9 +213,9 @@ internal class CloudBackupFragment : PreferenceFragmentCompat() {
                 backupNow.setOnPreferenceClickListener {
                     manualBackupDialog = MaterialAlertDialogBuilder(context)
                         .setCancelable(false)
-                        .setTitle(R.string.cloud_backup_uploading)
+                        .setTitle(RBase.string.cloud_backup_uploading)
                         .setView(R.layout.dialog_loading)
-                        .setNegativeButton(R.string.cancel) { _, _ ->
+                        .setNegativeButton(RTools.string.cancel) { _, _ ->
                             manualBackupDialog?.dismiss()
 
                             if (autoCloudBackup.get()) {
@@ -233,7 +235,7 @@ internal class CloudBackupFragment : PreferenceFragmentCompat() {
                     true
                 }
             } else {
-                backupState.setSummary(R.string.cloud_backup_state_required)
+                backupState.setSummary(RBase.string.cloud_backup_state_required)
             }
 
             onAccountPaymentChanged()
@@ -255,15 +257,15 @@ internal class CloudBackupFragment : PreferenceFragmentCompat() {
                 is Fruit.Ripe -> {
                     manualBackupDialog?.dismiss()
 
-                    requireView().longSnackbar(R.string.cloud_backup_finished)
+                    requireView().longSnackbar(RBase.string.cloud_backup_finished)
                 }
                 is Fruit.Rotten -> {
                     manualBackupDialog?.dismiss()
 
                     MaterialAlertDialogBuilder(context)
-                        .setTitle(R.string.cloud_backup_backup_now_failed)
+                        .setTitle(RBase.string.cloud_backup_backup_now_failed)
                         .setMessage(fruit.exception.causeFirstMessage())
-                        .setPositiveButton(R.string.ok, null)
+                        .setPositiveButton(RTools.string.ok, null)
                         .show()
                     if (autoCloudBackup.get()) {
                         CloudBackup.schedule(context, currentBackupState)
@@ -275,7 +277,7 @@ internal class CloudBackupFragment : PreferenceFragmentCompat() {
 
         viewModel.autoBackupEnabledEvent.observeEvent(viewLifecycleOwner) {
             autoBackup.isChecked = true
-            requireView().snackbar(R.string.cloud_backup_auto_backup_enabled)
+            requireView().snackbar(RBase.string.cloud_backup_auto_backup_enabled)
         }
     }
 
@@ -283,7 +285,7 @@ internal class CloudBackupFragment : PreferenceFragmentCompat() {
         signInLauncher.launch(
             AuthUI.getInstance()
                 .createSignInIntentBuilder()
-                .setLogo(R.mipmap.app_icon_square)
+                .setLogo(RBase.mipmap.app_icon_square)
                 .setTosAndPrivacyPolicyUrls(
                     Constants.getTermsOfServiceLink(),
                     Constants.getPrivacyPolicyLink()
@@ -330,12 +332,12 @@ internal class CloudBackupFragment : PreferenceFragmentCompat() {
 
     private fun confirmToSignOut(context: Context) {
         MaterialAlertDialogBuilder(context)
-            .setMessage(R.string.account_sign_out_confirmation)
-            .setNegativeButton(R.string.cancel, null)
-            .setPositiveButton(R.string.ok) { _, _ ->
+            .setMessage(RBase.string.account_sign_out_confirmation)
+            .setNegativeButton(RTools.string.cancel, null)
+            .setPositiveButton(RTools.string.ok) { _, _ ->
                 val loadingDialog = MaterialAlertDialogBuilder(context)
                     .setCancelable(false)
-                    .setTitle(R.string.account_signing_out)
+                    .setTitle(RBase.string.account_signing_out)
                     .setView(R.layout.dialog_loading)
                     .show()
                 viewLifecycleOwner.lifecycleScope.launch {
@@ -357,9 +359,9 @@ internal class CloudBackupFragment : PreferenceFragmentCompat() {
 
     private fun confirmToDeleteAccount(context: Context) {
         val dialog = MaterialAlertDialogBuilder(context)
-            .setMessage(R.string.account_delete_confirmation)
-            .setPositiveButton(R.string.ok, null)
-            .setNegativeButton(R.string.cancel, null)
+            .setMessage(RBase.string.account_delete_confirmation)
+            .setPositiveButton(RTools.string.ok, null)
+            .setNegativeButton(RTools.string.cancel, null)
             .show()
         val positiveButton = dialog.getButton(AlertDialog.BUTTON_POSITIVE)
         positiveButton.isEnabled = false
@@ -367,15 +369,15 @@ internal class CloudBackupFragment : PreferenceFragmentCompat() {
         val timer = object : CountDownTimer(3000, 1000) {
             private var remainingSeconds = 3
             override fun onTick(millisUntilFinished: Long) {
-                positiveButton.text = getString(R.string.count_down_template).format(
-                    getString(R.string.ok),
+                positiveButton.text = getString(RBase.string.count_down_template).format(
+                    getString(RTools.string.ok),
                     remainingSeconds
                 )
                 remainingSeconds -= 1
             }
 
             override fun onFinish() {
-                positiveButton.setText(R.string.ok)
+                positiveButton.setText(RTools.string.ok)
                 positiveButton.isEnabled = true
             }
         }
@@ -386,7 +388,7 @@ internal class CloudBackupFragment : PreferenceFragmentCompat() {
 
             val loadingDialog = MaterialAlertDialogBuilder(context)
                 .setCancelable(false)
-                .setTitle(R.string.account_deleting)
+                .setTitle(RBase.string.account_deleting)
                 .setView(R.layout.dialog_loading)
                 .show()
 
@@ -412,17 +414,17 @@ internal class CloudBackupFragment : PreferenceFragmentCompat() {
         if (viewModel.billingSupervisor.error.value != null) return
         val context = requireContext()
         IapPromotionDialog(context).show(
-            title = context.getString(R.string.billing_cloud_backup_title),
+            title = context.getString(RBase.string.billing_cloud_backup_title),
             message = buildSpannedString {
-                append(context.getString(R.string.billing_cloud_backup_desp))
+                append(context.getString(RBase.string.billing_cloud_backup_desp))
                 append("\n\n")
                 append(
-                    context.getString(R.string.billing_subscription_service),
+                    context.getString(RBase.string.billing_subscription_service),
                     StyleSpan(Typeface.BOLD),
                     Spanned.SPAN_EXCLUSIVE_EXCLUSIVE
                 )
             },
-            positiveButtonTextRes = R.string.billing_subscribe
+            positiveButtonTextRes = RBase.string.billing_subscribe
         ) {
             startActivity(BillingActivity.getIntent(context))
         }

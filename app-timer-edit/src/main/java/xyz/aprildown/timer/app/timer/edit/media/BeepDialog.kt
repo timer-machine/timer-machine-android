@@ -6,8 +6,8 @@ import androidx.collection.ArrayMap
 import androidx.collection.arrayMapOf
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import xyz.aprildown.timer.app.base.media.Beeper
-import xyz.aprildown.timer.app.timer.edit.R
 import xyz.aprildown.tools.view.SimpleInputDialog
+import xyz.aprildown.timer.app.base.R as RBase
 
 internal class BeepDialog(private val context: Context) {
 
@@ -47,7 +47,7 @@ internal class BeepDialog(private val context: Context) {
         )
         var selected = 0
         MaterialAlertDialogBuilder(context)
-            .setTitle(R.string.beep_sound)
+            .setTitle(RBase.string.beep_sound)
             .setSingleChoiceItems(items.values.toTypedArray(), select) { _, which ->
                 Beeper.play(context, items.keyAt(which))
                 selected = which
@@ -63,10 +63,10 @@ internal class BeepDialog(private val context: Context) {
 
     fun showBeepCountDialog(oldCount: Int, func: (Int) -> Unit) {
         SimpleInputDialog(context).show(
-            titleRes = R.string.beep_count_title,
+            titleRes = RBase.string.beep_count_title,
             preFill = oldCount.toString(),
             inputType = InputType.TYPE_CLASS_NUMBER,
-            messageRes = R.string.beep_count_intro
+            messageRes = RBase.string.beep_count_intro
         ) {
             func.invoke(it.toIntOrNull() ?: 0)
         }

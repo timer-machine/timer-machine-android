@@ -7,8 +7,9 @@ import androidx.appcompat.widget.TooltipCompatFix
 import androidx.core.view.postDelayed
 import xyz.aprildown.tools.anko.dip
 import xyz.aprildown.tools.helper.color
+import com.mikepenz.materialize.R as RMaterialize
 
-internal fun View.showInteractionIndicator(@ColorInt tint: Int = context.color(R.color.md_red_500)) {
+internal fun View.showInteractionIndicator(@ColorInt tint: Int = context.color(RMaterialize.color.md_red_500)) {
     val overlay = overlay
     val drawable = GradientDrawable().apply {
         setStroke(context.dip(4), tint)

@@ -38,6 +38,7 @@ import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
 import javax.inject.Inject
+import xyz.aprildown.timer.app.base.R as RBase
 
 @AndroidEntryPoint
 class ExportFragment : Fragment(R.layout.layout_vertical_form), StepperFormListener {
@@ -68,8 +69,8 @@ class ExportFragment : Fragment(R.layout.layout_vertical_form), StepperFormListe
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         val context = view.context
         val form = view as VerticalStepperFormView
-        locationStep = ExportLocationStep(resources.getString(R.string.export_path_title), this)
-        contentStep = ExportContentStep(resources.getString(R.string.export_content_title))
+        locationStep = ExportLocationStep(resources.getString(RBase.string.export_path_title), this)
+        contentStep = ExportContentStep(resources.getString(RBase.string.export_content_title))
         form.setup(this, locationStep, contentStep)
             .displayBottomNavigation(false)
             .apply {
@@ -78,9 +79,9 @@ class ExportFragment : Fragment(R.layout.layout_vertical_form), StepperFormListe
                     nextButtonColors(colorSecondary, colorSecondary, Color.WHITE, Color.WHITE)
                 }
             }
-            .stepNextButtonText(getString(R.string.backup_next_step))
-            .confirmationStepTitle(resources.getString(R.string.export_begin))
-            .lastStepNextButtonText(getString(R.string.export_action))
+            .stepNextButtonText(getString(RBase.string.backup_next_step))
+            .confirmationStepTitle(resources.getString(RBase.string.export_begin))
+            .lastStepNextButtonText(getString(RBase.string.export_action))
             .displayCancelButtonInLastStep(true)
             .lastStepCancelButtonText(getString(android.R.string.cancel))
             .init()
@@ -88,7 +89,7 @@ class ExportFragment : Fragment(R.layout.layout_vertical_form), StepperFormListe
             MaterialAlertDialogBuilder(context)
                 .setMessage(
                     buildSpannedString {
-                        append(getText(R.string.export_error))
+                        append(getText(RBase.string.export_error))
 
                         (exception.localizedMessage ?: exception.message)
                             ?.takeIf { it.isNotBlank() }
@@ -145,7 +146,7 @@ class ExportFragment : Fragment(R.layout.layout_vertical_form), StepperFormListe
                 }
             },
             onSuccess = {
-                mainCallback.snackbarView.longSnackbar(R.string.export_done)
+                mainCallback.snackbarView.longSnackbar(RBase.string.export_done)
                 popBackToBackup()
             }
         )
@@ -156,7 +157,7 @@ class ExportFragment : Fragment(R.layout.layout_vertical_form), StepperFormListe
     }
 
     private fun popBackToBackup() {
-        NavHostFragment.findNavController(this).popBackStack(R.id.dest_backup_restore, false)
+        NavHostFragment.findNavController(this).popBackStack(RBase.id.dest_backup_restore, false)
     }
 
     fun pickExportPath() {
@@ -222,7 +223,7 @@ private class ExportLocationStep(
             gone()
         }
         view.findViewById<Button>(R.id.btnStepTextButton).run {
-            setText(R.string.export_select_location)
+            setText(RBase.string.export_select_location)
             setOnClickListener {
                 parentFragment.pickExportPath()
             }
@@ -240,7 +241,7 @@ private class ExportLocationStep(
     override fun isStepDataValid(stepData: Uri?): IsDataValid {
         return IsDataValid(
             stepData != Uri.EMPTY,
-            context.getString(R.string.export_select_location)
+            context.getString(RBase.string.export_select_location)
         )
     }
 

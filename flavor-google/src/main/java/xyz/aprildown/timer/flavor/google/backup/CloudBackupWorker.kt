@@ -23,7 +23,6 @@ import xyz.aprildown.timer.domain.usecases.invoke
 import xyz.aprildown.timer.domain.utils.AppTracker
 import xyz.aprildown.timer.flavor.google.BillingActivity
 import xyz.aprildown.timer.flavor.google.BillingSupervisor
-import xyz.aprildown.timer.flavor.google.R
 import xyz.aprildown.timer.flavor.google.backup.usecases.AutoCloudBackup
 import xyz.aprildown.timer.flavor.google.backup.usecases.CloudBackup
 import xyz.aprildown.timer.flavor.google.backup.usecases.CloudBackupState
@@ -33,6 +32,7 @@ import xyz.aprildown.timer.flavor.google.utils.causeFirstMessage
 import xyz.aprildown.tools.arch.Event
 import javax.inject.Provider
 import kotlin.coroutines.resume
+import xyz.aprildown.timer.app.base.R as RBase
 
 @HiltWorker
 internal class CloudBackupWorker @AssistedInject constructor(
@@ -59,7 +59,7 @@ internal class CloudBackupWorker @AssistedInject constructor(
             )
             disableAutoBackup()
             currentBackupStateError.get().set(
-                context.getString(R.string.cloud_backup_account_issue_notif_title)
+                context.getString(RBase.string.cloud_backup_account_issue_notif_title)
             )
             currentBackupState.set(CloudBackupState.Error)
             showAccountErrorNotification()
@@ -119,7 +119,7 @@ internal class CloudBackupWorker @AssistedInject constructor(
             )
             disableAutoBackup()
             currentBackupStateError.get().set(
-                context.getString(R.string.cloud_backup_billing_issue_notif_title)
+                context.getString(RBase.string.cloud_backup_billing_issue_notif_title)
             )
             currentBackupState.set(CloudBackupState.Error)
             showSubscriptionErrorNotification()
@@ -154,9 +154,9 @@ internal class CloudBackupWorker @AssistedInject constructor(
             if (!error.isNullOrBlank()) {
                 stateError.set(
                     buildString {
-                        append(context.getString(R.string.cloud_backup_state_scheduled))
+                        append(context.getString(RBase.string.cloud_backup_state_scheduled))
                         append("\n")
-                        append(context.getString(R.string.cloud_backup_recent_error))
+                        append(context.getString(RBase.string.cloud_backup_recent_error))
                         append(": ")
                         append(error)
                     }
@@ -171,8 +171,8 @@ internal class CloudBackupWorker @AssistedInject constructor(
         val context = applicationContext
         AppInfoNotificationManager(context)
             .notify(
-                titleRes = R.string.cloud_backup_account_issue_notif_title,
-                despRes = R.string.cloud_backup_account_issue_notif_desp,
+                titleRes = RBase.string.cloud_backup_account_issue_notif_title,
+                despRes = RBase.string.cloud_backup_account_issue_notif_desp,
                 pendingIntent = newBillingPendingIntent()
             )
     }
@@ -181,8 +181,8 @@ internal class CloudBackupWorker @AssistedInject constructor(
         val context = applicationContext
         AppInfoNotificationManager(context)
             .notify(
-                titleRes = R.string.cloud_backup_billing_issue_notif_title,
-                despRes = R.string.cloud_backup_billing_issue_notif_desp,
+                titleRes = RBase.string.cloud_backup_billing_issue_notif_title,
+                despRes = RBase.string.cloud_backup_billing_issue_notif_desp,
                 pendingIntent = newBillingPendingIntent()
             )
     }

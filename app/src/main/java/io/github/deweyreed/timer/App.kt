@@ -28,6 +28,7 @@ import xyz.aprildown.timer.domain.utils.AppConfig
 import xyz.aprildown.timer.domain.utils.AppTracker
 import xyz.aprildown.timer.domain.utils.Constants
 import javax.inject.Inject
+import xyz.aprildown.timer.app.base.R as RBase
 
 @HiltAndroidApp
 class App : Application(), Configuration.Provider {
@@ -79,16 +80,16 @@ class App : Application(), Configuration.Provider {
         DarkTheme(this).applyAppCompatDelegate()
         Theme.init(
             context = this,
-            themeRes = R.style.AppTheme,
-            appIconRes = R.drawable.ic_launcher_round
+            themeRes = RBase.style.AppTheme,
+            appIconRes = RBase.drawable.ic_launcher_round
         ) {
-            colorPrimaryRes = R.color.colorPrimary
-            colorPrimaryVariantRes = R.color.colorPrimaryVariant
-            colorOnPrimaryRes = R.color.colorOnPrimary
-            colorSecondaryRes = R.color.colorSecondary
-            colorSecondaryVariantRes = R.color.colorSecondaryVariant
-            colorOnSecondaryRes = R.color.colorOnSecondary
-            colorStatusBarRes = R.color.colorStatusBar
+            colorPrimaryRes = RBase.color.colorPrimary
+            colorPrimaryVariantRes = RBase.color.colorPrimaryVariant
+            colorOnPrimaryRes = RBase.color.colorOnPrimary
+            colorSecondaryRes = RBase.color.colorSecondary
+            colorSecondaryVariantRes = RBase.color.colorSecondaryVariant
+            colorOnSecondaryRes = RBase.color.colorOnSecondary
+            colorStatusBarRes = RBase.color.colorStatusBar
             lightStatusByPrimary = true
         }
         Theme.installDelegates(DynamicThemeDelegate())

@@ -31,6 +31,8 @@ import xyz.aprildown.timer.app.timer.list.databinding.ListItemTimerPickerTimerBi
 import xyz.aprildown.timer.domain.entities.FolderEntity
 import xyz.aprildown.timer.domain.entities.TimerInfo
 import xyz.aprildown.timer.presentation.timer.TimerPickerViewModel
+import xyz.aprildown.timer.app.base.R as RBase
+import xyz.aprildown.tools.R as RTools
 
 @AndroidEntryPoint
 class TimerPicker : DialogFragment() {
@@ -47,13 +49,13 @@ class TimerPicker : DialogFragment() {
         val multi = arguments.getBoolean(EXTRA_MULTI, false)
 
         val dialog = MaterialAlertDialogBuilder(requireContext())
-            .setTitle(R.string.timer_pick_hint)
+            .setTitle(RBase.string.timer_pick_hint)
             .setView(binding.root)
             .setPositiveButton(android.R.string.ok, null)
             .setNegativeButton(android.R.string.cancel, null)
             .apply {
                 if (multi) {
-                    setNeutralButton(R.string.deselect, null)
+                    setNeutralButton(RBase.string.deselect, null)
                 }
             }
             .create()
@@ -156,7 +158,7 @@ class TimerPicker : DialogFragment() {
             (itemAnimator as DefaultItemAnimator).supportsChangeAnimations = false
         }
 
-        val selectLayoutRes = if (multi) R.layout.widget_check else R.layout.widget_radio
+        val selectLayoutRes = if (multi) RTools.layout.widget_check else RTools.layout.widget_radio
         val select = arguments.getIntArray(EXTRA_SELECT) ?: intArrayOf()
         viewModel.folderTimers.observe(this) { map: Map<FolderEntity, List<TimerInfo>> ->
             itemAdapter.set(mutableListOf<GenericItem>().apply {

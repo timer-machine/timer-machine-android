@@ -13,6 +13,7 @@ import xyz.aprildown.timer.presentation.edit.EditViewModel
 import xyz.aprildown.tools.arch.observeEvent
 import xyz.aprildown.tools.helper.gone
 import xyz.aprildown.tools.helper.show
+import xyz.aprildown.timer.app.base.R as RBase
 
 internal fun EditActivity.showBottomMoreDialog(
     viewModel: EditViewModel,
@@ -76,7 +77,7 @@ internal fun EditActivity.showBottomMoreDialog(
             }
         }
         if (timerInfo.id == TimerEntity.NULL_ID) {
-            triggerText.setText(R.string.timer_pick_required)
+            triggerText.setText(RBase.string.timer_pick_required)
         } else {
             triggerText.text = timerInfo.name
         }

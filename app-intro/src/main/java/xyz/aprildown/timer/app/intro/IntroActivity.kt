@@ -44,6 +44,9 @@ import xyz.aprildown.timer.domain.utils.AppTracker
 import xyz.aprildown.timer.presentation.intro.IntroViewModel
 import xyz.aprildown.tools.helper.color
 import javax.inject.Inject
+import com.mikepenz.materialize.R as RMaterialize
+import xyz.aprildown.timer.app.base.R as RBase
+import xyz.aprildown.tools.R as RTools
 
 @AndroidEntryPoint
 class IntroActivity : BaseActivity() {
@@ -130,12 +133,12 @@ class IntroActivity : BaseActivity() {
 
                 binding.confetti.build()
                     .addColors(
-                        color(R.color.md_red_500),
-                        color(R.color.md_amber_700),
-                        color(R.color.md_light_green_700),
-                        color(R.color.md_blue_500),
-                        color(R.color.md_green_500),
-                        color(R.color.md_purple_500),
+                        color(RMaterialize.color.md_red_500),
+                        color(RMaterialize.color.md_amber_700),
+                        color(RMaterialize.color.md_light_green_700),
+                        color(RMaterialize.color.md_blue_500),
+                        color(RMaterialize.color.md_green_500),
+                        color(RMaterialize.color.md_purple_500),
                     )
                     .setDirection(0.0, 180.0)
                     .setSpeed(5f, 10f)
@@ -249,12 +252,12 @@ class IntroActivity : BaseActivity() {
 
     private fun confirmToExit() {
         MaterialAlertDialogBuilder(this@IntroActivity)
-            .setTitle(R.string.intro_exit_confirmation)
+            .setTitle(RBase.string.intro_exit_confirmation)
             .setMessage(
                 buildSpannedString {
                     if (isOnBoarding) {
                         append(
-                            getText(R.string.intro_exit_difficult_app_alert),
+                            getText(RBase.string.intro_exit_difficult_app_alert),
                             StyleSpan(Typeface.BOLD),
                             Spanned.SPAN_EXCLUSIVE_EXCLUSIVE
                         )
@@ -264,19 +267,19 @@ class IntroActivity : BaseActivity() {
                         if (isNotBlank()) {
                             append("\n\n")
                         }
-                        append(getText(R.string.intro_exit_previous_hint))
+                        append(getText(RBase.string.intro_exit_previous_hint))
                     }
 
                     if (isNotBlank()) {
                         append("\n\n")
                     }
-                    append(getText(R.string.intro_location))
+                    append(getText(RBase.string.intro_location))
                 }.takeIf { it.isNotBlank() }
             )
-            .setPositiveButton(R.string.ok) { _, _ ->
+            .setPositiveButton(RTools.string.ok) { _, _ ->
                 finish()
             }
-            .setNegativeButton(R.string.cancel, null)
+            .setNegativeButton(RTools.string.cancel, null)
             .show()
     }
 

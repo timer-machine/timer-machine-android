@@ -10,6 +10,7 @@ import xyz.aprildown.timer.domain.entities.StepEntity
 import xyz.aprildown.timer.domain.entities.StepType
 import xyz.aprildown.timer.domain.entities.TimerEntity
 import xyz.aprildown.timer.domain.entities.VibrationAction
+import xyz.aprildown.timer.app.base.R as RBase
 
 internal class InstructionManager {
 
@@ -95,15 +96,15 @@ internal abstract class Instruction<VB : ViewBinding>(
         fun getInitialSampleTimer(context: Context): TimerEntity {
             return TimerEntity(
                 id = TimerEntity.NEW_ID,
-                name = context.getString(R.string.intro_start_sample_timer_name),
+                name = context.getString(RBase.string.intro_start_sample_timer_name),
                 loop = 5,
                 steps = listOf(
                     StepEntity.Step(
-                        label = context.getString(R.string.intro_start_sample_timer_step1),
+                        label = context.getString(RBase.string.intro_start_sample_timer_step1),
                         length = 180_000L
                     ),
                     StepEntity.Step(
-                        label = context.getString(R.string.intro_start_sample_timer_step2),
+                        label = context.getString(RBase.string.intro_start_sample_timer_step2),
                         length = 10_000L,
                         behaviour = listOf(
                             MusicAction().toBehaviourEntity(),
@@ -112,11 +113,11 @@ internal abstract class Instruction<VB : ViewBinding>(
                         type = StepType.NOTIFIER
                     ),
                     StepEntity.Step(
-                        label = context.getString(R.string.intro_start_sample_timer_step3),
+                        label = context.getString(RBase.string.intro_start_sample_timer_step3),
                         length = 120_000L
                     ),
                     StepEntity.Step(
-                        label = context.getString(R.string.intro_start_sample_timer_step4),
+                        label = context.getString(RBase.string.intro_start_sample_timer_step4),
                         length = 10_000L,
                         behaviour = listOf(
                             MusicAction().toBehaviourEntity(),

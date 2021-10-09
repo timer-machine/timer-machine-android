@@ -68,6 +68,9 @@ import xyz.aprildown.tools.utils.ThemeColorUtils
 import java.time.Instant
 import java.util.Optional
 import javax.inject.Inject
+import com.mikepenz.materialdrawer.R as RMaterialDrawer
+import xyz.aprildown.timer.app.base.R as RBase
+import xyz.aprildown.tools.R as RTools
 
 @AndroidEntryPoint
 class MainActivity : BaseActivity(),
@@ -157,11 +160,11 @@ class MainActivity : BaseActivity(),
 
         binding.drawer.setDrawerLockMode(
             if (currentDestId in setOf(
-                    R.id.dest_timer,
-                    R.id.dest_scheduler,
-                    R.id.dest_backup_restore,
-                    R.id.dest_settings,
-                    R.id.dest_help,
+                    RBase.id.dest_timer,
+                    RBase.id.dest_scheduler,
+                    RBase.id.dest_backup_restore,
+                    RBase.id.dest_settings,
+                    RBase.id.dest_help,
                 )
             ) {
                 DrawerLayout.LOCK_MODE_UNLOCKED
@@ -170,36 +173,36 @@ class MainActivity : BaseActivity(),
             }
         )
 
-        if (destination.parent?.id == R.id.dest_cloud_backup) {
+        if (destination.parent?.id == RBase.id.dest_cloud_backup) {
             refreshMainUi(DRAWER_ID_BACKUP_RESTORE)
             return
         }
 
         when (currentDestId) {
-            R.id.dest_timer -> {
+            RBase.id.dest_timer -> {
                 requireFab = true
                 refreshMainUi(DRAWER_ID_TIMER)
             }
-            R.id.dest_record -> refreshMainUi(DRAWER_ID_TIMER)
+            RBase.id.dest_record -> refreshMainUi(DRAWER_ID_TIMER)
 
-            R.id.dest_scheduler -> {
+            RBase.id.dest_scheduler -> {
                 requireFab = true
                 refreshMainUi(DRAWER_ID_SCHEDULER)
             }
-            R.id.dest_edit_scheduler -> refreshMainUi(DRAWER_ID_SCHEDULER)
+            RBase.id.dest_edit_scheduler -> refreshMainUi(DRAWER_ID_SCHEDULER)
 
-            R.id.dest_backup_restore,
-            R.id.dest_export,
-            R.id.dest_import -> refreshMainUi(DRAWER_ID_BACKUP_RESTORE)
+            RBase.id.dest_backup_restore,
+            RBase.id.dest_export,
+            RBase.id.dest_import -> refreshMainUi(DRAWER_ID_BACKUP_RESTORE)
 
-            R.id.dest_help,
-            R.id.dest_whitelist -> refreshMainUi(DRAWER_ID_HELP)
+            RBase.id.dest_help,
+            RBase.id.dest_whitelist -> refreshMainUi(DRAWER_ID_HELP)
 
-            R.id.dest_settings,
-            R.id.dest_settings_floating_window_pip,
-            R.id.dest_theme,
-            R.id.dest_one_layout,
-            R.id.dest_about -> refreshMainUi(DRAWER_ID_SETTINGS)
+            RBase.id.dest_settings,
+            RBase.id.dest_settings_floating_window_pip,
+            RBase.id.dest_theme,
+            RBase.id.dest_one_layout,
+            RBase.id.dest_about -> refreshMainUi(DRAWER_ID_SETTINGS)
         }
     }
 
@@ -247,7 +250,7 @@ class MainActivity : BaseActivity(),
         val colorPrimary = newDynamicTheme.colorPrimary
         val selectedItemBackgroundColor = ThemeColorUtils.adjustAlpha(
             colorPrimary,
-            float(R.dimen.material_drawer_selected_background_alpha)
+            float(RMaterialDrawer.dimen.material_drawer_selected_background_alpha)
         )
         val drawerItemTint = DrawerItemTint(this)
         val textColorTint = drawerItemTint.createTextColorTint()
@@ -262,7 +265,7 @@ class MainActivity : BaseActivity(),
 
         AccountHeaderView(this).run {
             attachToSliderView(binding.slider)
-            headerBackground = ImageHolder(R.drawable.ic_launcher_background)
+            headerBackground = ImageHolder(RBase.drawable.ic_launcher_background)
             selectionListEnabledForSingleProfile = false
             addProfiles(ProfileSettingDrawerItem())
         }
@@ -271,33 +274,33 @@ class MainActivity : BaseActivity(),
             listOf(
                 PrimaryDrawerItem().apply {
                     identifier = DRAWER_ID_TIMER
-                    nameRes = R.string.main_action_timers
-                    iconRes = R.drawable.ic_timer
+                    nameRes = RBase.string.main_action_timers
+                    iconRes = RBase.drawable.ic_timer
                     withCommonSettings()
                 },
                 PrimaryDrawerItem().apply {
                     identifier = DRAWER_ID_SCHEDULER
-                    nameRes = R.string.main_action_schedulers
-                    iconRes = R.drawable.ic_scheduler
+                    nameRes = RBase.string.main_action_schedulers
+                    iconRes = RBase.drawable.ic_scheduler
                     withCommonSettings()
                 },
                 PrimaryDrawerItem().apply {
                     identifier = DRAWER_ID_BACKUP_RESTORE
-                    nameRes = R.string.main_action_backup
-                    iconRes = R.drawable.ic_backup
+                    nameRes = RBase.string.main_action_backup
+                    iconRes = RBase.drawable.ic_backup
                     withCommonSettings()
                 },
                 DrawerDividerItem(),
                 PrimaryDrawerItem().apply {
                     identifier = DRAWER_ID_SETTINGS
-                    nameRes = R.string.main_action_settings
-                    iconRes = R.drawable.ic_settings
+                    nameRes = RBase.string.main_action_settings
+                    iconRes = RBase.drawable.ic_settings
                     withCommonSettings()
                 },
                 PrimaryDrawerItem().apply {
                     identifier = DRAWER_ID_HELP
-                    nameRes = R.string.main_action_help
-                    iconRes = R.drawable.settings_help
+                    nameRes = RBase.string.main_action_help
+                    iconRes = RBase.drawable.settings_help
                     withCommonSettings()
                 }
             )
@@ -308,8 +311,8 @@ class MainActivity : BaseActivity(),
                     DrawerDividerItem(),
                     PrimaryDrawerItem().apply {
                         identifier = DRAWER_ID_IN_APP_PURCHASES
-                        nameRes = R.string.billing_iap
-                        iconRes = R.drawable.settings_premium
+                        nameRes = RBase.string.billing_iap
+                        iconRes = RBase.drawable.settings_premium
                         withCommonSettings()
                         isSelectable = false
                         onDrawerItemClickListener = { _, _, _ ->
@@ -330,23 +333,23 @@ class MainActivity : BaseActivity(),
         binding.slider.onDrawerItemClickListener = { _, item, _ ->
             val shouldClose = when (item.identifier) {
                 DRAWER_ID_TIMER -> {
-                    navigateToMainDestination(R.id.dest_timer)
+                    navigateToMainDestination(RBase.id.dest_timer)
                     true
                 }
                 DRAWER_ID_SCHEDULER -> {
-                    navigateToMainDestination(R.id.dest_scheduler)
+                    navigateToMainDestination(RBase.id.dest_scheduler)
                     true
                 }
                 DRAWER_ID_BACKUP_RESTORE -> {
-                    navigateToMainDestination(R.id.dest_backup_restore)
+                    navigateToMainDestination(RBase.id.dest_backup_restore)
                     true
                 }
                 DRAWER_ID_SETTINGS -> {
-                    navigateToMainDestination(R.id.dest_settings)
+                    navigateToMainDestination(RBase.id.dest_settings)
                     true
                 }
                 DRAWER_ID_HELP -> {
-                    navigateToMainDestination(R.id.dest_help)
+                    navigateToMainDestination(RBase.id.dest_help)
                     true
                 }
                 DRAWER_ID_THEME -> false
@@ -365,7 +368,7 @@ class MainActivity : BaseActivity(),
 
         binding.mainRoot.toolbar.setupWithNavController(
             navController,
-            AppBarConfiguration.Builder(R.id.dest_timer)
+            AppBarConfiguration.Builder(RBase.id.dest_timer)
                 .setOpenableLayout(binding.drawer)
                 .build()
         )
@@ -378,10 +381,10 @@ class MainActivity : BaseActivity(),
         return if (DarkTheme(this).darkThemeValue == DarkTheme.DARK_THEME_MANUAL) {
             SwitchDrawerItem().apply {
                 identifier = DRAWER_ID_THEME
-                iconRes = R.drawable.settings_day_night
+                iconRes = RBase.drawable.settings_day_night
                 isIconTinted = true
                 iconColor = iconTint
-                nameRes = R.string.main_action_dark
+                nameRes = RBase.string.main_action_dark
                 textColor = textColorTint
                 isSelectable = false
                 isChecked = resources.isDarkTheme
@@ -398,10 +401,10 @@ class MainActivity : BaseActivity(),
         } else {
             PrimaryDrawerItem().apply {
                 identifier = DRAWER_ID_THEME
-                iconRes = R.drawable.settings_day_night
+                iconRes = RBase.drawable.settings_day_night
                 isIconTinted = true
                 iconColor = iconTint
-                nameRes = R.string.main_action_dark
+                nameRes = RBase.string.main_action_dark
                 textColor = textColorTint
                 isSelectable = false
                 onDrawerItemClickListener = { _, _, _ ->
@@ -437,8 +440,8 @@ class MainActivity : BaseActivity(),
                     destinationId,
                     null,
                     NavOptions.Builder()
-                        .setPopEnterAnim(R.anim.close_enter)
-                        .setPopExitAnim(R.anim.close_exit)
+                        .setPopEnterAnim(RBase.anim.close_enter)
+                        .setPopExitAnim(RBase.anim.close_exit)
                         .build()
                 )
             }
@@ -472,15 +475,15 @@ class MainActivity : BaseActivity(),
                     intent.removeExtra(EXTRA_SHOW_AUTO_DARK_MSG)
                     if (currentIsDark) {
                         snackbarView.longSnackbar(
-                            R.string.dark_theme_scheduled_dark_now,
-                            R.string.undo
+                            RBase.string.dark_theme_scheduled_dark_now,
+                            RTools.string.undo
                         ) {
                             updateManualDark(isDark = false)
                         }
                     } else {
                         snackbarView.longSnackbar(
-                            R.string.dark_theme_scheduled_light_now,
-                            R.string.undo
+                            RBase.string.dark_theme_scheduled_light_now,
+                            RTools.string.undo
                         ) {
                             updateManualDark(isDark = true)
                         }
@@ -614,10 +617,10 @@ private fun showRateDialog(context: Context, rate: AppReminder) {
     RateDialog(
         onRate = {
             rate.ok()
-            context.toast(R.string.thanks)
+            context.toast(RBase.string.thanks)
             context.startActivitySafely(
                 IntentHelper.appStorePage(context),
-                wrongMessageRes = R.string.no_action_found
+                wrongMessageRes = RBase.string.no_action_found
             )
         },
         onLater = {

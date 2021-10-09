@@ -12,6 +12,7 @@ import androidx.core.view.updateLayoutParams
 import xyz.aprildown.timer.app.timer.edit.R
 import xyz.aprildown.timer.app.timer.edit.databinding.LayoutVoiceVariableTableBinding
 import xyz.aprildown.tools.helper.drawable
+import xyz.aprildown.timer.app.base.R as RBase
 
 internal class VoiceVariableTableView(
     context: Context,
@@ -83,31 +84,31 @@ internal class VoiceVariableTableView(
     }
 
     private fun setUpTooltips() {
-        binding.variableTimerName withTooltip R.string.voice_variable_timer_name_desp
-        binding.variableTimerLoop withTooltip R.string.voice_variable_timer_loop_desp
-        binding.variableTimerTotalLoop withTooltip R.string.voice_variable_timer_total_loop_desp
-        binding.variableTimerDuration withTooltip R.string.voice_variable_timer_duration_desp
-        binding.variableTimerElapsed withTooltip R.string.voice_variable_timer_elapsed_desp
-        binding.variableTimerElapsedPercent withTooltip R.string.voice_variable_timer_elapsed_percent_desp
-        binding.variableTimerRemaining withTooltip R.string.voice_variable_timer_remaining_desp
-        binding.variableTimerRemainingPercent withTooltip R.string.voice_variable_timer_remaining_percent_desp
-        binding.variableTimerEndTime withTooltip R.string.voice_variable_timer_end_time_desp
+        binding.variableTimerName withTooltip RBase.string.voice_variable_timer_name_desp
+        binding.variableTimerLoop withTooltip RBase.string.voice_variable_timer_loop_desp
+        binding.variableTimerTotalLoop withTooltip RBase.string.voice_variable_timer_total_loop_desp
+        binding.variableTimerDuration withTooltip RBase.string.voice_variable_timer_duration_desp
+        binding.variableTimerElapsed withTooltip RBase.string.voice_variable_timer_elapsed_desp
+        binding.variableTimerElapsedPercent withTooltip RBase.string.voice_variable_timer_elapsed_percent_desp
+        binding.variableTimerRemaining withTooltip RBase.string.voice_variable_timer_remaining_desp
+        binding.variableTimerRemainingPercent withTooltip RBase.string.voice_variable_timer_remaining_percent_desp
+        binding.variableTimerEndTime withTooltip RBase.string.voice_variable_timer_end_time_desp
 
-        binding.variableGroupName withTooltip R.string.voice_variable_group_name_desp
-        binding.variableGroupLoop withTooltip R.string.voice_variable_group_loop_desp
-        binding.variableGroupTotalLoop withTooltip R.string.voice_variable_group_total_loop_desp
-        binding.variableGroupDuration withTooltip R.string.voice_variable_group_duration_desp
-        binding.variableGroupElapsed withTooltip R.string.voice_variable_group_elapsed_desp
-        binding.variableGroupElapsedPercent withTooltip R.string.voice_variable_group_elapsed_percent_desp
-        binding.variableGroupRemaining withTooltip R.string.voice_variable_group_remaining_desp
-        binding.variableGroupRemainingPercent withTooltip R.string.voice_variable_group_remaining_percent_desp
-        binding.variableGroupEndTime withTooltip R.string.voice_variable_group_end_time_desp
+        binding.variableGroupName withTooltip RBase.string.voice_variable_group_name_desp
+        binding.variableGroupLoop withTooltip RBase.string.voice_variable_group_loop_desp
+        binding.variableGroupTotalLoop withTooltip RBase.string.voice_variable_group_total_loop_desp
+        binding.variableGroupDuration withTooltip RBase.string.voice_variable_group_duration_desp
+        binding.variableGroupElapsed withTooltip RBase.string.voice_variable_group_elapsed_desp
+        binding.variableGroupElapsedPercent withTooltip RBase.string.voice_variable_group_elapsed_percent_desp
+        binding.variableGroupRemaining withTooltip RBase.string.voice_variable_group_remaining_desp
+        binding.variableGroupRemainingPercent withTooltip RBase.string.voice_variable_group_remaining_percent_desp
+        binding.variableGroupEndTime withTooltip RBase.string.voice_variable_group_end_time_desp
 
-        binding.variableStepName withTooltip R.string.voice_variable_step_name_desp
-        binding.variableStepDuration withTooltip R.string.voice_variable_step_duration_desp
-        binding.variableStepEndTime withTooltip R.string.voice_variable_step_end_time_desp
+        binding.variableStepName withTooltip RBase.string.voice_variable_step_name_desp
+        binding.variableStepDuration withTooltip RBase.string.voice_variable_step_duration_desp
+        binding.variableStepEndTime withTooltip RBase.string.voice_variable_step_end_time_desp
 
-        binding.variableOtherClockTime withTooltip R.string.voice_variable_other_clock_time_desp
+        binding.variableOtherClockTime withTooltip RBase.string.voice_variable_other_clock_time_desp
     }
 
     private infix fun View.withTooltip(@StringRes stringRes: Int) {

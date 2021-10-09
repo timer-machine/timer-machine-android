@@ -1,7 +1,7 @@
 package xyz.aprildown.timer.domain.utils
 
 import android.content.Context
-import xyz.aprildown.timer.domain.R
+import xyz.aprildown.tools.R as RTools
 
 object Constants {
     private const val EXTRA_PREFIX = "EXTRA_"
@@ -28,7 +28,7 @@ object Constants {
     private const val LINK_PREFIX = "https://github.com/DeweyReed/Grocery/blob/master"
     private const val SUFFIX_CONTENT = "#readme"
     private val Context.languageTag
-        get() = when (val tag = getString(R.string.language)) {
+        get() = when (val tag = getString(RTools.string.language)) {
             "zh-rCN" -> tag
             else -> "en"
         }

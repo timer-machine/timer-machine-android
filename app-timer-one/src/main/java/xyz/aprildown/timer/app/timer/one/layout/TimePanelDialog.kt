@@ -8,9 +8,9 @@ import androidx.core.view.get
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import xyz.aprildown.timer.app.base.data.PreferenceData
 import xyz.aprildown.timer.app.base.data.PreferenceData.timePanels
-import xyz.aprildown.timer.app.timer.one.R
 import xyz.aprildown.timer.app.timer.one.databinding.DialogTimePanelPickerBinding
 import xyz.aprildown.tools.view.ListItemWithLayout
+import xyz.aprildown.timer.app.base.R as RBase
 
 internal fun Context.showTimePanelPickerDialog(onDone: () -> Unit) {
 
@@ -18,7 +18,7 @@ internal fun Context.showTimePanelPickerDialog(onDone: () -> Unit) {
 
     val binding = DialogTimePanelPickerBinding.inflate(LayoutInflater.from(this))
     MaterialAlertDialogBuilder(this)
-        .setTitle(R.string.time_panel_picker)
+        .setTitle(RBase.string.time_panel_picker)
         .setView(binding.root)
         .setPositiveButton(android.R.string.ok) { _, _ ->
             timePanels = currentTimePanels

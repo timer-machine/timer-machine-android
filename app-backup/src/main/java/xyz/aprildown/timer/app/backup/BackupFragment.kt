@@ -10,6 +10,7 @@ import xyz.aprildown.timer.app.base.ui.FlavorUiInjectorQualifier
 import xyz.aprildown.timer.app.base.utils.NavigationUtils.subLevelNavigate
 import java.util.Optional
 import javax.inject.Inject
+import xyz.aprildown.timer.app.base.R as RBase
 
 @AndroidEntryPoint
 class BackupFragment : PreferenceFragmentCompat() {
@@ -22,7 +23,7 @@ class BackupFragment : PreferenceFragmentCompat() {
         setPreferencesFromResource(R.xml.pref_backup, rootKey)
 
         flavorUiInjector.run {
-            val preference = findPreference<Preference>(getString(R.string.backup_key_cloud))
+            val preference = findPreference<Preference>(getString(RBase.string.backup_key_cloud))
             requireNotNull(preference)
             if (isPresent) {
                 preference.setOnPreferenceClickListener {
@@ -34,14 +35,14 @@ class BackupFragment : PreferenceFragmentCompat() {
             }
         }
 
-        findPreference<Preference>(getString(R.string.backup_key_export))?.setOnPreferenceClickListener {
+        findPreference<Preference>(getString(RBase.string.backup_key_export))?.setOnPreferenceClickListener {
             NavHostFragment.findNavController(this)
-                .subLevelNavigate(R.id.dest_export)
+                .subLevelNavigate(RBase.id.dest_export)
             true
         }
-        findPreference<Preference>(getString(R.string.backup_key_import))?.setOnPreferenceClickListener {
+        findPreference<Preference>(getString(RBase.string.backup_key_import))?.setOnPreferenceClickListener {
             NavHostFragment.findNavController(this)
-                .subLevelNavigate(R.id.dest_import)
+                .subLevelNavigate(RBase.id.dest_import)
             true
         }
     }

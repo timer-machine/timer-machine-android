@@ -33,6 +33,7 @@ import java.time.ZoneId
 import java.util.Calendar
 import java.util.Date
 import javax.inject.Inject
+import xyz.aprildown.timer.app.base.R as RBase
 
 @AndroidEntryPoint
 class RecordFragment : Fragment(R.layout.fragment_record) {
@@ -188,9 +189,9 @@ class RecordFragment : Fragment(R.layout.fragment_record) {
         TabLayoutMediator(binding.tabLayoutRecord, binding.viewPagerRecord) { tab, position ->
             tab.setText(
                 when (position) {
-                    0 -> R.string.record_overview
-                    1 -> R.string.record_timeline
-                    2 -> R.string.record_calendar
+                    0 -> RBase.string.record_overview
+                    1 -> RBase.string.record_timeline
+                    2 -> RBase.string.record_calendar
                     else -> throw IllegalStateException("Wrong tab position $position")
                 }
             )

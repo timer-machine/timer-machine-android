@@ -14,6 +14,7 @@ import xyz.aprildown.timer.app.base.data.FloatingWindowPip
 import xyz.aprildown.timer.app.base.utils.produceTime
 import xyz.aprildown.timer.app.timer.one.R
 import xyz.aprildown.tools.view.ListItemWithLayout
+import xyz.aprildown.timer.app.base.R as RBase
 
 class FloatingWindowPipFragment : Fragment(R.layout.fragment_floating_window_pip) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -28,9 +29,9 @@ class FloatingWindowPipFragment : Fragment(R.layout.fragment_floating_window_pip
         fun updateAutoCloseText(enabled: Boolean) {
             itemAutoClose.listItem.setSecondaryText(
                 if (enabled) {
-                    R.string.settings_floating_window_pip_auto_close_on
+                    RBase.string.settings_floating_window_pip_auto_close_on
                 } else {
-                    R.string.settings_floating_window_pip_auto_close_off
+                    RBase.string.settings_floating_window_pip_auto_close_off
                 }
             )
         }

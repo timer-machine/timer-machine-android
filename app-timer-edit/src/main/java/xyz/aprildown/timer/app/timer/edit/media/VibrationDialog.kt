@@ -17,6 +17,8 @@ import xyz.aprildown.timer.app.timer.edit.databinding.DialogVibrationCountBindin
 import xyz.aprildown.timer.app.timer.edit.databinding.DialogVibrationPatternBinding
 import xyz.aprildown.timer.domain.entities.VibrationAction
 import xyz.aprildown.tools.helper.onImeActionClick
+import xyz.aprildown.timer.app.base.R as RBase
+import xyz.aprildown.tools.R as RTools
 
 internal class VibrationDialog(private val context: Context) {
     fun showPickPatternDialog(
@@ -27,7 +29,7 @@ internal class VibrationDialog(private val context: Context) {
         var newPattern = pattern
 
         MaterialAlertDialogBuilder(context)
-            .setTitle(R.string.vibration_pattern)
+            .setTitle(RBase.string.vibration_pattern)
             .setView(binding.root)
             .setPositiveButton(android.R.string.ok) { _, _ ->
                 onPositive.invoke(newPattern)
@@ -87,8 +89,8 @@ internal class VibrationDialog(private val context: Context) {
 
     fun showCountDialog(oldCount: Int, func: (Int) -> Unit) {
         val builder = MaterialAlertDialogBuilder(context)
-            .setPositiveButton(R.string.ok, null)
-            .setNegativeButton(R.string.cancel, null)
+            .setPositiveButton(RTools.string.ok, null)
+            .setNegativeButton(RTools.string.cancel, null)
 
         val binding = DialogVibrationCountBinding.inflate(LayoutInflater.from(context))
         binding.edit.setText(oldCount.toString()) // Put it here to make selectAllOnFocus work
@@ -104,9 +106,9 @@ internal class VibrationDialog(private val context: Context) {
         }
 
         binding.textInput.helperText = context.getString(
-            R.string.vibration_count_desp_template,
-            context.getString(R.string.vibration_count_desp_0),
-            context.getString(R.string.vibration_count_desp_range)
+            RBase.string.vibration_count_desp_template,
+            context.getString(RBase.string.vibration_count_desp_0),
+            context.getString(RBase.string.vibration_count_desp_range)
         )
 
         val positiveButton = dialog.getButton(AlertDialog.BUTTON_POSITIVE)
@@ -117,7 +119,7 @@ internal class VibrationDialog(private val context: Context) {
                 binding.textInput.error = null
                 positiveButton.isEnabled = true
             } else {
-                binding.textInput.error = context.getString(R.string.vibration_count_desp_range)
+                binding.textInput.error = context.getString(RBase.string.vibration_count_desp_range)
                 positiveButton.isEnabled = false
             }
         }
@@ -131,7 +133,7 @@ internal class VibrationDialog(private val context: Context) {
                 dialog.dismiss()
                 func.invoke(newCount)
             } else {
-                binding.textInput.error = context.getString(R.string.vibration_count_desp_range)
+                binding.textInput.error = context.getString(RBase.string.vibration_count_desp_range)
                 positiveButton.isEnabled = false
             }
         }

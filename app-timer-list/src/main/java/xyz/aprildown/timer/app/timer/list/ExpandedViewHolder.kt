@@ -10,6 +10,7 @@ import xyz.aprildown.timer.presentation.stream.StreamState
 import xyz.aprildown.timer.presentation.stream.TimerIndex
 import xyz.aprildown.timer.presentation.stream.getNiceLoopString
 import xyz.aprildown.timer.presentation.stream.getStep
+import xyz.aprildown.timer.app.base.R as RBase
 
 internal class ExpandedViewHolder(
     view: View,
@@ -50,11 +51,11 @@ internal class ExpandedViewHolder(
             item.timerItem = timerEntity
             name.text = timerEntity.name
             if (state.isRunning) {
-                start.setImageResource(R.drawable.ic_pause)
-                start.contentDescription = context.getString(R.string.pause)
+                start.setImageResource(RBase.drawable.ic_pause)
+                start.contentDescription = context.getString(RBase.string.pause)
             } else {
-                start.setImageResource(R.drawable.ic_start)
-                start.contentDescription = context.getString(R.string.start)
+                start.setImageResource(RBase.drawable.ic_start)
+                start.contentDescription = context.getString(RBase.string.start)
             }
             val totalLoop = timerEntity.loop
             loop.text = index.getNiceLoopString(totalLoop)
@@ -79,11 +80,11 @@ internal class ExpandedViewHolder(
                 }
                 MutableTimerEvent.State -> {
                     if (item.state.isRunning) {
-                        start.setImageResource(R.drawable.ic_pause)
-                        start.contentDescription = context.getString(R.string.pause)
+                        start.setImageResource(RBase.drawable.ic_pause)
+                        start.contentDescription = context.getString(RBase.string.pause)
                     } else {
-                        start.setImageResource(R.drawable.ic_start)
-                        start.contentDescription = context.getString(R.string.start)
+                        start.setImageResource(RBase.drawable.ic_start)
+                        start.contentDescription = context.getString(RBase.string.start)
                     }
                 }
             }

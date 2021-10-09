@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment
 import xyz.aprildown.timer.domain.utils.Constants
 import xyz.aprildown.tools.helper.scrollToBottom
 import java.io.File
+import xyz.aprildown.timer.app.base.R as RBase
 
 class LogFragment : Fragment(R.layout.fragment_log) {
 
@@ -18,7 +19,7 @@ class LogFragment : Fragment(R.layout.fragment_log) {
         if (logFile.exists()) {
             textView.text = logFile.readText()
         } else {
-            textView.setText(R.string.empty)
+            textView.setText(RBase.string.empty)
         }
 
         view.findViewById<ScrollView>(R.id.scrollLogRoot).scrollToBottom()

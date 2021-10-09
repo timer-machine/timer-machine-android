@@ -5,7 +5,8 @@ import androidx.core.view.ViewCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.mikepenz.materialdrawer.model.AbstractDrawerItem
 import com.mikepenz.materialdrawer.model.DividerDrawerItem
-import io.github.deweyreed.timer.R
+import com.mikepenz.materialdrawer.R as RMaterialDrawer
+import xyz.aprildown.tools.R as RTools
 
 /**
  * [DividerDrawerItem]
@@ -13,8 +14,8 @@ import io.github.deweyreed.timer.R
 internal class DrawerDividerItem :
     AbstractDrawerItem<DrawerDividerItem, DrawerDividerItem.ViewHolder>() {
 
-    override val layoutRes: Int = R.layout.divider
-    override val type: Int = R.id.material_drawer_item_divider
+    override val layoutRes: Int = RTools.layout.divider
+    override val type: Int = RMaterialDrawer.id.material_drawer_item_divider
     override fun getViewHolder(v: View): ViewHolder = ViewHolder(v)
 
     override fun bindView(holder: ViewHolder, payloads: List<Any>) {

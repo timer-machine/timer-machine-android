@@ -10,7 +10,6 @@ import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.filters.LargeTest
 import dagger.hilt.android.testing.HiltAndroidRule
 import dagger.hilt.android.testing.HiltAndroidTest
-import io.github.deweyreed.timer.R
 import kotlinx.coroutines.runBlocking
 import org.junit.Before
 import org.junit.Rule
@@ -20,6 +19,7 @@ import xyz.aprildown.timer.app.tasker.TaskerEditActivity
 import xyz.aprildown.timer.domain.TestData
 import xyz.aprildown.timer.domain.repositories.TimerRepository
 import javax.inject.Inject
+import xyz.aprildown.timer.app.base.R as RBase
 
 @RunWith(AndroidJUnit4::class)
 @LargeTest
@@ -49,7 +49,7 @@ class TaskerEditActivityTest {
         ActivityScenario.launch(TaskerEditActivity::class.java)
 
         // Wait our data is load asynchronously.
-        onView(withText(R.string.timer_pick_required)).perform(click())
+        onView(withText(RBase.string.timer_pick_required)).perform(click())
         Thread.sleep(1000)
         timers.map { it.name }.forEach {
             onView(withText(it)).check(matches(isDisplayed()))

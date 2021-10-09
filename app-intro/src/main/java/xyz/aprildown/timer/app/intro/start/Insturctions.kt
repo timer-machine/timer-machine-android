@@ -17,17 +17,22 @@ import xyz.aprildown.timer.presentation.edit.EditViewModel
 import xyz.aprildown.tools.helper.color
 import xyz.aprildown.tools.helper.gone
 import xyz.aprildown.tools.helper.show
+import com.mikepenz.materialize.R as RMaterialize
+import xyz.aprildown.timer.app.base.R as RBase
+import xyz.aprildown.timer.app.timer.edit.R as RTimerEdit
+import xyz.aprildown.timer.app.timer.list.R as RTimerList
+import xyz.aprildown.timer.app.timer.one.R as RTimerOne
 
 internal class Welcome : StartListInstruction(
-    despRes = R.string.intro_start_welcome
+    despRes = RBase.string.intro_start_welcome
 )
 
 internal class OurPlan : StartListInstruction(
-    despRes = R.string.intro_start_our_plan
+    despRes = RBase.string.intro_start_our_plan
 )
 
 internal class CreateTimer : StartListInstruction(
-    despRes = R.string.intro_start_create_timer,
+    despRes = RBase.string.intro_start_create_timer,
     requireAction = true
 ) {
     override fun setUpViews(binding: LayoutIntroStartListBinding) {
@@ -41,13 +46,13 @@ internal class CreateTimer : StartListInstruction(
 }
 
 internal class EnterLoop : StartEditInstruction(
-    despRes = R.string.intro_start_enter_loop,
+    despRes = RBase.string.intro_start_enter_loop,
     requireAction = true
 ) {
     override fun setUpViews(binding: LayoutIntroStartEditBinding) {
         val context = binding.root.context
         binding.viewEditNameLoop.loopView.run {
-            showInteractionIndicator(context.color(R.color.md_light_blue_400))
+            showInteractionIndicator(context.color(RMaterialize.color.md_light_blue_400))
             isEnabled = true
             setText(EditViewModel.defaultLoop.toString())
             val watcher = object : TextWatcher {
@@ -81,7 +86,7 @@ internal class EnterLoop : StartEditInstruction(
 }
 
 internal class StepCard : StartEditInstruction(
-    despRes = R.string.intro_start_step_card
+    despRes = RBase.string.intro_start_step_card
 ) {
     override fun setUpViews(binding: LayoutIntroStartEditBinding) {
         binding.stepIntroStartEdit1.run {
@@ -92,14 +97,14 @@ internal class StepCard : StartEditInstruction(
 }
 
 internal class StepTime : StartEditInstruction(
-    despRes = R.string.intro_start_step_time,
+    despRes = RBase.string.intro_start_step_time,
     requireAction = true
 ) {
     override fun setUpViews(binding: LayoutIntroStartEditBinding) {
         val context = binding.root.context
         binding.stepIntroStartEdit1.lengthTextView.run {
             setTime(60_000L)
-            showInteractionIndicator(context.color(R.color.md_light_blue_400))
+            showInteractionIndicator(context.color(RMaterialize.color.md_light_blue_400))
             setOnClickListener {
                 DurationPicker(context) { hours, minutes, seconds ->
                     val time = (hours * 3600L + minutes * 60L + seconds) * 1000L
@@ -114,16 +119,16 @@ internal class StepTime : StartEditInstruction(
 }
 
 internal class Notifier : StartEditInstruction(
-    despRes = R.string.intro_start_notifier
+    despRes = RBase.string.intro_start_notifier
 )
 
 internal class AddNotifier : StartEditInstruction(
-    despRes = R.string.intro_start_add_notifier,
+    despRes = RBase.string.intro_start_add_notifier,
     requireAction = true
 ) {
     override fun setUpViews(binding: LayoutIntroStartEditBinding) {
-        binding.root.findViewById<View>(R.id.btnAddNotifier).run {
-            showInteractionIndicator(context.color(R.color.md_light_blue_400))
+        binding.root.findViewById<View>(RTimerEdit.id.btnAddNotifier).run {
+            showInteractionIndicator(context.color(RMaterialize.color.md_light_blue_400))
             setOnClickListener {
                 markAsCompleted()
             }
@@ -132,7 +137,7 @@ internal class AddNotifier : StartEditInstruction(
 }
 
 internal class AddReminder : StartEditInstruction(
-    despRes = R.string.intro_start_add_reminder,
+    despRes = RBase.string.intro_start_add_reminder,
     requireAction = true
 ) {
     override fun setUpViews(binding: LayoutIntroStartEditBinding) {
@@ -152,7 +157,7 @@ internal class AddReminder : StartEditInstruction(
 }
 
 internal class ReminderUsage : StartEditInstruction(
-    despRes = R.string.intro_start_reminder_usage
+    despRes = RBase.string.intro_start_reminder_usage
 ) {
     override fun setUpViews(binding: LayoutIntroStartEditBinding) {
         binding.stepIntroStartEdit2.show()
@@ -160,13 +165,13 @@ internal class ReminderUsage : StartEditInstruction(
 }
 
 internal class AddWalkStep : StartEditInstruction(
-    despRes = R.string.intro_start_add_walk_step,
+    despRes = RBase.string.intro_start_add_walk_step,
     requireAction = true
 ) {
     override fun setUpViews(binding: LayoutIntroStartEditBinding) {
         binding.stepIntroStartEdit2.show()
-        binding.root.findViewById<View>(R.id.btnAddStep).run {
-            showInteractionIndicator(context.color(R.color.md_light_blue_400))
+        binding.root.findViewById<View>(RTimerEdit.id.btnAddStep).run {
+            showInteractionIndicator(context.color(RMaterialize.color.md_light_blue_400))
             setOnClickListener {
                 markAsCompleted()
             }
@@ -175,7 +180,7 @@ internal class AddWalkStep : StartEditInstruction(
 }
 
 internal class WalkStepTime : StartEditInstruction(
-    despRes = R.string.intro_start_walk_step_name,
+    despRes = RBase.string.intro_start_walk_step_name,
     requireAction = true
 ) {
     override fun setUpViews(binding: LayoutIntroStartEditBinding) {
@@ -184,7 +189,7 @@ internal class WalkStepTime : StartEditInstruction(
         binding.stepIntroStartEdit3.show()
         binding.stepIntroStartEdit3.lengthTextView.run {
             setTime(60_000L)
-            showInteractionIndicator(context.color(R.color.md_light_blue_400))
+            showInteractionIndicator(context.color(RMaterialize.color.md_light_blue_400))
             setOnClickListener {
                 DurationPicker(context) { hours, minutes, seconds ->
                     val time = (hours * 3600L + minutes * 60L + seconds) * 1000L
@@ -199,14 +204,14 @@ internal class WalkStepTime : StartEditInstruction(
 }
 
 internal class WalkNotifier : StartEditInstruction(
-    despRes = R.string.intro_start_walk_notifier,
+    despRes = RBase.string.intro_start_walk_notifier,
     requireAction = true
 ) {
     override fun setUpViews(binding: LayoutIntroStartEditBinding) {
         binding.stepIntroStartEdit2.show()
         binding.stepIntroStartEdit3.show()
-        binding.root.findViewById<View>(R.id.btnAddNotifier).run {
-            showInteractionIndicator(context.color(R.color.md_light_blue_400))
+        binding.root.findViewById<View>(RTimerEdit.id.btnAddNotifier).run {
+            showInteractionIndicator(context.color(RMaterialize.color.md_light_blue_400))
             setOnClickListener {
                 markAsCompleted()
             }
@@ -215,7 +220,7 @@ internal class WalkNotifier : StartEditInstruction(
 }
 
 internal class TimerDone : StartEditInstruction(
-    despRes = R.string.intro_start_timer_done,
+    despRes = RBase.string.intro_start_timer_done,
     requireAction = true
 ) {
     override fun setUpViews(binding: LayoutIntroStartEditBinding) {
@@ -224,7 +229,7 @@ internal class TimerDone : StartEditInstruction(
         binding.stepIntroStartEdit3.show()
         binding.stepIntroStartEdit4.show()
         binding.viewIntroStartEditSaveIndicator.showInteractionIndicator(
-            context.color(R.color.md_light_blue_400)
+            context.color(RMaterialize.color.md_light_blue_400)
         )
         binding.toolbar.menu.findItem(R.id.action_save_timer)?.setOnMenuItemClickListener {
             markAsCompleted()
@@ -234,12 +239,12 @@ internal class TimerDone : StartEditInstruction(
 }
 
 internal class RunTimer : StartListInstruction(
-    despRes = R.string.intro_start_run_timer,
+    despRes = RBase.string.intro_start_run_timer,
     requireAction = true
 ) {
     override fun setUpViews(binding: LayoutIntroStartListBinding) {
         binding.run {
-            root.findViewById<View>(R.id.cardTimer).run {
+            root.findViewById<View>(RTimerList.id.cardTimer).run {
                 show()
                 showInteractionIndicator()
                 setOnClickListener {
@@ -252,32 +257,32 @@ internal class RunTimer : StartListInstruction(
 }
 
 internal class TimerTime : StartRunInstruction(
-    despRes = R.string.intro_start_timer_time
+    despRes = RBase.string.intro_start_timer_time
 ) {
     override fun setUpViews(binding: LayoutIntroStartRunBinding) {
-        binding.root.findViewById<View>(R.id.cardOneTopInfo).showInteractionIndicator()
+        binding.root.findViewById<View>(RTimerOne.id.cardOneTopInfo).showInteractionIndicator()
     }
 }
 
 internal class TimerSteps : StartRunInstruction(
-    despRes = R.string.intro_start_timer_steps
+    despRes = RBase.string.intro_start_timer_steps
 ) {
     override fun setUpViews(binding: LayoutIntroStartRunBinding) {
-        binding.root.findViewById<View>(R.id.listOneSteps).showInteractionIndicator()
+        binding.root.findViewById<View>(RTimerOne.id.listOneSteps).showInteractionIndicator()
     }
 }
 
 internal class TimerButtons : StartRunInstruction(
-    despRes = R.string.intro_start_timer_buttons
+    despRes = RBase.string.intro_start_timer_buttons
 ) {
     override fun setUpViews(binding: LayoutIntroStartRunBinding) {
         val context = binding.root.context
-        binding.root.findViewById<View>(R.id.fiveActionsOne).showInteractionIndicator(
-            context.color(R.color.md_light_blue_400)
+        binding.root.findViewById<View>(RTimerOne.id.fiveActionsOne).showInteractionIndicator(
+            context.color(RMaterialize.color.md_light_blue_400)
         )
     }
 }
 
 internal class Finish : StartRunInstruction(
-    despRes = R.string.intro_start_finish
+    despRes = RBase.string.intro_start_finish
 )
