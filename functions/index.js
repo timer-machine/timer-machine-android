@@ -6,6 +6,7 @@ const admin = require('firebase-admin');
 admin.initializeApp()
 
 /**
+ * Limit the backup files up to 50.
  * https://googleapis.dev/nodejs/storage/latest/index.html
  */
 exports.limitBackup = functions.storage.object().onFinalize(async (object) => {
