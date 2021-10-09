@@ -14,25 +14,26 @@ import xyz.aprildown.tools.anko.toast
 import xyz.aprildown.tools.helper.IntentHelper
 import xyz.aprildown.tools.helper.setTextIfChanged
 import xyz.aprildown.tools.helper.startActivitySafely
+import xyz.aprildown.timer.app.base.R as RBase
 
 class ChangeLogDialog(private val context: Context) {
     fun show() {
         MaterialAlertDialogBuilder(context)
-            .setTitle(R.string.update_title)
+            .setTitle(RBase.string.update_title)
             .setAdapter(
                 ChangeLogAdapter(
                     generateEntries(
-                        R.array.update_content_600,
-                        R.array.update_content_580,
-                        R.array.update_content_570,
-                        R.array.update_content_560,
-                        R.array.update_content_550,
-                        R.array.update_content_541,
-                        R.array.update_content_540,
-                        R.array.update_content_530,
-                        R.array.update_content_520,
-                        R.array.update_content_510,
-                        R.array.update_content_500,
+                        RBase.array.update_content_600,
+                        RBase.array.update_content_580,
+                        RBase.array.update_content_570,
+                        RBase.array.update_content_560,
+                        RBase.array.update_content_550,
+                        RBase.array.update_content_541,
+                        RBase.array.update_content_540,
+                        RBase.array.update_content_530,
+                        RBase.array.update_content_520,
+                        RBase.array.update_content_510,
+                        RBase.array.update_content_500,
                     ),
                     onMoreClick = {
                         context.openWebsiteWithWarning(Constants.getChangeLogLink(context))
@@ -41,12 +42,12 @@ class ChangeLogDialog(private val context: Context) {
                 null
             )
             .setPositiveButton(android.R.string.ok, null)
-            .setNeutralButton(R.string.rate_five_stars) { _, _ ->
+            .setNeutralButton(RBase.string.rate_five_stars) { _, _ ->
                 AppReminder(context, Constants.REMINDER_RATE).ok()
-                context.toast(R.string.thanks)
+                context.toast(RBase.string.thanks)
                 context.startActivitySafely(
                     IntentHelper.appStorePage(context),
-                    wrongMessageRes = R.string.no_action_found
+                    wrongMessageRes = RBase.string.no_action_found
                 )
             }
             .show()
@@ -90,7 +91,7 @@ private class ChangeLogAdapter(
             },
             null
         )
-        val targetView = view.findViewById<TextView>(android.R.id.text1)
+        val targetView = view.findViewById<TextView>(R.id.text)
         if (viewType == VIEW_TYPE_MORE) {
             targetView.setOnClickListener {
                 onMoreClick.invoke()
@@ -102,7 +103,7 @@ private class ChangeLogAdapter(
             when (val entry = getItem(position)) {
                 is Entry.VersionTitle -> entry.title
                 is Entry.VersionContent -> entry.content
-                is Entry.More -> context.getString(R.string.update_more)
+                is Entry.More -> context.getString(RBase.string.update_more)
             }
         )
         return view

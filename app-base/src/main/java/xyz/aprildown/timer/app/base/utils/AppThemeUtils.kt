@@ -5,11 +5,11 @@ import android.graphics.Color
 import androidx.annotation.ColorInt
 import com.google.android.material.elevation.ElevationOverlayProvider
 import xyz.aprildown.theme.Theme
-import xyz.aprildown.timer.app.base.R
 import xyz.aprildown.timer.app.base.data.PreferenceData
 import xyz.aprildown.timer.app.base.data.PreferenceData.appTheme
 import xyz.aprildown.tools.anko.dp
 import xyz.aprildown.tools.utils.ThemeColorUtils
+import com.google.android.material.R as RMaterial
 
 object AppThemeUtils {
 
@@ -31,7 +31,7 @@ object AppThemeUtils {
 
     /**
      * I know pure black is better but I love #8A000000 so much.
-     * [R.dimen.material_emphasis_medium]
+     * [RMaterial.dimen.material_emphasis_medium]
      */
     fun calculateOnColor(@ColorInt color: Int): Int {
         return if (ThemeColorUtils.isLightColor(color)) {

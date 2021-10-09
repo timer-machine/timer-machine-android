@@ -58,8 +58,8 @@ android {
     }
 
     buildFeatures {
-        dataBinding = true
-        viewBinding = true
+        dataBinding true
+        viewBinding true
     }
 
     packagingOptions {
@@ -69,6 +69,7 @@ android {
 
     lintOptions {
         warningsAsErrors true
+        checkDependencies true
     }
 }
 

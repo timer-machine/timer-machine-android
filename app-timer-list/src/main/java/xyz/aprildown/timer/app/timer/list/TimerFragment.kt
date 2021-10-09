@@ -64,6 +64,8 @@ import xyz.aprildown.tools.helper.safeSharedPreference
 import xyz.aprildown.tools.helper.show
 import xyz.aprildown.tools.helper.startActivitySafely
 import javax.inject.Inject
+import xyz.aprildown.timer.app.base.R as RBase
+import xyz.aprildown.tools.R as RTools
 
 @AndroidEntryPoint
 class TimerFragment : Fragment(R.layout.fragment_timer),
@@ -106,7 +108,7 @@ class TimerFragment : Fragment(R.layout.fragment_timer),
     override fun onOptionsItemSelected(item: MenuItem): Boolean = when (item.itemId) {
         R.id.action_record -> {
             NavHostFragment.findNavController(this)
-                .subLevelNavigate(R.id.dest_record)
+                .subLevelNavigate(RBase.id.dest_record)
             true
         }
         else -> super.onOptionsItemSelected(item)
@@ -139,7 +141,7 @@ class TimerFragment : Fragment(R.layout.fragment_timer),
         super.onResume()
         ScreenWakeLock.acquireScreenWakeLock(
             context = requireActivity(),
-            screenTiming = getString(R.string.pref_screen_timing_value_timer)
+            screenTiming = getString(RBase.string.pref_screen_timing_value_timer)
         )
     }
 
@@ -147,7 +149,7 @@ class TimerFragment : Fragment(R.layout.fragment_timer),
         super.onPause()
         ScreenWakeLock.releaseScreenLock(
             context = requireActivity(),
-            screenTiming = getString(R.string.pref_screen_timing_value_timer)
+            screenTiming = getString(RBase.string.pref_screen_timing_value_timer)
         )
     }
 
@@ -165,7 +167,7 @@ class TimerFragment : Fragment(R.layout.fragment_timer),
     }
 
     private fun setUpMainActions() {
-        mainCallback.actionFab.contentDescription = getString(R.string.edit_create_timer)
+        mainCallback.actionFab.contentDescription = getString(RBase.string.edit_create_timer)
     }
 
     private fun setUpRecyclerView(binding: FragmentTimerBinding) {
@@ -315,18 +317,18 @@ class TimerFragment : Fragment(R.layout.fragment_timer),
                 val builder = MaterialAlertDialogBuilder(context)
                     .setTitle(
                         if (isInTheTrash) {
-                            R.string.folder_empty_trash_confirmation
+                            RBase.string.folder_empty_trash_confirmation
                         } else {
-                            R.string.folder_trash_folder_confirmation
+                            RBase.string.folder_trash_folder_confirmation
                         }
                     )
 
                 if (isInTheTrash) {
-                    builder.setMessage(R.string.folder_delete_timer_explanation)
+                    builder.setMessage(RBase.string.folder_delete_timer_explanation)
                 }
 
                 builder
-                    .setPositiveButton(R.string.ok) { _, _ ->
+                    .setPositiveButton(RTools.string.ok) { _, _ ->
                         if (isInTheTrash) {
                             viewModel.timerInfo.value?.forEach { timerInfo ->
                                 ShortcutHelper.disableTimerShortcut(context, timerInfo.id)
@@ -334,7 +336,7 @@ class TimerFragment : Fragment(R.layout.fragment_timer),
                         }
                         viewModel.deleteCurrentFolder()
                     }
-                    .setNegativeButton(R.string.cancel, null)
+                    .setNegativeButton(RTools.string.cancel, null)
 
                 builder.show()
             }
@@ -446,8 +448,8 @@ class TimerFragment : Fragment(R.layout.fragment_timer),
                 folderId = FolderEntity.FOLDER_TRASH
             )
             mainCallback.snackbarView.snackbar(
-                message = getString(R.string.trash_done_template, timerItem.timerName),
-                actionText = getString(R.string.undo),
+                message = getString(RBase.string.trash_done_template, timerItem.timerName),
+                actionText = getString(RTools.string.undo),
                 action = {
                     viewModel.moveTimerToFolder(
                         timerId = timerId,
@@ -461,20 +463,20 @@ class TimerFragment : Fragment(R.layout.fragment_timer),
                 .setCancelable(false)
                 .setMessage(
                     buildSpannedString {
-                        append(getString(R.string.delete_confirmation_template).format(timerItem.timerName))
+                        append(getString(RBase.string.delete_confirmation_template).format(timerItem.timerName))
                         append("\n\n")
                         append(
-                            getString(R.string.folder_delete_timer_explanation),
+                            getString(RBase.string.folder_delete_timer_explanation),
                             StyleSpan(Typeface.BOLD),
                             Spanned.SPAN_INCLUSIVE_INCLUSIVE
                         )
                     }
                 )
-                .setPositiveButton(R.string.ok) { _, _ ->
+                .setPositiveButton(RTools.string.ok) { _, _ ->
                     ShortcutHelper.disableTimerShortcut(context, timerId)
                     viewModel.deleteTimer(timerId)
                 }
-                .setNegativeButton(R.string.cancel) { _, _ ->
+                .setNegativeButton(RTools.string.cancel) { _, _ ->
                     listAdapter.notifyItemChanged(position)
                 }
                 .show()
@@ -521,20 +523,20 @@ class TimerFragment : Fragment(R.layout.fragment_timer),
                     ).also {
                         it.btnCheck.setOnClickListener {
                             findNavController().navigate(
-                                R.id.dest_whitelist,
+                                RBase.id.dest_whitelist,
                                 null,
-                                createMainFragmentNavOptions(R.id.dest_whitelist)
+                                createMainFragmentNavOptions(RBase.id.dest_whitelist)
                             )
                             viewModel.consumeTip(tip)
                         }
                         it.btnSkip.setOnClickListener {
                             MaterialAlertDialogBuilder(context)
-                                .setTitle(R.string.whitelist_disclaimer_no_confirmation)
-                                .setMessage(R.string.whitelist_location)
-                                .setPositiveButton(R.string.ok) { _, _ ->
+                                .setTitle(RBase.string.whitelist_disclaimer_no_confirmation)
+                                .setMessage(RBase.string.whitelist_location)
+                                .setPositiveButton(RTools.string.ok) { _, _ ->
                                     viewModel.consumeTip(tip)
                                 }
-                                .setNegativeButton(R.string.cancel, null)
+                                .setNegativeButton(RTools.string.cancel, null)
                                 .show()
                         }
                     }
@@ -548,9 +550,9 @@ class TimerFragment : Fragment(R.layout.fragment_timer),
                     ).also {
                         it.btnCheck.setOnClickListener {
                             findNavController().navigate(
-                                R.id.dest_whitelist,
+                                RBase.id.dest_whitelist,
                                 null,
-                                createMainFragmentNavOptions(R.id.dest_whitelist)
+                                createMainFragmentNavOptions(RBase.id.dest_whitelist)
                             )
                             viewModel.consumeTip(tip)
                         }

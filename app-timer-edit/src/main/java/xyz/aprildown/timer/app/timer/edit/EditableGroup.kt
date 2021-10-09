@@ -8,6 +8,7 @@ import androidx.core.view.isVisible
 import com.mikepenz.fastadapter.FastAdapter
 import com.mikepenz.fastadapter.items.AbstractItem
 import xyz.aprildown.timer.component.key.NameLoopView
+import xyz.aprildown.timer.app.base.R as RBase
 
 internal class EditableGroup(
     var name: String,
@@ -25,7 +26,7 @@ internal class EditableGroup(
     }
 
     override val layoutRes: Int = R.layout.item_edit_group
-    override val type: Int = R.id.type_step_group
+    override val type: Int = RBase.id.type_step_group
     override fun getViewHolder(v: View): ViewHolder = ViewHolder(v, handler, showTotalTime)
 
     class ViewHolder(

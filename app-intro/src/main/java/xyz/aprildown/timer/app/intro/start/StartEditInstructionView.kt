@@ -27,6 +27,8 @@ import xyz.aprildown.tools.anko.longToast
 import xyz.aprildown.tools.helper.gone
 import xyz.aprildown.tools.helper.show
 import xyz.aprildown.tools.helper.toColorStateList
+import xyz.aprildown.timer.app.base.R as RBase
+import xyz.aprildown.timer.app.timer.edit.R as RTimerEdit
 
 internal class StartEditInstructionView : InstructionView<LayoutIntroStartEditBinding> {
     override val layoutRes: Int = R.layout.layout_intro_start_edit
@@ -80,7 +82,7 @@ internal class StartEditInstructionView : InstructionView<LayoutIntroStartEditBi
                             layout: EditableBehaviourLayout,
                             current: BehaviourEntity
                         ) {
-                            showTooltip(context.getText(R.string.intro_start_edit_behaviour))
+                            showTooltip(context.getText(RBase.string.intro_start_edit_behaviour))
                         }
                     }
                 )
@@ -98,7 +100,7 @@ internal class StartEditInstructionView : InstructionView<LayoutIntroStartEditBi
                             layout: EditableBehaviourLayout,
                             current: BehaviourEntity
                         ) {
-                            showTooltip(context.getText(R.string.intro_start_edit_behaviour))
+                            showTooltip(context.getText(RBase.string.intro_start_edit_behaviour))
                         }
                     }
                 )
@@ -107,38 +109,38 @@ internal class StartEditInstructionView : InstructionView<LayoutIntroStartEditBi
             stepIntroStartEdit4.gone()
             stepIntroStartEdit4.withStepEntity(steps[3])
 
-            root.findViewById<View>(R.id.btnAddStep).run {
+            root.findViewById<View>(RTimerEdit.id.btnAddStep).run {
                 clearInteractionIndicator()
                 setOnClickListener(null)
             }
-            root.findViewById<View>(R.id.btnAddNotifier).run {
+            root.findViewById<View>(RTimerEdit.id.btnAddNotifier).run {
                 clearInteractionIndicator()
                 setOnClickListener(null)
             }
-            root.findViewById<View>(R.id.btnAddGroup).setOnClickListener {
+            root.findViewById<View>(RTimerEdit.id.btnAddGroup).setOnClickListener {
                 context.longToast(
                     buildString {
-                        append(context.getString(R.string.edit_add_group_desp))
+                        append(context.getString(RBase.string.edit_add_group_desp))
                         append("\n")
-                        append(context.getString(R.string.intro_save_for_later))
+                        append(context.getString(RBase.string.intro_save_for_later))
                     }
                 )
             }
-            root.findViewById<View>(R.id.btnAddStart).setOnClickListener {
+            root.findViewById<View>(RTimerEdit.id.btnAddStart).setOnClickListener {
                 context.longToast(
                     buildString {
-                        append(context.getString(R.string.edit_add_start_desp))
+                        append(context.getString(RBase.string.edit_add_start_desp))
                         append("\n")
-                        append(context.getString(R.string.intro_save_for_later))
+                        append(context.getString(RBase.string.intro_save_for_later))
                     }
                 )
             }
-            root.findViewById<View>(R.id.btnAddEnd).setOnClickListener {
+            root.findViewById<View>(RTimerEdit.id.btnAddEnd).setOnClickListener {
                 context.longToast(
                     buildString {
-                        append(context.getString(R.string.edit_add_end_desp))
+                        append(context.getString(RBase.string.edit_add_end_desp))
                         append("\n")
-                        append(context.getString(R.string.intro_save_for_later))
+                        append(context.getString(RBase.string.intro_save_for_later))
                     }
                 )
             }
@@ -159,17 +161,17 @@ internal class IntroEditableStep(
     private val addStepButton: ImageView
 
     init {
-        View.inflate(context, R.layout.item_edit_step, this)
+        View.inflate(context, RTimerEdit.layout.item_edit_step, this)
 
-        findViewById<View>(R.id.viewStepGroupIndicatorStart).gone()
-        findViewById<View>(R.id.viewStepGroupIndicatorEnd).gone()
+        findViewById<View>(RTimerEdit.id.viewStepGroupIndicatorStart).gone()
+        findViewById<View>(RTimerEdit.id.viewStepGroupIndicatorEnd).gone()
 
-        cardView = findViewById(R.id.cardEditStep)
-        stepColorView = findViewById(R.id.colorStep)
-        nameEditText = findViewById(R.id.editStepName)
-        lengthTextView = findViewById(R.id.textStepLength)
-        behaviourLayout = findViewById(R.id.layoutBehaviour)
-        addStepButton = findViewById(R.id.btnStepAdd)
+        cardView = findViewById(RTimerEdit.id.cardEditStep)
+        stepColorView = findViewById(RTimerEdit.id.colorStep)
+        nameEditText = findViewById(RTimerEdit.id.editStepName)
+        lengthTextView = findViewById(RTimerEdit.id.textStepLength)
+        behaviourLayout = findViewById(RTimerEdit.id.layoutBehaviour)
+        addStepButton = findViewById(RTimerEdit.id.btnStepAdd)
 
         nameEditText.run {
             isEnabled = false

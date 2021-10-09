@@ -29,11 +29,13 @@ import xyz.aprildown.tools.helper.gone
 import xyz.aprildown.tools.helper.restartWithFading
 import xyz.aprildown.tools.helper.show
 import javax.inject.Inject
+import xyz.aprildown.timer.app.base.R as RBase
+import xyz.aprildown.tools.R as RTools
 
 @AndroidEntryPoint
 internal class RestoreFragment : Fragment(R.layout.fragment_restore) {
 
-    private val viewModel: CloudBackupViewModel by navGraphViewModels(R.id.dest_cloud_backup)
+    private val viewModel: CloudBackupViewModel by navGraphViewModels(RBase.id.dest_cloud_backup)
 
     @Inject
     lateinit var appNavigator: AppNavigator
@@ -72,7 +74,7 @@ internal class RestoreFragment : Fragment(R.layout.fragment_restore) {
                         binding.run {
                             listRestore.gone()
                             textRestoreMessage.show()
-                            textRestoreMessage.setText(R.string.empty)
+                            textRestoreMessage.setText(RBase.string.empty)
                         }
                     } else {
                         binding.run {
@@ -104,9 +106,9 @@ internal class RestoreFragment : Fragment(R.layout.fragment_restore) {
 
                     MaterialAlertDialogBuilder(context)
                         .setCancelable(false)
-                        .setTitle(R.string.import_done)
-                        .setMessage(R.string.import_restart_content)
-                        .setPositiveButton(R.string.import_restart) { _, _ ->
+                        .setTitle(RBase.string.import_done)
+                        .setMessage(RBase.string.import_restart_content)
+                        .setPositiveButton(RBase.string.import_restart) { _, _ ->
                             val activity = requireActivity()
                             activity.restartWithFading(appNavigator.getMainIntent())
                         }
@@ -117,9 +119,9 @@ internal class RestoreFragment : Fragment(R.layout.fragment_restore) {
                     restoreDialog = null
 
                     MaterialAlertDialogBuilder(context)
-                        .setTitle(R.string.cloud_backup_restore_failed)
+                        .setTitle(RBase.string.cloud_backup_restore_failed)
                         .setMessage(fruit.exception.causeFirstMessage())
-                        .setPositiveButton(R.string.ok, null)
+                        .setPositiveButton(RTools.string.ok, null)
                         .show()
                 }
             }
@@ -128,9 +130,9 @@ internal class RestoreFragment : Fragment(R.layout.fragment_restore) {
 
     private fun confirmToRestore(context: Context, reference: StorageReference) {
         val dialog = MaterialAlertDialogBuilder(context)
-            .setMessage(R.string.cloud_backup_restore_alert)
-            .setPositiveButton(R.string.ok, null)
-            .setNegativeButton(R.string.cancel, null)
+            .setMessage(RBase.string.cloud_backup_restore_alert)
+            .setPositiveButton(RTools.string.ok, null)
+            .setNegativeButton(RTools.string.cancel, null)
             .show()
         val positiveButton = dialog.getButton(AlertDialog.BUTTON_POSITIVE)
         positiveButton.isEnabled = false
@@ -138,15 +140,15 @@ internal class RestoreFragment : Fragment(R.layout.fragment_restore) {
         val timer = object : CountDownTimer(3000, 1000) {
             private var remainingSeconds = 3
             override fun onTick(millisUntilFinished: Long) {
-                positiveButton.text = getString(R.string.count_down_template).format(
-                    getString(R.string.ok),
+                positiveButton.text = getString(RBase.string.count_down_template).format(
+                    getString(RTools.string.ok),
                     remainingSeconds
                 )
                 remainingSeconds -= 1
             }
 
             override fun onFinish() {
-                positiveButton.setText(R.string.ok)
+                positiveButton.setText(RTools.string.ok)
                 positiveButton.isEnabled = true
             }
         }
@@ -155,9 +157,9 @@ internal class RestoreFragment : Fragment(R.layout.fragment_restore) {
         positiveButton.setOnClickListener {
             restoreDialog = MaterialAlertDialogBuilder(context)
                 .setCancelable(false)
-                .setTitle(R.string.cloud_backup_restoring)
+                .setTitle(RBase.string.cloud_backup_restoring)
                 .setView(R.layout.dialog_loading)
-                .setNegativeButton(R.string.cancel) { _, _ ->
+                .setNegativeButton(RTools.string.cancel) { _, _ ->
                     viewModel.cancelRestoring()
                 }
                 .show()

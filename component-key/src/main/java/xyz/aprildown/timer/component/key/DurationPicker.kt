@@ -9,6 +9,7 @@ import io.github.deweyreed.scrollhmspicker.ScrollHmsPicker
 import xyz.aprildown.hmspickerview.HmsPickerView
 import xyz.aprildown.tools.anko.snackbar
 import xyz.aprildown.tools.helper.safeSharedPreference
+import xyz.aprildown.timer.app.base.R as RBase
 
 class DurationPicker(
     private val context: Context,
@@ -27,8 +28,8 @@ class DurationPicker(
             .setPositiveButton(android.R.string.ok, null)
             .setNegativeButton(android.R.string.cancel, null)
             .setNeutralButton(
-                if (currentType == TYPE_PANEL) R.string.time_picker_type_scroll
-                else R.string.time_picker_type_panel,
+                if (currentType == TYPE_PANEL) RBase.string.time_picker_type_scroll
+                else RBase.string.time_picker_type_panel,
                 null
             )
             .create()
@@ -42,7 +43,7 @@ class DurationPicker(
             val isZero = hours == 0 && minutes == 0 && seconds == 0
             val isNegative = hours < 0 || minutes < 0 || seconds < 0
             if (isZero || isNegative) {
-                pickerView.snackbar(R.string.edit_at_least_1s)
+                pickerView.snackbar(RBase.string.edit_at_least_1s)
             } else {
                 onTimePick.invoke(hours, minutes, seconds)
                 dialog.dismiss()

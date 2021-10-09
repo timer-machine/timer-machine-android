@@ -13,7 +13,6 @@ import androidx.transition.TransitionSet
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import xyz.aprildown.timer.flavor.google.BillingActivity
 import xyz.aprildown.timer.flavor.google.BillingSupervisor
-import xyz.aprildown.timer.flavor.google.R
 import xyz.aprildown.timer.flavor.google.databinding.DialogBakedCountBinding
 import xyz.aprildown.timer.flavor.google.showErrorDialog
 import xyz.aprildown.timer.flavor.google.utils.IapPromotionDialog
@@ -22,6 +21,7 @@ import xyz.aprildown.tools.anko.snackbar
 import xyz.aprildown.tools.arch.observeEvent
 import xyz.aprildown.tools.helper.gone
 import xyz.aprildown.tools.helper.show
+import xyz.aprildown.timer.app.base.R as RBase
 
 internal class BakedCountDialog {
 
@@ -76,7 +76,7 @@ internal class BakedCountDialog {
                     binding.progress.gone()
                     binding.textDownloading.gone()
                     binding.btnEnable.show()
-                    binding.btnEnable.setText(R.string.enable)
+                    binding.btnEnable.setText(RBase.string.enable)
                     binding.btnEnable.setOnClickListener {
                         viewModel.download()
                     }
@@ -87,7 +87,7 @@ internal class BakedCountDialog {
                     binding.progress.gone()
                     binding.textDownloading.gone()
                     binding.btnEnable.show()
-                    binding.btnEnable.setText(R.string.billing_purchase)
+                    binding.btnEnable.setText(RBase.string.billing_purchase)
                     binding.btnEnable.setOnClickListener {
                         fragment.startActivity(BillingActivity.getIntent(context))
                     }
@@ -100,17 +100,17 @@ internal class BakedCountDialog {
                     if (viewModel.shouldShowPromotionDialog) {
                         viewModel.shouldShowPromotionDialog = false
                         IapPromotionDialog(context).show(
-                            title = context.getString(R.string.billing_baked_count_title),
+                            title = context.getString(RBase.string.billing_baked_count_title),
                             message = buildSpannedString {
-                                append(context.getString(R.string.billing_baked_count_desp))
+                                append(context.getString(RBase.string.billing_baked_count_desp))
                                 append("\n\n")
                                 append(
-                                    context.getString(R.string.billing_a_part_of_iap),
+                                    context.getString(RBase.string.billing_a_part_of_iap),
                                     StyleSpan(Typeface.BOLD),
                                     Spanned.SPAN_EXCLUSIVE_EXCLUSIVE
                                 )
                             },
-                            positiveButtonTextRes = R.string.billing_purchase
+                            positiveButtonTextRes = RBase.string.billing_purchase
                         ) {
                             fragment.startActivity(BillingActivity.getIntent(context))
                         }

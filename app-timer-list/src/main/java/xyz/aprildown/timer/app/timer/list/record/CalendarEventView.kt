@@ -12,6 +12,7 @@ import xyz.aprildown.timer.app.timer.list.R
 import xyz.aprildown.timer.app.timer.list.databinding.ViewCalendarEventBinding
 import xyz.aprildown.tools.helper.gone
 import xyz.aprildown.tools.helper.show
+import xyz.aprildown.timer.app.base.R as RBase
 
 internal class CalendarEventView(
     context: Context,
@@ -74,7 +75,7 @@ internal class CalendarEventView(
             MODE_EVENT_MORE -> {
                 children.forEach { it.show() }
                 binding.imageCalendarEvent3.setImageResource(
-                    R.drawable.ic_calendar_more_events
+                    RBase.drawable.ic_calendar_more_events
                 )
             }
         }

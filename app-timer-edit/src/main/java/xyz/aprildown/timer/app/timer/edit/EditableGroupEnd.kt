@@ -4,6 +4,7 @@ import android.view.View
 import androidx.appcompat.widget.AppCompatImageButton
 import androidx.recyclerview.widget.RecyclerView
 import com.mikepenz.fastadapter.items.AbstractItem
+import xyz.aprildown.timer.app.base.R as RBase
 
 internal class EditableGroupEnd(
     private val handler: Handler
@@ -14,7 +15,7 @@ internal class EditableGroupEnd(
     }
 
     override val layoutRes: Int = R.layout.item_edit_group_end
-    override val type: Int = R.id.type_step_group_end
+    override val type: Int = RBase.id.type_step_group_end
     override fun getViewHolder(v: View): ViewHolder = ViewHolder(v, handler)
 
     class ViewHolder(

@@ -10,6 +10,8 @@ import xyz.aprildown.timer.app.intro.databinding.ViewIntroPanelBinding
 import xyz.aprildown.tools.helper.startDrawableAnimation
 import xyz.aprildown.tools.helper.stopDrawableAnimation
 import xyz.aprildown.tools.helper.themeColor
+import com.google.android.material.R as RMaterial
+import xyz.aprildown.timer.app.base.R as RBase
 
 internal class IntroPanelView(
     context: Context,
@@ -25,7 +27,7 @@ internal class IntroPanelView(
     var callback: Callback? = null
 
     init {
-        setBackgroundColor(context.themeColor(R.attr.colorSurface))
+        setBackgroundColor(context.themeColor(RMaterial.attr.colorSurface))
         View.inflate(context, R.layout.view_intro_panel, this)
         binding = ViewIntroPanelBinding.bind(this)
 
@@ -48,16 +50,16 @@ internal class IntroPanelView(
     fun withPreviousOrExit(hasPrevious: Boolean, hasNext: Boolean) {
         binding.btnIntroPanelPrevious.contentDescription = context.getString(
             if (hasPrevious) {
-                R.string.previous
+                RBase.string.previous
             } else {
-                R.string.exit
+                RBase.string.exit
             }
         )
         binding.btnIntroPanelNext.contentDescription = context.getString(
             if (hasNext) {
-                R.string.next
+                RBase.string.next
             } else {
-                R.string.exit
+                RBase.string.exit
             }
         )
     }

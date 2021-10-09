@@ -22,6 +22,7 @@ import xyz.aprildown.tools.helper.gone
 import xyz.aprildown.tools.helper.show
 import xyz.aprildown.tools.helper.startActivitySafely
 import javax.inject.Inject
+import xyz.aprildown.timer.app.base.R as RBase
 
 @AndroidEntryPoint
 internal class BillingFragment : Fragment(R.layout.fragment_billing) {
@@ -69,12 +70,12 @@ internal class BillingFragment : Fragment(R.layout.fragment_billing) {
             if (hasPro) {
                 binding.textProPrice.gone()
                 binding.btnProPurchase.isEnabled = false
-                binding.btnProPurchase.setText(R.string.billing_owned)
+                binding.btnProPurchase.setText(RBase.string.billing_owned)
                 binding.btnProPurchase.setOnClickListener(null)
             } else {
                 binding.textProPrice.gone()
                 binding.btnProPurchase.isEnabled = false
-                binding.btnProPurchase.setText(R.string.billing_under_maintenance)
+                binding.btnProPurchase.setText(RBase.string.billing_under_maintenance)
                 binding.btnProPurchase.setOnClickListener(null)
                 // billingSupervisor.proSkuDetails.observe(viewLifecycleOwner) { proSkuDetails ->
                 //     TransitionManager.beginDelayedTransition(binding.cardPro)
@@ -90,7 +91,7 @@ internal class BillingFragment : Fragment(R.layout.fragment_billing) {
             }
         }
         billingSupervisor.goProEvent.observeEvent(viewLifecycleOwner) {
-            binding.root.snackbar(R.string.thanks)
+            binding.root.snackbar(RBase.string.thanks)
         }
 
         billingSupervisor.backupSubState.observe(viewLifecycleOwner) { hasBackupSub ->
@@ -100,14 +101,14 @@ internal class BillingFragment : Fragment(R.layout.fragment_billing) {
             if (hasBackupSub) {
                 binding.textBackupSubPrice.gone()
                 binding.btnBackupSubSubscribe.isEnabled = false
-                binding.btnBackupSubSubscribe.setText(R.string.billing_owned)
+                binding.btnBackupSubSubscribe.setText(RBase.string.billing_owned)
                 binding.btnBackupSubManage.show()
                 binding.textBackupSubCancelAnytime.gone()
                 binding.textBackupSubPpTos.gone()
             } else {
                 binding.textBackupSubPrice.gone()
                 binding.btnBackupSubSubscribe.isEnabled = false
-                binding.btnBackupSubSubscribe.setText(R.string.billing_under_maintenance)
+                binding.btnBackupSubSubscribe.setText(RBase.string.billing_under_maintenance)
                 binding.btnBackupSubManage.show()
                 binding.textBackupSubCancelAnytime.gone()
                 binding.textBackupSubPpTos.gone()
@@ -140,7 +141,7 @@ internal class BillingFragment : Fragment(R.layout.fragment_billing) {
             )
         }
         billingSupervisor.backupSubEvent.observeEvent(viewLifecycleOwner) {
-            binding.root.snackbar(R.string.thanks)
+            binding.root.snackbar(RBase.string.thanks)
         }
 
         billingSupervisor.error.observeEvent(viewLifecycleOwner) {
@@ -193,19 +194,19 @@ internal class BillingFragment : Fragment(R.layout.fragment_billing) {
                 R.id.fragmentContainerOneTime,
                 PreferenceStyleListFragment.newInstance(
                     PreferenceStyleListFragment.Entry(
-                        R.drawable.settings_theme,
-                        R.string.billing_more_themes_title,
-                        R.string.billing_more_themes_desp
+                        RBase.drawable.settings_theme,
+                        RBase.string.billing_more_themes_title,
+                        RBase.string.billing_more_themes_desp
                     ),
                     PreferenceStyleListFragment.Entry(
-                        R.drawable.settings_count,
-                        R.string.billing_baked_count_title,
-                        R.string.billing_baked_count_desp
+                        RBase.drawable.settings_count,
+                        RBase.string.billing_baked_count_title,
+                        RBase.string.billing_baked_count_desp
                     ),
                     PreferenceStyleListFragment.Entry(
-                        R.drawable.settings_code,
-                        R.string.billing_future_title,
-                        R.string.billing_future_desp
+                        RBase.drawable.settings_code,
+                        RBase.string.billing_future_title,
+                        RBase.string.billing_future_desp
                     ),
                 )
             )
@@ -215,9 +216,9 @@ internal class BillingFragment : Fragment(R.layout.fragment_billing) {
                 R.id.fragmentContainerCloudBackup,
                 PreferenceStyleListFragment.newInstance(
                     PreferenceStyleListFragment.Entry(
-                        R.drawable.settings_cloud_backup,
-                        R.string.billing_cloud_backup_title,
-                        R.string.billing_cloud_backup_desp
+                        RBase.drawable.settings_cloud_backup,
+                        RBase.string.billing_cloud_backup_title,
+                        RBase.string.billing_cloud_backup_desp
                     )
                 )
             )
@@ -235,7 +236,7 @@ internal class BillingFragment : Fragment(R.layout.fragment_billing) {
                 MaterialAlertDialogBuilder(context)
                     .setItems(
                         arrayOf(
-                            getString(R.string.billing_help_contact),
+                            getString(RBase.string.billing_help_contact),
                         )
                     ) { _, which ->
                         when (which) {
@@ -243,7 +244,7 @@ internal class BillingFragment : Fragment(R.layout.fragment_billing) {
                                 startActivitySafely(
                                     IntentHelper.email(
                                         email = flavorData.email,
-                                        subject = getString(R.string.billing_help_email_title)
+                                        subject = getString(RBase.string.billing_help_email_title)
                                     ).createChooserIntentIfDead(context)
                                 )
                             }

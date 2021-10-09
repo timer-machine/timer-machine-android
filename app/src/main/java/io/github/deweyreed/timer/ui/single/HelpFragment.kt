@@ -26,6 +26,7 @@ import xyz.aprildown.tools.helper.IntentHelper
 import xyz.aprildown.tools.helper.createChooserIntentIfDead
 import xyz.aprildown.tools.helper.show
 import javax.inject.Inject
+import xyz.aprildown.timer.app.base.R as RBase
 
 @AndroidEntryPoint
 class HelpFragment : PreferenceFragmentCompat() {
@@ -41,32 +42,32 @@ class HelpFragment : PreferenceFragmentCompat() {
 
         setPreferencesFromResource(R.xml.pref_help, rootKey)
 
-        findPreference<Preference>(getString(R.string.help_key_tutorial))?.setOnPreferenceClickListener {
+        findPreference<Preference>(getString(RBase.string.help_key_tutorial))?.setOnPreferenceClickListener {
             startActivity(appNavigator.getIntroIntent())
             true
         }
-        findPreference<Preference>(getString(R.string.help_key_tips))?.setOnPreferenceClickListener {
+        findPreference<Preference>(getString(RBase.string.help_key_tips))?.setOnPreferenceClickListener {
             context.openWebsiteWithWarning(Constants.getTipsAndTricksLink(context))
             true
         }
-        findPreference<Preference>(getString(R.string.help_key_qa))?.setOnPreferenceClickListener {
+        findPreference<Preference>(getString(RBase.string.help_key_qa))?.setOnPreferenceClickListener {
             context.openWebsiteWithWarning(Constants.getQaLink(context))
             true
         }
-        findPreference<Preference>(getString(R.string.help_key_tts))?.setOnPreferenceClickListener {
+        findPreference<Preference>(getString(RBase.string.help_key_tts))?.setOnPreferenceClickListener {
             TtsTestDialog().show(childFragmentManager, null)
             true
         }
-        findPreference<Preference>(getString(R.string.help_key_whitelist))?.setOnPreferenceClickListener {
+        findPreference<Preference>(getString(RBase.string.help_key_whitelist))?.setOnPreferenceClickListener {
             NavHostFragment.findNavController(this)
-                .subLevelNavigate(R.id.dest_whitelist)
+                .subLevelNavigate(RBase.id.dest_whitelist)
             true
         }
-        findPreference<Preference>(getString(R.string.help_key_feedback))?.setOnPreferenceClickListener {
+        findPreference<Preference>(getString(RBase.string.help_key_feedback))?.setOnPreferenceClickListener {
             context.startActivity(
                 IntentHelper.email(
                     flavorData.email,
-                    context.getString(R.string.help_email_title)
+                    context.getString(RBase.string.help_email_title)
                 ).createChooserIntentIfDead(context)
             )
             true
@@ -93,7 +94,7 @@ class HelpFragment : PreferenceFragmentCompat() {
             binding.btnClickInstruction.setOnClickListener {
                 TtsSpeaker.speak(
                     context,
-                    context.getString(R.string.help_tts_test_read_content),
+                    context.getString(RBase.string.help_tts_test_read_content),
                     sayMore = true
                 )
                 it.postDelayed(1000) {

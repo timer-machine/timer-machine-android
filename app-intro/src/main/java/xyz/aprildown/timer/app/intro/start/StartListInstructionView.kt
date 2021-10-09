@@ -13,6 +13,8 @@ import xyz.aprildown.timer.app.intro.databinding.LayoutIntroStartListBinding
 import xyz.aprildown.timer.app.intro.showTooltip
 import xyz.aprildown.tools.helper.gone
 import xyz.aprildown.tools.helper.show
+import xyz.aprildown.timer.app.base.R as RBase
+import xyz.aprildown.timer.app.timer.list.R as RTimerList
 
 internal class StartListInstructionView : InstructionView<LayoutIntroStartListBinding> {
 
@@ -27,14 +29,14 @@ internal class StartListInstructionView : InstructionView<LayoutIntroStartListBi
         val context = binding.root.context
         val timer = Instruction.getInitialSampleTimer(context)
         binding.run {
-            root.findViewById<View>(R.id.cardTimer).run {
+            root.findViewById<View>(RTimerList.id.cardTimer).run {
                 gone()
                 clearInteractionIndicator()
                 setOnClickListener(null)
             }
-            root.findViewById<TextView>(R.id.textTimerName).text = timer.name
-            root.findViewById<View>(R.id.imageTimerStartPause).setOnClickListener {
-                it.showTooltip(context.getString(R.string.intro_start_quick_start_pause))
+            root.findViewById<TextView>(RTimerList.id.textTimerName).text = timer.name
+            root.findViewById<View>(RTimerList.id.imageTimerStartPause).setOnClickListener {
+                it.showTooltip(context.getString(RBase.string.intro_start_quick_start_pause))
             }
             viewIntroStartListEmpty.show()
 

@@ -5,6 +5,7 @@ import android.widget.CompoundButton
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import xyz.aprildown.tools.helper.gone
 import xyz.aprildown.tools.view.ListItemWithLayout
+import xyz.aprildown.timer.app.base.R as RBase
 
 internal class SelectAppContentSettings {
     var wipeFirst: Boolean = false
@@ -55,8 +56,8 @@ internal class SelectAppContentHelper {
                 if (isChecked) {
                     MaterialAlertDialogBuilder(context)
                         .setCancelable(false)
-                        .setMessage(R.string.import_wipe_warning)
-                        .setPositiveButton(R.string.understand, null)
+                        .setMessage(RBase.string.import_wipe_warning)
+                        .setPositiveButton(RBase.string.understand, null)
                         .show()
                 }
             }

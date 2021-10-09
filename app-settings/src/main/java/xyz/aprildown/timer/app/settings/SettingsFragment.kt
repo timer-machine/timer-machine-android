@@ -27,6 +27,7 @@ import xyz.aprildown.tools.helper.createChooserIntentIfDead
 import xyz.aprildown.tools.helper.startActivitySafely
 import java.util.Optional
 import javax.inject.Inject
+import xyz.aprildown.timer.app.base.R as RBase
 
 @AndroidEntryPoint
 class SettingsFragment : PreferenceFragmentCompat(),
@@ -61,7 +62,7 @@ class SettingsFragment : PreferenceFragmentCompat(),
         when (preference?.key) {
             KEY_APP_LANGUAGE -> {
                 (requireActivity() as? MainCallback.ActivityCallback)
-                    ?.restartWithDestination(R.id.dest_settings)
+                    ?.restartWithDestination(RBase.id.dest_settings)
             }
             KEY_SCREEN -> refreshBrightnessTime(newValue?.toString())
         }
@@ -83,11 +84,11 @@ class SettingsFragment : PreferenceFragmentCompat(),
             }
             KEY_EDIT_LAYOUT -> {
                 NavHostFragment.findNavController(this)
-                    .subLevelNavigate(R.id.dest_one_layout)
+                    .subLevelNavigate(RBase.id.dest_one_layout)
             }
             KEY_THEME -> {
                 NavHostFragment.findNavController(this)
-                    .subLevelNavigate(R.id.dest_theme)
+                    .subLevelNavigate(RBase.id.dest_theme)
             }
             KEY_TWEAK_TIME -> {
                 TweakTimeDialog().show(context) {
@@ -96,7 +97,7 @@ class SettingsFragment : PreferenceFragmentCompat(),
             }
             KEY_FLOATING_WINDOW_PIP -> {
                 NavHostFragment.findNavController(this)
-                    .subLevelNavigate(R.id.dest_settings_floating_window_pip)
+                    .subLevelNavigate(RBase.id.dest_settings_floating_window_pip)
             }
             KEY_BAKED_COUNT -> {
                 flavorUiInjector.orElse(null)?.toBakedCountDialog(this)
@@ -108,7 +109,7 @@ class SettingsFragment : PreferenceFragmentCompat(),
                         .putExtra(Settings.EXTRA_APP_PACKAGE, context.packageName)
                     startActivitySafely(
                         settingsIntent.createChooserIntentIfDead(context),
-                        wrongMessageRes = R.string.no_action_found
+                        wrongMessageRes = RBase.string.no_action_found
                     )
                 } else {
                     val settingsIntent = Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS)
@@ -116,7 +117,7 @@ class SettingsFragment : PreferenceFragmentCompat(),
                         .setData("package:${context.packageName}".toUri())
                     startActivitySafely(
                         settingsIntent.createChooserIntentIfDead(context),
-                        wrongMessageRes = R.string.no_action_found
+                        wrongMessageRes = RBase.string.no_action_found
                     )
                 }
             }
@@ -128,20 +129,20 @@ class SettingsFragment : PreferenceFragmentCompat(),
             KEY_RATE -> {
                 startActivitySafely(
                     IntentHelper.appStorePage(context),
-                    wrongMessageRes = R.string.no_action_found
+                    wrongMessageRes = RBase.string.no_action_found
                 )
             }
             KEY_RECOMMEND -> {
                 startActivity(
                     IntentHelper.share(
                         context = context,
-                        message = "${getString(R.string.share_content)}\n${flavorData.appDownloadLink}"
+                        message = "${getString(RBase.string.share_content)}\n${flavorData.appDownloadLink}"
                     )
                 )
             }
             KEY_ABOUT -> {
                 NavHostFragment.findNavController(this)
-                    .subLevelNavigate(R.id.dest_about)
+                    .subLevelNavigate(RBase.id.dest_about)
             }
             else -> return false
         }
@@ -192,9 +193,9 @@ class SettingsFragment : PreferenceFragmentCompat(),
                 KEY_BAKED_COUNT -> {
                     prefBakedCount?.setSummary(
                         if (sharedPreferences.getBoolean(key, false)) {
-                            R.string.pref_reminder_baked_count_on
+                            RBase.string.pref_reminder_baked_count_on
                         } else {
-                            R.string.pref_reminder_baked_count_off
+                            RBase.string.pref_reminder_baked_count_off
                         }
                     )
                 }
@@ -206,8 +207,8 @@ class SettingsFragment : PreferenceFragmentCompat(),
 
     private fun Preference.updateTweakTimeSummary() {
         setSummary(
-            if (PreferenceData.TweakTimeSettings(requireContext()).hasSlot) R.string.pref_tweak_time_on
-            else R.string.pref_tweak_time_off
+            if (PreferenceData.TweakTimeSettings(requireContext()).hasSlot) RBase.string.pref_tweak_time_on
+            else RBase.string.pref_tweak_time_off
         )
     }
 
@@ -216,12 +217,12 @@ class SettingsFragment : PreferenceFragmentCompat(),
         val darkTheme = DarkTheme(context)
         return when (darkTheme.darkThemeValue) {
             DarkTheme.DARK_THEME_MANUAL -> {
-                var result = context.getText(R.string.dark_theme_manual)
+                var result = context.getText(RBase.string.dark_theme_manual)
                 if (darkTheme.scheduleEnabled) {
                     val range = darkTheme.scheduleRange
                     result = "$result ${
                         "%s %s - %s".format(
-                            context.getText(R.string.dark_theme_scheduled),
+                            context.getText(RBase.string.dark_theme_scheduled),
                             TimeUtils.formattedTodayTime(
                                 context = context,
                                 hour = range.fromHour,
@@ -238,16 +239,16 @@ class SettingsFragment : PreferenceFragmentCompat(),
                 result
             }
             DarkTheme.DARK_THEME_SYSTEM_DEFAULT ->
-                context.getText(R.string.dark_theme_system_default)
+                context.getText(RBase.string.dark_theme_system_default)
             DarkTheme.DARK_THEME_BATTERY_SAVER ->
-                context.getText(R.string.dark_theme_battery_saver)
-            else -> context.getString(R.string.unknown)
+                context.getText(RBase.string.dark_theme_battery_saver)
+            else -> context.getString(RBase.string.unknown)
         }
     }
 
     private fun refreshBrightnessTime(screenValue: String?) {
         findPreference<Preference>(KEY_SCREEN_TIMING)?.isVisible =
-            screenValue != null && screenValue != getString(R.string.pref_screen_value_default)
+            screenValue != null && screenValue != getString(RBase.string.pref_screen_value_default)
     }
 
     override fun onPause() {

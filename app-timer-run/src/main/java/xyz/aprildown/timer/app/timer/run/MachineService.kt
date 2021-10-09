@@ -48,6 +48,7 @@ import java.time.Instant
 import java.time.LocalDateTime
 import java.time.ZoneId
 import javax.inject.Inject
+import xyz.aprildown.timer.app.base.R as RBase
 
 /**
  * DO NOT CALL STOP_SERVICE ON YOUR OWN.
@@ -170,7 +171,7 @@ class MachineService : Service(),
         ServiceWakeLock.acquireCpuWakeLock(this)
         ScreenWakeLock.acquireScreenWakeLock(
             context = this,
-            screenTiming = getString(R.string.pref_screen_timing_value_service)
+            screenTiming = getString(RBase.string.pref_screen_timing_value_service)
         )
         if (shouldPausePhoneCall) {
             phoneCallReceiver?.unListen()
@@ -204,7 +205,7 @@ class MachineService : Service(),
         ServiceWakeLock.releaseCpuLock()
         ScreenWakeLock.releaseScreenLock(
             context = this,
-            screenTiming = getString(R.string.pref_screen_timing_value_service)
+            screenTiming = getString(RBase.string.pref_screen_timing_value_service)
         )
         phoneCallReceiver?.unListen()
         phoneCallReceiver = null
@@ -391,22 +392,22 @@ class MachineService : Service(),
         val (hours, minutes, seconds) = duration.produceHms()
         return buildString {
             if (hours > 0) {
-                append(getNumberFormattedQuantityString(R.plurals.hours, hours))
+                append(getNumberFormattedQuantityString(RBase.plurals.hours, hours))
             }
             if (minutes > 0) {
                 if (isNotEmpty()) {
                     append(", ")
                 }
-                append(getNumberFormattedQuantityString(R.plurals.minutes, minutes))
+                append(getNumberFormattedQuantityString(RBase.plurals.minutes, minutes))
             }
             if (seconds > 0) {
                 if (isNotEmpty()) {
                     append(", ")
                 }
-                append(getNumberFormattedQuantityString(R.plurals.seconds, seconds))
+                append(getNumberFormattedQuantityString(RBase.plurals.seconds, seconds))
             }
             if (isEmpty()) {
-                append(getString(R.string.seconds_0))
+                append(getString(RBase.string.seconds_0))
             }
         }
     }

@@ -17,6 +17,7 @@ import xyz.aprildown.timer.app.timer.one.layout.one.OneLayoutOneFragment
 import xyz.aprildown.tools.helper.scale
 import xyz.aprildown.tools.helper.setScale
 import xyz.aprildown.tools.helper.triggerRipple
+import xyz.aprildown.timer.app.base.R as RBase
 
 class OneLayoutFragment : Fragment(R.layout.fragment_one_layout) {
 
@@ -29,7 +30,7 @@ class OneLayoutFragment : Fragment(R.layout.fragment_one_layout) {
     override fun onAttach(context: Context) {
         super.onAttach(context)
         (context as? OneActivityInterface)
-            ?.setToolbarTitle(context.getString(R.string.one_layout_edit))
+            ?.setToolbarTitle(context.getString(RBase.string.one_layout_edit))
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

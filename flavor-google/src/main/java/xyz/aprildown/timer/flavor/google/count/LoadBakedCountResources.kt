@@ -13,10 +13,10 @@ import xyz.aprildown.timer.app.base.data.PreferenceData
 import xyz.aprildown.timer.domain.di.IoDispatcher
 import xyz.aprildown.timer.domain.usecases.CoroutinesUseCase
 import xyz.aprildown.timer.domain.usecases.Fruit
-import xyz.aprildown.timer.flavor.google.R
 import xyz.aprildown.timer.flavor.google.utils.setUpFirebaseStorage
 import java.io.File
 import javax.inject.Inject
+import xyz.aprildown.tools.R as RTools
 
 @Reusable
 internal class LoadBakedCountResources @Inject constructor(
@@ -32,7 +32,7 @@ internal class LoadBakedCountResources @Inject constructor(
         return try {
             Firebase.storage.reference
                 .child(PreferenceData.BAKED_COUNT_NAME)
-                .child("${applicationContext.getString(R.string.language)}.zip")
+                .child("${applicationContext.getString(RTools.string.language)}.zip")
                 .getFile(tempZipFile)
                 .await()
             downloaded = true

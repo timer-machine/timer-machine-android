@@ -3,10 +3,10 @@ package xyz.aprildown.timer.app.timer.list.record
 import android.content.Context
 import android.util.AttributeSet
 import com.google.android.material.button.MaterialButton
-import xyz.aprildown.timer.app.timer.list.R
 import xyz.aprildown.timer.domain.entities.FolderEntity
 import xyz.aprildown.timer.domain.entities.TimerInfo
 import xyz.aprildown.tools.helper.getNumberFormattedQuantityString
+import xyz.aprildown.timer.app.base.R as RBase
 
 class RecordTimersButton(
     context: Context,
@@ -22,7 +22,7 @@ class RecordTimersButton(
         text = if (current.size == maxCount &&
             current.none { it.folderId == FolderEntity.FOLDER_TRASH }
         ) {
-            context.getString(R.string.record_all_timers)
+            context.getString(RBase.string.record_all_timers)
         } else {
             current.joinToString { it.name }
         }
@@ -32,7 +32,7 @@ class RecordTimersButton(
         super.onMeasure(widthMeasureSpec, heightMeasureSpec)
         if (lineCount > 1) {
             text =
-                context.getNumberFormattedQuantityString(R.plurals.timers, current.size)
+                context.getNumberFormattedQuantityString(RBase.plurals.timers, current.size)
             super.onMeasure(widthMeasureSpec, heightMeasureSpec)
         }
     }

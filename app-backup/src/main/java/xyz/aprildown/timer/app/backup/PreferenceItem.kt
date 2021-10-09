@@ -28,6 +28,7 @@ import xyz.aprildown.timer.domain.usecases.folder.FolderSortByRule
 import xyz.aprildown.tools.helper.getNonNullString
 import xyz.aprildown.tools.helper.safeSharedPreference
 import javax.inject.Inject
+import xyz.aprildown.timer.app.base.R as RBase
 
 private fun Map<String, String>.ifHasKey(key: String, f: (String) -> Unit) {
     get(key)?.let(f)
@@ -115,11 +116,11 @@ private class ScreenPreferenceItem : PreferenceItem {
     override fun storeToMap(context: Context, map: MutableMap<String, String>) {
         val sharedPreferences = context.safeSharedPreference
         map[KEY] = sharedPreferences.getNonNullString(
-            KEY, context.getString(R.string.pref_screen_value_default)
+            KEY, context.getString(RBase.string.pref_screen_value_default)
         )
         map[KEY_TIMING] = sharedPreferences.getNonNullString(
             KEY_TIMING,
-            context.getString(R.string.pref_screen_timing_value_default)
+            context.getString(RBase.string.pref_screen_timing_value_default)
         )
     }
 

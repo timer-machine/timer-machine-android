@@ -41,6 +41,9 @@ import xyz.aprildown.tools.helper.toColorStateList
 import xyz.aprildown.tools.view.ListItemWithLayout
 import java.util.Optional
 import javax.inject.Inject
+import com.mikepenz.materialize.R as RMaterialize
+import xyz.aprildown.timer.app.base.R as RBase
+import xyz.aprildown.tools.R as RTools
 
 @AndroidEntryPoint
 class ThemeFragment : Fragment(),
@@ -115,18 +118,18 @@ class ThemeFragment : Fragment(),
 
         items += BooleanToggle(
             BooleanToggle.ID_SAME_STATUS,
-            context.getString(R.string.theme_light_status_bar),
+            context.getString(RBase.string.theme_light_status_bar),
             status,
             this
         )
         items += BooleanToggle(
             BooleanToggle.ID_ENABLE_NAV,
-            context.getString(R.string.theme_theme_nav_bar),
+            context.getString(RBase.string.theme_theme_nav_bar),
             enableNav,
             this
         )
 
-        items += Group(context.getString(R.string.theme_title))
+        items += Group(context.getString(RBase.string.theme_title))
 
         items += context.getExtraThemes().map { appThemeColor ->
             ThemeColor(
@@ -156,7 +159,7 @@ class ThemeFragment : Fragment(),
             }
         }
 
-        items += Group(context.getString(R.string.theme_custom_title))
+        items += Group(context.getString(RBase.string.theme_custom_title))
 
         items += ThemeColor(
             name = NAME_CUSTOM,
@@ -166,28 +169,28 @@ class ThemeFragment : Fragment(),
             callback = this
         )
 
-        items += Group(context.getString(R.string.theme_step_color_title))
+        items += Group(context.getString(RBase.string.theme_step_color_title))
 
         items += StepColor(
-            context.getString(R.string.theme_step_color_normal),
+            context.getString(RBase.string.theme_step_color_normal),
             StepType.NORMAL,
             StepType.NORMAL.getTypeColor(context),
             this
         )
         items += StepColor(
-            context.getString(R.string.theme_step_color_notifier),
+            context.getString(RBase.string.theme_step_color_notifier),
             StepType.NOTIFIER,
             StepType.NOTIFIER.getTypeColor(context),
             this
         )
         items += StepColor(
-            context.getString(R.string.theme_step_color_start),
+            context.getString(RBase.string.theme_step_color_start),
             StepType.START,
             StepType.START.getTypeColor(context),
             this
         )
         items += StepColor(
-            context.getString(R.string.theme_step_color_end),
+            context.getString(RBase.string.theme_step_color_end),
             StepType.END,
             StepType.END.getTypeColor(context),
             this
@@ -250,13 +253,13 @@ class ThemeFragment : Fragment(),
 
     override fun onStepColorClick(pos: Int, type: StepType) {
         val context = requireContext()
-        ColorChooserDialog.Builder(context, R.string.theme_step_color_dialog_title)
+        ColorChooserDialog.Builder(context, RBase.string.theme_step_color_dialog_title)
             .tag(pos.toString())
             .doneButton(android.R.string.ok)
             .cancelButton(android.R.string.cancel)
-            .customButton(R.string.theme_pick_colors)
-            .presetsButton(R.string.theme_pick_presets)
-            .backButton(R.string.theme_pick_back)
+            .customButton(RBase.string.theme_pick_colors)
+            .presetsButton(RBase.string.theme_pick_presets)
+            .backButton(RBase.string.theme_pick_back)
             .allowUserColorInputAlpha(false)
             .show(childFragmentManager)
     }
@@ -274,7 +277,7 @@ class ThemeFragment : Fragment(),
     }
 
     private fun reload() {
-        (requireActivity() as? MainCallback.ActivityCallback)?.restartWithDestination(R.id.dest_theme)
+        (requireActivity() as? MainCallback.ActivityCallback)?.restartWithDestination(RBase.id.dest_theme)
     }
 }
 
@@ -291,7 +294,7 @@ private class BooleanToggle(
         fun onBooleanToggleChange(toggleType: Int, newValue: Boolean)
     }
 
-    override val layoutRes: Int = R.layout.widget_list_item_with_layout
+    override val layoutRes: Int = RTools.layout.widget_list_item_with_layout
     override val type: Int = 1
     override fun getViewHolder(v: View): ViewHolder = ViewHolder(v)
 
@@ -324,7 +327,7 @@ private class BooleanToggle(
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val listItemWithLayout: ListItemWithLayout = (view as ListItemWithLayout).apply {
-            setLayoutRes(R.layout.widget_switch)
+            setLayoutRes(RTools.layout.widget_switch)
         }
     }
 }
@@ -380,7 +383,7 @@ private class ThemeColor(
             if (isPremium) {
                 TextViewCompat.setCompoundDrawablesRelativeWithIntrinsicBounds(
                     title,
-                    R.drawable.settings_premium, 0, 0, 0
+                    RBase.drawable.settings_premium, 0, 0, 0
                 )
                 TextViewCompat.setCompoundDrawableTintList(title, colorOnPrimary.toColorStateList())
             } else {
@@ -390,7 +393,7 @@ private class ThemeColor(
             }
 
             fab.backgroundTintList = ColorStateList.valueOf(secondary)
-            fab.setImageResource(if (using) R.drawable.ic_check else 0)
+            fab.setImageResource(if (using) RBase.drawable.ic_check else 0)
             card.setOnClickListener {
                 callback.onThemeChange(name, primary, secondary, isPremium)
             }
@@ -416,7 +419,7 @@ private class StepColor(
         fun onStepColorClick(pos: Int, type: StepType)
     }
 
-    override val layoutRes: Int = R.layout.widget_list_item_with_layout
+    override val layoutRes: Int = RTools.layout.widget_list_item_with_layout
     override val type: Int = 4
     override fun getViewHolder(v: View): ViewHolder = ViewHolder(v)
 
@@ -453,28 +456,28 @@ private fun Context.getExtraThemes(): List<AppThemeColor> {
 
     list += AppThemeColor(
         "Original",
-        R.color.colorPrimary.color(),
-        R.color.colorSecondary.color()
+        RBase.color.colorPrimary.color(),
+        RBase.color.colorSecondary.color()
     )
     list += AppThemeColor(
         "Deep Purple",
-        R.color.md_deep_purple_500.color(),
-        R.color.md_lime_800.color()
+        RMaterialize.color.md_deep_purple_500.color(),
+        RMaterialize.color.md_lime_800.color()
     )
     list += AppThemeColor(
         name = "Red",
-        primaryColor = R.color.md_red_500.color(),
-        secondaryColor = R.color.md_blue_500.color()
+        primaryColor = RMaterialize.color.md_red_500.color(),
+        secondaryColor = RMaterialize.color.md_blue_500.color()
     )
     list += AppThemeColor(
         "Amber",
-        R.color.md_amber_500.color(),
-        R.color.md_deep_purple_400.color()
+        RMaterialize.color.md_amber_500.color(),
+        RMaterialize.color.md_deep_purple_400.color()
     )
     list += AppThemeColor(
         "Lime",
-        R.color.md_lime_500.color(),
-        R.color.md_purple_400.color()
+        RMaterialize.color.md_lime_500.color(),
+        RMaterialize.color.md_purple_400.color()
     )
 
     return list

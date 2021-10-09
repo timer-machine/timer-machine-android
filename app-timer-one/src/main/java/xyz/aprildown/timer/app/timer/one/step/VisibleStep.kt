@@ -19,6 +19,7 @@ import xyz.aprildown.tools.helper.attachToView
 import xyz.aprildown.tools.helper.gone
 import xyz.aprildown.tools.helper.onLongClick
 import xyz.aprildown.tools.helper.toColorStateList
+import xyz.aprildown.timer.app.base.R as RBase
 
 internal class VisibleStep(
     val step: StepEntity.Step,
@@ -29,7 +30,7 @@ internal class VisibleStep(
 ) : AbstractItem<VisibleStep.ViewHolder>() {
 
     override val layoutRes: Int = R.layout.item_step_step
-    override val type: Int = R.id.type_step_step
+    override val type: Int = RBase.id.type_step_step
     override fun getViewHolder(v: View): ViewHolder = ViewHolder(v)
     override var identifier: Long = id
 

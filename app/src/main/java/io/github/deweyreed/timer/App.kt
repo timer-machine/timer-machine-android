@@ -28,6 +28,7 @@ import xyz.aprildown.timer.domain.utils.AppConfig
 import xyz.aprildown.timer.domain.utils.AppTracker
 import xyz.aprildown.timer.domain.utils.Constants
 import javax.inject.Inject
+import xyz.aprildown.timer.app.base.R as RBase
 
 @HiltAndroidApp
 class App : Application(), Configuration.Provider {
@@ -79,16 +80,16 @@ class App : Application(), Configuration.Provider {
         DarkTheme(this).applyAppCompatDelegate()
         Theme.init(
             context = this,
-            themeRes = R.style.AppTheme,
-            appIconRes = R.drawable.ic_launcher_round
+            themeRes = RBase.style.AppTheme,
+            appIconRes = RBase.drawable.ic_launcher_round
         ) {
-            colorPrimaryRes = R.color.colorPrimary
-            colorPrimaryVariantRes = R.color.colorPrimaryVariant
-            colorOnPrimaryRes = R.color.colorOnPrimary
-            colorSecondaryRes = R.color.colorSecondary
-            colorSecondaryVariantRes = R.color.colorSecondaryVariant
-            colorOnSecondaryRes = R.color.colorOnSecondary
-            colorStatusBarRes = R.color.colorStatusBar
+            colorPrimaryRes = RBase.color.colorPrimary
+            colorPrimaryVariantRes = RBase.color.colorPrimaryVariant
+            colorOnPrimaryRes = RBase.color.colorOnPrimary
+            colorSecondaryRes = RBase.color.colorSecondary
+            colorSecondaryVariantRes = RBase.color.colorSecondaryVariant
+            colorOnSecondaryRes = RBase.color.colorOnSecondary
+            colorStatusBarRes = RBase.color.colorStatusBar
             lightStatusByPrimary = true
         }
         Theme.installDelegates(DynamicThemeDelegate())
@@ -143,13 +144,13 @@ class App : Application(), Configuration.Provider {
         }
         // Old user
         sharedPreferences.edit {
-            copySharedPreferences(from = deviceStorageSp, edtior = this)
+            copySharedPreferences(from = deviceStorageSp, editor = this)
             copySharedPreferences(
                 from = deviceStorageContext.getSharedPreferences(
                     "app_reminder_pref_file",
                     Context.MODE_PRIVATE
                 ),
-                edtior = this
+                editor = this
             )
             putBoolean(PREF_SP_MIGRATED, true)
         }
@@ -188,15 +189,15 @@ class App : Application(), Configuration.Provider {
 private const val PREF_FIRST_START = "pref_first_start_app"
 private const val PREF_SP_MIGRATED = "pref_sp_migrated"
 
-private fun copySharedPreferences(from: SharedPreferences, edtior: SharedPreferences.Editor) {
+private fun copySharedPreferences(from: SharedPreferences, editor: SharedPreferences.Editor) {
     from.all.forEach { (key, value) ->
         when (value) {
-            is Int -> edtior.putInt(key, value)
-            is Long -> edtior.putLong(key, value)
-            is Float -> edtior.putFloat(key, value)
-            is Boolean -> edtior.putBoolean(key, value)
-            is String -> edtior.putString(key, value)
-            is Set<*> -> edtior.putStringSet(key, value.map { it.toString() }.toSet())
+            is Int -> editor.putInt(key, value)
+            is Long -> editor.putLong(key, value)
+            is Float -> editor.putFloat(key, value)
+            is Boolean -> editor.putBoolean(key, value)
+            is String -> editor.putString(key, value)
+            is Set<*> -> editor.putStringSet(key, value.map { it.toString() }.toSet())
         }
     }
 }

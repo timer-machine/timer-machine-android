@@ -20,6 +20,7 @@ import xyz.aprildown.timer.domain.entities.StepEntity
 import xyz.aprildown.timer.presentation.stream.TimerIndex
 import xyz.aprildown.timer.presentation.stream.getNiceLoopString
 import xyz.aprildown.tools.anko.dp
+import xyz.aprildown.timer.app.timer.one.R as RTimerOne
 
 internal class StartRunInstructionView : InstructionView<LayoutIntroStartRunBinding> {
     override val layoutRes: Int = R.layout.layout_intro_start_run
@@ -34,23 +35,23 @@ internal class StartRunInstructionView : InstructionView<LayoutIntroStartRunBind
         val timer = Instruction.getInitialSampleTimer(context)
         val index = TimerIndex.Step(0, 0)
         binding.root.run {
-            findViewById<View>(R.id.cardOneTopInfo).clearInteractionIndicator()
+            findViewById<View>(RTimerOne.id.cardOneTopInfo).clearInteractionIndicator()
 
-            findViewById<TextView>(R.id.textOneTime).run {
+            findViewById<TextView>(RTimerOne.id.textOneTime).run {
                 textSize = dp(context.oneOneTimeSize)
                 text = (timer.steps.first() as StepEntity.Step).length.produceTime()
             }
 
-            findViewById<TextView>(R.id.textOneLoop)
+            findViewById<TextView>(RTimerOne.id.textOneLoop)
                 .text = index.getNiceLoopString(max = timer.loop)
 
-            findViewById<StepListView>(R.id.listOneSteps).run {
+            findViewById<StepListView>(RTimerOne.id.listOneSteps).run {
                 clearInteractionIndicator()
                 setTimer(timer)
                 toIndex(index)
             }
 
-            findViewById<FiveActionsView>(R.id.fiveActionsOne).run {
+            findViewById<FiveActionsView>(RTimerOne.id.fiveActionsOne).run {
                 clearInteractionIndicator()
                 withActions(OneFragment.getFourActionsFromKeys(context.oneOneFourActions))
             }

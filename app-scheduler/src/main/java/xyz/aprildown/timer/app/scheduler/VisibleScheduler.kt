@@ -11,6 +11,7 @@ import xyz.aprildown.timer.domain.TimeUtils
 import xyz.aprildown.timer.domain.entities.SchedulerEntity
 import xyz.aprildown.timer.domain.entities.SchedulerRepeatMode
 import java.util.Calendar
+import xyz.aprildown.timer.app.base.R as RBase
 
 internal data class VisibleScheduler(
     val scheduler: SchedulerEntity,
@@ -57,9 +58,9 @@ internal data class VisibleScheduler(
             timerName: String
         ): VisibleScheduler = with(scheduler) {
             val actionStr = when (action) {
-                SchedulerEntity.ACTION_START -> context.getString(R.string.scheduler_starts_action_template)
-                SchedulerEntity.ACTION_END -> context.getString(R.string.scheduler_stops_action_template)
-                else -> context.getString(R.string.unknown)
+                SchedulerEntity.ACTION_START -> context.getString(RBase.string.scheduler_starts_action_template)
+                SchedulerEntity.ACTION_END -> context.getString(RBase.string.scheduler_stops_action_template)
+                else -> context.getString(RBase.string.unknown)
             }.format(timerName)
 
             fun SchedulerEntity.isTomorrow(): Boolean {
@@ -92,8 +93,8 @@ internal data class VisibleScheduler(
                                 DateUtils.FORMAT_SHOW_TIME
                         )
                     }
-                    isTomorrow() -> context.getString(R.string.scheduler_repeat_tomorrow)
-                    else -> context.getString(R.string.scheduler_repeat_today)
+                    isTomorrow() -> context.getString(RBase.string.scheduler_repeat_tomorrow)
+                    else -> context.getString(RBase.string.scheduler_repeat_today)
                 }
             )
         }

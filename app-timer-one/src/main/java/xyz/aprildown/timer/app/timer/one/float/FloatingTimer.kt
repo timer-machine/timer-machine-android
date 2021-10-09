@@ -27,6 +27,7 @@ import xyz.aprildown.timer.presentation.stream.getFirstIndex
 import xyz.aprildown.timer.presentation.stream.getNiceLoopString
 import xyz.aprildown.timer.presentation.stream.getStep
 import xyz.aprildown.tools.anko.toast
+import xyz.aprildown.timer.app.base.R as RBase
 
 internal class FloatingTimer(
     c: Context,
@@ -54,7 +55,7 @@ internal class FloatingTimer(
     private var bind = false
 
     fun show() {
-        val themedContext = ContextThemeWrapper(context, R.style.AppTheme)
+        val themedContext = ContextThemeWrapper(context, RBase.style.AppTheme)
 
         val dynamicTheme = newDynamicTheme
         val colorPrimary = dynamicTheme.colorPrimary
@@ -125,7 +126,7 @@ internal class FloatingTimer(
         try {
             floater.show()
         } catch (_: WindowManager.BadTokenException) {
-            context.toast(R.string.settings_floating_window_pip_floating_failed)
+            context.toast(RBase.string.settings_floating_window_pip_floating_failed)
             floater.dismiss()
             return
         }
@@ -219,11 +220,11 @@ internal class FloatingTimer(
     private fun updateButton() {
         btnStartPause.run {
             if (state.isRunning) {
-                contentDescription = context.getString(R.string.pause)
-                setImageResource(R.drawable.ic_pause)
+                contentDescription = context.getString(RBase.string.pause)
+                setImageResource(RBase.drawable.ic_pause)
             } else {
-                contentDescription = context.getString(R.string.start)
-                setImageResource(R.drawable.ic_start)
+                contentDescription = context.getString(RBase.string.start)
+                setImageResource(RBase.drawable.ic_start)
             }
         }
     }

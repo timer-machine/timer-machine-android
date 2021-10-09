@@ -5,15 +5,15 @@ import androidx.annotation.StringRes
 import androidx.core.content.edit
 import dagger.Reusable
 import timber.log.Timber
-import xyz.aprildown.timer.flavor.google.R
 import javax.inject.Inject
+import xyz.aprildown.timer.app.base.R as RBase
 
 internal enum class CloudBackupState(@StringRes val despId: Int) {
-    Required(R.string.cloud_backup_state_required),
-    Scheduled(R.string.cloud_backup_state_scheduled),
-    Running(R.string.cloud_backup_state_running),
-    UpToDate(R.string.cloud_backup_state_up_to_date),
-    Error(R.string.cloud_backup_state_error);
+    Required(RBase.string.cloud_backup_state_required),
+    Scheduled(RBase.string.cloud_backup_state_scheduled),
+    Running(RBase.string.cloud_backup_state_running),
+    UpToDate(RBase.string.cloud_backup_state_up_to_date),
+    Error(RBase.string.cloud_backup_state_error);
 
     val canBackupNow: Boolean get() = this != Running && this != UpToDate
 

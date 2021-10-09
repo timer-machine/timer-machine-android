@@ -23,6 +23,7 @@ import xyz.aprildown.tools.helper.gone
 import xyz.aprildown.tools.helper.show
 import xyz.aprildown.tools.helper.showActionAndMultiLine
 import xyz.aprildown.tools.helper.toColorStateList
+import xyz.aprildown.timer.app.base.R as RBase
 
 @VisibleForTesting(otherwise = VisibleForTesting.PACKAGE_PRIVATE)
 class EditableStep(
@@ -60,7 +61,7 @@ class EditableStep(
     }
 
     override val layoutRes: Int = R.layout.item_edit_step
-    override val type: Int = R.id.type_step_step
+    override val type: Int = RBase.id.type_step_step
     override fun getViewHolder(v: View): ViewHolder = ViewHolder(v, handler)
 
     class ViewHolder(

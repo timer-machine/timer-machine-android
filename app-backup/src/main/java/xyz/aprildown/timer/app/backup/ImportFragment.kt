@@ -36,6 +36,7 @@ import xyz.aprildown.tools.helper.requireCallback
 import xyz.aprildown.tools.helper.restartWithFading
 import xyz.aprildown.tools.helper.show
 import javax.inject.Inject
+import xyz.aprildown.timer.app.base.R as RBase
 
 @AndroidEntryPoint
 class ImportFragment : Fragment(R.layout.layout_vertical_form), StepperFormListener {
@@ -65,11 +66,11 @@ class ImportFragment : Fragment(R.layout.layout_vertical_form), StepperFormListe
         val context = view.context
         val form = view as VerticalStepperFormView
         locationStep = ImportLocationStep(
-            resources.getString(R.string.import_path_title),
+            resources.getString(RBase.string.import_path_title),
             this
         )
         contentStep =
-            ImportContentStep(resources.getString(R.string.import_content_title))
+            ImportContentStep(resources.getString(RBase.string.import_content_title))
         form.setup(this, locationStep, contentStep)
             .displayBottomNavigation(false)
             .apply {
@@ -83,9 +84,9 @@ class ImportFragment : Fragment(R.layout.layout_vertical_form), StepperFormListe
                     )
                 }
             }
-            .stepNextButtonText(getString(R.string.backup_next_step))
-            .confirmationStepTitle(resources.getString(R.string.import_begin))
-            .lastStepNextButtonText(getString(R.string.import_action))
+            .stepNextButtonText(getString(RBase.string.backup_next_step))
+            .confirmationStepTitle(resources.getString(RBase.string.import_begin))
+            .lastStepNextButtonText(getString(RBase.string.import_action))
             .displayCancelButtonInLastStep(true)
             .lastStepCancelButtonText(getString(android.R.string.cancel))
             .init()
@@ -93,7 +94,7 @@ class ImportFragment : Fragment(R.layout.layout_vertical_form), StepperFormListe
             MaterialAlertDialogBuilder(context)
                 .setMessage(
                     buildSpannedString {
-                        append(getText(R.string.import_error))
+                        append(getText(RBase.string.import_error))
 
                         (exception.localizedMessage ?: exception.message)
                             ?.takeIf { it.isNotBlank() }
@@ -160,9 +161,9 @@ class ImportFragment : Fragment(R.layout.layout_vertical_form), StepperFormListe
 
                 MaterialAlertDialogBuilder(context)
                     .setCancelable(false)
-                    .setTitle(R.string.import_done)
-                    .setMessage(R.string.import_restart_content)
-                    .setPositiveButton(R.string.import_restart) { _, _ ->
+                    .setTitle(RBase.string.import_done)
+                    .setMessage(RBase.string.import_restart_content)
+                    .setPositiveButton(RBase.string.import_restart) { _, _ ->
                         val activity = requireActivity()
                         activity.restartWithFading(appNavigator.getMainIntent())
                     }
@@ -176,7 +177,7 @@ class ImportFragment : Fragment(R.layout.layout_vertical_form), StepperFormListe
     }
 
     private fun popBackToBackup() {
-        NavHostFragment.findNavController(this).popBackStack(R.id.dest_backup_restore, false)
+        NavHostFragment.findNavController(this).popBackStack(RBase.id.dest_backup_restore, false)
     }
 
     fun importFile() {
@@ -248,7 +249,7 @@ private class ImportLocationStep(
             gone()
         }
         view.findViewById<Button>(R.id.btnStepTextButton).run {
-            setText(R.string.import_select_location)
+            setText(RBase.string.import_select_location)
             setOnClickListener {
                 parentFragment.importFile()
             }
@@ -264,11 +265,11 @@ private class ImportLocationStep(
     }
 
     fun emptyFilePicked() {
-        markAsUncompleted(parentFragment.getString(R.string.import_empty_file), true)
+        markAsUncompleted(parentFragment.getString(RBase.string.import_empty_file), true)
     }
 
     override fun isStepDataValid(stepData: Uri): IsDataValid {
-        return IsDataValid(stepData != Uri.EMPTY, context.getString(R.string.import_no_file))
+        return IsDataValid(stepData != Uri.EMPTY, context.getString(RBase.string.import_no_file))
     }
 
     override fun getStepDataAsHumanReadableString(): String = locationTextView.text.toString()

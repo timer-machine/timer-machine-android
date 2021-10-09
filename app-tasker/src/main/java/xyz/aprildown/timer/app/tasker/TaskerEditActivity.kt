@@ -16,6 +16,7 @@ import xyz.aprildown.timer.domain.entities.TimerInfo
 import xyz.aprildown.timer.presentation.tasker.TaskerEditViewModel
 import javax.inject.Inject
 import kotlin.properties.Delegates
+import xyz.aprildown.timer.app.base.R as RBase
 
 @AndroidEntryPoint
 class TaskerEditActivity : BaseActivity() {
@@ -29,7 +30,7 @@ class TaskerEditActivity : BaseActivity() {
 
     private var currentTimerInfo: TimerInfo? by Delegates.observable(null) { _, _, newValue ->
         binding.btnTaskerEditPickTimer.text =
-            newValue?.name ?: getString(R.string.timer_pick_required)
+            newValue?.name ?: getString(RBase.string.timer_pick_required)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -84,7 +85,7 @@ class TaskerEditActivity : BaseActivity() {
                             EXTRA_STRING_BLURB,
                             "%s %s".format(
                                 getString(
-                                    if (shouldStart) R.string.start else R.string.stop
+                                    if (shouldStart) RBase.string.start else RBase.string.stop
                                 ),
                                 targetTimerInfo.name
                             )

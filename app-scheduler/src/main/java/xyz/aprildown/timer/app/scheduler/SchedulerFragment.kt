@@ -32,6 +32,9 @@ import xyz.aprildown.tools.helper.getNumberFormattedQuantityString
 import xyz.aprildown.tools.helper.safeSharedPreference
 import xyz.aprildown.tools.helper.tinted
 import xyz.aprildown.tools.utils.withEmptyView
+import com.mikepenz.materialize.R as RMaterialize
+import xyz.aprildown.timer.app.base.R as RBase
+import xyz.aprildown.tools.R as RTools
 
 @AndroidEntryPoint
 class SchedulerFragment : Fragment(R.layout.fragment_scheduler), MainCallback.FragmentCallback {
@@ -80,7 +83,7 @@ class SchedulerFragment : Fragment(R.layout.fragment_scheduler), MainCallback.Fr
     }
 
     private fun setUpMainActions() {
-        mainCallback.actionFab.contentDescription = getString(R.string.scheduler_title)
+        mainCallback.actionFab.contentDescription = getString(RBase.string.scheduler_title)
     }
 
     private fun setUpRecyclerView(binding: FragmentSchedulerBinding) {
@@ -131,7 +134,7 @@ class SchedulerFragment : Fragment(R.layout.fragment_scheduler), MainCallback.Fr
                 VisibleScheduler.fromSchedulerEntity(
                     scheduler,
                     context,
-                    timerInfo?.name ?: getString(R.string.unknown)
+                    timerInfo?.name ?: getString(RBase.string.unknown)
                 )
             })
         }
@@ -139,7 +142,7 @@ class SchedulerFragment : Fragment(R.layout.fragment_scheduler), MainCallback.Fr
 
     private fun editScheduler(scheduler: SchedulerEntity? = null) {
         NavHostFragment.findNavController(this).subLevelNavigate(
-            R.id.dest_edit_scheduler,
+            RBase.id.dest_edit_scheduler,
             EditSchedulerFragment.getBundle(scheduler?.id ?: SchedulerEntity.NEW_ID)
         )
     }
@@ -157,14 +160,14 @@ class SchedulerFragment : Fragment(R.layout.fragment_scheduler), MainCallback.Fr
         val actionSize = softDeleteHelper.actionSize
         snackbar = mainCallback.snackbarView.longSnackbar(
             getString(
-                R.string.delete_done_template,
+                RBase.string.delete_done_template,
                 if (actionSize == 1) {
                     scheduler.scheduler.label
                 } else {
-                    resources.getNumberFormattedQuantityString(R.plurals.schedulers, actionSize)
+                    resources.getNumberFormattedQuantityString(RBase.plurals.schedulers, actionSize)
                 }
             ),
-            getString(R.string.undo)
+            getString(RTools.string.undo)
         ) {
             softDeleteHelper.undo()
             viewModel.load()
@@ -176,11 +179,12 @@ class SchedulerFragment : Fragment(R.layout.fragment_scheduler), MainCallback.Fr
         MaterialAlertDialogBuilder(context)
             .setCancelable(false)
             .setIcon(
-                context.drawable(R.drawable.ic_warning).tinted(context.color(R.color.md_red_500))
+                context.drawable(RBase.drawable.ic_warning)
+                    .tinted(context.color(RMaterialize.color.md_red_500))
             )
-            .setTitle(R.string.scheduler_alert_title)
-            .setMessage(R.string.scheduler_alert_content)
-            .setPositiveButton(R.string.understand, null)
+            .setTitle(RBase.string.scheduler_alert_title)
+            .setMessage(RBase.string.scheduler_alert_content)
+            .setPositiveButton(RBase.string.understand, null)
             .show()
     }
 
@@ -193,15 +197,15 @@ class SchedulerFragment : Fragment(R.layout.fragment_scheduler), MainCallback.Fr
                     }
                     is SetSchedulerEnable.Result.Canceled -> {
                         getString(
-                            R.string.scheduler_canceled_template,
+                            RBase.string.scheduler_canceled_template,
                             resources.getNumberFormattedQuantityString(
-                                R.plurals.schedulers,
+                                RBase.plurals.schedulers,
                                 it.count
                             )
                         )
                     }
                     is SetSchedulerEnable.Result.Failed -> {
-                        getString(R.string.scheduler_schedule_failed)
+                        getString(RBase.string.scheduler_schedule_failed)
                     }
                 }
             )
@@ -214,7 +218,7 @@ private const val SP_SHOW_SCHEDULER_DIALOG = "pref_show_scheduler_dialog2"
 private fun Long.formatElapsedTimeUntilScheduler(res: Resources): String {
     var delta = this - System.currentTimeMillis()
     // If the alarm will ring within 60 seconds, just report "less than a minute."
-    val formats = res.getStringArray(R.array.scheduler_set)
+    val formats = res.getStringArray(RBase.array.scheduler_set)
     if (delta < DateUtils.MINUTE_IN_MILLIS) {
         return formats[0]
     }
@@ -230,9 +234,9 @@ private fun Long.formatElapsedTimeUntilScheduler(res: Resources): String {
     val days = hours / 24
     hours %= 24
 
-    val daySeq = res.getNumberFormattedQuantityString(R.plurals.days, days)
-    val minSeq = res.getNumberFormattedQuantityString(R.plurals.minutes, minutes)
-    val hourSeq = res.getNumberFormattedQuantityString(R.plurals.hours, hours)
+    val daySeq = res.getNumberFormattedQuantityString(RBase.plurals.days, days)
+    val minSeq = res.getNumberFormattedQuantityString(RBase.plurals.minutes, minutes)
+    val hourSeq = res.getNumberFormattedQuantityString(RBase.plurals.hours, hours)
 
     val showDays = days > 0
     val showHours = hours > 0

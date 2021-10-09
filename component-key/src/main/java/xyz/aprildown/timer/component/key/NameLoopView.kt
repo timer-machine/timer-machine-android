@@ -13,6 +13,7 @@ import com.google.android.material.textfield.TextInputLayout
 import xyz.aprildown.tools.helper.showActionAndMultiLine
 import xyz.aprildown.tools.helper.themeColor
 import xyz.aprildown.tools.helper.toColorStateList
+import com.google.android.material.R as RMaterial
 
 class NameLoopView(
     context: Context,
@@ -39,7 +40,7 @@ class NameLoopView(
         context.withStyledAttributes(attrs, R.styleable.NameLoopView) {
             val color = getColor(
                 R.styleable.NameLoopView_nlv_view_color,
-                context.themeColor(R.attr.colorOnPrimary)
+                context.themeColor(RMaterial.attr.colorOnPrimary)
             )
             withColor(color)
         }

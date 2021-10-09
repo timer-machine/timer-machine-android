@@ -24,7 +24,6 @@ import androidx.test.filters.LargeTest
 import com.mikepenz.fastadapter.FastAdapter
 import dagger.hilt.android.testing.HiltAndroidRule
 import dagger.hilt.android.testing.HiltAndroidTest
-import io.github.deweyreed.timer.R
 import io.github.deweyreed.timer.TestDataModule
 import kotlinx.coroutines.runBlocking
 import org.hamcrest.Matcher
@@ -47,6 +46,11 @@ import xyz.aprildown.timer.domain.entities.TimerEntity
 import xyz.aprildown.timer.domain.repositories.NotifierRepository
 import xyz.aprildown.timer.domain.utils.Constants
 import javax.inject.Inject
+import com.google.android.material.R as RMaterial
+import xyz.aprildown.timer.app.base.R as RBase
+import xyz.aprildown.timer.app.intro.R as RIntro
+import xyz.aprildown.timer.app.timer.edit.R as RTimerEdit
+import xyz.aprildown.timer.component.key.R as RComponentKey
 
 @RunWith(AndroidJUnit4::class)
 @LargeTest
@@ -75,13 +79,13 @@ class EditActivityTest {
     @Test
     fun snackbar() {
         launchEditTimerActivity()
-        onView(withId(R.id.editNameLoopName)).perform(replaceText(""))
-        onView(withId(R.id.action_save_timer)).perform(click())
+        onView(withId(RComponentKey.id.editNameLoopName)).perform(replaceText(""))
+        onView(withId(RIntro.id.action_save_timer)).perform(click())
         Thread.sleep(500)
         onView(
             allOf(
-                withId(R.id.snackbar_text),
-                withText(R.string.edit_wrong_empty_name)
+                withId(RMaterial.id.snackbar_text),
+                withText(RBase.string.edit_wrong_empty_name)
             )
         )
             .check(matches(isDisplayed()))
@@ -90,17 +94,17 @@ class EditActivityTest {
     @Test
     fun start_end() {
         val scenario = launchEditTimerActivity()
-        onView(withText(R.string.edit_add_start)).check(matches(isDisplayed()))
+        onView(withText(RBase.string.edit_add_start)).check(matches(isDisplayed()))
         scenario.onActivity { it.addStartStep() }
         Thread.sleep(2000)
-        onView(withText(R.string.edit_start_step)).check(matches(isDisplayed()))
+        onView(withText(RBase.string.edit_start_step)).check(matches(isDisplayed()))
 
         onView(isRoot()).perform(ViewActions.swipeUp())
 
-        onView(withText(R.string.edit_add_end)).check(matches(isDisplayed()))
+        onView(withText(RBase.string.edit_add_end)).check(matches(isDisplayed()))
         scenario.onActivity { it.addEndStep() }
         Thread.sleep(2000)
-        onView(withText(R.string.edit_end_step)).check(matches(isDisplayed()))
+        onView(withText(RBase.string.edit_end_step)).check(matches(isDisplayed()))
     }
 
     @Test
@@ -112,7 +116,7 @@ class EditActivityTest {
         onView(
             allOf(
                 withClassName(endsWith("EditText")),
-                withText(R.string.edit_default_notifier_name)
+                withText(RBase.string.edit_default_notifier_name)
             )
         ).check(matches(isDisplayed()))
 
@@ -121,28 +125,29 @@ class EditActivityTest {
         onView(
             allOf(
                 withClassName(endsWith("EditText")),
-                withText(`is`(context.getString(R.string.edit_default_notifier_name)))
+                withText(`is`(context.getString(RBase.string.edit_default_notifier_name)))
             )
         ).perform(replaceText(new.label))
 
-        onView(withId(R.id.listEditSteps)).perform(
+        onView(withId(RTimerEdit.id.listEditSteps)).perform(
             RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(
                 1,
                 object : ViewAction {
                     override fun getDescription(): String = ""
                     override fun getConstraints(): Matcher<View> = allOf()
                     override fun perform(uiController: UiController, view: View) {
-                        view.findViewById<View>(R.id.btnBehaviourAdd).performClick()
+                        view.findViewById<View>(RComponentKey.id.btnBehaviourAdd).performClick()
                     }
                 }
             )
         )
         Thread.sleep(500)
-        onView(withText(containsString(context.getString(R.string.behaviour_voice)))).perform(click())
+        onView(withText(containsString(context.getString(RBase.string.behaviour_voice))))
+            .perform(click())
 
         // new added notifier should be same as the last one
         scenario.onActivity { it.addNotifierStep() }
-        onView(withId(R.id.listEditSteps)).check { view, _ ->
+        onView(withId(RTimerEdit.id.listEditSteps)).check { view, _ ->
             ((view as RecyclerView).adapter as FastAdapter<*>).run {
                 val step1 = getItem(1) as EditableStep
                 val step2 = getItem(2) as EditableStep
@@ -153,7 +158,7 @@ class EditActivityTest {
             }
         }
 
-        onView(withId(R.id.action_save_timer)).perform(click())
+        onView(withId(RIntro.id.action_save_timer)).perform(click())
         val stored = runBlocking { notifierRepo.get() }
         assertEquals(new.label, stored.label)
         assertEquals(StepType.NOTIFIER, stored.type)
@@ -171,7 +176,7 @@ class EditActivityTest {
         onView(withText(old.label)).check(matches(isDisplayed()))
         onView(withText(old.length.produceTime())).check(matches(isDisplayed()))
 
-        onView(withId(R.id.listEditSteps)).check { view, _ ->
+        onView(withId(RTimerEdit.id.listEditSteps)).check { view, _ ->
             ((view as RecyclerView).adapter as FastAdapter<*>).run {
                 assertEquals(old.behaviour, (getItem(1) as EditableStep).behaviour)
             }

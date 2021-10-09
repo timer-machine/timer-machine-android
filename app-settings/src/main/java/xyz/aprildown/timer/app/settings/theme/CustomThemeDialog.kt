@@ -15,6 +15,7 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import xyz.aprildown.timer.app.settings.R
 import xyz.aprildown.tools.helper.requireCallback
 import xyz.aprildown.tools.view.ListItemWithLayout
+import xyz.aprildown.timer.app.base.R as RBase
 
 internal class CustomThemeDialog : DialogFragment(), ColorChooserDialog.ColorCallback {
 
@@ -49,7 +50,7 @@ internal class CustomThemeDialog : DialogFragment(), ColorChooserDialog.ColorCal
         val view = View.inflate(context, R.layout.dialog_custom_theme, null)
 
         val dialog = MaterialAlertDialogBuilder(context)
-            .setTitle(R.string.theme_custom_title)
+            .setTitle(RBase.string.theme_custom_title)
             .setView(view)
             .setPositiveButton(android.R.string.ok) { _, _ ->
                 callback.onCustomThemePick(colorPrimary, colorSecondary)
@@ -62,9 +63,9 @@ internal class CustomThemeDialog : DialogFragment(), ColorChooserDialog.ColorCal
                 .tag(tag)
                 .doneButton(android.R.string.ok)
                 .cancelButton(android.R.string.cancel)
-                .customButton(R.string.theme_pick_colors)
-                .presetsButton(R.string.theme_pick_presets)
-                .backButton(R.string.theme_pick_back)
+                .customButton(RBase.string.theme_pick_colors)
+                .presetsButton(RBase.string.theme_pick_presets)
+                .backButton(RBase.string.theme_pick_back)
                 .allowUserColorInputAlpha(false)
                 .dynamicButtonColor(tintButtons)
                 .show(childFragmentManager)
@@ -74,14 +75,14 @@ internal class CustomThemeDialog : DialogFragment(), ColorChooserDialog.ColorCal
         imagePrimary = itemPrimary.getLayoutView()
         imagePrimary.setBackgroundColor(colorPrimary)
         itemPrimary.setOnClickListener {
-            showChooser(R.string.theme_custom_primary, "p", tintButtons = false)
+            showChooser(RBase.string.theme_custom_primary, "p", tintButtons = false)
         }
 
         val itemSecondary = view.findViewById<ListItemWithLayout>(R.id.itemCustomThemeSecondary)
         imageSecondary = itemSecondary.getLayoutView()
         imageSecondary.setBackgroundColor(colorSecondary)
         itemSecondary.setOnClickListener {
-            showChooser(R.string.theme_custom_secondary, "a", tintButtons = true)
+            showChooser(RBase.string.theme_custom_secondary, "a", tintButtons = true)
         }
 
         return dialog

@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.mikepenz.fastadapter.items.AbstractItem
 import xyz.aprildown.timer.app.timer.one.R
 import xyz.aprildown.tools.helper.attachToView
+import xyz.aprildown.timer.app.base.R as RBase
 
 internal class VisibleGroup(
     private val name: String,
@@ -19,7 +20,7 @@ internal class VisibleGroup(
 ) : AbstractItem<VisibleGroup.ViewHolder>() {
 
     override val layoutRes: Int = R.layout.item_step_group
-    override val type: Int = R.id.type_step_group
+    override val type: Int = RBase.id.type_step_group
     override fun getViewHolder(v: View): ViewHolder = ViewHolder(v)
     override var identifier: Long = id
 

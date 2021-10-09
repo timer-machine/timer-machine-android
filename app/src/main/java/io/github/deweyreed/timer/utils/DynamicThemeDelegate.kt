@@ -14,6 +14,8 @@ import xyz.aprildown.theme.ThemeInflationDelegate
 import xyz.aprildown.timer.app.timer.list.record.RecordTimersButton
 import xyz.aprildown.timer.component.key.NameLoopView
 import xyz.aprildown.tools.helper.themeColor
+import io.github.deweyreed.scrollhmspicker.R as RScrollHmsPicker
+import xyz.aprildown.timer.component.key.R as RComponentKey
 
 class DynamicThemeDelegate : ThemeInflationDelegate() {
 
@@ -47,10 +49,13 @@ class DynamicThemeDelegate : ThemeInflationDelegate() {
                 }
             "io.github.deweyreed.scrollhmspicker.ScrollHmsPicker" ->
                 ScrollHmsPicker(context, attrs).apply {
-                    context.withStyledAttributes(attrs, R.styleable.ScrollHmsPicker) {
+                    context.withStyledAttributes(
+                        attrs,
+                        RScrollHmsPicker.styleable.ScrollHmsPicker
+                    ) {
                         matchThemeColor(
                             typedArray = this,
-                            index = R.styleable.ScrollHmsPicker_shp_selected_color
+                            index = RScrollHmsPicker.styleable.ScrollHmsPicker_shp_selected_color
                         )?.let {
                             setColorIntSelected(it)
                         }
@@ -58,10 +63,10 @@ class DynamicThemeDelegate : ThemeInflationDelegate() {
                 }
             "xyz.aprildown.timer.component.key.NameLoopView" ->
                 NameLoopView(context, attrs).apply {
-                    context.withStyledAttributes(attrs, R.styleable.NameLoopView) {
+                    context.withStyledAttributes(attrs, RComponentKey.styleable.NameLoopView) {
                         matchThemeColor(
                             typedArray = this,
-                            index = R.styleable.NameLoopView_nlv_view_color
+                            index = RComponentKey.styleable.NameLoopView_nlv_view_color
                         )?.let {
                             withColor(it)
                         }

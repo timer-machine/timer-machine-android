@@ -21,6 +21,7 @@ import xyz.aprildown.timer.presentation.stream.getNiceLoopString
 import xyz.aprildown.timer.presentation.stream.getStep
 import xyz.aprildown.tools.arch.observeEvent
 import xyz.aprildown.tools.helper.pendingServiceIntent
+import xyz.aprildown.timer.app.base.R as RBase
 
 @RequiresApi(Build.VERSION_CODES.O)
 internal class PipHelper(
@@ -98,23 +99,23 @@ internal class PipHelper(
         return listOf(
             if (viewModel.timerCurrentState.value?.isRunning == true) {
                 RemoteAction(
-                    Icon.createWithResource(activity, R.drawable.ic_pause),
-                    activity.getString(R.string.pause),
-                    activity.getString(R.string.pause),
+                    Icon.createWithResource(activity, RBase.drawable.ic_pause),
+                    activity.getString(RBase.string.pause),
+                    activity.getString(RBase.string.pause),
                     activity.pendingServiceIntent(streamMachineIntentProvider.pauseIntent(timer.id))
                 )
             } else {
                 RemoteAction(
-                    Icon.createWithResource(activity, R.drawable.ic_start),
-                    activity.getString(R.string.start),
-                    activity.getString(R.string.start),
+                    Icon.createWithResource(activity, RBase.drawable.ic_start),
+                    activity.getString(RBase.string.start),
+                    activity.getString(RBase.string.start),
                     activity.pendingServiceIntent(streamMachineIntentProvider.startIntent(timer.id))
                 )
             },
             RemoteAction(
-                Icon.createWithResource(activity, R.drawable.ic_stop),
-                activity.getString(R.string.stop),
-                activity.getString(R.string.stop),
+                Icon.createWithResource(activity, RBase.drawable.ic_stop),
+                activity.getString(RBase.string.stop),
+                activity.getString(RBase.string.stop),
                 activity.pendingServiceIntent(streamMachineIntentProvider.resetIntent(timer.id))
             )
         )

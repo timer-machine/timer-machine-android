@@ -4,16 +4,16 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.widget.CompoundButton
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
-import xyz.aprildown.timer.app.timer.edit.R
 import xyz.aprildown.timer.app.timer.edit.databinding.DialogHalfOptionBinding
 import xyz.aprildown.timer.domain.entities.HalfAction
+import xyz.aprildown.timer.app.base.R as RBase
 
 internal class HalfDialog(private val context: Context) {
     fun showOptionDialog(oldOption: Int, onOption: (Int) -> Unit) {
         val binding = DialogHalfOptionBinding.inflate(LayoutInflater.from(context))
         var newOption = oldOption
         MaterialAlertDialogBuilder(context)
-            .setTitle(R.string.half_option)
+            .setTitle(RBase.string.half_option)
             .setView(binding.root)
             .setPositiveButton(android.R.string.ok) { _, _ ->
                 onOption.invoke(newOption)

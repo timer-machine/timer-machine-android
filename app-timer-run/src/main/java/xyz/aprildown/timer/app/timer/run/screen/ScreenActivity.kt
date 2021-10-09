@@ -22,7 +22,6 @@ import dagger.hilt.android.AndroidEntryPoint
 import xyz.aprildown.timer.app.base.ui.BaseActivity
 import xyz.aprildown.timer.app.base.utils.setTime
 import xyz.aprildown.timer.app.timer.run.MachineService
-import xyz.aprildown.timer.app.timer.run.R
 import xyz.aprildown.timer.app.timer.run.databinding.ActivityScreenBinding
 import xyz.aprildown.timer.domain.entities.TimerEntity
 import xyz.aprildown.timer.domain.utils.Constants
@@ -31,6 +30,7 @@ import xyz.aprildown.timer.presentation.stream.MachineContract
 import xyz.aprildown.tools.arch.observeEvent
 import xyz.aprildown.tools.helper.startDrawableAnimation
 import xyz.aprildown.tools.helper.stopDrawableAnimation
+import xyz.aprildown.tools.R as RTools
 
 @AndroidEntryPoint
 class ScreenActivity : BaseActivity() {
@@ -77,7 +77,7 @@ class ScreenActivity : BaseActivity() {
 
     private fun setUpFullscreen() {
         WindowCompat.setDecorFitsSystemWindows(window, false)
-        val isLandscape = resources.getBoolean(R.bool.is_landscape)
+        val isLandscape = resources.getBoolean(RTools.bool.is_landscape)
         ViewCompat.setOnApplyWindowInsetsListener(binding.root) { v, insets ->
             val targetInsets = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             val isLtr = ViewCompat.getLayoutDirection(v) == ViewCompat.LAYOUT_DIRECTION_LTR

@@ -11,6 +11,7 @@ import xyz.aprildown.timer.domain.usecases.timer.FindTimerInfo
 import xyz.aprildown.timer.domain.utils.Constants
 import xyz.aprildown.tools.anko.toast
 import javax.inject.Inject
+import xyz.aprildown.timer.app.base.R as RBase
 
 @AndroidEntryPoint
 class PhantomActivity : BaseActivity() {
@@ -25,7 +26,7 @@ class PhantomActivity : BaseActivity() {
         try {
             super.onCreate(savedInstanceState)
             when (intent?.action) {
-                ACTION_SHORTCUT_CREATED -> toast(R.string.shortcut_created)
+                ACTION_SHORTCUT_CREATED -> toast(RBase.string.shortcut_created)
                 Constants.ACTION_START -> {
                     val id = intent?.getIntExtra(Constants.EXTRA_TIMER_ID, TimerEntity.NULL_ID)
                     if (id != null &&
@@ -39,7 +40,7 @@ class PhantomActivity : BaseActivity() {
                         if (intent.getBooleanExtra(EXTRA_ONE_SETTING, false)) {
                             startActivity(appNavigator.getOneIntent(timerId = id))
                         } else {
-                            toast(R.string.shortcut_timer_started)
+                            toast(RBase.string.shortcut_timer_started)
                         }
                     }
                 }

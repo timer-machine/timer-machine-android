@@ -27,6 +27,7 @@ import xyz.aprildown.tools.anko.dp
 import xyz.aprildown.tools.anko.snackbar
 import xyz.aprildown.tools.arch.observeEvent
 import xyz.aprildown.tools.arch.observeNonNull
+import xyz.aprildown.timer.app.base.R as RBase
 
 @AndroidEntryPoint
 class OneFragment : BaseOneFragment<FragmentOneBinding>(), FiveActionsView.Listener {
@@ -57,8 +58,8 @@ class OneFragment : BaseOneFragment<FragmentOneBinding>(), FiveActionsView.Liste
 
         viewModel.messageEvent.observeEvent(viewLifecycleOwner) {
             when (it) {
-                R.string.one_ui_locked -> {
-                    binding.layoutOneRoot.snackbar(it, R.string.one_ui_unlock) {
+                RBase.string.one_ui_locked -> {
+                    binding.layoutOneRoot.snackbar(it, RBase.string.one_ui_unlock) {
                         actionLockUi(false)
                     }
                 }
@@ -148,7 +149,7 @@ class OneFragment : BaseOneFragment<FragmentOneBinding>(), FiveActionsView.Liste
         popupMenu {
             section {
                 switchItem {
-                    label = context.getString(R.string.one_action_lock_ui)
+                    label = context.getString(RBase.string.one_action_lock_ui)
                     onBind = {
                         it.isChecked = viewModel.uiLocked.value ?: false
                     }
@@ -157,33 +158,33 @@ class OneFragment : BaseOneFragment<FragmentOneBinding>(), FiveActionsView.Liste
                     }
                 }
                 item {
-                    label = context.getString(R.string.one_action_show_float)
+                    label = context.getString(RBase.string.one_action_show_float)
                     callback = { actionFloating() }
                 }
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O &&
                     context.packageManager.hasSystemFeature(PackageManager.FEATURE_PICTURE_IN_PICTURE)
                 ) {
                     item {
-                        label = context.getString(R.string.one_action_pip)
-                        icon = R.drawable.settings_pip
+                        label = context.getString(RBase.string.one_action_pip)
+                        icon = RBase.drawable.settings_pip
                         callback = { actionEnterPipMode() }
                     }
                 }
             }
             section {
                 item {
-                    label = context.getString(R.string.one_action_edit_layout)
-                    icon = R.drawable.settings_customize
+                    label = context.getString(RBase.string.one_action_edit_layout)
+                    icon = RBase.drawable.settings_customize
                     callback = { actionToOneLayoutSetting() }
                 }
                 item {
-                    label = context.getString(R.string.one_action_add_shortcut)
-                    icon = R.drawable.ic_watch
+                    label = context.getString(RBase.string.one_action_add_shortcut)
+                    icon = RBase.drawable.ic_watch
                     callback = { actionCreateShortcut() }
                 }
                 item {
-                    label = context.getString(R.string.one_action_edit_timer)
-                    icon = R.drawable.ic_edit
+                    label = context.getString(RBase.string.one_action_edit_timer)
+                    icon = RBase.drawable.ic_edit
                     callback = { actionEditTimer() }
                 }
             }
@@ -219,14 +220,14 @@ class OneFragment : BaseOneFragment<FragmentOneBinding>(), FiveActionsView.Liste
                 if (it == true) {
                     binding.fiveActionsOne.changeAction(
                         PreferenceData.ONE_LAYOUT_ONE_ACTION_LOCK,
-                        R.string.one_action_unlock_ui,
-                        R.drawable.ic_locked
+                        RBase.string.one_action_unlock_ui,
+                        RBase.drawable.ic_locked
                     )
                 } else {
                     binding.fiveActionsOne.changeAction(
                         PreferenceData.ONE_LAYOUT_ONE_ACTION_LOCK,
-                        R.string.one_action_lock_ui,
-                        R.drawable.ic_unlocked
+                        RBase.string.one_action_lock_ui,
+                        RBase.drawable.ic_unlocked
                     )
                 }
             }
@@ -265,22 +266,22 @@ class OneFragment : BaseOneFragment<FragmentOneBinding>(), FiveActionsView.Liste
             keys.map {
                 when (it) {
                     PreferenceData.ONE_LAYOUT_ONE_ACTION_STOP -> FiveActionsView.Action(
-                        it, R.string.one_action_stop, R.drawable.ic_stop
+                        it, RBase.string.one_action_stop, RBase.drawable.ic_stop
                     )
                     PreferenceData.ONE_LAYOUT_ONE_ACTION_PREV -> FiveActionsView.Action(
-                        it, R.string.one_action_prev, R.drawable.ic_arrow_up
+                        it, RBase.string.one_action_prev, RBase.drawable.ic_arrow_up
                     )
                     PreferenceData.ONE_LAYOUT_ONE_ACTION_NEXT -> FiveActionsView.Action(
-                        it, R.string.one_action_next, R.drawable.ic_arrow_down
+                        it, RBase.string.one_action_next, RBase.drawable.ic_arrow_down
                     )
                     PreferenceData.ONE_LAYOUT_ONE_ACTION_MORE -> FiveActionsView.Action(
-                        it, R.string.one_action_more, R.drawable.ic_overflow
+                        it, RBase.string.one_action_more, RBase.drawable.ic_overflow
                     )
                     PreferenceData.ONE_LAYOUT_ONE_ACTION_LOCK -> FiveActionsView.Action(
-                        it, R.string.one_action_lock_ui, R.drawable.ic_unlocked
+                        it, RBase.string.one_action_lock_ui, RBase.drawable.ic_unlocked
                     )
                     PreferenceData.ONE_LAYOUT_ONE_ACTION_EDIT -> FiveActionsView.Action(
-                        it, R.string.one_action_edit_timer, R.drawable.ic_edit
+                        it, RBase.string.one_action_edit_timer, RBase.drawable.ic_edit
                     )
                     else -> throw IllegalStateException("Unknown action $it")
                 }

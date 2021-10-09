@@ -27,6 +27,7 @@ import java.util.Calendar.SUNDAY
 import java.util.Calendar.THURSDAY
 import java.util.Calendar.TUESDAY
 import java.util.Calendar.WEDNESDAY
+import com.mikepenz.materialize.R as RMaterialize
 
 object PreferenceData {
 
@@ -235,32 +236,32 @@ object PreferenceData {
         ELAPSED_TIME(
             iconRes = R.drawable.ic_time_panel_elapsed,
             despRes = R.string.time_panel_elapsed_time,
-            colorRes = R.color.md_grey_500
+            colorRes = RMaterialize.color.md_grey_500
         ),
         ELAPSED_PERCENT(
             iconRes = R.drawable.ic_time_panel_elapsed,
             despRes = R.string.time_panel_elapsed_percent,
-            colorRes = R.color.md_grey_500
+            colorRes = RMaterialize.color.md_grey_500
         ),
         REMAINING_TIME(
             iconRes = R.drawable.ic_time_panel_remaining,
             despRes = R.string.time_panel_remaining_time,
-            colorRes = R.color.md_green_500
+            colorRes = RMaterialize.color.md_green_500
         ),
         REMAINING_PERCENT(
             iconRes = R.drawable.ic_time_panel_remaining,
             despRes = R.string.time_panel_remaining_percent,
-            colorRes = R.color.md_green_500
+            colorRes = RMaterialize.color.md_green_500
         ),
         STEP_END_TIME(
             iconRes = R.drawable.ic_time_panel_step_end_time,
             despRes = R.string.time_panel_step_end_time,
-            colorRes = R.color.md_amber_800
+            colorRes = RMaterialize.color.md_amber_800
         ),
         TIMER_END_TIME(
             iconRes = R.drawable.ic_time_panel_timer_end_time,
             despRes = R.string.time_panel_timer_end_time,
-            colorRes = R.color.md_amber_800
+            colorRes = RMaterialize.color.md_amber_800
         );
 
         fun formatText(context: Context, data: Double): String = when (this) {
@@ -342,11 +343,11 @@ object PreferenceData {
     fun StepType.getTypeColor(context: Context): Int = when (this) {
         StepType.NORMAL -> context.safeSharedPreference.getInt(
             KEY_STEP_NORMAL,
-            context.color(R.color.md_purple_500)
+            context.color(RMaterialize.color.md_purple_500)
         )
         StepType.NOTIFIER -> context.safeSharedPreference.getInt(
             KEY_STEP_NOTIFIER,
-            context.color(R.color.md_light_blue_500)
+            context.color(RMaterialize.color.md_light_blue_500)
         )
         StepType.START -> context.safeSharedPreference.getInt(
             KEY_STEP_START,

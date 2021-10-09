@@ -13,6 +13,7 @@ import xyz.aprildown.timer.domain.entities.FolderEntity
 import xyz.aprildown.timer.domain.entities.FolderSortBy
 import xyz.aprildown.tools.helper.dimen
 import xyz.aprildown.tools.view.SimpleInputDialog
+import xyz.aprildown.timer.app.base.R as RBase
 
 internal class FolderToolbar(
     context: Context,
@@ -41,7 +42,7 @@ internal class FolderToolbar(
         binding = ViewFolderToolbarBinding.inflate(LayoutInflater.from(context), this)
 
         fun requestFolderName(f: (String) -> Unit) {
-            SimpleInputDialog(context).show(titleRes = R.string.folder_name) {
+            SimpleInputDialog(context).show(titleRes = RBase.string.folder_name) {
                 if (it.isNotBlank()) {
                     f.invoke(it)
                 }
@@ -68,7 +69,7 @@ internal class FolderToolbar(
                 }
                 section {
                     item {
-                        labelRes = R.string.folder_trash
+                        labelRes = RBase.string.folder_trash
                         callback = {
                             this@FolderToolbar.callback?.onChangeFolder(folderId = FolderEntity.FOLDER_TRASH)
                         }
@@ -97,12 +98,12 @@ internal class FolderToolbar(
                         }
                     }
 
-                    addItem(R.string.folder_sort_added_newest, FolderSortBy.AddedNewest)
-                    addItem(R.string.folder_sort_added_oldest, FolderSortBy.AddedOldest)
-                    addItem(R.string.folder_sort_run_newest, FolderSortBy.RunNewest)
-                    addItem(R.string.folder_sort_run_oldest, FolderSortBy.RunOldest)
-                    addItem(R.string.folder_sort_a_to_z, FolderSortBy.AToZ)
-                    addItem(R.string.folder_sort_z_to_a, FolderSortBy.ZToA)
+                    addItem(RBase.string.folder_sort_added_newest, FolderSortBy.AddedNewest)
+                    addItem(RBase.string.folder_sort_added_oldest, FolderSortBy.AddedOldest)
+                    addItem(RBase.string.folder_sort_run_newest, FolderSortBy.RunNewest)
+                    addItem(RBase.string.folder_sort_run_oldest, FolderSortBy.RunOldest)
+                    addItem(RBase.string.folder_sort_a_to_z, FolderSortBy.AToZ)
+                    addItem(RBase.string.folder_sort_z_to_a, FolderSortBy.ZToA)
                 }
             }.show(context, it)
         }
@@ -112,7 +113,7 @@ internal class FolderToolbar(
                 dropdownGravity = Gravity.TOP or Gravity.END
                 section {
                     item {
-                        labelRes = R.string.folder_new_folder
+                        labelRes = RBase.string.folder_new_folder
                         callback = {
                             requestFolderName {
                                 this@FolderToolbar.callback?.onCreateNewFolder(it)
@@ -121,7 +122,7 @@ internal class FolderToolbar(
                     }
                     if (canCurrentFolderBeRenamed) {
                         item {
-                            labelRes = R.string.folder_rename
+                            labelRes = RBase.string.folder_rename
                             callback = {
                                 requestFolderName {
                                     this@FolderToolbar.callback?.onChangeCurrentFolderName(it)
@@ -130,7 +131,7 @@ internal class FolderToolbar(
                         }
                     }
                     item {
-                        labelRes = R.string.folder_delete
+                        labelRes = RBase.string.folder_delete
                         callback = {
                             this@FolderToolbar.callback?.onDeleteCurrentFolder()
                         }
@@ -148,11 +149,11 @@ internal class FolderToolbar(
         binding.btnFolderToolbarGridList.run {
             tag = showGrid
             if (showGrid) {
-                contentDescription = context.getString(R.string.folder_to_grid_view)
-                setImageResource(R.drawable.ic_grid_view)
+                contentDescription = context.getString(RBase.string.folder_to_grid_view)
+                setImageResource(RBase.drawable.ic_grid_view)
             } else {
-                contentDescription = context.getString(R.string.folder_to_list_view)
-                setImageResource(R.drawable.ic_list_view)
+                contentDescription = context.getString(RBase.string.folder_to_list_view)
+                setImageResource(RBase.drawable.ic_list_view)
             }
         }
     }

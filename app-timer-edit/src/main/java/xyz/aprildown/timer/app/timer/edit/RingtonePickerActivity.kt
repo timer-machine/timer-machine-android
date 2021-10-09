@@ -22,6 +22,8 @@ import xyz.aprildown.tools.helper.toColorStateList
 import xyz.aprildown.ultimateringtonepicker.RingtonePickerFragment
 import xyz.aprildown.ultimateringtonepicker.UltimateRingtonePicker
 import javax.inject.Inject
+import xyz.aprildown.timer.app.base.R as RBase
+import xyz.aprildown.tools.R as RTools
 
 @AndroidEntryPoint
 class RingtonePickerActivity : BaseActivity(),
@@ -93,13 +95,13 @@ class RingtonePickerActivity : BaseActivity(),
                     applyNewSafPickSetting()
                 } else {
                     MaterialAlertDialogBuilder(this)
-                        .setTitle(R.string.music_saf_pick)
-                        .setMessage(R.string.music_saf_pick_desp)
-                        .setPositiveButton(R.string.enable) { _, _ ->
+                        .setTitle(RBase.string.music_saf_pick)
+                        .setMessage(RBase.string.music_saf_pick_desp)
+                        .setPositiveButton(RBase.string.enable) { _, _ ->
                             usingSafPick = true
                             applyNewSafPickSetting()
                         }
-                        .setNegativeButton(R.string.cancel, null)
+                        .setNegativeButton(RTools.string.cancel, null)
                         .show()
                 }
             }
@@ -205,7 +207,7 @@ internal fun Context.generateRingtonePickerSettings(select: Uri?): UltimateRingt
                 showSilent = false,
                 defaultUri = UltimateRingtonePicker.createRawRingtoneUri(
                     context = this,
-                    resourceId = R.raw.default_ringtone
+                    resourceId = RBase.raw.default_ringtone
                 )
             ),
             ringtoneTypes = listOf(

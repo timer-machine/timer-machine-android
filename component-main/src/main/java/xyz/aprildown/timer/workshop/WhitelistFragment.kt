@@ -12,6 +12,7 @@ import androidx.preference.PreferenceCategory
 import androidx.preference.PreferenceFragmentCompat
 import xyz.aprildown.timer.app.base.utils.openWebsiteWithWarning
 import xyz.aprildown.tools.helper.startActivitySafely
+import xyz.aprildown.timer.app.base.R as RBase
 
 class WhitelistFragment : PreferenceFragmentCompat() {
     override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
@@ -23,10 +24,10 @@ class WhitelistFragment : PreferenceFragmentCompat() {
             Preference(context).apply {
                 withDefaultSettings()
                 title = "Don't kill my app!"
-                setSummary(R.string.whitelist_don_t_kill_desp)
+                setSummary(RBase.string.whitelist_don_t_kill_desp)
                 setOnPreferenceClickListener {
                     context.openWebsiteWithWarning(
-                        "https://dontkillmyapp.com?app=${getString(R.string.app_name)}"
+                        "https://dontkillmyapp.com?app=${getString(RBase.string.app_name)}"
                     )
                     true
                 }
@@ -42,7 +43,7 @@ class WhitelistFragment : PreferenceFragmentCompat() {
                         setOnPreferenceClickListener {
                             context.startActivitySafely(
                                 Intent.createChooser(action.intent, null),
-                                wrongMessageRes = R.string.no_action_found
+                                wrongMessageRes = RBase.string.no_action_found
                             )
                             true
                         }
@@ -53,7 +54,7 @@ class WhitelistFragment : PreferenceFragmentCompat() {
             category.addPreference(
                 Preference(context).apply {
                     withDefaultSettings()
-                    setTitle(R.string.whitelist_ignore_battery_optimization)
+                    setTitle(RBase.string.whitelist_ignore_battery_optimization)
                     setOnPreferenceClickListener {
                         context.startActivitySafely(
                             Intent.createChooser(
@@ -62,7 +63,7 @@ class WhitelistFragment : PreferenceFragmentCompat() {
                                     .setData("package:${context.packageName}".toUri()),
                                 null
                             ),
-                            wrongMessageRes = R.string.no_action_found
+                            wrongMessageRes = RBase.string.no_action_found
                         )
 
                         true
@@ -86,7 +87,7 @@ private data class WhitelistAction(val title: String, val intent: Intent)
  */
 @Suppress("SpellCheckingInspection")
 private fun findAllWhitelistItems(context: Context): List<WhitelistAction> {
-    val appName = context.getString(R.string.app_name)
+    val appName = context.getString(RBase.string.app_name)
     val packageName = context.packageName
 
     val result = mutableListOf<WhitelistAction>()
@@ -94,11 +95,11 @@ private fun findAllWhitelistItems(context: Context): List<WhitelistAction> {
     when (Build.MANUFACTURER.lowercase()) {
         "huawei" -> {
             result += WhitelistAction(
-                title = context.getString(R.string.whitelist_settings_template, 1),
+                title = context.getString(RBase.string.whitelist_settings_template, 1),
                 intent = Intent("huawei.intent.action.HSM_BOOTAPP_MANAGER")
             )
             result += WhitelistAction(
-                title = context.getString(R.string.whitelist_settings_template, 2),
+                title = context.getString(RBase.string.whitelist_settings_template, 2),
                 intent = Intent().setComponent(
                     ComponentName(
                         "com.huawei.systemmanager",
@@ -109,12 +110,12 @@ private fun findAllWhitelistItems(context: Context): List<WhitelistAction> {
         }
         "xiaomi" -> {
             result += WhitelistAction(
-                title = context.getString(R.string.whitelist_settings_template, 1),
+                title = context.getString(RBase.string.whitelist_settings_template, 1),
                 intent = Intent("miui.intent.action.OP_AUTO_START")
                     .addCategory(Intent.CATEGORY_DEFAULT)
             )
             result += WhitelistAction(
-                title = context.getString(R.string.whitelist_settings_template, 2),
+                title = context.getString(RBase.string.whitelist_settings_template, 2),
                 intent = Intent().setComponent(
                     ComponentName(
                         "com.miui.powerkeeper",
@@ -127,13 +128,13 @@ private fun findAllWhitelistItems(context: Context): List<WhitelistAction> {
         }
         "meizu" -> {
             result += WhitelistAction(
-                title = context.getString(R.string.whitelist_settings_template, 1),
+                title = context.getString(RBase.string.whitelist_settings_template, 1),
                 intent = Intent("com.meizu.safe.security.SHOW_APPSEC")
                     .addCategory(Intent.CATEGORY_DEFAULT)
                     .putExtra("packageName", packageName)
             )
             result += WhitelistAction(
-                title = context.getString(R.string.whitelist_settings_template, 2),
+                title = context.getString(RBase.string.whitelist_settings_template, 2),
                 intent = Intent().setComponent(
                     ComponentName(
                         "com.meizu.safe",
@@ -144,7 +145,7 @@ private fun findAllWhitelistItems(context: Context): List<WhitelistAction> {
         }
         "vivo" -> {
             result += WhitelistAction(
-                title = context.getString(R.string.whitelist_settings_template, 1),
+                title = context.getString(RBase.string.whitelist_settings_template, 1),
                 intent = Intent().setComponent(
                     ComponentName(
                         "com.coloros.safecenter",
@@ -153,7 +154,7 @@ private fun findAllWhitelistItems(context: Context): List<WhitelistAction> {
                 )
             )
             result += WhitelistAction(
-                title = context.getString(R.string.whitelist_settings_template, 2),
+                title = context.getString(RBase.string.whitelist_settings_template, 2),
                 intent = Intent().setComponent(
                     ComponentName(
                         "com.vivo.abe",
