@@ -1,7 +1,7 @@
 ext {
     //noinspection SpellCheckingInspection
     versions = [
-            agp         : '7.0.2',
+            agp         : '7.0.3',
             kotlin      : '1.5.31',
             versions    : '0.39.0',
             detekt      : '1.18.1',
