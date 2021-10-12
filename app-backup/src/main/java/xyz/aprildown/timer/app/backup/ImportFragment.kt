@@ -140,25 +140,6 @@ class ImportFragment : Fragment(R.layout.layout_vertical_form), StepperFormListe
                 }
             },
             onSuccess = {
-                try {
-                    // https://developer.android.com/training/secure-file-sharing/retrieve-info#RetrieveFileInfo
-                    context.contentResolver.query(
-                        fileUri,
-                        arrayOf(OpenableColumns.SIZE),
-                        null,
-                        null,
-                        null
-                    )?.use { cursor ->
-                        if (cursor.moveToFirst()) {
-                            cursor.getLongOrNull(cursor.getColumnIndex(OpenableColumns.SIZE))?.let {
-                                trackImportFileSize(appTracker = appTracker, size = it)
-                            }
-                        }
-                    }
-                } catch (e: Exception) {
-                    appTracker.trackError(e)
-                }
-
                 MaterialAlertDialogBuilder(context)
                     .setCancelable(false)
                     .setTitle(RBase.string.import_done)
