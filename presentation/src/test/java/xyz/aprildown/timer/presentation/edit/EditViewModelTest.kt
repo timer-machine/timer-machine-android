@@ -33,7 +33,6 @@ import xyz.aprildown.timer.domain.usecases.timer.AddTimer
 import xyz.aprildown.timer.domain.usecases.timer.DeleteTimer
 import xyz.aprildown.timer.domain.usecases.timer.FindTimerInfo
 import xyz.aprildown.timer.domain.usecases.timer.GetTimer
-import xyz.aprildown.timer.domain.usecases.timer.SampleTimerProvider
 import xyz.aprildown.timer.domain.usecases.timer.SaveTimer
 import xyz.aprildown.timer.presentation.R
 import xyz.aprildown.timer.presentation.testCoroutineDispatcher
@@ -51,7 +50,6 @@ class EditViewModelTest {
     private val findTimerInfo: FindTimerInfo = mock()
     private val getNotifier: GetNotifier = mock()
     private val saveNotifier: SaveNotifier = mock()
-    private val sampleTimerProvider: SampleTimerProvider = mock()
 
     private val snackMessageObserver: Observer<Event<Int>> = mock()
     private val timerUpdatedObserver: Observer<Event<Unit>> = mock()
@@ -72,7 +70,6 @@ class EditViewModelTest {
             getNotifier = getNotifier,
             saveNotifier = saveNotifier,
             defaultName = "Test Default Name",
-            sampleTimerProviderProvider = { sampleTimerProvider },
             shareTimer = mock(),
         )
         viewModel.message.observeForever(snackMessageObserver)
@@ -401,11 +398,9 @@ class EditViewModelTest {
     }
 
     @Test
-    fun `populate sample timer`() = runBlocking {
-        val id = TestData.fakeTimerId
+    fun `populate sample timer`() {
         val timer = TestData.fakeTimerAdvanced
-        whenever(sampleTimerProvider.invoke(id)).thenReturn(timer)
-        viewModel.loadSampleTimer(id)?.join()
+        viewModel.loadSampleTimer(timer)
         assertEquals(timer.name, viewModel.name.value)
         assertEquals(timer.loop, viewModel.loop.value?.toInt())
         assertEquals(timer.steps, viewModel.stepsEvent.value?.peekContent())
@@ -415,8 +410,6 @@ class EditViewModelTest {
             assertTrue(timer.startStep to timer.endStep == firstValue.peekContent())
         }
         assertEquals(timer.more, viewModel.more.value)
-
-        verify(sampleTimerProvider).invoke(id)
 
         verifyNoMoreInteractionsForAll()
     }
@@ -429,7 +422,6 @@ class EditViewModelTest {
         verifyNoMoreInteractions(findTimerInfo)
         verifyNoMoreInteractions(getNotifier)
         verifyNoMoreInteractions(saveNotifier)
-        verifyNoMoreInteractions(sampleTimerProvider)
         verifyNoMoreInteractions(snackMessageObserver)
         verifyNoMoreInteractions(timerUpdatedObserver)
         verifyNoMoreInteractions(startEndLoaderObserver)

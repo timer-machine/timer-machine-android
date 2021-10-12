@@ -276,6 +276,7 @@
     <string name="record_this_month">本月</string>
     <string name="record_this_year">本年</string>
     <string name="record_total_time">從頭開始</string>
+    <string name="record_deleted_timer">已刪除</string>
 
     <!--Timer running screen-->
     <string name="one_action_lock_ui">鎖定介面</string>

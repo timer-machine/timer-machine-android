@@ -10,7 +10,6 @@ import android.provider.OpenableColumns
 import android.view.View
 import android.widget.Button
 import android.widget.TextView
-import androidx.core.database.getLongOrNull
 import androidx.core.database.getStringOrNull
 import androidx.core.text.buildSpannedString
 import androidx.fragment.app.Fragment
@@ -125,24 +124,6 @@ class ExportFragment : Fragment(R.layout.layout_vertical_form), StepperFormListe
                 val fileUri = locationStep.stepData
                 context.contentResolver.openOutputStream(fileUri, "rwt")?.use { os ->
                     os.sink().buffer().writeUtf8(exportString).flush()
-                }
-
-                try {
-                    context.contentResolver.query(
-                        fileUri,
-                        arrayOf(OpenableColumns.SIZE),
-                        null,
-                        null,
-                        null
-                    )?.use { cursor ->
-                        if (cursor.moveToFirst()) {
-                            cursor.getLongOrNull(cursor.getColumnIndex(OpenableColumns.SIZE))?.let {
-                                trackExportFileSize(appTracker = appTracker, size = it)
-                            }
-                        }
-                    }
-                } catch (e: Exception) {
-                    appTracker.trackError(e)
                 }
             },
             onSuccess = {

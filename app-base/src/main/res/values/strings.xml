@@ -320,6 +320,7 @@
     <string name="record_total_time">From day one</string>
     <string name="record_previous_month_a11y" translatable="false">Previous month</string>
     <string name="record_next_month_a11y" translatable="false">Next month</string>
+    <string name="record_deleted_timer">Deleted</string>
 
     <!--Timer running screen-->
     <string name="one_action_lock_ui">Lock UI</string>
