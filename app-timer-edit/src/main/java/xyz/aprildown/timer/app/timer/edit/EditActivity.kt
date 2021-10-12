@@ -56,7 +56,6 @@ import xyz.aprildown.timer.domain.entities.toScreenAction
 import xyz.aprildown.timer.domain.entities.toVibrationAction
 import xyz.aprildown.timer.domain.entities.toVoiceAction
 import xyz.aprildown.timer.domain.usecases.Fruit
-import xyz.aprildown.timer.domain.usecases.timer.SampleTimerProvider
 import xyz.aprildown.timer.domain.utils.Constants
 import xyz.aprildown.timer.presentation.edit.EditViewModel
 import xyz.aprildown.timer.presentation.stream.accumulateTime
@@ -191,9 +190,9 @@ class EditActivity : BaseActivity(),
                         .setItems(RBase.array.sample_timers) { _, which ->
                             userLeave {
                                 when (which) {
-                                    0 -> viewModel.loadSampleTimer(SampleTimerProvider.TEMPLATE_ONE_STAGE)
-                                    1 -> viewModel.loadSampleTimer(SampleTimerProvider.TEMPLATE_TWO_STAGES)
-                                    2 -> viewModel.loadSampleTimer(SampleTimerProvider.TEMPLATE_THREE_STAGES)
+                                    0 -> viewModel.loadSampleTimer(getOneStageTimer())
+                                    1 -> viewModel.loadSampleTimer(getTwoStagesTimer())
+                                    2 -> viewModel.loadSampleTimer(getThreeStagesTimer())
                                 }
                             }
                         }

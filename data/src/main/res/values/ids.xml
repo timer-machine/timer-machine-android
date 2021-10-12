@@ -3,18 +3,4 @@
     <item name="folder_default" type="string" />
     <item name="folder_trash" type="string" />
     <item name="edit_default_notifier_name" type="string" />
-    <item name="sample_timer_template_prepare" type="string" />
-    <item name="sample_timer_template_finish" type="string" />
-    <item name="sample_timer_template_done" type="string" />
-    <item name="sample_timer_template_1_stage_name" type="string" />
-    <item name="sample_timer_template_1_stage_work" type="string" />
-    <item name="sample_timer_template_2_stages_name" type="string" />
-    <item name="sample_timer_template_2_stages_start" type="string" />
-    <item name="sample_timer_template_2_stages_high" type="string" />
-    <item name="sample_timer_template_2_stages_low" type="string" />
-    <item name="sample_timer_template_2_stages_end" type="string" />
-    <item name="sample_timer_template_3_stages_name" type="string" />
-    <item name="sample_timer_template_3_stages_1" type="string" />
-    <item name="sample_timer_template_3_stages_2" type="string" />
-    <item name="sample_timer_template_3_stages_3" type="string" />
 </resources>

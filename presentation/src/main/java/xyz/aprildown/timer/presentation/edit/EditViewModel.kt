@@ -24,7 +24,6 @@ import xyz.aprildown.timer.domain.usecases.timer.AddTimer
 import xyz.aprildown.timer.domain.usecases.timer.DeleteTimer
 import xyz.aprildown.timer.domain.usecases.timer.FindTimerInfo
 import xyz.aprildown.timer.domain.usecases.timer.GetTimer
-import xyz.aprildown.timer.domain.usecases.timer.SampleTimerProvider
 import xyz.aprildown.timer.domain.usecases.timer.SaveTimer
 import xyz.aprildown.timer.domain.usecases.timer.ShareTimer
 import xyz.aprildown.timer.presentation.BaseViewModel
@@ -33,7 +32,6 @@ import xyz.aprildown.timer.presentation.di.ViewModelModule
 import xyz.aprildown.tools.arch.Event
 import javax.inject.Inject
 import javax.inject.Named
-import javax.inject.Provider
 
 /**
  * Instead of putting all work to ViewModel,
@@ -52,7 +50,6 @@ class EditViewModel @Inject constructor(
     private val getNotifier: GetNotifier,
     private val saveNotifier: SaveNotifier,
     @Named(ViewModelModule.DEFAULT_TIMER_NAME) private val defaultName: String,
-    private val sampleTimerProviderProvider: Provider<SampleTimerProvider>,
 
     private val shareTimer: ShareTimer,
 ) : BaseViewModel(mainDispatcher) {
@@ -123,15 +120,12 @@ class EditViewModel @Inject constructor(
         }
     }
 
-    fun loadSampleTimer(sampleTimerId: Int): Job? {
-        return if (sampleTimerId != SampleTimerProvider.NO_SAMPLE) launch {
-            val sampleTimer = sampleTimerProviderProvider.get().invoke(sampleTimerId)
-            name.value = sampleTimer.name
-            loop.value = sampleTimer.loop
-            _stepsEvent.value = Event(sampleTimer.steps)
-            _startEndEvent.value = Event(Pair(sampleTimer.startStep, sampleTimer.endStep))
-            more.value = sampleTimer.more
-        } else null
+    fun loadSampleTimer(timer: TimerEntity) {
+        name.value = timer.name
+        loop.value = timer.loop
+        _stepsEvent.value = Event(timer.steps)
+        _startEndEvent.value = Event(Pair(timer.startStep, timer.endStep))
+        more.value = timer.more
     }
 
     fun requestTimerInfoByTimerId(timerId: Int) = launch {

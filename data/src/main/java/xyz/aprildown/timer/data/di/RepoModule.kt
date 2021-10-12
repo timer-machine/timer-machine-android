@@ -15,7 +15,6 @@ import xyz.aprildown.timer.data.repositories.AppDataRepositoryImpl
 import xyz.aprildown.timer.data.repositories.FolderRepositoryImpl
 import xyz.aprildown.timer.data.repositories.NotifierRepositoryImpl
 import xyz.aprildown.timer.data.repositories.PreferencesRepoImpl
-import xyz.aprildown.timer.data.repositories.SampleTimerRepositoryImpl
 import xyz.aprildown.timer.data.repositories.SchedulerExecutorImpl
 import xyz.aprildown.timer.data.repositories.SchedulerRepositoryImpl
 import xyz.aprildown.timer.data.repositories.TimerRepositoryImpl
@@ -24,7 +23,6 @@ import xyz.aprildown.timer.domain.repositories.AppDataRepository
 import xyz.aprildown.timer.domain.repositories.FolderRepository
 import xyz.aprildown.timer.domain.repositories.NotifierRepository
 import xyz.aprildown.timer.domain.repositories.PreferencesRepository
-import xyz.aprildown.timer.domain.repositories.SampleTimerRepository
 import xyz.aprildown.timer.domain.repositories.SchedulerExecutor
 import xyz.aprildown.timer.domain.repositories.SchedulerRepository
 import xyz.aprildown.timer.domain.repositories.TimerRepository
@@ -54,9 +52,6 @@ internal abstract class RepoModule {
 
     @Binds
     abstract fun bindTimerStampRepo(repo: TimerStampRepositoryImpl): TimerStampRepository
-
-    @Binds
-    abstract fun bindSampleTimersStampRepo(repo: SampleTimerRepositoryImpl): SampleTimerRepository
 
     @Binds
     abstract fun bindPreferencesRepo(repo: PreferencesRepoImpl): PreferencesRepository
