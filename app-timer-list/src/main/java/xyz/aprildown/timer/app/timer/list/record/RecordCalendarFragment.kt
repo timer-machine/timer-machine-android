@@ -47,6 +47,7 @@ import java.time.LocalDateTime
 import java.time.YearMonth
 import java.time.ZoneId
 import java.util.Date
+import xyz.aprildown.timer.app.base.R as RBase
 
 internal class RecordCalendarFragment : Fragment(R.layout.fragment_record_calendar) {
 
@@ -241,7 +242,8 @@ internal class RecordCalendarFragment : Fragment(R.layout.fragment_record_calend
                         itemAdapter.set(
                             signal.result.map {
                                 CalendarDayEvent(
-                                    name = viewModel?.queryTimerName(it.timerId).toString(),
+                                    name = viewModel?.queryTimerName(it.timerId)
+                                        ?: getString(RBase.string.record_deleted_timer),
                                     stamp = it
                                 )
                             }
