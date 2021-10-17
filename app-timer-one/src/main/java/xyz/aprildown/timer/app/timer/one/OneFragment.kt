@@ -3,19 +3,17 @@ package xyz.aprildown.timer.app.timer.one
 import android.content.Context
 import android.content.pm.PackageManager
 import android.os.Build
-import android.view.LayoutInflater
+import android.os.Bundle
 import android.view.View
-import android.view.ViewGroup
-import android.widget.ProgressBar
-import androidx.databinding.DataBindingUtil
-import androidx.databinding.ViewStubProxy
 import com.github.zawadz88.materialpopupmenu.popupMenu
+import com.google.android.material.progressindicator.LinearProgressIndicator
 import dagger.hilt.android.AndroidEntryPoint
 import xyz.aprildown.timer.app.base.data.PreferenceData
 import xyz.aprildown.timer.app.base.data.PreferenceData.oneOneFourActions
 import xyz.aprildown.timer.app.base.data.PreferenceData.oneOneTimeSize
 import xyz.aprildown.timer.app.base.data.PreferenceData.oneOneUsingTimingBar
 import xyz.aprildown.timer.app.base.data.PreferenceData.timePanels
+import xyz.aprildown.timer.app.base.utils.produceTime
 import xyz.aprildown.timer.app.timer.one.databinding.FragmentOneBinding
 import xyz.aprildown.timer.app.timer.one.layout.TweakTimeLayout
 import xyz.aprildown.timer.app.timer.one.step.StepListView
@@ -23,22 +21,27 @@ import xyz.aprildown.timer.component.key.TimePanelLayout
 import xyz.aprildown.timer.component.key.switchItem
 import xyz.aprildown.timer.domain.entities.StepEntity
 import xyz.aprildown.timer.presentation.stream.TimerIndex
+import xyz.aprildown.timer.presentation.stream.getNiceLoopString
 import xyz.aprildown.tools.anko.dp
 import xyz.aprildown.tools.anko.snackbar
 import xyz.aprildown.tools.arch.observeEvent
 import xyz.aprildown.tools.arch.observeNonNull
+import xyz.aprildown.tools.helper.setTextIfChanged
 import xyz.aprildown.timer.app.base.R as RBase
 
 @AndroidEntryPoint
-class OneFragment : BaseOneFragment<FragmentOneBinding>(), FiveActionsView.Listener {
+class OneFragment : BaseOneFragment<FragmentOneBinding>(
+    R.layout.fragment_one
+), FiveActionsView.Listener {
 
-    override fun createBinding(
-        inflater: LayoutInflater,
-        container: ViewGroup?
-    ): FragmentOneBinding =
-        DataBindingUtil.inflate(inflater, R.layout.fragment_one, container, false)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        val binding = FragmentOneBinding.bind(view)
+        setUpViews(binding)
+        applySettings(binding)
+        setUpObservers(binding)
+    }
 
-    override fun setUpViews(binding: FragmentOneBinding) {
+    private fun setUpViews(binding: FragmentOneBinding) {
         val context = binding.root.context
         binding.fiveActionsOne.run {
             setActionClickListener(this@OneFragment)
@@ -191,10 +194,10 @@ class OneFragment : BaseOneFragment<FragmentOneBinding>(), FiveActionsView.Liste
         }.show(context, view)
     }
 
-    override fun applySettings(binding: FragmentOneBinding) {
+    private fun applySettings(binding: FragmentOneBinding) {
         val context = binding.root.context
         if (context.oneOneUsingTimingBar) {
-            val mpb = binding.stubTimingBar.getSafeView<ProgressBar>()
+            val mpb = binding.stubTimingBar.inflate() as LinearProgressIndicator
             viewModel.timerCurrentTime.observe(viewLifecycleOwner) {
                 val stepTime = viewModel.timerStepTime
                 if (stepTime > 0) {
@@ -207,7 +210,7 @@ class OneFragment : BaseOneFragment<FragmentOneBinding>(), FiveActionsView.Liste
 
         context.timePanels.let {
             if (it.isNotEmpty()) {
-                val timePanelLayout = binding.stubTimePanel.getSafeView<TimePanelLayout>()
+                val timePanelLayout = binding.stubTimePanel.inflate() as TimePanelLayout
                 timePanelLayout.setPanels(it)
                 setUpTimePanels(timePanelLayout, it)
             }
@@ -261,6 +264,31 @@ class OneFragment : BaseOneFragment<FragmentOneBinding>(), FiveActionsView.Liste
         }
     }
 
+    private fun setUpObservers(binding: FragmentOneBinding) {
+        viewModel.timerCurrentTime.observe(viewLifecycleOwner) { time ->
+            binding.textOneTime.text = (time ?: 0L).produceTime()
+        }
+        viewModel.timerCurrentIndex.observe(viewLifecycleOwner) { index ->
+            if (index == null) return@observe
+            val totalLoop = viewModel.timer.value?.loop ?: return@observe
+            binding.textOneLoop.setTextIfChanged(index.getNiceLoopString(totalLoop))
+            binding.listOneSteps.toIndex(index)
+        }
+        viewModel.timer.observe(viewLifecycleOwner) { timer ->
+            if (timer == null) return@observe
+            binding.listOneSteps.setTimer(timer)
+        }
+        viewModel.timerCurrentState.observe(viewLifecycleOwner) { state ->
+            binding.fiveActionsOne.changeState(
+                if (state?.isRunning == true) {
+                    FiveActionsView.STATE_PAUSE
+                } else {
+                    FiveActionsView.STATE_PLAY
+                }
+            )
+        }
+    }
+
     companion object {
         fun getFourActionsFromKeys(keys: List<String>): List<FiveActionsView.Action> =
             keys.map {
@@ -288,7 +316,3 @@ class OneFragment : BaseOneFragment<FragmentOneBinding>(), FiveActionsView.Liste
             }
     }
 }
-
-@Suppress("UNCHECKED_CAST")
-private fun <T : View> ViewStubProxy.getSafeView(): T =
-    (if (isInflated) root else viewStub!!.inflate()) as T

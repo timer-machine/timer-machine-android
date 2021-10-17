@@ -7,23 +7,22 @@ import android.content.Intent
 import android.content.ServiceConnection
 import android.net.Uri
 import android.os.Build
-import android.os.Bundle
 import android.os.IBinder
 import android.provider.Settings
 import android.text.InputType
 import android.text.format.DateUtils
-import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.CompoundButton
 import android.widget.EditText
+import androidx.annotation.LayoutRes
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AlertDialog
-import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.NavOptions
 import androidx.navigation.fragment.NavHostFragment
+import androidx.viewbinding.ViewBinding
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import pub.devrel.easypermissions.AfterPermissionGranted
 import pub.devrel.easypermissions.EasyPermissions
@@ -49,7 +48,9 @@ import javax.inject.Inject
 import javax.inject.Provider
 import xyz.aprildown.timer.app.base.R as RBase
 
-abstract class BaseOneFragment<T : ViewDataBinding> : Fragment() {
+abstract class BaseOneFragment<T : ViewBinding>(
+    @LayoutRes contentLayoutId: Int
+) : Fragment(contentLayoutId) {
 
     protected val viewModel: OneViewModel by activityViewModels()
 
@@ -65,23 +66,6 @@ abstract class BaseOneFragment<T : ViewDataBinding> : Fragment() {
     private var isBind = false
 
     private var pipHelper: PipHelper? = null
-
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        val binding = createBinding(inflater, container)
-        binding.lifecycleOwner = viewLifecycleOwner
-        binding.setVariable(BR.viewModel, viewModel)
-        setUpViews(binding)
-        applySettings(binding)
-        return binding.root
-    }
-
-    abstract fun createBinding(inflater: LayoutInflater, container: ViewGroup?): T
-    abstract fun setUpViews(binding: T)
-    abstract fun applySettings(binding: T)
 
     override fun onRequestPermissionsResult(
         requestCode: Int,
