@@ -48,12 +48,16 @@ class NameLoopView(
 
     fun getName(): String = nameView.text.toString()
     fun setName(name: String) {
-        nameView.setText(name)
+        if (name != getName()) {
+            nameView.setText(name)
+        }
     }
 
     fun getLoop(): Int = loopView.text.toString().toIntOrNull() ?: 0
     fun setLoop(loop: Int) {
-        loopView.setText(loop.toString())
+        if (loop != getLoop()) {
+            loopView.setText(loop.toString())
+        }
     }
 
     fun withColor(@ColorInt textColor: Int) {
