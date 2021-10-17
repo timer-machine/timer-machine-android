@@ -53,7 +53,6 @@
     <string name="main_action_record">Records</string>
 
     <!--Permission-->
-    <string name="perm_rational_shortcut">To create a shortcut, grant the app \"Install Shortcut\" permission</string>
     <string name="perm_rational_floating">To show a floating window, grant the app \"Floating Window\" permission</string>
 
     <!--Timer list-->

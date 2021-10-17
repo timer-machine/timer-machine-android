@@ -15,8 +15,6 @@ dependencies {
     implementation libs.hilt_android
     kapt libs.hilt_compiler
 
-    implementation libs.permission
-
     implementation libs.fastadapter
 
     implementation libs.chrome_menu

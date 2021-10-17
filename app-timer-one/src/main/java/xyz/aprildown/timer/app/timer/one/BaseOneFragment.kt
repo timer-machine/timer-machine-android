@@ -1,6 +1,5 @@
 package xyz.aprildown.timer.app.timer.one
 
-import android.Manifest
 import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
@@ -24,9 +23,6 @@ import androidx.navigation.NavOptions
 import androidx.navigation.fragment.NavHostFragment
 import androidx.viewbinding.ViewBinding
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
-import pub.devrel.easypermissions.AfterPermissionGranted
-import pub.devrel.easypermissions.EasyPermissions
-import pub.devrel.easypermissions.PermissionRequest
 import xyz.aprildown.timer.app.base.ui.AppNavigator
 import xyz.aprildown.timer.app.base.ui.StepUpdater
 import xyz.aprildown.timer.app.base.utils.ShortcutHelper
@@ -66,18 +62,6 @@ abstract class BaseOneFragment<T : ViewBinding>(
     private var isBind = false
 
     private var pipHelper: PipHelper? = null
-
-    override fun onRequestPermissionsResult(
-        requestCode: Int,
-        permissions: Array<out String>,
-        grantResults: IntArray
-    ) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-        EasyPermissions.onRequestPermissionsResult(
-            requestCode, permissions, grantResults,
-            this
-        )
-    }
 
     override fun onStart() {
         super.onStart()
@@ -217,19 +201,6 @@ abstract class BaseOneFragment<T : ViewBinding>(
     }
 
     protected fun actionCreateShortcut() {
-        EasyPermissions.requestPermissions(
-            PermissionRequest.Builder(this, 0, Manifest.permission.INSTALL_SHORTCUT)
-                .setRationale(RBase.string.perm_rational_shortcut)
-                .build()
-        )
-    }
-
-    protected fun actionEditTimer() {
-        viewModel.onEdit()
-    }
-
-    @AfterPermissionGranted(0)
-    private fun addShortcut() {
         val timer = viewModel.timer.value ?: return
         val context = requireContext()
 
@@ -265,6 +236,10 @@ abstract class BaseOneFragment<T : ViewBinding>(
             )
             dialog.dismiss()
         }
+    }
+
+    protected fun actionEditTimer() {
+        viewModel.onEdit()
     }
 
     protected fun showPickLoopDialog(maxLoop: Int, onPick: (Int) -> Unit) {
