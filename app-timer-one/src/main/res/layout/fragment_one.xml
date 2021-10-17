@@ -1,129 +1,111 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".ui.one.OneActivity">
+    android:id="@+id/layoutOneRoot"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
-    <data>
-
-        <variable
-            name="viewModel"
-            type="xyz.aprildown.timer.presentation.one.OneViewModel" />
-    </data>
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/layoutOneRoot"
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/cardOneTopInfo"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="0dp"
+        app:cardElevation="2dp"
+        app:layout_constraintBottom_toTopOf="@id/guidelineHorizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
-        <com.google.android.material.card.MaterialCardView
-            android:id="@+id/cardOneTopInfo"
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            app:cardElevation="2dp"
-            app:layout_constraintBottom_toTopOf="@id/guidelineHorizontal"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            android:layout_height="match_parent">
 
-            <androidx.constraintlayout.widget.ConstraintLayout
+            <ViewStub
+                android:id="@+id/stubTimePanel"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:layout_marginTop="4dp"
+                android:layout_marginEnd="4dp"
+                android:inflatedId="@+id/layoutTimePanel"
+                android:layout="@layout/layout_one_widget_time_panel"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-                <ViewStub
-                    android:id="@+id/stubTimePanel"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="4dp"
-                    android:layout_marginTop="4dp"
-                    android:layout_marginEnd="4dp"
-                    android:inflatedId="@+id/layoutTimePanel"
-                    android:layout="@layout/layout_one_widget_time_panel"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+            <TextView
+                android:id="@+id/textOneTime"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/digital_numbers_colon"
+                android:textColor="?android:textColorPrimary"
+                android:textSize="36sp"
+                app:layout_constrainedHeight="true"
+                app:layout_constrainedWidth="true"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="12:34" />
 
-                <TextView
-                    android:id="@+id/textOneTime"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/digital_numbers_colon"
-                    android:textColor="?android:textColorPrimary"
-                    android:textSize="36sp"
-                    app:layout_constrainedHeight="true"
-                    app:layout_constrainedWidth="true"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:oneTime="@{viewModel.timerCurrentTime}"
-                    tools:text="12:34" />
+            <Button
+                android:id="@+id/textOneLoop"
+                style="@style/Widget.MaterialComponents.Button.TextButton.Dialog.Flush"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="?colorSecondary"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                tools:text="1/3" />
 
-                <Button
-                    android:id="@+id/textOneLoop"
-                    style="@style/Widget.MaterialComponents.Button.TextButton.Dialog.Flush"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textColor="?colorSecondary"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:oneLoop="@{viewModel.timerCurrentIndex}"
-                    app:oneTotalLoop="@{viewModel.getTimer().getLoop()}"
-                    tools:text="1/3" />
+            <xyz.aprildown.timer.app.timer.one.layout.TweakTimeLayout
+                android:id="@+id/layoutOneTweakTime"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent" />
 
-                <xyz.aprildown.timer.app.timer.one.layout.TweakTimeLayout
-                    android:id="@+id/layoutOneTweakTime"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="8dp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
-            </androidx.constraintlayout.widget.ConstraintLayout>
+    </com.google.android.material.card.MaterialCardView>
 
-        </com.google.android.material.card.MaterialCardView>
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidelineHorizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.3" />
 
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/guidelineHorizontal"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            app:layout_constraintGuide_percent="0.3" />
+    <xyz.aprildown.timer.app.timer.one.step.StepListView
+        android:id="@+id/listOneSteps"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginBottom="64dp"
+        android:transitionGroup="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/guidelineHorizontal"
+        tools:listitem="@layout/item_step_step" />
 
-        <xyz.aprildown.timer.app.timer.one.step.StepListView
-            android:id="@+id/listOneSteps"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_marginBottom="64dp"
-            android:transitionGroup="true"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/guidelineHorizontal"
-            app:oneStepIndex="@{viewModel.timerCurrentIndex}"
-            app:oneTimer="@{viewModel.timer}"
-            tools:listitem="@layout/item_step_step" />
+    <ViewStub
+        android:id="@+id/stubTimingBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inflatedId="@+id/progressTimingBar"
+        android:layout="@layout/layout_one_widget_timing_bar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/guidelineHorizontal" />
 
-        <ViewStub
-            android:id="@+id/stubTimingBar"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:inflatedId="@+id/progressTimingBar"
-            android:layout="@layout/layout_one_widget_timing_bar"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/guidelineHorizontal" />
+    <xyz.aprildown.timer.app.timer.one.FiveActionsView
+        android:id="@+id/fiveActionsOne"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:layout_height="64dp" />
 
-        <xyz.aprildown.timer.app.timer.one.FiveActionsView
-            android:id="@+id/fiveActionsOne"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:oneFabState="@{viewModel.timerCurrentState}"
-            tools:layout_height="64dp" />
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-</layout>
+</androidx.constraintlayout.widget.ConstraintLayout>

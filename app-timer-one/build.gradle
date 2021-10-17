@@ -5,12 +5,6 @@ plugins {
     id 'dagger.hilt.android.plugin'
 }
 
-android {
-    buildFeatures {
-        dataBinding = true
-    }
-}
-
 dependencies {
     implementation project(':app-base')
     implementation project(':component-key')
@@ -20,8 +14,6 @@ dependencies {
 
     implementation libs.hilt_android
     kapt libs.hilt_compiler
-
-    implementation libs.permission
 
     implementation libs.fastadapter
 

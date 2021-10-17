@@ -21,7 +21,6 @@ import androidx.core.view.MenuCompat
 import androidx.core.view.isVisible
 import androidx.core.view.updatePadding
 import androidx.core.widget.doAfterTextChanged
-import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -95,8 +94,8 @@ class EditActivity : BaseActivity(),
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = DataBindingUtil.setContentView(this, R.layout.activity_edit_timer)
-        binding.lifecycleOwner = this
+        binding = ActivityEditTimerBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
         viewModel.init(
             timerId = intent?.getIntExtra(Constants.EXTRA_TIMER_ID, TimerEntity.NEW_ID)
@@ -104,9 +103,9 @@ class EditActivity : BaseActivity(),
             folderId = intent?.getLongExtra(EXTRA_FOLDER_ID, FolderEntity.FOLDER_DEFAULT)
                 ?: FolderEntity.FOLDER_DEFAULT
         )
-        binding.viewModel = viewModel
 
         setUpToolbar()
+        setUpNameLoopView()
         setUpRecyclerView()
         setUpOtherViews()
         setUpSnackbar()
@@ -223,6 +222,21 @@ class EditActivity : BaseActivity(),
                 if (viewModel.isNewTimer) RBase.string.edit_create_timer
                 else RBase.string.edit_edit_timer
             )
+        }
+    }
+
+    private fun setUpNameLoopView() {
+        viewModel.name.observe(this) {
+            binding.viewEditNameLoop.setName(it)
+        }
+        binding.viewEditNameLoop.nameView.doAfterTextChanged {
+            viewModel.name.value = binding.viewEditNameLoop.getName()
+        }
+        viewModel.loop.observe(this) {
+            binding.viewEditNameLoop.setLoop(it)
+        }
+        binding.viewEditNameLoop.loopView.doAfterTextChanged {
+            viewModel.loop.value = binding.viewEditNameLoop.getLoop()
         }
     }
 

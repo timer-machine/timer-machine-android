@@ -1,33 +1,28 @@
 package xyz.aprildown.timer.app.timer.one
 
-import android.Manifest
 import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
 import android.content.ServiceConnection
 import android.net.Uri
 import android.os.Build
-import android.os.Bundle
 import android.os.IBinder
 import android.provider.Settings
 import android.text.InputType
 import android.text.format.DateUtils
-import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.CompoundButton
 import android.widget.EditText
+import androidx.annotation.LayoutRes
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AlertDialog
-import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.NavOptions
 import androidx.navigation.fragment.NavHostFragment
+import androidx.viewbinding.ViewBinding
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
-import pub.devrel.easypermissions.AfterPermissionGranted
-import pub.devrel.easypermissions.EasyPermissions
-import pub.devrel.easypermissions.PermissionRequest
 import xyz.aprildown.timer.app.base.ui.AppNavigator
 import xyz.aprildown.timer.app.base.ui.StepUpdater
 import xyz.aprildown.timer.app.base.utils.ShortcutHelper
@@ -49,7 +44,9 @@ import javax.inject.Inject
 import javax.inject.Provider
 import xyz.aprildown.timer.app.base.R as RBase
 
-abstract class BaseOneFragment<T : ViewDataBinding> : Fragment() {
+abstract class BaseOneFragment<T : ViewBinding>(
+    @LayoutRes contentLayoutId: Int
+) : Fragment(contentLayoutId) {
 
     protected val viewModel: OneViewModel by activityViewModels()
 
@@ -65,35 +62,6 @@ abstract class BaseOneFragment<T : ViewDataBinding> : Fragment() {
     private var isBind = false
 
     private var pipHelper: PipHelper? = null
-
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        val binding = createBinding(inflater, container)
-        binding.lifecycleOwner = viewLifecycleOwner
-        binding.setVariable(BR.viewModel, viewModel)
-        setUpViews(binding)
-        applySettings(binding)
-        return binding.root
-    }
-
-    abstract fun createBinding(inflater: LayoutInflater, container: ViewGroup?): T
-    abstract fun setUpViews(binding: T)
-    abstract fun applySettings(binding: T)
-
-    override fun onRequestPermissionsResult(
-        requestCode: Int,
-        permissions: Array<out String>,
-        grantResults: IntArray
-    ) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-        EasyPermissions.onRequestPermissionsResult(
-            requestCode, permissions, grantResults,
-            this
-        )
-    }
 
     override fun onStart() {
         super.onStart()
@@ -233,19 +201,6 @@ abstract class BaseOneFragment<T : ViewDataBinding> : Fragment() {
     }
 
     protected fun actionCreateShortcut() {
-        EasyPermissions.requestPermissions(
-            PermissionRequest.Builder(this, 0, Manifest.permission.INSTALL_SHORTCUT)
-                .setRationale(RBase.string.perm_rational_shortcut)
-                .build()
-        )
-    }
-
-    protected fun actionEditTimer() {
-        viewModel.onEdit()
-    }
-
-    @AfterPermissionGranted(0)
-    private fun addShortcut() {
         val timer = viewModel.timer.value ?: return
         val context = requireContext()
 
@@ -281,6 +236,10 @@ abstract class BaseOneFragment<T : ViewDataBinding> : Fragment() {
             )
             dialog.dismiss()
         }
+    }
+
+    protected fun actionEditTimer() {
+        viewModel.onEdit()
     }
 
     protected fun showPickLoopDialog(maxLoop: Int, onPick: (Int) -> Unit) {

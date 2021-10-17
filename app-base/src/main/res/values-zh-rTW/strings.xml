@@ -52,7 +52,6 @@
     <string name="main_action_record">執行記錄</string>
 
     <!--Permission-->
-    <string name="perm_rational_shortcut">要建立計時器快捷方式，請授予應用“建立快捷方式”的許可權</string>
     <string name="perm_rational_floating">要顯示懸浮窗，請授予應用“懸浮窗”的許可權</string>
 
     <!--Timer list-->
