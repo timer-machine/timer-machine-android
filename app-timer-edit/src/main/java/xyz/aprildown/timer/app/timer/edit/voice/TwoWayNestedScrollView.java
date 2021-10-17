@@ -2535,10 +2535,17 @@ public class TwoWayNestedScrollView extends FrameLayout implements NestedScrolli
             if (!nsvHost.isEnabled()) {
                 return false;
             }
+            int height = nsvHost.getHeight();
+            Rect rect = new Rect();
+            // Gets the visible rect on the screen except for the rotation or scale cases which
+            // might affect the result.
+            if (nsvHost.getMatrix().isIdentity() && nsvHost.getGlobalVisibleRect(rect)) {
+                height = rect.height();
+            }
             switch (action) {
                 case AccessibilityNodeInfoCompat.ACTION_SCROLL_FORWARD:
                 case android.R.id.accessibilityActionScrollDown: {
-                    final int viewportHeight = nsvHost.getHeight() - nsvHost.getPaddingBottom()
+                    final int viewportHeight = height - nsvHost.getPaddingBottom()
                             - nsvHost.getPaddingTop();
                     final int targetScrollY = Math.min(nsvHost.getScrollY() + viewportHeight,
                             nsvHost.getScrollRangeY());
@@ -2550,7 +2557,7 @@ public class TwoWayNestedScrollView extends FrameLayout implements NestedScrolli
                 return false;
                 case AccessibilityNodeInfoCompat.ACTION_SCROLL_BACKWARD:
                 case android.R.id.accessibilityActionScrollUp: {
-                    final int viewportHeight = nsvHost.getHeight() - nsvHost.getPaddingBottom()
+                    final int viewportHeight = height - nsvHost.getPaddingBottom()
                             - nsvHost.getPaddingTop();
                     final int targetScrollY = Math.max(nsvHost.getScrollY() - viewportHeight, 0);
                     if (targetScrollY != nsvHost.getScrollY()) {
