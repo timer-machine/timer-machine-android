@@ -21,15 +21,25 @@ The app uses the [Navigation component](https://developer.android.com/guide/navi
 
 ## Build
 
-Use the `dog` product flavor to develop. The other two flavors require Firebase. Their detailed
-build instructions will arrive later.
+Use the `dog` product flavor to develop and test.
+
+The `google` product flavor is the version in Google Play. It has some in-app purchases. It also
+uses Firebase to store backup files and AppCenter to track crashes.
+
+- Firebase: Create a Firebase project and add `google-services.json` to the project.
+- AppCenter: Create an AppCenter project and put the app secret to your `local.properties`(
+  Format: `APP_CENTER_APP_SECRET=your-app-secret`).
+
+Compared with the `google` product flavor, the `other` product flavor removes in-app purchases and
+corresponding functions to release the app to other app stores.
 
 ## Contribute
 
 If you have any questions or suggestions, feel free
 to [open an issue](https://github.com/timer-machine/timer-machine-android/issues/new).
 
-If you would like to create a pull request, please open an issue before contributing because I'm cleaning up and improving the codebase. It would avoid some repetitive work.
+If you would like to create a pull request, please open an issue before contributing because I'm
+cleaning up and improving the codebase. It would avoid some repetitive work.
 
 ## License
 
