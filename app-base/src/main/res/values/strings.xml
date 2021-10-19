@@ -927,12 +927,6 @@
 
     <string name="whitelist_settings_template" formatted="false">System setting %d</string>
 
-    <!--Rate-->
-    <string name="rate_title">A Wild DEVELOPER Appears!</string>
-    <string name="rate_content">It seems that you enjoy this app. Please rate this app or share your ideas!</string>
-    <string name="rate_yes">Rate</string>
-    <string name="rate_no">Leave</string>
-
     <!--Account-->
     <string name="account_sign_out_confirmation">Sign out?</string>
     <string name="account_sign_out">Sign Out</string>

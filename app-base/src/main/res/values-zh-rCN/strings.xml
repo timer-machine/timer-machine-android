@@ -798,12 +798,6 @@
 
     <string name="whitelist_settings_template" formatted="false">系统设置 %d</string>
 
-    <!--Rate-->
-    <string name="rate_title">野生的开发者出现了！！</string>
-    <string name="rate_content">你似乎很喜欢本应用，请给应用评分或留下你的想法</string>
-    <string name="rate_yes">评分</string>
-    <string name="rate_no">离开</string>
-
     <!--Account-->
     <string name="account_sign_out_confirmation">退出登录？</string>
     <string name="account_sign_out">退出登录</string>

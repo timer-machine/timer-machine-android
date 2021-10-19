@@ -53,17 +53,11 @@ import xyz.aprildown.timer.app.timer.one.OneActivity
 import xyz.aprildown.timer.component.settings.DarkThemeDialog
 import xyz.aprildown.timer.domain.usecases.home.TipManager
 import xyz.aprildown.timer.domain.utils.AppConfig
-import xyz.aprildown.timer.domain.utils.Constants
 import xyz.aprildown.timer.workshop.ChangeLogDialog
-import xyz.aprildown.timer.workshop.RateDialog
-import xyz.aprildown.timer.workshop.reminder.AppReminder
 import xyz.aprildown.tools.anko.longSnackbar
-import xyz.aprildown.tools.anko.toast
-import xyz.aprildown.tools.helper.IntentHelper
 import xyz.aprildown.tools.helper.float
 import xyz.aprildown.tools.helper.isDarkTheme
 import xyz.aprildown.tools.helper.restartWithFading
-import xyz.aprildown.tools.helper.startActivitySafely
 import xyz.aprildown.tools.utils.ThemeColorUtils
 import java.time.Instant
 import java.util.Optional
@@ -527,23 +521,7 @@ class MainActivity : BaseActivity(),
             return false
         }
 
-        fun showRateDialog(): Boolean {
-            val rate = AppReminder(this, Constants.REMINDER_RATE)
-            if (rate.getAgreeToShow()) {
-                rate.setInstallDays(7)
-                    .setLaunchTimes(7)
-                    .setRemindInterval(7)
-                    .monitor()
-                    .ifConditionsAreMetThen {
-                        showRateDialog(this, rate)
-                        return true
-                    }
-            }
-            return false
-        }
-
         if (showIntroOrUpdateMessages()) return
-        if (showRateDialog()) return
     }
 
     // region Other private helper methods
@@ -611,23 +589,4 @@ private fun MaterialDrawerSliderView.setSelectionFix(identifier: Long) {
             fastAdapter.notifyItemChanged(index)
         }
     }
-}
-
-private fun showRateDialog(context: Context, rate: AppReminder) {
-    RateDialog(
-        onRate = {
-            rate.ok()
-            context.toast(RBase.string.thanks)
-            context.startActivitySafely(
-                IntentHelper.appStorePage(context),
-                wrongMessageRes = RBase.string.no_action_found
-            )
-        },
-        onLater = {
-            rate.later()
-        },
-        onNever = {
-            rate.no()
-        }
-    ).show(context)
 }

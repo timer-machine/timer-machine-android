@@ -704,12 +704,6 @@
 
     <string name="whitelist_settings_template" formatted="false">系統設置 %d</string>
 
-    <!--Rate-->
-    <string name="rate_title">野生的開發者出現了！！</string>
-    <string name="rate_content">你似乎很喜歡本應用，請給應用評分或留下你的想法</string>
-    <string name="rate_yes">評分</string>
-    <string name="rate_no">離開</string>
-
     <!--Account-->
     <string name="account_sign_out_confirmation">退出登錄？</string>
     <string name="account_sign_out">退出登錄</string>

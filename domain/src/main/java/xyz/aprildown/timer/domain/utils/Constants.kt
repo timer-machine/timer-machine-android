@@ -61,8 +61,6 @@ object Constants {
 
     const val FILENAME_RUNNING_LOG = "running.log"
 
-    const val REMINDER_RATE = "rate"
-
     const val PREF_HAS_ANY_PURCHASE = "pref_has_subscription" // For backward compatibility
     const val PREF_HAS_PRO = "pref_has_pro"
     const val PREF_HAS_BACKUP_SUB = "pref_has_backup_sub"
