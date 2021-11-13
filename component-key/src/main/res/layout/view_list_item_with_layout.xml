@@ -7,7 +7,7 @@
     tools:gravity="center_vertical"
     tools:parentTag="android.widget.RelativeLayout">
 
-    <xyz.aprildown.tools.view.ListItem
+    <xyz.aprildown.timer.component.key.ListItem
         android:id="@+id/itemListItem"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
