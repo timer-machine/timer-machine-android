@@ -14,8 +14,8 @@ import org.mockito.kotlin.argumentCaptor
 import org.mockito.kotlin.mock
 import org.mockito.kotlin.times
 import org.mockito.kotlin.verify
+import org.mockito.kotlin.verifyNoInteractions
 import org.mockito.kotlin.verifyNoMoreInteractions
-import org.mockito.kotlin.verifyZeroInteractions
 import org.mockito.kotlin.whenever
 import xyz.aprildown.timer.domain.TestData
 import xyz.aprildown.timer.domain.entities.BehaviourEntity
@@ -130,7 +130,7 @@ class EditViewModelTest {
             assertTrue(R.string.edit_wrong_empty_steps == thirdValue.peekContent())
         }
 
-        verifyZeroInteractions(timerUpdatedObserver)
+        verifyNoInteractions(timerUpdatedObserver)
 
         viewModel.more.value = new.more
         viewModel.saveTimer(new.steps, new.startStep, new.endStep)?.join()

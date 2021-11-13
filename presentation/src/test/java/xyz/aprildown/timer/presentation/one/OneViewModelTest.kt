@@ -15,7 +15,7 @@ import org.mockito.kotlin.eq
 import org.mockito.kotlin.mock
 import org.mockito.kotlin.times
 import org.mockito.kotlin.verify
-import org.mockito.kotlin.verifyZeroInteractions
+import org.mockito.kotlin.verifyNoInteractions
 import org.mockito.kotlin.whenever
 import xyz.aprildown.timer.domain.TestData
 import xyz.aprildown.timer.domain.entities.TimerEntity
@@ -83,8 +83,8 @@ class OneViewModelTest {
             assertEquals(StreamState.RESET, timerCurrentState.value)
             assertEquals(t.getFirstIndex(), timerCurrentIndex.value)
 
-            verifyZeroInteractions(editTimerObserver)
-            verifyZeroInteractions(serviceTriggerObserver)
+            verifyNoInteractions(editTimerObserver)
+            verifyNoInteractions(serviceTriggerObserver)
         }
 
         viewModel.dropPresenter()
