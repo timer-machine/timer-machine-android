@@ -2,6 +2,15 @@
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <string name="app_name">計時機器</string>
 
+    <string name="language">zh-rTW</string>
+
+    <string name="ok">確定</string>
+    <string name="cancel">取消</string>
+    <string name="settings">設定</string>
+    <string name="more">更多</string>
+    <string name="delete">刪除</string>
+    <string name="undo">復原</string>
+
     <!--Common actions-->
     <string name="understand">明白啦</string>
     <string name="add">新增</string>
@@ -207,6 +216,8 @@
 
     <string name="voice_variable_other_group">其他</string>
     <string name="voice_variable_other_clock_time_desp">當前時間</string>
+
+    <string name="tts_error_template" formatted="false">文字轉語音錯誤：%s</string>
 
     <string name="behaviour_beep">嘟嘟</string>
     <string name="behaviour_beep_help">每秒播放嘟嘟音</string>
@@ -703,12 +714,6 @@
     <string name="whitelist_ignore_battery_optimization">忽略電池最佳化</string>
 
     <string name="whitelist_settings_template" formatted="false">系統設定 %d</string>
-
-    <!--Rate-->
-    <string name="rate_title">野生的開發者出現了！！</string>
-    <string name="rate_content">你似乎很喜歡本應用，請給應用評分或留下你的想法</string>
-    <string name="rate_yes">評分</string>
-    <string name="rate_no">離開</string>
 
     <!--Account-->
     <string name="account_sign_out_confirmation">退出登入？</string>

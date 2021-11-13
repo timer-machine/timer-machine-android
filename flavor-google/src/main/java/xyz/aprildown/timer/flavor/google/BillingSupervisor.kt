@@ -19,6 +19,13 @@ import com.android.billingclient.api.PurchaseHistoryRecord
 import com.android.billingclient.api.PurchasesUpdatedListener
 import com.android.billingclient.api.SkuDetails
 import com.android.billingclient.api.SkuDetailsParams
+import com.android.billingclient.api.queryPurchaseHistory
+import com.android.billingclient.api.queryPurchasesAsync
+import com.android.billingclient.api.querySkuDetails
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.MainScope
+import kotlinx.coroutines.cancel
+import kotlinx.coroutines.launch
 import timber.log.Timber
 import xyz.aprildown.timer.domain.utils.Constants
 import xyz.aprildown.tools.arch.Event
@@ -35,7 +42,7 @@ internal class BillingSupervisor(
     private val requestProState: Boolean = false,
     private val requestBackupSubState: Boolean = false,
     private val consumeInAppPurchases: Boolean = false,
-) : PurchasesUpdatedListener, BillingClientStateListener {
+) : PurchasesUpdatedListener, BillingClientStateListener, CoroutineScope by MainScope() {
 
     sealed class Error {
         object SubscriptionNotSupported : Error() {
@@ -132,7 +139,7 @@ internal class BillingSupervisor(
                     updateIapIndicator()
                 }
                 BillingClient.BillingResponseCode.ITEM_ALREADY_OWNED -> {
-                    queryPurchases()
+                    launch { queryPurchases() }
                 }
                 BillingClient.BillingResponseCode.SERVICE_DISCONNECTED -> {
                     connect()
@@ -167,10 +174,12 @@ internal class BillingSupervisor(
         HandlerHelper.runOnUiThread {
             when (billingResult.responseCode) {
                 BillingClient.BillingResponseCode.OK -> {
-                    if (requireSkuDetails) {
-                        querySkuDetails()
+                    launch {
+                        if (requireSkuDetails) {
+                            querySkuDetails()
+                        }
+                        queryPurchases()
                     }
-                    queryPurchases()
                 }
                 else -> {
                     emitError(billingResult)
@@ -194,51 +203,45 @@ internal class BillingSupervisor(
 
     // endregion BillingClientStateListener
 
-    private fun querySkuDetails() {
-        billingClient.querySkuDetailsAsync(
+    private suspend fun querySkuDetails() {
+        val inAppResult = billingClient.querySkuDetails(
             SkuDetailsParams.newBuilder()
                 .setSkusList(listOf(PRO))
                 .setType(BillingClient.SkuType.INAPP)
                 .build()
-        ) { billingResult, skuDetailsList ->
-            HandlerHelper.runOnUiThread {
-                when (billingResult.responseCode) {
-                    BillingClient.BillingResponseCode.OK -> {
-                        val skuDetails = skuDetailsList?.find { it.sku == PRO }
-                        if (skuDetails != null) {
-                            _proSkuDetails.value = skuDetails
-                        }
-                    }
-                    else -> {
-                        emitError(billingResult)
-                    }
+        )
+        when (inAppResult.billingResult.responseCode) {
+            BillingClient.BillingResponseCode.OK -> {
+                val skuDetails = inAppResult.skuDetailsList?.find { it.sku == PRO }
+                if (skuDetails != null) {
+                    _proSkuDetails.value = skuDetails
                 }
+            }
+            else -> {
+                emitError(inAppResult.billingResult)
             }
         }
 
-        billingClient.querySkuDetailsAsync(
+        val subResult = billingClient.querySkuDetails(
             SkuDetailsParams.newBuilder()
                 .setSkusList(listOf(BACKUP_SUB))
                 .setType(BillingClient.SkuType.SUBS)
                 .build()
-        ) { billingResult, skuDetailsList ->
-            HandlerHelper.runOnUiThread {
-                when (billingResult.responseCode) {
-                    BillingClient.BillingResponseCode.OK -> {
-                        val skuDetails = skuDetailsList?.find { it.sku == BACKUP_SUB }
-                        if (skuDetails != null) {
-                            _backupSubSkuDetails.value = skuDetails
-                        }
-                    }
-                    else -> {
-                        emitError(billingResult)
-                    }
+        )
+        when (subResult.billingResult.responseCode) {
+            BillingClient.BillingResponseCode.OK -> {
+                val skuDetails = subResult.skuDetailsList?.find { it.sku == BACKUP_SUB }
+                if (skuDetails != null) {
+                    _backupSubSkuDetails.value = skuDetails
                 }
+            }
+            else -> {
+                emitError(subResult.billingResult)
             }
         }
     }
 
-    private fun queryPurchases() {
+    private suspend fun queryPurchases() {
         if (sharedPreferences.getBoolean(PREF_HAD_OLD_SUBSCRIPTION, false)) {
             _proState.value = true
             _backupSubState.value = true
@@ -247,8 +250,7 @@ internal class BillingSupervisor(
         }
 
         if (findSubscription(
-                billingClient.queryPurchases(BillingClient.SkuType.SUBS)
-                    .purchasesList?.toSet() ?: emptySet<Purchase?>(),
+                billingClient.queryPurchasesAsync(BillingClient.SkuType.SUBS).purchasesList.toSet(),
                 OLD_SUB
             )
         ) {
@@ -264,44 +266,40 @@ internal class BillingSupervisor(
             queryNewestPurchases()
             updateIapIndicator()
         } else {
-            billingClient.queryPurchaseHistoryAsync(
-                BillingClient.SkuType.SUBS
-            ) { billingResult, purchases ->
-                HandlerHelper.runOnUiThread {
-                    if (billingResult.responseCode == BillingClient.BillingResponseCode.OK) {
-                        val hasHistorySub = processHistorySubscription(
-                            purchases?.toSet() ?: emptySet()
-                        )
-                        sharedPreferences.edit {
-                            putBoolean(PREF_HAD_OLD_SUBSCRIPTION, hasHistorySub)
-                        }
-                        if (hasHistorySub) {
-                            _proState.value = true
-                            _backupSubState.value = true
-                        } else {
-                            queryNewestPurchases()
-                        }
-                    } else {
-                        queryNewestPurchases()
-                    }
-                    updateIapIndicator()
+            val result = billingClient.queryPurchaseHistory(BillingClient.SkuType.SUBS)
+
+            if (result.billingResult.responseCode == BillingClient.BillingResponseCode.OK) {
+                val hasHistorySub = processHistorySubscription(
+                    result.purchaseHistoryRecordList?.toSet() ?: emptySet()
+                )
+                sharedPreferences.edit {
+                    putBoolean(PREF_HAD_OLD_SUBSCRIPTION, hasHistorySub)
                 }
+                if (hasHistorySub) {
+                    _proState.value = true
+                    _backupSubState.value = true
+                } else {
+                    queryNewestPurchases()
+                }
+            } else {
+                queryNewestPurchases()
             }
+            updateIapIndicator()
         }
     }
 
-    private fun queryNewestPurchases() {
+    private suspend fun queryNewestPurchases() {
         if (requestProState) {
             _proState.value = findProState(
-                billingClient.queryPurchases(BillingClient.SkuType.INAPP)
-                    .purchasesList?.toSet() ?: emptySet()
+                billingClient.queryPurchasesAsync(BillingClient.SkuType.INAPP)
+                    .purchasesList.toSet()
             )
         }
         if (requestBackupSubState) {
             if (isSubscriptionSupported()) {
                 _backupSubState.value = findSubscription(
-                    billingClient.queryPurchases(BillingClient.SkuType.SUBS)
-                        .purchasesList?.toSet() ?: emptySet<Purchase?>(),
+                    billingClient.queryPurchasesAsync(BillingClient.SkuType.SUBS)
+                        .purchasesList.toSet(),
                     BACKUP_SUB, OLD_SUB
                 )
             } else {
@@ -313,7 +311,7 @@ internal class BillingSupervisor(
     private fun findProState(purchases: Set<Purchase>): Boolean {
         var hasActivePurchase = false
         purchases.forEach { purchase ->
-            if (purchase.sku == PRO || purchase.sku == OLD_PRO) {
+            if (PRO in purchase.skus || OLD_PRO in purchase.skus) {
                 if (purchase.purchaseState == Purchase.PurchaseState.PURCHASED) {
                     if (!purchase.isAcknowledged) {
                         billingClient.acknowledgePurchase(
@@ -328,7 +326,7 @@ internal class BillingSupervisor(
                                 .setPurchaseToken(purchase.purchaseToken)
                                 .build()
                         ) { _, _ ->
-                            Timber.tag(TAG).i("Consumed ${purchase.sku}")
+                            Timber.tag(TAG).i("Consumed ${purchase.skus.joinToString()}")
                         }
                     }
                     hasActivePurchase = true
@@ -342,7 +340,8 @@ internal class BillingSupervisor(
     private fun findSubscription(purchases: Set<Purchase>, vararg skus: String): Boolean {
         var hasActivePurchase = false
         purchases.forEach { purchase ->
-            if (purchase.sku in skus) {
+            val targetSku = purchase.skus.find { it in skus }
+            if (targetSku != null) {
                 if (purchase.purchaseState == Purchase.PurchaseState.PURCHASED) {
                     if (!purchase.isAcknowledged) {
                         billingClient.acknowledgePurchase(
@@ -352,7 +351,7 @@ internal class BillingSupervisor(
                         ) {}
                     }
                     hasActivePurchase = true
-                    recentSubSku = purchase.sku
+                    recentSubSku = targetSku
                 }
             }
         }
@@ -362,9 +361,9 @@ internal class BillingSupervisor(
     private fun processHistorySubscription(purchases: Set<PurchaseHistoryRecord>): Boolean {
         var hasPurchase = false
         purchases.forEach { purchase ->
-            if (purchase.sku == OLD_SUB) {
+            if (OLD_SUB in purchase.skus) {
                 hasPurchase = true
-                recentSubSku = purchase.sku
+                recentSubSku = OLD_SUB
             }
         }
         return hasPurchase
@@ -383,6 +382,7 @@ internal class BillingSupervisor(
 
     fun endConnection() {
         billingClient.endConnection()
+        cancel()
     }
 
     fun getManageSubscriptionLink(): String {

@@ -2,4 +2,9 @@
 <resources>
     <dimen name="normal_chip_radius">8dp</dimen>
     <dimen name="behaviour_chip_text_padding">4dp</dimen>
+
+    <dimen name="list_item_text_vertical_padding">8dp</dimen>
+    <dimen name="list_item_one_line_height">56dp</dimen>
+    <dimen name="list_item_two_lines_height">64dp</dimen>
+    <dimen name="list_item_three_lines_height">88dp</dimen>
 </resources>

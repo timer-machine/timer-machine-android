@@ -15,7 +15,7 @@
         <item name="android:paddingStart">4dp</item>
         <item name="android:paddingEnd">4dp</item>
         <item name="li_divider">margin</item>
-        <item name="li_layout">@layout/widget_check</item>
+        <item name="li_layout">@layout/view_list_item_with_layout_check</item>
     </style>
 
 </resources>

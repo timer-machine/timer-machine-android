@@ -15,6 +15,7 @@ import xyz.aprildown.timer.app.timer.edit.media.HalfDialog
 import xyz.aprildown.timer.app.timer.edit.media.VibrationDialog
 import xyz.aprildown.timer.app.timer.edit.media.VoiceDialog
 import xyz.aprildown.timer.app.timer.edit.voice.VoiceVariableDialog
+import xyz.aprildown.timer.component.key.SimpleInputDialog
 import xyz.aprildown.timer.component.key.switchItem
 import xyz.aprildown.timer.domain.entities.BeepAction
 import xyz.aprildown.timer.domain.entities.CountAction
@@ -26,7 +27,6 @@ import xyz.aprildown.timer.domain.entities.VibrationAction
 import xyz.aprildown.timer.domain.entities.VoiceAction
 import xyz.aprildown.timer.domain.utils.Constants
 import xyz.aprildown.tools.helper.safeSharedPreference
-import xyz.aprildown.tools.view.SimpleInputDialog
 import xyz.aprildown.timer.app.base.R as RBase
 
 internal fun MaterialPopupMenuBuilder.addMusicItems(

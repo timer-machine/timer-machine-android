@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    tools:gravity="center_vertical"
+    tools:minHeight="@dimen/list_item_two_lines_height"
+    tools:orientation="vertical"
+    tools:paddingBottom="@dimen/list_item_text_vertical_padding"
+    tools:paddingEnd="@dimen/keyline_icon"
+    tools:paddingStart="@dimen/keyline_icon"
+    tools:paddingTop="@dimen/list_item_text_vertical_padding"
+    tools:parentTag="android.widget.LinearLayout">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:textAppearance="?textAppearanceSubtitle1"
+        tools:text="@tools:sample/lorem" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:ellipsize="end"
+        android:maxLines="2"
+        android:textAppearance="?textAppearanceBody2"
+        android:textColor="?android:textColorSecondary"
+        tools:text="@tools:sample/lorem" />
+</merge>

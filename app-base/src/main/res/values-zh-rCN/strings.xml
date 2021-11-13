@@ -2,6 +2,15 @@
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <string name="app_name">计时机器</string>
 
+    <string name="language">zh-rCN</string>
+
+    <string name="ok">确定</string>
+    <string name="cancel">取消</string>
+    <string name="settings">设置</string>
+    <string name="more">更多</string>
+    <string name="delete">删除</string>
+    <string name="undo">撤消</string>
+
     <!--Common actions-->
     <string name="understand">明白啦</string>
     <string name="add">添加</string>
@@ -207,6 +216,8 @@
 
     <string name="voice_variable_other_group">其他</string>
     <string name="voice_variable_other_clock_time_desp">当前时间</string>
+
+    <string name="tts_error_template" formatted="false">文字转语音错误：%s</string>
 
     <string name="behaviour_beep">嘟嘟</string>
     <string name="behaviour_beep_help">每秒播放嘟嘟音</string>
@@ -683,100 +694,6 @@
 
     <!--Updates-->
     <string name="update_title">更新内容</string>
-    <string-array name="update_content_600">
-        <item>6.0.0</item>
-        <item>新增: 新提醒方式：闪光</item>
-        <item>新增: 新设置：屏幕亮度应用时机</item>
-        <item>新增: 新设置：媒体样式通知</item>
-        <item>新增: 计时器被非正常关闭时，应用将会显示白名单的提醒</item>
-        <item>优化: 更好的音乐选择器</item>
-        <item>修复: 导出应用数据时的一个偶尔的崩溃</item>
-        <item>修复: 日历中最后一行日期未显示的问题</item>
-        <item>修改: 应用内购商品进入了维护状态。已内购用户不受影响。</item>
-        <item>修改: 应用最低支持的Android版本从5变为了6</item>
-    </string-array>
-    <string-array name="update_content_580">
-        <item>5.8.0</item>
-        <item>新增: 振动次数</item>
-        <item>新增: 长按步骤时间快速修改该步骤时间</item>
-        <item>优化: 更快的恢复数据列表加载速度</item>
-        <item>优化: 新朗读内容对话框和新音乐选择器完成了测试，成为了稳定的功能</item>
-        <item>优化: 修改步骤时暂停计时器而非停止计时器</item>
-        <item>优化: 更好的使用教程</item>
-        <item>优化: 一些界面细节</item>
-        <item>修复: 修改步骤后原步骤位置丢失的问题</item>
-    </string-array>
-    <string-array name="update_content_570">
-        <item>5.7.0</item>
-        <item>新增: 在计时器列表中通过长按分享计时器</item>
-        <item>优化: 音量设置将会打开系统的音量设置界面</item>
-        <item>优化: 更好的使用教程</item>
-        <item>优化: 翻新的关于页</item>
-        <item>优化: 新朗读对话框在平板上更好的显示</item>
-        <item>优化: 横屏编辑新朗读对话框内容时，输入框不再全屏显示</item>
-        <item>修复: 示例计时器被重复添加的问题</item>
-    </string-array>
-    <string-array name="update_content_560">
-        <item>5.6.0</item>
-        <item>新增: 全新的朗读内容对话框与变量正在测试中。非常感谢Martin Levy的反馈与帮助！</item>
-        <item>新增: 计时器编辑界面的分享计时器和从剪贴板创建计时器</item>
-        <item>优化: 从头开始的运行记录将以第一条记录的时间为开始</item>
-    </string-array>
-    <string-array name="update_content_550">
-        <item>5.5.0</item>
-        <item>新增: 订阅计划中新增了设置预置倒数音</item>
-        <item>新增: 计时器选择对话框中的取消选择按钮</item>
-        <item>新增: 组结束添加步骤菜单中的复制组选项</item>
-        <item>新增: （测试中）新的朗读变量。感谢M Lev的建议！</item>
-        <item>优化: 当仅有一个计时器运行时，在计时器概览通知中显示其名称</item>
-        <item>修复: 使用教程切换界面时的一个崩溃</item>
-    </string-array>
-    <string-array name="update_content_541">
-        <item>5.4.1</item>
-        <item>优化: 更快的应用启动速度</item>
-    </string-array>
-    <string-array name="update_content_540">
-        <item>5.4.0</item>
-        <item>新增: Android 11的支持</item>
-        <item>新增: 计时器列表网格视图</item>
-        <item>修复: 悬浮窗在旋转屏幕后位置错误的问题</item>
-        <item>修复: 启动一个已删除计时器的快捷方式导致的崩溃</item>
-    </string-array>
-    <string-array name="update_content_530">
-        <item>5.3.0</item>
-        <item>新增: 一些和时间相关的朗读内容变量</item>
-        <item>优化: 更简洁的应用内言语措辞</item>
-        <item>优化: 显示时间时，与系统设置保持相同的12/24小时制</item>
-        <item>优化: 导入失败时，显示具体的错误信息</item>
-    </string-array>
-    <string-array name="update_content_520">
-        <item>5.2.0</item>
-        <item>新增: 订阅计划中新增了一些精选的应用主题。</item>
-        <item>新增: 通过弹窗选择朗读变量。</item>
-        <item>新增: 能够计算相对于组的已用时间与剩余时间的朗读变量。</item>
-        <item>优化: 在计时器的最后一个步骤手动停止时，同样进行一次记录。</item>
-        <item>优化: 全屏提醒时可容纳更多文字。</item>
-        <item>优化: 浏览次级页面时，菜单栏显示返回按钮而不是菜单按钮。</item>
-        <item>修复: 导出至现有文件时，应用会生成错误数据。</item>
-    </string-array>
-    <string-array name="update_content_510">
-        <item>5.1.0</item>
-        <item>新增: 可互动的使用教程。</item>
-        <item>优化: 更好的白名单指南。</item>
-        <item>优化: 禁止启动垃圾桶中的计时器。</item>
-        <item>优化: 删除计时器时停用其快捷方式。</item>
-        <item>修复: 编辑后的计时器有时会被移动到默认合集中的问题。</item>
-        <item>修复: 在计时器结束后尝试启动一个不存在的计时器引起的界面无反应。</item>
-    </string-array>
-    <string-array name="update_content_500">
-        <item>5.0.0</item>
-        <item>新增: 用于归类计时器的计时器合集。</item>
-        <item>新增: 多种计时器排序规则。</item>
-        <item>新增: 长按计时器时更多的选项。</item>
-        <item>优化: 删除计时器时，将计时器先移动至垃圾桶，而不是直接删除。</item>
-        <item>修复: 一个保存通知步骤失败引起的崩溃。</item>
-    </string-array>
-
     <string name="update_more">更多更新内容</string>
 
     <!--Tasker-->
@@ -797,12 +714,6 @@
     <string name="whitelist_ignore_battery_optimization">忽略电池优化</string>
 
     <string name="whitelist_settings_template" formatted="false">系统设置 %d</string>
-
-    <!--Rate-->
-    <string name="rate_title">野生的开发者出现了！！</string>
-    <string name="rate_content">你似乎很喜欢本应用，请给应用评分或留下你的想法</string>
-    <string name="rate_yes">评分</string>
-    <string name="rate_no">离开</string>
 
     <!--Account-->
     <string name="account_sign_out_confirmation">退出登录？</string>

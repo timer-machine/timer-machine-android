@@ -25,13 +25,13 @@ import xyz.aprildown.timer.app.timer.one.layout.OneLayoutFragment
 import xyz.aprildown.timer.app.timer.one.layout.TweakTimeLayout
 import xyz.aprildown.timer.app.timer.one.layout.showTimePanelPickerDialog
 import xyz.aprildown.timer.app.timer.one.step.StepListView
+import xyz.aprildown.timer.component.key.ListItemWithLayout
 import xyz.aprildown.timer.component.key.TimePanelLayout
 import xyz.aprildown.timer.component.settings.TweakTimeDialog
 import xyz.aprildown.timer.domain.entities.TimerEntity
 import xyz.aprildown.tools.anko.dp
 import xyz.aprildown.tools.helper.gone
 import xyz.aprildown.tools.helper.show
-import xyz.aprildown.tools.view.ListItemWithLayout
 
 internal class OneLayoutOneFragment : Fragment(R.layout.fragment_one),
     OneLayoutFragment.ChildFragment,

@@ -2,7 +2,6 @@ package io.github.deweyreed.timer.ui
 
 import android.content.Context
 import android.content.Intent
-import android.content.SharedPreferences
 import android.os.Build
 import android.os.Bundle
 import android.view.View
@@ -38,7 +37,6 @@ import dagger.hilt.android.AndroidEntryPoint
 import io.github.deweyreed.timer.R
 import io.github.deweyreed.timer.databinding.ActivityMainBinding
 import xyz.aprildown.timer.app.base.data.DarkTheme
-import xyz.aprildown.timer.app.base.data.PreferenceData
 import xyz.aprildown.timer.app.base.data.PreferenceData.storedAudioTypeValue
 import xyz.aprildown.timer.app.base.ui.AppNavigator
 import xyz.aprildown.timer.app.base.ui.BaseActivity
@@ -51,19 +49,10 @@ import xyz.aprildown.timer.app.base.utils.NavigationUtils.createMainFragmentNavO
 import xyz.aprildown.timer.app.base.utils.NavigationUtils.getCurrentFragment
 import xyz.aprildown.timer.app.timer.one.OneActivity
 import xyz.aprildown.timer.component.settings.DarkThemeDialog
-import xyz.aprildown.timer.domain.usecases.home.TipManager
-import xyz.aprildown.timer.domain.utils.AppConfig
-import xyz.aprildown.timer.domain.utils.Constants
-import xyz.aprildown.timer.workshop.ChangeLogDialog
-import xyz.aprildown.timer.workshop.RateDialog
-import xyz.aprildown.timer.workshop.reminder.AppReminder
 import xyz.aprildown.tools.anko.longSnackbar
-import xyz.aprildown.tools.anko.toast
-import xyz.aprildown.tools.helper.IntentHelper
 import xyz.aprildown.tools.helper.float
 import xyz.aprildown.tools.helper.isDarkTheme
 import xyz.aprildown.tools.helper.restartWithFading
-import xyz.aprildown.tools.helper.startActivitySafely
 import xyz.aprildown.tools.utils.ThemeColorUtils
 import java.time.Instant
 import java.util.Optional
@@ -78,9 +67,6 @@ class MainActivity : BaseActivity(),
     NavController.OnDestinationChangedListener {
 
     private lateinit var binding: ActivityMainBinding
-
-    @Inject
-    lateinit var sharedPreferences: SharedPreferences
 
     @Inject
     lateinit var appNavigator: AppNavigator
@@ -109,7 +95,6 @@ class MainActivity : BaseActivity(),
         setUpDrawer()
         setUpNavigation()
 
-        setUpReminders()
         setUpDebug()
 
         setUpAutoDark()
@@ -493,59 +478,6 @@ class MainActivity : BaseActivity(),
         }
     }
 
-    private fun setUpReminders() {
-        if (!AppConfig.showFirstTimeInfo) return
-
-        // @return if the event is consumed
-        fun showIntroOrUpdateMessages(): Boolean {
-            val newVersion = "6.0.0"
-            if (!TipManager.hasTutorialViewed(sharedPreferences)) {
-                sharedPreferences.edit()
-                    .putBoolean(newVersion, false)
-                    .apply()
-                return true
-            } else {
-                if (sharedPreferences.getBoolean(newVersion, true)) {
-                    sharedPreferences.edit().putBoolean(newVersion, false)
-                        .remove("5.8.0").remove("5.7.0")
-                        .remove("5.6.0").remove("5.5.0").remove("5.4.1")
-                        .remove("5.4.0").remove("5.3.0").remove("5.2.0")
-                        .remove("5.1.0").remove("5.0.0").remove("4.7.0")
-                        .remove("4.6.0").remove("4.5.1").remove("4.5.0")
-                        .remove("4.4.0").remove("4.3.0").remove("4.2.0")
-                        .remove("4.1.0").remove("4.0.0").remove("3.8.0")
-                        .remove(PreferenceData.KEY_LABS_HALF_COUNT) // Last used in 3.8.0
-                        .remove(PreferenceData.KEY_LABS_NOTIFICATION) // Last used in 3.8.0
-                        .remove(PreferenceData.KEY_LABS_TIME_PANEL) // Last used in 3.8.0
-                        .remove("theme_changed") // Last used in 3.8.0
-                        .remove("pref_voice_dialog_mode") // Last used in 5.1.0
-                        .apply()
-                    ChangeLogDialog(this).show()
-                    return true
-                }
-            }
-            return false
-        }
-
-        fun showRateDialog(): Boolean {
-            val rate = AppReminder(this, Constants.REMINDER_RATE)
-            if (rate.getAgreeToShow()) {
-                rate.setInstallDays(7)
-                    .setLaunchTimes(7)
-                    .setRemindInterval(7)
-                    .monitor()
-                    .ifConditionsAreMetThen {
-                        showRateDialog(this, rate)
-                        return true
-                    }
-            }
-            return false
-        }
-
-        if (showIntroOrUpdateMessages()) return
-        if (showRateDialog()) return
-    }
-
     // region Other private helper methods
 
     private fun updateManualDark(isDark: Boolean) {
@@ -611,23 +543,4 @@ private fun MaterialDrawerSliderView.setSelectionFix(identifier: Long) {
             fastAdapter.notifyItemChanged(index)
         }
     }
-}
-
-private fun showRateDialog(context: Context, rate: AppReminder) {
-    RateDialog(
-        onRate = {
-            rate.ok()
-            context.toast(RBase.string.thanks)
-            context.startActivitySafely(
-                IntentHelper.appStorePage(context),
-                wrongMessageRes = RBase.string.no_action_found
-            )
-        },
-        onLater = {
-            rate.later()
-        },
-        onNever = {
-            rate.no()
-        }
-    ).show(context)
 }

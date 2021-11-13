@@ -12,8 +12,8 @@ import org.junit.Test
 import org.mockito.kotlin.argumentCaptor
 import org.mockito.kotlin.mock
 import org.mockito.kotlin.verify
+import org.mockito.kotlin.verifyNoInteractions
 import org.mockito.kotlin.verifyNoMoreInteractions
-import org.mockito.kotlin.verifyZeroInteractions
 import org.mockito.kotlin.whenever
 import xyz.aprildown.timer.domain.TestData
 import xyz.aprildown.timer.presentation.StreamMachineIntentProvider
@@ -108,7 +108,7 @@ class ScreenViewModelTest {
             assertEquals(1, allValues.size)
             Assert.assertTrue(addTimeIntent == firstValue.peekContent())
         }
-        verifyZeroInteractions(stopTimerObserver)
+        verifyNoInteractions(stopTimerObserver)
         verifyNoMoreInteractions(intentProvider)
         verifyNoMoreInteractions(serviceTriggerObserver)
     }

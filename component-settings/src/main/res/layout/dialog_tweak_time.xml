@@ -11,7 +11,7 @@
         android:orientation="vertical">
 
         <TextView
-            style="@style/Widget.ListHeader"
+            style="@style/Widget.AppTheme.ListHeader"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/tweak_time_main_title" />
@@ -25,7 +25,7 @@
             layout="@layout/layout_tweak_time_item" />
 
         <TextView
-            style="@style/Widget.ListHeader"
+            style="@style/Widget.AppTheme.ListHeader"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/tweak_time_overflow_title" />

@@ -1,7 +1,6 @@
 package io.github.deweyreed.timer
 
 import android.app.Application
-import android.content.Context
 import android.content.SharedPreferences
 import android.util.Log
 import androidx.core.content.ContextCompat
@@ -145,13 +144,6 @@ class App : Application(), Configuration.Provider {
         // Old user
         sharedPreferences.edit {
             copySharedPreferences(from = deviceStorageSp, editor = this)
-            copySharedPreferences(
-                from = deviceStorageContext.getSharedPreferences(
-                    "app_reminder_pref_file",
-                    Context.MODE_PRIVATE
-                ),
-                editor = this
-            )
             putBoolean(PREF_SP_MIGRATED, true)
         }
     }

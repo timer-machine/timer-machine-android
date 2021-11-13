@@ -5,7 +5,7 @@ ext {
             kotlin      : '1.5.31',
             versions    : '0.39.0',
             detekt      : '1.18.1',
-            hilt        : '2.39.1',
+            hilt        : '2.40.1',
             secrets     : '2.0.0',
             gms         : '4.3.10',
 
@@ -32,10 +32,10 @@ ext {
 
             // Unit Test
             junit                         : 'junit:junit:4.13.2',
-            mockito                       : 'org.mockito:mockito-core:3.11.1',
-            mockito_inline                : 'org.mockito:mockito-inline:3.11.1',
-            mockito_android               : 'org.mockito:mockito-android:3.11.1',
-            mockito_kotlin                : 'org.mockito.kotlin:mockito-kotlin:3.2.0',
+            mockito                       : 'org.mockito:mockito-core:4.0.0',
+            mockito_inline                : 'org.mockito:mockito-inline:4.0.0',
+            mockito_android               : 'org.mockito:mockito-android:4.0.0',
+            mockito_kotlin                : 'org.mockito.kotlin:mockito-kotlin:4.0.0',
 
             // Instrumentation Test
             // https://developer.android.com/training/testing/set-up-project#gradle-dependencies
@@ -47,7 +47,7 @@ ext {
             androidx_test_espresso_contrib: 'androidx.test.espresso:espresso-contrib:3.4.0',
             androidx_test_espresso_intents: 'androidx.test.espresso:espresso-intents:3.4.0',
             androidx_arch_test            : 'androidx.arch.core:core-testing:2.1.0',
-            androidx_media                : 'androidx.media:media:1.4.2',
+            androidx_media                : 'androidx.media:media:1.4.3',
 
             // AndroidX
             androidx_appcompat            : 'androidx.appcompat:appcompat:1.3.1',
@@ -64,7 +64,6 @@ ext {
             androidx_core_ktx             : 'androidx.core:core-ktx:1.6.0',
             androidx_collection_ktx       : 'androidx.collection:collection-ktx:1.1.0',
             androidx_fragment_ktx         : 'androidx.fragment:fragment-ktx:1.3.6',
-            androidx_viewmodel_ktx        : 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.1.0',
 
             // Material
             material                      : 'com.google.android.material:material:1.4.0',
@@ -103,8 +102,8 @@ ext {
             // Internet
 
             // Internet - Google
-            billing                       : 'com.android.billingclient:billing-ktx:3.0.3',
-            firebase_bom                  : 'com.google.firebase:firebase-bom:28.4.2',
+            billing                       : 'com.android.billingclient:billing-ktx:4.0.0',
+            firebase_bom                  : 'com.google.firebase:firebase-bom:29.0.0',
             firebase_analytics            : 'com.google.firebase:firebase-analytics-ktx',
             firebase_auth                 : 'com.google.firebase:firebase-auth-ktx',
             firebase_auth_ui              : 'com.firebaseui:firebase-ui-auth:8.0.0',
@@ -115,7 +114,7 @@ ext {
 
             // Other Utils
             android_job                   : 'com.evernote:android-job:1.4.2',
-            okio                          : 'com.squareup.okio:okio:2.10.0',
+            okio                          : 'com.squareup.okio:okio:3.0.0',
             permission                    : 'pub.devrel:easypermissions:3.0.0',
 
             // Other UI Components
@@ -132,7 +131,7 @@ ext {
             flexbox                       : 'com.google.android.flexbox:flexbox:3.0.0',
             hms_picker                    : 'xyz.aprildown:HmsPickerView:0.2.0',
             konfetti                      : 'nl.dionsegijn:konfetti:1.3.2',
-            material_drawer               : 'com.mikepenz:materialdrawer:8.4.4',
+            material_drawer               : 'com.mikepenz:materialdrawer:8.4.5',
             material_popup_menu           : 'com.github.zawadz88.materialpopupmenu:material-popup-menu:4.1.0',
             materialize                   : 'com.mikepenz:materialize:1.2.1',
             scroll_hms_picker             : 'xyz.aprildown:ScrollHmsPicker:2.0.3',

@@ -9,7 +9,6 @@ import androidx.annotation.ArrayRes
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import xyz.aprildown.timer.app.base.utils.openWebsiteWithWarning
 import xyz.aprildown.timer.domain.utils.Constants
-import xyz.aprildown.timer.workshop.reminder.AppReminder
 import xyz.aprildown.tools.anko.toast
 import xyz.aprildown.tools.helper.IntentHelper
 import xyz.aprildown.tools.helper.setTextIfChanged
@@ -43,7 +42,6 @@ class ChangeLogDialog(private val context: Context) {
             )
             .setPositiveButton(android.R.string.ok, null)
             .setNeutralButton(RBase.string.rate_five_stars) { _, _ ->
-                AppReminder(context, Constants.REMINDER_RATE).ok()
                 context.toast(RBase.string.thanks)
                 context.startActivitySafely(
                     IntentHelper.appStorePage(context),

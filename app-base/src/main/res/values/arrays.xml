@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="update_content_600">
+        <item>6.0.0</item>
+        <item>Added: A new reminder: Flashlight</item>
+        <item>Added: A new setting: \"Screen Brightness Application Timing\"</item>
+        <item>Added: A new setting: \"Media Style Notification\"</item>
+        <item>Added: A tip for whitelisting the app when a timer is stopped abnormally</item>
+        <item>Improved: A Better music picker</item>
+        <item>Fixed: A rare crash when exporting app data</item>
+        <item>Fixed: The calendar doesn\'t show the last row of a month</item>
+        <item>Changed: In-app purchases are under maintenance, which doesn\'t affect existing purchasers.</item>
+        <item>Changed: The minimum supported Android version changes from 5 to 6</item>
+    </string-array>
+    <string-array name="update_content_580">
+        <item>5.8.0</item>
+        <item>Added: Vibration count</item>
+        <item>Added: Long press step time to edit it quickly</item>
+        <item>Improved: Faster restore list load speed</item>
+        <item>Improved: New voice variables and new ringtone picker finish testing and become stable</item>
+        <item>Improved: Editing a step pauses the timer instead of stopping it</item>
+        <item>Improved: Better tutorial</item>
+        <item>Improved: Some UI details</item>
+        <item>Fixed: Step position is lost after editing a step</item>
+    </string-array>
+    <string-array name="update_content_570">
+        <item>5.7.0</item>
+        <item>Added: Long-press to share a timer in the timer list</item>
+        <item>Improved: Volume setting now opens the system volume settings panel</item>
+        <item>Improved: Better tutorial</item>
+        <item>Improved: Renovated about page</item>
+        <item>Improved: A better new voice dialog on the tablet</item>
+        <item>Improved: Editing content of new voice dialog in the landscape mode stops showing the full-screen editor</item>
+        <item>Fixed: The tutorial adds the sample timer multiple times after screen rotation</item>
+    </string-array>
+    <string-array name="update_content_560">
+        <item>5.6.0</item>
+        <item>Added: New voice variables and dialog is under testing. Thank Martin Levy very much for the feedback and help!</item>
+        <item>Added: Support for sharing the timer and importing from the clipboard in the edit screen</item>
+        <item>Improved: Records from day one will start from the first record</item>
+    </string-array>
+    <string-array name="update_content_550">
+        <item>5.5.0</item>
+        <item>Added: Baked count sound as a subscription service</item>
+        <item>Added: A cancel all button in the timer picker</item>
+        <item>Added: A duplicate group button in the add step popup menu of the group end divider</item>
+        <item>Added: (Testing)New voice variables. Thank M Lev for the advice!</item>
+        <item>Improved: When there is only one timer running, show its name in the overview notification</item>
+        <item>Fixed: A crash when switching tutorial pages</item>
+    </string-array>
+    <string-array name="update_content_541">
+        <item>5.4.1</item>
+        <item>Improved: Faster app startup speed</item>
+    </string-array>
+    <string-array name="update_content_540">
+        <item>5.4.0</item>
+        <item>Added: Support for Android 11</item>
+        <item>Added: Timers grid view</item>
+        <item>Fixed: The wrong floating window position after screen rotation</item>
+        <item>Fixed: Clicking a shortcut of a deleted timer crashes the app</item>
+    </string-array>
+    <string-array name="update_content_530">
+        <item>5.3.0</item>
+        <item>Added: Some time-related Voice variables</item>
+        <item>Improved: More straightforward writing</item>
+        <item>Improved: Displayed time has the same 12/24 hours format as the system settings</item>
+        <item>Improved: The error message of failed import includes the details</item>
+    </string-array>
+    <string-array name="update_content_520">
+        <item>5.2.0</item>
+        <item>Added: Some beautiful app themes have been added to the subscription plan.</item>
+        <item>Added: A popup menu to pick Voice variables.</item>
+        <item>Added: Elapsed time and remaining time Voice variables that can calculate the value based on the group.</item>
+        <item>Improved: The app will also record when manually stopping the timer at the last step of the timer.</item>
+        <item>Improved: The fullscreen screen can contain more text.</item>
+        <item>Improved: When browsing secondary screens, the menu bar shows a back icon instead of a menu icon.</item>
+        <item>Fixed: The app generates corrupted data when exporting to an existing file.</item>
+    </string-array>
+    <string-array name="update_content_510">
+        <item>5.1.0</item>
+        <item>Added: An interactive tutorial.</item>
+        <item>Improved: Better Whitelist Guideline.</item>
+        <item>Improved: Timers in the trash are unable to start.</item>
+        <item>Improved: Timer shortcuts are disabled when the timer is deleted.</item>
+        <item>Fixed: Edited timers go into the default set sometimes.</item>
+        <item>Fixed: UI becomes unresponsive when the next timer to start is missing.</item>
+    </string-array>
+    <string-array name="update_content_500">
+        <item>5.0.0</item>
+        <item>Added: Timer Set for categorizing timers.</item>
+        <item>Added: Several rules to sort timers.</item>
+        <item>Added: More menu options when long clicking a timer.</item>
+        <item>Improved: When deleting a timer, it goes to the trash instead of being deleted.</item>
+        <item>Fixed: A crash when saving a notifier fails.</item>
+    </string-array>
+</resources>

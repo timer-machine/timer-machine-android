@@ -13,4 +13,22 @@
         <attr name="nlv_view_color" format="color" />
     </declare-styleable>
 
+    <attr name="li_textPrimary" format="string" />
+    <attr name="li_textSecondary" format="string" />
+
+    <declare-styleable name="ListItem">
+        <attr name="li_textPrimary" />
+        <attr name="li_textSecondary" />
+    </declare-styleable>
+
+    <declare-styleable name="ListItemWithLayout">
+        <attr name="li_textPrimary" />
+        <attr name="li_textSecondary" />
+        <attr name="li_layout" format="reference" />
+        <attr name="li_divider">
+            <enum name="full" value="1" />
+            <enum name="margin" value="2" />
+        </attr>
+    </declare-styleable>
+
 </resources>

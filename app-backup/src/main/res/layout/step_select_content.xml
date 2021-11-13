@@ -5,51 +5,51 @@
     android:layout_height="wrap_content"
     android:orientation="vertical">
 
-    <xyz.aprildown.tools.view.ListItemWithLayout
+    <xyz.aprildown.timer.component.key.ListItemWithLayout
         android:id="@+id/itemSelectAppContentWipe"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:li_layout="@layout/widget_check"
+        app:li_layout="@layout/view_list_item_with_layout_check"
         app:li_textPrimary="@string/import_wipe_first" />
 
     <TextView
-        style="@style/Widget.ListHeader"
+        style="@style/Widget.AppTheme.ListHeader"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/backup_app_data" />
 
-    <xyz.aprildown.tools.view.ListItemWithLayout
+    <xyz.aprildown.timer.component.key.ListItemWithLayout
         android:id="@+id/itemSelectAppContentTimer"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:li_layout="@layout/widget_check"
+        app:li_layout="@layout/view_list_item_with_layout_check"
         app:li_textPrimary="@string/main_action_timers" />
 
-    <xyz.aprildown.tools.view.ListItemWithLayout
+    <xyz.aprildown.timer.component.key.ListItemWithLayout
         android:id="@+id/itemSelectAppContentTimerStamp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:li_layout="@layout/widget_check"
+        app:li_layout="@layout/view_list_item_with_layout_check"
         app:li_textPrimary="@string/main_action_record" />
 
-    <xyz.aprildown.tools.view.ListItemWithLayout
+    <xyz.aprildown.timer.component.key.ListItemWithLayout
         android:id="@+id/itemSelectAppContentScheduler"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:li_layout="@layout/widget_check"
+        app:li_layout="@layout/view_list_item_with_layout_check"
         app:li_textPrimary="@string/main_action_schedulers" />
 
     <TextView
-        style="@style/Widget.ListHeader"
+        style="@style/Widget.AppTheme.ListHeader"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/backup_app_settings" />
 
-    <xyz.aprildown.tools.view.ListItemWithLayout
+    <xyz.aprildown.timer.component.key.ListItemWithLayout
         android:id="@+id/itemSelectAppContentSettings"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:li_layout="@layout/widget_check"
+        app:li_layout="@layout/view_list_item_with_layout_check"
         app:li_textPrimary="@string/backup_app_settings" />
 
 </LinearLayout>

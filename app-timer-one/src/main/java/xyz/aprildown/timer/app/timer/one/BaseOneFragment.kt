@@ -28,6 +28,8 @@ import xyz.aprildown.timer.app.base.ui.StepUpdater
 import xyz.aprildown.timer.app.base.utils.ShortcutHelper
 import xyz.aprildown.timer.app.timer.one.float.FloatingTimer
 import xyz.aprildown.timer.component.key.DurationPicker
+import xyz.aprildown.timer.component.key.ListItemWithLayout
+import xyz.aprildown.timer.component.key.SimpleInputDialog
 import xyz.aprildown.timer.domain.utils.AppTracker
 import xyz.aprildown.timer.presentation.one.OneViewModel
 import xyz.aprildown.timer.presentation.stream.MachineContract
@@ -38,8 +40,6 @@ import xyz.aprildown.tools.anko.longToast
 import xyz.aprildown.tools.arch.Event
 import xyz.aprildown.tools.helper.createChooserIntentIfDead
 import xyz.aprildown.tools.helper.startActivitySafely
-import xyz.aprildown.tools.view.ListItemWithLayout
-import xyz.aprildown.tools.view.SimpleInputDialog
 import javax.inject.Inject
 import javax.inject.Provider
 import xyz.aprildown.timer.app.base.R as RBase

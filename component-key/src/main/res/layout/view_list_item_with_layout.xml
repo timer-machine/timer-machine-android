@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    tools:background="?selectableItemBackground"
+    tools:gravity="center_vertical"
+    tools:parentTag="android.widget.RelativeLayout">
+
+    <xyz.aprildown.timer.component.key.ListItem
+        android:id="@+id/itemListItem"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_toStartOf="@id/stubListItemLayout"
+        tools:li_textPrimary="Hello" />
+
+    <ViewStub
+        android:id="@+id/stubListItemLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_centerVertical="true"
+        android:layout_marginEnd="@dimen/keyline_icon"
+        android:inflatedId="@+id/viewListItemInflated" />
+
+    <ViewStub
+        android:layout_width="wrap_content"
+        android:layout_height="1dp"
+        android:layout_below="@id/itemListItem"
+        android:layout="@layout/divider" />
+</merge>

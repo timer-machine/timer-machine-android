@@ -11,40 +11,40 @@
         android:animateLayoutChanges="true"
         android:orientation="vertical">
 
-        <xyz.aprildown.tools.view.ListItemWithLayout
+        <xyz.aprildown.timer.component.key.ListItemWithLayout
             android:id="@+id/listItemDarkThemeManual"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingStart="8dp"
             android:paddingEnd="8dp"
-            app:li_layout="@layout/widget_radio"
+            app:li_layout="@layout/view_list_item_with_layout_radio"
             app:li_textPrimary="@string/dark_theme_manual" />
 
-        <xyz.aprildown.tools.view.ListItemWithLayout
+        <xyz.aprildown.timer.component.key.ListItemWithLayout
             android:id="@+id/listItemDarkThemeScheduled"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingStart="24dp"
             android:paddingEnd="8dp"
-            app:li_layout="@layout/widget_switch"
+            app:li_layout="@layout/view_list_item_with_layout_switch"
             app:li_textPrimary="@string/dark_theme_scheduled" />
 
-        <xyz.aprildown.tools.view.ListItemWithLayout
+        <xyz.aprildown.timer.component.key.ListItemWithLayout
             android:id="@+id/listItemDarkThemeScheduledFrom"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingStart="24dp"
             android:paddingEnd="8dp"
-            app:li_layout="@layout/widget_text"
+            app:li_layout="@layout/view_list_item_with_layout_text"
             app:li_textPrimary="@string/dark_theme_scheduled_from" />
 
-        <xyz.aprildown.tools.view.ListItemWithLayout
+        <xyz.aprildown.timer.component.key.ListItemWithLayout
             android:id="@+id/listItemDarkThemeScheduledTo"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingStart="24dp"
             android:paddingEnd="8dp"
-            app:li_layout="@layout/widget_text"
+            app:li_layout="@layout/view_list_item_with_layout_text"
             app:li_textPrimary="@string/dark_theme_scheduled_to" />
 
         <include
@@ -54,13 +54,13 @@
             android:layout_marginStart="24dp"
             android:layout_marginEnd="24dp" />
 
-        <xyz.aprildown.tools.view.ListItemWithLayout
+        <xyz.aprildown.timer.component.key.ListItemWithLayout
             android:id="@+id/listItemDarkThemeDefault"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingStart="8dp"
             android:paddingEnd="8dp"
-            app:li_layout="@layout/widget_radio"
+            app:li_layout="@layout/view_list_item_with_layout_radio"
             app:li_textPrimary="@string/dark_theme_system_default" />
 
         <include
@@ -70,13 +70,13 @@
             android:layout_marginStart="24dp"
             android:layout_marginEnd="24dp" />
 
-        <xyz.aprildown.tools.view.ListItemWithLayout
+        <xyz.aprildown.timer.component.key.ListItemWithLayout
             android:id="@+id/listItemDarkThemeSaver"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingStart="8dp"
             android:paddingEnd="8dp"
-            app:li_layout="@layout/widget_radio"
+            app:li_layout="@layout/view_list_item_with_layout_radio"
             app:li_textPrimary="@string/dark_theme_battery_saver" />
 
     </LinearLayout>
