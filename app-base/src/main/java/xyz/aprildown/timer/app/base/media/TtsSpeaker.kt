@@ -7,7 +7,6 @@ import android.os.Handler
 import android.os.Looper
 import android.speech.tts.TextToSpeech
 import android.speech.tts.UtteranceProgressListener
-import androidx.annotation.StringRes
 import androidx.core.content.getSystemService
 import androidx.core.net.toUri
 import androidx.core.os.bundleOf
@@ -66,7 +65,9 @@ object TtsSpeaker : AudioManager.OnAudioFocusChangeListener {
                     abandonAudioFocus(immediate = true)
 
                     HandlerHelper.runOnUiThread {
-                        appContext.longToast(status.getErrorMessage())
+                        context.longToast(
+                            context.getString(RBase.string.tts_error_template, status.toString())
+                        )
                         callback?.onError()
                     }
                 }
@@ -158,7 +159,9 @@ object TtsSpeaker : AudioManager.OnAudioFocusChangeListener {
                 stopSpeaking()
                 shutDownTts(immediate = true)
                 abandonAudioFocus(immediate = true)
-                context.longToast(errorCode.getErrorMessage())
+                context.longToast(
+                    context.getString(RBase.string.tts_error_template, errorCode.toString())
+                )
                 callback?.onError()
             }
         }
@@ -269,17 +272,4 @@ object TtsSpeaker : AudioManager.OnAudioFocusChangeListener {
             AudioManager.AUDIOFOCUS_LOSS_TRANSIENT_CAN_DUCK -> tearDown()
         }
     }
-}
-
-@StringRes
-private fun Int.getErrorMessage() = when (this) {
-    TextToSpeech.ERROR_SYNTHESIS -> RBase.string.tts_error_synthesis
-    TextToSpeech.ERROR_SERVICE -> RBase.string.tts_error_service
-    TextToSpeech.ERROR_OUTPUT -> RBase.string.tts_error_output
-    TextToSpeech.ERROR_NETWORK -> RBase.string.tts_error_network
-    TextToSpeech.ERROR_NETWORK_TIMEOUT -> RBase.string.tts_error_network_timeout
-    TextToSpeech.ERROR_INVALID_REQUEST -> RBase.string.tts_error_invalid_request
-    TextToSpeech.ERROR_NOT_INSTALLED_YET -> RBase.string.tts_error_not_installed_yet
-    // TextToSpeech.ERROR -> R.string.tts_unknown_error
-    else -> RBase.string.tts_unknown_error
 }

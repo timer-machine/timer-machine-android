@@ -208,6 +208,8 @@
     <string name="voice_variable_other_group">其他</string>
     <string name="voice_variable_other_clock_time_desp">當前時間</string>
 
+    <string name="tts_error_template" formatted="false">文字轉語音錯誤：%s</string>
+
     <string name="behaviour_beep">嘟嘟</string>
     <string name="behaviour_beep_help">每秒播放嘟嘟音</string>
     <string name="beep_count_title">嘟嘟次數</string>
