@@ -13,7 +13,7 @@
         app:li_textPrimary="@string/import_wipe_first" />
 
     <TextView
-        style="@style/Widget.ListHeader"
+        style="@style/Widget.AppTheme.ListHeader"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/backup_app_data" />
@@ -40,7 +40,7 @@
         app:li_textPrimary="@string/main_action_schedulers" />
 
     <TextView
-        style="@style/Widget.ListHeader"
+        style="@style/Widget.AppTheme.ListHeader"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/backup_app_settings" />

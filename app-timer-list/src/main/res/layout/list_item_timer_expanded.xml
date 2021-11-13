@@ -47,7 +47,7 @@
 
             <include
                 android:id="@+id/dividerTimer"
-                style="@style/Widget.MarginDivider"
+                style="@style/Widget.AppTheme.MarginDivider"
                 layout="@layout/divider"
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
