@@ -33,17 +33,17 @@ import xyz.aprildown.timer.app.base.ui.FlavorUiInjectorQualifier
 import xyz.aprildown.timer.app.base.ui.MainCallback
 import xyz.aprildown.timer.app.base.utils.AppThemeUtils
 import xyz.aprildown.timer.app.settings.R
+import xyz.aprildown.timer.component.key.ListItemWithLayout
 import xyz.aprildown.timer.domain.entities.StepType
 import xyz.aprildown.timer.domain.utils.Constants
 import xyz.aprildown.tools.anko.dip
 import xyz.aprildown.tools.helper.color
 import xyz.aprildown.tools.helper.toColorStateList
-import xyz.aprildown.tools.view.ListItemWithLayout
 import java.util.Optional
 import javax.inject.Inject
 import com.mikepenz.materialize.R as RMaterialize
 import xyz.aprildown.timer.app.base.R as RBase
-import xyz.aprildown.tools.R as RTools
+import xyz.aprildown.timer.component.key.R as RComponentKey
 
 @AndroidEntryPoint
 class ThemeFragment : Fragment(),
@@ -294,7 +294,7 @@ private class BooleanToggle(
         fun onBooleanToggleChange(toggleType: Int, newValue: Boolean)
     }
 
-    override val layoutRes: Int = RTools.layout.widget_list_item_with_layout
+    override val layoutRes: Int = RComponentKey.layout.layout_list_item_with_layout
     override val type: Int = 1
     override fun getViewHolder(v: View): ViewHolder = ViewHolder(v)
 
@@ -327,7 +327,7 @@ private class BooleanToggle(
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val listItemWithLayout: ListItemWithLayout = (view as ListItemWithLayout).apply {
-            setLayoutRes(RTools.layout.widget_switch)
+            setLayoutRes(RComponentKey.layout.view_list_item_with_layout_switch)
         }
     }
 }
@@ -419,7 +419,7 @@ private class StepColor(
         fun onStepColorClick(pos: Int, type: StepType)
     }
 
-    override val layoutRes: Int = RTools.layout.widget_list_item_with_layout
+    override val layoutRes: Int = RComponentKey.layout.layout_list_item_with_layout
     override val type: Int = 4
     override fun getViewHolder(v: View): ViewHolder = ViewHolder(v)
 

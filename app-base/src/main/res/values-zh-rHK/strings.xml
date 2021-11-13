@@ -2,6 +2,15 @@
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <string name="app_name">計時機器</string>
 
+    <string name="language">zh-rHK</string>
+
+    <string name="ok">確定</string>
+    <string name="cancel">取消</string>
+    <string name="settings">設定</string>
+    <string name="more">更多</string>
+    <string name="delete">刪除</string>
+    <string name="undo">復原</string>
+
     <!--Common actions-->
     <string name="understand">明白啦</string>
     <string name="add">新增</string>

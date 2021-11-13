@@ -11,12 +11,12 @@
         android:orientation="vertical"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-        <xyz.aprildown.tools.view.ListItemWithLayout
+        <xyz.aprildown.timer.component.key.ListItemWithLayout
             android:id="@+id/itemFloatingWindowPipAutoClose"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:li_divider="margin"
-            app:li_layout="@layout/widget_switch"
+            app:li_layout="@layout/view_list_item_with_layout_switch"
             app:li_textPrimary="@string/settings_floating_window_pip_auto_close" />
 
         <TextView

@@ -2,6 +2,15 @@
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <string name="app_name">计时机器</string>
 
+    <string name="language">zh-rCN</string>
+
+    <string name="ok">确定</string>
+    <string name="cancel">取消</string>
+    <string name="settings">设置</string>
+    <string name="more">更多</string>
+    <string name="delete">删除</string>
+    <string name="undo">撤消</string>
+
     <!--Common actions-->
     <string name="understand">明白啦</string>
     <string name="add">添加</string>

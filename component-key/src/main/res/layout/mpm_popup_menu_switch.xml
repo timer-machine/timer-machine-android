@@ -33,7 +33,7 @@
 
         <include
             android:id="@+id/mpmSwitchSwitch"
-            layout="@layout/widget_switch"
+            layout="@layout/view_list_item_with_layout_switch"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 

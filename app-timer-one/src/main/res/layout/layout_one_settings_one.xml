@@ -5,12 +5,12 @@
     android:layout_height="wrap_content"
     android:orientation="vertical">
 
-    <xyz.aprildown.tools.view.ListItemWithLayout
+    <xyz.aprildown.timer.component.key.ListItemWithLayout
         android:id="@+id/itemOneLayoutOneBar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:li_divider="margin"
-        app:li_layout="@layout/widget_switch"
+        app:li_layout="@layout/view_list_item_with_layout_switch"
         app:li_textPrimary="@string/one_layout_bar" />
 
     <LinearLayout
@@ -42,14 +42,14 @@
 
     </LinearLayout>
 
-    <xyz.aprildown.tools.view.ListItemWithLayout
+    <xyz.aprildown.timer.component.key.ListItemWithLayout
         android:id="@+id/itemOneLayoutOneTimePanels"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:li_divider="margin"
         app:li_textPrimary="@string/time_panel_picker" />
 
-    <xyz.aprildown.tools.view.ListItemWithLayout
+    <xyz.aprildown.timer.component.key.ListItemWithLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:li_divider="margin"

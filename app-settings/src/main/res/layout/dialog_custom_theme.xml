@@ -7,7 +7,7 @@
     android:paddingTop="8dp"
     android:paddingBottom="8dp">
 
-    <xyz.aprildown.tools.view.ListItemWithLayout
+    <xyz.aprildown.timer.component.key.ListItemWithLayout
         android:id="@+id/itemCustomThemePrimary"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -16,7 +16,7 @@
         app:li_layout="@layout/widget_color_swatch"
         app:li_textPrimary="@string/theme_custom_primary" />
 
-    <xyz.aprildown.tools.view.ListItemWithLayout
+    <xyz.aprildown.timer.component.key.ListItemWithLayout
         android:id="@+id/itemCustomThemeSecondary"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

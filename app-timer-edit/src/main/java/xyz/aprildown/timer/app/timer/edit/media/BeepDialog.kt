@@ -6,7 +6,7 @@ import androidx.collection.ArrayMap
 import androidx.collection.arrayMapOf
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import xyz.aprildown.timer.app.base.media.Beeper
-import xyz.aprildown.tools.view.SimpleInputDialog
+import xyz.aprildown.timer.component.key.SimpleInputDialog
 import xyz.aprildown.timer.app.base.R as RBase
 
 internal class BeepDialog(private val context: Context) {

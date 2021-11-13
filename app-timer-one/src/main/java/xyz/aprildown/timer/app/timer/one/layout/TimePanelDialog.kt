@@ -9,7 +9,7 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import xyz.aprildown.timer.app.base.data.PreferenceData
 import xyz.aprildown.timer.app.base.data.PreferenceData.timePanels
 import xyz.aprildown.timer.app.timer.one.databinding.DialogTimePanelPickerBinding
-import xyz.aprildown.tools.view.ListItemWithLayout
+import xyz.aprildown.timer.component.key.ListItemWithLayout
 import xyz.aprildown.timer.app.base.R as RBase
 
 internal fun Context.showTimePanelPickerDialog(onDone: () -> Unit) {

@@ -6,27 +6,27 @@
     android:layout_height="wrap_content"
     android:orientation="vertical">
 
-    <xyz.aprildown.tools.view.ListItemWithLayout
+    <xyz.aprildown.timer.component.key.ListItemWithLayout
         android:id="@+id/itemEditShowNotif"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:li_divider="margin"
-        app:li_layout="@layout/widget_switch"
+        app:li_layout="@layout/view_list_item_with_layout_switch"
         app:li_textPrimary="@string/edit_more_show_notif" />
 
-    <xyz.aprildown.tools.view.ListItemWithLayout
+    <xyz.aprildown.timer.component.key.ListItemWithLayout
         android:id="@+id/itemEditNotifCount"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:li_divider="margin"
-        app:li_layout="@layout/widget_switch"
+        app:li_layout="@layout/view_list_item_with_layout_switch"
         app:li_textPrimary="@string/edit_more_notif_count" />
 
-    <xyz.aprildown.tools.view.ListItemWithLayout
+    <xyz.aprildown.timer.component.key.ListItemWithLayout
         android:id="@+id/itemEditTrigger"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:li_layout="@layout/widget_switch"
+        app:li_layout="@layout/view_list_item_with_layout_switch"
         app:li_textPrimary="@string/edit_more_trigger" />
 
     <Button

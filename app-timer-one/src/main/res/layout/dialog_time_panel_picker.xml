@@ -23,32 +23,32 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <xyz.aprildown.tools.view.ListItemWithLayout
+            <xyz.aprildown.timer.component.key.ListItemWithLayout
                 style="@style/Widget.AppTheme.ListItem.TimePanelPickerItem"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
 
-            <xyz.aprildown.tools.view.ListItemWithLayout
+            <xyz.aprildown.timer.component.key.ListItemWithLayout
                 style="@style/Widget.AppTheme.ListItem.TimePanelPickerItem"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
 
-            <xyz.aprildown.tools.view.ListItemWithLayout
+            <xyz.aprildown.timer.component.key.ListItemWithLayout
                 style="@style/Widget.AppTheme.ListItem.TimePanelPickerItem"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
 
-            <xyz.aprildown.tools.view.ListItemWithLayout
+            <xyz.aprildown.timer.component.key.ListItemWithLayout
                 style="@style/Widget.AppTheme.ListItem.TimePanelPickerItem"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
 
-            <xyz.aprildown.tools.view.ListItemWithLayout
+            <xyz.aprildown.timer.component.key.ListItemWithLayout
                 style="@style/Widget.AppTheme.ListItem.TimePanelPickerItem"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
 
-            <xyz.aprildown.tools.view.ListItemWithLayout
+            <xyz.aprildown.timer.component.key.ListItemWithLayout
                 style="@style/Widget.AppTheme.ListItem.TimePanelPickerItem"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
