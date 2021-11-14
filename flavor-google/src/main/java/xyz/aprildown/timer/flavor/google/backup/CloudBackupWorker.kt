@@ -191,7 +191,10 @@ internal class CloudBackupWorker @AssistedInject constructor(
         val pendingIntent = TaskStackBuilder.create(applicationContext)
             .addNextIntent(appNavigator.get().getMainIntent())
             .addNextIntent(BillingActivity.getIntent(applicationContext))
-            .getPendingIntent(0, PendingIntent.FLAG_UPDATE_CURRENT)
+            .getPendingIntent(
+                0,
+                PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
+            )
         requireNotNull(pendingIntent)
         return pendingIntent
     }

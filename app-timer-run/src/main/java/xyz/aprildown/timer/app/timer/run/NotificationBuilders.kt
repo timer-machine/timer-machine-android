@@ -182,7 +182,10 @@ internal fun Context.buildTimerNotificationBuilder(
 
     val stackBuilder = TaskStackBuilder.create(this)
     stackBuilder.addNextIntentWithParentStack(showTimerIntent)
-    val pi = stackBuilder.getPendingIntent(timerId, PendingIntent.FLAG_UPDATE_CURRENT)
+    val pi = stackBuilder.getPendingIntent(
+        timerId,
+        PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
+    )
 
     return Builder(this, CHANNEL_TIMING)
         .setShowWhen(false)
@@ -291,7 +294,10 @@ internal fun Context.buildBehaviourNotification(
 
     val stackBuilder = TaskStackBuilder.create(this)
     stackBuilder.addNextIntentWithParentStack(showTimerIntent)
-    val pi = stackBuilder.getPendingIntent(timerId, PendingIntent.FLAG_UPDATE_CURRENT)
+    val pi = stackBuilder.getPendingIntent(
+        timerId,
+        PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
+    )
 
     return Builder(this, CHANNEL_B_NOTIF)
         .setShowWhen(true)
