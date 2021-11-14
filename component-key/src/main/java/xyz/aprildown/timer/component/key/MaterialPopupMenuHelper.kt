@@ -13,7 +13,7 @@ fun MaterialPopupMenuBuilder.SectionHolder.switchItem(init: MaterialPopupMenuCom
         viewBoundCallback = { view ->
             val binding = MpmPopupMenuSwitchBinding.bind(view)
             binding.mpmSwitchLabel.text = holder.label
-            val switch = binding.mpmSwitchSwitch as CompoundButton
+            val switch = binding.mpmSwitchSwitch.root as CompoundButton
             holder.onBind.invoke(switch)
             switch.setOnCheckedChangeListener { buttonView, isChecked ->
                 holder.onCheckedChange.invoke(buttonView, isChecked)

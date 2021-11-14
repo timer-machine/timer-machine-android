@@ -130,8 +130,11 @@ class ScreenActivity : BaseActivity() {
                 WindowManager.LayoutParams.FLAG_ALLOW_LOCK_WHILE_SCREEN_ON
         )
 
-        // Close dialogs and window shade, so this is fully visible
-        sendBroadcast(Intent(Intent.ACTION_CLOSE_SYSTEM_DIALOGS))
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.S) {
+            // Close dialogs and window shade, so this is fully visible
+            @Suppress("MissingPermission", "DEPRECATION")
+            sendBroadcast(Intent(Intent.ACTION_CLOSE_SYSTEM_DIALOGS))
+        }
     }
 
     private fun setUpObservers() {
