@@ -66,44 +66,10 @@ internal fun Context.serviceBuilder(
         )) + ' ' + getString(RBase.string.notif_timers_paused, pausedTimerCount.toString())
     }
 
-    val customView = RemoteViews(packageName, R.layout.layout_notif)
-    customView.setTextViewText(R.id.textNotifMessage, content)
-    customView.setContentDescription(
-        R.id.imageNotifStopAll,
-        getString(RBase.string.notif_a11y_stop_ally)
-    )
-    customView.setOnClickPendingIntent(
-        R.id.imageNotifStopAll,
-        pendingServiceIntent(MachineService.stopAllIntent(this))
-    )
-    if (isAllPaused) {
-        customView.setImageViewResource(R.id.imageNotifPauseAll, RBase.drawable.ic_start)
-        customView.setContentDescription(
-            R.id.imageNotifStopAll,
-            getString(RBase.string.notif_a11y_start_ally)
-        )
-        customView.setOnClickPendingIntent(
-            R.id.imageNotifPauseAll,
-            pendingServiceIntent(MachineService.startAllIntent(this))
-        )
-    } else {
-        customView.setImageViewResource(R.id.imageNotifPauseAll, RBase.drawable.ic_pause)
-        customView.setContentDescription(
-            R.id.imageNotifStopAll,
-            getString(RBase.string.notif_a11y_pause_ally)
-        )
-        customView.setOnClickPendingIntent(
-            R.id.imageNotifPauseAll,
-            pendingServiceIntent(MachineService.pauseAllIntent(this))
-        )
-    }
-
-    val contentPi = pendingActivityIntent(appNavigator.getMainIntent())
-
-    return Builder(this, CHANNEL_SERVICE)
+    val builder = Builder(this, CHANNEL_SERVICE)
         .setShowWhen(false)
         .setSmallIcon(RBase.drawable.ic_watch)
-        .setContentIntent(contentPi)
+        .setContentIntent(pendingActivityIntent(appNavigator.getMainIntent()))
         .setOngoing(true)
         .setAutoCancel(false)
         .setLocalOnly(true)
@@ -113,9 +79,67 @@ internal fun Context.serviceBuilder(
         .setSortKey("a_service")
         .setColor(color(RBase.color.colorPrimary))
         .setVisibility(NotificationCompat.VISIBILITY_PUBLIC)
-        .setCustomContentView(customView)
-        .setCustomBigContentView(customView)
-    // .setStyle(NotificationCompat.DecoratedCustomViewStyle())
+
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+        builder.setContentTitle(content)
+        builder.addAction(
+            RBase.drawable.ic_stop,
+            getString(RBase.string.notif_a11y_stop_ally),
+            pendingServiceIntent(MachineService.stopAllIntent(this))
+        )
+        if (isAllPaused) {
+            builder.addAction(
+                RBase.drawable.ic_start,
+                getString(RBase.string.notif_a11y_start_ally),
+                pendingServiceIntent(MachineService.startAllIntent(this))
+            )
+        } else {
+            builder.addAction(
+                RBase.drawable.ic_pause,
+                getString(RBase.string.notif_a11y_pause_ally),
+                pendingServiceIntent(MachineService.pauseAllIntent(this))
+            )
+        }
+        builder.setStyle(
+            androidx.media.app.NotificationCompat.MediaStyle()
+                .setShowActionsInCompactView(0, 1)
+        )
+    } else {
+        val customView = RemoteViews(packageName, R.layout.layout_notif)
+        customView.setTextViewText(R.id.textNotifMessage, content)
+        customView.setContentDescription(
+            R.id.imageNotifStopAll,
+            getString(RBase.string.notif_a11y_stop_ally)
+        )
+        customView.setOnClickPendingIntent(
+            R.id.imageNotifStopAll,
+            pendingServiceIntent(MachineService.stopAllIntent(this))
+        )
+        if (isAllPaused) {
+            customView.setImageViewResource(R.id.imageNotifPauseAll, RBase.drawable.ic_start)
+            customView.setContentDescription(
+                R.id.imageNotifPauseAll,
+                getString(RBase.string.notif_a11y_start_ally)
+            )
+            customView.setOnClickPendingIntent(
+                R.id.imageNotifPauseAll,
+                pendingServiceIntent(MachineService.startAllIntent(this))
+            )
+        } else {
+            customView.setImageViewResource(R.id.imageNotifPauseAll, RBase.drawable.ic_pause)
+            customView.setContentDescription(
+                R.id.imageNotifPauseAll,
+                getString(RBase.string.notif_a11y_pause_ally)
+            )
+            customView.setOnClickPendingIntent(
+                R.id.imageNotifPauseAll,
+                pendingServiceIntent(MachineService.pauseAllIntent(this))
+            )
+        }
+        builder.setCustomContentView(customView)
+            .setCustomBigContentView(customView)
+    }
+    return builder
 }
 
 /**

@@ -6,10 +6,8 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="64dp"
         android:background="@color/color_notification_background"
-        android:paddingTop="8dp"
-        android:paddingBottom="8dp"
         tools:ignore="ContentDescription,UselessParent">
 
         <ImageView
@@ -43,6 +41,7 @@
             android:layout_centerVertical="true"
             android:layout_marginEnd="8dp"
             android:layout_toStartOf="@id/imageNotifPauseAll"
+            android:contentDescription="@string/notif_a11y_stop_ally"
             android:src="@drawable/ic_stop"
             android:tint="@color/md_purple_500"
             tools:ignore="UseAppTint" />
