@@ -46,7 +46,6 @@ import xyz.aprildown.tools.helper.color
 import javax.inject.Inject
 import com.mikepenz.materialize.R as RMaterialize
 import xyz.aprildown.timer.app.base.R as RBase
-import xyz.aprildown.tools.R as RTools
 
 @AndroidEntryPoint
 class IntroActivity : BaseActivity() {
@@ -276,10 +275,10 @@ class IntroActivity : BaseActivity() {
                     append(getText(RBase.string.intro_location))
                 }.takeIf { it.isNotBlank() }
             )
-            .setPositiveButton(RTools.string.ok) { _, _ ->
+            .setPositiveButton(RBase.string.ok) { _, _ ->
                 finish()
             }
-            .setNegativeButton(RTools.string.cancel, null)
+            .setNegativeButton(RBase.string.cancel, null)
             .show()
     }
 

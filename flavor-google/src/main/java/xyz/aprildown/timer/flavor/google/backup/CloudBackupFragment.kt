@@ -55,7 +55,6 @@ import xyz.aprildown.tools.helper.safeSharedPreference
 import xyz.aprildown.tools.helper.startActivitySafely
 import javax.inject.Inject
 import xyz.aprildown.timer.app.base.R as RBase
-import xyz.aprildown.tools.R as RTools
 
 @AndroidEntryPoint
 internal class CloudBackupFragment : PreferenceFragmentCompat() {
@@ -215,7 +214,7 @@ internal class CloudBackupFragment : PreferenceFragmentCompat() {
                         .setCancelable(false)
                         .setTitle(RBase.string.cloud_backup_uploading)
                         .setView(R.layout.dialog_loading)
-                        .setNegativeButton(RTools.string.cancel) { _, _ ->
+                        .setNegativeButton(RBase.string.cancel) { _, _ ->
                             manualBackupDialog?.dismiss()
 
                             if (autoCloudBackup.get()) {
@@ -265,7 +264,7 @@ internal class CloudBackupFragment : PreferenceFragmentCompat() {
                     MaterialAlertDialogBuilder(context)
                         .setTitle(RBase.string.cloud_backup_backup_now_failed)
                         .setMessage(fruit.exception.causeFirstMessage())
-                        .setPositiveButton(RTools.string.ok, null)
+                        .setPositiveButton(RBase.string.ok, null)
                         .show()
                     if (autoCloudBackup.get()) {
                         CloudBackup.schedule(context, currentBackupState)
@@ -333,8 +332,8 @@ internal class CloudBackupFragment : PreferenceFragmentCompat() {
     private fun confirmToSignOut(context: Context) {
         MaterialAlertDialogBuilder(context)
             .setMessage(RBase.string.account_sign_out_confirmation)
-            .setNegativeButton(RTools.string.cancel, null)
-            .setPositiveButton(RTools.string.ok) { _, _ ->
+            .setNegativeButton(RBase.string.cancel, null)
+            .setPositiveButton(RBase.string.ok) { _, _ ->
                 val loadingDialog = MaterialAlertDialogBuilder(context)
                     .setCancelable(false)
                     .setTitle(RBase.string.account_signing_out)
@@ -360,8 +359,8 @@ internal class CloudBackupFragment : PreferenceFragmentCompat() {
     private fun confirmToDeleteAccount(context: Context) {
         val dialog = MaterialAlertDialogBuilder(context)
             .setMessage(RBase.string.account_delete_confirmation)
-            .setPositiveButton(RTools.string.ok, null)
-            .setNegativeButton(RTools.string.cancel, null)
+            .setPositiveButton(RBase.string.ok, null)
+            .setNegativeButton(RBase.string.cancel, null)
             .show()
         val positiveButton = dialog.getButton(AlertDialog.BUTTON_POSITIVE)
         positiveButton.isEnabled = false
@@ -370,14 +369,14 @@ internal class CloudBackupFragment : PreferenceFragmentCompat() {
             private var remainingSeconds = 3
             override fun onTick(millisUntilFinished: Long) {
                 positiveButton.text = getString(RBase.string.count_down_template).format(
-                    getString(RTools.string.ok),
+                    getString(RBase.string.ok),
                     remainingSeconds
                 )
                 remainingSeconds -= 1
             }
 
             override fun onFinish() {
-                positiveButton.setText(RTools.string.ok)
+                positiveButton.setText(RBase.string.ok)
                 positiveButton.isEnabled = true
             }
         }

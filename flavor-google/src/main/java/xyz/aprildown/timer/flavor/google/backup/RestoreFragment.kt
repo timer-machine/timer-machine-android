@@ -30,7 +30,6 @@ import xyz.aprildown.tools.helper.restartWithFading
 import xyz.aprildown.tools.helper.show
 import javax.inject.Inject
 import xyz.aprildown.timer.app.base.R as RBase
-import xyz.aprildown.tools.R as RTools
 
 @AndroidEntryPoint
 internal class RestoreFragment : Fragment(R.layout.fragment_restore) {
@@ -121,7 +120,7 @@ internal class RestoreFragment : Fragment(R.layout.fragment_restore) {
                     MaterialAlertDialogBuilder(context)
                         .setTitle(RBase.string.cloud_backup_restore_failed)
                         .setMessage(fruit.exception.causeFirstMessage())
-                        .setPositiveButton(RTools.string.ok, null)
+                        .setPositiveButton(RBase.string.ok, null)
                         .show()
                 }
             }
@@ -131,8 +130,8 @@ internal class RestoreFragment : Fragment(R.layout.fragment_restore) {
     private fun confirmToRestore(context: Context, reference: StorageReference) {
         val dialog = MaterialAlertDialogBuilder(context)
             .setMessage(RBase.string.cloud_backup_restore_alert)
-            .setPositiveButton(RTools.string.ok, null)
-            .setNegativeButton(RTools.string.cancel, null)
+            .setPositiveButton(RBase.string.ok, null)
+            .setNegativeButton(RBase.string.cancel, null)
             .show()
         val positiveButton = dialog.getButton(AlertDialog.BUTTON_POSITIVE)
         positiveButton.isEnabled = false
@@ -141,14 +140,14 @@ internal class RestoreFragment : Fragment(R.layout.fragment_restore) {
             private var remainingSeconds = 3
             override fun onTick(millisUntilFinished: Long) {
                 positiveButton.text = getString(RBase.string.count_down_template).format(
-                    getString(RTools.string.ok),
+                    getString(RBase.string.ok),
                     remainingSeconds
                 )
                 remainingSeconds -= 1
             }
 
             override fun onFinish() {
-                positiveButton.setText(RTools.string.ok)
+                positiveButton.setText(RBase.string.ok)
                 positiveButton.isEnabled = true
             }
         }
@@ -159,7 +158,7 @@ internal class RestoreFragment : Fragment(R.layout.fragment_restore) {
                 .setCancelable(false)
                 .setTitle(RBase.string.cloud_backup_restoring)
                 .setView(R.layout.dialog_loading)
-                .setNegativeButton(RTools.string.cancel) { _, _ ->
+                .setNegativeButton(RBase.string.cancel) { _, _ ->
                     viewModel.cancelRestoring()
                 }
                 .show()

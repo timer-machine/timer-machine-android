@@ -23,7 +23,6 @@ import xyz.aprildown.ultimateringtonepicker.RingtonePickerFragment
 import xyz.aprildown.ultimateringtonepicker.UltimateRingtonePicker
 import javax.inject.Inject
 import xyz.aprildown.timer.app.base.R as RBase
-import xyz.aprildown.tools.R as RTools
 
 @AndroidEntryPoint
 class RingtonePickerActivity : BaseActivity(),
@@ -101,7 +100,7 @@ class RingtonePickerActivity : BaseActivity(),
                             usingSafPick = true
                             applyNewSafPickSetting()
                         }
-                        .setNegativeButton(RTools.string.cancel, null)
+                        .setNegativeButton(RBase.string.cancel, null)
                         .show()
                 }
             }

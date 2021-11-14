@@ -7,10 +7,10 @@ import android.view.View
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.annotation.StringRes
-import xyz.aprildown.tools.R
 import xyz.aprildown.tools.helper.gone
 import xyz.aprildown.tools.helper.setSelectableItemBackground
 import xyz.aprildown.tools.helper.show
+import xyz.aprildown.tools.R as RTools
 
 class ListItem(
     context: Context,
@@ -26,7 +26,7 @@ class ListItem(
         gravity = Gravity.CENTER_VERTICAL
         setSelectableItemBackground()
 
-        val keylineIconDimen = res.getDimensionPixelSize(R.dimen.keyline_icon)
+        val keylineIconDimen = res.getDimensionPixelSize(RTools.dimen.keyline_icon)
         val verticalPadding = res.getDimensionPixelSize(R.dimen.list_item_text_vertical_padding)
         setPadding(keylineIconDimen, verticalPadding, keylineIconDimen, verticalPadding)
 

@@ -59,7 +59,6 @@ import java.util.Optional
 import javax.inject.Inject
 import com.mikepenz.materialdrawer.R as RMaterialDrawer
 import xyz.aprildown.timer.app.base.R as RBase
-import xyz.aprildown.tools.R as RTools
 
 @AndroidEntryPoint
 class MainActivity : BaseActivity(),
@@ -461,14 +460,14 @@ class MainActivity : BaseActivity(),
                     if (currentIsDark) {
                         snackbarView.longSnackbar(
                             RBase.string.dark_theme_scheduled_dark_now,
-                            RTools.string.undo
+                            RBase.string.undo
                         ) {
                             updateManualDark(isDark = false)
                         }
                     } else {
                         snackbarView.longSnackbar(
                             RBase.string.dark_theme_scheduled_light_now,
-                            RTools.string.undo
+                            RBase.string.undo
                         ) {
                             updateManualDark(isDark = true)
                         }

@@ -18,7 +18,6 @@ import xyz.aprildown.timer.app.timer.edit.databinding.DialogVibrationPatternBind
 import xyz.aprildown.timer.domain.entities.VibrationAction
 import xyz.aprildown.tools.helper.onImeActionClick
 import xyz.aprildown.timer.app.base.R as RBase
-import xyz.aprildown.tools.R as RTools
 
 internal class VibrationDialog(private val context: Context) {
     fun showPickPatternDialog(
@@ -89,8 +88,8 @@ internal class VibrationDialog(private val context: Context) {
 
     fun showCountDialog(oldCount: Int, func: (Int) -> Unit) {
         val builder = MaterialAlertDialogBuilder(context)
-            .setPositiveButton(RTools.string.ok, null)
-            .setNegativeButton(RTools.string.cancel, null)
+            .setPositiveButton(RBase.string.ok, null)
+            .setNegativeButton(RBase.string.cancel, null)
 
         val binding = DialogVibrationCountBinding.inflate(LayoutInflater.from(context))
         binding.edit.setText(oldCount.toString()) // Put it here to make selectAllOnFocus work

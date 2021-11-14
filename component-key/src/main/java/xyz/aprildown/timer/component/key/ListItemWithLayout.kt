@@ -9,8 +9,8 @@ import android.widget.Checkable
 import android.widget.RelativeLayout
 import androidx.annotation.LayoutRes
 import androidx.core.view.updateLayoutParams
-import xyz.aprildown.tools.R
 import xyz.aprildown.tools.helper.setSelectableItemBackground
+import xyz.aprildown.tools.R as RTools
 
 class ListItemWithLayout(
     context: Context,
@@ -57,7 +57,7 @@ class ListItemWithLayout(
             val dividerView = (getChildAt(2) as ViewStub).inflate()
             if (divider == DIVIDER_MARGIN) {
                 dividerView.updateLayoutParams<LayoutParams> {
-                    val margin = context.resources.getDimensionPixelSize(R.dimen.keyline_icon)
+                    val margin = context.resources.getDimensionPixelSize(RTools.dimen.keyline_icon)
                     marginStart = margin
                     marginEnd = margin
                 }

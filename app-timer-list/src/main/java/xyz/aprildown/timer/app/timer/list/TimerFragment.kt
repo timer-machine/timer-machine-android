@@ -65,7 +65,6 @@ import xyz.aprildown.tools.helper.show
 import xyz.aprildown.tools.helper.startActivitySafely
 import javax.inject.Inject
 import xyz.aprildown.timer.app.base.R as RBase
-import xyz.aprildown.tools.R as RTools
 
 @AndroidEntryPoint
 class TimerFragment : Fragment(R.layout.fragment_timer),
@@ -328,7 +327,7 @@ class TimerFragment : Fragment(R.layout.fragment_timer),
                 }
 
                 builder
-                    .setPositiveButton(RTools.string.ok) { _, _ ->
+                    .setPositiveButton(RBase.string.ok) { _, _ ->
                         if (isInTheTrash) {
                             viewModel.timerInfo.value?.forEach { timerInfo ->
                                 ShortcutHelper.disableTimerShortcut(context, timerInfo.id)
@@ -336,7 +335,7 @@ class TimerFragment : Fragment(R.layout.fragment_timer),
                         }
                         viewModel.deleteCurrentFolder()
                     }
-                    .setNegativeButton(RTools.string.cancel, null)
+                    .setNegativeButton(RBase.string.cancel, null)
 
                 builder.show()
             }
@@ -449,7 +448,7 @@ class TimerFragment : Fragment(R.layout.fragment_timer),
             )
             mainCallback.snackbarView.snackbar(
                 message = getString(RBase.string.trash_done_template, timerItem.timerName),
-                actionText = getString(RTools.string.undo),
+                actionText = getString(RBase.string.undo),
                 action = {
                     viewModel.moveTimerToFolder(
                         timerId = timerId,
@@ -472,11 +471,11 @@ class TimerFragment : Fragment(R.layout.fragment_timer),
                         )
                     }
                 )
-                .setPositiveButton(RTools.string.ok) { _, _ ->
+                .setPositiveButton(RBase.string.ok) { _, _ ->
                     ShortcutHelper.disableTimerShortcut(context, timerId)
                     viewModel.deleteTimer(timerId)
                 }
-                .setNegativeButton(RTools.string.cancel) { _, _ ->
+                .setNegativeButton(RBase.string.cancel) { _, _ ->
                     listAdapter.notifyItemChanged(position)
                 }
                 .show()
@@ -533,10 +532,10 @@ class TimerFragment : Fragment(R.layout.fragment_timer),
                             MaterialAlertDialogBuilder(context)
                                 .setTitle(RBase.string.whitelist_disclaimer_no_confirmation)
                                 .setMessage(RBase.string.whitelist_location)
-                                .setPositiveButton(RTools.string.ok) { _, _ ->
+                                .setPositiveButton(RBase.string.ok) { _, _ ->
                                     viewModel.consumeTip(tip)
                                 }
-                                .setNegativeButton(RTools.string.cancel, null)
+                                .setNegativeButton(RBase.string.cancel, null)
                                 .show()
                         }
                     }

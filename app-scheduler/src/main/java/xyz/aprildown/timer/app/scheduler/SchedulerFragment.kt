@@ -34,7 +34,6 @@ import xyz.aprildown.tools.helper.tinted
 import xyz.aprildown.tools.utils.withEmptyView
 import com.mikepenz.materialize.R as RMaterialize
 import xyz.aprildown.timer.app.base.R as RBase
-import xyz.aprildown.tools.R as RTools
 
 @AndroidEntryPoint
 class SchedulerFragment : Fragment(R.layout.fragment_scheduler), MainCallback.FragmentCallback {
@@ -167,7 +166,7 @@ class SchedulerFragment : Fragment(R.layout.fragment_scheduler), MainCallback.Fr
                     resources.getNumberFormattedQuantityString(RBase.plurals.schedulers, actionSize)
                 }
             ),
-            getString(RTools.string.undo)
+            getString(RBase.string.undo)
         ) {
             softDeleteHelper.undo()
             viewModel.load()

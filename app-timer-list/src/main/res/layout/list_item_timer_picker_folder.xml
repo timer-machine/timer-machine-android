@@ -57,7 +57,7 @@
 
             <include
                 android:id="@+id/viewTimerPickerSelection"
-                layout="@layout/widget_check"
+                layout="@layout/view_list_item_with_layout_check"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="24dp"

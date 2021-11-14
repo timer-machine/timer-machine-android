@@ -9,9 +9,9 @@ ext {
             secrets     : '2.0.0',
             gms         : '4.3.10',
 
-            compile_sdk : 30,
+            compile_sdk : 31,
             min_sdk     : 23,
-            target_sdk  : 30,
+            target_sdk  : 31,
 
             version_code: 6000001, // XXYYZZFF
             version_name: '6.0.0', // X.Y.Z; X = Major, Y = Minor, Z = Patch, F = Fix
@@ -22,7 +22,7 @@ ext {
     libs = [
 
             desugar_jdk_libs              : 'com.android.tools:desugar_jdk_libs:1.1.5',
-            tools                         : 'xyz.aprildown:tools:0.2.4',
+            tools                         : 'xyz.aprildown:tools:0.3.1',
 
             // Kotlin Coroutines
             kotlin_coroutines_core        : 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.5.2',

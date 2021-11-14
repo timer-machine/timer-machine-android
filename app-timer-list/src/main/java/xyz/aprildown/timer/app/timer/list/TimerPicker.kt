@@ -32,7 +32,7 @@ import xyz.aprildown.timer.domain.entities.FolderEntity
 import xyz.aprildown.timer.domain.entities.TimerInfo
 import xyz.aprildown.timer.presentation.timer.TimerPickerViewModel
 import xyz.aprildown.timer.app.base.R as RBase
-import xyz.aprildown.tools.R as RTools
+import xyz.aprildown.timer.component.key.R as RComponentKey
 
 @AndroidEntryPoint
 class TimerPicker : DialogFragment() {
@@ -158,7 +158,11 @@ class TimerPicker : DialogFragment() {
             (itemAnimator as DefaultItemAnimator).supportsChangeAnimations = false
         }
 
-        val selectLayoutRes = if (multi) RTools.layout.widget_check else RTools.layout.widget_radio
+        val selectLayoutRes = if (multi) {
+            RComponentKey.layout.view_list_item_with_layout_check
+        } else {
+            RComponentKey.layout.view_list_item_with_layout_radio
+        }
         val select = arguments.getIntArray(EXTRA_SELECT) ?: intArrayOf()
         viewModel.folderTimers.observe(this) { map: Map<FolderEntity, List<TimerInfo>> ->
             itemAdapter.set(mutableListOf<GenericItem>().apply {
@@ -223,7 +227,7 @@ private class FolderItem(
     override val type: Int = R.layout.list_item_timer_picker_folder
     override val layoutRes: Int = R.layout.list_item_timer_picker_folder
     override fun getViewHolder(v: View): ViewHolder = ViewHolder(v).apply {
-        binding.viewTimerPickerSelection.isVisible = selectable
+        binding.viewTimerPickerSelection.root.isVisible = selectable
     }
 
     override var isSelectable: Boolean = selectable
@@ -235,7 +239,7 @@ private class FolderItem(
             binding.run {
                 textTimerPickerName.text = folderEntity.getDisplayName(root.context)
                 imageTimerPickerExpand.rotation = if (isExpanded) 180f else 0f
-                (viewTimerPickerSelection as CompoundButton).isChecked = isSelected
+                (viewTimerPickerSelection.root as CompoundButton).isChecked = isSelected
             }
         }
     }

@@ -7,7 +7,6 @@ import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
 import xyz.aprildown.timer.domain.entities.FolderEntity
 import xyz.aprildown.timer.app.base.R as RBase
-import xyz.aprildown.tools.R as RTools
 
 internal class CollapsedViewHolder(
     view: View,
@@ -27,7 +26,7 @@ internal class CollapsedViewHolder(
                 add(0, MENU_ID_EDIT, MENU_ID_EDIT, RBase.string.edit)
                 add(0, MENU_ID_DUPLICATE, MENU_ID_DUPLICATE, RBase.string.duplicate)
                 add(0, MENU_ID_MOVE, MENU_ID_MOVE, RBase.string.move)
-                add(0, MENU_ID_DELETE, MENU_ID_DELETE, RTools.string.delete)
+                add(0, MENU_ID_DELETE, MENU_ID_DELETE, RBase.string.delete)
                 add(0, MENU_ID_SHARE, MENU_ID_SHARE, RBase.string.share)
             }
         }

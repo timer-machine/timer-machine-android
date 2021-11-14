@@ -70,7 +70,7 @@ subprojects {
                 }
 
                 buildFeatures {
-                    viewBinding = true
+                    viewBinding true
                 }
             }
 

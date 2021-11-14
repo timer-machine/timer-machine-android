@@ -33,7 +33,6 @@ import xyz.aprildown.tools.helper.toColorStateList
 import xyz.aprildown.ultimateringtonepicker.RingtonePickerDialog
 import xyz.aprildown.ultimateringtonepicker.UltimateRingtonePicker
 import xyz.aprildown.timer.app.base.R as RBase
-import xyz.aprildown.tools.R as RTools
 
 class UpdateStepDialog : DialogFragment(),
     EditableBehaviourLayout.Listener {
@@ -255,7 +254,7 @@ class UpdateStepDialog : DialogFragment(),
             }
             section {
                 item {
-                    label = getString(RTools.string.delete)
+                    label = getString(RBase.string.delete)
                     icon = RBase.drawable.ic_delete
                     callback = { layout.removeBehaviour(type) }
                 }

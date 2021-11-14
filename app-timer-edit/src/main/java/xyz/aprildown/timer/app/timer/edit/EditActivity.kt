@@ -67,7 +67,6 @@ import xyz.aprildown.tools.helper.show
 import xyz.aprildown.tools.helper.startActivitySafely
 import javax.inject.Inject
 import xyz.aprildown.timer.app.base.R as RBase
-import xyz.aprildown.tools.R as RTools
 
 @AndroidEntryPoint
 class EditActivity : BaseActivity(),
@@ -177,11 +176,11 @@ class EditActivity : BaseActivity(),
                                     )
                                 }
                             )
-                            .setPositiveButton(RTools.string.delete) { _, _ ->
+                            .setPositiveButton(RBase.string.delete) { _, _ ->
                                 ShortcutHelper.disableTimerShortcut(this@EditActivity, viewModel.id)
                                 viewModel.deleteTimer()
                             }
-                            .setNegativeButton(RTools.string.cancel, null)
+                            .setNegativeButton(RBase.string.cancel, null)
                             .show()
                     }
                     R.id.action_timer_template -> MaterialAlertDialogBuilder(this@EditActivity)
@@ -686,7 +685,7 @@ class EditActivity : BaseActivity(),
             }
             section {
                 item {
-                    label = getString(RTools.string.delete)
+                    label = getString(RBase.string.delete)
                     icon = RBase.drawable.ic_delete
                     callback = { layout.removeBehaviour(type) }
                 }
