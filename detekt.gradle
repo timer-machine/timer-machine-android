@@ -8,13 +8,11 @@ detekt {
     toolVersion = "${versions.detekt}"
     config = files(buildscript.sourceFile.getParent().toString() + "/detekt-config.yml")
     buildUponDefaultConfig = true
+}
 
+tasks.named("detekt").configure {
     reports {
-        xml {
-            enabled = false
-        }
-        txt {
-            enabled = false
-        }
+        xml.required.set(false)
+        txt.required.set(false)
     }
 }
