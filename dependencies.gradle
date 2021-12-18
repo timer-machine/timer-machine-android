@@ -84,8 +84,8 @@ ext {
             androidx_navigation_ui        : 'androidx.navigation:navigation-ui-ktx:2.3.5',
 
             // WorkManager
-            androidx_work                 : 'androidx.work:work-runtime-ktx:2.6.0',
-            androidx_work_test            : 'androidx.work:work-testing:2.6.0',
+            androidx_work                 : 'androidx.work:work-runtime-ktx:2.7.1',
+            androidx_work_test            : 'androidx.work:work-testing:2.7.1',
 
             // App Components
             hilt_android                  : "com.google.dagger:hilt-android:${versions.hilt}",
@@ -113,7 +113,7 @@ ext {
             appcenter_crashes             : 'com.microsoft.appcenter:appcenter-crashes:4.3.1',
 
             // Other Utils
-            android_job                   : 'com.evernote:android-job:1.4.2',
+            android_job                   : 'xyz.aprildown:android-job:bfcf66eb01',
             okio                          : 'com.squareup.okio:okio:3.0.0',
             permission                    : 'pub.devrel:easypermissions:3.0.0',
 
