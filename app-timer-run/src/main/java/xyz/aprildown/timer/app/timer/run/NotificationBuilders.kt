@@ -60,10 +60,16 @@ internal fun Context.serviceBuilder(
                 getString(RBase.string.notif_timer_paused, theOnlyTimerName.toString())
             }
         }
-        else -> (getString(
-            RBase.string.notif_timers_running,
-            (totalRunningTimerCount - pausedTimerCount).toString()
-        )) + ' ' + getString(RBase.string.notif_timers_paused, pausedTimerCount.toString())
+        else -> buildString {
+            append(
+                getString(
+                    RBase.string.notif_timers_running,
+                    (totalRunningTimerCount - pausedTimerCount).toString()
+                )
+            )
+            append(" ")
+            append(getString(RBase.string.notif_timers_paused, pausedTimerCount.toString()))
+        }
     }
 
     val builder = Builder(this, CHANNEL_SERVICE)

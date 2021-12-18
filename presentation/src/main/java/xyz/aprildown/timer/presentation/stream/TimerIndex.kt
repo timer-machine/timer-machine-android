@@ -73,11 +73,14 @@ fun Intent.putTimerIndex(index: TimerIndex?): Intent = apply {
 }
 
 fun TimerIndex?.getNiceLoopString(max: Int = 1): String =
-    "%d/%d".format(this?.let {
-        when (it) {
-            is TimerIndex.Start -> 1
-            is TimerIndex.Step -> it.loopIndex + 1
-            is TimerIndex.Group -> it.loopIndex + 1
-            is TimerIndex.End -> max
-        }
-    } ?: 0, max)
+    "%d/%d".format(
+        this?.let {
+            when (it) {
+                is TimerIndex.Start -> 1
+                is TimerIndex.Step -> it.loopIndex + 1
+                is TimerIndex.Group -> it.loopIndex + 1
+                is TimerIndex.End -> max
+            }
+        } ?: 0,
+        max
+    )

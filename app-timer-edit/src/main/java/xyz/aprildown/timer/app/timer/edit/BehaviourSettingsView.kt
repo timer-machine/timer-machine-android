@@ -62,15 +62,19 @@ internal fun MaterialPopupMenuBuilder.addVibrationItems(
 ) {
     section {
         item {
-            label = "${context.getString(RBase.string.vibration_pattern)}: ${
-                context.getString(
-                    when (action.vibrationPattern) {
-                        is VibrationAction.VibrationPattern.Short -> RBase.string.vibration_short
-                        is VibrationAction.VibrationPattern.Normal -> RBase.string.vibration_normal
-                        is VibrationAction.VibrationPattern.Long -> RBase.string.vibration_long
-                    }
+            label = buildString {
+                append(context.getString(RBase.string.vibration_pattern))
+                append(": ")
+                append(
+                    context.getString(
+                        when (action.vibrationPattern) {
+                            is VibrationAction.VibrationPattern.Short -> RBase.string.vibration_short
+                            is VibrationAction.VibrationPattern.Normal -> RBase.string.vibration_normal
+                            is VibrationAction.VibrationPattern.Long -> RBase.string.vibration_long
+                        }
+                    )
                 )
-            }"
+            }
             callback = {
                 VibrationDialog(context).showPickPatternDialog(action.vibrationPattern) {
                     onNewPattern.invoke(it)
@@ -181,14 +185,18 @@ internal fun MaterialPopupMenuBuilder.addHalfItems(
 ) {
     section {
         item {
-            label = "${context.getString(RBase.string.half_option)}: ${
-                when (action.option) {
-                    HalfAction.OPTION_VOICE -> context.getString(RBase.string.half_option_voice)
-                    HalfAction.OPTION_MUSIC -> context.getString(RBase.string.half_option_music)
-                    HalfAction.OPTION_VIBRATION -> context.getString(RBase.string.half_option_vibration)
-                    else -> ""
-                }
-            }"
+            label = buildString {
+                append(context.getString(RBase.string.half_option))
+                append(": ")
+                append(
+                    when (action.option) {
+                        HalfAction.OPTION_VOICE -> context.getString(RBase.string.half_option_voice)
+                        HalfAction.OPTION_MUSIC -> context.getString(RBase.string.half_option_music)
+                        HalfAction.OPTION_VIBRATION -> context.getString(RBase.string.half_option_vibration)
+                        else -> ""
+                    }
+                )
+            }
             callback = {
                 HalfDialog(context).showOptionDialog(action.option) {
                     onHalfOption.invoke(it)

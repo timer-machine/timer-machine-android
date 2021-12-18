@@ -224,9 +224,12 @@ object TtsSpeaker : AudioManager.OnAudioFocusChangeListener {
         } else {
             // Later message has higher priority.
             shutDownTtsHandler?.removeCallbacksAndMessages(null)
-            (shutDownTtsHandler ?: Handler(Looper.getMainLooper()).also {
-                shutDownTtsHandler = it
-            }).postDelayed(5_000L) {
+            var handler = shutDownTtsHandler
+            if (handler == null) {
+                handler = Handler(Looper.getMainLooper())
+                shutDownTtsHandler = handler
+            }
+            handler.postDelayed(5_000L) {
                 run()
             }
         }

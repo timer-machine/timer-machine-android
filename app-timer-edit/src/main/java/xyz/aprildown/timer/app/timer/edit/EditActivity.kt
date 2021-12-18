@@ -69,7 +69,8 @@ import javax.inject.Inject
 import xyz.aprildown.timer.app.base.R as RBase
 
 @AndroidEntryPoint
-class EditActivity : BaseActivity(),
+class EditActivity :
+    BaseActivity(),
     EditableStep.Handler,
     EditableGroup.Handler,
     EditableGroupEnd.Handler {
@@ -964,13 +965,14 @@ class EditActivity : BaseActivity(),
                             groupSteps.add(item.toStep())
                         } else {
                             throw IllegalStateException(
-                                """isCollectingGroup but a step is not in a group: 
-                                    |${
-                                    stepAdapter.adapterItems.joinToString {
-                                        "$it(${(it as? EditableStep)?.isInAGroup})"
-                                    }
+                                buildString {
+                                    append("isCollectingGroup but a step is not in a group: ")
+                                    append(
+                                        stepAdapter.adapterItems.joinToString {
+                                            "$it(${(it as? EditableStep)?.isInAGroup})"
+                                        }
+                                    )
                                 }
-                                    |""".trimMargin()
                             )
                         }
                     } else {

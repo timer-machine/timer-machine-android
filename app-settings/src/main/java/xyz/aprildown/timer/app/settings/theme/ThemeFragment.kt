@@ -46,7 +46,8 @@ import xyz.aprildown.timer.app.base.R as RBase
 import xyz.aprildown.timer.component.key.R as RComponentKey
 
 @AndroidEntryPoint
-class ThemeFragment : Fragment(),
+class ThemeFragment :
+    Fragment(),
     BooleanToggle.Callback,
     ThemeColor.Callback,
     StepColor.Callback,

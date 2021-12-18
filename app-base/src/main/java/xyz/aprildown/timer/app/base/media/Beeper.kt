@@ -94,16 +94,17 @@ object Beeper : AudioManager.OnAudioFocusChangeListener {
         audioFocusType: Int,
         streamType: Int
     ) {
-        (audioManager ?: context.getSystemService<AudioManager>()?.also { am ->
+        var am = audioManager
+        if (am == null) {
+            am = context.getSystemService() ?: return
             audioManager = am
-        })?.let {
-            AudioFocusManager.requestAudioFocus(
-                audioManager = it,
-                focusGain = audioFocusType,
-                streamType = streamType,
-                listener = this
-            )
         }
+        AudioFocusManager.requestAudioFocus(
+            audioManager = am,
+            focusGain = audioFocusType,
+            streamType = streamType,
+            listener = this
+        )
     }
 
     private abstract class CustomToneGenerator(streamType: Int) {

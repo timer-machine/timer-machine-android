@@ -55,7 +55,8 @@ import xyz.aprildown.timer.app.base.R as RBase
  * Reset every timer and this service will be stopped automatically.
  */
 @AndroidEntryPoint
-class MachineService : Service(),
+class MachineService :
+    Service(),
     MachineContract.View,
     PhoneCallReceiver.ServiceActionCallback {
 

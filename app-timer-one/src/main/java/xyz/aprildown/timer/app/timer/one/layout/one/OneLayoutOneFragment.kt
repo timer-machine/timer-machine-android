@@ -33,7 +33,8 @@ import xyz.aprildown.tools.anko.dp
 import xyz.aprildown.tools.helper.gone
 import xyz.aprildown.tools.helper.show
 
-internal class OneLayoutOneFragment : Fragment(R.layout.fragment_one),
+internal class OneLayoutOneFragment :
+    Fragment(R.layout.fragment_one),
     OneLayoutFragment.ChildFragment,
     FiveActionsView.Listener,
     TweakTimeLayout.Callback {
@@ -176,10 +177,13 @@ internal class OneLayoutOneFragment : Fragment(R.layout.fragment_one),
         val lp = view.layoutParams as ConstraintLayout.LayoutParams
         val parent = view.parent as ViewGroup
         parent.removeView(view)
-        parent.addView(TweakTimeLayout(requireContext()).apply {
-            id = R.id.layoutOneTweakTime
-            setCallback(requireActivity(), this@OneLayoutOneFragment)
-        }, lp)
+        parent.addView(
+            TweakTimeLayout(requireContext()).apply {
+                id = R.id.layoutOneTweakTime
+                setCallback(requireActivity(), this@OneLayoutOneFragment)
+            },
+            lp
+        )
     }
 
     override fun onTweakTime(amount: Long) {

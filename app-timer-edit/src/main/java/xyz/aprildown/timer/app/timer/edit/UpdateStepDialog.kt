@@ -34,7 +34,8 @@ import xyz.aprildown.ultimateringtonepicker.RingtonePickerDialog
 import xyz.aprildown.ultimateringtonepicker.UltimateRingtonePicker
 import xyz.aprildown.timer.app.base.R as RBase
 
-class UpdateStepDialog : DialogFragment(),
+class UpdateStepDialog :
+    DialogFragment(),
     EditableBehaviourLayout.Listener {
 
     private lateinit var editName: EditText
@@ -122,7 +123,9 @@ class UpdateStepDialog : DialogFragment(),
             when (type) {
                 BehaviourType.MUSIC -> {
                     val action = current.toMusicAction()
-                    addMusicItems(context, action,
+                    addMusicItems(
+                        context = context,
+                        action = action,
                         onPickMusicClick = {
                             RingtonePickerDialog.createEphemeralInstance(
                                 settings = context.generateRingtonePickerSettings(
@@ -266,9 +269,11 @@ class UpdateStepDialog : DialogFragment(),
         type: BehaviourType,
         transform: (BehaviourEntity) -> BehaviourEntity
     ) {
-        behaviourLayout.setBehaviours(behaviourLayout.getBehaviours().map {
-            if (it.type == type) transform.invoke(it) else it
-        })
+        behaviourLayout.setBehaviours(
+            behaviourLayout.getBehaviours().map {
+                if (it.type == type) transform.invoke(it) else it
+            }
+        )
     }
 
     companion object : StepUpdater {

@@ -165,9 +165,9 @@ class TimerPicker : DialogFragment() {
         }
         val select = arguments.getIntArray(EXTRA_SELECT) ?: intArrayOf()
         viewModel.folderTimers.observe(this) { map: Map<FolderEntity, List<TimerInfo>> ->
-            itemAdapter.set(mutableListOf<GenericItem>().apply {
-                map.filter { it.value.isNotEmpty() }
-                    .forEach { (folder, timers) ->
+            itemAdapter.set(
+                mutableListOf<GenericItem>().apply {
+                    map.filter { it.value.isNotEmpty() }.forEach { (folder, timers) ->
                         val folderItem = FolderItem(folder, selectable = multi)
                         val subItems = folderItem.subItems
                         timers.forEach { timer ->
@@ -183,7 +183,8 @@ class TimerPicker : DialogFragment() {
                         folderItem.isSelected = subItems.all { it.isSelected }
                         add(folderItem)
                     }
-            })
+                }
+            )
             for (index in fastAdapter.itemCount downTo 0) {
                 val item = fastAdapter.getItem(index) ?: continue
                 if (item is FolderItem && !item.folderEntity.isTrash) {

@@ -30,7 +30,8 @@ import javax.inject.Inject
 import xyz.aprildown.timer.app.base.R as RBase
 
 @AndroidEntryPoint
-class SettingsFragment : PreferenceFragmentCompat(),
+class SettingsFragment :
+    PreferenceFragmentCompat(),
     Preference.OnPreferenceChangeListener,
     Preference.OnPreferenceClickListener {
 
@@ -220,21 +221,25 @@ class SettingsFragment : PreferenceFragmentCompat(),
                 var result = context.getText(RBase.string.dark_theme_manual)
                 if (darkTheme.scheduleEnabled) {
                     val range = darkTheme.scheduleRange
-                    result = "$result ${
-                        "%s %s - %s".format(
-                            context.getText(RBase.string.dark_theme_scheduled),
-                            TimeUtils.formattedTodayTime(
-                                context = context,
-                                hour = range.fromHour,
-                                minute = range.fromMinute
-                            ),
-                            TimeUtils.formattedTodayTime(
-                                context = context,
-                                hour = range.toHour,
-                                minute = range.toMinute
+                    result = buildString {
+                        append(result)
+                        append(" ")
+                        append(
+                            "%s %s - %s".format(
+                                context.getText(RBase.string.dark_theme_scheduled),
+                                TimeUtils.formattedTodayTime(
+                                    context = context,
+                                    hour = range.fromHour,
+                                    minute = range.fromMinute
+                                ),
+                                TimeUtils.formattedTodayTime(
+                                    context = context,
+                                    hour = range.toHour,
+                                    minute = range.toMinute
+                                )
                             )
                         )
-                    }"
+                    }
                 }
                 result
             }

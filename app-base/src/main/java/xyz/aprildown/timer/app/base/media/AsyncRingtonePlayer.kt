@@ -185,7 +185,7 @@ internal class AsyncRingtonePlayer(private val mContext: Context) {
                     mMediaPlayer?.reset()
                     mMediaPlayer?.setDataSource(context, getFallbackRingtoneUri(context))
                     return startPlayback(inTelephoneCall)
-                } catch (t2: Throwable) {
+                } catch (_: Throwable) {
                     // At this point we just don't play anything.
                 }
             }

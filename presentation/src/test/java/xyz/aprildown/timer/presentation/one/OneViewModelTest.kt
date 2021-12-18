@@ -255,19 +255,21 @@ class OneViewModelTest {
         val captor = argumentCaptor<TimerEntity>()
         verify(timerRepository).save(captor.capture())
         assertEquals(
-            t.copy(steps = t.steps.toMutableList().apply {
-                set(
-                    1,
-                    TestData.fakeStepD.copy(
-                        steps = listOf(
-                            TestData.fakeStepA,
-                            // This is changed from B to A
-                            TestData.fakeStepA,
-                            TestData.fakeStepC
+            t.copy(
+                steps = t.steps.toMutableList().apply {
+                    set(
+                        1,
+                        TestData.fakeStepD.copy(
+                            steps = listOf(
+                                TestData.fakeStepA,
+                                // This is changed from B to A
+                                TestData.fakeStepA,
+                                TestData.fakeStepC,
+                            )
                         )
                     )
-                )
-            }),
+                }
+            ),
             captor.firstValue
         )
     }

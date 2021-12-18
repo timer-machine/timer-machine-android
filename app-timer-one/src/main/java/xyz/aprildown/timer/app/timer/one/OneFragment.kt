@@ -30,9 +30,9 @@ import xyz.aprildown.tools.helper.setTextIfChanged
 import xyz.aprildown.timer.app.base.R as RBase
 
 @AndroidEntryPoint
-class OneFragment : BaseOneFragment<FragmentOneBinding>(
-    R.layout.fragment_one
-), FiveActionsView.Listener {
+class OneFragment :
+    BaseOneFragment<FragmentOneBinding>(R.layout.fragment_one),
+    FiveActionsView.Listener {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         val binding = FragmentOneBinding.bind(view)
@@ -102,10 +102,9 @@ class OneFragment : BaseOneFragment<FragmentOneBinding>(
                 }
 
                 override fun onGroupTitleClicked(defaultIndex: TimerIndex.Group) {
-                    showPickLoopDialog(
-                        (viewModel.timer.value?.steps?.get(defaultIndex.stepIndex)
-                            as? StepEntity.Group)?.loop ?: 1
-                    ) {
+                    val step = viewModel.timer.value?.steps?.get(defaultIndex.stepIndex)
+                    val maxLoop = (step as? StepEntity.Group)?.loop ?: 1
+                    showPickLoopDialog(maxLoop) {
                         actionJump(
                             defaultIndex.copy(
                                 groupStepIndex = defaultIndex.groupStepIndex.copy(loopIndex = it)
@@ -245,7 +244,8 @@ class OneFragment : BaseOneFragment<FragmentOneBinding>(
             val timerTotalTime = viewModel.timerTotalTime.toDouble()
             timePanels.forEach { timePanel ->
                 timePanelLayout.updateText(
-                    timePanel, when (timePanel) {
+                    timePanel,
+                    when (timePanel) {
                         PreferenceData.TimePanel.ELAPSED_TIME -> elapsedTime.toDouble()
                         PreferenceData.TimePanel.ELAPSED_PERCENT ->
                             elapsedTime / timerTotalTime * 100

@@ -68,7 +68,8 @@ class TimerMachineHelperKtTest {
                     loopIndex = 4,
                     stepIndex = 2,
                     groupStepIndex = TimerIndex.Step(loopIndex = 0, stepIndex = 0)
-                ), index
+                ),
+                index
             )
             assertEquals(step2, step)
         }
@@ -93,7 +94,8 @@ class TimerMachineHelperKtTest {
                     loopIndex = 4,
                     stepIndex = 0,
                     groupStepIndex = TimerIndex.Step(loopIndex = 0, stepIndex = 0)
-                ), index
+                ),
+                index
             )
             assertEquals(step2, step)
         }

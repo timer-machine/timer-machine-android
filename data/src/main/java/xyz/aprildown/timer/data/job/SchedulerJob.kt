@@ -48,10 +48,12 @@ class SchedulerJob : Job() {
             JobRequest.Builder(scheduler.id.jobTag)
                 .setExact(nextTime - System.currentTimeMillis())
                 .setUpdateCurrent(true)
-                .setExtras(PersistableBundleCompat().apply {
-                    putInt(EXTRA_ID, scheduler.id)
-                    putInt(EXTRA_ACTION, scheduler.action)
-                })
+                .setExtras(
+                    PersistableBundleCompat().apply {
+                        putInt(EXTRA_ID, scheduler.id)
+                        putInt(EXTRA_ACTION, scheduler.action)
+                    }
+                )
                 .build()
                 .schedule()
             return nextTime

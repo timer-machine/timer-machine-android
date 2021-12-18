@@ -56,13 +56,21 @@ internal fun BehaviourEntity.getChipText(context: Context): String {
         }
         BehaviourType.HALF -> {
             val option = toHalfAction().option
-            if (option != HalfAction.OPTION_VOICE) "${getDefaultName()} ${
-                when (option) {
-                    HalfAction.OPTION_MUSIC -> context.getString(RBase.string.half_option_music)
-                    HalfAction.OPTION_VIBRATION -> context.getString(RBase.string.half_option_vibration)
-                    else -> ""
+            if (option != HalfAction.OPTION_VOICE) {
+                buildString {
+                    append(getDefaultName())
+                    append(" ")
+                    append(
+                        when (option) {
+                            HalfAction.OPTION_MUSIC -> context.getString(RBase.string.half_option_music)
+                            HalfAction.OPTION_VIBRATION -> context.getString(RBase.string.half_option_vibration)
+                            else -> ""
+                        }
+                    )
                 }
-            }" else null
+            } else {
+                null
+            }
         }
         BehaviourType.COUNT -> {
             val times = toCountAction().times

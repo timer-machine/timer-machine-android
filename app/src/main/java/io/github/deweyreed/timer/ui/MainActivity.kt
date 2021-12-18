@@ -61,7 +61,8 @@ import com.mikepenz.materialdrawer.R as RMaterialDrawer
 import xyz.aprildown.timer.app.base.R as RBase
 
 @AndroidEntryPoint
-class MainActivity : BaseActivity(),
+class MainActivity :
+    BaseActivity(),
     MainCallback.ActivityCallback,
     NavController.OnDestinationChangedListener {
 

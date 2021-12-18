@@ -518,8 +518,7 @@ internal fun VoiceAction.generateVoiceContent(
             if (index !is TimerIndex.Group) {
                 timer.loop
             } else {
-                (timer.steps.getOrNull(index.stepIndex)
-                    as? StepEntity.Group)?.loop
+                (timer.steps.getOrNull(index.stepIndex) as? StepEntity.Group)?.loop
             }.toString()
         }
     )
@@ -687,14 +686,15 @@ private fun createGroupTimerEntity(timer: TimerEntity, index: TimerIndex.Group):
 }
 
 private fun produceElapsedTimePercent(timer: TimerEntity, index: TimerIndex): String {
-    return ((timer.getTimeBeforeIndex(index).toFloat() /
-        timer.getTotalTime().toFloat()) * 100).toInt().toString() + "%"
+    val timeBeforeIndex = timer.getTimeBeforeIndex(index)
+    val totalTime = timer.getTotalTime()
+    return ((timeBeforeIndex.toFloat() / totalTime.toFloat()) * 100).toInt().toString() + "%"
 }
 
 private fun produceRemainingTimePercent(timer: TimerEntity, index: TimerIndex): String {
     val total = timer.getTotalTime().toFloat()
-    return (((total - timer.getTimeBeforeIndex(index).toFloat()) /
-        total) * 100).toInt().toString() + "%"
+    val timeBeforeIndex = timer.getTimeBeforeIndex(index)
+    return (((total - timeBeforeIndex.toFloat()) / total) * 100).toInt().toString() + "%"
 }
 
 private fun generateVoiceContent(
@@ -749,8 +749,7 @@ private fun generateVoiceContent(
 
         VoiceAction.VOICE_VARIABLE_GROUP_NAME,
         VoiceAction.VARIABLE_GROUP_NAME -> if (index is TimerIndex.Group) {
-            (timer.steps.getOrNull(index.stepIndex)
-                as? StepEntity.Group)?.name.toString()
+            (timer.steps.getOrNull(index.stepIndex) as? StepEntity.Group)?.name.toString()
         } else {
             timer.name
         }
@@ -763,8 +762,7 @@ private fun generateVoiceContent(
         }.toString()
         VoiceAction.VOICE_VARIABLE_GROUP_TOTAL_LOOP,
         VoiceAction.VARIABLE_GROUP_TOTAL_LOOP -> if (index is TimerIndex.Group) {
-            (timer.steps.getOrNull(index.stepIndex)
-                as? StepEntity.Group)?.loop.toString()
+            (timer.steps.getOrNull(index.stepIndex) as? StepEntity.Group)?.loop.toString()
         } else {
             timer.loop.toString()
         }

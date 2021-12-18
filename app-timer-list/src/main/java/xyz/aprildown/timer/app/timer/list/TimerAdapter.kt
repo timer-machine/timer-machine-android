@@ -35,7 +35,8 @@ internal class TimerAdapter(
     )
         .setBackgroundThreadExecutor(backgroundExecutor)
         .build()
-), TimerMachineListener {
+),
+    TimerMachineListener {
 
     interface Callback {
         fun onTimerAction(viewHolder: RecyclerView.ViewHolder, actionId: Int)
@@ -50,6 +51,7 @@ internal class TimerAdapter(
                 if (showGrid) R.layout.list_item_timer_collapsed_grid else R.layout.list_item_timer_collapsed
             expandedLayoutRes =
                 if (showGrid) R.layout.list_item_timer_expanded_gird else R.layout.list_item_timer_expanded
+            @Suppress("NotifyDataSetChanged")
             notifyDataSetChanged()
         }
 

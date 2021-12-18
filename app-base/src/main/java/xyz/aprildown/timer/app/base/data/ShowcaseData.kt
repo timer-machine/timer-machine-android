@@ -9,15 +9,23 @@ object ShowcaseData {
     fun getSampleSteps(): List<StepEntity.Step> = listOf(
         StepEntity.Step("Run", 180_000, listOf()),
         StepEntity.Step(
-            "Rest", 5_000, listOf(
+            "Rest",
+            5_000,
+            listOf(
                 BehaviourEntity(BehaviourType.MUSIC),
                 BehaviourEntity(BehaviourType.VOICE)
             ),
             StepType.NOTIFIER
         ),
-        StepEntity.Step("Walk", 60_000, listOf()),
         StepEntity.Step(
-            "Rest", 5_000, listOf(
+            "Walk",
+            60_000,
+            listOf()
+        ),
+        StepEntity.Step(
+            "Rest",
+            5_000,
+            listOf(
                 BehaviourEntity(BehaviourType.MUSIC),
                 BehaviourEntity(BehaviourType.VIBRATION),
                 BehaviourEntity(BehaviourType.SCREEN)

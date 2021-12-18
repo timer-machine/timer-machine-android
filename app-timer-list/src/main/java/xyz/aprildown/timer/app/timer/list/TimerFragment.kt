@@ -67,7 +67,8 @@ import javax.inject.Inject
 import xyz.aprildown.timer.app.base.R as RBase
 
 @AndroidEntryPoint
-class TimerFragment : Fragment(R.layout.fragment_timer),
+class TimerFragment :
+    Fragment(R.layout.fragment_timer),
     MainCallback.FragmentCallback,
     TimerAdapter.Callback {
 
@@ -235,9 +236,12 @@ class TimerFragment : Fragment(R.layout.fragment_timer),
                     isExpanded = false
                 )
             }
-            TransitionManager.beginDelayedTransition(binding.root, AutoTransition().apply {
-                excludeChildren(binding.listTimers, true)
-            })
+            TransitionManager.beginDelayedTransition(
+                binding.root,
+                AutoTransition().apply {
+                    excludeChildren(binding.listTimers, true)
+                }
+            )
             timerAdapter.setItems(newList)
 
             val isEmpty = newList.isEmpty()

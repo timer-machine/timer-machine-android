@@ -25,7 +25,8 @@ import javax.inject.Inject
 import xyz.aprildown.timer.app.base.R as RBase
 
 @AndroidEntryPoint
-class RingtonePickerActivity : BaseActivity(),
+class RingtonePickerActivity :
+    BaseActivity(),
     UltimateRingtonePicker.RingtonePickerListener {
 
     @Inject

@@ -107,14 +107,16 @@ class HelpFragment : PreferenceFragmentCompat() {
             }
             binding.btnSystemSettings.setOnClickListener {
                 try {
-                    context.startActivity(Intent().apply {
-                        action = "com.android.settings.TTS_SETTINGS"
-                        flags = Intent.FLAG_ACTIVITY_NEW_TASK
-                    })
+                    context.startActivity(
+                        Intent().apply {
+                            action = "com.android.settings.TTS_SETTINGS"
+                            flags = Intent.FLAG_ACTIVITY_NEW_TASK
+                        }
+                    )
                 } catch (_: ActivityNotFoundException) {
                     try {
                         context.startActivity(Intent(Settings.ACTION_ACCESSIBILITY_SETTINGS))
-                    } catch (e: ActivityNotFoundException) {
+                    } catch (_: ActivityNotFoundException) {
                         binding.textSystemSettingsManual.show()
                     }
                 }

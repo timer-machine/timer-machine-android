@@ -51,8 +51,10 @@ internal class StepTouchHelper(
         val toItem = fastAdapter.getItem(target.bindingAdapterPosition)
         // Items whose position can't be changed.
         if (toItem is EditableFooter ||
-            (toItem is EditableStep &&
-                (toItem.stepType == StepType.START || toItem.stepType == StepType.END))
+            (
+                toItem is EditableStep &&
+                    (toItem.stepType == StepType.START || toItem.stepType == StepType.END)
+                )
         ) {
             return false
         }

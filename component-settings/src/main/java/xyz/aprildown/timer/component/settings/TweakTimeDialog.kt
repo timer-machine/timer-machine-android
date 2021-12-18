@@ -38,7 +38,8 @@ class TweakTimeDialog {
                     context,
                     60_000L,
                     0L,
-                    List(4) { 0L })
+                    List(4) { 0L }
+                )
                 onDone.invoke()
             }
             .show()

@@ -125,17 +125,20 @@ class SchedulerFragment : Fragment(R.layout.fragment_scheduler), MainCallback.Fr
                             schedulerAdapter.notifyItemChanged(pos)
                         }
                     }
-                })
+                }
+            )
         ).attachToRecyclerView(binding.list)
 
         viewModel.schedulerWithTimerInfo.observe(viewLifecycleOwner) { items ->
-            schedulerAdapter.set(items.map { (scheduler, timerInfo) ->
-                VisibleScheduler.fromSchedulerEntity(
-                    scheduler,
-                    context,
-                    timerInfo?.name ?: getString(RBase.string.unknown)
-                )
-            })
+            schedulerAdapter.set(
+                items.map { (scheduler, timerInfo) ->
+                    VisibleScheduler.fromSchedulerEntity(
+                        scheduler,
+                        context,
+                        timerInfo?.name ?: getString(RBase.string.unknown),
+                    )
+                }
+            )
         }
     }
 

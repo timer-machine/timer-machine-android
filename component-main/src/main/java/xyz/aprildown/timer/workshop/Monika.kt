@@ -89,17 +89,19 @@ class Monika : Fragment() {
         override fun getItemCount(): Int = monika
 
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MonikaViewHolder {
-            return MonikaViewHolder(TextView(parent.context).apply {
-                maxLines = 1
-                setSingleLine()
-                setTextSize(TypedValue.COMPLEX_UNIT_SP, MONIKA2)
-                setTextColor(ColorStateList.valueOf(Color.BLACK))
-                setTypeface(typeface, Typeface.BOLD)
-                layoutParams = ViewGroup.LayoutParams(
-                    ViewGroup.LayoutParams.MATCH_PARENT,
-                    ViewGroup.LayoutParams.WRAP_CONTENT
-                )
-            })
+            return MonikaViewHolder(
+                TextView(parent.context).apply {
+                    maxLines = 1
+                    setSingleLine()
+                    setTextSize(TypedValue.COMPLEX_UNIT_SP, MONIKA2)
+                    setTextColor(ColorStateList.valueOf(Color.BLACK))
+                    setTypeface(typeface, Typeface.BOLD)
+                    layoutParams = ViewGroup.LayoutParams(
+                        ViewGroup.LayoutParams.MATCH_PARENT,
+                        ViewGroup.LayoutParams.WRAP_CONTENT,
+                    )
+                }
+            )
         }
 
         override fun onBindViewHolder(holder: MonikaViewHolder, position: Int) {

@@ -16,11 +16,12 @@ import xyz.aprildown.timer.domain.entities.SchedulerRepeatMode
     tableName = "TimerScheduler",
     indices = [(Index("timerId"))],
     foreignKeys = [
-        (ForeignKey(
+        ForeignKey(
             entity = TimerData::class,
             parentColumns = ["id"],
             childColumns = ["timerId"]
-        ))]
+        )
+    ]
 )
 internal data class SchedulerData(
     @Json(name = "id")
