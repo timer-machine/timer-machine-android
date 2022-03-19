@@ -1,6 +1,9 @@
 package xyz.aprildown.timer.data.repositories
 
+import android.app.AlarmManager
 import android.content.Context
+import android.os.Build
+import androidx.core.content.getSystemService
 import dagger.Reusable
 import dagger.hilt.android.qualifiers.ApplicationContext
 import xyz.aprildown.timer.data.job.SchedulerJob
@@ -19,6 +22,14 @@ class SchedulerExecutorImpl @Inject constructor(
 ) : SchedulerExecutor {
 
     override fun schedule(scheduler: SchedulerEntity): SetSchedulerEnable.Result {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+            val am = context.getSystemService<AlarmManager>()
+            // The permission seems to have been granted by default.
+            if (am?.canScheduleExactAlarms() == false) {
+                // TODO: 2022/3/19 Better error message
+                return SetSchedulerEnable.Result.Failed
+            }
+        }
         return when (scheduler.action) {
             SchedulerEntity.ACTION_START, SchedulerEntity.ACTION_END -> {
                 SetSchedulerEnable.Result.Scheduled(SchedulerJob.scheduleAJob(scheduler))
