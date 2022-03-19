@@ -12,7 +12,6 @@ dependencies {
 
     implementation libs.androidx_preference
     api libs.androidx_constraintlayout
-    api libs.androidx_lifecycle_compiler
     implementation libs.androidx_custom_tabs
     api libs.androidx_fragment_ktx
 

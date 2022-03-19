@@ -18,7 +18,7 @@ import xyz.aprildown.timer.workshop.ChangeLogDialog
 import xyz.aprildown.timer.workshop.Monika
 import xyz.aprildown.tools.anko.newTask
 import xyz.aprildown.tools.helper.IntentHelper
-import xyz.aprildown.tools.helper.startActivitySafely
+import xyz.aprildown.tools.helper.startActivityOrNothing
 import javax.inject.Inject
 
 class AboutFragment : Fragment(R.layout.fragment_about) {
@@ -82,7 +82,7 @@ class AboutPreferenceFragment : PreferenceFragmentCompat() {
         }
 
         findPreference<Preference>("key_about_more_apps")?.setOnPreferenceClickListener {
-            startActivitySafely(
+            startActivityOrNothing(
                 IntentHelper.intent("https://play.google.com/store/apps/dev?id=7518578900930550082")
                     .newTask()
             )
@@ -95,7 +95,7 @@ class AboutPreferenceFragment : PreferenceFragmentCompat() {
         }
 
         findPreference<Preference>("key_about_email")?.setOnPreferenceClickListener {
-            startActivitySafely(IntentHelper.email(it.summary.toString()))
+            startActivityOrNothing(IntentHelper.email(it.summary.toString()))
             true
         }
 

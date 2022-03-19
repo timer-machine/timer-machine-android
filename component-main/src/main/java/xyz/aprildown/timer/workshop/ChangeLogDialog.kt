@@ -12,7 +12,7 @@ import xyz.aprildown.timer.domain.utils.Constants
 import xyz.aprildown.tools.anko.toast
 import xyz.aprildown.tools.helper.IntentHelper
 import xyz.aprildown.tools.helper.setTextIfChanged
-import xyz.aprildown.tools.helper.startActivitySafely
+import xyz.aprildown.tools.helper.startActivityOrNothing
 import xyz.aprildown.timer.app.base.R as RBase
 
 class ChangeLogDialog(private val context: Context) {
@@ -43,7 +43,7 @@ class ChangeLogDialog(private val context: Context) {
             .setPositiveButton(android.R.string.ok, null)
             .setNeutralButton(RBase.string.rate_five_stars) { _, _ ->
                 context.toast(RBase.string.thanks)
-                context.startActivitySafely(
+                context.startActivityOrNothing(
                     IntentHelper.appStorePage(context),
                     wrongMessageRes = RBase.string.no_action_found
                 )

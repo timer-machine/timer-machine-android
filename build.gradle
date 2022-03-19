@@ -39,6 +39,7 @@ allprojects {
             url "https://jitpack.io"
             content {
                 includeGroup "xyz.aprildown"
+                includeGroup "com.github.DeweyReed"
                 includeModule "com.github.PhilJay", "MPAndroidChart"
                 includeModule "com.github.kizitonwose", "CalendarView"
                 includeGroup "com.github.whataa"

@@ -11,7 +11,7 @@ import androidx.preference.Preference
 import androidx.preference.PreferenceCategory
 import androidx.preference.PreferenceFragmentCompat
 import xyz.aprildown.timer.app.base.utils.openWebsiteWithWarning
-import xyz.aprildown.tools.helper.startActivitySafely
+import xyz.aprildown.tools.helper.startActivityOrNothing
 import xyz.aprildown.timer.app.base.R as RBase
 
 class WhitelistFragment : PreferenceFragmentCompat() {
@@ -41,7 +41,7 @@ class WhitelistFragment : PreferenceFragmentCompat() {
                         withDefaultSettings()
                         title = action.title
                         setOnPreferenceClickListener {
-                            context.startActivitySafely(
+                            context.startActivityOrNothing(
                                 Intent.createChooser(action.intent, null),
                                 wrongMessageRes = RBase.string.no_action_found
                             )
@@ -56,7 +56,7 @@ class WhitelistFragment : PreferenceFragmentCompat() {
                     withDefaultSettings()
                     setTitle(RBase.string.whitelist_ignore_battery_optimization)
                     setOnPreferenceClickListener {
-                        context.startActivitySafely(
+                        context.startActivityOrNothing(
                             Intent.createChooser(
                                 @Suppress("BatteryLife")
                                 Intent(Settings.ACTION_REQUEST_IGNORE_BATTERY_OPTIMIZATIONS)

@@ -64,7 +64,7 @@ import xyz.aprildown.tools.arch.observeEvent
 import xyz.aprildown.tools.helper.IntentHelper
 import xyz.aprildown.tools.helper.gone
 import xyz.aprildown.tools.helper.show
-import xyz.aprildown.tools.helper.startActivitySafely
+import xyz.aprildown.tools.helper.startActivityOrNothing
 import javax.inject.Inject
 import xyz.aprildown.timer.app.base.R as RBase
 
@@ -538,7 +538,7 @@ class EditActivity :
         viewModel.shareStringEvent.observeEvent(this) { fruit ->
             when (fruit) {
                 is Fruit.Ripe -> {
-                    startActivitySafely(IntentHelper.share(this, fruit.data))
+                    startActivityOrNothing(IntentHelper.share(this, fruit.data))
                 }
                 is Fruit.Rotten -> {
                     binding.root.snackbar(fruit.exception.message.toString())

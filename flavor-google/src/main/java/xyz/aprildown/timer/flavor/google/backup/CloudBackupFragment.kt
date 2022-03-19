@@ -52,7 +52,7 @@ import xyz.aprildown.tools.arch.observeEvent
 import xyz.aprildown.tools.helper.IntentHelper
 import xyz.aprildown.tools.helper.createChooserIntentIfDead
 import xyz.aprildown.tools.helper.safeSharedPreference
-import xyz.aprildown.tools.helper.startActivitySafely
+import xyz.aprildown.tools.helper.startActivityOrNothing
 import javax.inject.Inject
 import xyz.aprildown.timer.app.base.R as RBase
 
@@ -146,7 +146,7 @@ internal class CloudBackupFragment : PreferenceFragmentCompat() {
 
         findPreference<Preference>(getString(R.string.backup_key_contact))
             ?.setOnPreferenceClickListener {
-                startActivitySafely(
+                startActivityOrNothing(
                     IntentHelper.email(
                         email = flavorData.email,
                         subject = getString(RBase.string.billing_help_email_title)
@@ -157,7 +157,7 @@ internal class CloudBackupFragment : PreferenceFragmentCompat() {
 
         findPreference<Preference>(getString(R.string.backup_key_manage_subscription))
             ?.setOnPreferenceClickListener {
-                startActivitySafely(
+                startActivityOrNothing(
                     IntentHelper.webPage(
                         viewModel.billingSupervisor.getManageSubscriptionLink()
                     ).newTask()

@@ -39,7 +39,7 @@ import xyz.aprildown.timer.presentation.stream.getStep
 import xyz.aprildown.tools.anko.longToast
 import xyz.aprildown.tools.arch.Event
 import xyz.aprildown.tools.helper.createChooserIntentIfDead
-import xyz.aprildown.tools.helper.startActivitySafely
+import xyz.aprildown.tools.helper.startActivityOrNothing
 import javax.inject.Inject
 import javax.inject.Provider
 import xyz.aprildown.timer.app.base.R as RBase
@@ -164,7 +164,7 @@ abstract class BaseOneFragment<T : ViewBinding>(
             val timer = viewModel.timer.value ?: return
             FloatingTimer(context, timer, viewModel.streamMachineIntentProvider, appTracker).show()
         } else {
-            context.startActivitySafely(
+            context.startActivityOrNothing(
                 Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION)
                     .setData(Uri.parse("package:${context.packageName}"))
                     .createChooserIntentIfDead(context)

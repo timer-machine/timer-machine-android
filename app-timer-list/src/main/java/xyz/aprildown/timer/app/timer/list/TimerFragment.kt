@@ -62,7 +62,7 @@ import xyz.aprildown.tools.helper.IntentHelper
 import xyz.aprildown.tools.helper.gone
 import xyz.aprildown.tools.helper.safeSharedPreference
 import xyz.aprildown.tools.helper.show
-import xyz.aprildown.tools.helper.startActivitySafely
+import xyz.aprildown.tools.helper.startActivityOrNothing
 import javax.inject.Inject
 import xyz.aprildown.timer.app.base.R as RBase
 
@@ -499,7 +499,7 @@ class TimerFragment :
         viewModel.shareStringEvent.observeEvent(viewLifecycleOwner) { fruit ->
             when (fruit) {
                 is Fruit.Ripe -> {
-                    startActivitySafely(IntentHelper.share(requireActivity(), fruit.data))
+                    startActivityOrNothing(IntentHelper.share(requireActivity(), fruit.data))
                 }
                 is Fruit.Rotten -> {
                     mainCallback.snackbarView.snackbar(fruit.exception.message.toString())

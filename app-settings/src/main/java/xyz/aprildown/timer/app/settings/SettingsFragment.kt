@@ -24,7 +24,7 @@ import xyz.aprildown.timer.component.settings.TweakTimeDialog
 import xyz.aprildown.timer.domain.TimeUtils
 import xyz.aprildown.tools.helper.IntentHelper
 import xyz.aprildown.tools.helper.createChooserIntentIfDead
-import xyz.aprildown.tools.helper.startActivitySafely
+import xyz.aprildown.tools.helper.startActivityOrNothing
 import java.util.Optional
 import javax.inject.Inject
 import xyz.aprildown.timer.app.base.R as RBase
@@ -108,7 +108,7 @@ class SettingsFragment :
                     val settingsIntent = Intent(Settings.ACTION_APP_NOTIFICATION_SETTINGS)
                         .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
                         .putExtra(Settings.EXTRA_APP_PACKAGE, context.packageName)
-                    startActivitySafely(
+                    startActivityOrNothing(
                         settingsIntent.createChooserIntentIfDead(context),
                         wrongMessageRes = RBase.string.no_action_found
                     )
@@ -116,7 +116,7 @@ class SettingsFragment :
                     val settingsIntent = Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS)
                         .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
                         .setData("package:${context.packageName}".toUri())
-                    startActivitySafely(
+                    startActivityOrNothing(
                         settingsIntent.createChooserIntentIfDead(context),
                         wrongMessageRes = RBase.string.no_action_found
                     )
@@ -124,11 +124,11 @@ class SettingsFragment :
             }
             KEY_AUDIO_VOLUME -> {
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
-                    startActivitySafely(Intent(Settings.Panel.ACTION_VOLUME))
+                    startActivityOrNothing(Intent(Settings.Panel.ACTION_VOLUME))
                 }
             }
             KEY_RATE -> {
-                startActivitySafely(
+                startActivityOrNothing(
                     IntentHelper.appStorePage(context),
                     wrongMessageRes = RBase.string.no_action_found
                 )
