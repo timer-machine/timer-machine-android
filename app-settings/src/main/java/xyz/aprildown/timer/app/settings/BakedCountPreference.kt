@@ -13,9 +13,9 @@ internal class BakedCountPreference(
     context: Context,
     attrs: AttributeSet? = null
 ) : Preference(context, attrs) {
-    override fun onBindViewHolder(holder: PreferenceViewHolder?) {
+    override fun onBindViewHolder(holder: PreferenceViewHolder) {
         super.onBindViewHolder(holder)
-        val imageView = holder?.findViewById(R.id.image) as? ImageView? ?: return
+        val imageView = holder.findViewById(R.id.image) as? ImageView? ?: return
         imageView.isVisible =
             !context.safeSharedPreference.getBoolean(Constants.PREF_HAS_PRO, false)
     }

@@ -59,8 +59,8 @@ class SettingsFragment :
         refresh()
     }
 
-    override fun onPreferenceChange(preference: Preference?, newValue: Any?): Boolean {
-        when (preference?.key) {
+    override fun onPreferenceChange(preference: Preference, newValue: Any?): Boolean {
+        when (preference.key) {
             KEY_APP_LANGUAGE -> {
                 (requireActivity() as? MainCallback.ActivityCallback)
                     ?.restartWithDestination(RBase.id.dest_settings)
@@ -72,9 +72,9 @@ class SettingsFragment :
         return true
     }
 
-    override fun onPreferenceClick(preference: Preference?): Boolean {
+    override fun onPreferenceClick(preference: Preference): Boolean {
         val context = requireActivity()
-        when (preference?.key) {
+        when (preference.key) {
             KEY_DARK_THEME -> {
                 DarkThemeDialog(context).showSettingsDialog {
                     DarkTheme(context).applyAppCompatDelegate()
@@ -151,7 +151,7 @@ class SettingsFragment :
     }
 
     private fun refresh() {
-        val sharedPreferences = preferenceManager.sharedPreferences
+        val sharedPreferences = preferenceManager.sharedPreferences ?: return
 
         findPreference<Preference>(KEY_DARK_THEME)?.run {
             onPreferenceClickListener = this@SettingsFragment
@@ -260,7 +260,7 @@ class SettingsFragment :
         super.onPause()
         if (sharedPreferenceListener != null) {
             preferenceManager.sharedPreferences
-                .unregisterOnSharedPreferenceChangeListener(sharedPreferenceListener)
+                ?.unregisterOnSharedPreferenceChangeListener(sharedPreferenceListener)
             sharedPreferenceListener = null
         }
     }
