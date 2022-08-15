@@ -87,7 +87,7 @@
             app:singleLineTitle="false"
             app:title="@string/settings_floating_window_pip" />
 
-        <DropDownPreference
+        <xyz.aprildown.timer.app.settings.PhoneCallPreference
             app:defaultValue="2"
             app:entries="@array/pref_phone_call_titles"
             app:entryValues="@array/pref_phone_call_values"

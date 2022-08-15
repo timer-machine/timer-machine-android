@@ -107,6 +107,10 @@ object PreferenceData {
     val Context.shouldResumePhoneCall: Boolean
         get() = safeSharedPreference.getNonNullString(KEY_PHONE_CALL, "2").let { it == "2" }
 
+    fun SharedPreferences.disablePhoneCallBehavior() {
+        edit { putString(KEY_PHONE_CALL, "0") }
+    }
+
     // endregion Phone Call
 
     // region Show Timer Total Time

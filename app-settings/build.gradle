@@ -19,5 +19,6 @@ dependencies {
 
     implementation libs.material_dialog
     implementation libs.material_common
+    implementation libs.permission
 
 }

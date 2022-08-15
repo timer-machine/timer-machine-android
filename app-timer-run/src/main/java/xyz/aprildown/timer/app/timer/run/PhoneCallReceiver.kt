@@ -5,7 +5,8 @@ import android.telephony.PhoneStateListener
 import android.telephony.TelephonyManager
 
 internal class PhoneCallReceiver(
-    private val context: Context
+    private val context: Context,
+    private val onListenFailed: () -> Unit,
 ) : PhoneStateListener() {
 
     interface ServiceActionCallback {
@@ -22,13 +23,21 @@ internal class PhoneCallReceiver(
     fun listen(callback: ServiceActionCallback) {
         this.callback = callback
         manager = context.getSystemService(Context.TELEPHONY_SERVICE) as TelephonyManager
-        manager?.listen(this, LISTEN_CALL_STATE)
+        try {
+            manager?.listen(this, LISTEN_CALL_STATE)
+        } catch (e: SecurityException) {
+            onListenFailed()
+        }
     }
 
     fun unListen() {
         isCalling = false
         callback = null
-        manager?.listen(this, LISTEN_NONE)
+        try {
+            manager?.listen(this, LISTEN_NONE)
+        } catch (e: SecurityException) {
+            onListenFailed()
+        }
         manager = null
     }
 

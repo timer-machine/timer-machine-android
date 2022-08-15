@@ -1,7 +1,9 @@
 package io.github.deweyreed.timer
 
+import android.Manifest
 import android.app.Application
 import android.content.SharedPreferences
+import android.os.Build
 import android.util.Log
 import androidx.core.content.ContextCompat
 import androidx.core.content.edit
@@ -13,10 +15,13 @@ import dagger.Lazy
 import dagger.hilt.android.HiltAndroidApp
 import io.github.deweyreed.timer.utils.DynamicThemeDelegate
 import kotlinx.coroutines.runBlocking
+import pub.devrel.easypermissions.EasyPermissions
 import timber.log.Timber
 import xyz.aprildown.theme.Theme
 import xyz.aprildown.timer.app.base.data.DarkTheme
 import xyz.aprildown.timer.app.base.data.PreferenceData.appTheme
+import xyz.aprildown.timer.app.base.data.PreferenceData.disablePhoneCallBehavior
+import xyz.aprildown.timer.app.base.data.PreferenceData.shouldPausePhoneCall
 import xyz.aprildown.timer.app.base.data.PreferenceData.useVoiceContent2
 import xyz.aprildown.timer.app.base.utils.AppThemeUtils
 import xyz.aprildown.timer.app.base.utils.LogToFileTree
@@ -98,11 +103,13 @@ class App : Application(), Configuration.Provider {
     private fun setUpForFirstStart() {
         val themeMigrationKey = "new_theme"
         val iapMigrationKey = "new_iap"
+        val phoneCallMigrationKey = "phone_call"
         if (sharedPreferences.getBoolean(PREF_FIRST_START, true)) {
             sharedPreferences.edit {
                 putBoolean(PREF_FIRST_START, false)
                 putBoolean(themeMigrationKey, false)
                 putBoolean(iapMigrationKey, false)
+                putBoolean(phoneCallMigrationKey, false)
                 putBoolean(PREF_SP_MIGRATED, true)
             }
             sharedPreferences.useVoiceContent2 = true
@@ -125,6 +132,22 @@ class App : Application(), Configuration.Provider {
                         sharedPreferences.getBoolean(Constants.PREF_HAS_ANY_PURCHASE, false)
                     putBoolean(Constants.PREF_HAS_PRO, hasOldSub)
                     putBoolean(Constants.PREF_HAS_BACKUP_SUB, hasOldSub)
+                }
+            }
+
+            // Imported since 7.0.0 and shouldn't be removed.
+            if (sharedPreferences.getBoolean(phoneCallMigrationKey, true)) {
+                sharedPreferences.edit {
+                    putBoolean(phoneCallMigrationKey, false)
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S &&
+                        shouldPausePhoneCall &&
+                        !EasyPermissions.hasPermissions(
+                            this@App,
+                            Manifest.permission.READ_PHONE_STATE
+                        )
+                    ) {
+                        sharedPreferences.disablePhoneCallBehavior()
+                    }
                 }
             }
         }

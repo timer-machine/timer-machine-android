@@ -157,8 +157,7 @@ internal class AsyncRingtonePlayer(private val mContext: Context) {
             }
 
             val inTelephoneCall = isInTelephoneCall(context)
-            var alarmNoise: Uri? =
-                if (inTelephoneCall) getInCallRingtoneUri(context) else ringtoneUri
+            var alarmNoise: Uri? = ringtoneUri
             // Fall back to the system default alarm if the database does not have an alarm stored.
             if (alarmNoise == null) {
                 alarmNoise = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_ALARM)
@@ -382,18 +381,15 @@ private const val STREAM_TYPE = "STREAM_TYPE"
  */
 private fun isInTelephoneCall(context: Context): Boolean {
     val tm = context.getSystemService<TelephonyManager>()
-    return tm?.callState != TelephonyManager.CALL_STATE_IDLE
+    return try {
+        tm?.callState != TelephonyManager.CALL_STATE_IDLE
+    } catch (e: SecurityException) {
+        false
+    }
 }
 
 private fun now(): Long {
     return SystemClock.elapsedRealtime()
-}
-
-/**
- * @return Uri of the ringtone to play when the user is in a telephone call
- */
-private fun getInCallRingtoneUri(context: Context): Uri {
-    return context.getResourceUri(R.raw.default_ringtone)
 }
 
 /**

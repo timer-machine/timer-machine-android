@@ -1,20 +1,23 @@
 package xyz.aprildown.timer.app.settings
 
-import android.app.Activity.RESULT_OK
+import android.Manifest
 import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Build
 import android.os.Bundle
 import android.provider.Settings
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.net.toUri
 import androidx.navigation.fragment.NavHostFragment
 import androidx.preference.ListPreference
 import androidx.preference.Preference
 import androidx.preference.PreferenceFragmentCompat
 import dagger.hilt.android.AndroidEntryPoint
+import pub.devrel.easypermissions.EasyPermissions
 import xyz.aprildown.timer.app.base.data.DarkTheme
 import xyz.aprildown.timer.app.base.data.FlavorData
 import xyz.aprildown.timer.app.base.data.PreferenceData
+import xyz.aprildown.timer.app.base.data.PreferenceData.disablePhoneCallBehavior
 import xyz.aprildown.timer.app.base.ui.FlavorUiInjector
 import xyz.aprildown.timer.app.base.ui.FlavorUiInjectorQualifier
 import xyz.aprildown.timer.app.base.ui.MainCallback
@@ -36,6 +39,9 @@ class SettingsFragment :
     Preference.OnPreferenceClickListener {
 
     @Inject
+    lateinit var sharedPreferences: SharedPreferences
+
+    @Inject
     lateinit var flavorData: FlavorData
 
     @Inject
@@ -43,6 +49,11 @@ class SettingsFragment :
     lateinit var flavorUiInjector: Optional<FlavorUiInjector>
 
     private var sharedPreferenceListener: SharedPreferences.OnSharedPreferenceChangeListener? = null
+
+    private val phoneStateLauncher =
+        registerForActivityResult(ActivityResultContracts.RequestPermission()) {
+            if (!it) sharedPreferences.disablePhoneCallBehavior()
+        }
 
     override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
         setPreferencesFromResource(R.xml.pref_settings, rootKey)
@@ -66,9 +77,18 @@ class SettingsFragment :
                     ?.restartWithDestination(RBase.id.dest_settings)
             }
             KEY_SCREEN -> refreshBrightnessTime(newValue?.toString())
+            KEY_PHONE_CALL -> {
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S &&
+                    newValue != "0" &&
+                    !EasyPermissions.hasPermissions(
+                        requireContext(),
+                        Manifest.permission.READ_PHONE_STATE
+                    )
+                ) {
+                    phoneStateLauncher.launch(Manifest.permission.READ_PHONE_STATE)
+                }
+            }
         }
-        // Set result so parent knows to refresh itself
-        activity?.setResult(RESULT_OK)
         return true
     }
 
@@ -170,6 +190,7 @@ class SettingsFragment :
             updateTweakTimeSummary()
         }
         findPreference<Preference>(KEY_FLOATING_WINDOW_PIP)?.onPreferenceClickListener = this
+        findPreference<Preference>(KEY_PHONE_CALL)?.onPreferenceChangeListener = this
 
         findPreference<Preference>(KEY_GROUP_REMINDER)?.isVisible =
             flavorData.supportAdvancedFeatures
@@ -282,7 +303,7 @@ private const val KEY_GROUP_REMINDER = "pref_group_reminder"
 
 private const val KEY_BAKED_COUNT = PreferenceData.PREF_BAKED_COUNT
 
-// private const val KEY_PHONE_CALL = PreferenceData.KEY_PHONE_CALL
+private const val KEY_PHONE_CALL = PreferenceData.KEY_PHONE_CALL
 
 // private const val KEY_WEEK_START = PreferenceData.KEY_WEEK_START
 

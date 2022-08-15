@@ -4,6 +4,7 @@ import android.app.NotificationManager
 import android.app.Service
 import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import android.net.Uri
 import android.os.Binder
 import android.os.Handler
@@ -18,6 +19,7 @@ import androidx.core.os.postDelayed
 import androidx.core.text.buildSpannedString
 import dagger.hilt.android.AndroidEntryPoint
 import timber.log.Timber
+import xyz.aprildown.timer.app.base.data.PreferenceData.disablePhoneCallBehavior
 import xyz.aprildown.timer.app.base.data.PreferenceData.shouldNotifierPlusGoBack
 import xyz.aprildown.timer.app.base.data.PreferenceData.shouldPausePhoneCall
 import xyz.aprildown.timer.app.base.data.PreferenceData.shouldResumePhoneCall
@@ -70,6 +72,9 @@ class MachineService :
 
     @Inject
     lateinit var presenter: MachineContract.Presenter
+
+    @Inject
+    lateinit var sharedPreferences: SharedPreferences
 
     @Inject
     lateinit var appNavigator: AppNavigator
@@ -176,7 +181,10 @@ class MachineService :
         )
         if (shouldPausePhoneCall) {
             phoneCallReceiver?.unListen()
-            phoneCallReceiver = PhoneCallReceiver(this).apply {
+            phoneCallReceiver = PhoneCallReceiver(
+                context = this,
+                onListenFailed = { sharedPreferences.disablePhoneCallBehavior() }
+            ).apply {
                 listen(this@MachineService)
             }
             phoneCallPausedTimerIds = null
