@@ -22,7 +22,6 @@ import xyz.aprildown.timer.domain.repositories.AppDataRepository
 import xyz.aprildown.timer.domain.repositories.TimerRepository
 import xyz.aprildown.timer.domain.usecases.record.AddTimerStamp
 import xyz.aprildown.timer.domain.usecases.timer.GetTimer
-import xyz.aprildown.timer.presentation.testCoroutineDispatcher
 
 @RunWith(AndroidJUnit4::class)
 @LargeTest
