@@ -1,4 +1,4 @@
-package xyz.aprildown.timer.presentation.tasker
+package xyz.aprildown.timer.app.tasker
 
 import android.content.Intent
 import kotlinx.coroutines.runBlocking
@@ -6,7 +6,7 @@ import xyz.aprildown.timer.domain.usecases.timer.FindTimerInfo
 import xyz.aprildown.timer.presentation.StreamMachineIntentProvider
 import javax.inject.Inject
 
-class TaskerRunPresenter @Inject constructor(
+internal class TaskerRunPresenter @Inject constructor(
     private val findTimerInfo: FindTimerInfo,
     private val streamMachineIntentProvider: StreamMachineIntentProvider
 ) {

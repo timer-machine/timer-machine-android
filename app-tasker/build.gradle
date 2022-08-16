@@ -17,4 +17,5 @@ dependencies {
     implementation libs.hilt_android
     kapt libs.hilt_compiler
 
+    implementation libs.tasker_plugin
 }

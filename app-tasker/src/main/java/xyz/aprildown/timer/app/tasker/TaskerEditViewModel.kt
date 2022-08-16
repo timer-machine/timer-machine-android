@@ -1,4 +1,4 @@
-package xyz.aprildown.timer.presentation.tasker
+package xyz.aprildown.timer.app.tasker
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -13,7 +13,7 @@ import xyz.aprildown.timer.presentation.BaseViewModel
 import javax.inject.Inject
 
 @HiltViewModel
-class TaskerEditViewModel @Inject constructor(
+internal class TaskerEditViewModel @Inject constructor(
     @MainDispatcher mainDispatcher: CoroutineDispatcher,
     private val findTimerInfo: FindTimerInfo
 ) : BaseViewModel(mainDispatcher) {

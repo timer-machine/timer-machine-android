@@ -139,6 +139,7 @@ ext {
             ultimate_ringtone_picker      : 'xyz.aprildown:UltimateRingtonePicker:3.1.0',
             vertical_stepper_form         : 'com.ernestoyaquello.stepperform:vertical-stepper-form:2.5.0',
             zip4j                         : 'net.lingala.zip4j:zip4j:2.11.1',
+            tasker_plugin                 : 'com.joaomgcd:taskerpluginlibrary:0.4.2',
 
     ]
 }
