@@ -10,6 +10,7 @@ import xyz.aprildown.timer.presentation.StreamMachineIntentProvider
 import xyz.aprildown.timer.presentation.stream.MachineContract
 import xyz.aprildown.timer.presentation.stream.TimerIndex
 import xyz.aprildown.timer.presentation.stream.TimerMachineListener
+import xyz.aprildown.timer.presentation.stream.getGroup
 import xyz.aprildown.timer.presentation.stream.getNiceLoopString
 import xyz.aprildown.timer.presentation.stream.getStep
 import xyz.aprildown.tools.arch.Event
@@ -46,11 +47,26 @@ class ScreenViewModel @Inject constructor(
         presenter?.getTimerStateInfo(timerId)?.run {
             if (timerEntity.id == timerId && !state.isReset) {
                 timerCurrentTime.value = time
-                timerStepInfo.value = formatStepInfo(
-                    timerName = timerEntity.name,
-                    loopString = index.getNiceLoopString(max = timerEntity.loop),
-                    stepName = timerEntity.getStep(index)?.label.toString()
-                )
+                timerStepInfo.value = if (index !is TimerIndex.Group) {
+                    formatStepInfo(
+                        timerName = timerEntity.name,
+                        loopString = index.getNiceLoopString(max = timerEntity.loop),
+                        stepName = timerEntity.getStep(index)?.label.toString()
+                    )
+                } else {
+                    val group = timerEntity.getGroup(index)
+                    formatStepInfo(
+                        timerName = buildString {
+                            append(timerEntity.name)
+                            append(" ")
+                            append(index.getNiceLoopString(max = timerEntity.loop))
+                            append(" ")
+                            append(group?.name ?: "")
+                        },
+                        loopString = index.groupStepIndex.getNiceLoopString(max = group?.loop ?: 0),
+                        stepName = timerEntity.getStep(index)?.label.toString()
+                    )
+                }
             } else {
                 _stopEvent.value = Event(Unit)
             }

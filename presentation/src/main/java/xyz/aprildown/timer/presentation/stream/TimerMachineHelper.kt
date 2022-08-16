@@ -326,6 +326,11 @@ fun TimerEntity.getStep(index: TimerIndex): StepEntity.Step? = when (index) {
     is TimerIndex.End -> endStep
 }
 
+fun TimerEntity.getGroup(index: TimerIndex): StepEntity.Group? {
+    if (index !is TimerIndex.Group) return null
+    return steps.getOrNull(index.stepIndex) as? StepEntity.Group
+}
+
 fun TimerEntity.getFirstIndex(): TimerIndex {
     if (startStep != null) return TimerIndex.Start
     return when (steps[0]) {
