@@ -19,6 +19,7 @@ import androidx.core.content.edit
 import xyz.aprildown.timer.app.base.data.PreferenceData.getTypeColor
 import xyz.aprildown.timer.app.base.data.PreferenceData.useMediaStyleNotification
 import xyz.aprildown.timer.app.base.ui.AppNavigator
+import xyz.aprildown.timer.app.base.ui.newDynamicTheme
 import xyz.aprildown.timer.app.base.utils.produceTime
 import xyz.aprildown.timer.app.timer.run.screen.ScreenActivity
 import xyz.aprildown.timer.domain.entities.TimerEntity
@@ -30,7 +31,6 @@ import xyz.aprildown.timer.domain.utils.Constants.CHANNEL_TIMING
 import xyz.aprildown.timer.presentation.stream.StreamState
 import xyz.aprildown.timer.presentation.stream.TimerIndex
 import xyz.aprildown.timer.presentation.stream.getStep
-import xyz.aprildown.tools.helper.color
 import xyz.aprildown.tools.helper.pendingActivityIntent
 import xyz.aprildown.tools.helper.pendingServiceIntent
 import xyz.aprildown.tools.helper.safeSharedPreference
@@ -83,7 +83,7 @@ internal fun Context.serviceBuilder(
         .setPriority(NotificationCompat.PRIORITY_DEFAULT)
         .setGroup("service")
         .setSortKey("a_service")
-        .setColor(color(RBase.color.colorPrimary))
+        .setColor(newDynamicTheme.colorPrimary)
         .setVisibility(NotificationCompat.VISIBILITY_PUBLIC)
 
     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
@@ -228,7 +228,7 @@ internal fun Context.buildTimerNotificationBuilder(
         .setCategory(NotificationCompat.CATEGORY_ALARM)
         .setPriority(NotificationCompat.PRIORITY_LOW)
         .setSortKey("t_$timerId")
-        .setColor(color(RBase.color.colorPrimary))
+        .setColor(newDynamicTheme.colorPrimary)
         .setVisibility(NotificationCompat.VISIBILITY_PUBLIC)
         .apply {
             actions.forEach { addAction(it) }
@@ -300,7 +300,7 @@ internal fun Context.buildScreenNotificationBuilder(
         .setLocalOnly(false)
         .setCategory(NotificationCompat.CATEGORY_REMINDER)
         .setPriority(NotificationCompat.PRIORITY_MAX)
-        .setColor(color(RBase.color.colorPrimary))
+        .setColor(newDynamicTheme.colorPrimary)
         .setVisibility(NotificationCompat.VISIBILITY_PUBLIC)
         .apply {
             actions.forEach { addAction(it) }
