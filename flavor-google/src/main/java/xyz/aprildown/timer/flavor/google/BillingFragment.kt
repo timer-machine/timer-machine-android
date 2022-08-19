@@ -1,17 +1,24 @@
 package xyz.aprildown.timer.flavor.google
 
 import android.os.Bundle
+import android.text.Spannable
+import android.text.SpannableString
+import android.text.method.LinkMovementMethod
+import android.text.style.ClickableSpan
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
 import android.view.View
+import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.transition.TransitionManager
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import dagger.hilt.android.AndroidEntryPoint
 import xyz.aprildown.timer.app.base.data.FlavorData
+import xyz.aprildown.timer.app.base.utils.openWebsiteWithWarning
 import xyz.aprildown.timer.component.key.PreferenceStyleListFragment
 import xyz.aprildown.timer.domain.utils.AppTracker
+import xyz.aprildown.timer.domain.utils.Constants
 import xyz.aprildown.timer.flavor.google.databinding.FragmentBillingBinding
 import xyz.aprildown.tools.anko.newTask
 import xyz.aprildown.tools.anko.snackbar
@@ -73,21 +80,17 @@ internal class BillingFragment : Fragment(R.layout.fragment_billing) {
                 binding.btnProPurchase.setText(RBase.string.billing_owned)
                 binding.btnProPurchase.setOnClickListener(null)
             } else {
-                binding.textProPrice.gone()
-                binding.btnProPurchase.isEnabled = false
-                binding.btnProPurchase.setText(RBase.string.billing_under_maintenance)
-                binding.btnProPurchase.setOnClickListener(null)
-                // billingSupervisor.proSkuDetails.observe(viewLifecycleOwner) { proSkuDetails ->
-                //     TransitionManager.beginDelayedTransition(binding.cardPro)
-                //
-                //     binding.textProPrice.show()
-                //     binding.textProPrice.text = proSkuDetails.price
-                //     binding.btnProPurchase.isEnabled = true
-                //     binding.btnProPurchase.setText(R.string.billing_purchase)
-                //     binding.btnProPurchase.setOnClickListener {
-                //         billingSupervisor.launchBillingFlow(requireActivity(), proSkuDetails)
-                //     }
-                // }
+                billingSupervisor.proSkuDetails.observe(viewLifecycleOwner) { proSkuDetails ->
+                    TransitionManager.beginDelayedTransition(binding.cardPro)
+
+                    binding.textProPrice.show()
+                    binding.textProPrice.text = proSkuDetails.price
+                    binding.btnProPurchase.isEnabled = true
+                    binding.btnProPurchase.setText(RBase.string.billing_purchase)
+                    binding.btnProPurchase.setOnClickListener {
+                        billingSupervisor.launchBillingFlow(requireActivity(), proSkuDetails)
+                    }
+                }
             }
         }
         billingSupervisor.goProEvent.observeEvent(viewLifecycleOwner) {
@@ -106,33 +109,27 @@ internal class BillingFragment : Fragment(R.layout.fragment_billing) {
                 binding.textBackupSubCancelAnytime.gone()
                 binding.textBackupSubPpTos.gone()
             } else {
-                binding.textBackupSubPrice.gone()
-                binding.btnBackupSubSubscribe.isEnabled = false
-                binding.btnBackupSubSubscribe.setText(RBase.string.billing_under_maintenance)
-                binding.btnBackupSubManage.show()
-                binding.textBackupSubCancelAnytime.gone()
-                binding.textBackupSubPpTos.gone()
-                // billingSupervisor.backupSubSkuDetails.observe(viewLifecycleOwner) { backupSubSkuDetails ->
-                //     TransitionManager.beginDelayedTransition(binding.cardBackupSub)
-                //
-                //     binding.textBackupSubPrice.show()
-                //     binding.textBackupSubPrice.text = buildString {
-                //         append(backupSubSkuDetails.price)
-                //         // https://developer.android.com/reference/com/android/billingclient/api/SkuDetails#getsubscriptionperiod
-                //         if (backupSubSkuDetails.subscriptionPeriod == "P1Y") {
-                //             append(getString(R.string.billing_per_year))
-                //         }
-                //     }
-                //     binding.btnBackupSubSubscribe.isEnabled = true
-                //     binding.btnBackupSubSubscribe.setText(R.string.billing_subscribe)
-                //     binding.btnBackupSubSubscribe.setOnClickListener {
-                //         billingSupervisor.launchBillingFlow(requireActivity(), backupSubSkuDetails)
-                //     }
-                //     binding.btnBackupSubManage.gone()
-                //     binding.textBackupSubCancelAnytime.show()
-                //     binding.textBackupSubPpTos.show()
-                //     updatePpTosText(binding.textBackupSubPpTos)
-                // }
+                billingSupervisor.backupSubSkuDetails.observe(viewLifecycleOwner) { backupSubSkuDetails ->
+                    TransitionManager.beginDelayedTransition(binding.cardBackupSub)
+
+                    binding.textBackupSubPrice.show()
+                    binding.textBackupSubPrice.text = buildString {
+                        append(backupSubSkuDetails.price)
+                        // https://developer.android.com/reference/com/android/billingclient/api/SkuDetails#getsubscriptionperiod
+                        if (backupSubSkuDetails.subscriptionPeriod == "P1Y") {
+                            append(getString(RBase.string.billing_per_year))
+                        }
+                    }
+                    binding.btnBackupSubSubscribe.isEnabled = true
+                    binding.btnBackupSubSubscribe.setText(RBase.string.billing_subscribe)
+                    binding.btnBackupSubSubscribe.setOnClickListener {
+                        billingSupervisor.launchBillingFlow(requireActivity(), backupSubSkuDetails)
+                    }
+                    binding.btnBackupSubManage.gone()
+                    binding.textBackupSubCancelAnytime.show()
+                    binding.textBackupSubPpTos.show()
+                    updatePpTosText(binding.textBackupSubPpTos)
+                }
             }
         }
         binding.btnBackupSubManage.setOnClickListener {
@@ -149,44 +146,44 @@ internal class BillingFragment : Fragment(R.layout.fragment_billing) {
         }
     }
 
-    // private fun updatePpTosText(textView: TextView) {
-    //     val context = textView.context
-    //     val contentTemplate = getString(R.string.billing_explanation)
-    //     val privacyPolicy = getString(R.string.privacy_policy)
-    //     val terms = getString(R.string.terms_of_service)
-    //     val content = contentTemplate.format(privacyPolicy, terms)
-    //     val spannable = SpannableString(content)
-    //
-    //     val privacyPolicyIndex = content.indexOf(privacyPolicy)
-    //     spannable.setSpan(
-    //         object : ClickableSpan() {
-    //             override fun onClick(widget: View) {
-    //                 context.openWebsiteWithWarning(Constants.getPrivacyPolicyLink())
-    //             }
-    //         },
-    //         privacyPolicyIndex,
-    //         privacyPolicyIndex + privacyPolicy.length,
-    //         Spannable.SPAN_INCLUSIVE_EXCLUSIVE
-    //     )
-    //
-    //     val termsIndex = content.indexOf(terms)
-    //     spannable.setSpan(
-    //         object : ClickableSpan() {
-    //             override fun onClick(widget: View) {
-    //                 context.openWebsiteWithWarning(Constants.getTermsOfServiceLink())
-    //             }
-    //         },
-    //         termsIndex,
-    //         termsIndex + terms.length,
-    //         Spannable.SPAN_INCLUSIVE_EXCLUSIVE
-    //     )
-    //
-    //     textView.run {
-    //         show()
-    //         setText(spannable, TextView.BufferType.SPANNABLE)
-    //         movementMethod = LinkMovementMethod.getInstance()
-    //     }
-    // }
+    private fun updatePpTosText(textView: TextView) {
+        val context = textView.context
+        val contentTemplate = getString(RBase.string.billing_explanation)
+        val privacyPolicy = getString(RBase.string.privacy_policy)
+        val terms = getString(RBase.string.terms_of_service)
+        val content = contentTemplate.format(privacyPolicy, terms)
+        val spannable = SpannableString(content)
+
+        val privacyPolicyIndex = content.indexOf(privacyPolicy)
+        spannable.setSpan(
+            object : ClickableSpan() {
+                override fun onClick(widget: View) {
+                    context.openWebsiteWithWarning(Constants.getPrivacyPolicyLink())
+                }
+            },
+            privacyPolicyIndex,
+            privacyPolicyIndex + privacyPolicy.length,
+            Spannable.SPAN_INCLUSIVE_EXCLUSIVE
+        )
+
+        val termsIndex = content.indexOf(terms)
+        spannable.setSpan(
+            object : ClickableSpan() {
+                override fun onClick(widget: View) {
+                    context.openWebsiteWithWarning(Constants.getTermsOfServiceLink())
+                }
+            },
+            termsIndex,
+            termsIndex + terms.length,
+            Spannable.SPAN_INCLUSIVE_EXCLUSIVE
+        )
+
+        textView.run {
+            show()
+            setText(spannable, TextView.BufferType.SPANNABLE)
+            movementMethod = LinkMovementMethod.getInstance()
+        }
+    }
 
     private fun setUpEntries() {
         childFragmentManager.beginTransaction()
