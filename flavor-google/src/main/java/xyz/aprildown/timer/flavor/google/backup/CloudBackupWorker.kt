@@ -28,7 +28,6 @@ import xyz.aprildown.timer.flavor.google.backup.usecases.CloudBackup
 import xyz.aprildown.timer.flavor.google.backup.usecases.CloudBackupState
 import xyz.aprildown.timer.flavor.google.backup.usecases.CurrentBackupState
 import xyz.aprildown.timer.flavor.google.backup.usecases.CurrentBackupStateError
-import xyz.aprildown.timer.flavor.google.utils.causeFirstMessage
 import xyz.aprildown.tools.arch.Event
 import javax.inject.Provider
 import kotlin.coroutines.resume
@@ -52,11 +51,6 @@ internal class CloudBackupWorker @AssistedInject constructor(
 
         val hasSignedIn = Firebase.auth.currentUser != null
         if (!hasSignedIn) {
-            appTracker.trackEvent(
-                event = TRACKER_TAG,
-                property = TRACKER_ERROR_PROPERTY,
-                value = "AccountError"
-            )
             disableAutoBackup()
             currentBackupStateError.get().set(
                 context.getString(RBase.string.cloud_backup_account_issue_notif_title)
@@ -112,11 +106,6 @@ internal class CloudBackupWorker @AssistedInject constructor(
         }
 
         if (!hasSubscription) {
-            appTracker.trackEvent(
-                event = TRACKER_TAG,
-                property = TRACKER_ERROR_PROPERTY,
-                value = "BillingError"
-            )
             disableAutoBackup()
             currentBackupStateError.get().set(
                 context.getString(RBase.string.cloud_backup_billing_issue_notif_title)
@@ -130,11 +119,6 @@ internal class CloudBackupWorker @AssistedInject constructor(
             when (val fruit = cloudBackup()) {
                 is Fruit.Ripe -> {
                     Timber.tag(CloudBackup.CLOUD_BACKUP_LOG_TAG).i("Worker Done")
-                    appTracker.trackEvent(
-                        event = TRACKER_TAG,
-                        property = TRACKER_ERROR_PROPERTY,
-                        value = "None"
-                    )
                     Result.success()
                 }
                 is Fruit.Rotten -> {
@@ -143,11 +127,6 @@ internal class CloudBackupWorker @AssistedInject constructor(
             }
         } catch (e: Exception) {
             Timber.tag(CloudBackup.CLOUD_BACKUP_LOG_TAG).e(e)
-            appTracker.trackEvent(
-                event = TRACKER_TAG,
-                property = TRACKER_ERROR_PROPERTY,
-                value = e.causeFirstMessage()
-            )
 
             val stateError = currentBackupStateError.get()
             val error = stateError.get()
@@ -205,7 +184,5 @@ internal class CloudBackupWorker @AssistedInject constructor(
 
     companion object {
         const val UNIQUE_NAME = "cloud_backup"
-        private const val TRACKER_TAG = "CloudBackup"
-        private const val TRACKER_ERROR_PROPERTY = "Error"
     }
 }

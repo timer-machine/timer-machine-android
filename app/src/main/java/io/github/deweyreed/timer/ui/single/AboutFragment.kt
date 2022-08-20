@@ -105,7 +105,6 @@ class AboutPreferenceFragment : PreferenceFragmentCompat() {
                 ?: return@setOnPreferenceClickListener false
 
             if (++clickedTimes == 9) {
-                appTracker.trackEvent("Monika")
                 fm.beginTransaction()
                     .replace(R.id.fragmentContainer, Monika())
                     .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)

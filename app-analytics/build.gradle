@@ -16,8 +16,5 @@ dependencies {
     implementation libs.hilt_android
     kapt libs.hilt_compiler
 
-    implementation platform(libs.firebase_bom)
-    implementation libs.firebase_analytics
-
     implementation libs.appcenter_crashes
 }

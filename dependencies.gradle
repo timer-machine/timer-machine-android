@@ -103,7 +103,6 @@ ext {
             // Internet - Google
             billing                       : 'com.android.billingclient:billing-ktx:4.1.0',
             firebase_bom                  : 'com.google.firebase:firebase-bom:30.3.2',
-            firebase_analytics            : 'com.google.firebase:firebase-analytics-ktx',
             firebase_auth                 : 'com.google.firebase:firebase-auth-ktx',
             firebase_auth_ui              : 'com.firebaseui:firebase-ui-auth:8.0.1',
             firebase_storage              : 'com.google.firebase:firebase-storage-ktx',

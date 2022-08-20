@@ -94,7 +94,7 @@ dependencies {
     googleImplementation project(':flavor-google')
     dogImplementation project(':app-analytics-fake')
     googleImplementation project(':app-analytics')
-    otherImplementation project(':app-analytics')
+    otherImplementation project(':app-analytics-fake')
 
     implementation libs.tools
 
@@ -156,7 +156,7 @@ dependencies {
 }
 
 android.applicationVariants.all { variant ->
-    if (variant.name.contains('dog')) {
+    if (variant.name.contains('dog') || variant.name.contains('other')) {
         project.tasks.getByName('process' + variant.name.capitalize() + 'GoogleServices').enabled = false
     }
 }

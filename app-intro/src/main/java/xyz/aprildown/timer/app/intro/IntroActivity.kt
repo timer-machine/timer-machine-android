@@ -72,10 +72,6 @@ class IntroActivity : BaseActivity() {
         setUpInstructions(savedInstanceState)
         setUpViews()
         setUpNavigation()
-
-        if (isOnBoarding && savedInstanceState == null) {
-            appTracker.trackEvent(event = "OnBoardingShow")
-        }
     }
 
     override fun onSaveInstanceState(outState: Bundle) {
@@ -280,17 +276,6 @@ class IntroActivity : BaseActivity() {
             }
             .setNegativeButton(RBase.string.cancel, null)
             .show()
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        if (isOnBoarding && isFinishing) {
-            appTracker.trackEvent(
-                event = "OnBoardingEnd",
-                property = "Step",
-                value = (instructionManager.currentIndex + 1).toString()
-            )
-        }
     }
 
     companion object {

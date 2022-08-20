@@ -10,10 +10,6 @@ import javax.inject.Inject
 internal class AppTrackerImpl @Inject constructor() : AppTracker {
     override fun init(context: Context) = Unit
 
-    override fun trackEvent(event: String, property: String?, value: String?) {
-        Timber.tag("AnalyticsEvents").i("$event -> $property: $value")
-    }
-
     override fun trackError(throwable: Throwable, message: String?) {
         if (message != null) {
             Timber.e(throwable, message)
