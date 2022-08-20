@@ -91,7 +91,7 @@ class FlavorUiInjectorImpl @Inject constructor() : FlavorUiInjector {
         }
         billingSupervisor?.error?.observeEvent(fragment) {
             clearObservers()
-            fragment.toast(
+            fragment.context?.toast(
                 when (it) {
                     is BillingSupervisor.Error.Message -> it.content
                     else -> it.toString()
