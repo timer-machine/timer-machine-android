@@ -280,9 +280,9 @@ object PreferenceData {
     var Context.timePanels: List<TimePanel>
         get() = safeSharedPreference.getString(TIME_PANELS, null)?.let { content ->
             val values = TimePanel.values()
-            if (content.contains(",")) {
-                content.split(",").map { str -> values[str.toInt()] }
-            } else null
+            content.split(",").mapNotNull { str ->
+                values.getOrNull(str.toIntOrNull() ?: -1)
+            }
         } ?: emptyList()
         set(value) {
             safeSharedPreference.edit {
