@@ -115,7 +115,11 @@ class ThemeFragment :
     private fun getThemeItems(context: Context): List<GenericItem> {
         val items = mutableListOf<IItem<*>>()
 
-        val (currentPrimary, currentSecondary, status, enableNav) = context.appTheme
+        val appTheme = context.appTheme
+        val currentPrimary = appTheme.colorPrimary
+        val currentSecondary = appTheme.colorSecondary
+        val status = appTheme.sameStatusBar
+        val enableNav = appTheme.enableNav
 
         items += BooleanToggle(
             BooleanToggle.ID_SAME_STATUS,

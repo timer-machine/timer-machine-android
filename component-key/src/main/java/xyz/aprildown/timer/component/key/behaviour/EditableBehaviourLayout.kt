@@ -156,8 +156,7 @@ class EditableBehaviourLayout(
             listener?.showBehaviourSettingsView(
                 it,
                 this,
-                data[type]?.second
-                    ?: throw IllegalStateException("BehaviourView has a null behaviour $data")
+                data[type]?.second ?: error("BehaviourView has a null behaviour $data")
             )
         }
         view.setOnCloseIconClickListener(onClick)

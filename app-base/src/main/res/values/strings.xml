@@ -422,7 +422,7 @@
         <item>Scheduler set for <xliff:g example="2 days" id="DAYS">%1$s</xliff:g>, <xliff:g example="2 hours" id="HOURS">%2$s</xliff:g>, and <xliff:g example="2 minutes" id="MINUTES">%3$s</xliff:g> from now</item>
     </string-array>
 
-    <string name="scheduler_schedule_failed">Setting scheduler failed. Please try again</string>
+    <string name="scheduler_schedule_failed">Setting scheduler failed %s</string>
     <string name="scheduler_canceled_template">%1$s canceled</string>
     <string name="scheduler_starts_action_template">Start %1$s</string>
     <string name="scheduler_stops_action_template">Stop %1$s</string>

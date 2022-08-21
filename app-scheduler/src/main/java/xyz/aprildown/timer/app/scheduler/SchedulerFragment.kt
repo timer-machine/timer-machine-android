@@ -207,7 +207,14 @@ class SchedulerFragment : Fragment(R.layout.fragment_scheduler), MainCallback.Fr
                         )
                     }
                     is SetSchedulerEnable.Result.Failed -> {
-                        getString(RBase.string.scheduler_schedule_failed)
+                        getString(
+                            RBase.string.scheduler_schedule_failed,
+                            if (it.message.isNullOrBlank()) {
+                                ""
+                            } else {
+                                it.message
+                            }
+                        )
                     }
                 }
             )

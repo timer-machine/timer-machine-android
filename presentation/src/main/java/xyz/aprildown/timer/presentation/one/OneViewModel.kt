@@ -183,7 +183,7 @@ class OneViewModel @Inject constructor(
                     timerCurrentIndex.value ?: theFirstIndex,
                     theFirstIndex
                 )
-                else -> throw IllegalStateException("Offset $offset is not supported yet")
+                else -> error("Offset $offset is not supported yet")
             }
 
             timerCurrentTime.value = step?.length ?: 0L

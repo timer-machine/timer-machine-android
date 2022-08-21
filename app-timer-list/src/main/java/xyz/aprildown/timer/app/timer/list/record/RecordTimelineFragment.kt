@@ -38,7 +38,7 @@ internal class RecordTimelineFragment : Fragment(R.layout.fragment_record_timeli
             durationFormatter = { it.toString() }
         )
 
-        viewModel?.timeline?.observe(viewLifecycleOwner, { signal ->
+        viewModel?.timeline?.observe(viewLifecycleOwner) { signal ->
             when (signal) {
                 is GetRecords.Signal.Processing -> {
                     binding.layoutRecordContent.animateHideGraphs()
@@ -76,7 +76,7 @@ internal class RecordTimelineFragment : Fragment(R.layout.fragment_record_timeli
                                 GetRecords.TimelineResult.MODE_ONE_DAY -> {
                                     DateFormat.getTimeFormat(context)
                                 }
-                                else -> throw IllegalStateException("Wrong format $mode")
+                                else -> error("Wrong format $mode")
                             }
                             xAxis.valueFormatter = object : ValueFormatter() {
                                 override fun getAxisLabel(value: Float, axis: AxisBase?): String {
@@ -106,7 +106,7 @@ internal class RecordTimelineFragment : Fragment(R.layout.fragment_record_timeli
                 }
                 else -> Unit
             }
-        })
+        }
     }
 
     private fun BarChart.applyCommonSettings(durationFormatter: (Long) -> String) {

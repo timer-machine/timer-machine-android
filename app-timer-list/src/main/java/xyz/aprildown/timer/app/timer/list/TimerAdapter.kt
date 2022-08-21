@@ -74,7 +74,7 @@ internal class TimerAdapter(
         return when (viewType) {
             collapsedLayoutRes -> CollapsedViewHolder(view, callback)
             expandedLayoutRes -> ExpandedViewHolder(view, callback)
-            else -> throw IllegalStateException("Wrong view type $viewType")
+            else -> error("Wrong view type $viewType")
         }.also { viewHolder ->
             viewHolder.itemView.findViewById<View>(R.id.cardTimer).setOnClickListener {
                 callback.onTimerAction(viewHolder, ACTION_ITEM_CLICK)

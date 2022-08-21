@@ -25,7 +25,7 @@ internal class PhoneCallReceiver(
         manager = context.getSystemService(Context.TELEPHONY_SERVICE) as TelephonyManager
         try {
             manager?.listen(this, LISTEN_CALL_STATE)
-        } catch (e: SecurityException) {
+        } catch (_: SecurityException) {
             onListenFailed()
         }
     }
@@ -35,7 +35,7 @@ internal class PhoneCallReceiver(
         callback = null
         try {
             manager?.listen(this, LISTEN_NONE)
-        } catch (e: SecurityException) {
+        } catch (_: SecurityException) {
             onListenFailed()
         }
         manager = null

@@ -26,15 +26,14 @@ class SchedulerExecutorImpl @Inject constructor(
             val am = context.getSystemService<AlarmManager>()
             // The permission seems to have been granted by default.
             if (am?.canScheduleExactAlarms() == false) {
-                // TODO: 2022/3/19 Better error message
-                return SetSchedulerEnable.Result.Failed
+                return SetSchedulerEnable.Result.Failed("No permission to schedule exact alarms")
             }
         }
         return when (scheduler.action) {
             SchedulerEntity.ACTION_START, SchedulerEntity.ACTION_END -> {
                 SetSchedulerEnable.Result.Scheduled(SchedulerJob.scheduleAJob(scheduler))
             }
-            else -> SetSchedulerEnable.Result.Failed
+            else -> SetSchedulerEnable.Result.Failed("Invalid action")
         }
     }
 

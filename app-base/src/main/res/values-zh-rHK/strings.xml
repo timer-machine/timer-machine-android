@@ -384,7 +384,7 @@
         <item>"計劃任務設定在 <xliff:g id="DAYS">%1$s</xliff:g><xliff:g id="HOURS">%2$s</xliff:g><xliff:g id="MINUTES">%3$s</xliff:g>後響起"</item>
     </string-array>
 
-    <string name="scheduler_schedule_failed">設置計劃失敗，重試一下？</string>
+    <string name="scheduler_schedule_failed">設置計劃失敗 %s</string>
     <string name="scheduler_canceled_template">%1$s 已取消</string>
     <string name="scheduler_starts_action_template">開啟 %1$s</string>
     <string name="scheduler_stops_action_template">停止 %1$s</string>

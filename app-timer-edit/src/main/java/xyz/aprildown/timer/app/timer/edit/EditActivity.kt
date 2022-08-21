@@ -321,7 +321,7 @@ class EditActivity :
                                 item is EditableFooter -> {
                                     RBase.string.edit_cant_move_footer
                                 }
-                                else -> throw IllegalStateException("What are you moving? $item")
+                                else -> error("What are you moving? $item")
                             }
                             binding.root.snackbar(msgRes)
                             false

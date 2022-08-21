@@ -53,7 +53,7 @@ class TipManager @Inject constructor(
         when (tip) {
             TIP_TUTORIAL -> tipLiveData.postValue(TIP_WHITELIST)
             TIP_WHITELIST, TIP_MISSED_TIMER -> tipLiveData.postValue(TIP_NO_MORE)
-            else -> throw IllegalStateException("Unknown onboarding tip $tip")
+            else -> error("Unknown onboarding tip $tip")
         }
     }
 

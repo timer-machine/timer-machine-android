@@ -14,7 +14,10 @@ import com.google.android.material.R as RMaterial
 object AppThemeUtils {
 
     fun configAppTheme(context: Context, appTheme: PreferenceData.AppTheme) {
-        val (primary, secondary, sameStatusBar, enableNav) = appTheme
+        val primary = appTheme.colorPrimary
+        val secondary = appTheme.colorSecondary
+        val sameStatusBar = appTheme.sameStatusBar
+        val enableNav = appTheme.enableNav
         Theme.edit(context) {
             colorPrimary = primary
             val darkerPrimary = darker(primary)
@@ -42,7 +45,11 @@ object AppThemeUtils {
     }
 
     fun configThemeForDark(context: Context, isDark: Boolean) {
-        val (primary, _, sameStatusBar, enableNav) = context.appTheme
+        val appTheme = context.appTheme
+        val primary = appTheme.colorPrimary
+        val sameStatusBar = appTheme.sameStatusBar
+        val enableNav = appTheme.enableNav
+
         if (isDark) {
             Theme.edit(context) {
                 val color = calculateToolbarColorDuringNight(context)

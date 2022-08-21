@@ -311,7 +311,7 @@ class OneFragment :
                     PreferenceData.ONE_LAYOUT_ONE_ACTION_EDIT -> FiveActionsView.Action(
                         it, RBase.string.one_action_edit_timer, RBase.drawable.ic_edit
                     )
-                    else -> throw IllegalStateException("Unknown action $it")
+                    else -> error("Unknown action $it")
                 }
             }
     }

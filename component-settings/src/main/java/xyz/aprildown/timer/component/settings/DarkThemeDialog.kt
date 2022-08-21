@@ -142,7 +142,7 @@ class DarkThemeDialog(private val context: Context) {
                 radioManual.isChecked -> DarkTheme.DARK_THEME_MANUAL
                 radioDefault.isChecked -> DarkTheme.DARK_THEME_SYSTEM_DEFAULT
                 radioSaver.isChecked -> DarkTheme.DARK_THEME_BATTERY_SAVER
-                else -> throw IllegalStateException("No dark theme value selected")
+                else -> error("No dark theme value selected")
             }
             if (radioManual.isChecked) {
                 darkTheme.scheduleEnabled = currentScheduleEnable

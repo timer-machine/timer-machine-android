@@ -183,7 +183,7 @@ class RecordFragment : Fragment(R.layout.fragment_record) {
                 0 -> RecordOverviewFragment()
                 1 -> RecordTimelineFragment()
                 2 -> RecordCalendarFragment()
-                else -> throw IllegalStateException("Wrong pager position $position")
+                else -> error("Wrong pager position $position")
             }
         }
         TabLayoutMediator(binding.tabLayoutRecord, binding.viewPagerRecord) { tab, position ->
@@ -192,7 +192,7 @@ class RecordFragment : Fragment(R.layout.fragment_record) {
                     0 -> RBase.string.record_overview
                     1 -> RBase.string.record_timeline
                     2 -> RBase.string.record_calendar
-                    else -> throw IllegalStateException("Wrong tab position $position")
+                    else -> error("Wrong tab position $position")
                 }
             )
         }.attach()

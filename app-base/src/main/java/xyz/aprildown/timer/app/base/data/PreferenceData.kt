@@ -142,7 +142,7 @@ object PreferenceData {
             FRIDAY -> DayOfWeek.FRIDAY
             SATURDAY -> DayOfWeek.SATURDAY
             SUNDAY -> DayOfWeek.SUNDAY
-            else -> throw IllegalStateException("Unknown weekday $startWeekOn")
+            else -> error("Unknown weekday $startWeekOn")
         }
 
     // endregion Week Start
@@ -326,11 +326,10 @@ object PreferenceData {
         }
         set(value) {
             safeSharedPreference.edit {
-                val (p, a, s, n) = value
-                putInt(AppTheme.PREF_PRIMARY, p)
-                putInt(AppTheme.PREF_SECONDARY, a)
-                putBoolean(AppTheme.PREF_SAME_STATUS_BAR, s)
-                putBoolean(AppTheme.PREF_ENABLE_NAV, n)
+                putInt(AppTheme.PREF_PRIMARY, value.colorPrimary)
+                putInt(AppTheme.PREF_SECONDARY, value.colorSecondary)
+                putBoolean(AppTheme.PREF_SAME_STATUS_BAR, value.sameStatusBar)
+                putBoolean(AppTheme.PREF_ENABLE_NAV, value.enableNav)
             }
         }
 

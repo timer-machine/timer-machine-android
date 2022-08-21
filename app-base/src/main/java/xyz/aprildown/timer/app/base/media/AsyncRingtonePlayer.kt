@@ -383,7 +383,7 @@ private fun isInTelephoneCall(context: Context): Boolean {
     val tm = context.getSystemService<TelephonyManager>()
     return try {
         tm?.callState != TelephonyManager.CALL_STATE_IDLE
-    } catch (e: SecurityException) {
+    } catch (_: SecurityException) {
         false
     }
 }

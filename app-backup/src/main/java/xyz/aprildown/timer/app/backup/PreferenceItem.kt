@@ -321,12 +321,12 @@ private class OneLayoutPreferenceItem : PreferenceItem {
 
 private class ThemePreferenceItem : PreferenceItem {
     override fun storeToMap(context: Context, map: MutableMap<String, String>) {
-        val (primary, secondary, sameStatus, enableNav) = context.appTheme
+        val appTheme = context.appTheme
 
-        map[PreferenceData.AppTheme.PREF_PRIMARY] = primary.toString()
-        map[PreferenceData.AppTheme.PREF_SECONDARY] = secondary.toString()
-        map[PreferenceData.AppTheme.PREF_SAME_STATUS_BAR] = sameStatus.toString()
-        map[PreferenceData.AppTheme.PREF_ENABLE_NAV] = enableNav.toString()
+        map[PreferenceData.AppTheme.PREF_PRIMARY] = appTheme.colorPrimary.toString()
+        map[PreferenceData.AppTheme.PREF_SECONDARY] = appTheme.colorSecondary.toString()
+        map[PreferenceData.AppTheme.PREF_SAME_STATUS_BAR] = appTheme.sameStatusBar.toString()
+        map[PreferenceData.AppTheme.PREF_ENABLE_NAV] = appTheme.enableNav.toString()
 
         map[PreferenceData.KEY_STEP_NORMAL] = StepType.NORMAL.getTypeColor(context).toString()
         map[PreferenceData.KEY_STEP_NOTIFIER] = StepType.NOTIFIER.getTypeColor(context).toString()

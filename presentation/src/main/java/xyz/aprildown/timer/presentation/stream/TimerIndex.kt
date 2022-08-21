@@ -69,6 +69,7 @@ fun Intent.putTimerIndex(index: TimerIndex?): Intent = apply {
         is TimerIndex.End -> {
             putExtra(KEY_INDEX_TYPE, INDEX_TYPE_END)
         }
+        else -> Unit
     }
 }
 

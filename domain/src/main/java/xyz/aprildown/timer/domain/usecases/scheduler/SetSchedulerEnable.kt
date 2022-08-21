@@ -25,7 +25,7 @@ class SetSchedulerEnable @Inject constructor(
     sealed class Result {
         class Scheduled(val time: Long) : Result()
         class Canceled(val count: Int) : Result()
-        object Failed : Result()
+        class Failed(val message: String? = null) : Result()
     }
 
     /**
@@ -38,11 +38,11 @@ class SetSchedulerEnable @Inject constructor(
             result = when (enable) {
                 0 -> executor.cancel(new)
                 1 -> executor.schedule(new)
-                else -> throw IllegalStateException("Invalid scheduler enable value: $enable")
+                else -> error("Invalid scheduler enable value: $enable")
             }
         }
         repository.setSchedulerEnable(id, enable)
         appDataRepository.notifyDataChanged()
-        return result ?: Result.Failed
+        return result ?: Result.Failed("Can't find the scheduler")
     }
 }

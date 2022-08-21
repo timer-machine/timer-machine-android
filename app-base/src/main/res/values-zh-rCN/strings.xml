@@ -384,7 +384,7 @@
         <item>"计划任务已设为 <xliff:g id="DAYS">%1$s</xliff:g><xliff:g id="HOURS">%2$s</xliff:g><xliff:g id="MINUTES">%3$s</xliff:g>后"</item>
     </string-array>
 
-    <string name="scheduler_schedule_failed">设置计划失败，重试一下？</string>
+    <string name="scheduler_schedule_failed">设置计划失败 %s</string>
     <string name="scheduler_canceled_template">%1$s 已取消</string>
     <string name="scheduler_starts_action_template">开启 %1$s</string>
     <string name="scheduler_stops_action_template">停止 %1$s</string>

@@ -49,7 +49,7 @@ class OneLayoutFragment : Fragment(R.layout.fragment_one_layout) {
             override fun getItemCount(): Int = 1
             override fun createFragment(position: Int): Fragment = when (position) {
                 0 -> OneLayoutOneFragment()
-                else -> throw IllegalStateException("Too big position $position")
+                else -> error("Too big position $position")
             }
         }
         binding.viewPager.adapter = pagerAdapter
