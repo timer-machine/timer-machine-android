@@ -8,6 +8,7 @@ ext {
             hilt        : '2.42',
             secrets     : '2.0.1',
             gms         : '4.3.10',
+            guard       : '0.3.1',
 
             compile_sdk : 31,
             min_sdk     : 23,

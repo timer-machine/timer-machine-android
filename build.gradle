@@ -16,6 +16,7 @@ buildscript {
         classpath "com.google.android.libraries.mapsplatform.secrets-gradle-plugin:secrets-gradle-plugin:${versions.secrets}"
         classpath "io.gitlab.arturbosch.detekt:detekt-gradle-plugin:${versions.detekt}"
         classpath "com.google.gms:google-services:${versions.gms}"
+        classpath "com.dropbox.dependency-guard:dependency-guard:${versions.guard}"
     }
 }
 

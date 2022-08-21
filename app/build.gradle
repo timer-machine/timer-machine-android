@@ -4,6 +4,7 @@ plugins {
     id 'kotlin-kapt'
     id 'dagger.hilt.android.plugin'
     id 'com.google.gms.google-services'
+    id "com.dropbox.dependency-guard"
 }
 
 android {
@@ -158,5 +159,17 @@ dependencies {
 android.applicationVariants.all { variant ->
     if (variant.name.contains('dog') || variant.name.contains('other')) {
         project.tasks.getByName('process' + variant.name.capitalize() + 'GoogleServices').enabled = false
+    }
+}
+
+dependencyGuard {
+    configuration("dogReleaseRuntimeClasspath") {
+        modules true
+    }
+    configuration("googleReleaseRuntimeClasspath") {
+        modules true
+    }
+    configuration("otherReleaseRuntimeClasspath") {
+        modules true
     }
 }
