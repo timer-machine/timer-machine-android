@@ -16,6 +16,7 @@ import xyz.aprildown.timer.data.job.SchedulerJob.Companion.RECEIVE_JOB_ACTION
 import xyz.aprildown.timer.domain.entities.SchedulerEntity
 import xyz.aprildown.timer.domain.entities.TimerEntity
 import xyz.aprildown.timer.presentation.scheduler.SchedulerReceiverPresenter
+import xyz.aprildown.tools.helper.HandlerHelper
 import javax.inject.Inject
 
 /**
@@ -29,26 +30,30 @@ class SchedulerReceiver : BroadcastReceiver() {
 
     override fun onReceive(context: Context, intent: Intent) {
         if (intent.action != RECEIVE_JOB_ACTION) return
-        val c = context.applicationContext
         val schedulerId = intent.getIntExtra(EXTRA_ID, SchedulerEntity.NULL_ID)
         when (intent.getIntExtra(EXTRA_ACTION, -1)) {
             SchedulerEntity.ACTION_START -> {
                 val timerId = presenter.handleFiredScheduler(schedulerId)
                 if (timerId != TimerEntity.NULL_ID && presenter.isValidTimerId(timerId)) {
-                    ContextCompat.startForegroundService(
-                        c,
-                        MachineService.scheduleTimerStartIntent(context, timerId)
-                    )
+                    // https://proandroiddev.com/when-your-app-makes-android-foreground-services-misbehave-8dbcc57dd99c
+                    HandlerHelper.post {
+                        ContextCompat.startForegroundService(
+                            context,
+                            MachineService.scheduleTimerStartIntent(context, timerId)
+                        )
+                    }
                 }
             }
             SchedulerEntity.ACTION_END -> {
                 val timerId = presenter.handleFiredScheduler(schedulerId)
                 if (timerId != TimerEntity.NULL_ID && presenter.isValidTimerId(timerId)) {
                     fun sendStopIntent() {
-                        ContextCompat.startForegroundService(
-                            c,
-                            MachineService.scheduleTimerEndIntent(context, timerId)
-                        )
+                        HandlerHelper.post {
+                            ContextCompat.startForegroundService(
+                                context,
+                                MachineService.scheduleTimerEndIntent(context, timerId)
+                            )
+                        }
                     }
                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
                         context.getSystemService<NotificationManager>()?.let {
