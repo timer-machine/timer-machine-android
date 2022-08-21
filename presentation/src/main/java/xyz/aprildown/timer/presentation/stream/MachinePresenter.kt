@@ -290,7 +290,12 @@ class MachinePresenter @Inject constructor(
                         BehaviourType.FLASHLIGHT -> {
                             view?.toggleFlashlight(
                                 action = behavior.toFlashlightAction(),
-                                duration = currentStep.length
+                                duration = if (stepBehaviours.any { it.type == BehaviourType.HALT }) {
+                                    // This causes CountDownTimer to overflow, but it works fine.
+                                    Long.MAX_VALUE
+                                } else {
+                                    currentStep.length
+                                }
                             )
                         }
                         else -> Unit
