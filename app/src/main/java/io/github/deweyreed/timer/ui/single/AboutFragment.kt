@@ -6,20 +6,17 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
 import androidx.preference.Preference
 import androidx.preference.PreferenceFragmentCompat
-import dagger.hilt.android.AndroidEntryPoint
 import io.github.deweyreed.timer.BuildConfig
 import io.github.deweyreed.timer.R
 import xyz.aprildown.timer.app.base.utils.openWebsiteWithWarning
 import xyz.aprildown.timer.app.settings.LogFragment
 import xyz.aprildown.timer.domain.utils.AppConfig
-import xyz.aprildown.timer.domain.utils.AppTracker
 import xyz.aprildown.timer.domain.utils.Constants
 import xyz.aprildown.timer.workshop.ChangeLogDialog
 import xyz.aprildown.timer.workshop.Monika
 import xyz.aprildown.tools.anko.newTask
 import xyz.aprildown.tools.helper.IntentHelper
 import xyz.aprildown.tools.helper.startActivityOrNothing
-import javax.inject.Inject
 
 class AboutFragment : Fragment(R.layout.fragment_about) {
 
@@ -33,11 +30,7 @@ class AboutFragment : Fragment(R.layout.fragment_about) {
     }
 }
 
-@AndroidEntryPoint
 class AboutPreferenceFragment : PreferenceFragmentCompat() {
-
-    @Inject
-    lateinit var appTracker: AppTracker
 
     override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
         val context = requireContext()
@@ -46,6 +39,11 @@ class AboutPreferenceFragment : PreferenceFragmentCompat() {
 
         findPreference<Preference>("key_about_version")?.summary =
             "${BuildConfig.VERSION_NAME}(${BuildConfig.VERSION_CODE})"
+
+        findPreference<Preference>("key_about_source_code")?.setOnPreferenceClickListener {
+            context.openWebsiteWithWarning("https://github.com/timer-machine/timer-machine-android")
+            true
+        }
 
         findPreference<Preference>("key_about_crash")?.run {
             isVisible = AppConfig.openDebug

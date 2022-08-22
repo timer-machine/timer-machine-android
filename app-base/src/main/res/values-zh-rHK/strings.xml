@@ -646,6 +646,7 @@
     <string name="pref_about_title">關於</string>
 
     <string name="about_version">版本</string>
+    <string name="about_source_code">源代碼</string>
     <string name="about_developer">開發者</string>
     <string name="about_more_apps_from_me">更多應用</string>
 

@@ -11,6 +11,11 @@
             tools:summary="1.1.0" />
 
         <Preference
+            app:key="key_about_source_code"
+            app:persistent="false"
+            app:title="@string/about_source_code" />
+
+        <Preference
             app:key="key_about_crash"
             app:persistent="false"
             app:title="Test crash" />

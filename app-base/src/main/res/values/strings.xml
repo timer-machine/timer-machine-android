@@ -766,6 +766,7 @@
     <string name="pref_about_title">About</string>
 
     <string name="about_version">Version</string>
+    <string name="about_source_code">Source code</string>
     <string name="about_developer">Developer</string>
     <string name="about_more_apps_from_me">More apps from me</string>
 
