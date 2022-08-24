@@ -2,7 +2,6 @@ package xyz.aprildown.timer.data.db
 
 import android.content.Context
 import androidx.room.testing.MigrationTestHelper
-import androidx.sqlite.db.framework.FrameworkSQLiteOpenHelperFactory
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.filters.SmallTest
@@ -19,8 +18,7 @@ class MachineDatabaseMigratingTest {
     @JvmField
     val testHelper = MigrationTestHelper(
         InstrumentationRegistry.getInstrumentation(),
-        MachineDatabase::class.java.canonicalName,
-        FrameworkSQLiteOpenHelperFactory()
+        MachineDatabase::class.java,
     )
 
     @Test
