@@ -7,8 +7,6 @@ import androidx.collection.arrayMapOf
 import androidx.core.net.toUri
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 import xyz.aprildown.timer.domain.di.MainDispatcher
 import xyz.aprildown.timer.domain.entities.BehaviourEntity
@@ -31,6 +29,7 @@ import xyz.aprildown.timer.domain.usecases.record.AddTimerStamp
 import xyz.aprildown.timer.domain.usecases.timer.GetTimer
 import xyz.aprildown.timer.domain.utils.AppTracker
 import xyz.aprildown.timer.domain.utils.Constants
+import xyz.aprildown.timer.domain.utils.fireAndForget
 import xyz.aprildown.timer.presentation.R
 import javax.inject.Inject
 
@@ -119,7 +118,7 @@ class MachinePresenter @Inject constructor(
                 machine.setAndStartWith(timer)
             }
         } else {
-            GlobalScope.launch(mainDispatcher) {
+            fireAndForget(mainDispatcher) {
                 getTimer.execute(timerId)
                     ?.takeIf { it.folderId != FolderEntity.FOLDER_TRASH }
                     ?.let { timer ->
@@ -571,7 +570,7 @@ class MachinePresenter @Inject constructor(
             (timer != null && timer.machine.currentIndex.isTheLastInTimer(timer.timer))
         ) {
             // Record if the timer finished normally or is stopped manually at the last step.
-            GlobalScope.launch(mainDispatcher) {
+            fireAndForget(mainDispatcher) {
                 addTimerStamp.execute(
                     TimerStampEntity(
                         timerId,

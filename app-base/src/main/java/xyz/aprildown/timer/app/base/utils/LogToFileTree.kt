@@ -2,12 +2,11 @@ package xyz.aprildown.timer.app.base.utils
 
 import android.content.Context
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
 import kotlinx.coroutines.sync.Mutex
 import kotlinx.coroutines.sync.withLock
 import timber.log.Timber
 import xyz.aprildown.timer.domain.utils.Constants
+import xyz.aprildown.timer.domain.utils.fireAndForget
 import java.io.File
 import java.text.SimpleDateFormat
 import java.util.Locale
@@ -23,7 +22,7 @@ class LogToFileTree(private val context: Context) : Timber.Tree() {
             cachedMessage += message
         }
 
-        GlobalScope.launch(Dispatchers.IO) {
+        fireAndForget(Dispatchers.IO) {
             logMutex.withLock {
                 try {
                     val messageToLog = synchronized(messageLock) {
