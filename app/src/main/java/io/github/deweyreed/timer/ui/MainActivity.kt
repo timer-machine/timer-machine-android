@@ -50,9 +50,12 @@ import xyz.aprildown.timer.app.base.utils.NavigationUtils.getCurrentFragment
 import xyz.aprildown.timer.app.timer.one.OneActivity
 import xyz.aprildown.timer.component.settings.DarkThemeDialog
 import xyz.aprildown.tools.anko.longSnackbar
+import xyz.aprildown.tools.anko.toast
+import xyz.aprildown.tools.helper.IntentHelper
 import xyz.aprildown.tools.helper.float
 import xyz.aprildown.tools.helper.isDarkTheme
 import xyz.aprildown.tools.helper.restartWithFading
+import xyz.aprildown.tools.helper.startActivityOrNothing
 import xyz.aprildown.tools.utils.ThemeColorUtils
 import java.time.Instant
 import java.util.Optional
@@ -287,7 +290,22 @@ class MainActivity :
                     nameRes = RBase.string.main_action_help
                     iconRes = RBase.drawable.settings_help
                     withCommonSettings()
-                }
+                },
+                PrimaryDrawerItem().apply {
+                    identifier = DRAWER_ID_RATE
+                    nameRes = RBase.string.rate_five_stars
+                    iconRes = RBase.drawable.settings_rate
+                    withCommonSettings()
+                    isSelectable = false
+                    onDrawerItemClickListener = { _, _, _ ->
+                        toast(RBase.string.thanks)
+                        startActivityOrNothing(
+                            IntentHelper.appStorePage(this@MainActivity),
+                            wrongMessageRes = RBase.string.no_action_found
+                        )
+                        true
+                    }
+                },
             )
         )
         flavorUiInjector.orElse(null)?.let { flavorUiInjector ->
@@ -520,6 +538,7 @@ private const val DRAWER_ID_SCHEDULER = 20L
 private const val DRAWER_ID_BACKUP_RESTORE = 25L
 private const val DRAWER_ID_SETTINGS = 50L
 private const val DRAWER_ID_HELP = 55L
+private const val DRAWER_ID_RATE = 58L
 private const val DRAWER_ID_IN_APP_PURCHASES = 60L
 private const val DRAWER_ID_THEME = 90L
 
