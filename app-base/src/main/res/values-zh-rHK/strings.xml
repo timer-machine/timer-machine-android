@@ -695,7 +695,6 @@
 
     <!--Updates-->
     <string name="update_title">更新內容</string>
-    <string name="update_more">更多更新內容</string>
 
     <!--Tasker-->
     <string name="tasker_edit_title">計時機器插件</string>

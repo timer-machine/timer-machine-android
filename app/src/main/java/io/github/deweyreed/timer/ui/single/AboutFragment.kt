@@ -12,7 +12,6 @@ import xyz.aprildown.timer.app.base.utils.openWebsiteWithWarning
 import xyz.aprildown.timer.app.settings.LogFragment
 import xyz.aprildown.timer.domain.utils.AppConfig
 import xyz.aprildown.timer.domain.utils.Constants
-import xyz.aprildown.timer.workshop.ChangeLogDialog
 import xyz.aprildown.timer.workshop.Monika
 import xyz.aprildown.tools.anko.newTask
 import xyz.aprildown.tools.helper.IntentHelper
@@ -53,7 +52,7 @@ class AboutPreferenceFragment : PreferenceFragmentCompat() {
         }
 
         findPreference<Preference>("key_about_changelog")?.setOnPreferenceClickListener {
-            ChangeLogDialog(context).show()
+            context.openWebsiteWithWarning(Constants.getChangeLogLink(context))
             true
         }
 

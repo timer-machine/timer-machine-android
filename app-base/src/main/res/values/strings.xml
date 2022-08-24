@@ -815,7 +815,6 @@
 
     <!--Updates-->
     <string name="update_title">What\'s new?</string>
-    <string name="update_more">More Changelog</string>
 
     <!--Tasker-->
     <string name="tasker_edit_title">TimeR Machine Plugin</string>
