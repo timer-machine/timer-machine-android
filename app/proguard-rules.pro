@@ -39,6 +39,10 @@
 -keep class xyz.aprildown.timer.domain.entities.BehaviourType { *; }
 -keep class xyz.aprildown.timer.domain.entities.StepType { *; }
 
+# Okio https://square.github.io/okio/#r8-proguard
+# Animal Sniffer compileOnly dependency to ensure APIs are compatible with older versions of Java.
+-dontwarn org.codehaus.mojo.animal_sniffer.*
+
 # MPAndroidChart https://github.com/PhilJay/MPAndroidChart/issues/348
 -keep public class com.github.mikephil.charting.animation.* {
     public protected *;
