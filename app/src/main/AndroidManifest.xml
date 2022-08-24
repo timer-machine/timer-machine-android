@@ -13,7 +13,7 @@
     <!-- create shortcut for timers -->
     <uses-permission android:name="com.android.launcher.permission.INSTALL_SHORTCUT" />
 
-    <!-- start and pause all timers for incoming calls, not needed from M to S -->
+    <!-- start and pause all timers for incoming calls, not needed from M until S -->
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
 
     <!-- Android P requires this -->
