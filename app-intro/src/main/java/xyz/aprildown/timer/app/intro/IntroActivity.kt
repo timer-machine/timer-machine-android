@@ -40,10 +40,8 @@ import xyz.aprildown.timer.app.intro.start.WalkNotifier
 import xyz.aprildown.timer.app.intro.start.WalkStepTime
 import xyz.aprildown.timer.app.intro.start.Welcome
 import xyz.aprildown.timer.component.key.behaviour.EditableBehaviourLayout
-import xyz.aprildown.timer.domain.utils.AppTracker
 import xyz.aprildown.timer.presentation.intro.IntroViewModel
 import xyz.aprildown.tools.helper.color
-import javax.inject.Inject
 import com.mikepenz.materialize.R as RMaterialize
 import xyz.aprildown.timer.app.base.R as RBase
 
@@ -51,9 +49,6 @@ import xyz.aprildown.timer.app.base.R as RBase
 class IntroActivity : BaseActivity() {
 
     private val viewModel: IntroViewModel by viewModels()
-
-    @Inject
-    lateinit var appTracker: AppTracker
 
     private lateinit var binding: ActivityIntroBinding
 

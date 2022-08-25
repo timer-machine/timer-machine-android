@@ -17,7 +17,6 @@ import dagger.hilt.android.AndroidEntryPoint
 import xyz.aprildown.timer.app.base.data.FlavorData
 import xyz.aprildown.timer.app.base.utils.openWebsiteWithWarning
 import xyz.aprildown.timer.component.key.PreferenceStyleListFragment
-import xyz.aprildown.timer.domain.utils.AppTracker
 import xyz.aprildown.timer.domain.utils.Constants
 import xyz.aprildown.timer.flavor.google.databinding.FragmentBillingBinding
 import xyz.aprildown.tools.anko.newTask
@@ -36,9 +35,6 @@ internal class BillingFragment : Fragment(R.layout.fragment_billing) {
 
     @Inject
     lateinit var flavorData: FlavorData
-
-    @Inject
-    lateinit var appTracker: AppTracker
 
     private lateinit var billingSupervisor: BillingSupervisor
 

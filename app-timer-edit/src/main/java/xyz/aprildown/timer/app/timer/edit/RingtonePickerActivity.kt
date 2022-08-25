@@ -16,21 +16,16 @@ import dagger.hilt.android.AndroidEntryPoint
 import xyz.aprildown.timer.app.base.data.PreferenceData.storedAudioTypeValue
 import xyz.aprildown.timer.app.base.ui.BaseActivity
 import xyz.aprildown.timer.app.base.ui.newDynamicTheme
-import xyz.aprildown.timer.domain.utils.AppTracker
 import xyz.aprildown.tools.helper.safeSharedPreference
 import xyz.aprildown.tools.helper.toColorStateList
 import xyz.aprildown.ultimateringtonepicker.RingtonePickerFragment
 import xyz.aprildown.ultimateringtonepicker.UltimateRingtonePicker
-import javax.inject.Inject
 import xyz.aprildown.timer.app.base.R as RBase
 
 @AndroidEntryPoint
 class RingtonePickerActivity :
     BaseActivity(),
     UltimateRingtonePicker.RingtonePickerListener {
-
-    @Inject
-    lateinit var appTracker: AppTracker
 
     private var reference: Int = -1
 

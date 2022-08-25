@@ -165,17 +165,6 @@ object PreferenceData {
             AudioManager.STREAM_MUSIC.toString()
         ).toInt()
 
-    // region Labs
-
-    private const val KEY_LABS = "key_labs"
-
-    // Only used to remove them from SharedPreferences
-    const val KEY_LABS_HALF_COUNT = "${KEY_LABS}_half_count"
-    const val KEY_LABS_NOTIFICATION = "${KEY_LABS}_notification"
-    const val KEY_LABS_TIME_PANEL = "${KEY_LABS}_time_panel"
-
-    // endregion Labs
-
     // region One Layout
 
     const val KEY_ONE_LAYOUT = "key_one_layout_fix"

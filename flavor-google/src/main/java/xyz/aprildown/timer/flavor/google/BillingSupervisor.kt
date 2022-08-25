@@ -214,7 +214,8 @@ internal class BillingSupervisor(
             BillingClient.BillingResponseCode.OK -> {
                 val skuDetails = inAppResult.skuDetailsList?.find { it.sku == PRO }
                 if (skuDetails != null) {
-                    _proSkuDetails.value = skuDetails
+                    val sd: SkuDetails = skuDetails // Otherwise the compiler complains
+                    _proSkuDetails.value = sd
                 }
             }
             else -> {
@@ -232,7 +233,8 @@ internal class BillingSupervisor(
             BillingClient.BillingResponseCode.OK -> {
                 val skuDetails = subResult.skuDetailsList?.find { it.sku == BACKUP_SUB }
                 if (skuDetails != null) {
-                    _backupSubSkuDetails.value = skuDetails
+                    val sd: SkuDetails = skuDetails
+                    _backupSubSkuDetails.value = sd
                 }
             }
             else -> {

@@ -1,6 +1,5 @@
 package xyz.aprildown.timer.domain.usecases.home
 
-import android.content.SharedPreferences
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import dagger.Reusable
@@ -71,11 +70,5 @@ class TipManager @Inject constructor(
         const val TIP_MISSED_TIMER = 3
 
         private const val PREF_OLD_INTRO = "pref_first_start_app_screen"
-
-        fun hasTutorialViewed(sharedPreferences: SharedPreferences): Boolean {
-            if (sharedPreferences.contains(PREF_OLD_INTRO)) return true
-            if (sharedPreferences.contains(TIP_TUTORIAL.tipKey)) return true
-            return false
-        }
     }
 }

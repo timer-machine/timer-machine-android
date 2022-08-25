@@ -31,6 +31,6 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:layout="@layout/widget_check" />
+        tools:layout="@layout/view_list_item_with_layout_check" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

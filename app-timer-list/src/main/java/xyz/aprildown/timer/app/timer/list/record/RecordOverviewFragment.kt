@@ -34,7 +34,7 @@ internal class RecordOverviewFragment : Fragment(R.layout.fragment_record_overvi
         binding.chartRecordTotalCount.applyCommonSettings()
 
         viewModel?.overview?.let { overview ->
-            overview.observe(viewLifecycleOwner, { signal ->
+            overview.observe(viewLifecycleOwner) { signal ->
                 when (signal) {
                     is GetRecords.Signal.Processing -> {
                         binding.layoutRecordContent.animateHideGraphs()
@@ -136,7 +136,7 @@ internal class RecordOverviewFragment : Fragment(R.layout.fragment_record_overvi
                     }
                     else -> Unit
                 }
-            })
+            }
         }
     }
 

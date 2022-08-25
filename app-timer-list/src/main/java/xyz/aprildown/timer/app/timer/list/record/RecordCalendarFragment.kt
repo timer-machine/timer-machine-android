@@ -235,22 +235,19 @@ internal class RecordCalendarFragment : Fragment(R.layout.fragment_record_calend
             val fastAdapter = FastAdapter.with(itemAdapter)
             adapter = fastAdapter
 
-            viewModel?.calendarSelectedDateEvents?.observe(
-                viewLifecycleOwner,
-                { signal ->
-                    if (signal is GetRecords.Signal.Result) {
-                        itemAdapter.set(
-                            signal.result.map {
-                                CalendarDayEvent(
-                                    name = viewModel?.queryTimerName(it.timerId)
-                                        ?: getString(RBase.string.record_deleted_timer),
-                                    stamp = it
-                                )
-                            }
-                        )
-                    }
+            viewModel?.calendarSelectedDateEvents?.observe(viewLifecycleOwner) { signal ->
+                if (signal is GetRecords.Signal.Result) {
+                    itemAdapter.set(
+                        signal.result.map {
+                            CalendarDayEvent(
+                                name = viewModel?.queryTimerName(it.timerId)
+                                    ?: getString(RBase.string.record_deleted_timer),
+                                stamp = it
+                            )
+                        }
+                    )
                 }
-            )
+            }
         }
     }
 

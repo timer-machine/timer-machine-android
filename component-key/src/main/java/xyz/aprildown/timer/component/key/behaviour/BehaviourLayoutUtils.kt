@@ -21,8 +21,7 @@ internal fun BehaviourEntity.getChipText(context: Context): String {
 
     return when (type) {
         BehaviourType.MUSIC -> {
-            val title = toMusicAction().title
-            if (title.isBlank()) null else title
+            toMusicAction().title.ifBlank { null }
         }
         BehaviourType.VIBRATION -> {
             buildString {
@@ -42,12 +41,8 @@ internal fun BehaviourEntity.getChipText(context: Context): String {
         }
         BehaviourType.VOICE -> {
             val action = toVoiceAction()
-            val content2 = action.content2
-            if (content2.isNotBlank()) {
-                content2
-            } else {
-                val content = action.content
-                if (content.isBlank()) null else content
+            action.content2.ifBlank {
+                action.content.ifBlank { null }
             }
         }
         BehaviourType.BEEP -> {

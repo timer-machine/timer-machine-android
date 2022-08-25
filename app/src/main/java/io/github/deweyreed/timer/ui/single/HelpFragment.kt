@@ -6,7 +6,6 @@ import android.content.DialogInterface
 import android.content.Intent
 import android.os.Bundle
 import android.provider.Settings
-import android.view.LayoutInflater
 import androidx.core.view.postDelayed
 import androidx.fragment.app.DialogFragment
 import androidx.navigation.fragment.NavHostFragment
@@ -77,7 +76,7 @@ class HelpFragment : PreferenceFragmentCompat() {
     class TtsTestDialog : DialogFragment() {
         override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
             val context = requireContext()
-            val binding = DialogTtsTestBinding.inflate(LayoutInflater.from(context))
+            val binding = DialogTtsTestBinding.inflate(layoutInflater)
             return MaterialAlertDialogBuilder(context)
                 .setView(binding.root)
                 .create()
