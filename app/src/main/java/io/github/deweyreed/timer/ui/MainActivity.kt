@@ -425,7 +425,7 @@ class MainActivity :
 
     private fun setUpNavigation() {
         flavorUiInjector.orElse(null)?.let { flavorUiInjector ->
-            navController.graph.addAll(
+            navController.graph.addDestination(
                 navController.navInflater.inflate(flavorUiInjector.cloudBackupNavGraphId)
             )
         }
