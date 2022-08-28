@@ -33,6 +33,7 @@ dependencies {
     implementation libs.firebase_auth
     implementation libs.firebase_auth_ui
     implementation libs.firebase_storage
+    implementation libs.play_services_auth
 
     implementation libs.fastadapter
     implementation libs.fastadapter_binding
