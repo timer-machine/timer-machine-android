@@ -1,4 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="xyz.aprildown.timer.app.tasker">
 
     <application android:theme="@style/AppTheme.LibraryPreview">
@@ -13,5 +14,23 @@
             </intent-filter>
         </activity>
 
+        <receiver
+            android:name="com.joaomgcd.taskerpluginlibrary.action.BroadcastReceiverAction"
+            android:exported="true"
+            tools:ignore="ExportedReceiver"
+            tools:node="remove">
+            <intent-filter>
+                <action android:name="com.twofortyfouram.locale.intent.action.FIRE_SETTING" />
+            </intent-filter>
+        </receiver>
+
+        <receiver
+            android:name=".BroadcastReceiverActionTweak"
+            android:exported="true"
+            tools:ignore="ExportedReceiver">
+            <intent-filter>
+                <action android:name="com.twofortyfouram.locale.intent.action.FIRE_SETTING" />
+            </intent-filter>
+        </receiver>
     </application>
 </manifest>
