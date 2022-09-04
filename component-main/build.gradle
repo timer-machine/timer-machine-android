@@ -3,12 +3,6 @@ plugins {
     id 'kotlin-android'
 }
 
-android {
-    buildFeatures {
-        viewBinding = true
-    }
-}
-
 dependencies {
     implementation project(':app-base')
 

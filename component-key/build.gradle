@@ -4,12 +4,6 @@ plugins {
     id 'kotlin-parcelize'
 }
 
-android {
-    buildFeatures {
-        viewBinding = true
-    }
-}
-
 dependencies {
     api project(':app-base')
 
