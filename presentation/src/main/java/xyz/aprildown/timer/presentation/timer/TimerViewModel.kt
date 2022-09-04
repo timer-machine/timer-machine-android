@@ -90,7 +90,7 @@ class TimerViewModel @Inject constructor(
     private val _shareStringEvent = MutableLiveData<Event<Fruit<String>>>()
     val shareStringEvent: LiveData<Event<Fruit<String>>> = _shareStringEvent
 
-    val tips: LiveData<Int> = tipManager.getTipLiveData(this)
+    val tips: LiveData<Int> = tipManager.getTipFlow(this).asLiveData()
 
     init {
         launch {
@@ -109,7 +109,7 @@ class TimerViewModel @Inject constructor(
     }
 
     private suspend fun refreshFolders() {
-        _allFolders.value = getFolders()
+        _allFolders.value = getFolders.invoke()
     }
 
     fun changeFolder(folderId: Long) {
@@ -227,7 +227,7 @@ class TimerViewModel @Inject constructor(
     }
 
     fun consumeTip(tip: Int) {
-        viewModelScope.launch {
+        viewModelScope.launch(NonCancellable) {
             tipManager.consumeTip(tip)
         }
     }

@@ -1,10 +1,11 @@
 package xyz.aprildown.timer.domain.usecases.home
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
+import android.os.Build
 import dagger.Reusable
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import xyz.aprildown.timer.domain.di.IoDispatcher
@@ -23,41 +24,64 @@ class TipManager @Inject constructor(
     private val appTracker: AppTracker,
 ) {
 
-    private val tipLiveData: MutableLiveData<Int> = MutableLiveData()
+    private val tipFlow: MutableStateFlow<Int> = MutableStateFlow(TIP_NO_MORE)
 
-    fun getTipLiveData(coroutineScope: CoroutineScope): LiveData<Int> {
-        return tipLiveData.also {
-            coroutineScope.launch(dispatcher) {
-                if (!AppConfig.showFirstTimeInfo) return@launch
+    fun getTipFlow(coroutineScope: CoroutineScope): Flow<Int> {
+        coroutineScope.launch(dispatcher) {
+            if (!AppConfig.showFirstTimeInfo) return@launch
 
-                val isOldUser = repo.contains(PREF_OLD_INTRO)
-                if (!repo.contains(TIP_TUTORIAL.tipKey) && !isOldUser) {
-                    tipLiveData.postValue(TIP_TUTORIAL)
-                } else if (!repo.contains(TIP_WHITELIST.tipKey) && !isOldUser) {
-                    tipLiveData.postValue(TIP_WHITELIST)
-                } else {
-                    if (!repo.getBoolean(TIP_MISSED_TIMER.tipKey, true) &&
-                        !appTracker.hasCrashedInLastSession()
-                    ) {
-                        tipLiveData.postValue(TIP_MISSED_TIMER)
-                    }
+            val isOldUser = repo.contains(PREF_OLD_INTRO)
+            when {
+                !isOldUser && !isTipChecked(TIP_TUTORIAL) -> {
+                    tipFlow.value = TIP_TUTORIAL
+
+                    // This tip only affects old users.
+                    checkTip(TIP_ANDROID_12)
+                }
+                !isOldUser && !isTipChecked(TIP_WHITELIST) -> {
+                    tipFlow.value = TIP_WHITELIST
+                }
+                !isTipChecked(TIP_MISSED_TIMER, default = true) &&
+                    !appTracker.hasCrashedInLastSession() -> {
+                    tipFlow.value = TIP_MISSED_TIMER
+                }
+                Build.VERSION.SDK_INT >= Build.VERSION_CODES.S && !isTipChecked(TIP_ANDROID_12) -> {
+                    tipFlow.value = TIP_ANDROID_12
                 }
             }
         }
+        return tipFlow
     }
 
     suspend fun consumeTip(tip: Int) = withContext(dispatcher) {
-        repo.setBoolean(tip.tipKey, true)
+        checkTip(tip)
 
         when (tip) {
-            TIP_TUTORIAL -> tipLiveData.postValue(TIP_WHITELIST)
-            TIP_WHITELIST, TIP_MISSED_TIMER -> tipLiveData.postValue(TIP_NO_MORE)
+            TIP_TUTORIAL -> tipFlow.value = TIP_WHITELIST
+            TIP_WHITELIST, TIP_MISSED_TIMER, TIP_ANDROID_12 -> tipFlow.value = TIP_NO_MORE
             else -> error("Unknown onboarding tip $tip")
         }
     }
 
-    suspend fun setTip(tip: Int) = withContext(dispatcher) {
-        repo.setBoolean(tip.tipKey, false)
+    suspend fun setTip(tip: Int) {
+        checkTip(tip, false)
+    }
+
+    private suspend fun isTipChecked(tip: Int, default: Boolean = false): Boolean {
+        return withContext(dispatcher) {
+            val key = tip.tipKey
+            if (default) {
+                repo.getBoolean(key, default)
+            } else {
+                repo.contains(key) && repo.getBoolean(key, default)
+            }
+        }
+    }
+
+    private suspend fun checkTip(tip: Int, checked: Boolean = true) {
+        withContext(dispatcher) {
+            repo.setBoolean(tip.tipKey, checked)
+        }
     }
 
     companion object {
@@ -68,6 +92,7 @@ class TipManager @Inject constructor(
         const val TIP_TUTORIAL = 1
         const val TIP_WHITELIST = 2
         const val TIP_MISSED_TIMER = 3
+        const val TIP_ANDROID_12 = 4
 
         private const val PREF_OLD_INTRO = "pref_first_start_app_screen"
     }

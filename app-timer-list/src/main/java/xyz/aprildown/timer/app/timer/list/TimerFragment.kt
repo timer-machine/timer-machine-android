@@ -1,14 +1,17 @@
 package xyz.aprildown.timer.app.timer.list
 
+import android.Manifest
 import android.content.ComponentName
 import android.content.Context
+import android.content.Intent
 import android.content.ServiceConnection
 import android.graphics.Typeface
 import android.os.Bundle
 import android.os.IBinder
+import android.os.PowerManager
+import android.provider.Settings
 import android.text.Spanned
 import android.text.style.StyleSpan
-import android.view.LayoutInflater
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
@@ -17,6 +20,8 @@ import androidx.activity.result.ActivityResult
 import androidx.activity.result.ActivityResultCallback
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.edit
+import androidx.core.content.getSystemService
+import androidx.core.net.toUri
 import androidx.core.text.buildSpannedString
 import androidx.core.view.isVisible
 import androidx.core.view.updatePadding
@@ -33,6 +38,8 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.asExecutor
+import pub.devrel.easypermissions.EasyPermissions
+import pub.devrel.easypermissions.PermissionRequest
 import xyz.aprildown.timer.app.base.data.PreferenceData
 import xyz.aprildown.timer.app.base.data.PreferenceData.showGridTimerList
 import xyz.aprildown.timer.app.base.ui.AppNavigator
@@ -45,6 +52,7 @@ import xyz.aprildown.timer.app.base.utils.ScreenWakeLock
 import xyz.aprildown.timer.app.base.utils.ShortcutHelper
 import xyz.aprildown.timer.app.base.utils.getDisplayName
 import xyz.aprildown.timer.app.timer.list.databinding.FragmentTimerBinding
+import xyz.aprildown.timer.app.timer.list.databinding.ViewTipAndroid12Binding
 import xyz.aprildown.timer.app.timer.list.databinding.ViewTipMissedTimerBinding
 import xyz.aprildown.timer.app.timer.list.databinding.ViewTipWhitelistBinding
 import xyz.aprildown.timer.domain.entities.FolderEntity
@@ -520,7 +528,7 @@ class TimerFragment :
                 TipManager.TIP_WHITELIST -> {
                     binding.viewEmpty.gone()
                     ViewTipWhitelistBinding.inflate(
-                        LayoutInflater.from(context),
+                        layoutInflater,
                         binding.layoutTip,
                         true
                     ).also {
@@ -547,7 +555,7 @@ class TimerFragment :
                 TipManager.TIP_MISSED_TIMER -> {
                     binding.viewEmpty.gone()
                     ViewTipMissedTimerBinding.inflate(
-                        LayoutInflater.from(context),
+                        layoutInflater,
                         binding.layoutTip,
                         true
                     ).also {
@@ -560,6 +568,46 @@ class TimerFragment :
                             viewModel.consumeTip(tip)
                         }
                         it.btnDismiss.setOnClickListener {
+                            viewModel.consumeTip(tip)
+                        }
+                    }
+                }
+                TipManager.TIP_ANDROID_12 -> {
+                    ViewTipAndroid12Binding.inflate(
+                        layoutInflater,
+                        binding.layoutTip,
+                        true
+                    ).also {
+                        it.groupPhoneCalls.isVisible = !EasyPermissions.hasPermissions(
+                            context,
+                            Manifest.permission.READ_PHONE_STATE
+                        )
+                        it.btnPhoneCalls.setOnClickListener {
+                            EasyPermissions.requestPermissions(
+                                PermissionRequest.Builder(
+                                    this,
+                                    0,
+                                    Manifest.permission.READ_PHONE_STATE
+                                ).build()
+                            )
+                        }
+                        it.groupBattery.isVisible = context.getSystemService<PowerManager>()
+                            ?.isIgnoringBatteryOptimizations(context.packageName) != true
+                        it.btnBattery.setOnClickListener {
+                            context.startActivityOrNothing(
+                                Intent.createChooser(
+                                    @Suppress("BatteryLife")
+                                    Intent(Settings.ACTION_REQUEST_IGNORE_BATTERY_OPTIMIZATIONS)
+                                        .setData("package:${context.packageName}".toUri()),
+                                    null
+                                ),
+                                wrongMessageRes = RBase.string.no_action_found
+                            )
+                        }
+                        it.btnDismiss.setOnClickListener {
+                            viewModel.consumeTip(tip)
+                        }
+                        if (!it.groupPhoneCalls.isVisible && !it.groupBattery.isVisible) {
                             viewModel.consumeTip(tip)
                         }
                     }

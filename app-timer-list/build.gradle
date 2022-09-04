@@ -19,5 +19,6 @@ dependencies {
     implementation libs.calendar_view
     implementation libs.chart
     implementation libs.material_popup_menu
+    implementation libs.permission
 
 }

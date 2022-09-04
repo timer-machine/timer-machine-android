@@ -30,6 +30,7 @@
     <string name="deselect">取消選擇</string>
     <string name="share">分享</string>
     <string name="dismiss">關閉</string>
+    <string name="grant">授權</string>
 
     <!--App actions-->
     <string name="start">開始</string>
@@ -691,7 +692,10 @@
 
     <string name="intro_location">你可以在“幫助與反饋”中找到該使用教程。</string>
 
-    <string name="missed_timer_desp"><b>計時器被非正常地停止了！</b>\n\n這很有可能是系統殺掉了在後臺的應用。<b>為了解決該問題，請考慮將本應用在系統設定中白名單。</b></string>
+    <string name="tip_missed_timer"><b>計時器被非正常地停止了！</b>\n\n這很有可能是系統殺掉了在後臺的應用。<b>為了解決該問題，請考慮將本應用在系統設定中白名單。</b></string>
+
+    <string name="tip_android_12_phone_calls">當手機在通話時暫停計時器現需要\"獲取手機資訊\"的許可權</string>
+    <string name="tip_android_12_battery">Tasker支援現需要\"忽略電池最佳化\"的許可權</string>
 
     <!--Updates-->
     <string name="update_title">更新內容</string>

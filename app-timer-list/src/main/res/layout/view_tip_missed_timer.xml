@@ -19,7 +19,7 @@
             android:layout_marginTop="16dp"
             android:layout_marginEnd="16dp"
             android:layout_marginBottom="4dp"
-            android:text="@string/missed_timer_desp"
+            android:text="@string/tip_missed_timer"
             android:textAppearance="?textAppearanceBody2"
             app:layout_constraintBottom_toTopOf="@id/btnCheck"
             app:layout_constraintEnd_toEndOf="parent"
