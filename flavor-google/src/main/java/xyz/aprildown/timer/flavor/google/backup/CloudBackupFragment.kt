@@ -257,6 +257,8 @@ internal class CloudBackupFragment : PreferenceFragmentCompat() {
                     manualBackupDialog?.dismiss()
 
                     requireView().longSnackbar(RBase.string.cloud_backup_finished)
+
+                    viewModel.consumeManualCloudBackupResult()
                 }
                 is Fruit.Rotten -> {
                     manualBackupDialog?.dismiss()
@@ -269,6 +271,8 @@ internal class CloudBackupFragment : PreferenceFragmentCompat() {
                     if (autoCloudBackup.get()) {
                         CloudBackup.schedule(context, currentBackupState)
                     }
+
+                    viewModel.consumeManualCloudBackupResult()
                 }
                 else -> Unit
             }

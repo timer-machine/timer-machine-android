@@ -76,8 +76,8 @@ internal class CloudBackupViewModel @Inject constructor(
 
     private var manualCloudBackupJob: Job? = null
 
-    private val _manualCloudBackupResult: MutableLiveData<Fruit<Unit>> = MutableLiveData()
-    val manualCloudBackupResult: LiveData<Fruit<Unit>> = _manualCloudBackupResult
+    private val _manualCloudBackupResult: MutableLiveData<Fruit<Unit>?> = MutableLiveData()
+    val manualCloudBackupResult: LiveData<Fruit<Unit>?> = _manualCloudBackupResult
 
     fun manualCloudBackup() {
         manualCloudBackupJob?.cancel()
@@ -85,6 +85,10 @@ internal class CloudBackupViewModel @Inject constructor(
             _manualCloudBackupResult.value = cloudBackup.get().manualBackup()
             manualCloudBackupJob = null
         }
+    }
+
+    fun consumeManualCloudBackupResult() {
+        _manualCloudBackupResult.value = null
     }
 
     fun cancelCloudBackup() {
