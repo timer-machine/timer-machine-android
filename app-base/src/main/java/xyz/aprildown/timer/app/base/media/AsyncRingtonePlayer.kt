@@ -201,11 +201,6 @@ internal class AsyncRingtonePlayer(private val mContext: Context) {
          */
         @Throws(IOException::class)
         private fun startPlayback(inTelephoneCall: Boolean): Boolean {
-            // Do not play alarms if stream volume is 0 (typically because ringer mode is silent).
-            if (mAudioManager?.getStreamVolume(mStreamType) == 0) {
-                return false
-            }
-
             // Indicate the ringtone should be played via the alarm stream.
             val audioAttributes = AudioAttributes.Builder()
                 .setLegacyStreamType(mStreamType)
