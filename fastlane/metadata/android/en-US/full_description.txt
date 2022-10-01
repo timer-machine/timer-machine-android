@@ -1,0 +1,71 @@
+<b>TimeR Machine is a free interval timer for not just workout and exercise, but also any situations you need to construct personalized, multi-stage timer plans. It's highly customizable and able to create almost whatever kind of timer you need.</b>
+
+Suitable for all kinds of activities, including:
+
+* HIIT (High-Intensity Interval Training) workout
+* Tabata workout
+* Gym workout
+* Run, jog, walk exercise
+* Other sports workouts like cycling, running, stretching, boxing, MMA, circuit training, at-home bodyweight training workouts, cross fit, weightlifting, yoga...
+
+This app can serve as:
+
+* HIIT Timer
+* Tabata Timer
+* Gym Timer
+* Sport Timer
+* Round Timer
+* Productivity Timer
+* Continuous Timer
+* Repeating Timer
+* Custom Countdown Timer
+* Interval Traning App
+* ...
+
+Not just exercise, this app can help you:
+
+* Cultivate a habit
+* Complete daily routine
+* Finish game loop
+* Presentation
+* Study
+* ...
+
+<b>Customize Reminders</b>
+
+🎵 <b>Music feedback</b>. Play any sound on your device as a reminder and pause other sounds to remind you.
+💬 <b>Voice feedback</b> backed by Text-to-speech. Let your phone speak anything you want.
+📳 <b>Vibration feedback</b>. Pick different vibration pattern for different events.
+⭐ <b>Fullscreen notification</b>
+⌚ <b>Stopwatch</b> support for the indeterminate event
+🔊 <b>Beep</b> sound
+🚩 <b>Half-way reminder</b>
+⏱ <b>Countdown seconds</b>
+📌 <b>App notification</b>
+
+You can:
+
+🕛 Enjoy this <b>free app with no intrusive Ads</b>.
+🕧 Create <b>any number of timers for free</b>.
+🕐 Set timer names, loops, <b>warm-up, and cool-down reminders</b>.
+🕜 Add <b>groups as sub-timers</b>.
+🕑 Let timers <b>work in the background</b> and <b>show the current progress in a notification</b>.
+🕝 Start and <b>control many timers at the same time</b>.
+🕒 <b>View timers in a list</b> and <b>jump to another stage with a double tap</b>.
+🕞 Enter <b>Picture In Picture mode</b> and choose to show a <b>floating window</b>..
+🕓 Create <b>timer shortcuts</b> to start them in one click from the launcher.
+🕟 <b>Customize action buttons</b> that are shown on the timer screen.
+🕔 Show a <b>timing bar</b>!
+🕠 <b>Lock the screen</b> while a timer is running.
+🕕 <b>Plus or minus time</b> from current timer time.
+🕡 <b>Customize how much time to plus or minus</b>.
+🕖 Check <b>activities records and history</b>.
+🕢 <b>Schedule a timer</b> to be run at a specific time.
+🕗 Repeat a timer every week or every few days.
+🕣 <b>Back up your timers and settings</b>.
+🕘 Pick an app theme from <b>9 pre-defined themes + night mode</b> or <b>Use any color as your theme</b>.
+🕤 Automatically change to night mode.
+🕙 Choose to <b>play sound only in the headphones or globally</b>.
+🕥 <b>Pause timers on phone calls</b>.
+🕚 Enjoy nice <b>material design with animations</b>.
+🕦 <b>Support for Tasker, Automate, etc</b>.
