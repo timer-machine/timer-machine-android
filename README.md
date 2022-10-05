@@ -7,6 +7,8 @@ A highly customizable interval timer app for Android
 ![Showcase](images/showcase.jpg)
 
 <a href='https://play.google.com/store/apps/details?id=io.github.deweyreed.timer.google'><img alt='Get it on Google Play' src='https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png' height='100'/></a>
+<a href='https://apt.izzysoft.de/fdroid/index/apk/io.github.deweyreed.timer.other'><img alt='Get it on IzzyOnDroid' src='https://gitlab.com/IzzyOnDroid/repo/-/raw/master/assets/IzzyOnDroid.png' height='100'/></a>
+<a href='https://github.com/timer-machine/timer-machine-android/releases'>Get it on GitHub</a>
 
 ## Structure
 
