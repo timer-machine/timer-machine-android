@@ -19,7 +19,6 @@ import xyz.aprildown.timer.app.base.data.PreferenceData.useBakedCount
 import xyz.aprildown.tools.anko.longToast
 import xyz.aprildown.tools.helper.HandlerHelper
 import xyz.aprildown.tools.helper.safeSharedPreference
-import xyz.aprildown.tools.music.AudioFocusManager
 import java.io.File
 import xyz.aprildown.timer.app.base.R as RBase
 
@@ -150,6 +149,7 @@ object TtsSpeaker : AudioManager.OnAudioFocusChangeListener {
             }
         }
 
+        @Suppress("OVERRIDE_DEPRECATION")
         override fun onError(utteranceId: String?) {
             onError(utteranceId, TextToSpeech.ERROR)
         }
@@ -272,7 +272,9 @@ object TtsSpeaker : AudioManager.OnAudioFocusChangeListener {
         when (focusChange) {
             AudioManager.AUDIOFOCUS_LOSS,
             AudioManager.AUDIOFOCUS_LOSS_TRANSIENT,
-            AudioManager.AUDIOFOCUS_LOSS_TRANSIENT_CAN_DUCK -> tearDown()
+            AudioManager.AUDIOFOCUS_LOSS_TRANSIENT_CAN_DUCK -> {
+                tearDown()
+            }
         }
     }
 }

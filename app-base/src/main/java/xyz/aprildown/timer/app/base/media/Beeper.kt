@@ -5,7 +5,6 @@ import android.media.AudioManager
 import android.media.ToneGenerator
 import android.os.SystemClock
 import androidx.core.content.getSystemService
-import xyz.aprildown.tools.music.AudioFocusManager
 
 object Beeper : AudioManager.OnAudioFocusChangeListener {
 
@@ -68,7 +67,11 @@ object Beeper : AudioManager.OnAudioFocusChangeListener {
 
     override fun onAudioFocusChange(focusChange: Int) {
         when (focusChange) {
-            AudioManager.AUDIOFOCUS_LOSS, AudioManager.AUDIOFOCUS_LOSS_TRANSIENT_CAN_DUCK -> tearDown()
+            AudioManager.AUDIOFOCUS_LOSS,
+            AudioManager.AUDIOFOCUS_LOSS_TRANSIENT,
+            AudioManager.AUDIOFOCUS_LOSS_TRANSIENT_CAN_DUCK -> {
+                tearDown()
+            }
         }
     }
 

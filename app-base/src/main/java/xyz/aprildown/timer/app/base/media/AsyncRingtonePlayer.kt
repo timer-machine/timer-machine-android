@@ -36,7 +36,6 @@ import androidx.core.os.bundleOf
 import timber.log.Timber
 import xyz.aprildown.timer.app.base.R
 import xyz.aprildown.tools.helper.getResourceUri
-import xyz.aprildown.tools.music.AudioFocusManager
 import java.io.IOException
 import kotlin.math.pow
 
@@ -251,10 +250,20 @@ internal class AsyncRingtonePlayer(private val mContext: Context) {
 
         override fun onAudioFocusChange(focusChange: Int) {
             when (focusChange) {
-                AudioManager.AUDIOFOCUS_LOSS,
-                AudioManager.AUDIOFOCUS_LOSS_TRANSIENT,
-                AudioManager.AUDIOFOCUS_LOSS_TRANSIENT_CAN_DUCK ->
+                AudioManager.AUDIOFOCUS_LOSS -> {
                     this@AsyncRingtonePlayer.stop()
+                }
+                AudioManager.AUDIOFOCUS_LOSS_TRANSIENT,
+                AudioManager.AUDIOFOCUS_LOSS_TRANSIENT_CAN_DUCK -> {
+                    if (mMediaPlayer?.isPlaying == true) {
+                        mMediaPlayer?.pause()
+                    }
+                }
+                AudioManager.AUDIOFOCUS_GAIN -> {
+                    if (mMediaPlayer?.isPlaying == false) {
+                        mMediaPlayer?.start()
+                    }
+                }
             }
         }
 
