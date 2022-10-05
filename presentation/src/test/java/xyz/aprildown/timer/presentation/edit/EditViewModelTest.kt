@@ -52,7 +52,7 @@ class EditViewModelTest {
     private val saveNotifier: SaveNotifier = mock()
 
     private val snackMessageObserver: Observer<Event<Int>> = mock()
-    private val timerUpdatedObserver: Observer<Event<Unit>> = mock()
+    private val timerUpdatedObserver: Observer<Int> = mock()
     private val startEndLoaderObserver: Observer<Event<Pair<StepEntity?, StepEntity?>>> = mock()
     private val timerInfoObserver: Observer<Event<TimerInfo?>> = mock()
 
@@ -135,10 +135,10 @@ class EditViewModelTest {
         viewModel.more.value = new.more
         viewModel.saveTimer(new.steps, new.startStep, new.endStep)?.join()
         verify(addTimer).invoke(new.copy(id = TimerEntity.NEW_ID))
-        argumentCaptor<Event<Unit>> {
+        argumentCaptor<Int> {
             verify(timerUpdatedObserver).onChanged(capture())
             assertEquals(1, allValues.size)
-            assertEquals(Unit, firstValue.peekContent())
+            assertEquals(EditViewModel.UPDATE_CREATE, firstValue)
         }
 
         verifyNoMoreInteractionsForAll()
@@ -171,10 +171,10 @@ class EditViewModelTest {
         viewModel.more.value = new.more
         viewModel.saveTimer(new.steps, new.startStep, new.endStep)?.join()
         verify(saveTimer).invoke(new)
-        argumentCaptor<Event<Unit>> {
+        argumentCaptor<Int> {
             verify(timerUpdatedObserver).onChanged(capture())
             assertEquals(1, allValues.size)
-            assertEquals(Unit, firstValue.peekContent())
+            assertEquals(EditViewModel.UPDATE_UPDATE, firstValue)
         }
 
         verifyNoMoreInteractionsForAll()
@@ -206,10 +206,10 @@ class EditViewModelTest {
         viewModel.deleteTimer().join()
 
         verify(deleteTimer).invoke(timer.id)
-        argumentCaptor<Event<Unit>> {
+        argumentCaptor<Int> {
             verify(timerUpdatedObserver).onChanged(capture())
             assertEquals(1, allValues.size)
-            assertEquals(Unit, firstValue.peekContent())
+            assertEquals(EditViewModel.UPDATE_DELETE, firstValue)
         }
 
         verifyNoMoreInteractionsForAll()

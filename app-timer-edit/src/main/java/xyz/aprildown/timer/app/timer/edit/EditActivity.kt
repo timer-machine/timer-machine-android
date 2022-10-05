@@ -178,7 +178,6 @@ class EditActivity :
                                 }
                             )
                             .setPositiveButton(RBase.string.delete) { _, _ ->
-                                ShortcutHelper.disableTimerShortcut(this@EditActivity, viewModel.id)
                                 viewModel.deleteTimer()
                             }
                             .setNegativeButton(RBase.string.cancel, null)
@@ -520,7 +519,20 @@ class EditActivity :
     }
 
     private fun subscribeToChanges() {
-        viewModel.updatedEvent.observeEvent(this) {
+        viewModel.updatedEvent.observe(this) { update ->
+            when (update) {
+                EditViewModel.UPDATE_UPDATE -> {
+                    ShortcutHelper.updateTimerShortcutName(
+                        context = this,
+                        timerId = viewModel.id,
+                        oldTimerName = viewModel.oldTimer?.name ?: "",
+                        newTimerName = viewModel.name.value ?: ""
+                    )
+                }
+                EditViewModel.UPDATE_DELETE -> {
+                    ShortcutHelper.disableTimerShortcut(this, viewModel.id)
+                }
+            }
             setResult(RESULT_OK)
             finishEditTimerActivity()
         }

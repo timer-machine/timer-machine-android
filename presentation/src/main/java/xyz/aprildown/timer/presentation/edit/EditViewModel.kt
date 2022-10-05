@@ -78,8 +78,8 @@ class EditViewModel @Inject constructor(
     private val _message = MutableLiveData<Event<Int>>()
     val message: LiveData<Event<Int>> = _message
 
-    private val _updatedEvent = MutableLiveData<Event<Unit>>()
-    val updatedEvent: LiveData<Event<Unit>> = _updatedEvent
+    private val _updatedEvent = MutableLiveData<Int>()
+    val updatedEvent: LiveData<Int> = _updatedEvent
 
     private val _timerInfoEvent = MutableLiveData<Event<TimerInfo>>()
     val timerInfoEvent: LiveData<Event<TimerInfo>> = _timerInfoEvent
@@ -88,6 +88,8 @@ class EditViewModel @Inject constructor(
         private set
     private var folderId: Long = FolderEntity.FOLDER_DEFAULT
     var isNewTimer = true
+        private set
+    var oldTimer: TimerEntity? = null
         private set
 
     private val _shareStringEvent = MutableLiveData<Event<Fruit<String>>>()
@@ -102,6 +104,7 @@ class EditViewModel @Inject constructor(
     fun loadTimerData(): Job? = when {
         !isNewTimer -> launch {
             val savedTimer = getTimer(id)
+            oldTimer = savedTimer
             if (savedTimer != null) {
                 timerHash = savedTimer.hashCode()
                 name.value = savedTimer.name
@@ -157,6 +160,7 @@ class EditViewModel @Inject constructor(
                         folderId = folderId
                     )
                 )
+                _updatedEvent.value = UPDATE_CREATE
             } else {
                 saveTimer(
                     TimerEntity(
@@ -170,8 +174,8 @@ class EditViewModel @Inject constructor(
                         folderId = folderId
                     )
                 )
+                _updatedEvent.value = UPDATE_UPDATE
             }
-            notifyToFinishActivity()
         }
     }
 
@@ -197,7 +201,7 @@ class EditViewModel @Inject constructor(
 
     fun deleteTimer() = launch {
         deleteTimer.get().invoke(id)
-        notifyToFinishActivity()
+        _updatedEvent.value = UPDATE_DELETE
     }
 
     fun isTimerRemainingSame(
@@ -229,10 +233,6 @@ class EditViewModel @Inject constructor(
         if (isNotifierChanged) {
             saveNotifier(notifier)
         }
-    }
-
-    private fun notifyToFinishActivity() {
-        _updatedEvent.value = Event(Unit)
     }
 
     fun generateTimerString(
@@ -277,5 +277,9 @@ class EditViewModel @Inject constructor(
 
     companion object {
         const val defaultLoop = 3
+
+        const val UPDATE_CREATE = 0
+        const val UPDATE_UPDATE = 1
+        const val UPDATE_DELETE = 2
     }
 }

@@ -24,13 +24,12 @@ object ShortcutHelper {
             try {
                 ShortcutManagerCompat.requestPinShortcut(
                     context,
-                    ShortcutInfoCompat.Builder(context, timerId.toString())
-                        .setShortLabel(shortcutName)
-                        .setLongLabel(shortcutName)
-                        .setDisabledMessage(context.getString(R.string.shortcut_disabled))
-                        .setIntent(intent)
-                        .setIcon(IconCompat.createWithResource(context, R.drawable.shortcut_timer))
-                        .build(),
+                    createTimerShortcutInfo(
+                        context = context,
+                        id = timerId.toString(),
+                        label = shortcutName,
+                        intent = intent,
+                    ),
                     context.pendingActivityIntent(shortcutCreatedIntent, timerId).intentSender
                 )
             } catch (_: IllegalArgumentException) {
@@ -40,6 +39,48 @@ object ShortcutHelper {
         } else {
             context.longToast(R.string.shortcut_not_support)
         }
+    }
+
+    fun updateTimerShortcutName(
+        context: Context,
+        timerId: Int,
+        oldTimerName: String,
+        newTimerName: String,
+    ) {
+        if (oldTimerName.isEmpty() || newTimerName.isEmpty()) return
+
+        ShortcutManagerCompat.getShortcuts(context, ShortcutManagerCompat.FLAG_MATCH_PINNED)
+            .filter { it.id == timerId.toString() }
+            .takeIf { it.isNotEmpty() }
+            ?.let { targets ->
+                ShortcutManagerCompat.updateShortcuts(
+                    context,
+                    targets.map { shortcutInfo ->
+                        createTimerShortcutInfo(
+                            context = context,
+                            id = shortcutInfo.id,
+                            label = shortcutInfo.shortLabel.toString()
+                                .replaceFirst(oldTimerName, newTimerName),
+                            intent = shortcutInfo.intent,
+                        )
+                    }
+                )
+            }
+    }
+
+    private fun createTimerShortcutInfo(
+        context: Context,
+        id: String,
+        label: String,
+        intent: Intent,
+    ): ShortcutInfoCompat {
+        return ShortcutInfoCompat.Builder(context, id)
+            .setShortLabel(label)
+            .setLongLabel(label)
+            .setDisabledMessage(context.getString(R.string.shortcut_disabled))
+            .setIntent(intent)
+            .setIcon(IconCompat.createWithResource(context, R.drawable.shortcut_timer))
+            .build()
     }
 
     fun disableTimerShortcut(context: Context, id: Int): Unit = with(context) {
