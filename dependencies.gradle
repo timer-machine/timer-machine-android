@@ -113,7 +113,7 @@ ext {
             appcenter_crashes             : 'com.microsoft.appcenter:appcenter-crashes:4.4.5',
 
             // Other Utils
-            android_job                   : 'xyz.aprildown:android-job:bfcf66eb01',
+            android_job                   : 'com.github.DeweyReed:android-job:a04c817792',
             okio                          : 'com.squareup.okio:okio:3.2.0',
             permission                    : 'pub.devrel:easypermissions:3.0.0',
 
