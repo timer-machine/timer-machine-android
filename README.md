@@ -29,8 +29,8 @@ The `google` product flavor is the version in Google Play. It has some in-app pu
 uses Firebase to store backup files and AppCenter to track crashes.
 
 - Firebase: Create a Firebase project and add `google-services.json` to the project.
-  - [This optional Firebase Cloud Function](functions/index.js) removes old backup files when there
-    are too many.
+    - [This optional Firebase Cloud Function](functions/index.js) removes old backup files when
+      there are too many.
 - AppCenter: Create an AppCenter project and put the app secret to your `local.properties`(
   Format: `APP_CENTER_APP_SECRET=your-app-secret`).
 
