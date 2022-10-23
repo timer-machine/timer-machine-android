@@ -99,19 +99,29 @@ internal class TimerMachine(
             timer.loop,
             currentIndex
         )
+
+        val (_, nextStepAfterNext) = getNextIndexWithStep(
+            timer.steps,
+            timer.loop,
+            nextIndex
+        )
+
         currentIndex = nextIndex
-        return timer.getStep(nextIndex)?.toTask()
+        return timer.getStep(nextIndex)?.toTask(
+            useTtsNextStep = nextStepAfterNext?.behaviour?.any { it.useTts() } == true
+        )
     }
 
-    private fun StepEntity.Step.toTask(): Task {
+    private fun StepEntity.Step.toTask(useTtsNextStep: Boolean = false): Task {
         val behaviour = behaviour
         return if (behaviour.find { it.type == BehaviourType.HALT } != null) {
             StopwatchTask(this@TimerMachine).apply {
                 behaviour.forEach {
                     when (it.type) {
-                        BehaviourType.BEEP -> addTickListener(BeepTickListener())
-                        else -> {
+                        BehaviourType.BEEP -> {
+                            addTickListener(BeepTickListener(beep = listener::beep))
                         }
+                        else -> Unit
                     }
                 }
             }
@@ -120,30 +130,47 @@ internal class TimerMachine(
                 this@TimerMachine,
                 length
             ).apply {
-                behaviour.forEach {
-                    when (it.type) {
-                        BehaviourType.BEEP -> addTickListener(BeepTickListener())
-                        BehaviourType.HALF ->
-                            addTickListener(HalfTickListener(length, it.toHalfAction().option))
-                        BehaviourType.COUNT ->
-                            addTickListener(CountTickListener(it.toCountAction().times))
-                        else -> {
+                behaviour.forEach { behaviour ->
+                    when (behaviour.type) {
+                        BehaviourType.BEEP -> {
+                            addTickListener(BeepTickListener(beep = listener::beep))
                         }
+                        BehaviourType.HALF -> {
+                            addTickListener(
+                                HalfTickListener(
+                                    total = length,
+                                    half = { listener.notifyHalf(behaviour.toHalfAction().option) },
+                                )
+                            )
+                        }
+                        BehaviourType.COUNT -> {
+                            addTickListener(
+                                CountTickListener(
+                                    times = behaviour.toCountAction().times,
+                                    count = listener::countRead,
+                                )
+                            )
+                        }
+                        else -> Unit
                     }
+                }
+
+                if (useTtsNextStep) {
+                    addTickListener(WarmUpTtsListener(warmUp = { listener.countRead("") }))
                 }
             }
         }
     }
 
-    private inner class BeepTickListener : TickListener {
+    private class BeepTickListener(private val beep: () -> Unit) : TickListener {
         override fun onNewTime(newTime: Long) {
-            listener.beep()
+            beep()
         }
     }
 
-    private inner class HalfTickListener(
+    private class HalfTickListener(
         total: Long,
-        private val halfOption: Int
+        private val half: () -> Unit,
     ) : TickListener {
 
         /**
@@ -156,13 +183,14 @@ internal class TimerMachine(
         override fun onNewTime(newTime: Long) {
             if (!isNotified && newTime < notifyTime) {
                 isNotified = true
-                listener.notifyHalf(halfOption)
+                half()
             }
         }
     }
 
-    private inner class CountTickListener(
-        private var times: Int
+    private class CountTickListener(
+        private var times: Int,
+        private val count: (String) -> Unit,
     ) : TickListener {
 
         private val warmUpTime = times + 1
@@ -172,11 +200,25 @@ internal class TimerMachine(
             val remainingSeconds = newTime / 1000
             if (!isWarmedUp && remainingSeconds <= warmUpTime) {
                 isWarmedUp = true
-                listener.countRead("")
+                count("")
             }
             if (remainingSeconds <= times && times > 0) {
                 times--
-                listener.countRead(remainingSeconds.toInt().toString())
+                count(remainingSeconds.toInt().toString())
+            }
+        }
+    }
+
+    private class WarmUpTtsListener(private val warmUp: () -> Unit) : TickListener {
+
+        private var isWarmedUp = false
+
+        override fun onNewTime(newTime: Long) {
+            if (isWarmedUp) return
+            val remainingSeconds = newTime / 1000
+            if (remainingSeconds <= 10) {
+                warmUp()
+                isWarmedUp = true
             }
         }
     }

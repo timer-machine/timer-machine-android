@@ -2,9 +2,13 @@ package xyz.aprildown.timer.presentation.stream
 
 import android.text.SpannableString
 import android.text.SpannableStringBuilder
+import xyz.aprildown.timer.domain.entities.BehaviourEntity
+import xyz.aprildown.timer.domain.entities.BehaviourType
+import xyz.aprildown.timer.domain.entities.HalfAction
 import xyz.aprildown.timer.domain.entities.StepEntity
 import xyz.aprildown.timer.domain.entities.TimerEntity
 import xyz.aprildown.timer.domain.entities.VoiceAction
+import xyz.aprildown.timer.domain.entities.toHalfAction
 import xyz.aprildown.timer.domain.utils.AppTracker
 
 /**
@@ -870,4 +874,16 @@ private fun generateVoiceContent(
     }
 
     return SpannableString(builder)
+}
+
+fun BehaviourEntity.useTts(): Boolean {
+    when (type) {
+        BehaviourType.VOICE,
+        BehaviourType.COUNT -> return true
+        BehaviourType.HALF -> if (toHalfAction().option == HalfAction.OPTION_VOICE) {
+            return true
+        }
+        else -> Unit
+    }
+    return false
 }

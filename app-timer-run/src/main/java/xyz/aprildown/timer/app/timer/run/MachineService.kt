@@ -28,7 +28,7 @@ import xyz.aprildown.timer.app.base.data.PreferenceData.storedAudioTypeValue
 import xyz.aprildown.timer.app.base.media.Beeper
 import xyz.aprildown.timer.app.base.media.RingtonePreviewKlaxon
 import xyz.aprildown.timer.app.base.media.Torch
-import xyz.aprildown.timer.app.base.media.TtsSpeaker
+import xyz.aprildown.timer.app.base.media.TtsSpeaker2
 import xyz.aprildown.timer.app.base.media.VibrateHelper
 import xyz.aprildown.timer.app.base.ui.AppNavigator
 import xyz.aprildown.timer.app.base.utils.ScreenWakeLock
@@ -381,19 +381,11 @@ class MachineService :
         sayMore: Boolean,
         afterDone: (() -> Unit)?
     ) {
-        TtsSpeaker.speak(
-            this,
-            content ?: getString(contentRes),
-            sayMore = sayMore,
-            callback = object : TtsSpeaker.Callback() {
-                override fun onDone() {
-                    afterDone?.invoke()
-                }
-
-                override fun onError() {
-                    afterDone?.invoke()
-                }
-            }
+        TtsSpeaker2.speak(
+            context = this,
+            text = content ?: getString(contentRes),
+            oneShot = !sayMore,
+            onDone = afterDone,
         )
     }
 
@@ -434,7 +426,7 @@ class MachineService :
     }
 
     override fun stopReading() {
-        TtsSpeaker.tearDown()
+        TtsSpeaker2.stopCurrentSpeaking()
     }
 
     override fun enableTone(tone: Int, count: Int, respectOtherSound: Boolean) {
