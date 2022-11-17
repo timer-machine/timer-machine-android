@@ -166,6 +166,7 @@ object TtsSpeaker2 : WelcomingTextToSpeech.Listener, AudioManager.OnAudioFocusCh
     }
 
     private fun scheduleClean() {
+        if (textToSpeech == null && onDone == null && audioManager == null) return
         cancelScheduledClean()
         cleanHandler.postDelayed(DateUtils.MINUTE_IN_MILLIS) {
             clean()
@@ -173,6 +174,8 @@ object TtsSpeaker2 : WelcomingTextToSpeech.Listener, AudioManager.OnAudioFocusCh
     }
 
     fun clean() {
+        cancelScheduledClean()
+
         textToSpeech?.run {
             stop()
             shutdown()
@@ -188,6 +191,7 @@ object TtsSpeaker2 : WelcomingTextToSpeech.Listener, AudioManager.OnAudioFocusCh
     }
 
     private fun cancelScheduledClean() {
+        if (nullableCleanHandler == null) return
         cleanHandler.removeCallbacksAndMessages(null)
     }
 }

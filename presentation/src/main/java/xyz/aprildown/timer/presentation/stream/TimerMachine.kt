@@ -89,7 +89,15 @@ internal class TimerMachine(
     }
 
     override fun provideFirstTask(): Task? {
-        return timer.getStep(timer.getFirstIndex())?.toTask()
+        val firstIndex = timer.getFirstIndex()
+        val (_, nextStepAfterNext) = getNextIndexWithStep(
+            timer.steps,
+            timer.loop,
+            firstIndex
+        )
+        return timer.getStep(firstIndex)?.toTask(
+            useTtsNextStep = nextStepAfterNext?.behaviour?.any { it.useTts() } == true
+        )
     }
 
     override fun provideNextTask(): Task? {
@@ -216,7 +224,7 @@ internal class TimerMachine(
         override fun onNewTime(newTime: Long) {
             if (isWarmedUp) return
             val remainingSeconds = newTime / 1000
-            if (remainingSeconds <= 10) {
+            if (remainingSeconds <= 20) {
                 warmUp()
                 isWarmedUp = true
             }
