@@ -16,7 +16,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import io.github.deweyreed.timer.R
 import io.github.deweyreed.timer.databinding.DialogTtsTestBinding
 import xyz.aprildown.timer.app.base.data.FlavorData
-import xyz.aprildown.timer.app.base.media.TtsSpeaker2
+import xyz.aprildown.timer.app.base.media.TtsSpeaker
 import xyz.aprildown.timer.app.base.ui.AppNavigator
 import xyz.aprildown.timer.app.base.utils.NavigationUtils.subLevelNavigate
 import xyz.aprildown.timer.app.base.utils.openWebsiteWithWarning
@@ -91,7 +91,7 @@ class HelpFragment : PreferenceFragmentCompat() {
             val context = requireContext()
 
             binding.btnClickInstruction.setOnClickListener {
-                TtsSpeaker2.speak(
+                TtsSpeaker.speak(
                     context = context,
                     text = context.getString(RBase.string.help_tts_test_read_content),
                     oneShot = true,
@@ -127,12 +127,12 @@ class HelpFragment : PreferenceFragmentCompat() {
 
         override fun onResume() {
             super.onResume()
-            TtsSpeaker2.clean()
+            TtsSpeaker.clean()
         }
 
         override fun onDismiss(dialog: DialogInterface) {
             super.onDismiss(dialog)
-            TtsSpeaker2.clean()
+            TtsSpeaker.clean()
         }
     }
 }

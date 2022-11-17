@@ -1,17 +1,19 @@
 package xyz.aprildown.timer.app.base.media
 
-import android.annotation.SuppressLint
+import android.app.Application
 import android.content.Context
 import android.media.AudioManager
+import android.net.Uri
 import android.os.Handler
 import android.os.Looper
 import android.speech.tts.TextToSpeech
 import android.speech.tts.UtteranceProgressListener
+import android.text.format.DateUtils
 import androidx.core.content.getSystemService
 import androidx.core.net.toUri
 import androidx.core.os.bundleOf
 import androidx.core.os.postDelayed
-import timber.log.Timber
+import xyz.aprildown.timer.app.base.R
 import xyz.aprildown.timer.app.base.data.PreferenceData
 import xyz.aprildown.timer.app.base.data.PreferenceData.storedAudioFocusType
 import xyz.aprildown.timer.app.base.data.PreferenceData.storedAudioTypeValue
@@ -20,219 +22,113 @@ import xyz.aprildown.tools.anko.longToast
 import xyz.aprildown.tools.helper.HandlerHelper
 import xyz.aprildown.tools.helper.safeSharedPreference
 import java.io.File
-import xyz.aprildown.timer.app.base.R as RBase
 
-/**
- * It handles states itself.
- */
-object TtsSpeaker : AudioManager.OnAudioFocusChangeListener {
+object TtsSpeaker : WelcomingTextToSpeech.Listener, AudioManager.OnAudioFocusChangeListener {
 
-    abstract class Callback {
-        open fun onDone() = Unit
-        open fun onError() = Unit
+    private var application: Application? = null
+
+    private var textToSpeech: WelcomingTextToSpeech? = null
+
+    private var oneShot = false
+    private var onDone: (() -> Unit)? = null
+
+    private var audioManager: AudioManager? = null
+
+    private var nullableCleanHandler: Handler? = null
+    private val cleanHandler: Handler
+        get() {
+            var nch = nullableCleanHandler
+            if (nch == null) {
+                nch = Handler(Looper.getMainLooper())
+                nullableCleanHandler = nch
+            }
+            return nch
+        }
+
+    private fun warmUp(context: Context) {
+        var application = application
+        if (application == null) {
+            application = context.applicationContext as Application
+            this.application = application
+        }
+
+        cancelScheduledClean()
+
+        var tts = textToSpeech
+        if (tts == null) {
+            tts = WelcomingTextToSpeech(application = application, listener = this)
+            textToSpeech = tts
+        }
     }
-
-    private var tts: TextToSpeech? = null
-
-    // We handle it carefully.
-    @SuppressLint("StaticFieldLeak")
-    private var ttsListener: ProgressListener? = null
-    private var shutDownTtsHandler: Handler? = null
-    private var am: AudioManager? = null
 
     fun speak(
         context: Context,
-        content: CharSequence,
-        sayMore: Boolean = false,
-        callback: Callback? = null
+        text: CharSequence,
+        oneShot: Boolean,
+        onDone: (() -> Unit)? = null
     ) {
-        Timber.tag("TTS_SPEAK").i("\"$content\"")
-        val appContext = context.applicationContext
+        warmUp(context)
 
-        if (tryBakedCount(context, content)) return
+        this.oneShot = oneShot
+        this.onDone = onDone
 
-        val streamType = appContext.storedAudioTypeValue
-        // We don't need to shut down now.
-        shutDownTtsHandler?.removeCallbacksAndMessages(null)
-        if (tts == null) {
-            tts = TextToSpeech(appContext) { status ->
-                if (status == TextToSpeech.SUCCESS) {
-                    beginSpeaking(content, streamType)
-                } else {
-                    stopSpeaking()
-                    shutDownTts(immediate = true)
-                    abandonAudioFocus(immediate = true)
-
-                    HandlerHelper.runOnUiThread {
-                        context.longToast(
-                            context.getString(RBase.string.tts_error_template, status.toString())
-                        )
-                        callback?.onError()
-                    }
-                }
-            }.apply {
-                ttsListener = ProgressListener(
-                    context = appContext,
-                    audioFocusType = appContext.storedAudioFocusType,
-                    streamType = streamType,
-                    sayMore = sayMore,
-                    callback = callback
-                )
-                setOnUtteranceProgressListener(ttsListener)
-            }
-        } else {
-            val listener = ttsListener
-            // Its lifecycle should be same as tts.
-            requireNotNull(listener)
-            listener.sayMore = sayMore
-            listener.streamType = streamType
-            listener.callback = callback
-            beginSpeaking(content, streamType)
-        }
+        checkNotNull(textToSpeech).speak(text, checkNotNull(application).storedAudioTypeValue)
     }
 
-    /**
-     * @return If the [content] is consumed by the baked count.
-     */
-    private fun tryBakedCount(context: Context, content: CharSequence): Boolean {
-        if (content.length > 2) return false
-        if ((content.toString().toIntOrNull() ?: -1) !in 0..20) return false
-        if (!context.safeSharedPreference.useBakedCount) return false
+    fun stopCurrentSpeaking() {
+        textToSpeech?.stop()
 
-        val folder = File(context.filesDir, PreferenceData.BAKED_COUNT_NAME)
-        val file = File(folder, "$content.mp3")
-        if (!file.exists()) return false
+        oneShot = false
+        onDone = null
 
-        val audioFocusType = context.storedAudioFocusType
-        val streamType = context.storedAudioTypeValue
+        abandonAudioFocus()
 
-        requestAudioFocus(context, audioFocusType, streamType)
+        scheduleClean()
+    }
 
-        RingtonePreviewKlaxon.start(
+    override fun onError(errorCode: Int) {
+        application?.run {
+            longToast(getString(R.string.tts_error_template, errorCode.toString()))
+        }
+        onDone?.invoke()
+
+        textToSpeech?.run {
+            stop()
+            textToSpeech = null
+        }
+        oneShot = false
+        onDone = null
+        application = null
+
+        abandonAudioFocus()
+    }
+
+    override fun onStart() {
+        if (audioManager != null) return
+        val context = application ?: return
+        requestAudioFocus(
             context = context,
-            uri = file.toUri(),
-            crescendoDuration = 0L,
-            loop = false,
-            audioFocusType = 0, // AudioManager.AUDIOFOCUS_NONE
-            streamType = streamType
-        )
-
-        return true
-    }
-
-    private class ProgressListener(
-        val context: Context,
-        val audioFocusType: Int,
-        var streamType: Int,
-        var sayMore: Boolean,
-        var callback: Callback?
-    ) : UtteranceProgressListener() {
-
-        override fun onStart(utteranceId: String?) {
-            HandlerHelper.runOnUiThread {
-                requestAudioFocus(
-                    context = context,
-                    audioFocusType = audioFocusType,
-                    streamType = streamType
-                )
-            }
-        }
-
-        override fun onDone(utteranceId: String?) {
-            HandlerHelper.runOnUiThread {
-                if (!sayMore) {
-                    stopSpeaking()
-                    shutDownTts(immediate = false)
-                    abandonAudioFocus(immediate = false)
-                }
-                callback?.onDone()
-            }
-        }
-
-        @Suppress("OVERRIDE_DEPRECATION")
-        override fun onError(utteranceId: String?) {
-            onError(utteranceId, TextToSpeech.ERROR)
-        }
-
-        override fun onError(utteranceId: String?, errorCode: Int) {
-            HandlerHelper.runOnUiThread {
-                stopSpeaking()
-                shutDownTts(immediate = true)
-                abandonAudioFocus(immediate = true)
-                context.longToast(
-                    context.getString(RBase.string.tts_error_template, errorCode.toString())
-                )
-                callback?.onError()
-            }
-        }
-    }
-
-    private fun beginSpeaking(
-        content: CharSequence,
-        streamType: Int = AudioManager.STREAM_MUSIC
-    ) {
-        val textToSpeech = tts
-        requireNotNull(textToSpeech)
-
-        if (content.isBlank()) return
-
-        if (textToSpeech.isSpeaking) {
-            textToSpeech.stop()
-        }
-
-        textToSpeech.speak(
-            content,
-            TextToSpeech.QUEUE_FLUSH,
-            bundleOf(
-                TextToSpeech.Engine.KEY_PARAM_STREAM to streamType
-            ),
-            content.hashCode().toString()
+            audioFocusType = context.storedAudioFocusType,
+            streamType = context.storedAudioTypeValue,
         )
     }
 
     /**
-     * Stop and clean [TtsSpeaker].
-     * This method might be called many times. So it batches all calls by default.
-     * @param force true if you wish to force shutdown and abandon all batches.
+     * When we use baked count, only [onStart] is called to request the audio focus.
+     * onDone isn't called, but it's okay because
+     * 1. It's not [oneShot]. 2. It has no [onDone] action. 3. We call [scheduleClean] eventually.
      */
-    fun tearDown(force: Boolean = false) {
-        stopSpeaking()
-        shutDownTts(immediate = force)
-        abandonAudioFocus(immediate = force)
-    }
+    override fun onDone() {
+        if (oneShot) {
+            oneShot = false
 
-    private fun stopSpeaking() {
-        tts?.stop()
-    }
-
-    private fun shutDownTts(immediate: Boolean = false) {
-        // If tts is null, don't even think about it.
-        if (tts == null) return
-
-        fun run() {
-            tts?.run {
-                shutdown()
-                tts = null
-                ttsListener = null
-                shutDownTtsHandler?.removeCallbacksAndMessages(null)
-                shutDownTtsHandler = null
-            }
+            abandonAudioFocus()
         }
 
-        if (immediate) {
-            run()
-        } else {
-            // Later message has higher priority.
-            shutDownTtsHandler?.removeCallbacksAndMessages(null)
-            var handler = shutDownTtsHandler
-            if (handler == null) {
-                handler = Handler(Looper.getMainLooper())
-                shutDownTtsHandler = handler
-            }
-            handler.postDelayed(5_000L) {
-                run()
-            }
-        }
+        onDone?.invoke()
+        onDone = null
+
+        scheduleClean()
     }
 
     private fun requestAudioFocus(
@@ -240,32 +136,23 @@ object TtsSpeaker : AudioManager.OnAudioFocusChangeListener {
         audioFocusType: Int,
         streamType: Int
     ) {
-        (am ?: context.getSystemService<AudioManager>()?.also { am = it })?.let {
-            AudioFocusManager.requestAudioFocus(
-                audioManager = it,
-                focusGain = audioFocusType,
-                streamType = streamType,
-                listener = this
-            )
+        var am = audioManager
+        if (am == null) {
+            am = context.getSystemService() ?: return
+            audioManager = am
         }
+        AudioFocusManager.requestAudioFocus(
+            audioManager = am,
+            focusGain = audioFocusType,
+            streamType = streamType,
+            listener = this,
+        )
     }
 
-    private fun abandonAudioFocus(immediate: Boolean = false) {
-        am?.let {
-
-            fun run() {
-                AudioFocusManager.abandonAudioFocus(it, this@TtsSpeaker)
-                am = null
-            }
-
-            if (immediate) {
-                run()
-            } else {
-                HandlerHelper.postDelayed(512) {
-                    run()
-                }
-            }
-        }
+    private fun abandonAudioFocus() {
+        val am = audioManager ?: return
+        AudioFocusManager.abandonAudioFocus(audioManager = am, listener = this)
+        audioManager = null
     }
 
     override fun onAudioFocusChange(focusChange: Int) {
@@ -273,8 +160,165 @@ object TtsSpeaker : AudioManager.OnAudioFocusChangeListener {
             AudioManager.AUDIOFOCUS_LOSS,
             AudioManager.AUDIOFOCUS_LOSS_TRANSIENT,
             AudioManager.AUDIOFOCUS_LOSS_TRANSIENT_CAN_DUCK -> {
-                tearDown()
+                textToSpeech?.stop()
             }
         }
     }
+
+    private fun scheduleClean() {
+        if (textToSpeech == null && onDone == null && audioManager == null) return
+        cancelScheduledClean()
+        cleanHandler.postDelayed(DateUtils.MINUTE_IN_MILLIS) {
+            clean()
+        }
+    }
+
+    fun clean() {
+        cancelScheduledClean()
+
+        textToSpeech?.run {
+            stop()
+            shutdown()
+            textToSpeech = null
+        }
+        oneShot = false
+        onDone = null
+        application = null
+
+        abandonAudioFocus()
+
+        nullableCleanHandler = null
+    }
+
+    private fun cancelScheduledClean() {
+        if (nullableCleanHandler == null) return
+        cleanHandler.removeCallbacksAndMessages(null)
+    }
+}
+
+private class WelcomingTextToSpeech(
+    private val application: Application,
+    private val listener: Listener,
+) : TextToSpeech.OnInitListener {
+
+    interface Listener {
+        fun onError(errorCode: Int)
+        fun onStart()
+        fun onDone()
+    }
+
+    private val textToSpeech = TextToSpeech(application, this).also { tts ->
+        tts.setOnUtteranceProgressListener(
+            object : UtteranceProgressListener() {
+                override fun onStart(utteranceId: String?) {
+                    HandlerHelper.runOnUiThread {
+                        listener.onStart()
+                    }
+                }
+
+                override fun onDone(utteranceId: String?) {
+                    HandlerHelper.runOnUiThread {
+                        listener.onDone()
+                    }
+                }
+
+                @Suppress("OVERRIDE_DEPRECATION")
+                override fun onError(utteranceId: String?) {
+                    onErrorCompat(TextToSpeech.ERROR)
+                }
+
+                override fun onError(utteranceId: String?, errorCode: Int) {
+                    onErrorCompat(errorCode)
+                }
+
+                private fun onErrorCompat(errorCode: Int) {
+                    HandlerHelper.runOnUiThread {
+                        listener.onError(errorCode)
+                    }
+                }
+            }
+        )
+    }
+
+    private var initialized = false
+    private var pendingText: CharSequence? = null
+
+    override fun onInit(status: Int) {
+        if (status != TextToSpeech.SUCCESS) {
+            stop()
+            HandlerHelper.runOnUiThread {
+                listener.onError(status)
+            }
+            return
+        }
+        initialized = true
+
+        val currentPendingText = pendingText
+        if (currentPendingText != null) {
+            speak(currentPendingText)
+        }
+    }
+
+    fun speak(text: CharSequence, streamType: Int = AudioManager.STREAM_MUSIC) {
+        if (text.isBlank()) return
+
+        val bakedCountUri = getBakedCountUri(context = application, content = text)
+        if (bakedCountUri != null) {
+            if (initialized) {
+                if (textToSpeech.isSpeaking) {
+                    textToSpeech.stop()
+                }
+            }
+
+            RingtonePreviewKlaxon.start(
+                context = application,
+                uri = bakedCountUri,
+                crescendoDuration = 0L,
+                loop = false,
+                audioFocusType = 0, // AudioManager.AUDIOFOCUS_NONE
+                streamType = streamType
+            )
+
+            listener.onStart()
+            return
+        }
+
+        if (!initialized) {
+            pendingText = text
+            return
+        }
+
+        if (textToSpeech.isSpeaking) {
+            textToSpeech.stop()
+        }
+
+        textToSpeech.speak(
+            text,
+            TextToSpeech.QUEUE_FLUSH,
+            bundleOf(
+                TextToSpeech.Engine.KEY_PARAM_STREAM to streamType
+            ),
+            text.hashCode().toString()
+        )
+    }
+
+    fun stop() {
+        textToSpeech.stop()
+    }
+
+    fun shutdown() {
+        textToSpeech.shutdown()
+    }
+}
+
+private fun getBakedCountUri(context: Context, content: CharSequence): Uri? {
+    if (content.length > 2) return null
+    if ((content.toString().toIntOrNull() ?: -1) !in 0..20) return null
+    if (!context.safeSharedPreference.useBakedCount) return null
+
+    val folder = File(context.filesDir, PreferenceData.BAKED_COUNT_NAME)
+    val file = File(folder, "$content.mp3")
+    if (!file.exists()) return null
+
+    return file.toUri()
 }
