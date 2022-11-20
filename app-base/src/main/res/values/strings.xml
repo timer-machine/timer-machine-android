@@ -1,16 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <string name="app_name">TimeR Machine</string>
-
     <string name="language">en</string>
-
     <string name="ok">OK</string>
     <string name="cancel">Cancel</string>
     <string name="settings">Settings</string>
     <string name="more">More</string>
     <string name="delete">Delete</string>
     <string name="undo">Undo</string>
-
     <!--Common actions-->
     <string name="understand">I get it</string>
     <string name="add">Add</string>
@@ -31,13 +28,11 @@
     <string name="share">Share</string>
     <string name="dismiss">Dismiss</string>
     <string name="grant">Grant</string>
-
     <!--App actions-->
     <string name="start">Start</string>
     <string name="pause">Pause</string>
     <string name="stop">Stop</string>
     <string name="plus_one_minute">Add 1 Minute</string>
-
     <!--Common-->
     <string name="unknown">Unknown</string>
     <string name="never_show_again">Never show again</string>
@@ -52,7 +47,6 @@
     <string name="save_changes">Save changes?</string>
     <string name="privacy_policy">Privacy policy</string>
     <string name="terms_of_service">Terms</string>
-
     <!--Main actions-->
     <string name="main_action_timers">Timers</string>
     <string name="main_action_schedulers">Schedulers</string>
@@ -61,10 +55,8 @@
     <string name="main_action_settings">Settings</string>
     <string name="main_action_dark">Dark Theme</string>
     <string name="main_action_record">Records</string>
-
     <!--Permission-->
     <string name="perm_rational_floating">To show a floating window, grant the app \"Floating Window\" permission</string>
-
     <!--Timer list-->
     <plurals name="timers">
         <item quantity="one">1 timer</item>
@@ -72,7 +64,6 @@
     </plurals>
     <string name="timer_pick_required">Click here to pick a timer</string>
     <string name="timer_pick_hint">Pick a timer</string>
-
     <!--Folder-->
     <string name="folder_default">Default Set</string>
     <string name="folder_new_folder">New timer set</string>
@@ -92,7 +83,6 @@
     <string name="folder_sort_z_to_a">Name Z ➝ A</string>
     <string name="folder_to_list_view">Switch to list view</string>
     <string name="folder_to_grid_view">Switch to grid view</string>
-
     <!--Edit screen-->
     <string name="edit_create_timer">Create Timer</string>
     <string name="edit_edit_timer">Edit Timer</string>
@@ -134,25 +124,20 @@
     <string name="edit_cant_move_footer">Unable to move these buttons</string>
     <string name="edit_share_as_text">Share as text</string>
     <string name="edit_import_from_the_clipboard">Import from the clipboard</string>
-
     <!--Edit widgets-->
     <string name="name_loop_name_hint">Name</string>
     <string name="name_loop_loop_hint">Loop</string>
-
     <string name="time_picker_type_panel">Panel</string>
     <string name="time_picker_type_scroll">Scroll</string>
-
     <!--Behaviour-->
     <string name="behaviour_no_behaviours">A Silent Step</string>
     <string name="behaviour_add_new">Add a reminder</string>
-
     <string name="behaviour_music">Music</string>
     <string name="behaviour_music_help">Play music at this step</string>
     <string name="music_pick_ringtone">Pick Step Music</string>
     <string name="music_loop">Loop</string>
     <string name="music_saf_pick">SAF Pick</string>
     <string name="music_saf_pick_desp">If you would like to pick music without granting permission, or the default ringtone picker doesn\'t show your music, enabling this option might help.</string>
-
     <string name="behaviour_vibration">Vibration</string>
     <string name="behaviour_vibration_help">Vibrate the phone at this step</string>
     <string name="vibration_count">Count</string>
@@ -163,14 +148,11 @@
     <string name="vibration_short">Short Vibration</string>
     <string name="vibration_normal">Normal Vibration</string>
     <string name="vibration_long">Long Vibration</string>
-
     <string name="behaviour_screen">Screen</string>
     <string name="behaviour_screen_help">Wake up the phone and show a reminding screen</string>
     <string name="screen_fullscreen">Always Fullscreen</string>
-
     <string name="behaviour_halt">Halt</string>
     <string name="behaviour_halt_help">Stay at the step until you move on manually, and make it forward-timing</string>
-
     <string name="behaviour_voice">Voice</string>
     <string name="behaviour_voice_help">Read this step name</string>
     <string name="voice_content_title">Talking Content</string>
@@ -188,11 +170,9 @@
     <string name="voice_group_end_time">Group end time</string>
     <string name="voice_content2_enable">Use new variables</string>
     <string name="voice_content2_disable">Use old variables</string>
-
     <string name="voice_variable_info_empty" translatable="false">@string/voice_content_info_empty</string>
     <string name="voice_variable_info_usage">* Variables will be replaced with the corresponding value when running.</string>
     <string name="voice_variable_info_operations">* Tap variables to insert them into the text box. Long press to check its usage.</string>
-
     <string name="voice_variable_timer_group">Timer</string>
     <string name="voice_variable_timer_name" translatable="false">{TName}</string>
     <string name="voice_variable_timer_name_desp">Timer name</string>
@@ -212,7 +192,6 @@
     <string name="voice_variable_timer_remaining_percent_desp">Timer remaining time in percent</string>
     <string name="voice_variable_timer_end_time" translatable="false">{TEndTime}</string>
     <string name="voice_variable_timer_end_time_desp">Timer end time</string>
-
     <string name="voice_variable_group_group">Group</string>
     <string name="voice_variable_group_name" translatable="false">{GName}</string>
     <string name="voice_variable_group_name_desp">Group name</string>
@@ -232,7 +211,6 @@
     <string name="voice_variable_group_remaining_percent_desp">Group remaining time in percent</string>
     <string name="voice_variable_group_end_time" translatable="false">{GEndTime}</string>
     <string name="voice_variable_group_end_time_desp">Group end time</string>
-
     <string name="voice_variable_step_group">Step</string>
     <string name="voice_variable_step_name" translatable="false">{SName}</string>
     <string name="voice_variable_step_name_desp">Step name</string>
@@ -240,20 +218,16 @@
     <string name="voice_variable_step_duration_desp">Step duration</string>
     <string name="voice_variable_step_end_time" translatable="false">{SEndTime}</string>
     <string name="voice_variable_step_end_time_desp">Step end time</string>
-
     <string name="voice_variable_other_group">Other</string>
     <string name="voice_variable_other_clock_time" translatable="false">{OClockTime}</string>
     <string name="voice_variable_other_clock_time_desp">Current clock time</string>
-
     <string name="tts_error_template" formatted="false">TextToSpeech error: %s</string>
-
     <string name="behaviour_beep">Beep</string>
     <string name="behaviour_beep_help">Play a beep every second</string>
     <string name="beep_count_title">Beep Count</string>
     <string name="beep_count_intro">* Enter the times after which the beep should stop.\n* 0 for keeping beeping until the end of the step.</string>
     <string name="beep_sound">Beep Sound</string>
     <string name="beep_respect_other">Respect Other Sound</string>
-
     <string name="behaviour_half">Half</string>
     <string name="behaviour_half_help">Read \"Half of the time\" when this step is over halfway</string>
     <string name="half_option">Half Reminder</string>
@@ -264,47 +238,38 @@
     <string name="half_option_vibration">Vibration</string>
     <string name="half_option_vibration_desp">Normal Pattern, Twice</string>
     <string name="half_content">Half of the time</string>
-
     <string name="behaviour_count">Count</string>
     <string name="behaviour_count_help">Count down the last several seconds</string>
     <string name="count_times">Count Times</string>
     <string name="count_times_desp">* Enter the number of countdown seconds at the end of the step</string>
-
     <string name="behaviour_notification">Notification</string>
     <string name="behaviour_notification_help">Show another notification at the start of a step</string>
     <string name="notification_duration">Duration</string>
     <string name="notification_duration_desp">* Enter the number of seconds after which the notification will be dismissed automatically.\n* 0 for not dismissing automatically.</string>
     <string name="notification_settings">Edit notification</string>
-
     <string name="behaviour_flashlight">Flashlight</string>
     <string name="behaviour_flashlight_help">Turn the flashlight on and off</string>
-
     <!--Sample timers strings-->
     <string name="sample_timer_template_title">Timer Template</string>
     <string name="sample_timer_template_prepare">Prepare</string>
     <string name="sample_timer_template_finish">Finish</string>
     <string name="sample_timer_template_done">Done</string>
-
     <string name="sample_timer_template_1_stage_name">One Stage Timer</string>
     <string name="sample_timer_template_1_stage_work">Work</string>
-
     <string name="sample_timer_template_2_stages_name">Two Stages Timer</string>
     <string name="sample_timer_template_2_stages_start">Warm-up</string>
     <string name="sample_timer_template_2_stages_high">High Intensity</string>
     <string name="sample_timer_template_2_stages_low">Low Intensity</string>
     <string name="sample_timer_template_2_stages_end">Cool Down</string>
-
     <string name="sample_timer_template_3_stages_name">Three Stages Timer</string>
     <string name="sample_timer_template_3_stages_1">Stage 1</string>
     <string name="sample_timer_template_3_stages_2">Stage 2</string>
     <string name="sample_timer_template_3_stages_3">Stage 3</string>
-
     <string-array name="sample_timers">
         <item>@string/sample_timer_template_1_stage_name</item>
         <item>@string/sample_timer_template_2_stages_name</item>
         <item>@string/sample_timer_template_3_stages_name</item>
     </string-array>
-
     <!--Record-->
     <string name="record_all_timers">All timers</string>
     <string name="record_overview">Overview</string>
@@ -323,12 +288,11 @@
     <string name="record_previous_month_a11y" translatable="false">Previous month</string>
     <string name="record_next_month_a11y" translatable="false">Next month</string>
     <string name="record_deleted_timer">Deleted</string>
-
     <!--Timer running screen-->
     <string name="one_action_lock_ui">Lock UI</string>
     <string name="one_action_unlock_ui">Unlock UI</string>
     <string name="one_action_show_float">Floating Window</string>
-    <string name="one_action_pip">PIP Mode</string>
+    <string name="one_action_pip">PiP Mode</string>
     <string name="one_action_edit_layout">Customize Screen</string>
     <string name="one_action_add_shortcut">Create Shortcut</string>
     <string name="one_action_edit_timer">Edit Timer</string>
@@ -339,19 +303,14 @@
     <string name="one_action_tweak_time">Tweak Time</string>
     <string name="one_action_add_one_minute" translatable="false">+ 1:00</string>
     <string name="one_unable_to_start_timers_in_the_trash">Unable to start a timer in the trash</string>
-
     <string name="one_ui_locked">UI is locked</string>
     <string name="one_ui_unlock">Unlock</string>
-
     <string name="one_shortcut_name">Shortcut name</string>
     <string name="one_shortcut_open_on_click">Open timer screen on click</string>
-
     <string name="one_layout_bar">Timing Bar</string>
     <string name="one_layout_time_size">Time Text Size</string>
     <string name="one_layout_click_hint">Just click around to see what can be customized</string>
-
     <string name="one_layout_edit">Edit Layout</string>
-
     <!--Time panels-->
     <string name="time_panel_picker">Time Panel Picker</string>
     <string name="time_panel_elapsed_time">Elapsed time</string>
@@ -360,13 +319,11 @@
     <string name="time_panel_remaining_percent">Remaining time in percent</string>
     <string name="time_panel_step_end_time">Step end time</string>
     <string name="time_panel_timer_end_time">Timer end time</string>
-
     <!--Notifications-->
     <string name="notif_timer_title">%1$s: %2$s</string>
     <string name="notif_timer_running">%1$s running</string>
     <string name="notif_timer_paused">%1$s paused</string>
     <string name="notif_timer_screen_showing">%1$s is waking the screen</string>
-
     <string name="notif_channel_fore_title">Foreground Service</string>
     <string name="notif_channel_fore_desp">Controls all notifications</string>
     <string name="notif_channel_timing_title">Timing Notification</string>
@@ -377,17 +334,14 @@
     <string name="notif_channel_b_notif_desp">Used by Notification reminder</string>
     <string name="notif_channel_app_info_title">App Info</string>
     <string name="notif_channel_app_info_desp">Like errors, billing issues, account issues, etc</string>
-
     <string name="notif_timers_running">%1$s running</string>
     <string name="notif_timers_paused">%1$s paused</string>
     <string name="notif_a11y_start_ally">Start all timers</string>
     <string name="notif_a11y_pause_ally">Pause all timers</string>
     <string name="notif_a11y_stop_ally">Stop all timers</string>
-
     <!--Scheduler-->
     <string name="scheduler_alert_title">Please use scheduler at your own risk</string>
     <string name="scheduler_alert_content">Scheduling work on Android is tricky. There are chances that the system does not trigger a scheduler. Please test on your own before relying on schedulers.</string>
-
     <string name="scheduler_default_name">Scheduler</string>
     <string name="scheduler_title">Edit Scheduler</string>
     <string name="scheduler_name">Scheduler Name</string>
@@ -411,7 +365,6 @@
     <string name="scheduler_repeat_today">Today</string>
     <string name="scheduler_wrong_timer_id">This scheduler requires a timer</string>
     <string name="scheduler_wrong_every_days">This value should be between 1 and 127</string>
-
     <string-array name="scheduler_set">
         <item>Scheduler set for less than 1 minute from now</item>
         <item>Scheduler set for <xliff:g example="2 days" id="DAYS">%1$s</xliff:g> from now</item>
@@ -422,17 +375,14 @@
         <item>Scheduler set for <xliff:g example="2 hours" id="HOURS">%2$s</xliff:g> and <xliff:g example="2 minutes" id="MINUTES">%3$s</xliff:g> from now</item>
         <item>Scheduler set for <xliff:g example="2 days" id="DAYS">%1$s</xliff:g>, <xliff:g example="2 hours" id="HOURS">%2$s</xliff:g>, and <xliff:g example="2 minutes" id="MINUTES">%3$s</xliff:g> from now</item>
     </string-array>
-
     <string name="scheduler_schedule_failed">Setting scheduler failed %s</string>
     <string name="scheduler_canceled_template">%1$s canceled</string>
     <string name="scheduler_starts_action_template">Start %1$s</string>
     <string name="scheduler_stops_action_template">Stop %1$s</string>
-
     <plurals name="schedulers">
         <item quantity="one">1 scheduler</item>
         <item quantity="other">%1$s schedulers</item>
     </plurals>
-
     <plurals name="days">
         <item quantity="one">1 day</item>
         <item quantity="other"><xliff:g example="7" id="number">%1$s</xliff:g> days</item>
@@ -450,14 +400,12 @@
         <item quantity="one">1 second</item>
         <item quantity="other"><xliff:g example="7" id="number">%s</xliff:g> seconds</item>
     </plurals>
-
     <!--Shortcut-->
     <string name="shortcut_created">Shortcut created</string>
     <string name="shortcut_disabled">Timer not found. Please recreate one</string>
     <string name="shortcut_not_support">The current launcher can\'t create a shortcut</string>
     <string name="shortcut_remove_old">Please delete this timer\'s old shortcut first</string>
     <string name="shortcut_timer_started">The timer has started</string>
-
     <!--Theme-->
     <string name="theme_title">App Theme</string>
     <string name="theme_light_status_bar">Light status bar</string>
@@ -465,43 +413,35 @@
     <string name="theme_custom_title">Custom Theme</string>
     <string name="theme_custom_primary">Primary color</string>
     <string name="theme_custom_secondary">Accent color</string>
-
     <string name="theme_pick_colors">Custom</string>
     <string name="theme_pick_presets">Presets</string>
     <string name="theme_pick_back">Back</string>
-
     <string name="theme_step_color_dialog_title">Pick Step Color</string>
     <string name="theme_step_color_title">Step Color</string>
     <string name="theme_step_color_normal">Normal step</string>
     <string name="theme_step_color_notifier">Notifier step</string>
     <string name="theme_step_color_start">Start step</string>
     <string name="theme_step_color_end">End step</string>
-
     <!--Backup-->
     <string name="backup_local_backup">Local</string>
     <string name="backup_app_data">Application Data</string>
     <string name="backup_app_settings">Application Settings</string>
     <string name="backup_next_step">Next Step</string>
     <string name="backup_wrong_saf">Storage Access Framework not found\nThis device doesn\'t support export and import</string>
-
     <string name="backup_key_cloud" translatable="false">backup_key_cloud</string>
     <string name="backup_key_export" translatable="false">backup_key_export</string>
     <string name="backup_key_import" translatable="false">backup_key_import</string>
-
     <!--Cloud Backup-->
     <string name="cloud_backup_title">Cloud Backup</string>
-
     <string name="cloud_backup_account_issue_notif_title">Cloud Backup Failed</string>
     <string name="cloud_backup_account_issue_notif_desp">Unable to find your account. Click here to sign in</string>
     <string name="cloud_backup_billing_issue_notif_title">Cloud Backup Failed</string>
     <string name="cloud_backup_billing_issue_notif_desp">Unable to find your subscription. Click here to manage subscriptions</string>
-
     <string name="cloud_backup_state_required">Backup required</string>
     <string name="cloud_backup_state_scheduled">Scheduled</string>
     <string name="cloud_backup_state_running">In progress</string>
     <string name="cloud_backup_state_up_to_date">Up-to-date</string>
     <string name="cloud_backup_state_error">Error</string>
-
     <string name="cloud_backup_account_required">Create an account to keep track of backups</string>
     <string name="cloud_backup_backup_options">Backup Options</string>
     <string name="cloud_backup_backup_state">Backup State</string>
@@ -517,7 +457,6 @@
     <string name="cloud_backup_restore_alert">Your app data and settings will be overridden. Continue?</string>
     <string name="cloud_backup_other_options">Other Options</string>
     <string name="cloud_backup_recent_error">Recent Error</string>
-
     <!--Export-->
     <string name="export_data_title">Export Application Data</string>
     <string name="export_data_summary">Save this app\'s data as a file</string>
@@ -528,7 +467,6 @@
     <string name="export_begin">Begin Exporting</string>
     <string name="export_action">Export</string>
     <string name="export_done">Export done</string>
-
     <!--Import-->
     <string name="import_data_title">Import Application Data</string>
     <string name="import_data_summary">Import app\'s data from an exported file</string>
@@ -545,7 +483,6 @@
     <string name="import_done">Import done</string>
     <string name="import_restart_content">Restart the app to activate changes?</string>
     <string name="import_restart">Restart</string>
-
     <!--Help-->
     <string name="help_email_title">TimeR Machine Feedback</string>
     <string name="help_tutorial">Tutorial</string>
@@ -565,14 +502,12 @@
     <string name="help_qa">Common Q &amp; A</string>
     <string name="help_feedback">Feedback</string>
     <string name="help_feedback_desp">Send an email and get replied in 24 hours</string>
-
     <string name="help_key_tutorial" translatable="false">key_help_tutorial</string>
     <string name="help_key_tips" translatable="false">key_help_tips</string>
     <string name="help_key_qa" translatable="false">key_help_qa</string>
     <string name="help_key_whitelist" translatable="false">key_help_whitelist</string>
     <string name="help_key_tts" translatable="false">key_help_tts</string>
     <string name="help_key_feedback" translatable="false">key_help_feedback</string>
-
     <!--Dark theme-->
     <string name="dark_theme_title">Dark Theme</string>
     <string name="dark_theme_manual">Manual</string>
@@ -583,15 +518,12 @@
     <string name="dark_theme_battery_saver">Set by battery saver</string>
     <string name="dark_theme_scheduled_dark_now">Switched to the dark theme</string>
     <string name="dark_theme_scheduled_light_now">Switched to the light theme</string>
-
     <!--Tweak time-->
     <string name="tweak_time_title">Tweak Time Settings</string>
     <string name="tweak_time_main_title">Main Buttons</string>
     <string name="tweak_time_overflow_title">Overflow Buttons</string>
-
     <!--App preferences-->
     <string name="pref_category_title_app">Application Settings</string>
-
     <string name="pref_app_language">Language</string>
     <string name="pref_app_language_default">System default</string>
     <string-array name="pref_app_language_titles">
@@ -607,12 +539,9 @@
         <item>zh-CN</item>
         <item>zh-TW</item>
     </string-array>
-
     <string name="pref_help_translation">Help translate the app</string>
-
     <!--Timer preferences-->
     <string name="pref_category_title_timer_setting">Timer Settings</string>
-
     <string name="pref_screen_title">Screen Brightness</string>
     <string-array name="pref_screen_titles">
         <item>Keep the screen on</item>
@@ -627,7 +556,6 @@
         <item>@string/pref_screen_value_dim</item>
         <item>@string/pref_screen_value_default</item>
     </string-array>
-
     <string name="pref_screen_timing_title">Screen Brightness Application Timing</string>
     <string-array name="pref_screen_timing_titles">
         <item>When the app is open</item>
@@ -640,7 +568,6 @@
         <item>@string/pref_screen_timing_value_timer</item>
         <item>@string/pref_screen_timing_value_service</item>
     </string-array>
-
     <string name="pref_notifier_plus_title">When plus time at a notifier</string>
     <string-array name="pref_notifier_plus_titles">
         <item>Return to the last step and set time to 1m</item>
@@ -650,11 +577,9 @@
         <item>1</item>
         <item>0</item>
     </string-array>
-
     <string name="pref_tweak_time_title">Advanced Time Tweak</string>
     <string name="pref_tweak_time_on">Enabled</string>
     <string name="pref_tweak_time_off">Disabled</string>
-
     <string name="settings_floating_window_pip">Floating Window &amp; PIP</string>
     <string name="settings_floating_window_pip_auto_close">Automatically Close Window</string>
     <string name="settings_floating_window_pip_auto_close_on">When a timer finishes, close the floating window or PIP</string>
@@ -664,7 +589,6 @@
     <string name="settings_floating_window_pip_floating_size">Window Size</string>
     <string name="settings_floating_window_pip_pip">PIP</string>
     <string name="settings_floating_window_pip_floating_failed">Unable to create a Floating Window. Please try again</string>
-
     <string name="pref_phone_call">When the phone is on a call</string>
     <string-array name="pref_phone_call_titles">
         <item>Do nothing</item>
@@ -676,25 +600,19 @@
         <item>1</item>
         <item>2</item>
     </string-array>
-
     <string name="pref_show_timer_total_time">Total Time When Editing</string>
     <string name="pref_show_timer_total_time_on">Show the total time of the timer and groups</string>
     <string name="pref_show_timer_total_time_off">Hide it</string>
-
     <string name="pref_media_style_notification">Media Style Notification</string>
-
     <!--Reminder preferences-->
     <string name="pref_reminder">Reminder</string>
-
     <string name="pref_reminder_baked_count_title">Baked count sound</string>
     <string name="pref_reminder_baked_count_desp">When counting down from 20 to 0, play recorded sound instead of synthesizing the speech from text.\n\nThis is faster and more consistent.</string>
     <string name="pref_reminder_baked_count_on">Enabled</string>
     <string name="pref_reminder_baked_count_off">Disabled</string>
     <string name="pref_reminder_baked_count_downloading">Downloading resources…</string>
-
     <!--Scheduler preferences-->
     <string name="pref_category_title_scheduler_setting">Scheduler Settings</string>
-
     <string name="pref_week_start_title">Start Week on</string>
     <string-array name="pref_week_start_titles">
         <item>Monday</item>
@@ -706,23 +624,26 @@
         <item>Sunday</item>
     </string-array>
     <string-array name="pref_week_start_values">
-        <item>2</item> <!-- Calendar.MONDAY -->
-        <item>3</item> <!-- Calendar.TUESDAY -->
-        <item>4</item> <!-- Calendar.WEDNESDAY -->
-        <item>5</item> <!-- Calendar.THURSDAY -->
-        <item>6</item> <!-- Calendar.FRIDAY -->
-        <item>7</item> <!-- Calendar.SATURDAY -->
-        <item>1</item> <!-- Calendar.SUNDAY -->
+        <item>2</item>
+        <!-- Calendar.MONDAY -->
+        <item>3</item>
+        <!-- Calendar.TUESDAY -->
+        <item>4</item>
+        <!-- Calendar.WEDNESDAY -->
+        <item>5</item>
+        <!-- Calendar.THURSDAY -->
+        <item>6</item>
+        <!-- Calendar.FRIDAY -->
+        <item>7</item>
+        <!-- Calendar.SATURDAY -->
+        <item>1</item>
+        <!-- Calendar.SUNDAY -->
     </string-array>
-
     <!--Notification preferences-->
     <string name="pref_category_notif">Notifications</string>
-
     <string name="pref_open_notif_setting">Open Notification Settings</string>
-
     <!--Audio preferences-->
     <string name="pref_category_title_audio">Audio</string>
-
     <string name="pref_audio_focus_type_title">Audio Focus Type</string>
     <!--AudioManager.AUDIOFOCUS_GAIN-->
     <string name="pref_audio_focus_type_default" translatable="false">2</string>
@@ -741,7 +662,6 @@
         <!--AudioManager.AUDIOFOCUS_NONE-->
         <item>0</item>
     </string-array>
-
     <string name="pref_audio_type_title">Sound Type</string>
     <string-array name="pref_audio_type_titles">
         <item>Alarm</item>
@@ -756,26 +676,19 @@
         <!--AudioManager.STREAM_NOTIFICATION == 5-->
         <item>5</item>
     </string-array>
-
     <string name="pref_audio_volume_title">Volume</string>
-
     <!--Other preferences-->
     <string name="pref_title_other">Other</string>
-
     <string name="rate_five_stars">Rate This App 5 Stars</string>
     <string name="pref_recommend">Share This App</string>
     <string name="pref_about_title">About</string>
-
     <string name="about_version">Version</string>
     <string name="about_source_code">Source code</string>
     <string name="about_developer">Developer</string>
     <string name="about_more_apps_from_me">More apps from me</string>
-
     <string name="share_content">TimeR Machine, a great interval/workouts timer app</string>
-
     <!--Log-->
     <string name="log_title">App log</string>
-
     <!--App intro-->
     <string name="intro_start_sample_timer_name">Exercise Plan</string>
     <string name="intro_start_sample_timer_step1">Run 3 minutes</string>
@@ -801,44 +714,33 @@
     <string name="intro_start_timer_steps">This part shows <b>the step list</b> and highlights <b>the current running step</b>.</string>
     <string name="intro_start_timer_buttons">This is the control panel. They\'re <b>Stop, Previous Step, Start/Pause, Next Step</b>, and more options.</string>
     <string name="intro_start_finish"><b>Congratulations! You\'ve finished the tutorial.</b></string>
-
     <string name="intro_start_edit_behaviour">Click allows you to edit a reminder. For now, please finish the tutorial first</string>
     <string name="intro_start_quick_start_pause">This starts a timer quickly. For now, click on the timer name to see its detail</string>
     <string name="intro_save_for_later">You can try this after the tutorial</string>
-
     <string name="intro_exit_confirmation">Exit the tutorial?</string>
     <string name="intro_exit_difficult_app_alert">Without finishing the tutorial, the app may be confusing to use.</string>
     <string name="intro_exit_previous_hint">To go back to the previous step, click the <b>Left Arrow</b> at the bottom of the screen.</string>
-
     <string name="intro_location">You can find the tutorial in \"Help &amp; Feedback.\"</string>
-
     <string name="tip_missed_timer"><b>Some timers are stopped abnormally!</b>\n\nIt is probably because the system kills the app in the background. <b>To resolve this problem, please consider whitelisting this app in system settings.</b></string>
-
     <string name="tip_android_12_phone_calls">Pausing on phone calls now requires \"Read phone status\" permission</string>
     <string name="tip_android_12_battery">Tasker support now requires \"Ignore Battery Optimization\" permission</string>
-
     <!--Updates-->
     <string name="update_title">What\'s new?</string>
-
     <!--Tasker-->
     <string name="tasker_edit_title">TimeR Machine Plugin</string>
-
     <!--Whitelist-->
     <string name="whitelist_disclaimer"><b>Many Android manufacturers may kill running apps when the screen is off or switching to another app</b>, which is an infamous Android problem.\n\nThis app tries its best to do its job well, but there\'s still a chance of failing.\n\n<b>Please whitelist this app in the system settings</b>.</string>
     <string name="whitelist_disclaimer_yes">Check Whitelist Guideline</string>
     <string name="whitelist_disclaimer_no">No, I understand the consequences</string>
     <string name="whitelist_disclaimer_no_confirmation">Skip the guideline?</string>
     <string name="whitelist_location">You can find Whitelist Guideline in \"Help &amp; Feedback.\"</string>
-
     <string name="whitelist_intro">Most Android manufacturers shut down running background apps by force, making apps stops reminding you.\n\nPlease allow auto-start, allow background running, turn off battery optimization, etc., in the settings.\n\nHere are some instructions: </string>
     <string name="whitelist_don_t_kill_desp">A website that provides many solutions</string>
     <string name="whitelist_setting">Configure</string>
     <string name="whitelist_links">Links</string>
     <string name="whitelist_quick_settings">Some quick Settings</string>
     <string name="whitelist_ignore_battery_optimization">Ignore Battery Optimization</string>
-
     <string name="whitelist_settings_template" formatted="false">System setting %d</string>
-
     <!--Account-->
     <string name="account_sign_out_confirmation">Sign out?</string>
     <string name="account_sign_out">Sign Out</string>
@@ -847,7 +749,6 @@
     <string name="account_delete_confirmation">Delete your account and all your backup data?\n\nThis does <b>NOT</b> affect your subscription. You can manage your subscription in the Google Play Store</string>
     <string name="account_deleting">Deleting Account…</string>
     <string name="account_sign_in">Register / Sign In</string>
-
     <!--Billing-->
     <string name="billing_iap">In-App Purchases</string>
     <string name="billing_loading">Loading</string>
@@ -861,7 +762,6 @@
     <string name="billing_connect_issue">There was an error connecting with Google Play.\n\nThis issue might be temporary, so please try again in a few minutes.</string>
     <string name="billing_manage_subscription">Manage Subscription</string>
     <string name="billing_under_maintenance">Under maintenance</string>
-
     <string name="billing_cloud_backup_title">Cloud backup</string>
     <string name="billing_cloud_backup_desp">Never lose your record of hard work</string>
     <string name="billing_more_themes_title">More themes</string>
@@ -872,9 +772,7 @@
     <string name="billing_future_desp">Your help makes the app better!</string>
     <string name="billing_a_part_of_iap">This is a part of in-app purchases.</string>
     <string name="billing_subscription_service">This is a subscription service.</string>
-
     <string name="billing_help_title">Help</string>
     <string name="billing_help_contact">Contact</string>
     <string name="billing_help_email_title">TimeR Machine Billing Issue</string>
-
 </resources>
