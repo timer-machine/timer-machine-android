@@ -2,7 +2,6 @@ package io.github.deweyreed.timer.ui.single
 
 import android.app.Dialog
 import android.content.ActivityNotFoundException
-import android.content.DialogInterface
 import android.content.Intent
 import android.os.Bundle
 import android.provider.Settings
@@ -91,10 +90,12 @@ class HelpFragment : PreferenceFragmentCompat() {
             val context = requireContext()
 
             binding.btnClickInstruction.setOnClickListener {
+                TtsSpeaker.clean()
                 TtsSpeaker.speak(
                     context = context,
                     text = context.getString(RBase.string.help_tts_test_read_content),
                     oneShot = true,
+                    onDone = { TtsSpeaker.clean() }
                 )
                 it.postDelayed(1000) {
                     binding.layoutActions.show()
@@ -130,8 +131,8 @@ class HelpFragment : PreferenceFragmentCompat() {
             TtsSpeaker.clean()
         }
 
-        override fun onDismiss(dialog: DialogInterface) {
-            super.onDismiss(dialog)
+        override fun onPause() {
+            super.onPause()
             TtsSpeaker.clean()
         }
     }

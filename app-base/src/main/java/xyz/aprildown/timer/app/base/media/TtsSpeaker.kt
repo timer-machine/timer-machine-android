@@ -69,10 +69,12 @@ object TtsSpeaker : WelcomingTextToSpeech.Listener, AudioManager.OnAudioFocusCha
     ) {
         warmUp(context)
 
-        this.oneShot = oneShot
-        this.onDone = onDone
+        if (text.isNotBlank()) {
+            this.oneShot = oneShot
+            this.onDone = onDone
 
-        checkNotNull(textToSpeech).speak(text, checkNotNull(application).storedAudioTypeValue)
+            checkNotNull(textToSpeech).speak(text, checkNotNull(application).storedAudioTypeValue)
+        }
     }
 
     fun stopCurrentSpeaking() {
@@ -286,10 +288,6 @@ private class WelcomingTextToSpeech(
         if (!initialized) {
             pendingText = text
             return
-        }
-
-        if (textToSpeech.isSpeaking) {
-            textToSpeech.stop()
         }
 
         textToSpeech.speak(
