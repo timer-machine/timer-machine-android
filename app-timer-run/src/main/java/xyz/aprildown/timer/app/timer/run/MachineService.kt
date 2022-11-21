@@ -382,18 +382,10 @@ class MachineService :
         afterDone: (() -> Unit)?
     ) {
         TtsSpeaker.speak(
-            this,
-            content ?: getString(contentRes),
-            sayMore = sayMore,
-            callback = object : TtsSpeaker.Callback() {
-                override fun onDone() {
-                    afterDone?.invoke()
-                }
-
-                override fun onError() {
-                    afterDone?.invoke()
-                }
-            }
+            context = this,
+            text = content ?: getString(contentRes),
+            oneShot = !sayMore,
+            onDone = afterDone,
         )
     }
 
@@ -434,7 +426,7 @@ class MachineService :
     }
 
     override fun stopReading() {
-        TtsSpeaker.tearDown()
+        TtsSpeaker.stopCurrentSpeaking()
     }
 
     override fun enableTone(tone: Int, count: Int, respectOtherSound: Boolean) {
