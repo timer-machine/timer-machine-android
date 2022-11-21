@@ -3,12 +3,12 @@ ext {
     versions = [
             agp         : '7.1.3',
             kotlin      : '1.6.21',
-            versions    : '0.42.0',
-            detekt      : '1.21.0',
+            versions    : '0.43.0',
+            detekt      : '1.22.0',
             hilt        : '2.42',
             secrets     : '2.0.1',
             gms         : '4.3.10',
-            guard       : '0.3.1',
+            guard       : '0.3.2',
 
             compile_sdk : 31,
             min_sdk     : 23,
@@ -52,18 +52,18 @@ ext {
 
             // AndroidX
             androidx_appcompat            : 'androidx.appcompat:appcompat:1.4.2',
+            androidx_fragment             : 'androidx.fragment:fragment-ktx:1.5.4',
             androidx_recyclerview         : 'androidx.recyclerview:recyclerview:1.2.1',
             androidx_preference           : 'androidx.preference:preference:1.2.0',
             androidx_constraintlayout     : 'androidx.constraintlayout:constraintlayout:2.1.4',
-            androidx_lifecycle_runtime    : 'androidx.lifecycle:lifecycle-runtime-ktx:2.4.1',
-            androidx_lifecycle_livedata   : 'androidx.lifecycle:lifecycle-livedata-ktx:2.4.1',
-            androidx_lifecycle_viewmodel  : 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.4.1',
+            androidx_lifecycle_runtime    : 'androidx.lifecycle:lifecycle-runtime-ktx:2.5.1',
+            androidx_lifecycle_livedata   : 'androidx.lifecycle:lifecycle-livedata-ktx:2.5.1',
+            androidx_lifecycle_viewmodel  : 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.5.1',
             androidx_custom_tabs          : 'androidx.browser:browser:1.4.0',
             androidx_dynamicanimation     : 'androidx.dynamicanimation:dynamicanimation:1.0.0',
             // KTX
-            androidx_core_ktx             : 'androidx.core:core-ktx:1.7.0',
+            androidx_core_ktx             : 'androidx.core:core-ktx:1.8.0',
             androidx_collection_ktx       : 'androidx.collection:collection-ktx:1.2.0',
-            androidx_fragment_ktx         : 'androidx.fragment:fragment-ktx:1.4.1',
 
             // Material
             material                      : 'com.google.android.material:material:1.4.0',
@@ -80,8 +80,8 @@ ext {
             androidx_room_test            : 'androidx.room:room-testing:2.4.2',
 
             // Navigation
-            androidx_navigation_fragment  : 'androidx.navigation:navigation-fragment-ktx:2.4.2',
-            androidx_navigation_ui        : 'androidx.navigation:navigation-ui-ktx:2.4.2',
+            androidx_navigation_fragment  : 'androidx.navigation:navigation-fragment-ktx:2.5.3',
+            androidx_navigation_ui        : 'androidx.navigation:navigation-ui-ktx:2.5.3',
 
             // WorkManager
             androidx_work                 : 'androidx.work:work-runtime-ktx:2.7.1',
@@ -105,7 +105,7 @@ ext {
             billing                       : 'com.android.billingclient:billing-ktx:4.1.0',
             firebase_bom                  : 'com.google.firebase:firebase-bom:30.3.2',
             firebase_auth                 : 'com.google.firebase:firebase-auth-ktx',
-            firebase_auth_ui              : 'com.firebaseui:firebase-ui-auth:8.0.1',
+            firebase_auth_ui              : 'com.firebaseui:firebase-ui-auth:8.0.2',
             firebase_storage              : 'com.google.firebase:firebase-storage-ktx',
             play_services_auth            : 'com.google.android.gms:play-services-auth:20.2.0',
 
@@ -139,8 +139,8 @@ ext {
             toggle_button_group           : 'com.nex3z:toggle-button-group:1.2.3',
             ultimate_ringtone_picker      : 'xyz.aprildown:UltimateRingtonePicker:3.1.0',
             vertical_stepper_form         : 'com.ernestoyaquello.stepperform:vertical-stepper-form:2.5.0',
-            zip4j                         : 'net.lingala.zip4j:zip4j:2.11.1',
-            tasker_plugin                 : 'com.joaomgcd:taskerpluginlibrary:0.4.2',
+            zip4j                         : 'net.lingala.zip4j:zip4j:2.11.2',
+            tasker_plugin                 : 'com.joaomgcd:taskerpluginlibrary:0.4.6',
 
     ]
 }

@@ -14,7 +14,7 @@ dependencies {
     api libs.androidx_constraintlayout
     implementation libs.androidx_custom_tabs
     implementation libs.androidx_media
-    api libs.androidx_fragment_ktx
+    api libs.androidx_fragment
 
     api libs.material
 
