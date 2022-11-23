@@ -104,11 +104,13 @@ internal class VibrationDialog(private val context: Context) {
             dialog.window?.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN)
         }
 
-        binding.textInput.helperText = context.getString(
-            RBase.string.vibration_count_desp_template,
-            context.getString(RBase.string.vibration_count_desp_0),
-            context.getString(RBase.string.vibration_count_desp_range)
-        )
+        binding.textInput.helperText = buildString {
+            append("* ")
+            append(context.getString(RBase.string.vibration_count_desp_0))
+            appendLine()
+            append("* ")
+            append(context.getString(RBase.string.vibration_count_desp_range))
+        }
 
         val positiveButton = dialog.getButton(AlertDialog.BUTTON_POSITIVE)
 

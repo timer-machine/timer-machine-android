@@ -45,7 +45,6 @@
     <string name="consume_data_warning">This will open a web page and consume mobile data</string>
     <string name="no_action_found">No apps can perform this action</string>
     <string name="empty">Empty</string>
-    <string name="count_down_template" translatable="false">%s(%s)</string>
     <string name="delete_confirmation_template">Delete %s?</string>
     <string name="delete_done_template">%s deleted</string>
     <string name="trash_done_template">%s trashed</string>
@@ -156,7 +155,6 @@
     <string name="behaviour_vibration">Vibration</string>
     <string name="behaviour_vibration_help">Vibrate the phone at this step</string>
     <string name="vibration_count">Count</string>
-    <string name="vibration_count_desp_template" formatted="false" translatable="false">* %s\n* %s</string>
     <string name="vibration_count_desp_0">0 for keeping vibrating until the end of the step.</string>
     <string name="vibration_count_desp_range">The count should be between 0 and 100.</string>
     <string name="vibration_pattern">Pattern</string>
@@ -328,7 +326,7 @@
     <string name="one_action_lock_ui">Lock UI</string>
     <string name="one_action_unlock_ui">Unlock UI</string>
     <string name="one_action_show_float">Floating Window</string>
-    <string name="one_action_pip">PIP Mode</string>
+    <string name="one_action_pip">PiP Mode</string>
     <string name="one_action_edit_layout">Customize Screen</string>
     <string name="one_action_add_shortcut">Create Shortcut</string>
     <string name="one_action_edit_timer">Edit Timer</string>
@@ -818,7 +816,7 @@
     <string name="tip_android_12_battery">Tasker support now requires \"Ignore Battery Optimization\" permission</string>
 
     <!--Updates-->
-    <string name="update_title">What\'s new?</string>
+    <string name="update_title">Changelog</string>
 
     <!--Tasker-->
     <string name="tasker_edit_title">TimeR Machine Plugin</string>

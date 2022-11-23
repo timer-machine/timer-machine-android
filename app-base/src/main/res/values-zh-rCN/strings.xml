@@ -395,17 +395,17 @@
     </plurals>
 
     <plurals name="days">
-        <item quantity="other"><xliff:g id="NUMBER">%1$s</xliff:g> 天</item>
+        <item quantity="other"><xliff:g id="number">%1$s</xliff:g> 天</item>
     </plurals>
     <plurals name="hours">
-        <item quantity="other"><xliff:g id="NUMBER">%1$s</xliff:g> 小时</item>
+        <item quantity="other"><xliff:g id="number">%1$s</xliff:g> 小时</item>
     </plurals>
     <plurals name="minutes">
-        <item quantity="other"><xliff:g id="NUMBER">%1$s</xliff:g> 分钟</item>
+        <item quantity="other"><xliff:g id="number">%1$s</xliff:g> 分钟</item>
     </plurals>
     <string name="seconds_0">0 秒</string>
     <plurals name="seconds">
-        <item quantity="other"><xliff:g id="NUMBER">%s</xliff:g> 秒</item>
+        <item quantity="other"><xliff:g id="number">%s</xliff:g> 秒</item>
     </plurals>
 
     <!--Shortcut-->
