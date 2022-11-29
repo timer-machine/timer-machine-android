@@ -362,7 +362,14 @@ internal class CloudBackupFragment : PreferenceFragmentCompat() {
 
     private fun confirmToDeleteAccount(context: Context) {
         val dialog = MaterialAlertDialogBuilder(context)
-            .setMessage(RBase.string.account_delete_confirmation)
+            .setMessage(
+                buildSpannedString {
+                    append(context.getText(RBase.string.account_delete_confirmation_title))
+                    appendLine()
+                    appendLine()
+                    append(context.getText(RBase.string.account_delete_confirmation_desp))
+                }
+            )
             .setPositiveButton(RBase.string.ok, null)
             .setNegativeButton(RBase.string.cancel, null)
             .show()
@@ -370,17 +377,8 @@ internal class CloudBackupFragment : PreferenceFragmentCompat() {
         positiveButton.isEnabled = false
 
         val timer = object : CountDownTimer(3000, 1000) {
-            private var remainingSeconds = 3
-            override fun onTick(millisUntilFinished: Long) {
-                positiveButton.text = getString(RBase.string.count_down_template).format(
-                    getString(RBase.string.ok),
-                    remainingSeconds
-                )
-                remainingSeconds -= 1
-            }
-
+            override fun onTick(millisUntilFinished: Long) = Unit
             override fun onFinish() {
-                positiveButton.setText(RBase.string.ok)
                 positiveButton.isEnabled = true
             }
         }

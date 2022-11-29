@@ -223,7 +223,8 @@
     <string name="behaviour_beep">嘟嘟</string>
     <string name="behaviour_beep_help">每秒播放嘟嘟音</string>
     <string name="beep_count_title">嘟嘟次数</string>
-    <string name="beep_count_intro">* 输入在嘟嘟播放几次后停止\n* 0 代表一直嘟嘟到步骤结束</string>
+    <string name="beep_count_intro_usage">输入在嘟嘟播放几次后停止</string>
+    <string name="beep_count_intro_0_meaning">0 代表一直嘟嘟到步骤结束</string>
     <string name="beep_sound">嘟嘟音</string>
     <string name="beep_respect_other">尊重其他背景音</string>
 
@@ -246,7 +247,8 @@
     <string name="behaviour_notification">通知</string>
     <string name="behaviour_notification_help">步骤开始时显示一个新的通知</string>
     <string name="notification_duration">持续时间</string>
-    <string name="notification_duration_desp">* 输入通知的持续秒数\n* 0 代表一直显示到步骤结束</string>
+    <string name="notification_duration_desp_usage">输入通知的持续秒数</string>
+    <string name="notification_duration_desp_0_meaning">0 代表一直显示到步骤结束</string>
     <string name="notification_settings">修改通知设置</string>
 
     <string name="behaviour_flashlight">闪光</string>
@@ -350,7 +352,7 @@
 
     <!--Scheduler-->
     <string name="scheduler_alert_title">请谨慎使用计划任务</string>
-    <string name="scheduler_alert_content">有很多原因会导致计划任务无法正常触发，请在使用前自行测试</string>
+    <string name="scheduler_alert_content">有很多原因会导致计划任务无法正常触发，请在使用前自行测试。</string>
 
     <string name="scheduler_default_name">计划任务</string>
     <string name="scheduler_title">编辑计划任务</string>
@@ -395,17 +397,17 @@
     </plurals>
 
     <plurals name="days">
-        <item quantity="other"><xliff:g id="NUMBER">%1$s</xliff:g> 天</item>
+        <item quantity="other"><xliff:g id="number">%1$s</xliff:g> 天</item>
     </plurals>
     <plurals name="hours">
-        <item quantity="other"><xliff:g id="NUMBER">%1$s</xliff:g> 小时</item>
+        <item quantity="other"><xliff:g id="number">%1$s</xliff:g> 小时</item>
     </plurals>
     <plurals name="minutes">
-        <item quantity="other"><xliff:g id="NUMBER">%1$s</xliff:g> 分钟</item>
+        <item quantity="other"><xliff:g id="number">%1$s</xliff:g> 分钟</item>
     </plurals>
     <string name="seconds_0">0 秒</string>
     <plurals name="seconds">
-        <item quantity="other"><xliff:g id="NUMBER">%s</xliff:g> 秒</item>
+        <item quantity="other"><xliff:g id="number">%s</xliff:g> 秒</item>
     </plurals>
 
     <!--Shortcut-->
@@ -690,7 +692,7 @@
     <string name="intro_exit_difficult_app_alert">如果不完成使用教程的话，应用可能会难以上手。</string>
     <string name="intro_exit_previous_hint">如果要返回上一步，请点击屏幕底端的<b>左箭头</b>。</string>
 
-    <string name="intro_location">你可以在“帮助与反馈”中找到该使用教程。</string>
+    <string name="intro_location">你可以在“帮助与反馈”中找到该使用教程</string>
 
     <string name="tip_missed_timer"><b>计时器被非正常地停止了！</b>\n\n这很有可能是系统杀掉了在后台的应用。<b>为了解决该问题，请考虑将本应用在系统设置中白名单。</b></string>
 
@@ -708,7 +710,7 @@
     <string name="whitelist_disclaimer_yes">查看白名单指南</string>
     <string name="whitelist_disclaimer_no">不，我已了解潜在的后果</string>
     <string name="whitelist_disclaimer_no_confirmation">跳过该指南？</string>
-    <string name="whitelist_location">你可以在“帮助与反馈”中找到该白名单指南。</string>
+    <string name="whitelist_location">你可以在“帮助与反馈”中找到该白名单指南</string>
 
     <string name="whitelist_intro">许多Android制造商会强制关闭运行中的后台应用，从而导致该应用无法正常提醒。\n\n请在设置中允许自启动、允许后台运行、关闭电池优化等。\n\n这里有一些具体方法：</string>
     <string name="whitelist_don_t_kill_desp">一个提供了很多设置方法的英文网站</string>
@@ -724,7 +726,8 @@
     <string name="account_sign_out">退出登录</string>
     <string name="account_signing_out">正在退出登录……</string>
     <string name="account_delete">删除账号和所有备份数据</string>
-    <string name="account_delete_confirmation">删除账号和所有备份数据？\n\n这<b>不会</b>影响您的订阅。您可以在Google Play Store中管理订阅。</string>
+    <string name="account_delete_confirmation_title">删除账号和所有备份数据？</string>
+    <string name="account_delete_confirmation_desp">这<b>不会</b>影响您的订阅。您可以在Google Play Store中管理订阅。</string>
     <string name="account_deleting">删除账号中……</string>
     <string name="account_sign_in">注册 / 登录</string>
 
@@ -735,7 +738,7 @@
     <string name="billing_subscribe">订阅</string>
     <string name="billing_owned">已拥有</string>
     <string name="billing_per_year">/年</string>
-    <string name="billing_explanation" formatted="false">"轻触“订阅”，您的Google Play Store账户将会被收取相应的费用。您的订购将会以相同的价格并根据方案的周期自动续订，直到您在当前订购周期过期前至少24个小时从Google Play Store的订购中取消它。轻触“订阅”意味着您同意我们的%s和%s。"</string>
+    <string name="billing_explanation" formatted="false">"轻触“订阅”，您的Google Play Store账户将会被收取相应的费用。您的订购将会以相同的价格并根据方案的周期自动续订，直到您在当前订购周期过期前至少24个小时从Google Play Store的订购中取消它。轻触“订阅”意味着您同意我们的<xliff:g id="privacy_policy">%s</xliff:g>和<xliff:g id="terms">%s</xliff:g>。"</string>
     <string name="billing_cancel_anytime">定期支付，随时可以取消。</string>
     <string name="billing_not_supported">目前暂时不支持订阅</string>
     <string name="billing_connect_issue">连接到Google Play的时候发生了一个错误。\n\n这个问题可能只是暂时的，因此请稍后重试。</string>

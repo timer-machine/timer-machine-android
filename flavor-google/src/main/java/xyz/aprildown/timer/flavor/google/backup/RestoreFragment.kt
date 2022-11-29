@@ -137,17 +137,8 @@ internal class RestoreFragment : Fragment(R.layout.fragment_restore) {
         positiveButton.isEnabled = false
 
         val timer = object : CountDownTimer(3000, 1000) {
-            private var remainingSeconds = 3
-            override fun onTick(millisUntilFinished: Long) {
-                positiveButton.text = getString(RBase.string.count_down_template).format(
-                    getString(RBase.string.ok),
-                    remainingSeconds
-                )
-                remainingSeconds -= 1
-            }
-
+            override fun onTick(millisUntilFinished: Long) = Unit
             override fun onFinish() {
-                positiveButton.setText(RBase.string.ok)
                 positiveButton.isEnabled = true
             }
         }

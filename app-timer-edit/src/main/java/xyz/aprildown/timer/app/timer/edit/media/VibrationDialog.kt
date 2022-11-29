@@ -1,6 +1,8 @@
 package xyz.aprildown.timer.app.timer.edit.media
 
 import android.content.Context
+import android.text.Spanned
+import android.text.style.BulletSpan
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.view.WindowManager
@@ -9,6 +11,7 @@ import android.widget.CompoundButton
 import android.widget.ImageButton
 import androidx.annotation.IdRes
 import androidx.appcompat.app.AlertDialog
+import androidx.core.text.buildSpannedString
 import androidx.core.widget.doOnTextChanged
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import xyz.aprildown.timer.app.base.media.VibrateHelper
@@ -16,6 +19,7 @@ import xyz.aprildown.timer.app.timer.edit.R
 import xyz.aprildown.timer.app.timer.edit.databinding.DialogVibrationCountBinding
 import xyz.aprildown.timer.app.timer.edit.databinding.DialogVibrationPatternBinding
 import xyz.aprildown.timer.domain.entities.VibrationAction
+import xyz.aprildown.tools.helper.dimen
 import xyz.aprildown.tools.helper.onImeActionClick
 import xyz.aprildown.timer.app.base.R as RBase
 
@@ -104,11 +108,20 @@ internal class VibrationDialog(private val context: Context) {
             dialog.window?.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN)
         }
 
-        binding.textInput.helperText = context.getString(
-            RBase.string.vibration_count_desp_template,
-            context.getString(RBase.string.vibration_count_desp_0),
-            context.getString(RBase.string.vibration_count_desp_range)
-        )
+        binding.textInput.helperText = buildSpannedString {
+            val gapWidth = context.dimen(RBase.dimen.bullet_span_gap_width)
+            append(
+                context.getString(RBase.string.vibration_count_desp_0),
+                BulletSpan(gapWidth),
+                Spanned.SPAN_EXCLUSIVE_EXCLUSIVE
+            )
+            appendLine()
+            append(
+                context.getString(RBase.string.vibration_count_desp_range),
+                BulletSpan(gapWidth),
+                Spanned.SPAN_EXCLUSIVE_EXCLUSIVE
+            )
+        }
 
         val positiveButton = dialog.getButton(AlertDialog.BUTTON_POSITIVE)
 

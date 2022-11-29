@@ -5,7 +5,10 @@ import android.content.Intent
 import android.os.Build
 import android.provider.Settings
 import android.text.InputType
+import android.text.Spanned
+import android.text.style.BulletSpan
 import androidx.core.net.toUri
+import androidx.core.text.buildSpannedString
 import com.github.zawadz88.materialpopupmenu.MaterialPopupMenuBuilder
 import xyz.aprildown.timer.app.base.data.PreferenceData.storedAudioFocusType
 import xyz.aprildown.timer.app.base.data.PreferenceData.storedAudioTypeValue
@@ -26,6 +29,7 @@ import xyz.aprildown.timer.domain.entities.ScreenAction
 import xyz.aprildown.timer.domain.entities.VibrationAction
 import xyz.aprildown.timer.domain.entities.VoiceAction
 import xyz.aprildown.timer.domain.utils.Constants
+import xyz.aprildown.tools.helper.dimen
 import xyz.aprildown.tools.helper.safeSharedPreference
 import xyz.aprildown.timer.app.base.R as RBase
 
@@ -241,7 +245,20 @@ internal fun MaterialPopupMenuBuilder.addNotificationItems(
                     titleRes = RBase.string.notification_duration,
                     preFill = action.duration.toString(),
                     inputType = InputType.TYPE_CLASS_NUMBER,
-                    messageRes = RBase.string.notification_duration_desp
+                    message = buildSpannedString {
+                        val gapWidth = context.dimen(RBase.dimen.bullet_span_gap_width)
+                        append(
+                            context.getString(RBase.string.notification_duration_desp_usage),
+                            BulletSpan(gapWidth),
+                            Spanned.SPAN_EXCLUSIVE_EXCLUSIVE
+                        )
+                        appendLine()
+                        append(
+                            context.getString(RBase.string.notification_duration_desp_0_meaning),
+                            BulletSpan(gapWidth),
+                            Spanned.SPAN_EXCLUSIVE_EXCLUSIVE
+                        )
+                    },
                 ) {
                     onNotificationDuring.invoke(it.toIntOrNull() ?: 0)
                 }
