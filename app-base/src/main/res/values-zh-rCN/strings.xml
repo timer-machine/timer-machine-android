@@ -397,17 +397,17 @@
     </plurals>
 
     <plurals name="days">
-        <item quantity="other"><xliff:g id="number">%1$s</xliff:g> 天</item>
+        <item quantity="other"><xliff:g example="7" id="number">%1$s</xliff:g> 天</item>
     </plurals>
     <plurals name="hours">
-        <item quantity="other"><xliff:g id="number">%1$s</xliff:g> 小时</item>
+        <item quantity="other"><xliff:g example="7" id="number">%1$s</xliff:g> 小时</item>
     </plurals>
     <plurals name="minutes">
-        <item quantity="other"><xliff:g id="number">%1$s</xliff:g> 分钟</item>
+        <item quantity="other"><xliff:g example="7" id="number">%1$s</xliff:g> 分钟</item>
     </plurals>
     <string name="seconds_0">0 秒</string>
     <plurals name="seconds">
-        <item quantity="other"><xliff:g id="number">%s</xliff:g> 秒</item>
+        <item quantity="other"><xliff:g example="7" id="number">%s</xliff:g> 秒</item>
     </plurals>
 
     <!--Shortcut-->
@@ -738,7 +738,7 @@
     <string name="billing_subscribe">订阅</string>
     <string name="billing_owned">已拥有</string>
     <string name="billing_per_year">/年</string>
-    <string name="billing_explanation" formatted="false">"轻触“订阅”，您的Google Play Store账户将会被收取相应的费用。您的订购将会以相同的价格并根据方案的周期自动续订，直到您在当前订购周期过期前至少24个小时从Google Play Store的订购中取消它。轻触“订阅”意味着您同意我们的<xliff:g id="privacy_policy">%s</xliff:g>和<xliff:g id="terms">%s</xliff:g>。"</string>
+    <string name="billing_explanation" formatted="false">"轻触“订阅”，您的Google Play Store账户将会被收取相应的费用。您的订购将会以相同的价格并根据方案的周期自动续订，直到您在当前订购周期过期前至少24个小时从Google Play Store的订购中取消它。轻触“订阅”意味着您同意我们的<xliff:g example="Privacy policy" id="privacy_policy">%1$s</xliff:g>和<xliff:g example="Terms" id="terms">%2$s</xliff:g>。"</string>
     <string name="billing_cancel_anytime">定期支付，随时可以取消。</string>
     <string name="billing_not_supported">目前暂时不支持订阅</string>
     <string name="billing_connect_issue">连接到Google Play的时候发生了一个错误。\n\n这个问题可能只是暂时的，因此请稍后重试。</string>

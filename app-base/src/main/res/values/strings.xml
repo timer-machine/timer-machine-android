@@ -856,7 +856,7 @@
     <string name="billing_subscribe">Subscribe</string>
     <string name="billing_owned">Owned</string>
     <string name="billing_per_year">/Year</string>
-    <string name="billing_explanation" formatted="false">"By tapping "Subscribe," your payment will be charged to your Google Play Store account. Your subscription will automatically renew for the same plan length at the same price until you cancel it on Subscriptions in the Google Play Store at least 24 hours before the end of the current period. By tapping "Subscribe," you agree to our <xliff:g example="Privacy policy" id="privacy_policy">%s</xliff:g> and <xliff:g example="Terms" id="terms">%s</xliff:g>."</string>
+    <string name="billing_explanation" formatted="false">"By tapping "Subscribe," your payment will be charged to your Google Play Store account. Your subscription will automatically renew for the same plan length at the same price until you cancel it on Subscriptions in the Google Play Store at least 24 hours before the end of the current period. By tapping "Subscribe," you agree to our <xliff:g example="Privacy policy" id="privacy_policy">%1$s</xliff:g> and <xliff:g example="Terms" id="terms">%2$s</xliff:g>."</string>
     <string name="billing_cancel_anytime">Recurring billing. Cancel anytime.</string>
     <string name="billing_not_supported">Subscriptions are not supported at the moment</string>
     <string name="billing_connect_issue">There was an error connecting with Google Play.\n\nThis issue might be temporary, so please try again in a few minutes.</string>
