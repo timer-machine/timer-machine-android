@@ -692,7 +692,7 @@
     <string name="intro_exit_difficult_app_alert">如果不完成使用教程的话，应用可能会难以上手。</string>
     <string name="intro_exit_previous_hint">如果要返回上一步，请点击屏幕底端的<b>左箭头</b>。</string>
 
-    <string name="intro_location">你可以在“帮助与反馈”中找到该使用教程。</string>
+    <string name="intro_location">你可以在“帮助与反馈”中找到该使用教程</string>
 
     <string name="tip_missed_timer"><b>计时器被非正常地停止了！</b>\n\n这很有可能是系统杀掉了在后台的应用。<b>为了解决该问题，请考虑将本应用在系统设置中白名单。</b></string>
 
@@ -710,7 +710,7 @@
     <string name="whitelist_disclaimer_yes">查看白名单指南</string>
     <string name="whitelist_disclaimer_no">不，我已了解潜在的后果</string>
     <string name="whitelist_disclaimer_no_confirmation">跳过该指南？</string>
-    <string name="whitelist_location">你可以在“帮助与反馈”中找到该白名单指南。</string>
+    <string name="whitelist_location">你可以在“帮助与反馈”中找到该白名单指南</string>
 
     <string name="whitelist_intro">许多Android制造商会强制关闭运行中的后台应用，从而导致该应用无法正常提醒。\n\n请在设置中允许自启动、允许后台运行、关闭电池优化等。\n\n这里有一些具体方法：</string>
     <string name="whitelist_don_t_kill_desp">一个提供了很多设置方法的英文网站</string>

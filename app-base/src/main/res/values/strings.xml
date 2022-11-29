@@ -810,7 +810,7 @@
     <string name="intro_exit_difficult_app_alert">Without finishing the tutorial, the app may be confusing to use.</string>
     <string name="intro_exit_previous_hint">To go back to the previous step, click the <b>Left Arrow</b> at the bottom of the screen.</string>
 
-    <string name="intro_location">You can find the tutorial in \"Help &amp; Feedback.\"</string>
+    <string name="intro_location">You can find the tutorial in \"Help &amp; Feedback\"</string>
 
     <string name="tip_missed_timer"><b>Some timers are stopped abnormally!</b>\n\nIt is probably because the system kills the app in the background. <b>To resolve this problem, please consider whitelisting this app in system settings.</b></string>
 
@@ -828,7 +828,7 @@
     <string name="whitelist_disclaimer_yes">Check Whitelist Guideline</string>
     <string name="whitelist_disclaimer_no">No, I understand the consequences</string>
     <string name="whitelist_disclaimer_no_confirmation">Skip the guideline?</string>
-    <string name="whitelist_location">You can find Whitelist Guideline in \"Help &amp; Feedback.\"</string>
+    <string name="whitelist_location">You can find Whitelist Guideline in \"Help &amp; Feedback\"</string>
 
     <string name="whitelist_intro">Most Android manufacturers shut down running background apps by force, making apps stops reminding you.\n\nPlease allow auto-start, allow background running, turn off battery optimization, etc., in the settings.\n\nHere are some instructions: </string>
     <string name="whitelist_don_t_kill_desp">A website that provides many solutions</string>
