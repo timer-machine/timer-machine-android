@@ -362,7 +362,14 @@ internal class CloudBackupFragment : PreferenceFragmentCompat() {
 
     private fun confirmToDeleteAccount(context: Context) {
         val dialog = MaterialAlertDialogBuilder(context)
-            .setMessage(RBase.string.account_delete_confirmation)
+            .setMessage(
+                buildSpannedString {
+                    append(context.getText(RBase.string.account_delete_confirmation_title))
+                    appendLine()
+                    appendLine()
+                    append(context.getText(RBase.string.account_delete_confirmation_desp))
+                }
+            )
             .setPositiveButton(RBase.string.ok, null)
             .setNegativeButton(RBase.string.cancel, null)
             .show()

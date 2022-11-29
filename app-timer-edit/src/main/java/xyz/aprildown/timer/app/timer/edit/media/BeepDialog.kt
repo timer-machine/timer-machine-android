@@ -2,11 +2,15 @@ package xyz.aprildown.timer.app.timer.edit.media
 
 import android.content.Context
 import android.text.InputType
+import android.text.Spanned
+import android.text.style.BulletSpan
 import androidx.collection.ArrayMap
 import androidx.collection.arrayMapOf
+import androidx.core.text.buildSpannedString
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import xyz.aprildown.timer.app.base.media.Beeper
 import xyz.aprildown.timer.component.key.SimpleInputDialog
+import xyz.aprildown.tools.helper.dimen
 import xyz.aprildown.timer.app.base.R as RBase
 
 internal class BeepDialog(private val context: Context) {
@@ -66,7 +70,20 @@ internal class BeepDialog(private val context: Context) {
             titleRes = RBase.string.beep_count_title,
             preFill = oldCount.toString(),
             inputType = InputType.TYPE_CLASS_NUMBER,
-            messageRes = RBase.string.beep_count_intro
+            message = buildSpannedString {
+                val gapWidth = context.dimen(RBase.dimen.bullet_span_gap_width)
+                append(
+                    context.getString(RBase.string.beep_count_intro_usage),
+                    BulletSpan(gapWidth),
+                    Spanned.SPAN_EXCLUSIVE_EXCLUSIVE
+                )
+                appendLine()
+                append(
+                    context.getString(RBase.string.beep_count_intro_0_meaning),
+                    BulletSpan(gapWidth),
+                    Spanned.SPAN_EXCLUSIVE_EXCLUSIVE
+                )
+            },
         ) {
             func.invoke(it.toIntOrNull() ?: 0)
         }

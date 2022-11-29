@@ -155,8 +155,8 @@
     <string name="behaviour_vibration">Vibration</string>
     <string name="behaviour_vibration_help">Vibrate the phone at this step</string>
     <string name="vibration_count">Count</string>
-    <string name="vibration_count_desp_0">0 for keeping vibrating until the end of the step.</string>
-    <string name="vibration_count_desp_range">The count should be between 0 and 100.</string>
+    <string name="vibration_count_desp_0">0 for keeping vibrating until the end of the step</string>
+    <string name="vibration_count_desp_range">The count should be between 0 and 100</string>
     <string name="vibration_pattern">Pattern</string>
     <string name="vibration_short">Short Vibration</string>
     <string name="vibration_normal">Normal Vibration</string>
@@ -248,7 +248,8 @@
     <string name="behaviour_beep">Beep</string>
     <string name="behaviour_beep_help">Play a beep every second</string>
     <string name="beep_count_title">Beep Count</string>
-    <string name="beep_count_intro">* Enter the times after which the beep should stop.\n* 0 for keeping beeping until the end of the step.</string>
+    <string name="beep_count_intro_usage">Enter the times after which the beep should stop</string>
+    <string name="beep_count_intro_0_meaning">0 for keeping beeping until the end of the step</string>
     <string name="beep_sound">Beep Sound</string>
     <string name="beep_respect_other">Respect Other Sound</string>
 
@@ -271,7 +272,8 @@
     <string name="behaviour_notification">Notification</string>
     <string name="behaviour_notification_help">Show another notification at the start of a step</string>
     <string name="notification_duration">Duration</string>
-    <string name="notification_duration_desp">* Enter the number of seconds after which the notification will be dismissed automatically.\n* 0 for not dismissing automatically.</string>
+    <string name="notification_duration_desp_usage">Enter the number of seconds after which the notification will be dismissed automatically</string>
+    <string name="notification_duration_desp_0_meaning">0 for not dismissing automatically</string>
     <string name="notification_settings">Edit notification</string>
 
     <string name="behaviour_flashlight">Flashlight</string>
@@ -842,7 +844,8 @@
     <string name="account_sign_out">Sign Out</string>
     <string name="account_signing_out">Signing Out…</string>
     <string name="account_delete">Delete Account and All Backup</string>
-    <string name="account_delete_confirmation">Delete your account and all your backup data?\n\nThis does <b>NOT</b> affect your subscription. You can manage your subscription in the Google Play Store</string>
+    <string name="account_delete_confirmation_title">Delete your account and all your backup data?</string>
+    <string name="account_delete_confirmation_desp">This does <b>NOT</b> affect your subscription. You can manage your subscription in the Google Play Store.</string>
     <string name="account_deleting">Deleting Account…</string>
     <string name="account_sign_in">Register / Sign In</string>
 
@@ -853,7 +856,7 @@
     <string name="billing_subscribe">Subscribe</string>
     <string name="billing_owned">Owned</string>
     <string name="billing_per_year">/Year</string>
-    <string name="billing_explanation" formatted="false">"By tapping "Subscribe," your payment will be charged to your Google Play Store account. Your subscription will automatically renew for the same plan length at the same price until you cancel it on Subscriptions in the Google Play Store at least 24 hours before the end of the current period. By tapping "Subscribe," you agree to our %s and %s."</string>
+    <string name="billing_explanation" formatted="false">"By tapping "Subscribe," your payment will be charged to your Google Play Store account. Your subscription will automatically renew for the same plan length at the same price until you cancel it on Subscriptions in the Google Play Store at least 24 hours before the end of the current period. By tapping "Subscribe," you agree to our <xliff:g example="Privacy policy" id="privacy_policy">%s</xliff:g> and <xliff:g example="Terms" id="terms">%s</xliff:g>."</string>
     <string name="billing_cancel_anytime">Recurring billing. Cancel anytime.</string>
     <string name="billing_not_supported">Subscriptions are not supported at the moment</string>
     <string name="billing_connect_issue">There was an error connecting with Google Play.\n\nThis issue might be temporary, so please try again in a few minutes.</string>

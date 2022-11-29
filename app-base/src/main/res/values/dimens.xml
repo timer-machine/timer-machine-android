@@ -5,4 +5,6 @@
     <!-- Lollipop and later normal floating action button container height. -->
     <dimen name="fab_height">88dp</dimen>
 
+    <dimen name="bullet_span_gap_width">8dp</dimen>
+
 </resources>

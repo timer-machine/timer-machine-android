@@ -22,14 +22,14 @@ class SimpleInputDialog(
     private val context: Context
 ) {
     fun show(
-        title: String? = null,
+        title: CharSequence? = null,
         @StringRes titleRes: Int = 0,
 
-        preFill: String? = null,
+        preFill: CharSequence? = null,
         inputType: Int = InputType.TYPE_CLASS_TEXT,
         hint: String? = null,
 
-        message: String? = null,
+        message: CharSequence? = null,
         @StringRes messageRes: Int = 0,
 
         onInput: (String) -> Unit
