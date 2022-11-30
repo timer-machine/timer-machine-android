@@ -264,8 +264,6 @@
     <string name="voice_variable_timer_duration_desp">Duración del temporizador</string>
     <string name="voice_variable_timer_elapsed_desp">Tiempo transcurrido del temporizador</string>
     <string name="voice_variable_timer_end_time_desp">Hora final del temporizador</string>
-    <string name="beep_count_intro">* Introduzca las veces a las que debe dejar de sonar el timbre.
-\n* 0 para mantener el timbre hasta el final de la etapa.</string>
     <string name="voice_variable_group_name_desp">Nombre del grupo</string>
     <string name="count_times_desp">* Introduce el numero de segundos contados al final de la etapa</string>
     <string name="sample_timer_template_2_stages_end">Enfriamento</string>
@@ -288,8 +286,6 @@
     </plurals>
     <string name="half_option_music_desp">Reproduce el timbre por defecto</string>
     <string name="behaviour_count">Conteo</string>
-    <string name="notification_duration_desp">* Introduzca el número de segundos después de los cuales la notificación será descartada automáticamente.
-\n* 0 para que no se cierre automáticamente.</string>
     <string name="sample_timer_template_finish">Final</string>
     <string name="sample_timer_template_done">Completado</string>
     <string name="sample_timer_template_2_stages_high">Alta intensidad</string>
