@@ -45,6 +45,11 @@ to [open an issue](https://github.com/timer-machine/timer-machine-android/issues
 If you would like to create a pull request, please open an issue before contributing because I'm
 cleaning up and improving the codebase. It would avoid some repetitive work.
 
+## Translations
+
+If you'd like to add translations, please join the project
+on [Weblate](https://hosted.weblate.org/engage/timer-machine/).
+
 ## License
 
 TimeR Machine is under the [GNU General Public License v3.0](LICENSE).
