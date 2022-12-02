@@ -42,11 +42,11 @@ internal class VisibleStep(
             GestureDetectorCompat(
                 binding.root.context,
                 object : GestureDetector.SimpleOnGestureListener() {
-                    override fun onLongPress(e: MotionEvent?) {
+                    override fun onLongPress(e: MotionEvent) {
                         stepLongClickListener.onStepLongClick(this@VisibleStep)
                     }
 
-                    override fun onDoubleTap(e: MotionEvent?): Boolean {
+                    override fun onDoubleTap(e: MotionEvent): Boolean {
                         stepLongClickListener.onStepDoubleTap(this@VisibleStep)
                         return true
                     }

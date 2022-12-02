@@ -106,9 +106,9 @@ internal class CalendarEventView(
             mode = source.readInt()
         }
 
-        override fun writeToParcel(dest: Parcel?, flags: Int) {
+        override fun writeToParcel(dest: Parcel, flags: Int) {
             super.writeToParcel(dest, flags)
-            dest?.writeInt(mode)
+            dest.writeInt(mode)
         }
 
         companion object CREATOR : Parcelable.Creator<SavedState> {

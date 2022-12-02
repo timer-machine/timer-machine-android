@@ -32,7 +32,7 @@ internal class VisibleGroup(
             GestureDetectorCompat(
                 holder.itemView.context,
                 object : GestureDetector.SimpleOnGestureListener() {
-                    override fun onDoubleTap(e: MotionEvent?): Boolean {
+                    override fun onDoubleTap(e: MotionEvent): Boolean {
                         stepLongClickListener.onStepDoubleTap(this@VisibleGroup)
                         return true
                     }
