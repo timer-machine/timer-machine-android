@@ -19,6 +19,8 @@ android {
         vectorDrawables.useSupportLibrary true
 
         archivesBaseName = "TimeR Machine-v${versionName}(${versionCode})"
+
+        resConfigs "en", "zh-rCN", "zh-rHK", "zh-rTW"
     }
 
     compileOptions {
