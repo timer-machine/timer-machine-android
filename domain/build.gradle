@@ -6,6 +6,7 @@ plugins {
 }
 
 android {
+    namespace 'xyz.aprildown.timer.domain'
     buildTypes {
         debug {
             buildConfigField "boolean", "SHOW_FIRST_TIME", "Boolean.parseBoolean(\"false\")"

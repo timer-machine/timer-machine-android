@@ -3,6 +3,10 @@ plugins {
     id 'kotlin-android'
 }
 
+android {
+    namespace 'xyz.aprildown.timer.workshop'
+}
+
 dependencies {
     implementation project(':app-base')
 

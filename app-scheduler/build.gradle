@@ -5,6 +5,10 @@ plugins {
     id 'dagger.hilt.android.plugin'
 }
 
+android {
+    namespace 'xyz.aprildown.timer.app.scheduler'
+}
+
 dependencies {
     implementation project(':app-base')
 

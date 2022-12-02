@@ -6,6 +6,10 @@ plugins {
     id 'com.google.android.libraries.mapsplatform.secrets-gradle-plugin'
 }
 
+android {
+    namespace 'xyz.aprildown.timer.analytics'
+}
+
 secrets {
     defaultPropertiesFileName = 'secrets.defaults.properties'
 }
