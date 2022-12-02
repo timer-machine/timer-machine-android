@@ -3,6 +3,10 @@ plugins {
     id 'kotlin-android'
 }
 
+android {
+    namespace 'xyz.aprildown.timer.component.settings'
+}
+
 dependencies {
     api project(':app-base')
     implementation project(':component-key')

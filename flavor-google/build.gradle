@@ -5,6 +5,10 @@ plugins {
     id 'dagger.hilt.android.plugin'
 }
 
+android {
+    namespace 'xyz.aprildown.timer.flavor.google'
+}
+
 dependencies {
     implementation project(':app-base')
     implementation project(':component-key')

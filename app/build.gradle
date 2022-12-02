@@ -8,6 +8,7 @@ plugins {
 }
 
 android {
+    namespace 'io.github.deweyreed.timer'
     compileSdkVersion versions.compile_sdk
     defaultConfig {
         applicationId "io.github.deweyreed.timer"
@@ -20,7 +21,7 @@ android {
 
         archivesBaseName = "TimeR Machine-v${versionName}(${versionCode})"
 
-        resConfigs "en", "zh-rCN", "zh-rHK", "zh-rTW"
+        resConfigs 'en', 'zh-rCN', 'zh-rHK', 'zh-rTW'
     }
 
     compileOptions {
@@ -63,15 +64,18 @@ android {
     buildFeatures {
         viewBinding true
     }
-
     packagingOptions {
-        exclude 'META-INF/library_release.kotlin_module'
-        exclude 'META-INF/library-core_release.kotlin_module'
+        resources {
+            excludes += [
+                    'META-INF/library_release.kotlin_module',
+                    'META-INF/library-core_release.kotlin_module',
+            ]
+        }
     }
 
-    lintOptions {
-        warningsAsErrors true
+    lint {
         checkDependencies true
+        warningsAsErrors true
     }
 }
 

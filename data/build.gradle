@@ -6,6 +6,7 @@ plugins {
 }
 
 android {
+    namespace 'xyz.aprildown.timer.data'
     defaultConfig {
         javaCompileOptions {
             annotationProcessorOptions {

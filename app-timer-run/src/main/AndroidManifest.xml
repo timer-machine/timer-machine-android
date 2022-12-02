@@ -1,6 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    package="xyz.aprildown.timer.app.timer.run">
+    xmlns:tools="http://schemas.android.com/tools">
 
     <application android:theme="@style/AppTheme.LibraryPreview">
         <service
