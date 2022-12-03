@@ -5,14 +5,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import com.github.deweyreed.tools.helper.gone
+import com.github.deweyreed.tools.helper.show
 import xyz.aprildown.timer.app.intro.Instruction
 import xyz.aprildown.timer.app.intro.InstructionView
 import xyz.aprildown.timer.app.intro.R
 import xyz.aprildown.timer.app.intro.clearInteractionIndicator
 import xyz.aprildown.timer.app.intro.databinding.LayoutIntroStartListBinding
 import xyz.aprildown.timer.app.intro.showTooltip
-import xyz.aprildown.tools.helper.gone
-import xyz.aprildown.tools.helper.show
 import xyz.aprildown.timer.app.base.R as RBase
 import xyz.aprildown.timer.app.timer.list.R as RTimerList
 

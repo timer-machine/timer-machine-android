@@ -18,6 +18,9 @@ import androidx.core.view.WindowCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.updateLayoutParams
 import androidx.core.view.updatePadding
+import com.github.deweyreed.tools.arch.observeEvent
+import com.github.deweyreed.tools.helper.startDrawableAnimation
+import com.github.deweyreed.tools.helper.stopDrawableAnimation
 import dagger.hilt.android.AndroidEntryPoint
 import xyz.aprildown.timer.app.base.ui.BaseActivity
 import xyz.aprildown.timer.app.base.utils.setTime
@@ -27,10 +30,7 @@ import xyz.aprildown.timer.domain.entities.TimerEntity
 import xyz.aprildown.timer.domain.utils.Constants
 import xyz.aprildown.timer.presentation.screen.ScreenViewModel
 import xyz.aprildown.timer.presentation.stream.MachineContract
-import xyz.aprildown.tools.arch.observeEvent
-import xyz.aprildown.tools.helper.startDrawableAnimation
-import xyz.aprildown.tools.helper.stopDrawableAnimation
-import xyz.aprildown.tools.R as RTools
+import com.github.deweyreed.tools.R as RTools
 
 @AndroidEntryPoint
 class ScreenActivity : BaseActivity() {

@@ -15,6 +15,12 @@ import androidx.core.text.buildSpannedString
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.NavHostFragment
+import com.github.deweyreed.tools.anko.longSnackbar
+import com.github.deweyreed.tools.arch.observeEvent
+import com.github.deweyreed.tools.helper.gone
+import com.github.deweyreed.tools.helper.requireCallback
+import com.github.deweyreed.tools.helper.restartWithFading
+import com.github.deweyreed.tools.helper.show
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import dagger.hilt.android.AndroidEntryPoint
 import ernestoyaquello.com.verticalstepperform.VerticalStepperFormView
@@ -29,12 +35,6 @@ import xyz.aprildown.timer.app.base.utils.AppPreferenceProvider
 import xyz.aprildown.timer.domain.usecases.data.ImportAppData
 import xyz.aprildown.timer.domain.utils.AppTracker
 import xyz.aprildown.timer.presentation.backup.ImportViewModel
-import xyz.aprildown.tools.anko.longSnackbar
-import xyz.aprildown.tools.arch.observeEvent
-import xyz.aprildown.tools.helper.gone
-import xyz.aprildown.tools.helper.requireCallback
-import xyz.aprildown.tools.helper.restartWithFading
-import xyz.aprildown.tools.helper.show
 import javax.inject.Inject
 import xyz.aprildown.timer.app.base.R as RBase
 

@@ -7,6 +7,7 @@ import android.content.Intent
 import android.os.Build
 import androidx.core.content.ContextCompat
 import androidx.core.content.getSystemService
+import com.github.deweyreed.tools.helper.HandlerHelper
 import dagger.hilt.android.AndroidEntryPoint
 import xyz.aprildown.timer.app.timer.run.MachineService
 import xyz.aprildown.timer.data.job.SchedulerJob
@@ -16,7 +17,6 @@ import xyz.aprildown.timer.data.job.SchedulerJob.Companion.RECEIVE_JOB_ACTION
 import xyz.aprildown.timer.domain.entities.SchedulerEntity
 import xyz.aprildown.timer.domain.entities.TimerEntity
 import xyz.aprildown.timer.presentation.scheduler.SchedulerReceiverPresenter
-import xyz.aprildown.tools.helper.HandlerHelper
 import javax.inject.Inject
 
 /**

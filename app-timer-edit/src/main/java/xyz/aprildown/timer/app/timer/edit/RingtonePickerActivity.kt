@@ -11,13 +11,14 @@ import android.view.MenuItem
 import android.view.View
 import androidx.core.content.edit
 import androidx.core.view.MenuItemCompat
+import com.github.deweyreed.tools.compat.getParcelableExtraCompat
+import com.github.deweyreed.tools.helper.toColorStateList
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import dagger.hilt.android.AndroidEntryPoint
 import xyz.aprildown.timer.app.base.data.PreferenceData.storedAudioTypeValue
 import xyz.aprildown.timer.app.base.ui.BaseActivity
 import xyz.aprildown.timer.app.base.ui.newDynamicTheme
 import xyz.aprildown.tools.helper.safeSharedPreference
-import xyz.aprildown.tools.helper.toColorStateList
 import xyz.aprildown.ultimateringtonepicker.RingtonePickerFragment
 import xyz.aprildown.ultimateringtonepicker.UltimateRingtonePicker
 import xyz.aprildown.timer.app.base.R as RBase
@@ -42,7 +43,7 @@ class RingtonePickerActivity :
 
         if (savedInstanceState == null) {
             val settings =
-                intent.getParcelableExtra<UltimateRingtonePicker.Settings>(EXTRA_SETTINGS)
+                intent.getParcelableExtraCompat<UltimateRingtonePicker.Settings>(EXTRA_SETTINGS)
             requireNotNull(settings)
             val fragment = settings.createFragment()
             supportFragmentManager.beginTransaction()
@@ -109,7 +110,7 @@ class RingtonePickerActivity :
         invalidateOptionsMenu()
 
         val currentSettings =
-            intent.getParcelableExtra<UltimateRingtonePicker.Settings>(EXTRA_SETTINGS)
+            intent.getParcelableExtraCompat<UltimateRingtonePicker.Settings>(EXTRA_SETTINGS)
         requireNotNull(currentSettings)
         val newSettings = currentSettings.copy(
             systemRingtonePicker = currentSettings.systemRingtonePicker?.copy(

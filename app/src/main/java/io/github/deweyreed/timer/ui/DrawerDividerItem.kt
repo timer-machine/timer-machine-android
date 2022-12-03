@@ -5,8 +5,8 @@ import androidx.core.view.ViewCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.mikepenz.materialdrawer.model.AbstractDrawerItem
 import com.mikepenz.materialdrawer.model.DividerDrawerItem
+import com.github.deweyreed.tools.R as RTools
 import com.mikepenz.materialdrawer.R as RMaterialDrawer
-import xyz.aprildown.tools.R as RTools
 
 /**
  * [DividerDrawerItem]

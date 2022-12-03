@@ -12,6 +12,9 @@ import androidx.navigation.fragment.NavHostFragment
 import androidx.preference.ListPreference
 import androidx.preference.Preference
 import androidx.preference.PreferenceFragmentCompat
+import com.github.deweyreed.tools.helper.IntentHelper
+import com.github.deweyreed.tools.helper.createChooserIntentIfDead
+import com.github.deweyreed.tools.helper.startActivityOrNothing
 import dagger.hilt.android.AndroidEntryPoint
 import pub.devrel.easypermissions.EasyPermissions
 import xyz.aprildown.timer.app.base.data.DarkTheme
@@ -25,9 +28,6 @@ import xyz.aprildown.timer.app.base.utils.NavigationUtils.subLevelNavigate
 import xyz.aprildown.timer.component.settings.DarkThemeDialog
 import xyz.aprildown.timer.component.settings.TweakTimeDialog
 import xyz.aprildown.timer.domain.TimeUtils
-import xyz.aprildown.tools.helper.IntentHelper
-import xyz.aprildown.tools.helper.createChooserIntentIfDead
-import xyz.aprildown.tools.helper.startActivityOrNothing
 import java.util.Optional
 import javax.inject.Inject
 import xyz.aprildown.timer.app.base.R as RBase

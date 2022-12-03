@@ -11,11 +11,11 @@ import android.widget.TextView
 import androidx.annotation.StringRes
 import androidx.appcompat.app.AlertDialog
 import androidx.core.view.updateLayoutParams
+import com.github.deweyreed.tools.anko.dip
+import com.github.deweyreed.tools.helper.gone
+import com.github.deweyreed.tools.helper.onImeActionClick
+import com.github.deweyreed.tools.helper.setTextAndSelectEnd
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
-import xyz.aprildown.tools.anko.dip
-import xyz.aprildown.tools.helper.gone
-import xyz.aprildown.tools.helper.onImeActionClick
-import xyz.aprildown.tools.helper.setTextAndSelectEnd
 import xyz.aprildown.timer.app.base.R as RBase
 
 class SimpleInputDialog(

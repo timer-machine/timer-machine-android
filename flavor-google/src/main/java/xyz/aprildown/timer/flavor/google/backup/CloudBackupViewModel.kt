@@ -6,6 +6,8 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
 import androidx.lifecycle.liveData
 import androidx.lifecycle.switchMap
+import com.github.deweyreed.tools.arch.Event
+import com.github.deweyreed.tools.arch.EventObserver
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.StorageMetadata
@@ -24,8 +26,6 @@ import xyz.aprildown.timer.flavor.google.backup.usecases.CurrentBackupState
 import xyz.aprildown.timer.flavor.google.backup.usecases.GetRestoreReferences
 import xyz.aprildown.timer.flavor.google.backup.usecases.RestoreFromCloud
 import xyz.aprildown.timer.presentation.BaseViewModel
-import xyz.aprildown.tools.arch.Event
-import xyz.aprildown.tools.arch.EventObserver
 import javax.inject.Inject
 
 /**

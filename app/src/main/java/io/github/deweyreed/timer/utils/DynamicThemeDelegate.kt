@@ -6,6 +6,7 @@ import android.util.AttributeSet
 import android.view.View
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.withStyledAttributes
+import com.github.deweyreed.tools.helper.themeColor
 import com.nex3z.togglebuttongroup.button.CircularToggle
 import io.github.deweyreed.scrollhmspicker.ScrollHmsPicker
 import io.github.deweyreed.timer.R
@@ -13,7 +14,6 @@ import xyz.aprildown.theme.Theme
 import xyz.aprildown.theme.ThemeInflationDelegate
 import xyz.aprildown.timer.app.timer.list.record.RecordTimersButton
 import xyz.aprildown.timer.component.key.NameLoopView
-import xyz.aprildown.tools.helper.themeColor
 import io.github.deweyreed.scrollhmspicker.R as RScrollHmsPicker
 import xyz.aprildown.timer.component.key.R as RComponentKey
 

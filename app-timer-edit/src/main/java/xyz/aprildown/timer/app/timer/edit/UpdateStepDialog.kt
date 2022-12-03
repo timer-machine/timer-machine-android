@@ -9,6 +9,8 @@ import androidx.cardview.widget.CardView
 import androidx.core.net.toUri
 import androidx.core.widget.ImageViewCompat
 import androidx.fragment.app.DialogFragment
+import com.github.deweyreed.tools.helper.gone
+import com.github.deweyreed.tools.helper.toColorStateList
 import com.github.zawadz88.materialpopupmenu.popupMenu
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import xyz.aprildown.timer.app.base.data.PreferenceData.getTypeColor
@@ -28,8 +30,6 @@ import xyz.aprildown.timer.domain.entities.toNotificationAction
 import xyz.aprildown.timer.domain.entities.toScreenAction
 import xyz.aprildown.timer.domain.entities.toVibrationAction
 import xyz.aprildown.timer.domain.entities.toVoiceAction
-import xyz.aprildown.tools.helper.gone
-import xyz.aprildown.tools.helper.toColorStateList
 import xyz.aprildown.ultimateringtonepicker.RingtonePickerDialog
 import xyz.aprildown.ultimateringtonepicker.UltimateRingtonePicker
 import xyz.aprildown.timer.app.base.R as RBase

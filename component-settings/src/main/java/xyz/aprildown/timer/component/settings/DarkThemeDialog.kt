@@ -6,13 +6,13 @@ import android.view.LayoutInflater
 import android.widget.CompoundButton
 import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
+import com.github.deweyreed.tools.helper.gone
+import com.github.deweyreed.tools.helper.show
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import xyz.aprildown.timer.app.base.data.DarkTheme
 import xyz.aprildown.timer.app.base.widgets.TimePickerFix
 import xyz.aprildown.timer.component.settings.databinding.DialogDarkThemeBinding
 import xyz.aprildown.timer.domain.TimeUtils
-import xyz.aprildown.tools.helper.gone
-import xyz.aprildown.tools.helper.show
 import xyz.aprildown.timer.app.base.R as RBase
 
 class DarkThemeDialog(private val context: Context) {

@@ -24,6 +24,13 @@ import androidx.core.widget.doAfterTextChanged
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.github.deweyreed.tools.anko.dip
+import com.github.deweyreed.tools.anko.snackbar
+import com.github.deweyreed.tools.arch.observeEvent
+import com.github.deweyreed.tools.helper.IntentHelper
+import com.github.deweyreed.tools.helper.gone
+import com.github.deweyreed.tools.helper.show
+import com.github.deweyreed.tools.helper.startActivityOrNothing
 import com.github.zawadz88.materialpopupmenu.popupMenu
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.mikepenz.fastadapter.FastAdapter
@@ -58,13 +65,6 @@ import xyz.aprildown.timer.domain.usecases.Fruit
 import xyz.aprildown.timer.domain.utils.Constants
 import xyz.aprildown.timer.presentation.edit.EditViewModel
 import xyz.aprildown.timer.presentation.stream.accumulateTime
-import xyz.aprildown.tools.anko.dip
-import xyz.aprildown.tools.anko.snackbar
-import xyz.aprildown.tools.arch.observeEvent
-import xyz.aprildown.tools.helper.IntentHelper
-import xyz.aprildown.tools.helper.gone
-import xyz.aprildown.tools.helper.show
-import xyz.aprildown.tools.helper.startActivityOrNothing
 import javax.inject.Inject
 import xyz.aprildown.timer.app.base.R as RBase
 

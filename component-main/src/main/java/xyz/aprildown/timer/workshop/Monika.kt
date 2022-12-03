@@ -17,7 +17,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
-import xyz.aprildown.tools.anko.sp
+import com.github.deweyreed.tools.anko.sp
 
 class Monika : Fragment() {
     override fun onCreateView(

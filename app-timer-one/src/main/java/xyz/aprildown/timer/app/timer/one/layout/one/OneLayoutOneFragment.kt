@@ -10,6 +10,9 @@ import android.widget.SeekBar
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.Fragment
+import com.github.deweyreed.tools.anko.dp
+import com.github.deweyreed.tools.helper.gone
+import com.github.deweyreed.tools.helper.show
 import com.github.zawadz88.materialpopupmenu.popupMenu
 import xyz.aprildown.timer.app.base.data.PreferenceData
 import xyz.aprildown.timer.app.base.data.PreferenceData.oneOneFourActions
@@ -29,9 +32,6 @@ import xyz.aprildown.timer.component.key.ListItemWithLayout
 import xyz.aprildown.timer.component.key.TimePanelLayout
 import xyz.aprildown.timer.component.settings.TweakTimeDialog
 import xyz.aprildown.timer.domain.entities.TimerEntity
-import xyz.aprildown.tools.anko.dp
-import xyz.aprildown.tools.helper.gone
-import xyz.aprildown.tools.helper.show
 
 internal class OneLayoutOneFragment :
     Fragment(R.layout.fragment_one),

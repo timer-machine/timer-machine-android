@@ -3,6 +3,7 @@ package xyz.aprildown.timer.presentation.timer
 import android.content.Intent
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.Observer
+import com.github.deweyreed.tools.arch.Event
 import kotlinx.coroutines.runBlocking
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertTrue
@@ -35,7 +36,6 @@ import xyz.aprildown.timer.domain.usecases.timer.GetTimerInfoFlow
 import xyz.aprildown.timer.presentation.StreamMachineIntentProvider
 import xyz.aprildown.timer.presentation.stream.StreamState
 import xyz.aprildown.timer.presentation.testCoroutineDispatcher
-import xyz.aprildown.tools.arch.Event
 
 class TimerViewModelTest {
 

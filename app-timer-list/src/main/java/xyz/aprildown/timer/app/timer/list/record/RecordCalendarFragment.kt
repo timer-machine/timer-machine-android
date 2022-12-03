@@ -11,6 +11,11 @@ import android.widget.TextView
 import androidx.core.view.children
 import androidx.core.view.isInvisible
 import androidx.fragment.app.Fragment
+import com.github.deweyreed.tools.helper.gone
+import com.github.deweyreed.tools.helper.setTextIfChanged
+import com.github.deweyreed.tools.helper.show
+import com.github.deweyreed.tools.helper.themeColor
+import com.github.deweyreed.tools.helper.toColorStateList
 import com.kizitonwose.calendarview.model.CalendarDay
 import com.kizitonwose.calendarview.model.CalendarMonth
 import com.kizitonwose.calendarview.model.DayOwner
@@ -35,11 +40,6 @@ import xyz.aprildown.timer.domain.TimeUtils
 import xyz.aprildown.timer.domain.entities.TimerStampEntity
 import xyz.aprildown.timer.domain.usecases.record.GetRecords
 import xyz.aprildown.timer.presentation.timer.RecordViewModel
-import xyz.aprildown.tools.helper.gone
-import xyz.aprildown.tools.helper.setTextIfChanged
-import xyz.aprildown.tools.helper.show
-import xyz.aprildown.tools.helper.themeColor
-import xyz.aprildown.tools.helper.toColorStateList
 import java.text.DateFormatSymbols
 import java.time.Instant
 import java.time.LocalDate

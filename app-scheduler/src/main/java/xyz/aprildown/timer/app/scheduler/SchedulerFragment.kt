@@ -12,6 +12,14 @@ import androidx.navigation.fragment.NavHostFragment
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.github.deweyreed.tools.anko.longSnackbar
+import com.github.deweyreed.tools.arch.observeEvent
+import com.github.deweyreed.tools.helper.SoftDeleteHelper
+import com.github.deweyreed.tools.helper.color
+import com.github.deweyreed.tools.helper.drawable
+import com.github.deweyreed.tools.helper.getNumberFormattedQuantityString
+import com.github.deweyreed.tools.helper.tinted
+import com.github.deweyreed.tools.utils.withEmptyView
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
@@ -23,15 +31,7 @@ import xyz.aprildown.timer.domain.entities.SchedulerEntity
 import xyz.aprildown.timer.domain.usecases.scheduler.SetSchedulerEnable
 import xyz.aprildown.timer.domain.utils.AppConfig
 import xyz.aprildown.timer.presentation.scheduler.SchedulerViewModel
-import xyz.aprildown.tools.anko.longSnackbar
-import xyz.aprildown.tools.arch.observeEvent
-import xyz.aprildown.tools.helper.SoftDeleteHelper
-import xyz.aprildown.tools.helper.color
-import xyz.aprildown.tools.helper.drawable
-import xyz.aprildown.tools.helper.getNumberFormattedQuantityString
 import xyz.aprildown.tools.helper.safeSharedPreference
-import xyz.aprildown.tools.helper.tinted
-import xyz.aprildown.tools.utils.withEmptyView
 import com.mikepenz.materialize.R as RMaterialize
 import xyz.aprildown.timer.app.base.R as RBase
 

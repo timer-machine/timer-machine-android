@@ -2,6 +2,8 @@ package xyz.aprildown.timer.presentation.scheduler
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.Observer
+import com.github.deweyreed.tools.arch.Event
+import com.github.deweyreed.tools.helper.toInt
 import kotlinx.coroutines.runBlocking
 import org.junit.Assert
 import org.junit.Before
@@ -24,8 +26,6 @@ import xyz.aprildown.timer.domain.usecases.scheduler.GetSchedulers
 import xyz.aprildown.timer.domain.usecases.scheduler.SetSchedulerEnable
 import xyz.aprildown.timer.domain.usecases.timer.FindTimerInfo
 import xyz.aprildown.timer.presentation.testCoroutineDispatcher
-import xyz.aprildown.tools.arch.Event
-import xyz.aprildown.tools.helper.toInt
 
 class SchedulerViewModelTest {
 

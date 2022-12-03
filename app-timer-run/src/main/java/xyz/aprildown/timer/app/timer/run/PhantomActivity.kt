@@ -2,6 +2,7 @@ package xyz.aprildown.timer.app.timer.run
 
 import android.os.Bundle
 import androidx.core.content.ContextCompat
+import com.github.deweyreed.tools.anko.toast
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.runBlocking
 import xyz.aprildown.timer.app.base.ui.AppNavigator
@@ -9,7 +10,6 @@ import xyz.aprildown.timer.app.base.ui.BaseActivity
 import xyz.aprildown.timer.domain.entities.TimerEntity
 import xyz.aprildown.timer.domain.usecases.timer.FindTimerInfo
 import xyz.aprildown.timer.domain.utils.Constants
-import xyz.aprildown.tools.anko.toast
 import javax.inject.Inject
 import xyz.aprildown.timer.app.base.R as RBase
 

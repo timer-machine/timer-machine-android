@@ -13,14 +13,14 @@ import androidx.annotation.IdRes
 import androidx.appcompat.app.AlertDialog
 import androidx.core.text.buildSpannedString
 import androidx.core.widget.doOnTextChanged
+import com.github.deweyreed.tools.helper.dimen
+import com.github.deweyreed.tools.helper.onImeActionClick
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import xyz.aprildown.timer.app.base.media.VibrateHelper
 import xyz.aprildown.timer.app.timer.edit.R
 import xyz.aprildown.timer.app.timer.edit.databinding.DialogVibrationCountBinding
 import xyz.aprildown.timer.app.timer.edit.databinding.DialogVibrationPatternBinding
 import xyz.aprildown.timer.domain.entities.VibrationAction
-import xyz.aprildown.tools.helper.dimen
-import xyz.aprildown.tools.helper.onImeActionClick
 import xyz.aprildown.timer.app.base.R as RBase
 
 internal class VibrationDialog(private val context: Context) {

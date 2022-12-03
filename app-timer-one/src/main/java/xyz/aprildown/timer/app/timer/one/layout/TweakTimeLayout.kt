@@ -11,13 +11,13 @@ import android.view.View
 import android.widget.Button
 import android.widget.LinearLayout
 import androidx.core.view.forEachIndexed
+import com.github.deweyreed.tools.anko.dip
 import xyz.aprildown.chromemenu.AbstractAppMenuPropertiesDelegate
 import xyz.aprildown.chromemenu.AppMenuButtonHelper
 import xyz.aprildown.chromemenu.AppMenuHandler
 import xyz.aprildown.timer.app.base.data.PreferenceData
 import xyz.aprildown.timer.app.base.utils.produceTime
 import xyz.aprildown.timer.app.timer.one.R
-import xyz.aprildown.tools.anko.dip
 
 private fun Long.produceActionString(): String {
     return "%s %s".format(if (this >= 0) "+" else "-", this.produceTime())

@@ -9,13 +9,13 @@ import androidx.core.graphics.BlendModeColorFilterCompat
 import androidx.core.graphics.BlendModeCompat
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
+import com.github.deweyreed.tools.helper.color
+import com.github.deweyreed.tools.helper.drawable
+import com.github.deweyreed.tools.utils.ThemeColorUtils
 import xyz.aprildown.timer.app.base.R
-import xyz.aprildown.tools.helper.color
-import xyz.aprildown.tools.helper.drawable
-import xyz.aprildown.tools.utils.ThemeColorUtils
 import kotlin.math.abs
+import com.github.deweyreed.tools.R as RTools
 import com.mikepenz.materialize.R as RMaterialize
-import xyz.aprildown.tools.R as RTools
 
 class SpecialItemTouchHelperCallback(
     private val context: Context,

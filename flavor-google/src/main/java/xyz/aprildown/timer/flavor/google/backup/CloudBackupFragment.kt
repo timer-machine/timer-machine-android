@@ -23,6 +23,13 @@ import androidx.preference.Preference
 import androidx.preference.PreferenceFragmentCompat
 import androidx.preference.SwitchPreferenceCompat
 import com.firebase.ui.auth.AuthUI
+import com.github.deweyreed.tools.anko.longSnackbar
+import com.github.deweyreed.tools.anko.newTask
+import com.github.deweyreed.tools.anko.snackbar
+import com.github.deweyreed.tools.arch.observeEvent
+import com.github.deweyreed.tools.helper.IntentHelper
+import com.github.deweyreed.tools.helper.createChooserIntentIfDead
+import com.github.deweyreed.tools.helper.startActivityOrNothing
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
@@ -45,14 +52,7 @@ import xyz.aprildown.timer.flavor.google.backup.usecases.CurrentBackupStateError
 import xyz.aprildown.timer.flavor.google.showErrorDialog
 import xyz.aprildown.timer.flavor.google.utils.IapPromotionDialog
 import xyz.aprildown.timer.flavor.google.utils.causeFirstMessage
-import xyz.aprildown.tools.anko.longSnackbar
-import xyz.aprildown.tools.anko.newTask
-import xyz.aprildown.tools.anko.snackbar
-import xyz.aprildown.tools.arch.observeEvent
-import xyz.aprildown.tools.helper.IntentHelper
-import xyz.aprildown.tools.helper.createChooserIntentIfDead
 import xyz.aprildown.tools.helper.safeSharedPreference
-import xyz.aprildown.tools.helper.startActivityOrNothing
 import javax.inject.Inject
 import xyz.aprildown.timer.app.base.R as RBase
 

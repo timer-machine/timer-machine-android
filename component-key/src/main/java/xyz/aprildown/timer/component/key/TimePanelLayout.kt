@@ -5,11 +5,11 @@ import android.util.AttributeSet
 import android.view.View
 import androidx.appcompat.widget.TooltipCompat
 import androidx.collection.arrayMapOf
+import com.github.deweyreed.tools.helper.drawable
 import com.google.android.flexbox.FlexWrap
 import com.google.android.flexbox.FlexboxLayout
 import com.google.android.material.chip.Chip
 import xyz.aprildown.timer.app.base.data.PreferenceData.TimePanel
-import xyz.aprildown.tools.helper.drawable
 
 class TimePanelLayout(
     context: Context,

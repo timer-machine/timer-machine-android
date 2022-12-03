@@ -6,6 +6,9 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
 import androidx.preference.Preference
 import androidx.preference.PreferenceFragmentCompat
+import com.github.deweyreed.tools.anko.newTask
+import com.github.deweyreed.tools.helper.IntentHelper
+import com.github.deweyreed.tools.helper.startActivityOrNothing
 import io.github.deweyreed.timer.BuildConfig
 import io.github.deweyreed.timer.R
 import xyz.aprildown.timer.app.base.utils.openWebsiteWithWarning
@@ -13,9 +16,6 @@ import xyz.aprildown.timer.app.settings.LogFragment
 import xyz.aprildown.timer.domain.utils.AppConfig
 import xyz.aprildown.timer.domain.utils.Constants
 import xyz.aprildown.timer.workshop.Monika
-import xyz.aprildown.tools.anko.newTask
-import xyz.aprildown.tools.helper.IntentHelper
-import xyz.aprildown.tools.helper.startActivityOrNothing
 
 class AboutFragment : Fragment(R.layout.fragment_about) {
 

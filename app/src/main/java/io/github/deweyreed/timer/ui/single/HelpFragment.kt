@@ -10,6 +10,9 @@ import androidx.fragment.app.DialogFragment
 import androidx.navigation.fragment.NavHostFragment
 import androidx.preference.Preference
 import androidx.preference.PreferenceFragmentCompat
+import com.github.deweyreed.tools.helper.IntentHelper
+import com.github.deweyreed.tools.helper.createChooserIntentIfDead
+import com.github.deweyreed.tools.helper.show
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import dagger.hilt.android.AndroidEntryPoint
 import io.github.deweyreed.timer.R
@@ -20,9 +23,6 @@ import xyz.aprildown.timer.app.base.ui.AppNavigator
 import xyz.aprildown.timer.app.base.utils.NavigationUtils.subLevelNavigate
 import xyz.aprildown.timer.app.base.utils.openWebsiteWithWarning
 import xyz.aprildown.timer.domain.utils.Constants
-import xyz.aprildown.tools.helper.IntentHelper
-import xyz.aprildown.tools.helper.createChooserIntentIfDead
-import xyz.aprildown.tools.helper.show
 import javax.inject.Inject
 import xyz.aprildown.timer.app.base.R as RBase
 

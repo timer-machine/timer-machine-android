@@ -7,10 +7,10 @@ import android.view.View
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.annotation.StringRes
-import xyz.aprildown.tools.helper.gone
-import xyz.aprildown.tools.helper.setSelectableItemBackground
-import xyz.aprildown.tools.helper.show
-import xyz.aprildown.tools.R as RTools
+import com.github.deweyreed.tools.helper.gone
+import com.github.deweyreed.tools.helper.setSelectableItemBackground
+import com.github.deweyreed.tools.helper.show
+import com.github.deweyreed.tools.R as RTools
 
 class ListItem(
     context: Context,

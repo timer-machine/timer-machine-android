@@ -10,6 +10,11 @@ import android.view.inputmethod.InputMethodManager
 import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
 import androidx.core.content.getSystemService
+import com.github.deweyreed.tools.helper.gone
+import com.github.deweyreed.tools.helper.onImeActionClick
+import com.github.deweyreed.tools.helper.setTextAndSelectEnd
+import com.github.deweyreed.tools.helper.show
+import com.github.deweyreed.tools.helper.showActionAndMultiLine
 import com.github.zawadz88.materialpopupmenu.MaterialPopupMenuBuilder
 import com.github.zawadz88.materialpopupmenu.popupMenu
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
@@ -19,12 +24,7 @@ import xyz.aprildown.timer.app.timer.edit.databinding.DialogVoiceContentBinding
 import xyz.aprildown.timer.app.timer.edit.voice.VoiceVariableDialog
 import xyz.aprildown.timer.domain.TimeUtils
 import xyz.aprildown.timer.domain.entities.VoiceAction
-import xyz.aprildown.tools.helper.gone
-import xyz.aprildown.tools.helper.onImeActionClick
 import xyz.aprildown.tools.helper.safeSharedPreference
-import xyz.aprildown.tools.helper.setTextAndSelectEnd
-import xyz.aprildown.tools.helper.show
-import xyz.aprildown.tools.helper.showActionAndMultiLine
 import xyz.aprildown.timer.app.base.R as RBase
 
 internal class VoiceDialog(private val context: Context) {

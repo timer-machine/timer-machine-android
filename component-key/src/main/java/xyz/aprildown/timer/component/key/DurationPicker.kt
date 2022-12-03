@@ -4,10 +4,10 @@ import android.content.Context
 import android.view.View
 import androidx.appcompat.app.AlertDialog
 import androidx.core.content.edit
+import com.github.deweyreed.tools.anko.snackbar
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import io.github.deweyreed.scrollhmspicker.ScrollHmsPicker
 import xyz.aprildown.hmspickerview.HmsPickerView
-import xyz.aprildown.tools.anko.snackbar
 import xyz.aprildown.tools.helper.safeSharedPreference
 import xyz.aprildown.timer.app.base.R as RBase
 

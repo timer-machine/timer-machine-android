@@ -16,6 +16,8 @@ import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationCompat.Action
 import androidx.core.app.NotificationCompat.Builder
 import androidx.core.content.edit
+import com.github.deweyreed.tools.helper.pendingActivityIntent
+import com.github.deweyreed.tools.helper.pendingServiceIntent
 import xyz.aprildown.timer.app.base.data.PreferenceData.getTypeColor
 import xyz.aprildown.timer.app.base.data.PreferenceData.useMediaStyleNotification
 import xyz.aprildown.timer.app.base.ui.AppNavigator
@@ -31,8 +33,6 @@ import xyz.aprildown.timer.domain.utils.Constants.CHANNEL_TIMING
 import xyz.aprildown.timer.presentation.stream.StreamState
 import xyz.aprildown.timer.presentation.stream.TimerIndex
 import xyz.aprildown.timer.presentation.stream.getStep
-import xyz.aprildown.tools.helper.pendingActivityIntent
-import xyz.aprildown.tools.helper.pendingServiceIntent
 import xyz.aprildown.tools.helper.safeSharedPreference
 import xyz.aprildown.timer.app.base.R as RBase
 

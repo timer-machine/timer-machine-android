@@ -9,9 +9,9 @@ import androidx.annotation.StringRes
 import androidx.appcompat.widget.TooltipCompatFix
 import androidx.core.view.doOnPreDraw
 import androidx.core.view.updateLayoutParams
+import com.github.deweyreed.tools.helper.drawable
 import xyz.aprildown.timer.app.timer.edit.R
 import xyz.aprildown.timer.app.timer.edit.databinding.LayoutVoiceVariableTableBinding
-import xyz.aprildown.tools.helper.drawable
 import xyz.aprildown.timer.app.base.R as RBase
 
 internal class VoiceVariableTableView(

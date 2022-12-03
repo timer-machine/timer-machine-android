@@ -7,6 +7,7 @@ import androidx.hilt.work.HiltWorker
 import androidx.lifecycle.Observer
 import androidx.work.CoroutineWorker
 import androidx.work.WorkerParameters
+import com.github.deweyreed.tools.arch.Event
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import dagger.assisted.Assisted
@@ -28,7 +29,6 @@ import xyz.aprildown.timer.flavor.google.backup.usecases.CloudBackup
 import xyz.aprildown.timer.flavor.google.backup.usecases.CloudBackupState
 import xyz.aprildown.timer.flavor.google.backup.usecases.CurrentBackupState
 import xyz.aprildown.timer.flavor.google.backup.usecases.CurrentBackupStateError
-import xyz.aprildown.tools.arch.Event
 import javax.inject.Provider
 import kotlin.coroutines.resume
 import xyz.aprildown.timer.app.base.R as RBase

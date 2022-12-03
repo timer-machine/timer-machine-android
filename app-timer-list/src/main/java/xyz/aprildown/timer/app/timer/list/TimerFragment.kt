@@ -36,6 +36,14 @@ import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
 import androidx.transition.AutoTransition
 import androidx.transition.TransitionManager
+import com.github.deweyreed.tools.anko.dip
+import com.github.deweyreed.tools.anko.snackbar
+import com.github.deweyreed.tools.arch.observeEvent
+import com.github.deweyreed.tools.arch.observeNonNull
+import com.github.deweyreed.tools.helper.IntentHelper
+import com.github.deweyreed.tools.helper.gone
+import com.github.deweyreed.tools.helper.show
+import com.github.deweyreed.tools.helper.startActivityOrNothing
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Dispatchers
@@ -64,15 +72,7 @@ import xyz.aprildown.timer.domain.usecases.home.TipManager
 import xyz.aprildown.timer.presentation.stream.MachineContract
 import xyz.aprildown.timer.presentation.stream.StreamState
 import xyz.aprildown.timer.presentation.timer.TimerViewModel
-import xyz.aprildown.tools.anko.dip
-import xyz.aprildown.tools.anko.snackbar
-import xyz.aprildown.tools.arch.observeEvent
-import xyz.aprildown.tools.arch.observeNonNull
-import xyz.aprildown.tools.helper.IntentHelper
-import xyz.aprildown.tools.helper.gone
 import xyz.aprildown.tools.helper.safeSharedPreference
-import xyz.aprildown.tools.helper.show
-import xyz.aprildown.tools.helper.startActivityOrNothing
 import javax.inject.Inject
 import xyz.aprildown.timer.app.base.R as RBase
 

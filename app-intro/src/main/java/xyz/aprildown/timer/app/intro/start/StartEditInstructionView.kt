@@ -10,6 +10,10 @@ import android.widget.EditText
 import android.widget.ImageView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.widget.ImageViewCompat
+import com.github.deweyreed.tools.anko.longToast
+import com.github.deweyreed.tools.helper.gone
+import com.github.deweyreed.tools.helper.show
+import com.github.deweyreed.tools.helper.toColorStateList
 import com.google.android.material.card.MaterialCardView
 import xyz.aprildown.timer.app.base.data.PreferenceData.getTypeColor
 import xyz.aprildown.timer.app.base.utils.setTime
@@ -23,10 +27,6 @@ import xyz.aprildown.timer.component.key.RoundTextView
 import xyz.aprildown.timer.component.key.behaviour.EditableBehaviourLayout
 import xyz.aprildown.timer.domain.entities.BehaviourEntity
 import xyz.aprildown.timer.domain.entities.StepEntity
-import xyz.aprildown.tools.anko.longToast
-import xyz.aprildown.tools.helper.gone
-import xyz.aprildown.tools.helper.show
-import xyz.aprildown.tools.helper.toColorStateList
 import xyz.aprildown.timer.app.base.R as RBase
 import xyz.aprildown.timer.app.timer.edit.R as RTimerEdit
 

@@ -2,6 +2,7 @@ package xyz.aprildown.timer.app.backup
 
 import android.content.Context
 import android.content.SharedPreferences
+import com.github.deweyreed.tools.helper.getNonNullString
 import dagger.Reusable
 import dagger.hilt.android.qualifiers.ApplicationContext
 import xyz.aprildown.timer.app.base.data.DarkTheme
@@ -25,7 +26,6 @@ import xyz.aprildown.timer.app.base.utils.AppThemeUtils
 import xyz.aprildown.timer.domain.entities.FolderSortBy
 import xyz.aprildown.timer.domain.entities.StepType
 import xyz.aprildown.timer.domain.usecases.folder.FolderSortByRule
-import xyz.aprildown.tools.helper.getNonNullString
 import xyz.aprildown.tools.helper.safeSharedPreference
 import javax.inject.Inject
 import xyz.aprildown.timer.app.base.R as RBase

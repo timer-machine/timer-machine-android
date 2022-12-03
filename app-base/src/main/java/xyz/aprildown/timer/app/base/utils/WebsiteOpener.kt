@@ -9,13 +9,13 @@ import androidx.browser.customtabs.CustomTabsIntent
 import androidx.core.content.ContextCompat
 import androidx.core.content.edit
 import androidx.core.net.toUri
+import com.github.deweyreed.tools.helper.isDarkTheme
+import com.github.deweyreed.tools.helper.isNetworkCheap
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import xyz.aprildown.timer.app.base.data.DarkTheme
 import xyz.aprildown.timer.app.base.data.PreferenceData.appTheme
 import xyz.aprildown.timer.app.base.databinding.DialogWebsiteWarningBinding
 import xyz.aprildown.timer.app.base.ui.newDynamicTheme
-import xyz.aprildown.tools.helper.isDarkTheme
-import xyz.aprildown.tools.helper.isNetworkCheap
 import xyz.aprildown.tools.helper.safeSharedPreference
 
 private fun Context.openWebsiteWithCustomTabs(url: String) {

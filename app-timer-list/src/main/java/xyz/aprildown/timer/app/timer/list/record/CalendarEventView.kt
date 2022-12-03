@@ -8,10 +8,10 @@ import android.view.View
 import android.widget.LinearLayout
 import androidx.core.view.children
 import androidx.customview.view.AbsSavedState
+import com.github.deweyreed.tools.helper.gone
+import com.github.deweyreed.tools.helper.show
 import xyz.aprildown.timer.app.timer.list.R
 import xyz.aprildown.timer.app.timer.list.databinding.ViewCalendarEventBinding
-import xyz.aprildown.tools.helper.gone
-import xyz.aprildown.tools.helper.show
 import xyz.aprildown.timer.app.base.R as RBase
 
 internal class CalendarEventView(

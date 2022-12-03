@@ -8,9 +8,9 @@ import androidx.core.content.getSystemService
 import androidx.core.content.pm.ShortcutInfoCompat
 import androidx.core.content.pm.ShortcutManagerCompat
 import androidx.core.graphics.drawable.IconCompat
+import com.github.deweyreed.tools.anko.longToast
+import com.github.deweyreed.tools.helper.pendingActivityIntent
 import xyz.aprildown.timer.app.base.R
-import xyz.aprildown.tools.anko.longToast
-import xyz.aprildown.tools.helper.pendingActivityIntent
 
 object ShortcutHelper {
     fun addTimerShortcut(

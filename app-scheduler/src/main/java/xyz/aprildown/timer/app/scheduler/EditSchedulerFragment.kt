@@ -20,6 +20,12 @@ import androidx.core.widget.doAfterTextChanged
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.NavHostFragment
+import com.github.deweyreed.tools.anko.longSnackbar
+import com.github.deweyreed.tools.helper.getNumberFormattedQuantityString
+import com.github.deweyreed.tools.helper.gone
+import com.github.deweyreed.tools.helper.requireCallback
+import com.github.deweyreed.tools.helper.scrollToBottom
+import com.github.deweyreed.tools.helper.show
 import com.github.zawadz88.materialpopupmenu.popupMenu
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.nex3z.togglebuttongroup.MultiSelectToggleGroup
@@ -35,12 +41,6 @@ import xyz.aprildown.timer.domain.entities.SchedulerRepeatMode
 import xyz.aprildown.timer.domain.entities.TimerEntity
 import xyz.aprildown.timer.domain.entities.TimerInfo
 import xyz.aprildown.timer.presentation.scheduler.EditSchedulerViewModel
-import xyz.aprildown.tools.anko.longSnackbar
-import xyz.aprildown.tools.helper.getNumberFormattedQuantityString
-import xyz.aprildown.tools.helper.gone
-import xyz.aprildown.tools.helper.requireCallback
-import xyz.aprildown.tools.helper.scrollToBottom
-import xyz.aprildown.tools.helper.show
 import java.text.DateFormatSymbols
 import java.time.LocalDateTime
 import javax.inject.Inject

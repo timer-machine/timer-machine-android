@@ -9,13 +9,13 @@ import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.DefaultLifecycleObserver
 import androidx.lifecycle.LifecycleOwner
 import androidx.navigation.fragment.findNavController
+import com.github.deweyreed.tools.anko.toast
+import com.github.deweyreed.tools.arch.observeEvent
 import dagger.Reusable
 import xyz.aprildown.timer.app.base.ui.FlavorUiInjector
 import xyz.aprildown.timer.app.base.utils.NavigationUtils.subLevelNavigate
 import xyz.aprildown.timer.flavor.google.count.BakedCountDialog
 import xyz.aprildown.timer.flavor.google.utils.IapPromotionDialog
-import xyz.aprildown.tools.anko.toast
-import xyz.aprildown.tools.arch.observeEvent
 import javax.inject.Inject
 import xyz.aprildown.timer.app.base.R as RBase
 

@@ -12,6 +12,9 @@ import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import androidx.navigation.navGraphViewModels
 import androidx.recyclerview.widget.DividerItemDecoration
+import com.github.deweyreed.tools.helper.gone
+import com.github.deweyreed.tools.helper.restartWithFading
+import com.github.deweyreed.tools.helper.show
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.firebase.storage.StorageMetadata
 import com.google.firebase.storage.StorageReference
@@ -25,9 +28,6 @@ import xyz.aprildown.timer.flavor.google.R
 import xyz.aprildown.timer.flavor.google.databinding.FragmentRestoreBinding
 import xyz.aprildown.timer.flavor.google.databinding.ListItemRestoreBinding
 import xyz.aprildown.timer.flavor.google.utils.causeFirstMessage
-import xyz.aprildown.tools.helper.gone
-import xyz.aprildown.tools.helper.restartWithFading
-import xyz.aprildown.tools.helper.show
 import javax.inject.Inject
 import xyz.aprildown.timer.app.base.R as RBase
 

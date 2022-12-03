@@ -3,6 +3,7 @@ package xyz.aprildown.timer.app.timer.edit.voice
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.WindowManager
+import com.github.deweyreed.tools.helper.setTextAndSelectEnd
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import xyz.aprildown.timer.app.base.data.PreferenceData.useVoiceContent2
 import xyz.aprildown.timer.app.timer.edit.R
@@ -10,7 +11,6 @@ import xyz.aprildown.timer.app.timer.edit.databinding.DialogVoiceVariableBinding
 import xyz.aprildown.timer.app.timer.edit.media.VoiceDialog
 import xyz.aprildown.timer.domain.entities.VoiceAction
 import xyz.aprildown.tools.helper.safeSharedPreference
-import xyz.aprildown.tools.helper.setTextAndSelectEnd
 
 internal class VoiceVariableDialog(private val context: Context) {
     fun show(

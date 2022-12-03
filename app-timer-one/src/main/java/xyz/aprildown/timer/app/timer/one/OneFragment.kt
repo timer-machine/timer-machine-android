@@ -5,6 +5,11 @@ import android.content.pm.PackageManager
 import android.os.Build
 import android.os.Bundle
 import android.view.View
+import com.github.deweyreed.tools.anko.dp
+import com.github.deweyreed.tools.anko.snackbar
+import com.github.deweyreed.tools.arch.observeEvent
+import com.github.deweyreed.tools.arch.observeNonNull
+import com.github.deweyreed.tools.helper.setTextIfChanged
 import com.github.zawadz88.materialpopupmenu.popupMenu
 import com.google.android.material.progressindicator.LinearProgressIndicator
 import dagger.hilt.android.AndroidEntryPoint
@@ -22,11 +27,6 @@ import xyz.aprildown.timer.component.key.switchItem
 import xyz.aprildown.timer.domain.entities.StepEntity
 import xyz.aprildown.timer.presentation.stream.TimerIndex
 import xyz.aprildown.timer.presentation.stream.getNiceLoopString
-import xyz.aprildown.tools.anko.dp
-import xyz.aprildown.tools.anko.snackbar
-import xyz.aprildown.tools.arch.observeEvent
-import xyz.aprildown.tools.arch.observeNonNull
-import xyz.aprildown.tools.helper.setTextIfChanged
 import xyz.aprildown.timer.app.base.R as RBase
 
 @AndroidEntryPoint
