@@ -4,15 +4,15 @@ import android.view.LayoutInflater
 import android.widget.CompoundButton
 import androidx.appcompat.app.AlertDialog
 import androidx.core.view.isVisible
+import com.github.deweyreed.tools.arch.observeEvent
+import com.github.deweyreed.tools.helper.gone
+import com.github.deweyreed.tools.helper.show
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import xyz.aprildown.timer.app.base.ui.AppNavigator
 import xyz.aprildown.timer.app.timer.edit.databinding.DialogEditMoreBinding
 import xyz.aprildown.timer.domain.entities.TimerEntity
 import xyz.aprildown.timer.domain.entities.TimerMoreEntity
 import xyz.aprildown.timer.presentation.edit.EditViewModel
-import xyz.aprildown.tools.arch.observeEvent
-import xyz.aprildown.tools.helper.gone
-import xyz.aprildown.tools.helper.show
 import xyz.aprildown.timer.app.base.R as RBase
 
 internal fun EditActivity.showBottomMoreDialog(

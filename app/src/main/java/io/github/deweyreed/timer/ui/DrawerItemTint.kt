@@ -2,10 +2,10 @@ package io.github.deweyreed.timer.ui
 
 import android.content.Context
 import android.content.res.ColorStateList
+import com.github.deweyreed.tools.helper.color
+import com.github.deweyreed.tools.helper.themeColor
 import io.github.deweyreed.timer.R
 import xyz.aprildown.timer.app.base.ui.newDynamicTheme
-import xyz.aprildown.tools.helper.color
-import xyz.aprildown.tools.helper.themeColor
 
 internal class DrawerItemTint(private val context: Context) {
 

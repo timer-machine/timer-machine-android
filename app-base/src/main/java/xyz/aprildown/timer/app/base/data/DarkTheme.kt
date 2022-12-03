@@ -4,8 +4,8 @@ import android.content.Context
 import android.os.Build
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.content.edit
+import com.github.deweyreed.tools.helper.getNonNullString
 import xyz.aprildown.timer.domain.utils.AppConfig
-import xyz.aprildown.tools.helper.getNonNullString
 import xyz.aprildown.tools.helper.safeSharedPreference
 import java.time.Instant
 import java.time.LocalDate

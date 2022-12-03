@@ -12,6 +12,8 @@ import android.widget.TextView
 import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
+import com.github.deweyreed.tools.arch.observeEvent
+import com.github.deweyreed.tools.helper.pendingServiceIntent
 import xyz.aprildown.timer.app.base.data.FloatingWindowPip
 import xyz.aprildown.timer.app.base.utils.produceTime
 import xyz.aprildown.timer.presentation.one.OneViewModel
@@ -19,8 +21,6 @@ import xyz.aprildown.timer.presentation.stream.StreamState
 import xyz.aprildown.timer.presentation.stream.TimerIndex
 import xyz.aprildown.timer.presentation.stream.getNiceLoopString
 import xyz.aprildown.timer.presentation.stream.getStep
-import xyz.aprildown.tools.arch.observeEvent
-import xyz.aprildown.tools.helper.pendingServiceIntent
 import xyz.aprildown.timer.app.base.R as RBase
 
 @RequiresApi(Build.VERSION_CODES.O)

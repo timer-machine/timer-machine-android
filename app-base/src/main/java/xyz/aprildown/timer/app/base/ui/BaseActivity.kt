@@ -3,8 +3,8 @@ package xyz.aprildown.timer.app.base.ui
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
+import com.github.deweyreed.tools.helper.isDarkTheme
 import xyz.aprildown.timer.app.base.utils.AppThemeUtils
-import xyz.aprildown.tools.helper.isDarkTheme
 
 abstract class BaseActivity : AppCompatActivity() {
 

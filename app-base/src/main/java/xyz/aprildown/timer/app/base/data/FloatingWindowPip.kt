@@ -5,7 +5,7 @@ import android.content.res.Resources
 import androidx.annotation.FloatRange
 import androidx.core.content.edit
 import androidx.core.math.MathUtils
-import xyz.aprildown.tools.anko.dip
+import com.github.deweyreed.tools.anko.dip
 import xyz.aprildown.tools.helper.safeSharedPreference
 import kotlin.math.min
 

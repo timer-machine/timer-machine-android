@@ -7,6 +7,9 @@ import android.view.WindowManager
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import androidx.viewpager2.widget.ViewPager2
+import com.github.deweyreed.tools.helper.scale
+import com.github.deweyreed.tools.helper.setScale
+import com.github.deweyreed.tools.helper.triggerRipple
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import xyz.aprildown.timer.app.base.data.PreferenceData.oneLayout
@@ -14,9 +17,6 @@ import xyz.aprildown.timer.app.timer.one.OneActivityInterface
 import xyz.aprildown.timer.app.timer.one.R
 import xyz.aprildown.timer.app.timer.one.databinding.FragmentOneLayoutBinding
 import xyz.aprildown.timer.app.timer.one.layout.one.OneLayoutOneFragment
-import xyz.aprildown.tools.helper.scale
-import xyz.aprildown.tools.helper.setScale
-import xyz.aprildown.tools.helper.triggerRipple
 import xyz.aprildown.timer.app.base.R as RBase
 
 class OneLayoutFragment : Fragment(R.layout.fragment_one_layout) {

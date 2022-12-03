@@ -3,6 +3,7 @@ package xyz.aprildown.timer.presentation.edit
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
+import com.github.deweyreed.tools.arch.Event
 import dagger.Lazy
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineDispatcher
@@ -29,7 +30,6 @@ import xyz.aprildown.timer.domain.usecases.timer.ShareTimer
 import xyz.aprildown.timer.presentation.BaseViewModel
 import xyz.aprildown.timer.presentation.R
 import xyz.aprildown.timer.presentation.di.ViewModelModule
-import xyz.aprildown.tools.arch.Event
 import javax.inject.Inject
 import javax.inject.Named
 

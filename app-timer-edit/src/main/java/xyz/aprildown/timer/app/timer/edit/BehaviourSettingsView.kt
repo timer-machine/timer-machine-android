@@ -9,6 +9,7 @@ import android.text.Spanned
 import android.text.style.BulletSpan
 import androidx.core.net.toUri
 import androidx.core.text.buildSpannedString
+import com.github.deweyreed.tools.helper.dimen
 import com.github.zawadz88.materialpopupmenu.MaterialPopupMenuBuilder
 import xyz.aprildown.timer.app.base.data.PreferenceData.storedAudioFocusType
 import xyz.aprildown.timer.app.base.data.PreferenceData.storedAudioTypeValue
@@ -29,7 +30,6 @@ import xyz.aprildown.timer.domain.entities.ScreenAction
 import xyz.aprildown.timer.domain.entities.VibrationAction
 import xyz.aprildown.timer.domain.entities.VoiceAction
 import xyz.aprildown.timer.domain.utils.Constants
-import xyz.aprildown.tools.helper.dimen
 import xyz.aprildown.tools.helper.safeSharedPreference
 import xyz.aprildown.timer.app.base.R as RBase
 

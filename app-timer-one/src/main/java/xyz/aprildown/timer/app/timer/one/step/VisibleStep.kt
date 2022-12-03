@@ -9,16 +9,16 @@ import androidx.core.view.isVisible
 import androidx.core.widget.ImageViewCompat
 import androidx.core.widget.TextViewCompat
 import androidx.recyclerview.widget.RecyclerView
+import com.github.deweyreed.tools.helper.attachToView
+import com.github.deweyreed.tools.helper.gone
+import com.github.deweyreed.tools.helper.onLongClick
+import com.github.deweyreed.tools.helper.toColorStateList
 import com.mikepenz.fastadapter.items.AbstractItem
 import xyz.aprildown.timer.app.base.data.PreferenceData.getTypeColor
 import xyz.aprildown.timer.app.base.utils.produceTime
 import xyz.aprildown.timer.app.timer.one.R
 import xyz.aprildown.timer.app.timer.one.databinding.ItemStepStepBinding
 import xyz.aprildown.timer.domain.entities.StepEntity
-import xyz.aprildown.tools.helper.attachToView
-import xyz.aprildown.tools.helper.gone
-import xyz.aprildown.tools.helper.onLongClick
-import xyz.aprildown.tools.helper.toColorStateList
 import xyz.aprildown.timer.app.base.R as RBase
 
 internal class VisibleStep(

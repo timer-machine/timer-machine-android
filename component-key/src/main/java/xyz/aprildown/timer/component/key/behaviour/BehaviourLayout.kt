@@ -6,12 +6,12 @@ import android.util.AttributeSet
 import android.view.View
 import androidx.annotation.ColorInt
 import androidx.appcompat.widget.TooltipCompat
+import com.github.deweyreed.tools.anko.dip
+import com.github.deweyreed.tools.helper.setTextIfChanged
 import com.google.android.material.chip.Chip
 import com.google.android.material.chip.ChipGroup
 import xyz.aprildown.timer.component.key.R
 import xyz.aprildown.timer.domain.entities.BehaviourEntity
-import xyz.aprildown.tools.anko.dip
-import xyz.aprildown.tools.helper.setTextIfChanged
 
 class BehaviourLayout @JvmOverloads constructor(
     context: Context,

@@ -3,12 +3,12 @@ package xyz.aprildown.timer.app.base.utils
 import android.content.Context
 import android.graphics.Color
 import androidx.annotation.ColorInt
+import com.github.deweyreed.tools.anko.dp
+import com.github.deweyreed.tools.utils.ThemeColorUtils
 import com.google.android.material.elevation.ElevationOverlayProvider
 import xyz.aprildown.theme.Theme
 import xyz.aprildown.timer.app.base.data.PreferenceData
 import xyz.aprildown.timer.app.base.data.PreferenceData.appTheme
-import xyz.aprildown.tools.anko.dp
-import xyz.aprildown.tools.utils.ThemeColorUtils
 import com.google.android.material.R as RMaterial
 
 object AppThemeUtils {

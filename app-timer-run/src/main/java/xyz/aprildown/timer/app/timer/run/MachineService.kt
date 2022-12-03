@@ -17,6 +17,8 @@ import android.util.SparseArray
 import androidx.core.app.NotificationCompat
 import androidx.core.os.postDelayed
 import androidx.core.text.buildSpannedString
+import com.github.deweyreed.tools.helper.HandlerHelper
+import com.github.deweyreed.tools.helper.getNumberFormattedQuantityString
 import dagger.hilt.android.AndroidEntryPoint
 import timber.log.Timber
 import xyz.aprildown.timer.app.base.data.PreferenceData.disablePhoneCallBehavior
@@ -44,8 +46,6 @@ import xyz.aprildown.timer.presentation.stream.MachineContract
 import xyz.aprildown.timer.presentation.stream.TimerIndex
 import xyz.aprildown.timer.presentation.stream.getTimerIndex
 import xyz.aprildown.timer.presentation.stream.putTimerIndex
-import xyz.aprildown.tools.helper.HandlerHelper
-import xyz.aprildown.tools.helper.getNumberFormattedQuantityString
 import java.time.Instant
 import java.time.LocalDateTime
 import java.time.ZoneId

@@ -13,6 +13,7 @@ import androidx.core.text.buildSpannedString
 import androidx.transition.AutoTransition
 import androidx.transition.TransitionManager
 import androidx.viewbinding.ViewBinding
+import com.github.deweyreed.tools.helper.color
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.transition.MaterialSharedAxis
 import dagger.hilt.android.AndroidEntryPoint
@@ -41,7 +42,6 @@ import xyz.aprildown.timer.app.intro.start.WalkStepTime
 import xyz.aprildown.timer.app.intro.start.Welcome
 import xyz.aprildown.timer.component.key.behaviour.EditableBehaviourLayout
 import xyz.aprildown.timer.presentation.intro.IntroViewModel
-import xyz.aprildown.tools.helper.color
 import com.mikepenz.materialize.R as RMaterialize
 import xyz.aprildown.timer.app.base.R as RBase
 

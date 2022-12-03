@@ -4,6 +4,7 @@ import android.content.Intent
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.map
+import com.github.deweyreed.tools.arch.Event
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.launch
@@ -29,7 +30,6 @@ import xyz.aprildown.timer.presentation.stream.getPrevIndexWithStep
 import xyz.aprildown.timer.presentation.stream.getStep
 import xyz.aprildown.timer.presentation.stream.getTimeBeforeIndex
 import xyz.aprildown.timer.presentation.stream.getTotalTime
-import xyz.aprildown.tools.arch.Event
 import javax.inject.Inject
 
 @HiltViewModel

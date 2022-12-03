@@ -5,6 +5,7 @@ import android.util.AttributeSet
 import android.view.Gravity
 import android.view.LayoutInflater
 import androidx.annotation.StringRes
+import com.github.deweyreed.tools.helper.dimen
 import com.github.zawadz88.materialpopupmenu.popupMenu
 import com.google.android.material.card.MaterialCardView
 import xyz.aprildown.timer.app.base.utils.getDisplayName
@@ -12,7 +13,6 @@ import xyz.aprildown.timer.app.timer.list.databinding.ViewFolderToolbarBinding
 import xyz.aprildown.timer.component.key.SimpleInputDialog
 import xyz.aprildown.timer.domain.entities.FolderEntity
 import xyz.aprildown.timer.domain.entities.FolderSortBy
-import xyz.aprildown.tools.helper.dimen
 import xyz.aprildown.timer.app.base.R as RBase
 
 internal class FolderToolbar(

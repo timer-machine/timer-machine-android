@@ -6,10 +6,10 @@ import android.view.View
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.view.isVisible
 import androidx.viewbinding.ViewBinding
+import com.github.deweyreed.tools.helper.startDrawableAnimation
+import com.github.deweyreed.tools.helper.stopDrawableAnimation
+import com.github.deweyreed.tools.helper.themeColor
 import xyz.aprildown.timer.app.intro.databinding.ViewIntroPanelBinding
-import xyz.aprildown.tools.helper.startDrawableAnimation
-import xyz.aprildown.tools.helper.stopDrawableAnimation
-import xyz.aprildown.tools.helper.themeColor
 import com.google.android.material.R as RMaterial
 import xyz.aprildown.timer.app.base.R as RBase
 

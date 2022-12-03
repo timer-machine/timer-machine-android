@@ -5,8 +5,8 @@ import android.view.View
 import android.widget.ScrollView
 import android.widget.TextView
 import androidx.fragment.app.Fragment
+import com.github.deweyreed.tools.helper.scrollToBottom
 import xyz.aprildown.timer.domain.utils.Constants
-import xyz.aprildown.tools.helper.scrollToBottom
 import java.io.File
 import xyz.aprildown.timer.app.base.R as RBase
 

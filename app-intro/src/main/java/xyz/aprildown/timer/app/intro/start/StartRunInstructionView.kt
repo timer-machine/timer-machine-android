@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import com.github.deweyreed.tools.anko.dp
 import xyz.aprildown.timer.app.base.data.PreferenceData.oneOneFourActions
 import xyz.aprildown.timer.app.base.data.PreferenceData.oneOneTimeSize
 import xyz.aprildown.timer.app.base.utils.produceTime
@@ -19,7 +20,6 @@ import xyz.aprildown.timer.app.timer.one.step.StepListView
 import xyz.aprildown.timer.domain.entities.StepEntity
 import xyz.aprildown.timer.presentation.stream.TimerIndex
 import xyz.aprildown.timer.presentation.stream.getNiceLoopString
-import xyz.aprildown.tools.anko.dp
 import xyz.aprildown.timer.app.timer.one.R as RTimerOne
 
 internal class StartRunInstructionView : InstructionView<LayoutIntroStartRunBinding> {

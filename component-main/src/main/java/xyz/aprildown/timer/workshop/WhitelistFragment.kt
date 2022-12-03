@@ -10,8 +10,8 @@ import androidx.core.net.toUri
 import androidx.preference.Preference
 import androidx.preference.PreferenceCategory
 import androidx.preference.PreferenceFragmentCompat
+import com.github.deweyreed.tools.helper.startActivityOrNothing
 import xyz.aprildown.timer.app.base.utils.openWebsiteWithWarning
-import xyz.aprildown.tools.helper.startActivityOrNothing
 import xyz.aprildown.timer.app.base.R as RBase
 
 class WhitelistFragment : PreferenceFragmentCompat() {

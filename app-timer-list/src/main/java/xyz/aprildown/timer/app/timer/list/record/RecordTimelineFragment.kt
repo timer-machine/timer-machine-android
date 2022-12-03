@@ -4,6 +4,8 @@ import android.os.Bundle
 import android.text.format.DateFormat
 import android.view.View
 import androidx.fragment.app.Fragment
+import com.github.deweyreed.tools.anko.dp
+import com.github.deweyreed.tools.helper.themeColor
 import com.github.mikephil.charting.animation.Easing
 import com.github.mikephil.charting.charts.BarChart
 import com.github.mikephil.charting.components.AxisBase
@@ -18,8 +20,6 @@ import xyz.aprildown.timer.app.timer.list.R
 import xyz.aprildown.timer.app.timer.list.databinding.FragmentRecordTimelineBinding
 import xyz.aprildown.timer.domain.usecases.record.GetRecords
 import xyz.aprildown.timer.presentation.timer.RecordViewModel
-import xyz.aprildown.tools.anko.dp
-import xyz.aprildown.tools.helper.themeColor
 import java.util.Date
 
 internal class RecordTimelineFragment : Fragment(R.layout.fragment_record_timeline) {

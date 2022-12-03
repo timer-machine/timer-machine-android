@@ -5,6 +5,9 @@ import android.text.TextWatcher
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import androidx.core.content.getSystemService
+import com.github.deweyreed.tools.helper.color
+import com.github.deweyreed.tools.helper.gone
+import com.github.deweyreed.tools.helper.show
 import xyz.aprildown.timer.app.base.utils.setTime
 import xyz.aprildown.timer.app.intro.R
 import xyz.aprildown.timer.app.intro.databinding.LayoutIntroStartEditBinding
@@ -14,9 +17,6 @@ import xyz.aprildown.timer.app.intro.showInteractionIndicator
 import xyz.aprildown.timer.component.key.DurationPicker
 import xyz.aprildown.timer.domain.entities.BehaviourType
 import xyz.aprildown.timer.presentation.edit.EditViewModel
-import xyz.aprildown.tools.helper.color
-import xyz.aprildown.tools.helper.gone
-import xyz.aprildown.tools.helper.show
 import com.mikepenz.materialize.R as RMaterialize
 import xyz.aprildown.timer.app.base.R as RBase
 import xyz.aprildown.timer.app.timer.edit.R as RTimerEdit

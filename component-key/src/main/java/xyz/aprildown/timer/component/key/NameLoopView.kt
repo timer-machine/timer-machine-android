@@ -9,10 +9,10 @@ import android.widget.EditText
 import android.widget.LinearLayout
 import androidx.annotation.ColorInt
 import androidx.core.content.withStyledAttributes
+import com.github.deweyreed.tools.helper.showActionAndMultiLine
+import com.github.deweyreed.tools.helper.themeColor
+import com.github.deweyreed.tools.helper.toColorStateList
 import com.google.android.material.textfield.TextInputLayout
-import xyz.aprildown.tools.helper.showActionAndMultiLine
-import xyz.aprildown.tools.helper.themeColor
-import xyz.aprildown.tools.helper.toColorStateList
 import com.google.android.material.R as RMaterial
 
 class NameLoopView(

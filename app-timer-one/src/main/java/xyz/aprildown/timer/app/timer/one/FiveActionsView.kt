@@ -8,8 +8,8 @@ import android.widget.ImageView
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
 import androidx.constraintlayout.widget.ConstraintLayout
+import com.github.deweyreed.tools.helper.startDrawableAnimation
 import com.google.android.material.floatingactionbutton.FloatingActionButton
-import xyz.aprildown.tools.helper.startDrawableAnimation
 import xyz.aprildown.timer.app.base.R as RBase
 
 typealias ButtonImageView = Pair<View, ImageView>

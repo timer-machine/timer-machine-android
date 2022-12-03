@@ -8,8 +8,9 @@ import androidx.annotation.StringRes
 import androidx.core.os.bundleOf
 import androidx.preference.Preference
 import androidx.preference.PreferenceFragmentCompat
+import com.github.deweyreed.tools.compat.getParcelableArrayCompat
+import com.github.deweyreed.tools.helper.findCallback
 import kotlinx.parcelize.Parcelize
-import xyz.aprildown.tools.helper.findCallback
 
 class PreferenceStyleListFragment : PreferenceFragmentCompat() {
 
@@ -30,8 +31,7 @@ class PreferenceStyleListFragment : PreferenceFragmentCompat() {
 
         val callback = findCallback<Callback>()
 
-        arguments?.getParcelableArray(EXTRA_ENTRIES)?.forEach { entry ->
-            require(entry is Entry)
+        arguments?.getParcelableArrayCompat<Entry>(EXTRA_ENTRIES)?.forEach { entry ->
             screen.addPreference(
                 Preference(context).apply {
                     isPersistent = false

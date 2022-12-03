@@ -3,6 +3,7 @@ package xyz.aprildown.timer.presentation.screen
 import android.content.Intent
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.Observer
+import com.github.deweyreed.tools.arch.Event
 import kotlinx.coroutines.runBlocking
 import org.junit.Assert
 import org.junit.Assert.assertEquals
@@ -22,7 +23,6 @@ import xyz.aprildown.timer.presentation.stream.StreamState
 import xyz.aprildown.timer.presentation.stream.TimerIndex
 import xyz.aprildown.timer.presentation.stream.getNiceLoopString
 import xyz.aprildown.timer.presentation.stream.getStep
-import xyz.aprildown.tools.arch.Event
 
 class ScreenViewModelTest {
 

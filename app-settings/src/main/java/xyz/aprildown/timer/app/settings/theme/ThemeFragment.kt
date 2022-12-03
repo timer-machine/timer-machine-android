@@ -17,6 +17,9 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.afollestad.materialdialogs.color.ColorChooserDialog
+import com.github.deweyreed.tools.anko.dip
+import com.github.deweyreed.tools.helper.color
+import com.github.deweyreed.tools.helper.toColorStateList
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.mikepenz.fastadapter.FastAdapter
 import com.mikepenz.fastadapter.GenericItem
@@ -36,9 +39,6 @@ import xyz.aprildown.timer.app.settings.R
 import xyz.aprildown.timer.component.key.ListItemWithLayout
 import xyz.aprildown.timer.domain.entities.StepType
 import xyz.aprildown.timer.domain.utils.Constants
-import xyz.aprildown.tools.anko.dip
-import xyz.aprildown.tools.helper.color
-import xyz.aprildown.tools.helper.toColorStateList
 import java.util.Optional
 import javax.inject.Inject
 import com.mikepenz.materialize.R as RMaterialize

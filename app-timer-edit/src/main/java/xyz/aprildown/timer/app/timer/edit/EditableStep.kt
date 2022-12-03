@@ -11,7 +11,11 @@ import android.widget.ImageView
 import androidx.annotation.VisibleForTesting
 import androidx.core.view.isVisible
 import androidx.core.widget.ImageViewCompat
-import com.mikepenz.fastadapter.FastAdapter
+import androidx.recyclerview.widget.RecyclerView
+import com.github.deweyreed.tools.helper.gone
+import com.github.deweyreed.tools.helper.show
+import com.github.deweyreed.tools.helper.showActionAndMultiLine
+import com.github.deweyreed.tools.helper.toColorStateList
 import com.mikepenz.fastadapter.items.AbstractItem
 import xyz.aprildown.timer.app.base.data.PreferenceData.getTypeColor
 import xyz.aprildown.timer.app.base.utils.setTime
@@ -19,10 +23,6 @@ import xyz.aprildown.timer.component.key.RoundTextView
 import xyz.aprildown.timer.component.key.behaviour.EditableBehaviourLayout
 import xyz.aprildown.timer.domain.entities.BehaviourEntity
 import xyz.aprildown.timer.domain.entities.StepType
-import xyz.aprildown.tools.helper.gone
-import xyz.aprildown.tools.helper.show
-import xyz.aprildown.tools.helper.showActionAndMultiLine
-import xyz.aprildown.tools.helper.toColorStateList
 import xyz.aprildown.timer.app.base.R as RBase
 
 @VisibleForTesting(otherwise = VisibleForTesting.PACKAGE_PRIVATE)
@@ -64,10 +64,20 @@ class EditableStep(
     override val type: Int = RBase.id.type_step_step
     override fun getViewHolder(v: View): ViewHolder = ViewHolder(v, handler)
 
+    override fun bindView(holder: ViewHolder, payloads: List<Any>) {
+        super.bindView(holder, payloads)
+        holder.bindView(this, payloads)
+    }
+
+    override fun unbindView(holder: ViewHolder) {
+        super.unbindView(holder)
+        holder.unbindView()
+    }
+
     class ViewHolder(
         view: View,
         private val handler: Handler
-    ) : FastAdapter.ViewHolder<EditableStep>(view) {
+    ) : RecyclerView.ViewHolder(view) {
 
         private val context = view.context
         private val startStepGroupIndicator: View =
@@ -99,7 +109,7 @@ class EditableStep(
             })
         }
 
-        override fun bindView(item: EditableStep, payloads: List<Any>) {
+        fun bindView(item: EditableStep, payloads: List<Any>) {
             if (payloads.isEmpty()) {
                 fullBind(item)
             } else {
@@ -178,7 +188,7 @@ class EditableStep(
             }
         }
 
-        override fun unbindView(item: EditableStep) {
+        fun unbindView() {
             stepName.removeTextChangedListener(stepNameTextChangeListener)
             stepNameTextChangeListener = null
         }

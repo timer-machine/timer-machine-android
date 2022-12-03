@@ -11,10 +11,10 @@ import androidx.annotation.StringRes
 import androidx.core.os.bundleOf
 import androidx.fragment.app.DialogFragment
 import com.afollestad.materialdialogs.color.ColorChooserDialog
+import com.github.deweyreed.tools.helper.requireCallback
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import xyz.aprildown.timer.app.settings.R
 import xyz.aprildown.timer.component.key.ListItemWithLayout
-import xyz.aprildown.tools.helper.requireCallback
 import xyz.aprildown.timer.app.base.R as RBase
 
 internal class CustomThemeDialog : DialogFragment(), ColorChooserDialog.ColorCallback {

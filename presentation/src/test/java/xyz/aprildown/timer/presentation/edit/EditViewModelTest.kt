@@ -2,6 +2,7 @@ package xyz.aprildown.timer.presentation.edit
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.Observer
+import com.github.deweyreed.tools.arch.Event
 import kotlinx.coroutines.runBlocking
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertFalse
@@ -36,7 +37,6 @@ import xyz.aprildown.timer.domain.usecases.timer.GetTimer
 import xyz.aprildown.timer.domain.usecases.timer.SaveTimer
 import xyz.aprildown.timer.presentation.R
 import xyz.aprildown.timer.presentation.testCoroutineDispatcher
-import xyz.aprildown.tools.arch.Event
 
 class EditViewModelTest {
 

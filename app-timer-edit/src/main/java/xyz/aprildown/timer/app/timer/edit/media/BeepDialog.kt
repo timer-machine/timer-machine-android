@@ -7,10 +7,10 @@ import android.text.style.BulletSpan
 import androidx.collection.ArrayMap
 import androidx.collection.arrayMapOf
 import androidx.core.text.buildSpannedString
+import com.github.deweyreed.tools.helper.dimen
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import xyz.aprildown.timer.app.base.media.Beeper
 import xyz.aprildown.timer.component.key.SimpleInputDialog
-import xyz.aprildown.tools.helper.dimen
 import xyz.aprildown.timer.app.base.R as RBase
 
 internal class BeepDialog(private val context: Context) {

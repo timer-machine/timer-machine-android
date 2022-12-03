@@ -3,6 +3,7 @@ package xyz.aprildown.timer.presentation.screen
 import android.content.Intent
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import com.github.deweyreed.tools.arch.Event
 import dagger.hilt.android.lifecycle.HiltViewModel
 import xyz.aprildown.timer.domain.entities.TimerEntity
 import xyz.aprildown.timer.presentation.SimpleViewModel
@@ -13,7 +14,6 @@ import xyz.aprildown.timer.presentation.stream.TimerMachineListener
 import xyz.aprildown.timer.presentation.stream.getGroup
 import xyz.aprildown.timer.presentation.stream.getNiceLoopString
 import xyz.aprildown.timer.presentation.stream.getStep
-import xyz.aprildown.tools.arch.Event
 import javax.inject.Inject
 
 @HiltViewModel

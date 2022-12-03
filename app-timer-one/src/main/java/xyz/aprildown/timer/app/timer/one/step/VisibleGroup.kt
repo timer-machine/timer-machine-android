@@ -6,9 +6,9 @@ import android.view.View
 import android.widget.TextView
 import androidx.core.view.GestureDetectorCompat
 import androidx.recyclerview.widget.RecyclerView
+import com.github.deweyreed.tools.helper.attachToView
 import com.mikepenz.fastadapter.items.AbstractItem
 import xyz.aprildown.timer.app.timer.one.R
-import xyz.aprildown.tools.helper.attachToView
 import xyz.aprildown.timer.app.base.R as RBase
 
 internal class VisibleGroup(

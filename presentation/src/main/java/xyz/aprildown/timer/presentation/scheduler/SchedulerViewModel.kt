@@ -2,6 +2,8 @@ package xyz.aprildown.timer.presentation.scheduler
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import com.github.deweyreed.tools.arch.Event
+import com.github.deweyreed.tools.helper.toInt
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Job
@@ -15,8 +17,6 @@ import xyz.aprildown.timer.domain.usecases.scheduler.GetSchedulers
 import xyz.aprildown.timer.domain.usecases.scheduler.SetSchedulerEnable
 import xyz.aprildown.timer.domain.usecases.timer.FindTimerInfo
 import xyz.aprildown.timer.presentation.BaseViewModel
-import xyz.aprildown.tools.arch.Event
-import xyz.aprildown.tools.helper.toInt
 import javax.inject.Inject
 
 @HiltViewModel

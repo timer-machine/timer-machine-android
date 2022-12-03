@@ -9,8 +9,8 @@ import android.widget.Checkable
 import android.widget.RelativeLayout
 import androidx.annotation.LayoutRes
 import androidx.core.view.updateLayoutParams
-import xyz.aprildown.tools.helper.setSelectableItemBackground
-import xyz.aprildown.tools.R as RTools
+import com.github.deweyreed.tools.helper.setSelectableItemBackground
+import com.github.deweyreed.tools.R as RTools
 
 class ListItemWithLayout(
     context: Context,

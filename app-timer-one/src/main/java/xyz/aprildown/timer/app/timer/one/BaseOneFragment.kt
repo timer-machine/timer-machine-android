@@ -22,6 +22,10 @@ import androidx.fragment.app.activityViewModels
 import androidx.navigation.NavOptions
 import androidx.navigation.fragment.NavHostFragment
 import androidx.viewbinding.ViewBinding
+import com.github.deweyreed.tools.anko.longToast
+import com.github.deweyreed.tools.arch.Event
+import com.github.deweyreed.tools.helper.createChooserIntentIfDead
+import com.github.deweyreed.tools.helper.startActivityOrNothing
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import xyz.aprildown.timer.app.base.ui.AppNavigator
 import xyz.aprildown.timer.app.base.ui.StepUpdater
@@ -36,10 +40,6 @@ import xyz.aprildown.timer.presentation.stream.MachineContract
 import xyz.aprildown.timer.presentation.stream.StreamState
 import xyz.aprildown.timer.presentation.stream.TimerIndex
 import xyz.aprildown.timer.presentation.stream.getStep
-import xyz.aprildown.tools.anko.longToast
-import xyz.aprildown.tools.arch.Event
-import xyz.aprildown.tools.helper.createChooserIntentIfDead
-import xyz.aprildown.tools.helper.startActivityOrNothing
 import javax.inject.Inject
 import javax.inject.Provider
 import xyz.aprildown.timer.app.base.R as RBase

@@ -4,6 +4,11 @@ import android.graphics.Color
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
+import com.github.deweyreed.tools.helper.color
+import com.github.deweyreed.tools.helper.gone
+import com.github.deweyreed.tools.helper.setTextIfChanged
+import com.github.deweyreed.tools.helper.show
+import com.github.deweyreed.tools.helper.themeColor
 import com.github.mikephil.charting.animation.Easing
 import com.github.mikephil.charting.charts.PieChart
 import com.github.mikephil.charting.data.PieData
@@ -15,11 +20,6 @@ import xyz.aprildown.timer.app.timer.list.R
 import xyz.aprildown.timer.app.timer.list.databinding.FragmentRecordOverviewBinding
 import xyz.aprildown.timer.domain.usecases.record.GetRecords
 import xyz.aprildown.timer.presentation.timer.RecordViewModel
-import xyz.aprildown.tools.helper.color
-import xyz.aprildown.tools.helper.gone
-import xyz.aprildown.tools.helper.setTextIfChanged
-import xyz.aprildown.tools.helper.show
-import xyz.aprildown.tools.helper.themeColor
 import com.mikepenz.materialize.R as RMaterialize
 import xyz.aprildown.timer.app.base.R as RBase
 

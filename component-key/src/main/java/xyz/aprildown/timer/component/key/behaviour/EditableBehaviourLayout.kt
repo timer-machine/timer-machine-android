@@ -11,6 +11,11 @@ import android.widget.TextView
 import androidx.annotation.ColorInt
 import androidx.appcompat.widget.TooltipCompat
 import androidx.appcompat.widget.TooltipCompatFix
+import com.github.deweyreed.tools.helper.drawable
+import com.github.deweyreed.tools.helper.gone
+import com.github.deweyreed.tools.helper.setTextIfChanged
+import com.github.deweyreed.tools.helper.show
+import com.github.deweyreed.tools.helper.toColorStateList
 import com.github.zawadz88.materialpopupmenu.popupMenu
 import com.google.android.flexbox.FlexWrap
 import com.google.android.flexbox.FlexboxLayout
@@ -18,11 +23,6 @@ import com.google.android.material.chip.Chip
 import xyz.aprildown.timer.component.key.R
 import xyz.aprildown.timer.domain.entities.BehaviourEntity
 import xyz.aprildown.timer.domain.entities.BehaviourType
-import xyz.aprildown.tools.helper.drawable
-import xyz.aprildown.tools.helper.gone
-import xyz.aprildown.tools.helper.setTextIfChanged
-import xyz.aprildown.tools.helper.show
-import xyz.aprildown.tools.helper.toColorStateList
 
 class EditableBehaviourLayout(
     context: Context,

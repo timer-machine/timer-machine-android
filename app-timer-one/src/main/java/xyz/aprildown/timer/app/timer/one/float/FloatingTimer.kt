@@ -12,6 +12,7 @@ import android.widget.TextView
 import androidx.appcompat.view.ContextThemeWrapper
 import androidx.cardview.widget.CardView
 import androidx.core.view.updateLayoutParams
+import com.github.deweyreed.tools.anko.toast
 import xyz.aprildown.timer.app.base.data.FloatingWindowPip
 import xyz.aprildown.timer.app.base.ui.newDynamicTheme
 import xyz.aprildown.timer.app.base.utils.produceTime
@@ -26,7 +27,6 @@ import xyz.aprildown.timer.presentation.stream.TimerMachineListener
 import xyz.aprildown.timer.presentation.stream.getFirstIndex
 import xyz.aprildown.timer.presentation.stream.getNiceLoopString
 import xyz.aprildown.timer.presentation.stream.getStep
-import xyz.aprildown.tools.anko.toast
 import xyz.aprildown.timer.app.base.R as RBase
 
 internal class FloatingTimer(
