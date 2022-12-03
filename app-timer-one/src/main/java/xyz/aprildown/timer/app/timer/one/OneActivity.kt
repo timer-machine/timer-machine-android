@@ -54,7 +54,7 @@ class OneActivity : BaseActivity(), OneActivityInterface {
             return false
         }
         if (!isTaskRoot) {
-            onBackPressed()
+            onBackPressedDispatcher.onBackPressed()
             return true
         }
         return super.onSupportNavigateUp()
