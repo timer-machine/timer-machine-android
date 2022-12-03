@@ -23,10 +23,12 @@ import androidx.core.content.edit
 import androidx.core.content.getSystemService
 import androidx.core.net.toUri
 import androidx.core.text.buildSpannedString
+import androidx.core.view.MenuProvider
 import androidx.core.view.isVisible
 import androidx.core.view.updatePadding
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Lifecycle
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
@@ -77,6 +79,7 @@ import xyz.aprildown.timer.app.base.R as RBase
 @AndroidEntryPoint
 class TimerFragment :
     Fragment(R.layout.fragment_timer),
+    MenuProvider,
     MainCallback.FragmentCallback,
     TimerAdapter.Callback {
 
@@ -106,20 +109,22 @@ class TimerFragment :
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setHasOptionsMenu(true)
+        requireActivity().addMenuProvider(this, this, Lifecycle.State.STARTED)
     }
 
-    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        inflater.inflate(R.menu.timer, menu)
+    override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
+        menuInflater.inflate(R.menu.timer, menu)
     }
 
-    override fun onOptionsItemSelected(item: MenuItem): Boolean = when (item.itemId) {
-        R.id.action_record -> {
-            NavHostFragment.findNavController(this)
-                .subLevelNavigate(RBase.id.dest_record)
-            true
+    override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
+        return when (menuItem.itemId) {
+            R.id.action_record -> {
+                NavHostFragment.findNavController(this)
+                    .subLevelNavigate(RBase.id.dest_record)
+                true
+            }
+            else -> false
         }
-        else -> super.onOptionsItemSelected(item)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
