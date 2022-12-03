@@ -10,6 +10,7 @@ import android.provider.OpenableColumns
 import android.view.View
 import android.widget.Button
 import android.widget.TextView
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.database.getStringOrNull
 import androidx.core.text.buildSpannedString
 import androidx.fragment.app.Fragment
@@ -54,6 +55,11 @@ class ExportFragment : Fragment(R.layout.layout_vertical_form), StepperFormListe
 
     private lateinit var locationStep: ExportLocationStep
     private lateinit var contentStep: ExportContentStep
+
+    private val launcher =
+        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
+            handleActivityResult(resultCode = it.resultCode, data = it.data)
+        }
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -141,18 +147,19 @@ class ExportFragment : Fragment(R.layout.layout_vertical_form), StepperFormListe
         val timeString = SimpleDateFormat("yyyy-MM-dd-kk-mm", Locale.getDefault()).format(date)
         val initialFilename = "timer-machine-$timeString.json"
         SafIntentSafeBelt(
-            fragment = this,
+            context = requireContext(),
             appTracker = appTracker,
             viewForSnackbar = mainCallback.snackbarView
         ).drive(
-            Intent(Intent.ACTION_CREATE_DOCUMENT)
+            launcher = launcher,
+            intent = Intent(Intent.ACTION_CREATE_DOCUMENT)
                 .addCategory(Intent.CATEGORY_OPENABLE)
                 .setType("*/*")
                 .putExtra(Intent.EXTRA_TITLE, initialFilename)
         )
     }
 
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+    private fun handleActivityResult(resultCode: Int, data: Intent?) {
         if (resultCode == Activity.RESULT_OK) {
             val uri = data?.data ?: return
             val context = requireContext()
