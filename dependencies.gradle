@@ -3,11 +3,11 @@ ext {
     versions = [
             agp         : '7.3.1',
             kotlin      : '1.7.20',
-            versions    : '0.43.0',
+            versions    : '0.44.0',
             detekt      : '1.22.0',
             hilt        : '2.44',
             secrets     : '2.0.1',
-            gms         : '4.3.10',
+            gms         : '4.3.14',
             guard       : '0.3.2',
 
             compile_sdk : 33,
@@ -84,53 +84,53 @@ ext {
             androidx_navigation_ui        : 'androidx.navigation:navigation-ui-ktx:2.5.3',
 
             // WorkManager
-            androidx_work                 : 'androidx.work:work-runtime-ktx:2.7.1',
-            androidx_work_test            : 'androidx.work:work-testing:2.7.1',
+            androidx_work            : 'androidx.work:work-runtime-ktx:2.7.1',
+            androidx_work_test       : 'androidx.work:work-testing:2.7.1',
 
             // App Components
-            hilt_android                  : "com.google.dagger:hilt-android:${versions.hilt}",
-            hilt_compiler                 : "com.google.dagger:hilt-compiler:${versions.hilt}",
-            hilt_android_test             : "com.google.dagger:hilt-android-testing:${versions.hilt}",
-            hilt_navigation               : 'androidx.hilt:hilt-navigation-fragment:1.0.0',
-            hilt_workmanager              : 'androidx.hilt:hilt-work:1.0.0',
-            hilt_workmanager_compiler     : 'androidx.hilt:hilt-compiler:1.0.0',
+            hilt_android             : "com.google.dagger:hilt-android:${versions.hilt}",
+            hilt_compiler            : "com.google.dagger:hilt-compiler:${versions.hilt}",
+            hilt_android_test        : "com.google.dagger:hilt-android-testing:${versions.hilt}",
+            hilt_navigation          : 'androidx.hilt:hilt-navigation-fragment:1.0.0',
+            hilt_workmanager         : 'androidx.hilt:hilt-work:1.0.0',
+            hilt_workmanager_compiler: 'androidx.hilt:hilt-compiler:1.0.0',
 
-            moshi                         : 'com.squareup.moshi:moshi:1.14.0',
-            moshi_kotlin_gen              : 'com.squareup.moshi:moshi-kotlin-codegen:1.14.0',
-            moshi_adapters                : 'com.squareup.moshi:moshi-adapters:1.14.0',
+            moshi                    : 'com.squareup.moshi:moshi:1.14.0',
+            moshi_kotlin_gen         : 'com.squareup.moshi:moshi-kotlin-codegen:1.14.0',
+            moshi_adapters           : 'com.squareup.moshi:moshi-adapters:1.14.0',
 
             // Internet
 
             // Internet - Google
-            billing                       : 'com.android.billingclient:billing-ktx:4.1.0',
-            firebase_bom                  : 'com.google.firebase:firebase-bom:30.3.2',
-            firebase_auth                 : 'com.google.firebase:firebase-auth-ktx',
-            firebase_auth_ui              : 'com.firebaseui:firebase-ui-auth:8.0.2',
-            firebase_storage              : 'com.google.firebase:firebase-storage-ktx',
-            play_services_auth            : 'com.google.android.gms:play-services-auth:20.2.0',
+            billing                  : 'com.android.billingclient:billing-ktx:4.1.0',
+            firebase_bom             : 'com.google.firebase:firebase-bom:31.1.0',
+            firebase_auth            : 'com.google.firebase:firebase-auth-ktx',
+            firebase_auth_ui         : 'com.firebaseui:firebase-ui-auth:8.0.2',
+            firebase_storage         : 'com.google.firebase:firebase-storage-ktx',
+            play_services_auth       : 'com.google.android.gms:play-services-auth:20.4.0',
 
             // Internet - Other
-            appcenter_crashes             : 'com.microsoft.appcenter:appcenter-crashes:4.4.5',
+            appcenter_crashes        : 'com.microsoft.appcenter:appcenter-crashes:5.0.0',
 
             // Other Utils
-            android_job                   : 'com.github.DeweyReed:android-job:a04c817792',
-            okio                          : 'com.squareup.okio:okio:3.2.0',
-            permission                    : 'pub.devrel:easypermissions:3.0.0',
+            android_job              : 'com.github.DeweyReed:android-job:a04c817792',
+            okio                     : 'com.squareup.okio:okio:3.2.0',
+            permission               : 'pub.devrel:easypermissions:3.0.0',
 
             // Other UI Components
-            fastadapter                   : 'com.mikepenz:fastadapter:5.7.0',
-            fastadapter_binding           : 'com.mikepenz:fastadapter-extensions-binding:5.7.0',
-            fastadapter_expandable        : 'com.mikepenz:fastadapter-extensions-expandable:5.7.0',
+            fastadapter              : 'com.mikepenz:fastadapter:5.7.0',
+            fastadapter_binding      : 'com.mikepenz:fastadapter-extensions-binding:5.7.0',
+            fastadapter_expandable   : 'com.mikepenz:fastadapter-extensions-expandable:5.7.0',
 
-            material_dialog               : 'com.afollestad.material-dialogs:core:0.9.6.0',
-            material_common               : 'com.afollestad.material-dialogs:commons:0.9.6.0',
+            material_dialog          : 'com.afollestad.material-dialogs:core:0.9.6.0',
+            material_common          : 'com.afollestad.material-dialogs:commons:0.9.6.0',
 
-            calendar_view                 : 'com.github.kizitonwose:CalendarView:1.0.4',
-            chart                         : 'com.github.PhilJay:MPAndroidChart:v3.1.0',
-            chrome_menu                   : 'xyz.aprildown:ChromeMenu:0.1.1',
-            flexbox                       : 'com.google.android.flexbox:flexbox:3.0.0',
-            hms_picker                    : 'xyz.aprildown:HmsPickerView:0.2.0',
-            konfetti                      : 'nl.dionsegijn:konfetti:1.3.2',
+            calendar_view            : 'com.github.kizitonwose:CalendarView:1.0.4',
+            chart                    : 'com.github.PhilJay:MPAndroidChart:v3.1.0',
+            chrome_menu              : 'xyz.aprildown:ChromeMenu:0.1.1',
+            flexbox                  : 'com.google.android.flexbox:flexbox:3.0.0',
+            hms_picker               : 'xyz.aprildown:HmsPickerView:0.2.0',
+            konfetti                 : 'nl.dionsegijn:konfetti:1.3.2',
             material_drawer               : 'com.mikepenz:materialdrawer:8.4.5',
             material_popup_menu           : 'com.github.zawadz88.materialpopupmenu:material-popup-menu:4.1.0',
             materialize                   : 'com.mikepenz:materialize:1.2.1',
