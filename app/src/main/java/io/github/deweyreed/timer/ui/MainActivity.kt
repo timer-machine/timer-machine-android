@@ -6,6 +6,7 @@ import android.os.Build
 import android.os.Bundle
 import android.view.View
 import android.widget.CompoundButton
+import androidx.activity.OnBackPressedCallback
 import androidx.annotation.IdRes
 import androidx.core.content.edit
 import androidx.drawerlayout.widget.DrawerLayout
@@ -117,13 +118,6 @@ class MainActivity :
         } else {
             adjustDrawerForAutoDark()
             super.recreate()
-        }
-    }
-
-    override fun onBackPressed() {
-        when {
-            binding.drawer.isOpen -> binding.drawer.close()
-            else -> super.onBackPressed()
         }
     }
 
@@ -363,6 +357,26 @@ class MainActivity :
             }
             true
         }
+
+        val drawerBackCallback = object : OnBackPressedCallback(false) {
+            override fun handleOnBackPressed() {
+                binding.drawer.close()
+            }
+        }
+        onBackPressedDispatcher.addCallback(this, drawerBackCallback)
+        binding.drawer.addDrawerListener(
+            object : DrawerLayout.DrawerListener {
+                override fun onDrawerSlide(drawerView: View, slideOffset: Float) = Unit
+                override fun onDrawerStateChanged(newState: Int) = Unit
+                override fun onDrawerOpened(drawerView: View) {
+                    drawerBackCallback.isEnabled = true
+                }
+
+                override fun onDrawerClosed(drawerView: View) {
+                    drawerBackCallback.isEnabled = false
+                }
+            }
+        )
 
         if (intent?.getBooleanExtra(EXTRA_OPEN_DRAWER, false) == true) {
             intent.removeExtra(EXTRA_OPEN_DRAWER)
