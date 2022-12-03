@@ -13,7 +13,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
-import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
@@ -166,9 +165,9 @@ class Monika : Fragment() {
                     // get maximum element within the list
                     lastVisibleItemPosition = getLastVisibleItem(lastVisibleItemPositions)
                 }
-                is GridLayoutManager -> {
-                    lastVisibleItemPosition = mLayoutManager.findLastVisibleItemPosition()
-                }
+                // is GridLayoutManager -> {
+                //     lastVisibleItemPosition = mLayoutManager.findLastVisibleItemPosition()
+                // }
             }
 
             // If the total item count is zero and the previous isn't, assume the

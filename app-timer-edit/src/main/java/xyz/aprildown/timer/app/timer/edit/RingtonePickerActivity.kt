@@ -11,6 +11,7 @@ import android.view.MenuItem
 import android.view.View
 import androidx.core.content.edit
 import androidx.core.view.MenuItemCompat
+import com.github.deweyreed.tools.compat.getParcelableArrayExtraCompat
 import com.github.deweyreed.tools.compat.getParcelableExtraCompat
 import com.github.deweyreed.tools.helper.toColorStateList
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
@@ -143,7 +144,7 @@ class RingtonePickerActivity :
             setResult(
                 Activity.RESULT_OK,
                 Intent()
-                    .putParcelableArrayListExtra(EXTRA_RESULT, ArrayList(ringtones))
+                    .putExtra(EXTRA_RESULT, ringtones.toTypedArray())
                     .putExtra(EXTRA_REFERENCE, reference)
             )
         }
@@ -171,7 +172,9 @@ class RingtonePickerActivity :
         }
 
         fun getPickerResult(intent: Intent): List<UltimateRingtonePicker.RingtoneEntry> {
-            return intent.getParcelableArrayListExtra(EXTRA_RESULT)!!
+            return intent
+                .getParcelableArrayExtraCompat<UltimateRingtonePicker.RingtoneEntry>(EXTRA_RESULT)
+                .toList()
         }
 
         fun getPickerReference(intent: Intent): Int {
