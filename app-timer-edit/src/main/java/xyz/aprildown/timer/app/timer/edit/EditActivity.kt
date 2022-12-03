@@ -9,6 +9,7 @@ import android.text.Spanned
 import android.text.style.StyleSpan
 import android.view.Gravity
 import android.view.View
+import androidx.activity.addCallback
 import androidx.activity.result.ActivityResult
 import androidx.activity.result.ActivityResultCallback
 import androidx.activity.result.contract.ActivityResultContracts
@@ -114,6 +115,10 @@ class EditActivity :
         if (savedInstanceState == null) {
             loadData()
         }
+
+        onBackPressedDispatcher.addCallback(this) {
+            userLeave { finishEditTimerActivity() }
+        }
     }
 
     override fun onSaveInstanceState(outState: Bundle) {
@@ -134,14 +139,6 @@ class EditActivity :
         }
     }
 
-    // region Toolbar menu actions
-
-    override fun onBackPressed() {
-        userLeave { finishEditTimerActivity() }
-    }
-
-    // endregion Toolbar menu actions
-
     // region SetUps and main actions
 
     private fun setUpToolbar() {
@@ -155,7 +152,7 @@ class EditActivity :
             }
             setNavigationIcon(RBase.drawable.ic_back)
             setNavigationContentDescription(RBase.string.nav_up)
-            setNavigationOnClickListener { onBackPressed() }
+            setNavigationOnClickListener { onBackPressedDispatcher.onBackPressed() }
             setOnMenuItemClickListener { item ->
                 when (item.itemId) {
                     R.id.action_save_timer -> {
