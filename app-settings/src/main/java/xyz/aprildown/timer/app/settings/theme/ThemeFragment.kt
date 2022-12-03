@@ -95,9 +95,7 @@ class ThemeFragment :
             var targetSelection = RecyclerView.NO_POSITION
             for ((index, item) in itemAdapter.adapterItems.withIndex()) {
                 if (item !is ThemeColor) continue
-                if (item.using ||
-                    (item.name == NAME_CUSTOM && targetSelection == RecyclerView.NO_POSITION)
-                ) {
+                if (item.using || item.name == NAME_CUSTOM) {
                     targetSelection = index
                     if (!item.using) {
                         item.using = true

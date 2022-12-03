@@ -15,6 +15,7 @@ import android.text.format.DateUtils
 import android.text.style.TtsSpan
 import android.util.SparseArray
 import androidx.core.app.NotificationCompat
+import androidx.core.app.ServiceCompat
 import androidx.core.os.postDelayed
 import androidx.core.text.buildSpannedString
 import com.github.deweyreed.tools.helper.HandlerHelper
@@ -155,7 +156,7 @@ class MachineService :
      */
     override fun finish() {
         toForegroundHandler.removeCallbacksAndMessages(null)
-        stopForeground(true)
+        ServiceCompat.stopForeground(this, ServiceCompat.STOP_FOREGROUND_REMOVE)
         notificationManager.cancelAll()
         updaterMap.clear()
         stopSelf()
@@ -289,7 +290,7 @@ class MachineService :
     }
 
     override fun stopForegroundState() {
-        stopForeground(true)
+        ServiceCompat.stopForeground(this, ServiceCompat.STOP_FOREGROUND_REMOVE)
     }
 
     // region Timer Notification Updates
