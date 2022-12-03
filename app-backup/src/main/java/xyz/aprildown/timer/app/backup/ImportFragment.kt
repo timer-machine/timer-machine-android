@@ -9,6 +9,7 @@ import android.provider.OpenableColumns
 import android.view.View
 import android.widget.Button
 import android.widget.TextView
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.database.getLongOrNull
 import androidx.core.database.getStringOrNull
 import androidx.core.text.buildSpannedString
@@ -56,6 +57,11 @@ class ImportFragment : Fragment(R.layout.layout_vertical_form), StepperFormListe
 
     private lateinit var locationStep: ImportLocationStep
     private lateinit var contentStep: ImportContentStep
+
+    private val launcher =
+        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
+            handleActivityResult(resultCode = it.resultCode, data = it.data)
+        }
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -163,17 +169,18 @@ class ImportFragment : Fragment(R.layout.layout_vertical_form), StepperFormListe
 
     fun importFile() {
         SafIntentSafeBelt(
-            fragment = this,
+            context = requireContext(),
             appTracker = appTracker,
             viewForSnackbar = mainCallback.snackbarView
         ).drive(
-            Intent(Intent.ACTION_OPEN_DOCUMENT)
+            launcher = launcher,
+            intent = Intent(Intent.ACTION_OPEN_DOCUMENT)
                 .addCategory(Intent.CATEGORY_OPENABLE)
                 .setType("*/*")
         )
     }
 
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+    private fun handleActivityResult(resultCode: Int, data: Intent?) {
         if (resultCode == Activity.RESULT_OK) {
             val uri = data?.data ?: return
             val context = requireContext()
