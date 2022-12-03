@@ -5,12 +5,12 @@
     <string name="unknown">Desconocido</string>
     <string name="edit_edit_timer">Editar temporizador</string>
     <string name="edit_add_start_too_many">Ya existe una etapa inicio</string>
-    <string name="edit_wrong_negative_loop">El ciclo debe ser un número positivo</string>
+    <string name="edit_wrong_negative_loop">La serie debe ser un número positivo</string>
     <string name="edit_wrong_empty_steps">Debe haber al menos una etapa</string>
     <string name="edit_more_show_notif">Mostrar notificación del tiempo</string>
     <string name="edit_cant_move_start">No es posible mover la etapa inicio</string>
     <string name="edit_more_notif_count">Mostrar tiempo restante en la notificación</string>
-    <string name="edit_more_trigger">Comenzar al finalizar el temporizador</string>
+    <string name="edit_more_trigger">Iniciar al finalizar el temporizador</string>
     <string name="edit_more_a11y">Más ajustes de temporizador</string>
     <string name="edit_share_as_text">Compartir como texto</string>
     <string name="name_loop_name_hint">Nombre</string>
@@ -18,7 +18,7 @@
     <string name="edit_cant_move_group">No es posible mover un grupo</string>
     <string name="edit_cant_move_footer">No es posible mover estos botones</string>
     <string name="edit_import_from_the_clipboard">Importar desde el portapapeles</string>
-    <string name="name_loop_loop_hint">Ciclo</string>
+    <string name="name_loop_loop_hint">Serie</string>
     <string name="time_picker_type_panel">Panel</string>
     <string name="behaviour_add_new">Añadir recordatorio</string>
     <string name="behaviour_music">Música</string>
@@ -32,7 +32,7 @@
     <string name="vibration_count">Conteo</string>
     <string name="behaviour_vibration_help">Vibrar equipo en esta etapa</string>
     <string name="vibration_short">Vibración corta</string>
-    <string name="vibration_count_desp_range">El conteo debe ser entre 0 y 100.</string>
+    <string name="vibration_count_desp_range">El conteo debe ser entre 0 y 100</string>
     <string name="vibration_pattern">Patrón</string>
     <string name="vibration_normal">Vibración normal</string>
     <string name="vibration_long">Vibración larga</string>
@@ -41,7 +41,7 @@
     <string name="voice_content_title">Contenido hablado</string>
     <string name="behaviour_screen_help">Enciende la pantalla y muestra un recordatorio</string>
     <string name="behaviour_voice_help">Lee el nombre de esta etapa</string>
-    <string name="voice_content_group_variables">* Las variables cuya descripción comienza con \"(Grupo)\" significa que cuando la etapa está en un grupo, el valor se calcula en base al grupo en lugar del temporizador.</string>
+    <string name="voice_content_group_variables">* Las variables cuya descripción inicia con \"(Grupo)\" significa que cuando la etapa está en un grupo, el valor se calcula en base al grupo en lugar del temporizador.</string>
     <string name="time_panel_step_end_time">Hora final de la etapa</string>
     <string name="voice_variable_group_duration_desp">Duración del grupo</string>
     <string name="folder_sort">Organizar por</string>
@@ -84,7 +84,7 @@
     <string name="record_other_data">Otro</string>
     <string name="record_today">Hoy</string>
     <string name="record_total_time">Desde el día 1</string>
-    <string name="record_deleted_timer">Borrados</string>
+    <string name="record_deleted_timer">Eliminados</string>
     <string name="one_action_unlock_ui">Desbloquear UI</string>
     <string name="one_action_show_float">Ventana flotante</string>
     <string name="one_action_pip">Modo PiP</string>
@@ -142,7 +142,7 @@
     <string name="ok">Ok</string>
     <string name="more">Más</string>
     <string name="undo">Deshacer</string>
-    <string name="delete">Borrar</string>
+    <string name="delete">Eliminar</string>
     <string name="open_menu">Abrir menú</string>
     <string name="understand">Entendido</string>
     <string name="add">Añadir</string>
@@ -175,8 +175,8 @@
     <string name="terms_of_service">Términos</string>
     <string name="main_action_timers">Temporizadores</string>
     <string name="empty">Vacío</string>
-    <string name="delete_confirmation_template">¿Borrar %s\?</string>
-    <string name="delete_done_template">%s borrado</string>
+    <string name="delete_confirmation_template">¿Eliminar %s\?</string>
+    <string name="delete_done_template">%s eliminado</string>
     <string name="trash_done_template">%s eliminado</string>
     <string name="main_action_schedulers">Planificadores</string>
     <string name="save_changes">¿Guardar cambios\?</string>
@@ -205,8 +205,8 @@
     <string name="folder_name">Nombre del set</string>
     <string name="folder_new_folder">Nuevo set de temporizador</string>
     <string name="folder_rename">Renombrar set</string>
-    <string name="folder_delete">Borrar set</string>
-    <string name="folder_delete_timer_explanation">El temporizador con sus registros y planificadores serán borrados permanentemente</string>
+    <string name="folder_delete">Eliminar set</string>
+    <string name="folder_delete_timer_explanation">El temporizador con sus registros y planificadores serán eliminados permanentemente</string>
     <string name="folder_empty_trash_confirmation">¿Vaciar papelera\?</string>
     <string name="folder_sort_run_newest">Recién ejecutados primero</string>
     <string name="edit_default_timer_name">Temporizador</string>
@@ -221,14 +221,14 @@
     <string name="edit_group">Grupo</string>
     <string name="folder_sort_run_oldest">Antiguos ejecutados primero</string>
     <string name="edit_group_end">Final del grupo</string>
-    <string name="edit_delete_group">Borrar grupo</string>
+    <string name="edit_delete_group">Eliminar grupo</string>
     <string name="edit_add_normal">Normal</string>
     <string name="edit_start_step">Inicio del temporizador</string>
     <string name="edit_step">Editar etapa</string>
     <string name="edit_add_step">Añadir nueva etapa</string>
     <string name="edit_add_group">Grupo</string>
     <string name="edit_at_least_1s">La duración debe ser al menos 1 segundo</string>
-    <string name="edit_add_group_desp">Tiene su nombre, su ciclo y puede contener pasos</string>
+    <string name="edit_add_group_desp">Tiene su nombre, series y puede contener etapas</string>
     <string name="edit_add_start">Etapa inicio</string>
     <string name="edit_add_start_desp">Ejecuta una etapa al inicio de todo el set para prepararte</string>
     <string name="edit_add_end_desp">Ejecuta una etapa al final de toda la tarea para enfriar</string>
@@ -238,19 +238,19 @@
     <string name="screen_fullscreen">Siempre pantalla completa</string>
     <string name="behaviour_halt_help">Mantiene esta etapa hasta saltar manualmente y la convierte en cronométro</string>
     <string name="behaviour_voice">Voz</string>
-    <string name="vibration_count_desp_0">0 para vibrar hasta el final de esta etapa.</string>
+    <string name="vibration_count_desp_0">0 para vibrar hasta el final de esta etapa</string>
     <string name="time_panel_timer_end_time">Hora final del temporizador</string>
     <string name="intro_start_sample_timer_step2">Fin de la carrera</string>
-    <string name="voice_variable_group_total_loop_desp">Ciclos totales del grupo</string>
+    <string name="voice_variable_group_total_loop_desp">Series totales del grupo</string>
     <string name="voice_content_info_empty">* Si este campo está vacío, se leerá el nombre de la etapa.</string>
     <string name="voice_content_info_variables_intro">* Toca el botón \"Variables\" de la parte inferior para elegir las variables. Estas serán sustituidas por el valor correspondiente al ejecutarse.</string>
     <string name="voice_time_variable">Tiempo</string>
     <string name="voice_variable_info_usage">* Las variables serán reemplazadas con el valor correspondiente cuando se ejecuten.</string>
     <string name="voice_variables">Variables</string>
-    <string name="voice_loop">Ciclo actual</string>
-    <string name="voice_total_loop">Ciclos totales</string>
+    <string name="voice_loop">Serie actual</string>
+    <string name="voice_total_loop">Series totales</string>
     <string name="voice_content2_enable">Usar nuevas variables</string>
-    <string name="voice_variable_timer_loop_desp">Ciclo actual del temporizador</string>
+    <string name="voice_variable_timer_loop_desp">Serie actual del temporizador</string>
     <string name="voice_variable_timer_remaining_desp">Tiempo restante del temporizador</string>
     <string name="voice_variable_group_end_time_desp">Hora final del grupo</string>
     <string name="voice_step_name">Nombre de la etapa</string>
@@ -272,8 +272,8 @@
     <string name="scheduler_end">Detener el temporizador</string>
     <string name="voice_variable_group_group">Grupo</string>
     <string name="intro_start_sample_timer_step4">Fin de la caminata</string>
-    <string name="voice_variable_group_loop_desp">Ciclo actual del grupo</string>
-    <string name="voice_variable_timer_total_loop_desp">Ciclos totales del temporizador</string>
+    <string name="voice_variable_group_loop_desp">Serie actual del grupo</string>
+    <string name="voice_variable_timer_total_loop_desp">Series totales del temporizador</string>
     <string name="voice_variable_timer_elapsed_percent_desp">Tiempo transcurrido del temporizador en porcentaje</string>
     <string name="voice_variable_timer_remaining_percent_desp">Tiempo restante del temporizador en porcentaje</string>
     <string name="time_panel_remaining_percent">Tiempo restante en porcentaje</string>
@@ -323,8 +323,8 @@
     <string name="pref_reminder_baked_count_on">Habilitado</string>
     <string name="pref_reminder_baked_count_downloading">Descargando recursos…</string>
     <string name="intro_start_notifier">En esta aplicación, <b>debes añadir recordatorios después de una etapa, o la aplicación no te lo recordará</b>.</string>
-    <string name="intro_start_add_reminder">Toca ➕ debajo de la duración de la etapa. Añade <b>música</b> y <b>vibración</b>.</string>
-    <string name="intro_start_reminder_usage">Puedes &lt;b&gt;usar un toque largo al añadir o seleccionar un recordatorio para revisar su uso&lt;b&gt;.</string>
+    <string name="intro_start_add_reminder">Toca ➕ debajo de la duración de la etapa. Añade <b>Música</b> y <b>Vibración</b>.</string>
+    <string name="intro_start_reminder_usage">Puedes <b>usar un toque largo al añadir o seleccionar un recordatorio para revisar su uso</b>.</string>
     <string name="intro_start_edit_behaviour">Un toque te permite editar un recordatorio. Por ahora, completa el tutorial primero</string>
     <string name="notif_timers_paused">%1$s pausado</string>
     <string name="notif_a11y_start_ally">Iniciar todos los temporizadores</string>
@@ -346,4 +346,117 @@
     <string name="record_timeline_count">El número de ejecuciones</string>
     <string name="voice_variable_step_group">Etapa</string>
     <string name="half_option_voice">Voz</string>
+    <string name="seconds_0">0 segundos</string>
+    <string name="shortcut_created">Atajo creado</string>
+    <string name="shortcut_disabled">Temporizador no encontrado. Por favor crea uno de nuevo</string>
+    <string name="shortcut_not_support">El lanzador actual no puede crear un atajo</string>
+    <string name="shortcut_remove_old">Por favor elimina primero el atajo previo de este temporizador</string>
+    <string name="shortcut_timer_started">El temporizador ha iniciado</string>
+    <string name="theme_title">Tema de la aplicación</string>
+    <string name="theme_theme_nav_bar">Colorear barra de navegación</string>
+    <string name="theme_custom_title">Tema personalizado</string>
+    <string name="theme_custom_primary">Color primario</string>
+    <string name="theme_custom_secondary">Color de acento</string>
+    <string name="theme_pick_colors">Personalizado</string>
+    <string name="theme_pick_presets">Predeterminados</string>
+    <string name="theme_pick_back">Regresar</string>
+    <string name="theme_step_color_dialog_title">Seleccionar color de etapa</string>
+    <string name="theme_step_color_title">Color de etapa</string>
+    <string name="theme_step_color_normal">Etapa normal</string>
+    <string name="theme_step_color_notifier">Etapa nitificador</string>
+    <string name="theme_step_color_start">Iniciar etapa</string>
+    <string name="theme_step_color_end">Etapa final</string>
+    <string name="backup_local_backup">Local</string>
+    <string name="backup_app_settings">Ajustes de aplicación</string>
+    <string name="backup_next_step">Siguiente paso</string>
+    <string name="cloud_backup_title">Respaldo en la nube</string>
+    <string name="cloud_backup_account_issue_notif_title">Respaldo en la nube fallido</string>
+    <string name="cloud_backup_billing_issue_notif_title">Respaldo en la nube fallido</string>
+    <string name="cloud_backup_state_required">Respaldo requerido</string>
+    <string name="cloud_backup_state_scheduled">Programado</string>
+    <string name="cloud_backup_state_running">En progreso</string>
+    <string name="cloud_backup_state_up_to_date">Actualizado</string>
+    <string name="cloud_backup_state_error">Error</string>
+    <string name="cloud_backup_account_required">Crear una cuenta para hacer un seguimiento de los respaldos</string>
+    <string name="cloud_backup_backup_state">Estado del respaldo</string>
+    <string name="cloud_backup_backup_now">Respaldar ahora</string>
+    <string name="cloud_backup_backup_now_failed">Respaldo fallido</string>
+    <string name="cloud_backup_uploading">Respaldo en progreso…</string>
+    <string name="cloud_backup_finished">Respaldo finalizado</string>
+    <string name="cloud_backup_auto_backup_title">Respaldo automático en la nube</string>
+    <string name="cloud_backup_auto_backup_enabled">Respaldo automático en la nube activado</string>
+    <string name="cloud_backup_restore">Restaurar</string>
+    <string name="cloud_backup_restoring">Restaurando…</string>
+    <string name="cloud_backup_restore_failed">Restauración fallida</string>
+    <string name="cloud_backup_restore_alert">Los datos y la configuración de tu aplicación serán sobrescritos. ¿Continuar\?</string>
+    <string name="cloud_backup_other_options">Otras opciones</string>
+    <string name="cloud_backup_recent_error">Error reciente</string>
+    <string name="export_data_title">Exportar datos de aplicación</string>
+    <string name="export_data_summary">Guardar los datos de esta aplicación como archivo</string>
+    <string name="export_error">Exportación fallida. Por favor intente de nuevo.</string>
+    <string name="export_path_title">Ubicación de exportación</string>
+    <string name="export_content_title">Selección de contenido</string>
+    <string name="export_begin">Iniciar exportación</string>
+    <string name="export_done">Exportación hecha</string>
+    <string name="import_data_title">Importar datos de aplicación</string>
+    <string name="import_data_summary">Importar datos de aplicación desde un archivo</string>
+    <string name="import_restart_content">¿Reiniciar la aplicación para activar los cambios\?</string>
+    <string name="import_restart">Reiniciar</string>
+    <string name="help_tutorial_desp">Inicia desde aquí</string>
+    <string name="pref_week_start_title">Iniciar semana en</string>
+    <string name="intro_start_sample_timer_name">Plan de ejercicios</string>
+    <string name="intro_start_sample_timer_step1">Correr 3 minutos</string>
+    <string name="intro_start_sample_timer_step3">Caminar 2 minutos</string>
+    <string name="intro_start_welcome">Bienvenido/a!
+\nToca la <b>flecha derecha</b> debajo para iniciar el tutorial.</string>
+    <string name="intro_start_create_timer">Toca ➕ para crear un nuevo temporizador.</string>
+    <string name="intro_start_add_notifier">Toca el botón <b>Notificador</b> para añadir un paso que te recuerde al terminar la carrera.</string>
+    <string name="intro_start_add_walk_step">Añade una etapa <b>normal</b> para caminata.</string>
+    <string name="intro_start_walk_notifier">Añade <b>otro notificador</b> para<b>que te recuerde al terminar la caminata</b>.</string>
+    <string name="intro_start_run_timer"><b>Toca el temporizador</b> para acceder a la pantalla de ejecución.</string>
+    <string name="intro_start_timer_steps">Esta parte muestra <b>la lista de etapas</b> y resalta <b>la etapa en ejecución</b>.</string>
+    <string name="intro_start_timer_buttons">Este es el panel de control. Aquí verás <b>Detener, Etapa anterior, Iniciar/Pausar, Siguiente etapa</b> y más opciones.</string>
+    <string name="intro_start_quick_start_pause">Esto inicia un temporizador rápidamente, toca el nombre del temporizador para ver sus detalles</string>
+    <string name="account_delete">Eliminar cuenta y todos los respaldos</string>
+    <string name="whitelist_intro">La mayoría de los fabricantes de Android forzan el cierre de las aplicaciones en segundo plano, haciendo que las aplicaciones dejen de recordarte.
+\n
+\nPor favor, permite el inicio automático, permite la ejecución en segundo plano, desactive la optimización de la batería, etc., en la configuración.
+\n
+\nAquí hay algunas instrucciones:</string>
+    <string name="beep_count_intro_usage">Introduzca las veces después de los cuales el bip debe detenerse</string>
+    <string name="beep_count_intro_0_meaning">0 para mantener el bip hasta el final de la etapa</string>
+    <string name="notification_duration_desp_usage">Introduzca el número de segundos después de los cuales la notificación será descartada automáticamente</string>
+    <string name="notification_duration_desp_0_meaning">0 para no descartar automáticamente</string>
+    <string name="account_delete_confirmation_title">¿Eliminar tu cuenta y toda tu información respaldada\?</string>
+    <string name="account_delete_confirmation_desp">Esto <b>NO</b> afecta a tu suscripción. Puedes gestionar tu suscripción en Google Play Store.</string>
+    <plurals name="minutes">
+        <item quantity="one"><xliff:g example="7" id="number">%1$s</xliff:g> minuto</item>
+        <item quantity="many"><xliff:g example="7" id="number">%1$s</xliff:g> minutos</item>
+        <item quantity="other"><xliff:g example="7" id="number">%1$s</xliff:g> minutos</item>
+    </plurals>
+    <string name="intro_start_our_plan">Vamos a crear un ejercicio donde <b>corramos por 3 minutos</b>, después <b>caminemos 2 minutos</b>, y <b>la serie se repita 5 veces</b>.</string>
+    <string name="intro_start_timer_time">Esta parte muestra <b>el tiempo restante</b>, las series restantes y el botón para ajustar el tiempo.</string>
+    <string name="intro_start_enter_loop">Primero, ajusta la <b>Serie</b> a <b>5</b>.</string>
+    <string name="intro_start_step_time">Toca <b>el tiempo al costado de nombre de la etapa</b> y cámbialo a <b>3 minutos</b>.</string>
+    <string name="intro_start_walk_step_name">Ajusta el tiempo a <b>2 minutos</b>.</string>
+    <string name="intro_start_timer_done">¡La configuración está lista! Toca ✔ en la parte superior para <b>gardar el temporizador</b>.</string>
+    <plurals name="seconds">
+        <item quantity="one"><xliff:g example="7" id="number">%s</xliff:g> segundo</item>
+        <item quantity="many"><xliff:g example="7" id="number">%s</xliff:g> segundos</item>
+        <item quantity="other"><xliff:g example="7" id="number">%s</xliff:g> segundos</item>
+    </plurals>
+    <string name="intro_start_step_card">Una tarjeta representa una etapa en el plan.</string>
+    <string name="intro_start_finish"><b>¡Felicitaciones! Has completado el tutorial.</b></string>
+    <plurals name="hours">
+        <item quantity="one"><xliff:g example="7" id="number">%1$s</xliff:g> hora</item>
+        <item quantity="many"><xliff:g example="7" id="number">%1$s</xliff:g> horas</item>
+        <item quantity="other"><xliff:g example="7" id="number">%1$s</xliff:g> horas</item>
+    </plurals>
+    <string name="backup_app_data">Datos de aplicación</string>
+    <string name="theme_light_status_bar">Barra de estado clara</string>
+    <string name="backup_wrong_saf">Framework de acceso al almacenamiento no encontrado
+\nEste dispositivo no soporta la exportación e importación</string>
+    <string name="cloud_backup_backup_options">Opciones de respaldo</string>
+    <string name="export_select_location">Selecciona una ubicación de exportación</string>
+    <string name="export_action">Exportar</string>
 </resources>
