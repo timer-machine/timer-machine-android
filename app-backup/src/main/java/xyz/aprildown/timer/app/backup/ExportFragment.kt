@@ -60,11 +60,6 @@ class ExportFragment : Fragment(R.layout.layout_vertical_form), StepperFormListe
         mainCallback = requireCallback()
     }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setHasOptionsMenu(true)
-    }
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         val context = view.context
         val form = view as VerticalStepperFormView

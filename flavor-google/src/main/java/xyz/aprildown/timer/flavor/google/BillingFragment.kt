@@ -10,7 +10,9 @@ import android.view.MenuInflater
 import android.view.MenuItem
 import android.view.View
 import android.widget.TextView
+import androidx.core.view.MenuProvider
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Lifecycle
 import androidx.transition.TransitionManager
 import com.github.deweyreed.tools.anko.newTask
 import com.github.deweyreed.tools.anko.snackbar
@@ -31,7 +33,7 @@ import javax.inject.Inject
 import xyz.aprildown.timer.app.base.R as RBase
 
 @AndroidEntryPoint
-internal class BillingFragment : Fragment(R.layout.fragment_billing) {
+internal class BillingFragment : Fragment(R.layout.fragment_billing), MenuProvider {
 
     @Inject
     lateinit var flavorData: FlavorData
@@ -40,7 +42,7 @@ internal class BillingFragment : Fragment(R.layout.fragment_billing) {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setHasOptionsMenu(true)
+        requireActivity().addMenuProvider(this, this, Lifecycle.State.STARTED)
 
         billingSupervisor = BillingSupervisor(
             requireContext(),
@@ -218,12 +220,12 @@ internal class BillingFragment : Fragment(R.layout.fragment_billing) {
             .commit()
     }
 
-    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        inflater.inflate(R.menu.flavor_help, menu)
+    override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
+        menuInflater.inflate(R.menu.flavor_help, menu)
     }
 
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when (item.itemId) {
+    override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
+        when (menuItem.itemId) {
             R.id.action_flavor_help -> {
                 val context = requireContext()
                 MaterialAlertDialogBuilder(context)

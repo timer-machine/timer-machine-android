@@ -15,10 +15,12 @@ import android.widget.ScrollView
 import android.widget.TextView
 import androidx.activity.OnBackPressedCallback
 import androidx.core.os.bundleOf
+import androidx.core.view.MenuProvider
 import androidx.core.view.forEachIndexed
 import androidx.core.widget.doAfterTextChanged
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Lifecycle
 import androidx.navigation.fragment.NavHostFragment
 import com.github.deweyreed.tools.anko.longSnackbar
 import com.github.deweyreed.tools.helper.getNumberFormattedQuantityString
@@ -47,7 +49,7 @@ import javax.inject.Inject
 import xyz.aprildown.timer.app.base.R as RBase
 
 @AndroidEntryPoint
-class EditSchedulerFragment : Fragment(R.layout.fragment_edit_scheduler) {
+class EditSchedulerFragment : Fragment(R.layout.fragment_edit_scheduler), MenuProvider {
 
     private val viewModel: EditSchedulerViewModel by viewModels()
 
@@ -104,7 +106,7 @@ class EditSchedulerFragment : Fragment(R.layout.fragment_edit_scheduler) {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setHasOptionsMenu(true)
+        requireActivity().addMenuProvider(this, this, Lifecycle.State.STARTED)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -282,20 +284,22 @@ class EditSchedulerFragment : Fragment(R.layout.fragment_edit_scheduler) {
         textRepeatEveryDaysLabel = null
     }
 
-    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        inflater.inflate(R.menu.edit_scheduler, menu)
+    override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
+        menuInflater.inflate(R.menu.edit_scheduler, menu)
     }
 
-    override fun onOptionsItemSelected(item: MenuItem): Boolean = when (item.itemId) {
-        R.id.action_save_scheduler -> {
-            if (selectedTimerId == TimerEntity.NULL_ID) {
-                mainCallback.snackbarView.longSnackbar(RBase.string.scheduler_wrong_timer_id)
-            } else {
-                saveScheduler()
+    override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
+        return when (menuItem.itemId) {
+            R.id.action_save_scheduler -> {
+                if (selectedTimerId == TimerEntity.NULL_ID) {
+                    mainCallback.snackbarView.longSnackbar(RBase.string.scheduler_wrong_timer_id)
+                } else {
+                    saveScheduler()
+                }
+                true
             }
-            true
+            else -> false
         }
-        else -> super.onOptionsItemSelected(item)
     }
 
     private fun saveScheduler() {
