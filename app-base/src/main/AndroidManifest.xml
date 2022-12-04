@@ -7,6 +7,7 @@
     </queries>
 
     <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
 
     <application android:theme="@style/AppTheme.LibraryPreview" />
 

@@ -60,7 +60,7 @@ abstract class MachineDatabase : RoomDatabase() {
 
         private fun Builder<MachineDatabase>.addCallback(context: Context): Builder<MachineDatabase> {
             return addCallback(
-                object : RoomDatabase.Callback() {
+                object : Callback() {
                     override fun onCreate(db: SupportSQLiteDatabase) {
                         addHostFolders(context, db)
                     }
@@ -146,13 +146,13 @@ abstract class MachineDatabase : RoomDatabase() {
                     if (moveToFirst()) {
                         while (!isAfterLast) {
                             val days =
-                                converter.stringToBooleanList(getString(getColumnIndex("days")))
+                                converter.stringToBooleanList(getString(getColumnIndexOrThrow("days")))
                             database.update(
                                 "TimerScheduler",
                                 SQLiteDatabase.CONFLICT_REPLACE,
                                 if (days.any { it }) repeatEveryWeekCv else repeatOnceCv,
                                 "id = ?",
-                                arrayOf(getInt(getColumnIndex("id")))
+                                arrayOf(getInt(getColumnIndexOrThrow("id")))
                             )
                             moveToNext()
                         }
