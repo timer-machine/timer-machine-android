@@ -358,7 +358,7 @@ class MainActivity :
             true
         }
 
-        val drawerBackCallback = object : OnBackPressedCallback(false) {
+        val drawerBackCallback = object : OnBackPressedCallback(binding.drawer.isOpen) {
             override fun handleOnBackPressed() {
                 binding.drawer.close()
             }

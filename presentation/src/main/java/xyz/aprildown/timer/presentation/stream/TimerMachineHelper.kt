@@ -312,12 +312,12 @@ internal fun getPrevIndexWithStep(
 
 fun List<StepEntity>.getStep(index: TimerIndex.Step): StepEntity.Step? {
     val i = index.stepIndex
-    return if (i in 0 until size) this[i] as? StepEntity.Step else null
+    return if (i in indices) this[i] as? StepEntity.Step else null
 }
 
 fun List<StepEntity>.getGroupStep(index: TimerIndex.Group): StepEntity.Step? {
     val (_, stepIndex, groupStepIndex) = index
-    val group = if (stepIndex in 0 until size) get(stepIndex) as? StepEntity.Group else null
+    val group = if (stepIndex in indices) get(stepIndex) as? StepEntity.Group else null
     val steps = group?.steps ?: return null
     val i = groupStepIndex.stepIndex
     return if (i in steps.indices) steps[i] as? StepEntity.Step? else null
