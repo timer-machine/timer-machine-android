@@ -25,7 +25,9 @@ class SchedulerExecutorImpl @Inject constructor(
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
             val am = context.getSystemService<AlarmManager>()
             // The permission seems to have been granted by default.
-            if (am?.canScheduleExactAlarms() == false) {
+            if (Build.VERSION.SDK_INT < Build.VERSION_CODES.TIRAMISU &&
+                am?.canScheduleExactAlarms() == false
+            ) {
                 return SetSchedulerEnable.Result.Failed("No permission to schedule exact alarms")
             }
         }

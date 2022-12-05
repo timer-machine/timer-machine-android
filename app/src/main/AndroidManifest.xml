@@ -29,7 +29,14 @@
     <!--For desperate users to whitelist-->
     <uses-permission android:name="android.permission.REQUEST_IGNORE_BATTERY_OPTIMIZATIONS" />
 
-    <uses-permission android:name="android.permission.SCHEDULE_EXACT_ALARM" />
+    <!--https://developer.android.com/training/scheduling/alarms#exact-permission-declare-->
+    <!--https://developer.android.com/reference/android/Manifest.permission#SCHEDULE_EXACT_ALARM-->
+    <!--From 31 to 32-->
+    <uses-permission
+        android:name="android.permission.SCHEDULE_EXACT_ALARM"
+        android:maxSdkVersion="32" />
+    <!--https://developer.android.com/reference/android/Manifest.permission#USE_EXACT_ALARM-->
+    <uses-permission android:name="android.permission.USE_EXACT_ALARM" />
 
     <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
 
