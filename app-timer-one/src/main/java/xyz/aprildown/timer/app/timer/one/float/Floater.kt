@@ -10,6 +10,7 @@ import android.os.Build
 import android.view.Gravity
 import android.view.View
 import android.view.WindowManager
+import androidx.core.content.ContextCompat
 import xyz.aprildown.timer.domain.utils.AppTracker
 
 internal class Floater(
@@ -93,9 +94,11 @@ internal class Floater(
         wm.addView(view, lp)
         isViewAdded = true
 
-        context.registerReceiver(
+        ContextCompat.registerReceiver(
+            context,
             orientationReceiver,
-            IntentFilter(Intent.ACTION_CONFIGURATION_CHANGED)
+            IntentFilter(Intent.ACTION_CONFIGURATION_CHANGED),
+            ContextCompat.RECEIVER_NOT_EXPORTED
         )
     }
 
