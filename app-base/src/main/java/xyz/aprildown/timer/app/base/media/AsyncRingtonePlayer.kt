@@ -31,6 +31,7 @@ import android.os.Looper
 import android.os.Message
 import android.os.SystemClock
 import android.telephony.TelephonyManager
+import androidx.core.content.ContextCompat
 import androidx.core.content.getSystemService
 import androidx.core.os.bundleOf
 import com.github.deweyreed.tools.compat.getParcelableCompat
@@ -238,9 +239,11 @@ internal class AsyncRingtonePlayer(private val mContext: Context) {
                         listener = this@MediaPlayerPlaybackDelegate
                     )
                     becomeNoisyReceiver = BecomeNoisyReceiver()
-                    mContext.registerReceiver(
+                    ContextCompat.registerReceiver(
+                        mContext,
                         becomeNoisyReceiver,
-                        IntentFilter(AudioManager.ACTION_AUDIO_BECOMING_NOISY)
+                        IntentFilter(AudioManager.ACTION_AUDIO_BECOMING_NOISY),
+                        ContextCompat.RECEIVER_NOT_EXPORTED
                     )
                 }
 
