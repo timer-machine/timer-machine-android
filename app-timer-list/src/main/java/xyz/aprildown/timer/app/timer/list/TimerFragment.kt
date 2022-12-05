@@ -6,6 +6,7 @@ import android.content.Context
 import android.content.Intent
 import android.content.ServiceConnection
 import android.graphics.Typeface
+import android.os.Build
 import android.os.Bundle
 import android.os.IBinder
 import android.os.PowerManager
@@ -42,6 +43,7 @@ import com.github.deweyreed.tools.arch.observeEvent
 import com.github.deweyreed.tools.arch.observeNonNull
 import com.github.deweyreed.tools.helper.IntentHelper
 import com.github.deweyreed.tools.helper.gone
+import com.github.deweyreed.tools.helper.hasPermissions
 import com.github.deweyreed.tools.helper.show
 import com.github.deweyreed.tools.helper.startActivityOrNothing
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
@@ -101,6 +103,10 @@ class TimerFragment :
         ActivityResultContracts.StartActivityForResult(),
         getIntroResultCallback()
     )
+
+    private var postNotificationsLauncher = registerForActivityResult(
+        ActivityResultContracts.RequestPermission()
+    ) {}
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -283,12 +289,19 @@ class TimerFragment :
                 }
             }
             TimerAdapter.ACTION_COLLAPSED_START -> {
-                val mutableTimerItem = listAdapter.getItemAt(position)
-                if (mutableTimerItem.state.isReset) {
-                    listAdapter.expand(position)
-                    viewModel.startPauseAction(
-                        mutableTimerItem.timerId, StreamState.RESET
-                    )
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU &&
+                    !view.context.hasPermissions(Manifest.permission.POST_NOTIFICATIONS) &&
+                    !shouldShowRequestPermissionRationale(Manifest.permission.POST_NOTIFICATIONS)
+                ) {
+                    postNotificationsLauncher.launch(Manifest.permission.POST_NOTIFICATIONS)
+                } else {
+                    val mutableTimerItem = listAdapter.getItemAt(position)
+                    if (mutableTimerItem.state.isReset) {
+                        listAdapter.expand(position)
+                        viewModel.startPauseAction(
+                            mutableTimerItem.timerId, StreamState.RESET
+                        )
+                    }
                 }
             }
             TimerAdapter.ACTION_CONTEXT_MENU -> {
