@@ -1,14 +1,17 @@
 package xyz.aprildown.timer.app.timer.one
 
+import android.Manifest
 import android.content.Context
 import android.content.pm.PackageManager
 import android.os.Build
 import android.os.Bundle
 import android.view.View
+import androidx.activity.result.contract.ActivityResultContracts
 import com.github.deweyreed.tools.anko.dp
 import com.github.deweyreed.tools.anko.snackbar
 import com.github.deweyreed.tools.arch.observeEvent
 import com.github.deweyreed.tools.arch.observeNonNull
+import com.github.deweyreed.tools.helper.hasPermissions
 import com.github.deweyreed.tools.helper.setTextIfChanged
 import com.github.zawadz88.materialpopupmenu.popupMenu
 import com.google.android.material.progressindicator.LinearProgressIndicator
@@ -34,6 +37,10 @@ class OneFragment :
     BaseOneFragment<FragmentOneBinding>(R.layout.fragment_one),
     FiveActionsView.Listener {
 
+    private var postNotificationsLauncher = registerForActivityResult(
+        ActivityResultContracts.RequestPermission()
+    ) {}
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         val binding = FragmentOneBinding.bind(view)
         setUpViews(binding)
@@ -46,7 +53,14 @@ class OneFragment :
         binding.fiveActionsOne.run {
             setActionClickListener(this@OneFragment)
             setMainFabClickListener {
-                actionStartPause()
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU &&
+                    !context.hasPermissions(Manifest.permission.POST_NOTIFICATIONS) &&
+                    !shouldShowRequestPermissionRationale(Manifest.permission.POST_NOTIFICATIONS)
+                ) {
+                    postNotificationsLauncher.launch(Manifest.permission.POST_NOTIFICATIONS)
+                } else {
+                    actionStartPause()
+                }
             }
         }
 
