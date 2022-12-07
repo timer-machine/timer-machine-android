@@ -397,7 +397,7 @@
     <string name="export_path_title">Ubicación de exportación</string>
     <string name="export_content_title">Selección de contenido</string>
     <string name="export_begin">Iniciar exportación</string>
-    <string name="export_done">Exportación hecha</string>
+    <string name="export_done">Exportación realizada</string>
     <string name="import_data_title">Importar datos de aplicación</string>
     <string name="import_data_summary">Importar datos de aplicación desde un archivo</string>
     <string name="import_restart_content">¿Reiniciar la aplicación para activar los cambios\?</string>
@@ -459,4 +459,148 @@
     <string name="cloud_backup_backup_options">Opciones de respaldo</string>
     <string name="export_select_location">Selecciona una ubicación de exportación</string>
     <string name="export_action">Exportar</string>
+    <string name="import_error">Importación fallida. Inténtalo de nuevo.
+\n
+\nPosibles soluciones:
+\n1. Importa de nuevo.
+\n2. Actualiza la app a la última versión.
+\n3. Limpia los datos de la app y vuelve a importarla.</string>
+    <string name="import_path_title">Selecciona un archivo para importar (.json/.tmd)</string>
+    <string name="import_select_location">Seleccionar archivo</string>
+    <string name="import_no_file">Ningún archivo disponible</string>
+    <string name="import_empty_file">El archivo está vacío</string>
+    <string name="import_wipe_first">Eliminar datos antiguos</string>
+    <string name="import_wipe_warning">Esto eliminará los datos actuales y añadirá los nuevos</string>
+    <string name="import_content_title">Selección de contenido</string>
+    <string name="import_begin">Comenzar la importación</string>
+    <string name="help_tutorial">Tutorial</string>
+    <string name="import_action">Importar</string>
+    <string name="import_done">Importación realizada</string>
+    <string name="help_email_title">Comentarios sobre TimeR Machine</string>
+    <string name="help_tips_tricks">Trucos y consejos</string>
+    <string name="help_tips_tricks_desp">Aprovecha al máximo esta aplicación</string>
+    <string name="help_whitelist_desp">Evita que los fabricantes de teléfonos eliminen esta aplicación mientras se ejecuta</string>
+    <string name="help_whitelist">Guía de lista blanca</string>
+    <string name="help_tts">Configuración de Texto a voz</string>
+    <string name="help_tts_test_read_content">Toca aquí para intentar convertir este texto a voz</string>
+    <string name="help_tts_test_question">¿Tu dispositivo lee el texto\?</string>
+    <string name="help_tts_test_yes">¡Sí!</string>
+    <string name="help_tts_test_instruction">No. Me gustaría leer las instrucciones</string>
+    <string name="help_tts_test_system_settings">No. Me gustaría ir a los ajustes del sistema</string>
+    <string name="help_tts_test_system_settings_manual">Tienes que buscar \"Texto a voz\" en los ajustes del sistema para configurar TTS</string>
+    <string name="help_qa">Preguntas y respuestas comunes</string>
+    <string name="help_feedback">Comentarios</string>
+    <string name="dark_theme_title">Tema oscuro</string>
+    <string name="dark_theme_manual">Manual</string>
+    <string name="dark_theme_scheduled">Programado</string>
+    <string name="dark_theme_scheduled_from">Desde</string>
+    <string name="dark_theme_scheduled_to">Hasta</string>
+    <string name="dark_theme_system_default">Predeterminado del sistema</string>
+    <string name="dark_theme_battery_saver">Configurado por el ahorro de batería</string>
+    <string name="dark_theme_scheduled_dark_now">Cambiado al tema oscuro</string>
+    <string name="dark_theme_scheduled_light_now">Cambiado al tema claro</string>
+    <string name="tweak_time_title">Ajustar la configuración horaria</string>
+    <string name="tweak_time_main_title">Botones principales</string>
+    <string name="tweak_time_overflow_title">Botones de desbordamiento</string>
+    <string name="pref_app_language">Idioma</string>
+    <string name="pref_app_language_default">Predeterminado del sistema</string>
+    <string name="pref_help_translation">Ayuda a traducir la aplicación</string>
+    <string name="pref_category_title_timer_setting">Ajustes de temporizador</string>
+    <string name="pref_screen_title">Brillo de la pantalla</string>
+    <string name="pref_screen_timing_title">Tiempo de aplicación del brillo de la pantalla</string>
+    <string name="pref_notifier_plus_title">Cuando añadas tiempo en un notificador</string>
+    <string name="pref_tweak_time_title">Ajustes de horario avanzados</string>
+    <string name="settings_floating_window_pip_auto_close_on">Cuando finalice un temporizador, cierre la ventana flotante o PIP</string>
+    <string name="pref_tweak_time_on">Habilitado</string>
+    <string name="pref_tweak_time_off">Deshabilitado</string>
+    <string name="settings_floating_window_pip">Ventana flotante y PIP</string>
+    <string name="settings_floating_window_pip_auto_close">Cerrar ventana automáticamente</string>
+    <string name="settings_floating_window_pip_auto_close_off">Cuando finalice un temporizador, mantener abierta la ventana flotante o PIP</string>
+    <string name="settings_floating_window_pip_floating">Ventana flotante</string>
+    <string name="settings_floating_window_pip_floating_alpha">Transparencia de la ventana</string>
+    <string name="settings_floating_window_pip_floating_size">Tamaño de la ventana</string>
+    <string name="settings_floating_window_pip_pip">PIP</string>
+    <string name="pref_phone_call">Cuando el teléfono está en llamada</string>
+    <string name="pref_show_timer_total_time">Tiempo total al editar</string>
+    <string name="pref_show_timer_total_time_on">Mostrar el tiempo total del temporizador y los grupos</string>
+    <string name="pref_show_timer_total_time_off">Ocultar</string>
+    <string name="pref_media_style_notification">Notificación de estilo multimedia</string>
+    <string name="pref_category_title_scheduler_setting">Ajustes del programador</string>
+    <string name="pref_category_notif">Notificaciones</string>
+    <string name="pref_open_notif_setting">Abrir ajustes de las notificaciones</string>
+    <string name="pref_category_title_audio">Audio</string>
+    <string name="pref_audio_focus_type_title">Tipo de enfoque de audio</string>
+    <string name="pref_audio_type_title">Tipo de sonido</string>
+    <string name="pref_audio_volume_title">Volumen</string>
+    <string name="pref_title_other">Otro</string>
+    <string name="rate_five_stars">Califica esta aplicación con 5 estrellas</string>
+    <string name="pref_recommend">Comparte esta aplicación</string>
+    <string name="pref_about_title">Acerca de</string>
+    <string name="about_version">Versión</string>
+    <string name="about_source_code">Código fuente</string>
+    <string name="about_developer">Desarrollador</string>
+    <string name="about_more_apps_from_me">Más aplicaciones mías</string>
+    <string name="share_content">TimeR Machine, una gran aplicación de cronómetro de intervalos/entrenamientos</string>
+    <string name="log_title">Registro de la aplicación</string>
+    <string name="intro_save_for_later">Puedes probar esto después del tutorial</string>
+    <string name="intro_exit_confirmation">¿Salir del tutorial\?</string>
+    <string name="intro_exit_difficult_app_alert">Sin terminar el tutorial, la aplicación puede resultar confusa de usar.</string>
+    <string name="intro_location">Puedes encontrar el tutorial en \"Ayuda y comentarios\"</string>
+    <string name="tip_android_12_phone_calls">La pausa en las llamadas telefónicas ahora requiere el permiso \"Leer estado del teléfono\"</string>
+    <string name="tip_android_12_battery">La compatibilidad con Tasker ahora requiere el permiso \"Ignorar optimización de batería\"</string>
+    <string name="tasker_edit_title">Plugin para TimeR Machine</string>
+    <string name="update_title">Registro de cambios</string>
+    <string name="whitelist_disclaimer"><b>Muchos fabricantes de Android pueden detener las aplicaciones en ejecución cuando la pantalla está apagada o al cambiar a otra aplicación</b>, que es un problema conocido de Android.
+\n
+\nEsta aplicación hace todo lo posible por hacer bien su trabajo, pero aún hay posibilidades de que falle.
+\n
+\n<b>Por favor, incluye esta aplicación en la lista blanca de los ajustes del sistema</b>.</string>
+    <string name="whitelist_disclaimer_no">No, entiendo las consecuencias</string>
+    <string name="whitelist_disclaimer_no_confirmation">¿Omitir la guía\?</string>
+    <string name="whitelist_disclaimer_yes">Comprobar la guía de lista blanca</string>
+    <string name="whitelist_don_t_kill_desp">Un sitio web que ofrece muchas soluciones</string>
+    <string name="whitelist_setting">Configurar</string>
+    <string name="whitelist_links">Enlaces</string>
+    <string name="whitelist_quick_settings">Algunos ajustes rápidos</string>
+    <string name="whitelist_ignore_battery_optimization">Ignorar optimización de la batería</string>
+    <string name="whitelist_settings_template" formatted="false">Ajuste del sistema %d</string>
+    <string name="account_sign_out_confirmation">¿Salir\?</string>
+    <string name="account_sign_out">Salir</string>
+    <string name="account_signing_out">Saliendo…</string>
+    <string name="billing_not_supported">Por el momento no es posible suscribirse</string>
+    <string name="billing_manage_subscription">Gestionar suscripción</string>
+    <string name="whitelist_location">Encontrará la Guía de Lista blanca en \"Ayuda y comentarios\"</string>
+    <string name="account_deleting">Eliminando cuenta…</string>
+    <string name="account_sign_in">Registrarse / Iniciar sesión</string>
+    <string name="billing_iap">Compras dentro de la aplicación</string>
+    <string name="billing_loading">Cargando</string>
+    <string name="billing_purchase">Comprar</string>
+    <string name="billing_subscribe">Suscribirse</string>
+    <string name="billing_owned">Comprado</string>
+    <string name="billing_per_year">/Año</string>
+    <string name="billing_cancel_anytime">Facturación periódica. Cancela en cualquier momento.</string>
+    <string name="billing_connect_issue">Se ha producido un error al conectar con Google Play.
+\n
+\nEste problema puede ser temporal, inténtalo de nuevo en unos minutos.</string>
+    <string name="billing_under_maintenance">En mantenimiento</string>
+    <string name="billing_cloud_backup_title">Respaldo en la nube</string>
+    <string name="billing_cloud_backup_desp">No pierdas nunca tu registro de trabajo duro</string>
+    <string name="billing_more_themes_title">Más temas</string>
+    <string name="billing_more_themes_desp">Colores cuidadosamente elegidos y perfectos para la aplicación</string>
+    <string name="billing_baked_count_title">Sonido de conteo grabado</string>
+    <string name="billing_baked_count_desp">Sonidos de cuenta atrás rápidos y consistentes</string>
+    <string name="billing_future_title">Más en el futuro</string>
+    <string name="billing_future_desp">¡Tu ayuda hace esta aplicación mejor!</string>
+    <string name="billing_a_part_of_iap">Esto forma parte de las compras dentro de la aplicación.</string>
+    <string name="billing_subscription_service">Este es un servicio de suscripción.</string>
+    <string name="billing_help_contact">Contacto</string>
+    <string name="billing_help_email_title">Problema de facturación de TimeR Machine</string>
+    <string name="intro_exit_previous_hint">Para volver al paso anterior, toca en la <b>flecha izquierda</b> en la parte inferior de la pantalla.</string>
+    <string name="tip_missed_timer"><b>¡Algunos temporizadores se han detenido anormalmente!</b>
+\n
+\nEsto se debe probablemente porque el sistema detuvo la aplicación en segundo plano. <b>Para resolver este problema, por favor considera agregar esta aplicación a la lista blanca en los ajustes del sistema.</b></string>
+    <string name="billing_help_title">Ayuda</string>
+    <string name="pref_category_title_app">Ajustes de la aplicación</string>
+    <string name="help_feedback_desp">Envía un correo electrónico y recibe respuesta en 24 horas</string>
+    <string name="billing_explanation" formatted="false">Al pulsar Suscribirse, el pago se cargará a su cuenta de Google Play Store. Su suscripción se renovará automáticamente por la misma duración del plan al mismo precio hasta que la cancele en Suscripciones en Google Play Store al menos 24 horas antes de que finalice el periodo actual. Al tocar Suscribirse, aceptas nuestra <xliff:g example="Privacy policy" id="privacy_policy">%1$s</xliff:g> y <xliff:g example="Terms" id="terms">%2$s</xliff:g>.</string>
 </resources>
