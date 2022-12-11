@@ -137,7 +137,7 @@ ext {
             scroll_hms_picker           : 'xyz.aprildown:ScrollHmsPicker:2.0.3',
             theme                       : 'xyz.aprildown:Theme:0.4.0',
             toggle_button_group         : 'com.nex3z:toggle-button-group:1.2.3',
-            ultimate_ringtone_picker    : 'xyz.aprildown:UltimateRingtonePicker:3.1.0',
+            ultimate_ringtone_picker    : 'com.github.DeweyReed:UltimateRingtonePicker:3.2.0',
             vertical_stepper_form       : 'com.ernestoyaquello.stepperform:vertical-stepper-form:2.5.0',
             zip4j                       : 'net.lingala.zip4j:zip4j:2.11.2',
             tasker_plugin               : 'com.joaomgcd:taskerpluginlibrary:0.4.6',
