@@ -590,24 +590,6 @@
     <!--App preferences-->
     <string name="pref_category_title_app">Application Settings</string>
 
-    <string name="pref_app_language">Language</string>
-    <string name="pref_app_language_default">System default</string>
-    <string-array name="pref_app_language_titles">
-        <item>@string/pref_app_language_default</item>
-        <item>English</item>
-        <item>简体中文</item>
-        <item>繁体中文</item>
-    </string-array>
-    <string-array name="pref_app_language_values">
-        <item>default</item>
-        <item>en</item>
-        <!--The dash is important otherwise Local doesn't recognize.-->
-        <item>zh-CN</item>
-        <item>zh-TW</item>
-    </string-array>
-
-    <string name="pref_help_translation">Help translate the app</string>
-
     <!--Timer preferences-->
     <string name="pref_category_title_timer_setting">Timer Settings</string>
 

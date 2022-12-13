@@ -72,10 +72,6 @@ class SettingsFragment :
 
     override fun onPreferenceChange(preference: Preference, newValue: Any?): Boolean {
         when (preference.key) {
-            KEY_APP_LANGUAGE -> {
-                (requireActivity() as? MainCallback.ActivityCallback)
-                    ?.restartWithDestination(RBase.id.dest_settings)
-            }
             KEY_SCREEN -> refreshBrightnessTime(newValue?.toString())
             KEY_PHONE_CALL -> {
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S &&
@@ -290,7 +286,6 @@ class SettingsFragment :
 private const val KEY_DARK_THEME = DarkTheme.PREF_DARK_THEME
 private const val KEY_EDIT_LAYOUT = "key_edit_layout"
 private const val KEY_THEME = "key_theme"
-private const val KEY_APP_LANGUAGE = PreferenceData.KEY_APP_LANGUAGE
 
 private const val KEY_SCREEN = PreferenceData.KEY_SCREEN
 private const val KEY_SCREEN_TIMING = PreferenceData.KEY_SCREEN_TIMING

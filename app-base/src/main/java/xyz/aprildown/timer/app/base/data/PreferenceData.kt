@@ -31,11 +31,6 @@ import com.mikepenz.materialize.R as RMaterialize
 
 object PreferenceData {
 
-    const val KEY_APP_LANGUAGE = "key_app_language"
-    // const val APP_LANGUAGE_DEFAULT = "default"
-    // val Context.appLanguageTag: String
-    //     get() = safeSharedPreference.getString(KEY_APP_LANGUAGE, APP_LANGUAGE_DEFAULT)
-
     /**
      * This key and its value will be used in the [ScreenWakeLock].
      */

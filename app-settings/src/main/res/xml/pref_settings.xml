@@ -21,24 +21,6 @@
             app:persistent="false"
             app:title="@string/theme_title" />
 
-        <DropDownPreference
-            app:defaultValue="default"
-            app:enabled="false"
-            app:entries="@array/pref_app_language_titles"
-            app:entryValues="@array/pref_app_language_values"
-            app:icon="@drawable/settings_translate"
-            app:isPreferenceVisible="false"
-            app:key="key_app_language"
-            app:title="@string/pref_app_language"
-            app:useSimpleSummaryProvider="true" />
-
-        <Preference
-            app:enabled="false"
-            app:isPreferenceVisible="false"
-            app:key="key_help_translation"
-            app:persistent="false"
-            app:title="@string/pref_help_translation" />
-
     </PreferenceCategory>
 
     <PreferenceCategory app:title="@string/pref_category_title_timer_setting">

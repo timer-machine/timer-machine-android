@@ -474,9 +474,6 @@
     <string name="tweak_time_overflow_title">菜單按鈕</string>
     <!--App preferences-->
     <string name="pref_category_title_app">應用設置</string>
-    <string name="pref_app_language">語言</string>
-    <string name="pref_app_language_default">跟隨系統</string>
-    <string name="pref_help_translation">幫助翻譯此應用</string>
     <!--Timer preferences-->
     <string name="pref_category_title_timer_setting">計時器設置</string>
     <string name="pref_screen_title">屏幕亮度</string>
