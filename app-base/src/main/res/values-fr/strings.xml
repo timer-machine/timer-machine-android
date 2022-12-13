@@ -2,7 +2,6 @@
 <resources>
     <string name="main_action_schedulers">Planificateurs</string>
     <string name="voice_content_info_variables_intro">* Cliquez sur le bouton « Variables » en bas pour choisir des variables. Elles seront remplacées par la valeur correspondante lors de l\'exécution.</string>
-    <string name="language">fr</string>
     <string name="ok">OK</string>
     <string name="cancel">Annuler</string>
     <string name="settings">Paramètres</string>

@@ -15,8 +15,8 @@ import xyz.aprildown.timer.domain.usecases.CoroutinesUseCase
 import xyz.aprildown.timer.domain.usecases.Fruit
 import xyz.aprildown.timer.flavor.google.utils.setUpFirebaseStorage
 import java.io.File
+import java.util.Locale
 import javax.inject.Inject
-import xyz.aprildown.timer.app.base.R as RBase
 
 @Reusable
 internal class LoadBakedCountResources @Inject constructor(
@@ -32,7 +32,7 @@ internal class LoadBakedCountResources @Inject constructor(
         return try {
             Firebase.storage.reference
                 .child(PreferenceData.BAKED_COUNT_NAME)
-                .child("${applicationContext.getString(RBase.string.language)}.zip")
+                .child("${Locale.getDefault().toLanguageTag()}.zip")
                 .getFile(tempZipFile)
                 .await()
             downloaded = true

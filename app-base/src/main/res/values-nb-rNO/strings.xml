@@ -45,7 +45,6 @@
     <string name="folder_new_folder">Nytt tidsur satt</string>
     <string name="folder_trash">Papirkurv</string>
     <string name="folder_name">Sett navn</string>
-    <string name="language">nb_NO</string>
     <string name="folder_trash_folder_confirmation">Flytt tidsur til papirkurv\?</string>
     <string name="folder_sort">Sorter etter</string>
     <string name="folder_sort_a_to_z">Navn A ➝ Å</string>
