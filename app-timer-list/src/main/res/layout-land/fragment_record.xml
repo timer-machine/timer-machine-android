@@ -87,6 +87,12 @@
         app:layout_constraintStart_toStartOf="@id/btnRecordTimers"
         app:layout_constraintTop_toBottomOf="@id/btnRecordEndTime" />
 
+    <androidx.constraintlayout.widget.Group
+        android:id="@+id/groupTime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:constraint_referenced_ids="btnRecordStartTime,textRecordTimeDivider,btnRecordEndTime,btnRecordRecent" />
+
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/tabLayoutRecord"
         android:layout_width="0dp"

@@ -1,6 +1,5 @@
 package xyz.aprildown.timer.presentation.timer
 
-import android.text.format.DateUtils
 import androidx.collection.ArrayMap
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -13,15 +12,20 @@ import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.launch
 import xyz.aprildown.timer.domain.TimeUtils
+import xyz.aprildown.timer.domain.TimeUtils.toEpochMilli
 import xyz.aprildown.timer.domain.di.MainDispatcher
 import xyz.aprildown.timer.domain.entities.TimerInfo
 import xyz.aprildown.timer.domain.entities.TimerStampEntity
+import xyz.aprildown.timer.domain.repositories.PreferencesRepository
 import xyz.aprildown.timer.domain.usecases.folder.FolderSortByRule
 import xyz.aprildown.timer.domain.usecases.folder.GetFolders
 import xyz.aprildown.timer.domain.usecases.invoke
 import xyz.aprildown.timer.domain.usecases.record.GetRecords
 import xyz.aprildown.timer.domain.usecases.timer.GetTimerInfo
 import xyz.aprildown.timer.presentation.BaseViewModel
+import java.time.Instant
+import java.time.LocalDateTime
+import java.time.ZoneId
 import javax.inject.Inject
 
 @HiltViewModel
@@ -30,7 +34,9 @@ class RecordViewModel @Inject constructor(
     private val getRecords: GetRecords,
     getFolders: GetFolders,
     folderSortByRule: FolderSortByRule,
-    getTimerInfo: GetTimerInfo
+    getTimerInfo: GetTimerInfo,
+
+    val preferencesRepository: PreferencesRepository,
 ) : BaseViewModel(mainDispatcher) {
 
     private val _allTimerInfo = MutableLiveData<List<TimerInfo>>()
@@ -69,11 +75,13 @@ class RecordViewModel @Inject constructor(
                 all += getTimerInfo(GetTimerInfo.Params(folder.id, sortBy))
             }
             _allTimerInfo.value = all
-            val now = System.currentTimeMillis()
-            updateParams(
-                timerInfo = all,
-                startTime = now - DateUtils.WEEK_IN_MILLIS,
-                endTime = now
+
+            updateStartTime(
+                since = preferencesRepository.getInt(PREF_START_SINCE, START_SINCE_LAST_WEEK),
+                timerInfo = preferencesRepository.getNullableString(PREF_SELECTED_TIMER_IDS)
+                    ?.split(SELECTED_TIMER_IDS_SEPARATOR)?.map { it.toInt() }
+                    ?.let { ids -> all.filter { it.id in ids } }
+                    ?: all
             )
         }
     }
@@ -99,6 +107,59 @@ class RecordViewModel @Inject constructor(
             _selectedTimerInfo.value = timerInfo
             _startTime.value = startTimeOfTheDay
             _endTime.value = endTimeOfTheDay
+
+            launch {
+                val allTimerInfo = _allTimerInfo.value ?: emptyList()
+                preferencesRepository.setString(
+                    PREF_SELECTED_TIMER_IDS,
+                    if (!timerInfo.containsAll(allTimerInfo) ||
+                        !allTimerInfo.containsAll(timerInfo)
+                    ) {
+                        newParams.timerIds.joinToString(
+                            separator = SELECTED_TIMER_IDS_SEPARATOR,
+                            prefix = "",
+                            postfix = ""
+                        )
+                    } else {
+                        null
+                    }
+                )
+            }
+        }
+    }
+
+    fun updateStartTime(
+        since: Int,
+        timerInfo: List<TimerInfo> = selectedTimerInfo.value ?: emptyList()
+    ) {
+        val now = Instant.now()
+        val zone = ZoneId.systemDefault()
+        val dateTime = LocalDateTime.ofInstant(now, zone)
+
+        val start = when (since) {
+            START_SINCE_NOW -> dateTime
+            START_SINCE_LAST_WEEK -> dateTime.minusWeeks(1)
+            START_SINCE_LAST_MONTH -> dateTime.minusMonths(1)
+            START_SINCE_LAST_YEAR -> dateTime.minusYears(1)
+            START_SINCE_THE_START -> {
+                LocalDateTime.ofInstant(
+                    Instant.ofEpochMilli(
+                        minDateMilli.value ?: TimerStampEntity.getMinDateMilli()
+                    ),
+                    zone
+                )
+            }
+            else -> error("Unsupported since $since")
+        }
+
+        updateParams(
+            timerInfo = timerInfo,
+            startTime = start.toEpochMilli(),
+            endTime = now.toEpochMilli()
+        )
+
+        launch {
+            preferencesRepository.setInt(PREF_START_SINCE, since)
         }
     }
 
@@ -144,4 +205,16 @@ class RecordViewModel @Inject constructor(
             }
 
     // endregion Calendar
+
+    companion object {
+        private const val PREF_START_SINCE = "records_start_since"
+        const val START_SINCE_NOW = 0
+        const val START_SINCE_LAST_WEEK = 1
+        const val START_SINCE_LAST_MONTH = 2
+        const val START_SINCE_LAST_YEAR = 3
+        const val START_SINCE_THE_START = 4
+
+        private const val PREF_SELECTED_TIMER_IDS = "records_selected_timer_ids"
+        private const val SELECTED_TIMER_IDS_SEPARATOR = ","
+    }
 }
