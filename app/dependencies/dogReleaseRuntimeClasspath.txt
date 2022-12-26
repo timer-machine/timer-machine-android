@@ -114,7 +114,7 @@ com.google.dagger:hilt-android:2.44
 com.google.dagger:hilt-core:2.44
 com.google.guava:listenablefuture:1.0
 com.jakewharton.timber:timber:5.0.1
-com.joaomgcd:taskerpluginlibrary:0.4.6
+com.joaomgcd:taskerpluginlibrary:0.4.7
 com.mikepenz:fastadapter-extensions-binding:5.7.0
 com.mikepenz:fastadapter-extensions-expandable:5.7.0
 com.mikepenz:fastadapter:5.7.0

@@ -103,7 +103,7 @@ ext {
 
             // Internet - Google
             billing                       : 'com.android.billingclient:billing-ktx:4.1.0',
-            firebase_bom                  : 'com.google.firebase:firebase-bom:31.1.0',
+            firebase_bom                  : 'com.google.firebase:firebase-bom:31.1.1',
             firebase_auth                 : 'com.google.firebase:firebase-auth-ktx',
             firebase_auth_ui              : 'com.firebaseui:firebase-ui-auth:8.0.2',
             firebase_storage              : 'com.google.firebase:firebase-storage-ktx',
@@ -140,7 +140,7 @@ ext {
             ultimate_ringtone_picker      : 'com.github.DeweyReed:UltimateRingtonePicker:3.2.0',
             vertical_stepper_form         : 'com.ernestoyaquello.stepperform:vertical-stepper-form:2.5.0',
             zip4j                         : 'net.lingala.zip4j:zip4j:2.11.2',
-            tasker_plugin                 : 'com.joaomgcd:taskerpluginlibrary:0.4.6',
+            tasker_plugin                 : 'com.joaomgcd:taskerpluginlibrary:0.4.7',
 
     ]
 }
