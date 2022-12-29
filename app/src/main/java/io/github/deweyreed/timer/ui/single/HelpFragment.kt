@@ -45,11 +45,11 @@ class HelpFragment : PreferenceFragmentCompat() {
             true
         }
         findPreference<Preference>(getString(RBase.string.help_key_tips))?.setOnPreferenceClickListener {
-            context.openWebsiteWithWarning(Constants.getTipsAndTricksLink(context))
+            context.openWebsiteWithWarning(Constants.getTipsAndTricksLink())
             true
         }
         findPreference<Preference>(getString(RBase.string.help_key_qa))?.setOnPreferenceClickListener {
-            context.openWebsiteWithWarning(Constants.getQaLink(context))
+            context.openWebsiteWithWarning(Constants.getQaLink())
             true
         }
         findPreference<Preference>(getString(RBase.string.help_key_tts))?.setOnPreferenceClickListener {
@@ -103,7 +103,7 @@ class HelpFragment : PreferenceFragmentCompat() {
             }
 
             binding.btnReadInstructions.setOnClickListener {
-                context.openWebsiteWithWarning(Constants.getConfigureTtsLink(context))
+                context.openWebsiteWithWarning(Constants.getConfigureTtsLink())
             }
             binding.btnSystemSettings.setOnClickListener {
                 try {

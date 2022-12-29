@@ -52,7 +52,7 @@ class AboutPreferenceFragment : PreferenceFragmentCompat() {
         }
 
         findPreference<Preference>("key_about_changelog")?.setOnPreferenceClickListener {
-            context.openWebsiteWithWarning(Constants.getChangeLogLink(context))
+            context.openWebsiteWithWarning(Constants.getChangeLogLink())
             true
         }
 

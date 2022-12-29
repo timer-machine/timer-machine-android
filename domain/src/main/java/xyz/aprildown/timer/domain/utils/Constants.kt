@@ -1,7 +1,6 @@
 package xyz.aprildown.timer.domain.utils
 
-import android.content.Context
-import xyz.aprildown.timer.domain.R
+import java.util.Locale
 
 object Constants {
     private const val EXTRA_PREFIX = "EXTRA_"
@@ -27,10 +26,13 @@ object Constants {
 
     private const val LINK_PREFIX = "https://github.com/DeweyReed/Grocery/blob/master"
     private const val SUFFIX_CONTENT = "#readme"
-    private val Context.languageTag
-        get() = when (val tag = getString(R.string.language)) {
-            "zh-rCN" -> tag
-            else -> "en"
+    private val languageTag: String
+        get() {
+            val languageTag = Locale.getDefault().toLanguageTag()
+            return when {
+                languageTag == "zh-CN" || languageTag.startsWith("zh-Hans") -> "zh-rCN"
+                else -> "en"
+            }
         }
 
     fun getPrivacyPolicyLink(): String {
@@ -41,20 +43,20 @@ object Constants {
         return "$LINK_PREFIX/tm-tos.md$SUFFIX_CONTENT"
     }
 
-    fun getTipsAndTricksLink(context: Context): String {
-        return "$LINK_PREFIX/${context.languageTag}/tips-and-tricks.md$SUFFIX_CONTENT"
+    fun getTipsAndTricksLink(): String {
+        return "$LINK_PREFIX/${languageTag}/tips-and-tricks.md$SUFFIX_CONTENT"
     }
 
-    fun getQaLink(context: Context): String {
-        return "$LINK_PREFIX/${context.languageTag}/qa.md$SUFFIX_CONTENT"
+    fun getQaLink(): String {
+        return "$LINK_PREFIX/${languageTag}/qa.md$SUFFIX_CONTENT"
     }
 
-    fun getConfigureTtsLink(context: Context): String {
-        return "$LINK_PREFIX/${context.languageTag}/configure-tts.md$SUFFIX_CONTENT"
+    fun getConfigureTtsLink(): String {
+        return "$LINK_PREFIX/${languageTag}/configure-tts.md$SUFFIX_CONTENT"
     }
 
-    fun getChangeLogLink(context: Context): String {
-        return "$LINK_PREFIX/${context.languageTag}/change-log.md$SUFFIX_CONTENT"
+    fun getChangeLogLink(): String {
+        return "$LINK_PREFIX/${languageTag}/change-log.md$SUFFIX_CONTENT"
     }
 
     // endregion Links
