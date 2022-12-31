@@ -29,9 +29,11 @@ object Beeper : AudioManager.OnAudioFocusChangeListener {
     fun load(settings: Settings, debounce: Boolean = true) {
         tearDown()
         toneSettings = settings
-        toneGenerator =
-            if (debounce) DebounceToneGenerator(settings.streamType)
-            else NormalToneGenerator(settings.streamType)
+        toneGenerator = if (debounce) {
+            DebounceToneGenerator(settings.streamType)
+        } else {
+            NormalToneGenerator(settings.streamType)
+        }
         isLoaded = true
     }
 

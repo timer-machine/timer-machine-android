@@ -19,7 +19,6 @@ internal fun EditActivity.showBottomMoreDialog(
     viewModel: EditViewModel,
     appNavigator: AppNavigator
 ) {
-
     val binding = DialogEditMoreBinding.inflate(LayoutInflater.from(this))
     // Inflate the view on our own to find ?dividerHorizontal
     val dialog = MaterialAlertDialogBuilder(this)

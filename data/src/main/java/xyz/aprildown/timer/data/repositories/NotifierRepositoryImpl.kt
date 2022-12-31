@@ -26,11 +26,19 @@ internal class NotifierRepositoryImpl @Inject constructor(
 
     override suspend fun get(): StepEntity.Step {
         val storedString: String? = sharedPreferences.getString(PREF_STEP_NOTIFIER, null)
-        return if (storedString == null) translatedDefaultNotifier() else try {
-            val step: StepData.Step? = fromJson(storedString)
-            return if (step == null) translatedDefaultNotifier() else stepOnlyMapper.mapFrom(step)
-        } catch (_: Exception) {
+        return if (storedString == null) {
             translatedDefaultNotifier()
+        } else {
+            try {
+                val step: StepData.Step? = fromJson(storedString)
+                return if (step == null) {
+                    translatedDefaultNotifier()
+                } else {
+                    stepOnlyMapper.mapFrom(step)
+                }
+            } catch (_: Exception) {
+                translatedDefaultNotifier()
+            }
         }
     }
 
@@ -67,13 +75,14 @@ internal class NotifierRepositoryImpl @Inject constructor(
     companion object {
         @VisibleForTesting(otherwise = VisibleForTesting.PRIVATE)
         fun getDefaultNotifier(): StepEntity.Step = StepEntity.Step(
-            "Notifier", 10_000,
-            listOf(
+            label = "Notifier",
+            length = 10_000,
+            behaviour = listOf(
                 BehaviourEntity(BehaviourType.MUSIC),
                 BehaviourEntity(BehaviourType.VIBRATION),
                 BehaviourEntity(BehaviourType.SCREEN)
             ),
-            StepType.NOTIFIER
+            type = StepType.NOTIFIER
         )
     }
 }

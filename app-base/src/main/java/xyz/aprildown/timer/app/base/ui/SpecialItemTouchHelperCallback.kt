@@ -172,8 +172,10 @@ class SpecialItemTouchHelperCallback(
             val cy = top + height / 2f
             val halfIconSize = startIcon.intrinsicWidth * iconScale / 2f
             startIcon.setBounds(
-                (cx - halfIconSize).toInt(), (cy - halfIconSize).toInt(),
-                (cx + halfIconSize).toInt(), (cy + halfIconSize).toInt()
+                (cx - halfIconSize).toInt(),
+                (cy - halfIconSize).toInt(),
+                (cx + halfIconSize).toInt(),
+                (cy + halfIconSize).toInt()
             )
             startIcon.draw(c)
         } else {
@@ -198,8 +200,10 @@ class SpecialItemTouchHelperCallback(
             val cy = top + height / 2f
             val halfIconSize = endIcon.intrinsicWidth * iconScale / 2f
             endIcon.setBounds(
-                (cx - halfIconSize).toInt(), (cy - halfIconSize).toInt(),
-                (cx + halfIconSize).toInt(), (cy + halfIconSize).toInt()
+                (cx - halfIconSize).toInt(),
+                (cy - halfIconSize).toInt(),
+                (cx + halfIconSize).toInt(),
+                (cy + halfIconSize).toInt()
             )
             endIcon.draw(c)
         }

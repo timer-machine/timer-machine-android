@@ -97,8 +97,10 @@ class MachinePresenter @Inject constructor(
     override fun getTimerStateInfo(id: Int): MachineContract.CurrentTimerInfo? {
         return timers[id]?.let { (timer, machine) ->
             MachineContract.CurrentTimerInfo(
-                timer, machine.currentTaskState,
-                machine.currentIndex, machine.currentTask?.currentTime ?: 0L
+                timerEntity = timer,
+                state = machine.currentTaskState,
+                index = machine.currentIndex,
+                time = machine.currentTask?.currentTime ?: 0L,
             )
         }
     }

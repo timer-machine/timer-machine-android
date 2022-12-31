@@ -17,7 +17,6 @@ internal class RecordTimelineMarker(
     private val contentView: TextView = findViewById(R.id.textRecordChartContent)
 
     override fun refreshContent(e: Entry?, highlight: Highlight?) {
-
         if (e != null) {
             titleView.text = chartView?.xAxis?.valueFormatter?.getAxisLabel(e.x, null)
             contentView.text = (chartView as? BarChart)?.axisLeft?.valueFormatter

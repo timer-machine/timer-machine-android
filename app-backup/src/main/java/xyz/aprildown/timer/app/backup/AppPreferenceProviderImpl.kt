@@ -116,7 +116,8 @@ private class ScreenPreferenceItem : PreferenceItem {
     override fun storeToMap(context: Context, map: MutableMap<String, String>) {
         val sharedPreferences = context.safeSharedPreference
         map[KEY] = sharedPreferences.getNonNullString(
-            KEY, context.getString(RBase.string.pref_screen_value_default)
+            KEY,
+            context.getString(RBase.string.pref_screen_value_default)
         )
         map[KEY_TIMING] = sharedPreferences.getNonNullString(
             KEY_TIMING,

@@ -304,7 +304,8 @@ class TimerMachineHelperKtTest {
         ).let { (index, step) ->
             assertEquals(
                 TimerIndex.Group(
-                    loopIndex = 3, stepIndex = 1,
+                    loopIndex = 3,
+                    stepIndex = 1,
                     groupStepIndex = TimerIndex.Step(loopIndex = 2, stepIndex = 1)
                 ),
                 index
@@ -328,7 +329,8 @@ class TimerMachineHelperKtTest {
         ).let { (index, step) ->
             assertEquals(
                 TimerIndex.Group(
-                    loopIndex = 2, stepIndex = 2,
+                    loopIndex = 2,
+                    stepIndex = 2,
                     groupStepIndex = TimerIndex.Step(loopIndex = 2, stepIndex = 1)
                 ),
                 index
@@ -515,7 +517,8 @@ class TimerMachineHelperKtTest {
         ).let { (index, step) ->
             assertEquals(
                 TimerIndex.Group(
-                    loopIndex = 2, stepIndex = 1,
+                    loopIndex = 2,
+                    stepIndex = 1,
                     groupStepIndex = TimerIndex.Step(loopIndex = 4, stepIndex = 1)
                 ),
                 index
@@ -597,7 +600,8 @@ class TimerMachineHelperKtTest {
                 (groupSteps[0] as StepEntity.Step).length,
             timer.getTimeBeforeIndex(
                 TimerIndex.Group(
-                    loopIndex = 2, stepIndex = 1,
+                    loopIndex = 2,
+                    stepIndex = 1,
                     groupStepIndex = TimerIndex.Step(loopIndex = 1, stepIndex = 1)
                 )
             )
@@ -622,7 +626,8 @@ class TimerMachineHelperKtTest {
                 (groupSteps[1] as StepEntity.Step).length,
             timer.getTimeBeforeIndex(
                 TimerIndex.Group(
-                    loopIndex = 3, stepIndex = 4,
+                    loopIndex = 3,
+                    stepIndex = 4,
                     groupStepIndex = TimerIndex.Step(loopIndex = 1, stepIndex = 2)
                 )
             )

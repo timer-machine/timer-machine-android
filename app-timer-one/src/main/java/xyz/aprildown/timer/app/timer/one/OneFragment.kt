@@ -97,7 +97,8 @@ class OneFragment :
                                 TimerIndex.Step(loopIndex = it, stepIndex = 0)
                             } else {
                                 TimerIndex.Group(
-                                    loopIndex = it, stepIndex = 0,
+                                    loopIndex = it,
+                                    stepIndex = 0,
                                     groupStepIndex = TimerIndex.Step(0, 0)
                                 )
                             }
@@ -307,24 +308,48 @@ class OneFragment :
         fun getFourActionsFromKeys(keys: List<String>): List<FiveActionsView.Action> =
             keys.map {
                 when (it) {
-                    PreferenceData.ONE_LAYOUT_ONE_ACTION_STOP -> FiveActionsView.Action(
-                        it, RBase.string.one_action_stop, RBase.drawable.ic_stop
-                    )
-                    PreferenceData.ONE_LAYOUT_ONE_ACTION_PREV -> FiveActionsView.Action(
-                        it, RBase.string.one_action_prev, RBase.drawable.ic_arrow_up
-                    )
-                    PreferenceData.ONE_LAYOUT_ONE_ACTION_NEXT -> FiveActionsView.Action(
-                        it, RBase.string.one_action_next, RBase.drawable.ic_arrow_down
-                    )
-                    PreferenceData.ONE_LAYOUT_ONE_ACTION_MORE -> FiveActionsView.Action(
-                        it, RBase.string.one_action_more, RBase.drawable.ic_overflow
-                    )
-                    PreferenceData.ONE_LAYOUT_ONE_ACTION_LOCK -> FiveActionsView.Action(
-                        it, RBase.string.one_action_lock_ui, RBase.drawable.ic_unlocked
-                    )
-                    PreferenceData.ONE_LAYOUT_ONE_ACTION_EDIT -> FiveActionsView.Action(
-                        it, RBase.string.one_action_edit_timer, RBase.drawable.ic_edit
-                    )
+                    PreferenceData.ONE_LAYOUT_ONE_ACTION_STOP -> {
+                        FiveActionsView.Action(
+                            tag = it,
+                            nameRes = RBase.string.one_action_stop,
+                            defaultDrawableRes = RBase.drawable.ic_stop
+                        )
+                    }
+                    PreferenceData.ONE_LAYOUT_ONE_ACTION_PREV -> {
+                        FiveActionsView.Action(
+                            tag = it,
+                            nameRes = RBase.string.one_action_prev,
+                            defaultDrawableRes = RBase.drawable.ic_arrow_up
+                        )
+                    }
+                    PreferenceData.ONE_LAYOUT_ONE_ACTION_NEXT -> {
+                        FiveActionsView.Action(
+                            tag = it,
+                            nameRes = RBase.string.one_action_next,
+                            defaultDrawableRes = RBase.drawable.ic_arrow_down
+                        )
+                    }
+                    PreferenceData.ONE_LAYOUT_ONE_ACTION_MORE -> {
+                        FiveActionsView.Action(
+                            tag = it,
+                            nameRes = RBase.string.one_action_more,
+                            defaultDrawableRes = RBase.drawable.ic_overflow
+                        )
+                    }
+                    PreferenceData.ONE_LAYOUT_ONE_ACTION_LOCK -> {
+                        FiveActionsView.Action(
+                            tag = it,
+                            nameRes = RBase.string.one_action_lock_ui,
+                            defaultDrawableRes = RBase.drawable.ic_unlocked
+                        )
+                    }
+                    PreferenceData.ONE_LAYOUT_ONE_ACTION_EDIT -> {
+                        FiveActionsView.Action(
+                            tag = it,
+                            nameRes = RBase.string.one_action_edit_timer,
+                            defaultDrawableRes = RBase.drawable.ic_edit
+                        )
+                    }
                     else -> error("Unknown action $it")
                 }
             }

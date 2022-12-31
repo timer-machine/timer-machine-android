@@ -137,10 +137,11 @@ class StepListView @JvmOverloads constructor(
                 is StepEntity.Step -> {
                     stepItems.add(
                         VisibleStep(
-                            stepEntity,
-                            i + 1,
-                            indexesToIdentifier(i + 1),
-                            this, this
+                            step = stepEntity,
+                            number = i + 1,
+                            id = indexesToIdentifier(i + 1),
+                            currentPositionCallback = this,
+                            stepLongClickListener = this
                         )
                     )
                 }
@@ -158,10 +159,11 @@ class StepListView @JvmOverloads constructor(
                         stepEntity.steps.mapIndexed { gi: Int, gse: StepEntity ->
                             val step = gse as StepEntity.Step
                             VisibleStep(
-                                step,
-                                gi + 1,
-                                indexesToIdentifier(i + 1, gi),
-                                this, this
+                                step = step,
+                                number = gi + 1,
+                                id = indexesToIdentifier(i + 1, gi),
+                                currentPositionCallback = this,
+                                stepLongClickListener = this
                             )
                         }
                     )
@@ -175,10 +177,11 @@ class StepListView @JvmOverloads constructor(
             val stepCount = timer.steps.size
             endAdapter.add(
                 VisibleStep(
-                    it,
-                    stepCount + 1,
-                    indexesToIdentifier(stepCount + 1),
-                    this, this
+                    step = it,
+                    number = stepCount + 1,
+                    id = indexesToIdentifier(stepCount + 1),
+                    currentPositionCallback = this,
+                    stepLongClickListener = this
                 )
             )
         }
@@ -222,9 +225,11 @@ class StepListView @JvmOverloads constructor(
         return TimerIndex.Group(
             loopIndex = timerInstance.getTimerLoop(currentIndex),
             stepIndex = stepNumber - 1,
-            groupStepIndex =
-            if (currentIndex is TimerIndex.Group) currentIndex.groupStepIndex
-            else TimerIndex.Step(0, 0)
+            groupStepIndex = if (currentIndex is TimerIndex.Group) {
+                currentIndex.groupStepIndex
+            } else {
+                TimerIndex.Step(0, 0)
+            }
         )
     }
 }

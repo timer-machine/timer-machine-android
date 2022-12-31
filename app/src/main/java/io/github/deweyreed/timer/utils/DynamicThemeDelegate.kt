@@ -22,7 +22,6 @@ class DynamicThemeDelegate : ThemeInflationDelegate() {
     @Suppress("SpellCheckingInspection")
     override fun createView(context: Context, name: String, attrs: AttributeSet?): View? =
         when (name) {
-
             "View" -> View(context, attrs).apply {
                 tintBackground(this, attrs)
             }

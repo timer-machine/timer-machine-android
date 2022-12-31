@@ -239,9 +239,12 @@ class DataUseCaseTest {
         whenever(notifierRepository.get()).thenReturn(notifier)
         whenever(schedulerRepository.items()).thenReturn(schedulers)
         return ExportAppData(
-            testCoroutineDispatcher, appDataRepository,
+            testCoroutineDispatcher,
+            appDataRepository,
             folderRepository,
-            timerRepository, notifierRepository, timerStampRepository,
+            timerRepository,
+            notifierRepository,
+            timerStampRepository,
             schedulerRepository
         )
     }
@@ -892,9 +895,12 @@ class DataUseCaseTest {
             AppDataEntity(folders, timers, notifier, timerStamps, schedulers, prefs)
         )
         return ImportAppData(
-            testCoroutineDispatcher, appDataRepository,
+            testCoroutineDispatcher,
+            appDataRepository,
             folderRepository,
-            timerRepository, notifierRepository, timerStampRepository,
+            timerRepository,
+            notifierRepository,
+            timerStampRepository,
             schedulerRepository
         )
     }

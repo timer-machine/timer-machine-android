@@ -159,7 +159,8 @@ class UpdateStepDialog :
                 }
                 BehaviourType.VIBRATION -> {
                     addVibrationItems(
-                        context, current.toVibrationAction(),
+                        context = context,
+                        action = current.toVibrationAction(),
                         onNewCount = { newCount ->
                             changeBehaviour(BehaviourType.VIBRATION) {
                                 it.toVibrationAction().copy(count = newCount)
@@ -176,7 +177,8 @@ class UpdateStepDialog :
                 }
                 BehaviourType.SCREEN -> {
                     addScreenItems(
-                        context, current.toScreenAction(),
+                        context = context,
+                        action = current.toScreenAction(),
                         onFullscreenChanged = { isChecked ->
                             changeBehaviour(BehaviourType.SCREEN) {
                                 it.toScreenAction().copy(fullScreen = isChecked).toBehaviourEntity()
@@ -186,7 +188,8 @@ class UpdateStepDialog :
                 }
                 BehaviourType.VOICE -> {
                     addVoiceItems(
-                        context, current.toVoiceAction(),
+                        context = context,
+                        action = current.toVoiceAction(),
                         onVoiceContent = { newContent ->
                             changeBehaviour(BehaviourType.VOICE) {
                                 it.toVoiceAction().copy(content = newContent).toBehaviourEntity()
@@ -201,7 +204,8 @@ class UpdateStepDialog :
                 }
                 BehaviourType.BEEP -> {
                     addBeepItems(
-                        context, current.toBeepAction(),
+                        context = context,
+                        action = current.toBeepAction(),
                         onBeepCount = { newCount ->
                             changeBehaviour(BehaviourType.BEEP) {
                                 it.toBeepAction().copy(count = newCount).toBehaviourEntity()
@@ -223,7 +227,8 @@ class UpdateStepDialog :
                 }
                 BehaviourType.HALF -> {
                     addHalfItems(
-                        context, current.toHalfAction(),
+                        context = context,
+                        action = current.toHalfAction(),
                         onHalfOption = { newOption ->
                             changeBehaviour(BehaviourType.HALF) {
                                 it.toHalfAction().copy(option = newOption).toBehaviourEntity()
@@ -233,7 +238,8 @@ class UpdateStepDialog :
                 }
                 BehaviourType.COUNT -> {
                     addCountItems(
-                        context, current.toCountAction(),
+                        context = context,
+                        action = current.toCountAction(),
                         onCountTimes = { newTimes ->
                             changeBehaviour(BehaviourType.COUNT) {
                                 it.toCountAction().copy(newTimes).toBehaviourEntity()
@@ -243,7 +249,8 @@ class UpdateStepDialog :
                 }
                 BehaviourType.NOTIFICATION -> {
                     addNotificationItems(
-                        context, current.toNotificationAction(),
+                        context = context,
+                        action = current.toNotificationAction(),
                         onNotificationDuring = { newDuration ->
                             changeBehaviour(BehaviourType.NOTIFICATION) {
                                 it.toNotificationAction().copy(duration = newDuration)

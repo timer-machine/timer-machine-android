@@ -431,11 +431,13 @@ fun TimerEntity.isThisIndexValid(index: TimerIndex): Boolean = when (index) {
     }
     is TimerIndex.Group -> {
         val (loopIndex, stepIndex, groupStepIndex) = index
-        if (loopIndex !in 0 until loop || stepIndex !in steps.indices) false
-        else {
+        if (loopIndex !in 0 until loop || stepIndex !in steps.indices) {
+            false
+        } else {
             val groupStep = steps[stepIndex]
-            if (groupStep !is StepEntity.Group) false
-            else {
+            if (groupStep !is StepEntity.Group) {
+                false
+            } else {
                 val (groupStepLoopIndex, groupStepStepIndex) = groupStepIndex
                 groupStepLoopIndex in 0 until groupStep.loop &&
                     groupStepStepIndex in groupStep.steps.indices

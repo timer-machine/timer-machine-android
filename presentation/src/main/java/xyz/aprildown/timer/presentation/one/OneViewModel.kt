@@ -133,7 +133,8 @@ class OneViewModel @Inject constructor(
         if (state.isReset || state.isPaused) {
             _intentEvent.value = Event(
                 streamMachineIntentProvider.startIntent(
-                    timerId, timerCurrentIndex.value
+                    timerId,
+                    timerCurrentIndex.value
                 )
             )
         } else if (state.isRunning) {

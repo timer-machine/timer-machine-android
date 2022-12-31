@@ -46,16 +46,20 @@ class RoundTextView : AppCompatTextView {
             tvAllCorner =
                 ta.getDimension(R.styleable.RoundTextView_allCorner, java.lang.Float.MIN_VALUE)
             tvTopLeftCorner = ta.getDimension(
-                R.styleable.RoundTextView_topLeftCorner, DEFAULT_CORNER.toFloat()
+                R.styleable.RoundTextView_topLeftCorner,
+                DEFAULT_CORNER.toFloat()
             )
             tvTopRightCorner = ta.getDimension(
-                R.styleable.RoundTextView_topRightCorner, DEFAULT_CORNER.toFloat()
+                R.styleable.RoundTextView_topRightCorner,
+                DEFAULT_CORNER.toFloat()
             )
             tvBottomRightCorner = ta.getDimension(
-                R.styleable.RoundTextView_bottomRightCorner, DEFAULT_CORNER.toFloat()
+                R.styleable.RoundTextView_bottomRightCorner,
+                DEFAULT_CORNER.toFloat()
             )
             tvBottomLeftCorner = ta.getDimension(
-                R.styleable.RoundTextView_bottomLeftCorner, DEFAULT_CORNER.toFloat()
+                R.styleable.RoundTextView_bottomLeftCorner,
+                DEFAULT_CORNER.toFloat()
             )
         } finally {
             ta.recycle()
@@ -106,7 +110,6 @@ private fun getCornerDrawable(
     bottomRight: Float,
     @ColorInt color: Int
 ): Drawable {
-
     val outerR = FloatArray(8)
     outerR[0] = topLeft
     outerR[1] = topLeft

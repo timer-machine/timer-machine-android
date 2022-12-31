@@ -44,19 +44,19 @@ object Constants {
     }
 
     fun getTipsAndTricksLink(): String {
-        return "$LINK_PREFIX/${languageTag}/tips-and-tricks.md$SUFFIX_CONTENT"
+        return "$LINK_PREFIX/$languageTag/tips-and-tricks.md$SUFFIX_CONTENT"
     }
 
     fun getQaLink(): String {
-        return "$LINK_PREFIX/${languageTag}/qa.md$SUFFIX_CONTENT"
+        return "$LINK_PREFIX/$languageTag/qa.md$SUFFIX_CONTENT"
     }
 
     fun getConfigureTtsLink(): String {
-        return "$LINK_PREFIX/${languageTag}/configure-tts.md$SUFFIX_CONTENT"
+        return "$LINK_PREFIX/$languageTag/configure-tts.md$SUFFIX_CONTENT"
     }
 
     fun getChangeLogLink(): String {
-        return "$LINK_PREFIX/${languageTag}/change-log.md$SUFFIX_CONTENT"
+        return "$LINK_PREFIX/$languageTag/change-log.md$SUFFIX_CONTENT"
     }
 
     // endregion Links

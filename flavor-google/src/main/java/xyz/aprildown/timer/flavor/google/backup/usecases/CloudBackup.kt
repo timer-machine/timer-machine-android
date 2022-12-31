@@ -135,7 +135,9 @@ internal class CloudBackup @Inject constructor(
                             }
                         }
                         .setBackoffCriteria(
-                            BackoffPolicy.EXPONENTIAL, 1, TimeUnit.HOURS
+                            BackoffPolicy.EXPONENTIAL,
+                            1,
+                            TimeUnit.HOURS
                         )
                         .build()
                 )

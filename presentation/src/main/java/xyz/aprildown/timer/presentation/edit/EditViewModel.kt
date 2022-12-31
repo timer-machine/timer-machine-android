@@ -218,8 +218,14 @@ class EditViewModel @Inject constructor(
                 }
         } else {
             TimerEntity(
-                id, name.value ?: "", loop.value ?: 0,
-                newSteps, start, end, more.value ?: TimerMoreEntity(), folderId
+                id = id,
+                name = name.value ?: "",
+                loop = loop.value ?: 0,
+                steps = newSteps,
+                startStep = start,
+                endStep = end,
+                more = more.value ?: TimerMoreEntity(),
+                folderId = folderId
             ).hashCode() == timerHash
         }
     }

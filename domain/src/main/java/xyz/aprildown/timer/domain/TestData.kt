@@ -27,10 +27,7 @@ object TestData {
 
     const val fakeTimerId = 434
 
-    val fakeBehaviourA = BehaviourEntity(
-        BehaviourType.MUSIC,
-        "Sun", "uri: sun", false
-    )
+    val fakeBehaviourA = BehaviourEntity(BehaviourType.MUSIC, "Sun", "uri: sun", false)
     val fakeBehaviourB = BehaviourEntity(BehaviourType.VIBRATION)
     val fakeBehaviourC = BehaviourEntity(BehaviourType.SCREEN)
     val fakeBehaviourD = BehaviourEntity(BehaviourType.VOICE)
@@ -40,29 +37,46 @@ object TestData {
 
     val fakeStepA = StepEntity.Step("Step Alpha", 60_000, listOf())
     val fakeStepB = StepEntity.Step(
-        "Step Bravo", 5_000,
-        listOf(fakeBehaviourA, fakeBehaviourB), StepType.NOTIFIER
+        label = "Step Bravo",
+        length = 5_000,
+        behaviour = listOf(fakeBehaviourA, fakeBehaviourB),
+        type = StepType.NOTIFIER
     )
     val fakeStepC = StepEntity.Step(
-        "Step Charles", 1_000_000,
-        listOf(fakeBehaviourC, fakeBehaviourD), StepType.END
+        label = "Step Charles",
+        length = 1_000_000,
+        behaviour = listOf(fakeBehaviourC, fakeBehaviourD),
+        type = StepType.END
     )
     val fakeStepD = StepEntity.Group(
-        "Step Group", 3, listOf(fakeStepA, fakeStepB, fakeStepC)
+        name = "Step Group",
+        loop = 3,
+        steps = listOf(fakeStepA, fakeStepB, fakeStepC)
     )
 
     val fakeTimerSimpleA = TimerEntity(
-        fakeTimerId, "Timer Alpha", 1,
-        listOf(fakeStepA)
+        id = fakeTimerId,
+        name = "Timer Alpha",
+        loop = 1,
+        steps = listOf(fakeStepA)
     )
     val fakeTimerSimpleB = TimerEntity(
-        fakeTimerId + 1, "Timer Bravo", 5,
-        listOf(fakeStepA, fakeStepB), fakeStepA, fakeStepC, fakeTimerMoreB
+        id = fakeTimerId + 1,
+        name = "Timer Bravo",
+        loop = 5,
+        steps = listOf(fakeStepA, fakeStepB),
+        startStep = fakeStepA,
+        endStep = fakeStepC,
+        more = fakeTimerMoreB
     )
     val fakeTimerAdvanced = TimerEntity(
-        fakeTimerId + 2, "Timer Advanced", 5,
-        listOf(fakeStepA, fakeStepD, fakeStepB, fakeStepC, fakeStepD),
-        fakeStepA, fakeStepC, fakeTimerMoreB
+        id = fakeTimerId + 2,
+        name = "Timer Advanced",
+        loop = 5,
+        steps = listOf(fakeStepA, fakeStepD, fakeStepB, fakeStepC, fakeStepD),
+        startStep = fakeStepA,
+        endStep = fakeStepC,
+        more = fakeTimerMoreB
     )
 
     const val fakeSchedulerId = 10
@@ -106,9 +120,10 @@ object TestData {
         require(from <= to) { "$from >= $to" }
         val (start, end) = getTimerStampSpan(from, to)
         return TimerStampEntity(
-            fakeTimerStampIdA, timerId,
-            start,
-            start + ThreadLocalRandom.current().nextLong(end - start)
+            id = fakeTimerStampIdA,
+            timerId = timerId,
+            start = start,
+            end = start + ThreadLocalRandom.current().nextLong(end - start)
         )
     }
 

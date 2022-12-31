@@ -16,7 +16,6 @@ import xyz.aprildown.timer.domain.entities.toVoiceAction
 import xyz.aprildown.timer.app.base.R as RBase
 
 internal fun BehaviourEntity.getChipText(context: Context): String {
-
     fun getDefaultName(): String = context.getString(type.nameRes)
 
     return when (type) {

@@ -785,7 +785,8 @@ class MachinePresenterUnitTest {
 
     private fun TimerEntity.toMachineTimers(): TimerEntity = apply {
         machine.timers[id] = MachinePresenter.TimerMachinePair(
-            this, TimerMachine(this, mock())
+            timer = this,
+            machine = TimerMachine(this, mock())
         )
     }
 

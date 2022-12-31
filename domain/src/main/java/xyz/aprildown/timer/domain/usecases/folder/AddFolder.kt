@@ -16,7 +16,6 @@ class AddFolder @Inject constructor(
     private val appDataRepository: AppDataRepository
 ) : CoroutinesUseCase<FolderEntity, Long>(dispatcher) {
     override suspend fun create(params: FolderEntity): Long {
-
         if (params.isDefault || params.isTrash) return params.id
 
         require(params.name.isNotBlank())

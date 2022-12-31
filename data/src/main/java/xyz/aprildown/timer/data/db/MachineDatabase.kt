@@ -99,7 +99,8 @@ abstract class MachineDatabase : RoomDatabase() {
         fun createPersistentDatabase(context: Context): MachineDatabase {
             return Room.databaseBuilder(
                 context.applicationContext,
-                MachineDatabase::class.java, DB_NAME
+                MachineDatabase::class.java,
+                DB_NAME
             )
                 .addMyMigrations(context)
                 .addCallback(context)

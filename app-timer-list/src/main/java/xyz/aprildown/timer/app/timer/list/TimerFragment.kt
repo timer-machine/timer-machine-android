@@ -299,7 +299,8 @@ class TimerFragment :
                     if (mutableTimerItem.state.isReset) {
                         listAdapter.expand(position)
                         viewModel.startPauseAction(
-                            mutableTimerItem.timerId, StreamState.RESET
+                            mutableTimerItem.timerId,
+                            StreamState.RESET
                         )
                     }
                 }
@@ -596,10 +597,8 @@ class TimerFragment :
                         binding.layoutTip,
                         true
                     ).also {
-                        it.groupPhoneCalls.isVisible = !EasyPermissions.hasPermissions(
-                            context,
-                            Manifest.permission.READ_PHONE_STATE
-                        )
+                        it.groupPhoneCalls.isVisible =
+                            !context.hasPermissions(Manifest.permission.READ_PHONE_STATE)
                         it.btnPhoneCalls.setOnClickListener {
                             EasyPermissions.requestPermissions(
                                 PermissionRequest.Builder(

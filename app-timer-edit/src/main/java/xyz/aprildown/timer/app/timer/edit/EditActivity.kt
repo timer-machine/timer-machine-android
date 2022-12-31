@@ -215,8 +215,11 @@ class EditActivity :
                 true
             }
             setTitle(
-                if (viewModel.isNewTimer) RBase.string.edit_create_timer
-                else RBase.string.edit_edit_timer
+                if (viewModel.isNewTimer) {
+                    RBase.string.edit_create_timer
+                } else {
+                    RBase.string.edit_edit_timer
+                }
             )
         }
     }
@@ -359,15 +362,21 @@ class EditActivity :
                 item {
                     label = getString(RBase.string.edit_add_normal)
                     callback = {
-                        if (isInAGroup) addNormalStepToGroup(position + 1)
-                        else addNormalStep(position + 1)
+                        if (isInAGroup) {
+                            addNormalStepToGroup(position + 1)
+                        } else {
+                            addNormalStep(position + 1)
+                        }
                     }
                 }
                 item {
                     label = getString(RBase.string.edit_add_notifier)
                     callback = {
-                        if (isInAGroup) addNotifierStepToGroup(position + 1)
-                        else addNotifierStep(position + 1)
+                        if (isInAGroup) {
+                            addNotifierStepToGroup(position + 1)
+                        } else {
+                            addNotifierStep(position + 1)
+                        }
                     }
                 }
                 if (!isInAGroup) {
@@ -576,7 +585,8 @@ class EditActivity :
                 BehaviourType.MUSIC -> {
                     val action = current.toMusicAction()
                     addMusicItems(
-                        this@EditActivity, action,
+                        context = this@EditActivity,
+                        action = action,
                         onPickMusicClick = {
                             ringtonePickerLauncher.launch(
                                 RingtonePickerActivity.getIntent(
@@ -598,7 +608,8 @@ class EditActivity :
                 }
                 BehaviourType.VIBRATION -> {
                     addVibrationItems(
-                        this@EditActivity, current.toVibrationAction(),
+                        context = this@EditActivity,
+                        action = current.toVibrationAction(),
                         onNewCount = { newCount ->
                             changeBehaviour(BehaviourType.VIBRATION, position) {
                                 it.toVibrationAction().copy(count = newCount)
@@ -615,7 +626,8 @@ class EditActivity :
                 }
                 BehaviourType.SCREEN -> {
                     addScreenItems(
-                        this@EditActivity, current.toScreenAction(),
+                        context = this@EditActivity,
+                        action = current.toScreenAction(),
                         onFullscreenChanged = { isChecked ->
                             changeBehaviour(BehaviourType.SCREEN, position) {
                                 it.toScreenAction().copy(fullScreen = isChecked).toBehaviourEntity()
@@ -625,7 +637,8 @@ class EditActivity :
                 }
                 BehaviourType.VOICE -> {
                     addVoiceItems(
-                        this@EditActivity, current.toVoiceAction(),
+                        context = this@EditActivity,
+                        action = current.toVoiceAction(),
                         onVoiceContent = { newContent ->
                             changeBehaviour(BehaviourType.VOICE, position) {
                                 it.toVoiceAction().copy(content = newContent).toBehaviourEntity()
@@ -640,7 +653,8 @@ class EditActivity :
                 }
                 BehaviourType.BEEP -> {
                     addBeepItems(
-                        this@EditActivity, current.toBeepAction(),
+                        context = this@EditActivity,
+                        action = current.toBeepAction(),
                         onBeepCount = { newCount ->
                             changeBehaviour(BehaviourType.BEEP, position) {
                                 it.toBeepAction().copy(count = newCount).toBehaviourEntity()
@@ -662,7 +676,8 @@ class EditActivity :
                 }
                 BehaviourType.HALF -> {
                     addHalfItems(
-                        this@EditActivity, current.toHalfAction(),
+                        context = this@EditActivity,
+                        action = current.toHalfAction(),
                         onHalfOption = { newOption ->
                             changeBehaviour(BehaviourType.HALF, position) {
                                 it.toHalfAction().copy(option = newOption).toBehaviourEntity()
@@ -672,7 +687,8 @@ class EditActivity :
                 }
                 BehaviourType.COUNT -> {
                     addCountItems(
-                        this@EditActivity, current.toCountAction(),
+                        context = this@EditActivity,
+                        action = current.toCountAction(),
                         onCountTimes = { newTimes ->
                             changeBehaviour(BehaviourType.COUNT, position) {
                                 it.toCountAction().copy(times = newTimes).toBehaviourEntity()
@@ -682,7 +698,8 @@ class EditActivity :
                 }
                 BehaviourType.NOTIFICATION -> {
                     addNotificationItems(
-                        this@EditActivity, current.toNotificationAction(),
+                        context = this@EditActivity,
+                        action = current.toNotificationAction(),
                         onNotificationDuring = { newDuration ->
                             changeBehaviour(BehaviourType.NOTIFICATION, position) {
                                 it.toNotificationAction().copy(duration = newDuration)
@@ -868,7 +885,11 @@ class EditActivity :
         if (startAdapter.adapterItemCount == 0) {
             startAdapter.add(
                 EditableStep(
-                    getString(RBase.string.edit_start_step), 10_000, listOf(), StepType.START, this
+                    label = getString(RBase.string.edit_start_step),
+                    length = 10_000,
+                    behaviour = listOf(),
+                    stepType = StepType.START,
+                    handler = this
                 )
             )
         } else {
@@ -883,7 +904,11 @@ class EditActivity :
         if (endAdapter.adapterItemCount == 0) {
             endAdapter.add(
                 EditableStep(
-                    getString(RBase.string.edit_end_step), 10_000, listOf(), StepType.END, this
+                    label = getString(RBase.string.edit_end_step),
+                    length = 10_000,
+                    behaviour = listOf(),
+                    stepType = StepType.END,
+                    handler = this
                 )
             )
         } else {
@@ -895,8 +920,12 @@ class EditActivity :
 
     private fun getDefaultNaiveStep(isInAGroup: Boolean): EditableStep {
         return EditableStep(
-            getString(RBase.string.edit_default_step_name), 60000, mutableListOf(), StepType.NORMAL,
-            this, isInAGroup = isInAGroup
+            label = getString(RBase.string.edit_default_step_name),
+            length = 60000,
+            behaviour = mutableListOf(),
+            stepType = StepType.NORMAL,
+            handler = this,
+            isInAGroup = isInAGroup
         )
     }
 
@@ -914,9 +943,16 @@ class EditActivity :
         return fastAdapter.getItem(position) as EditableStep
     }
 
-    private fun StepEntity.Step.toEditable(isInAGroup: Boolean = false) = EditableStep(
-        label, length, behaviour, type, this@EditActivity, isInAGroup
-    )
+    private fun StepEntity.Step.toEditable(isInAGroup: Boolean = false): EditableStep {
+        return EditableStep(
+            label = label,
+            length = length,
+            behaviour = behaviour,
+            stepType = type,
+            handler = this@EditActivity,
+            isInAGroup = isInAGroup
+        )
+    }
 
     private fun List<StepEntity>.moveIntoStepsAdapter() {
         stepAdapter.clear()
@@ -953,9 +989,14 @@ class EditActivity :
         postUpdateTotalTime()
     }
 
-    private fun EditableStep.toStep(): StepEntity.Step = StepEntity.Step(
-        label, length, behaviour, stepType
-    )
+    private fun EditableStep.toStep(): StepEntity.Step {
+        return StepEntity.Step(
+            label = label,
+            length = length,
+            behaviour = behaviour,
+            type = stepType
+        )
+    }
 
     private fun getStepEntityFromFastAdapter(
         doOnGroup: ((group: EditableGroup, steps: List<StepEntity.Step>) -> Unit)? = null

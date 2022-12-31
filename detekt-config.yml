@@ -1,7 +1,7 @@
 complexity:
   ComplexCondition:
     threshold: 6
-  ComplexMethod:
+  CyclomaticComplexMethod:
     active: false
   LargeClass:
     threshold: 1000

@@ -13,7 +13,6 @@ import xyz.aprildown.timer.component.key.ListItemWithLayout
 import xyz.aprildown.timer.app.base.R as RBase
 
 internal fun Context.showTimePanelPickerDialog(onDone: () -> Unit) {
-
     val currentTimePanels = timePanels.toMutableList()
 
     val binding = DialogTimePanelPickerBinding.inflate(LayoutInflater.from(this))

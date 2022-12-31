@@ -205,7 +205,8 @@ class ThemeFragment :
     private fun changeTheme(@ColorInt p: Int, @ColorInt a: Int) {
         val context = requireContext()
         val newAppTheme = context.appTheme.copy(
-            colorPrimary = p, colorSecondary = a
+            colorPrimary = p,
+            colorSecondary = a
         )
         context.appTheme = newAppTheme
         AppThemeUtils.configAppTheme(context, newAppTheme)
@@ -386,12 +387,19 @@ private class ThemeColor(
             if (isPremium) {
                 TextViewCompat.setCompoundDrawablesRelativeWithIntrinsicBounds(
                     title,
-                    RBase.drawable.settings_premium, 0, 0, 0
+                    RBase.drawable.settings_premium,
+                    0,
+                    0,
+                    0
                 )
                 TextViewCompat.setCompoundDrawableTintList(title, colorOnPrimary.toColorStateList())
             } else {
                 TextViewCompat.setCompoundDrawablesRelativeWithIntrinsicBounds(
-                    title, 0, 0, 0, 0
+                    title,
+                    0,
+                    0,
+                    0,
+                    0
                 )
             }
 

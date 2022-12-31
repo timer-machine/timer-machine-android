@@ -54,7 +54,8 @@ class ScreenActivity : BaseActivity() {
 
         bindService(
             MachineService.bindIntent(this),
-            mConnection, Context.BIND_AUTO_CREATE
+            mConnection,
+            Context.BIND_AUTO_CREATE
         )
     }
 

@@ -117,8 +117,11 @@ internal class FloatingTimer(
 
         btnStartPause.setOnClickListener {
             context.startService(
-                if (state.isRunning) streamMachineIntentProvider.pauseIntent(timerId)
-                else streamMachineIntentProvider.startIntent(timerId)
+                if (state.isRunning) {
+                    streamMachineIntentProvider.pauseIntent(timerId)
+                } else {
+                    streamMachineIntentProvider.startIntent(timerId)
+                }
             )
         }
 

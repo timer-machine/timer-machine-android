@@ -16,8 +16,12 @@ class SaveTimer @Inject constructor(
     private val appDataRepository: AppDataRepository
 ) : CoroutinesUseCase<TimerEntity, Boolean>(dispatcher) {
     override suspend fun create(params: TimerEntity): Boolean {
-        return if (params.isNull) false else repository.save(params).also {
-            appDataRepository.notifyDataChanged()
+        return if (params.isNull) {
+            false
+        } else {
+            repository.save(params).also {
+                appDataRepository.notifyDataChanged()
+            }
         }
     }
 }

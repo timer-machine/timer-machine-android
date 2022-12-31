@@ -39,8 +39,7 @@ internal class BroadcastReceiverActionTweak : BroadcastReceiver() {
             } else {
                 context.startService(intent)
             }
-        } catch (ex: Exception) {
-            ex.printStackTrace()
+        } catch (_: Exception) {
         }
     }
 }

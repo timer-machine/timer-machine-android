@@ -270,8 +270,9 @@ class EditViewModelTest {
         )
         assertFalse(
             viewModel.isTimerRemainingSame(
-                listOf(StepEntity.Step("", 60_000, listOf())),
-                TestData.fakeStepA, TestData.fakeStepB
+                newSteps = listOf(StepEntity.Step("", 60_000, listOf())),
+                start = TestData.fakeStepA,
+                end = TestData.fakeStepB
             )
         )
 

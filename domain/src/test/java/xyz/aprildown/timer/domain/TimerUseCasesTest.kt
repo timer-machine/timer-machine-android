@@ -97,8 +97,12 @@ class TimerUseCasesTest {
         val schedulerExecutor = mock<SchedulerExecutor>()
         val timerStampRepository = mock<TimerStampRepository>()
         val useCase = DeleteTimer(
-            testCoroutineDispatcher, timerRepository,
-            schedulerRepository, schedulerExecutor, timerStampRepository, appDataRepository
+            testCoroutineDispatcher,
+            timerRepository,
+            schedulerRepository,
+            schedulerExecutor,
+            timerStampRepository,
+            appDataRepository
         )
 
         val timerId = TestData.fakeTimerId

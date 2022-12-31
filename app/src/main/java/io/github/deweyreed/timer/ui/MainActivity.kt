@@ -85,7 +85,6 @@ class MainActivity :
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
-
         // The value may be changed when our app is in the background.
         AppThemeUtils.configThemeForDark(this, isDark = resources.isDarkTheme)
 
@@ -222,7 +221,9 @@ class MainActivity :
 
     private fun navigateToMainDestination(@IdRes destinationId: Int, bundle: Bundle? = null) {
         navController.navigate(
-            destinationId, bundle, createMainFragmentNavOptions(destinationId)
+            destinationId,
+            bundle,
+            createMainFragmentNavOptions(destinationId)
         )
     }
 
@@ -466,7 +467,6 @@ class MainActivity :
     }
 
     private fun setUpAutoDark() {
-
         val prefs = getPreferences(MODE_PRIVATE)
         val keyLastStartTime = "last_start_time"
         val now = Instant.now().toEpochMilli()
@@ -474,7 +474,6 @@ class MainActivity :
         prefs.edit { putLong(keyLastStartTime, now) }
         val darkTheme = DarkTheme(this)
         if (darkTheme.darkThemeValue == DarkTheme.DARK_THEME_MANUAL && darkTheme.scheduleEnabled) {
-
             val currentIsDark = resources.isDarkTheme
 
             if (darkTheme.calculateAutoDarkChange(

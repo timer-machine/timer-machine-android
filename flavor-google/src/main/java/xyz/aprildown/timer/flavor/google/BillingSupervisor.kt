@@ -302,7 +302,8 @@ internal class BillingSupervisor(
                 _backupSubState.value = findSubscription(
                     billingClient.queryPurchasesAsync(BillingClient.SkuType.SUBS)
                         .purchasesList.toSet(),
-                    BACKUP_SUB, OLD_SUB
+                    BACKUP_SUB,
+                    OLD_SUB
                 )
             } else {
                 emitError(Error.SubscriptionNotSupported)

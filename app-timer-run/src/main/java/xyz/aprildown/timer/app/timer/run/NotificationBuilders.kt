@@ -413,7 +413,8 @@ internal fun NotificationManager.buildChannelIfNecessary(context: Context): Unit
         if (getNotificationChannel(CHANNEL_SERVICE) == null) {
             createNotificationChannel(
                 NotificationChannel(
-                    CHANNEL_SERVICE, getString(RBase.string.notif_channel_fore_title),
+                    CHANNEL_SERVICE,
+                    getString(RBase.string.notif_channel_fore_title),
                     NotificationManager.IMPORTANCE_DEFAULT
                 ).apply {
                     description = getString(RBase.string.notif_channel_fore_desp)
@@ -427,7 +428,8 @@ internal fun NotificationManager.buildChannelIfNecessary(context: Context): Unit
             )
             createNotificationChannel(
                 NotificationChannel(
-                    CHANNEL_TIMING, getString(RBase.string.notif_channel_timing_title),
+                    CHANNEL_TIMING,
+                    getString(RBase.string.notif_channel_timing_title),
                     NotificationManager.IMPORTANCE_LOW
                 ).apply {
                     description = getString(RBase.string.notif_channel_timing_desp)
@@ -441,7 +443,8 @@ internal fun NotificationManager.buildChannelIfNecessary(context: Context): Unit
             )
             createNotificationChannel(
                 NotificationChannel(
-                    CHANNEL_SCREEN, getString(RBase.string.notif_channel_screen_title),
+                    CHANNEL_SCREEN,
+                    getString(RBase.string.notif_channel_screen_title),
                     NotificationManager.IMPORTANCE_HIGH
                 ).apply {
                     description = getString(RBase.string.notif_channel_screen_desp)
@@ -462,7 +465,8 @@ internal fun NotificationManager.buildChannelIfNecessary(context: Context): Unit
             sp.edit { putBoolean(wearOsChannelKey, true) }
             createNotificationChannel(
                 NotificationChannel(
-                    CHANNEL_B_NOTIF, getString(RBase.string.notif_channel_b_notif_title),
+                    CHANNEL_B_NOTIF,
+                    getString(RBase.string.notif_channel_b_notif_title),
                     NotificationManager.IMPORTANCE_HIGH
                 ).apply {
                     description = getString(RBase.string.notif_channel_b_notif_desp)

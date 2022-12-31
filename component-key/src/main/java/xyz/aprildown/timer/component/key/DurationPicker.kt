@@ -22,14 +22,20 @@ class DurationPicker(
 
         val dialog = MaterialAlertDialogBuilder(context)
             .setView(
-                if (currentType == TYPE_PANEL) R.layout.layout_time_picker_panel
-                else R.layout.layout_time_picker_scroll
+                if (currentType == TYPE_PANEL) {
+                    R.layout.layout_time_picker_panel
+                } else {
+                    R.layout.layout_time_picker_scroll
+                }
             )
             .setPositiveButton(android.R.string.ok, null)
             .setNegativeButton(android.R.string.cancel, null)
             .setNeutralButton(
-                if (currentType == TYPE_PANEL) RBase.string.time_picker_type_scroll
-                else RBase.string.time_picker_type_panel,
+                if (currentType == TYPE_PANEL) {
+                    RBase.string.time_picker_type_scroll
+                } else {
+                    RBase.string.time_picker_type_panel
+                },
                 null
             )
             .create()

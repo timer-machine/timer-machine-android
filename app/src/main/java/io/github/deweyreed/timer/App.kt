@@ -11,11 +11,11 @@ import androidx.hilt.work.HiltWorkerFactory
 import androidx.preference.PreferenceManager
 import androidx.work.Configuration
 import androidx.work.DelegatingWorkerFactory
+import com.github.deweyreed.tools.helper.hasPermissions
 import dagger.Lazy
 import dagger.hilt.android.HiltAndroidApp
 import io.github.deweyreed.timer.utils.DynamicThemeDelegate
 import kotlinx.coroutines.runBlocking
-import pub.devrel.easypermissions.EasyPermissions
 import timber.log.Timber
 import xyz.aprildown.theme.Theme
 import xyz.aprildown.timer.app.base.data.DarkTheme
@@ -141,10 +141,7 @@ class App : Application(), Configuration.Provider {
                     putBoolean(phoneCallMigrationKey, false)
                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S &&
                         shouldPausePhoneCall &&
-                        !EasyPermissions.hasPermissions(
-                            this@App,
-                            Manifest.permission.READ_PHONE_STATE
-                        )
+                        !hasPermissions(Manifest.permission.READ_PHONE_STATE)
                     ) {
                         sharedPreferences.disablePhoneCallBehavior()
                     }

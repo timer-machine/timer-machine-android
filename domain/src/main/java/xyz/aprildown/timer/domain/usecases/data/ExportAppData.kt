@@ -52,10 +52,13 @@ class ExportAppData @Inject constructor(
                 } else {
                     emptyList()
                 },
-                schedulers =
-                if (params.exportSchedulers) schedulerRepo.items().map {
-                    it.copy(enable = 0)
-                } else emptyList(),
+                schedulers = if (params.exportSchedulers) {
+                    schedulerRepo.items().map {
+                        it.copy(enable = 0)
+                    }
+                } else {
+                    emptyList()
+                },
                 prefs = params.prefs
             )
         )

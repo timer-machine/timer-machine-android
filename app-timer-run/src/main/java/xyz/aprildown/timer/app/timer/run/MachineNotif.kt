@@ -50,18 +50,22 @@ internal class TimerNotif(
 
     private var currentTotalLength: Long = 0L
 
-    private val updateTimeFunc: (Builder, Long) -> Builder = if (timer.more.notifCount) { b, time ->
-        b.apply {
-            setContentText(time.produceTime())
-            if (currentTotalLength > 0) {
-                setProgress(
-                    100,
-                    ((time.toFloat() / currentTotalLength.toFloat() * 100).toInt()),
-                    false
-                )
+    private val updateTimeFunc: (Builder, Long) -> Builder = if (timer.more.notifCount) {
+        { b, time ->
+            b.apply {
+                setContentText(time.produceTime())
+                if (currentTotalLength > 0) {
+                    setProgress(
+                        100,
+                        ((time.toFloat() / currentTotalLength.toFloat() * 100).toInt()),
+                        false
+                    )
+                }
             }
         }
-    } else { b, _ -> b }
+    } else {
+        { b, _ -> b }
+    }
 
     override fun stub(): Builder {
         return context.buildTimerNotificationBuilder(

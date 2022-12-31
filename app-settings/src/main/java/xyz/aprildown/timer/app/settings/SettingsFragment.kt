@@ -14,9 +14,9 @@ import androidx.preference.Preference
 import androidx.preference.PreferenceFragmentCompat
 import com.github.deweyreed.tools.helper.IntentHelper
 import com.github.deweyreed.tools.helper.createChooserIntentIfDead
+import com.github.deweyreed.tools.helper.hasPermissions
 import com.github.deweyreed.tools.helper.startActivityOrNothing
 import dagger.hilt.android.AndroidEntryPoint
-import pub.devrel.easypermissions.EasyPermissions
 import xyz.aprildown.timer.app.base.data.DarkTheme
 import xyz.aprildown.timer.app.base.data.FlavorData
 import xyz.aprildown.timer.app.base.data.PreferenceData
@@ -76,10 +76,7 @@ class SettingsFragment :
             KEY_PHONE_CALL -> {
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S &&
                     newValue != "0" &&
-                    !EasyPermissions.hasPermissions(
-                        requireContext(),
-                        Manifest.permission.READ_PHONE_STATE
-                    )
+                    !requireContext().hasPermissions(Manifest.permission.READ_PHONE_STATE)
                 ) {
                     phoneStateLauncher.launch(Manifest.permission.READ_PHONE_STATE)
                 }
@@ -225,8 +222,11 @@ class SettingsFragment :
 
     private fun Preference.updateTweakTimeSummary() {
         setSummary(
-            if (PreferenceData.TweakTimeSettings(requireContext()).hasSlot) RBase.string.pref_tweak_time_on
-            else RBase.string.pref_tweak_time_off
+            if (PreferenceData.TweakTimeSettings(requireContext()).hasSlot) {
+                RBase.string.pref_tweak_time_on
+            } else {
+                RBase.string.pref_tweak_time_off
+            }
         )
     }
 
