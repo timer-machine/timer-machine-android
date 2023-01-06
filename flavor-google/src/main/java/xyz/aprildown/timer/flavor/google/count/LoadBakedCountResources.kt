@@ -32,7 +32,7 @@ internal class LoadBakedCountResources @Inject constructor(
         return try {
             Firebase.storage.reference
                 .child(PreferenceData.BAKED_COUNT_NAME)
-                .child("${Locale.getDefault().toLanguageTag()}.zip")
+                .child("${Locale.getDefault().language.lowercase()}.zip")
                 .getFile(tempZipFile)
                 .await()
             downloaded = true
