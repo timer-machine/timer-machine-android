@@ -4,6 +4,7 @@ import android.content.Intent
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.Observer
 import com.github.deweyreed.tools.arch.Event
+import kotlinx.coroutines.flow.emptyFlow
 import kotlinx.coroutines.runBlocking
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertTrue
@@ -27,6 +28,7 @@ import xyz.aprildown.timer.domain.usecases.folder.FolderSortByRule
 import xyz.aprildown.timer.domain.usecases.folder.GetFolders
 import xyz.aprildown.timer.domain.usecases.folder.RecentFolder
 import xyz.aprildown.timer.domain.usecases.folder.UpdateFolder
+import xyz.aprildown.timer.domain.usecases.home.TipManager
 import xyz.aprildown.timer.domain.usecases.invoke
 import xyz.aprildown.timer.domain.usecases.timer.AddTimer
 import xyz.aprildown.timer.domain.usecases.timer.ChangeTimerFolder
@@ -59,6 +61,8 @@ class TimerViewModelTest {
 
     private val intentProvider: StreamMachineIntentProvider = mock()
 
+    private val tipManager: TipManager = mock()
+
     private val editObserver: Observer<Event<Int>> = mock()
     private val intentObserver: Observer<Event<Intent>> = mock()
 
@@ -78,6 +82,7 @@ class TimerViewModelTest {
         whenever(getFolders()).thenReturn(folders)
         whenever(recentFolder.get()).thenReturn(FolderEntity.FOLDER_DEFAULT)
         whenever(folderSortByRule.get()).thenReturn(FolderSortBy.values().random())
+        whenever(tipManager.getTipFlow(any())).thenReturn(emptyFlow())
 
         viewModel = TimerViewModel(
             mainDispatcher = testCoroutineDispatcher,
@@ -94,7 +99,7 @@ class TimerViewModelTest {
             folderSortByRule = folderSortByRule,
             recentFolder = recentFolder,
             streamMachineIntentProvider = intentProvider,
-            tipManager = mock(),
+            tipManager = tipManager,
         )
         viewModel.editEvent.observeForever(editObserver)
         viewModel.intentEvent.observeForever(intentObserver)

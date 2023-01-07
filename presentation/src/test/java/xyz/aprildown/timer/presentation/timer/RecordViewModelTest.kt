@@ -19,6 +19,7 @@ import xyz.aprildown.timer.domain.entities.FolderSortBy
 import xyz.aprildown.timer.domain.entities.TimerInfo
 import xyz.aprildown.timer.domain.entities.TimerStampEntity
 import xyz.aprildown.timer.domain.entities.toTimerInfo
+import xyz.aprildown.timer.domain.repositories.PreferencesRepository
 import xyz.aprildown.timer.domain.usecases.folder.FolderSortByRule
 import xyz.aprildown.timer.domain.usecases.folder.GetFolders
 import xyz.aprildown.timer.domain.usecases.invoke
@@ -35,6 +36,7 @@ class RecordViewModelTest {
     private val getFolders: GetFolders = mock()
     private val folderSortByRule: FolderSortByRule = mock()
     private val getTimerInfo: GetTimerInfo = mock()
+    private val preferencesRepository: PreferencesRepository = mock()
 
     @Test
     fun `initial load`() = runBlocking {
@@ -115,13 +117,18 @@ class RecordViewModelTest {
     private fun newViewModel(): RecordViewModel {
         runBlocking {
             whenever(getRecords.getMinDateMilli()).thenReturn(TimerStampEntity.getMinDateMilli())
+            whenever(
+                preferencesRepository.getInt(any(), any())
+            ).thenReturn(RecordViewModel.START_SINCE_LAST_WEEK)
+            whenever(preferencesRepository.getNullableString(any(), any())).thenReturn(null)
         }
         return RecordViewModel(
             mainDispatcher = testCoroutineDispatcher,
             getRecords = getRecords,
             getFolders = getFolders,
             folderSortByRule = folderSortByRule,
-            getTimerInfo = getTimerInfo
+            getTimerInfo = getTimerInfo,
+            preferencesRepository = preferencesRepository,
         ).also {
             runBlocking {
                 verify(getRecords).getMinDateMilli()
