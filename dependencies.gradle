@@ -5,7 +5,7 @@ ext {
             kotlin      : '1.7.20',
             versions    : '0.44.0',
             detekt      : '1.22.0',
-            hilt        : '2.44',
+            hilt        : '2.44.2',
             secrets     : '2.0.1',
             gms         : '4.3.14',
             guard       : '0.3.2',
@@ -41,7 +41,7 @@ ext {
             // Instrumentation Test
             // https://developer.android.com/training/testing/set-up-project#gradle-dependencies
             androidx_test_core            : 'androidx.test:core:1.5.0',
-            androidx_test_runner          : 'androidx.test:runner:1.5.0',
+            androidx_test_runner          : 'androidx.test:runner:1.5.2',
             androidx_test_rules           : 'androidx.test:rules:1.5.0',
             androidx_test_junit           : 'androidx.test.ext:junit:1.1.5',
             androidx_test_espresso        : 'androidx.test.espresso:espresso-core:3.5.1',
@@ -51,7 +51,7 @@ ext {
 
             // AndroidX
             androidx_appcompat            : 'androidx.appcompat:appcompat:1.5.1',
-            androidx_fragment             : 'androidx.fragment:fragment-ktx:1.5.4',
+            androidx_fragment             : 'androidx.fragment:fragment-ktx:1.5.5',
             androidx_recyclerview         : 'androidx.recyclerview:recyclerview:1.2.1',
             androidx_preference           : 'androidx.preference:preference:1.2.0',
             androidx_constraintlayout     : 'androidx.constraintlayout:constraintlayout:2.1.4',

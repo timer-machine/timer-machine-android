@@ -43,8 +43,8 @@ androidx.drawerlayout:drawerlayout:1.1.1
 androidx.dynamicanimation:dynamicanimation:1.0.0
 androidx.emoji2:emoji2-views-helper:1.2.0
 androidx.emoji2:emoji2:1.2.0
-androidx.fragment:fragment-ktx:1.5.4
-androidx.fragment:fragment:1.5.4
+androidx.fragment:fragment-ktx:1.5.5
+androidx.fragment:fragment:1.5.5
 androidx.hilt:hilt-common:1.0.0
 androidx.hilt:hilt-navigation-fragment:1.0.0
 androidx.hilt:hilt-navigation:1.0.0
@@ -126,10 +126,10 @@ com.google.android.gms:play-services-safetynet:17.0.0
 com.google.android.gms:play-services-tasks:18.0.1
 com.google.android.material:material:1.4.0
 com.google.code.findbugs:jsr305:3.0.2
-com.google.dagger:dagger-lint-aar:2.44
-com.google.dagger:dagger:2.44
-com.google.dagger:hilt-android:2.44
-com.google.dagger:hilt-core:2.44
+com.google.dagger:dagger-lint-aar:2.44.2
+com.google.dagger:dagger:2.44.2
+com.google.dagger:hilt-android:2.44.2
+com.google.dagger:hilt-core:2.44.2
 com.google.errorprone:error_prone_annotations:2.9.0
 com.google.firebase:firebase-annotations:16.1.0
 com.google.firebase:firebase-appcheck-interop:16.1.0
