@@ -33,6 +33,7 @@ object TtsSpeaker : WelcomingTextToSpeech.Listener, AudioManager.OnAudioFocusCha
     private var onDone: (() -> Unit)? = null
 
     private var audioManager: AudioManager? = null
+    private var audioManagerCleanHandler: Handler? = null
 
     private var nullableCleanHandler: Handler? = null
     private val cleanHandler: Handler
@@ -143,6 +144,8 @@ object TtsSpeaker : WelcomingTextToSpeech.Listener, AudioManager.OnAudioFocusCha
             am = context.getSystemService() ?: return
             audioManager = am
         }
+        audioManagerCleanHandler?.removeCallbacksAndMessages(null)
+        audioManagerCleanHandler = null
         AudioFocusManager.requestAudioFocus(
             audioManager = am,
             focusGain = audioFocusType,
@@ -152,9 +155,19 @@ object TtsSpeaker : WelcomingTextToSpeech.Listener, AudioManager.OnAudioFocusCha
     }
 
     private fun abandonAudioFocus() {
-        val am = audioManager ?: return
-        AudioFocusManager.abandonAudioFocus(audioManager = am, listener = this)
-        audioManager = null
+        var handler = audioManagerCleanHandler
+        if (handler == null) {
+            handler = Handler(Looper.getMainLooper())
+            audioManagerCleanHandler = handler
+        } else {
+            handler.removeCallbacksAndMessages(null)
+        }
+
+        handler.postDelayed(500) {
+            val am = audioManager ?: return@postDelayed
+            AudioFocusManager.abandonAudioFocus(audioManager = am, listener = this)
+            audioManager = null
+        }
     }
 
     override fun onAudioFocusChange(focusChange: Int) {
