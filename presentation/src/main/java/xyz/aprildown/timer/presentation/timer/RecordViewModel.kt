@@ -79,8 +79,10 @@ class RecordViewModel @Inject constructor(
             updateStartTime(
                 since = preferencesRepository.getInt(PREF_START_SINCE, START_SINCE_LAST_WEEK),
                 timerInfo = preferencesRepository.getNullableString(PREF_SELECTED_TIMER_IDS)
-                    ?.split(SELECTED_TIMER_IDS_SEPARATOR)?.map { it.toInt() }
+                    ?.split(SELECTED_TIMER_IDS_SEPARATOR)
+                    ?.mapNotNull { it.toIntOrNull() }
                     ?.let { ids -> all.filter { it.id in ids } }
+                    ?.takeIf { it.isNotEmpty() }
                     ?: all
             )
         }
