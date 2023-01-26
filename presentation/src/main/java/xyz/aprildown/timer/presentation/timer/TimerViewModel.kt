@@ -5,6 +5,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.asFlow
 import androidx.lifecycle.asLiveData
+import androidx.lifecycle.distinctUntilChanged
 import androidx.lifecycle.switchMap
 import androidx.lifecycle.viewModelScope
 import com.github.deweyreed.tools.arch.Event
@@ -90,7 +91,8 @@ class TimerViewModel @Inject constructor(
     private val _shareStringEvent = MutableLiveData<Event<Fruit<String>>>()
     val shareStringEvent: LiveData<Event<Fruit<String>>> = _shareStringEvent
 
-    val tips: LiveData<Int> = tipManager.getTipFlow(this).asLiveData()
+    val tips: LiveData<Int> = tipManager.getTipFlow(this)
+        .asLiveData().distinctUntilChanged()
 
     init {
         launch {
