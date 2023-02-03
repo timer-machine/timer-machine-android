@@ -17,8 +17,6 @@ import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
 import android.view.View
-import androidx.activity.result.ActivityResult
-import androidx.activity.result.ActivityResultCallback
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.edit
 import androidx.core.content.getSystemService
@@ -98,11 +96,6 @@ class TimerFragment :
 
     private val listAdapter: TimerAdapter?
         get() = view?.findViewById<RecyclerView>(R.id.listTimers)?.adapter as? TimerAdapter
-
-    private val introLauncher = registerForActivityResult(
-        ActivityResultContracts.StartActivityForResult(),
-        getIntroResultCallback()
-    )
 
     private var postNotificationsLauncher = registerForActivityResult(
         ActivityResultContracts.RequestPermission()
@@ -542,7 +535,8 @@ class TimerFragment :
             binding.layoutTip.removeAllViews()
             when (tip) {
                 TipManager.TIP_TUTORIAL -> {
-                    introLauncher.launch(appNavigator.getIntroIntent(isOnBoarding = true))
+                    startActivity(appNavigator.getIntroIntent(isOnBoarding = true))
+                    viewModel.consumeTip(TipManager.TIP_TUTORIAL)
                 }
                 TipManager.TIP_WHITELIST -> {
                     binding.viewEmpty.gone()
@@ -634,12 +628,6 @@ class TimerFragment :
                     binding.viewEmpty.isVisible = viewModel.timerInfo.value.isNullOrEmpty()
                 }
             }
-        }
-    }
-
-    private fun getIntroResultCallback(): ActivityResultCallback<ActivityResult> {
-        return ActivityResultCallback {
-            viewModel.consumeTip(TipManager.TIP_TUTORIAL)
         }
     }
 
