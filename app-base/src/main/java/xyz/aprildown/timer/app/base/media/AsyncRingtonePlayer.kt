@@ -259,13 +259,19 @@ internal class AsyncRingtonePlayer(private val mContext: Context) {
                 }
                 AudioManager.AUDIOFOCUS_LOSS_TRANSIENT,
                 AudioManager.AUDIOFOCUS_LOSS_TRANSIENT_CAN_DUCK -> {
-                    if (mMediaPlayer?.isPlaying == true) {
-                        mMediaPlayer?.pause()
+                    try {
+                        if (mMediaPlayer?.isPlaying == true) {
+                            mMediaPlayer?.pause()
+                        }
+                    } catch (_: Throwable) {
                     }
                 }
                 AudioManager.AUDIOFOCUS_GAIN -> {
-                    if (mMediaPlayer?.isPlaying == false) {
-                        mMediaPlayer?.start()
+                    try {
+                        if (mMediaPlayer?.isPlaying == false) {
+                            mMediaPlayer?.start()
+                        }
+                    } catch (_: Throwable) {
                     }
                 }
             }
