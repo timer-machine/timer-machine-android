@@ -625,7 +625,7 @@ class TimerFragment :
                 }
                 TipManager.TIP_NO_MORE -> {
                     binding.layoutTip.gone()
-                    binding.viewEmpty.isVisible = viewModel.timerInfo.value.isNullOrEmpty()
+                    binding.viewEmpty.isVisible = viewModel.timerInfo.value?.isEmpty() == true
                 }
             }
         }
