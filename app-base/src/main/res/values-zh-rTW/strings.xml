@@ -329,16 +329,14 @@
     <string name="scheduler_repeat_today">今天</string>
     <string name="scheduler_wrong_timer_id">計劃任務需要一個計時器</string>
     <string name="scheduler_wrong_every_days">這個數值應在1到127之間</string>
-    <string-array name="scheduler_set">
-        <item>"計劃任務設定在 1 分鐘內啟動"</item>
-        <item>"計劃任務設定在 <xliff:g id="DAYS">%1$s</xliff:g>後啟動"</item>
-        <item>"計劃任務設定在 <xliff:g id="HOURS">%2$s</xliff:g>後啟動"</item>
-        <item>"計劃任務設定在 <xliff:g id="DAYS">%1$s</xliff:g><xliff:g id="HOURS">%2$s</xliff:g>後啟動"</item>
-        <item>"計劃任務設定在 <xliff:g id="MINUTES">%3$s</xliff:g>後啟動"</item>
-        <item>"計劃任務設定在 <xliff:g id="DAYS">%1$s</xliff:g><xliff:g id="MINUTES">%3$s</xliff:g>後啟動"</item>
-        <item>"計劃任務設定在 <xliff:g id="HOURS">%2$s</xliff:g><xliff:g id="MINUTES">%3$s</xliff:g>後啟動"</item>
-        <item>"計劃任務設定在 <xliff:g id="DAYS">%1$s</xliff:g><xliff:g id="HOURS">%2$s</xliff:g><xliff:g id="MINUTES">%3$s</xliff:g>後啟動"</item>
-    </string-array>
+    <string name="scheduler_set1">"計劃任務設定在 1 分鐘內啟動"</string>
+    <string name="scheduler_set2">"計劃任務設定在 <xliff:g id="DAYS">%1$s</xliff:g>後啟動"</string>
+    <string name="scheduler_set3">"計劃任務設定在 <xliff:g id="HOURS">%2$s</xliff:g>後啟動"</string>
+    <string name="scheduler_set4">"計劃任務設定在 <xliff:g id="DAYS">%1$s</xliff:g><xliff:g id="HOURS">%2$s</xliff:g>後啟動"</string>
+    <string name="scheduler_set5">"計劃任務設定在 <xliff:g id="MINUTES">%3$s</xliff:g>後啟動"</string>
+    <string name="scheduler_set6">"計劃任務設定在 <xliff:g id="DAYS">%1$s</xliff:g><xliff:g id="MINUTES">%3$s</xliff:g>後啟動"</string>
+    <string name="scheduler_set7">"計劃任務設定在 <xliff:g id="HOURS">%2$s</xliff:g><xliff:g id="MINUTES">%3$s</xliff:g>後啟動"</string>
+    <string name="scheduler_set8">"計劃任務設定在 <xliff:g id="DAYS">%1$s</xliff:g><xliff:g id="HOURS">%2$s</xliff:g><xliff:g id="MINUTES">%3$s</xliff:g>後啟動"</string>
     <string name="scheduler_schedule_failed">設定計劃失敗 %s</string>
     <string name="scheduler_canceled_template">%1$s 已取消</string>
     <string name="scheduler_starts_action_template">開啟 %1$s</string>
@@ -477,21 +475,15 @@
     <!--Timer preferences-->
     <string name="pref_category_title_timer_setting">計時器設定</string>
     <string name="pref_screen_title">螢幕亮度</string>
-    <string-array name="pref_screen_titles">
-        <item>常亮</item>
-        <item>暗淡</item>
-        <item>預設</item>
-    </string-array>
+    <string name="pref_screen_title_on">常亮</string>
+    <string name="pref_screen_title_dim">暗淡</string>
+    <string name="pref_screen_title_default">預設</string>
     <string name="pref_screen_timing_title">螢幕亮度應用時機</string>
-    <string-array name="pref_screen_timing_titles">
-        <item>當使用應用時</item>
-        <item>當使用應用且有計時器執行時</item>
-    </string-array>
+    <string name="pref_screen_timing_title_open">當使用應用時</string>
+    <string name="pref_screen_timing_title_running">當使用應用且有計時器執行時</string>
     <string name="pref_notifier_plus_title">在通知步驟增加時間時</string>
-    <string-array name="pref_notifier_plus_titles">
-        <item>返回上一步並將時間設為1分鐘</item>
-        <item>在當前步驟增加時間</item>
-    </string-array>
+    <string name="pref_notifier_plus_title_return">返回上一步並將時間設為1分鐘</string>
+    <string name="pref_notifier_plus_title_time">在當前步驟增加時間</string>
     <string name="pref_tweak_time_title">更多的時間微調選項</string>
     <string name="pref_tweak_time_on">已啟用</string>
     <string name="pref_tweak_time_off">已禁用</string>
@@ -505,11 +497,9 @@
     <string name="settings_floating_window_pip_pip">畫中畫</string>
     <string name="settings_floating_window_pip_floating_failed">建立懸浮窗失敗，重試一下吧</string>
     <string name="pref_phone_call">當手機在通話時</string>
-    <string-array name="pref_phone_call_titles">
-        <item>什麼也不做</item>
-        <item>暫停所有計時器</item>
-        <item>暫停並在通話後恢復所有計時器</item>
-    </string-array>
+    <string name="pref_phone_call_title_nothing">什麼也不做</string>
+    <string name="pref_phone_call_title_pause">暫停所有計時器</string>
+    <string name="pref_phone_call_title_pause_resume">暫停並在通話後恢復所有計時器</string>
     <string name="pref_show_timer_total_time">編輯時的總時間</string>
     <string name="pref_show_timer_total_time_on">顯示計時器和組的總時間</string>
     <string name="pref_show_timer_total_time_off">隱藏</string>
@@ -524,33 +514,20 @@
     <!--Scheduler preferences-->
     <string name="pref_category_title_scheduler_setting">計劃任務設定</string>
     <string name="pref_week_start_title">一週的第一天</string>
-    <string-array name="pref_week_start_titles">
-        <item>星期一</item>
-        <item>星期二</item>
-        <item>星期三</item>
-        <item>星期四</item>
-        <item>星期五</item>
-        <item>星期六</item>
-        <item>星期日</item>
-    </string-array>
     <!--Notification preferences-->
     <string name="pref_category_notif">通知</string>
     <string name="pref_open_notif_setting">開啟通知設定</string>
     <!--Audio preferences-->
     <string name="pref_category_title_audio">音訊</string>
     <string name="pref_audio_focus_type_title">音訊焦點型別</string>
-    <string-array name="pref_audio_focus_titles">
-        <item>暫停其它播放</item>
-        <item>停止其他播放</item>
-        <item>降低其他播放音量</item>
-        <item>什麼也不做</item>
-    </string-array>
+    <string name="pref_audio_focus_title_pause">暫停其它播放</string>
+    <string name="pref_audio_focus_title_stop">停止其他播放</string>
+    <string name="pref_audio_focus_title_lower">降低其他播放音量</string>
+    <string name="pref_audio_focus_title_none">什麼也不做</string>
     <string name="pref_audio_type_title">音訊型別</string>
-    <string-array name="pref_audio_type_titles">
-        <item>鬧鐘</item>
-        <item>媒體</item>
-        <item>通知</item>
-    </string-array>
+    <string name="pref_audio_type_title_alarm">鬧鐘</string>
+    <string name="pref_audio_type_title_media">媒體</string>
+    <string name="pref_audio_type_title_notification">通知</string>
     <string name="pref_audio_volume_title">音量</string>
     <!--Other preferences-->
     <string name="pref_title_other">其他</string>

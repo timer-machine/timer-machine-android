@@ -297,7 +297,7 @@
     <string name="sample_timer_template_3_stages_2">Stage 2</string>
     <string name="sample_timer_template_3_stages_3">Stage 3</string>
 
-    <string-array name="sample_timers">
+    <string-array name="sample_timers" translatable="false">
         <item>@string/sample_timer_template_1_stage_name</item>
         <item>@string/sample_timer_template_2_stages_name</item>
         <item>@string/sample_timer_template_3_stages_name</item>
@@ -410,16 +410,24 @@
     <string name="scheduler_wrong_timer_id">This scheduler requires a timer</string>
     <string name="scheduler_wrong_every_days">This value should be between 1 and 127</string>
 
-    <string-array name="scheduler_set">
-        <item>Scheduler set for less than 1 minute from now</item>
-        <item>Scheduler set for <xliff:g example="2 days" id="DAYS">%1$s</xliff:g> from now</item>
-        <item>Scheduler set for <xliff:g example="2 hours" id="HOURS">%2$s</xliff:g> from now</item>
-        <item>Scheduler set for <xliff:g example="2 days" id="DAYS">%1$s</xliff:g> and <xliff:g example="2 hours" id="HOURS">%2$s</xliff:g> from now</item>
-        <item>Scheduler set for <xliff:g example="2 minutes" id="MINUTES">%3$s</xliff:g> from now</item>
-        <item>Scheduler set for <xliff:g example="2 days" id="DAYS">%1$s</xliff:g> and <xliff:g example="2 minutes" id="MINUTES">%3$s</xliff:g> from now</item>
-        <item>Scheduler set for <xliff:g example="2 hours" id="HOURS">%2$s</xliff:g> and <xliff:g example="2 minutes" id="MINUTES">%3$s</xliff:g> from now</item>
-        <item>Scheduler set for <xliff:g example="2 days" id="DAYS">%1$s</xliff:g>, <xliff:g example="2 hours" id="HOURS">%2$s</xliff:g>, and <xliff:g example="2 minutes" id="MINUTES">%3$s</xliff:g> from now</item>
+    <string-array name="scheduler_set" translatable="false">
+        <item>@string/scheduler_set1</item>
+        <item>@string/scheduler_set2</item>
+        <item>@string/scheduler_set3</item>
+        <item>@string/scheduler_set4</item>
+        <item>@string/scheduler_set5</item>
+        <item>@string/scheduler_set6</item>
+        <item>@string/scheduler_set7</item>
+        <item>@string/scheduler_set8</item>
     </string-array>
+    <string name="scheduler_set1">Scheduler set for less than 1 minute from now</string>
+    <string name="scheduler_set2">Scheduler set for <xliff:g example="2 days" id="DAYS">%1$s</xliff:g> from now</string>
+    <string name="scheduler_set3">Scheduler set for <xliff:g example="2 hours" id="HOURS">%2$s</xliff:g> from now</string>
+    <string name="scheduler_set4">Scheduler set for <xliff:g example="2 days" id="DAYS">%1$s</xliff:g> and <xliff:g example="2 hours" id="HOURS">%2$s</xliff:g> from now</string>
+    <string name="scheduler_set5">Scheduler set for <xliff:g example="2 minutes" id="MINUTES">%3$s</xliff:g> from now</string>
+    <string name="scheduler_set6">Scheduler set for <xliff:g example="2 days" id="DAYS">%1$s</xliff:g> and <xliff:g example="2 minutes" id="MINUTES">%3$s</xliff:g> from now</string>
+    <string name="scheduler_set7">Scheduler set for <xliff:g example="2 hours" id="HOURS">%2$s</xliff:g> and <xliff:g example="2 minutes" id="MINUTES">%3$s</xliff:g> from now</string>
+    <string name="scheduler_set8">Scheduler set for <xliff:g example="2 days" id="DAYS">%1$s</xliff:g>, <xliff:g example="2 hours" id="HOURS">%2$s</xliff:g>, and <xliff:g example="2 minutes" id="MINUTES">%3$s</xliff:g> from now</string>
 
     <string name="scheduler_schedule_failed">Setting scheduler failed %s</string>
     <string name="scheduler_canceled_template">%1$s canceled</string>
@@ -594,39 +602,46 @@
     <string name="pref_category_title_timer_setting">Timer Settings</string>
 
     <string name="pref_screen_title">Screen Brightness</string>
-    <string-array name="pref_screen_titles">
-        <item>Keep the screen on</item>
-        <item>Dim the screen</item>
-        <item>Use system default</item>
+    <string-array name="pref_screen_titles" translatable="false">
+        <item>@string/pref_screen_title_on</item>
+        <item>@string/pref_screen_title_dim</item>
+        <item>@string/pref_screen_title_default</item>
     </string-array>
+    <string name="pref_screen_title_on">Keep the screen on</string>
+    <string name="pref_screen_title_dim">Dim the screen</string>
+    <string name="pref_screen_title_default">Use system default</string>
     <string name="pref_screen_value_keep" translatable="false">screen_keep</string>
     <string name="pref_screen_value_dim" translatable="false">screen_dim</string>
     <string name="pref_screen_value_default" translatable="false">screen_system</string>
-    <string-array name="pref_screen_values">
+    <string-array name="pref_screen_values" translatable="false">
         <item>@string/pref_screen_value_keep</item>
         <item>@string/pref_screen_value_dim</item>
         <item>@string/pref_screen_value_default</item>
     </string-array>
 
     <string name="pref_screen_timing_title">Screen Brightness Application Timing</string>
-    <string-array name="pref_screen_timing_titles">
-        <item>When the app is open</item>
-        <item>When the app is open and any timer is running</item>
+    <string-array name="pref_screen_timing_titles" translatable="false">
+        <item>@string/pref_screen_timing_title_open</item>
+        <item>@string/pref_screen_timing_title_running</item>
     </string-array>
+    <string name="pref_screen_timing_title_open">When the app is open</string>
+    <string name="pref_screen_timing_title_running">When the app is open and any timer is running</string>
     <string name="pref_screen_timing_value_timer" translatable="false">timer</string>
     <string name="pref_screen_timing_value_service" translatable="false">service</string>
     <string name="pref_screen_timing_value_default" translatable="false">@string/pref_screen_timing_value_timer</string>
-    <string-array name="pref_screen_timing_values">
+    <string-array name="pref_screen_timing_values" translatable="false">
         <item>@string/pref_screen_timing_value_timer</item>
         <item>@string/pref_screen_timing_value_service</item>
     </string-array>
 
     <string name="pref_notifier_plus_title">When plus time at a notifier</string>
-    <string-array name="pref_notifier_plus_titles">
-        <item>Return to the last step and set time to 1m</item>
-        <item>Add more time</item>
+    <string-array name="pref_notifier_plus_titles" translatable="false">
+        <item>@string/pref_notifier_plus_title_return</item>
+        <item>@string/pref_notifier_plus_title_time</item>
     </string-array>
-    <string-array name="pref_notifier_plus_values">
+    <string name="pref_notifier_plus_title_return">Return to the last step and set time to 1m</string>
+    <string name="pref_notifier_plus_title_time">Add more time</string>
+    <string-array name="pref_notifier_plus_values" translatable="false">
         <item>1</item>
         <item>0</item>
     </string-array>
@@ -646,12 +661,15 @@
     <string name="settings_floating_window_pip_floating_failed">Unable to create a Floating Window. Please try again</string>
 
     <string name="pref_phone_call">When the phone is on a call</string>
-    <string-array name="pref_phone_call_titles">
-        <item>Do nothing</item>
-        <item>Pause all timers</item>
-        <item>Pause and then resume all after the call</item>
+    <string-array name="pref_phone_call_titles" translatable="false">
+        <item>@string/pref_phone_call_title_nothing</item>
+        <item>@string/pref_phone_call_title_pause</item>
+        <item>@string/pref_phone_call_title_pause_resume</item>
     </string-array>
-    <string-array name="pref_phone_call_values">
+    <string name="pref_phone_call_title_nothing">Do nothing</string>
+    <string name="pref_phone_call_title_pause">Pause all timers</string>
+    <string name="pref_phone_call_title_pause_resume">Pause and then resume all after the call</string>
+    <string-array name="pref_phone_call_values" translatable="false">
         <item>0</item>
         <item>1</item>
         <item>2</item>
@@ -676,24 +694,6 @@
     <string name="pref_category_title_scheduler_setting">Scheduler Settings</string>
 
     <string name="pref_week_start_title">Start Week on</string>
-    <string-array name="pref_week_start_titles">
-        <item>Monday</item>
-        <item>Tuesday</item>
-        <item>Wednesday</item>
-        <item>Thursday</item>
-        <item>Friday</item>
-        <item>Saturday</item>
-        <item>Sunday</item>
-    </string-array>
-    <string-array name="pref_week_start_values">
-        <item>2</item> <!-- Calendar.MONDAY -->
-        <item>3</item> <!-- Calendar.TUESDAY -->
-        <item>4</item> <!-- Calendar.WEDNESDAY -->
-        <item>5</item> <!-- Calendar.THURSDAY -->
-        <item>6</item> <!-- Calendar.FRIDAY -->
-        <item>7</item> <!-- Calendar.SATURDAY -->
-        <item>1</item> <!-- Calendar.SUNDAY -->
-    </string-array>
 
     <!--Notification preferences-->
     <string name="pref_category_notif">Notifications</string>
@@ -706,13 +706,17 @@
     <string name="pref_audio_focus_type_title">Audio Focus Type</string>
     <!--AudioManager.AUDIOFOCUS_GAIN-->
     <string name="pref_audio_focus_type_default" translatable="false">2</string>
-    <string-array name="pref_audio_focus_titles">
-        <item>Pause other sounds</item>
-        <item>Stop other sounds</item>
-        <item>Lower other sounds</item>
-        <item>None</item>
+    <string-array name="pref_audio_focus_titles" translatable="false">
+        <item>@string/pref_audio_focus_title_pause</item>
+        <item>@string/pref_audio_focus_title_stop</item>
+        <item>@string/pref_audio_focus_title_lower</item>
+        <item>@string/pref_audio_focus_title_none</item>
     </string-array>
-    <string-array name="pref_audio_focus_values">
+    <string name="pref_audio_focus_title_pause">Pause other sounds</string>
+    <string name="pref_audio_focus_title_stop">Stop other sounds</string>
+    <string name="pref_audio_focus_title_lower">Lower other sounds</string>
+    <string name="pref_audio_focus_title_none">None</string>
+    <string-array name="pref_audio_focus_values" translatable="false">
         <item>@string/pref_audio_focus_type_default</item>
         <!--AudioManager.AUDIOFOCUS_GAIN-->
         <item>1</item>
@@ -723,12 +727,15 @@
     </string-array>
 
     <string name="pref_audio_type_title">Sound Type</string>
-    <string-array name="pref_audio_type_titles">
-        <item>Alarm</item>
-        <item>Media</item>
-        <item>Notification</item>
+    <string-array name="pref_audio_type_titles" translatable="false">
+        <item>@string/pref_audio_type_title_alarm</item>
+        <item>@string/pref_audio_type_title_media</item>
+        <item>@string/pref_audio_type_title_notification</item>
     </string-array>
-    <string-array name="pref_audio_type_values">
+    <string name="pref_audio_type_title_alarm">Alarm</string>
+    <string name="pref_audio_type_title_media">Media</string>
+    <string name="pref_audio_type_title_notification">Notification</string>
+    <string-array name="pref_audio_type_values" translatable="false">
         <!--AudioManager.STREAM_ALARM == 4-->
         <item>4</item>
         <!--AudioManager.STREAM_MUSIC == 3-->

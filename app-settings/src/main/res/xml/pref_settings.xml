@@ -108,8 +108,6 @@
 
         <DropDownPreference
             app:defaultValue="2"
-            app:entries="@array/pref_week_start_titles"
-            app:entryValues="@array/pref_week_start_values"
             app:icon="@drawable/settings_week_start"
             app:key="key_week_start"
             app:title="@string/pref_week_start_title"

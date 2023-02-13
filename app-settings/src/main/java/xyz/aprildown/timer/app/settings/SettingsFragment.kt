@@ -28,6 +28,9 @@ import xyz.aprildown.timer.app.base.utils.NavigationUtils.subLevelNavigate
 import xyz.aprildown.timer.component.settings.DarkThemeDialog
 import xyz.aprildown.timer.component.settings.TweakTimeDialog
 import xyz.aprildown.timer.domain.TimeUtils
+import java.text.DateFormatSymbols
+import java.util.Calendar
+import java.util.Locale
 import java.util.Optional
 import javax.inject.Inject
 import xyz.aprildown.timer.app.base.R as RBase
@@ -184,6 +187,20 @@ class SettingsFragment :
         }
         findPreference<Preference>(KEY_FLOATING_WINDOW_PIP)?.onPreferenceClickListener = this
         findPreference<Preference>(KEY_PHONE_CALL)?.onPreferenceChangeListener = this
+        findPreference<ListPreference>(KEY_WEEK_START)?.run {
+            val weekdays = listOf(
+                Calendar.MONDAY,
+                Calendar.TUESDAY,
+                Calendar.WEDNESDAY,
+                Calendar.THURSDAY,
+                Calendar.FRIDAY,
+                Calendar.SATURDAY,
+                Calendar.SUNDAY,
+            )
+            val weekdayLabels = DateFormatSymbols.getInstance(Locale.getDefault()).weekdays
+            entries = weekdays.map { weekdayLabels[it] }.toTypedArray()
+            entryValues = weekdays.map { it.toString() }.toTypedArray()
+        }
 
         findPreference<Preference>(KEY_GROUP_REMINDER)?.isVisible =
             flavorData.supportAdvancedFeatures
@@ -300,7 +317,7 @@ private const val KEY_BAKED_COUNT = PreferenceData.PREF_BAKED_COUNT
 
 private const val KEY_PHONE_CALL = PreferenceData.KEY_PHONE_CALL
 
-// private const val KEY_WEEK_START = PreferenceData.KEY_WEEK_START
+private const val KEY_WEEK_START = PreferenceData.KEY_WEEK_START
 
 private const val KEY_NOTIF_SETTING = "key_notif_setting"
 
