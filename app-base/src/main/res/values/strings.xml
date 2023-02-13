@@ -441,15 +441,15 @@
 
     <plurals name="days">
         <item quantity="one">1 day</item>
-        <item quantity="other"><xliff:g example="7" id="number">%1$s</xliff:g> days</item>
+        <item quantity="other"><xliff:g example="7" id="number">%s</xliff:g> days</item>
     </plurals>
     <plurals name="hours">
         <item quantity="one">1 hour</item>
-        <item quantity="other"><xliff:g example="7" id="number">%1$s</xliff:g> hours</item>
+        <item quantity="other"><xliff:g example="7" id="number">%s</xliff:g> hours</item>
     </plurals>
     <plurals name="minutes">
         <item quantity="one">1 minute</item>
-        <item quantity="other"><xliff:g example="7" id="number">%1$s</xliff:g> minutes</item>
+        <item quantity="other"><xliff:g example="7" id="number">%s</xliff:g> minutes</item>
     </plurals>
     <string name="seconds_0">0 second</string>
     <plurals name="seconds">
