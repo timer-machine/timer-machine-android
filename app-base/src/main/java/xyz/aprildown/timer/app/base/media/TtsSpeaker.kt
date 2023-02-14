@@ -260,8 +260,9 @@ private class WelcomingTextToSpeech(
 
     override fun onInit(status: Int) {
         if (status != TextToSpeech.SUCCESS) {
-            stop()
-            HandlerHelper.runOnUiThread {
+            // onInit may be called in the constructor of TextToSpeech
+            HandlerHelper.post {
+                stop()
                 listener.onError(status)
             }
             return
