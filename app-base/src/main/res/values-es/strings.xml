@@ -280,8 +280,8 @@
     <string name="voice_variable_group_elapsed_percent_desp">Tiempo transcurrido del grupo en porcentaje</string>
     <plurals name="days">
         <item quantity="one">1 día</item>
-        <item quantity="many"><xliff:g example="7" id="number">%1$s</xliff:g> días</item>
-        <item quantity="other"><xliff:g example="7" id="number">%1$s</xliff:g> días</item>
+        <item quantity="many"><xliff:g example="7" id="number">%s</xliff:g> días</item>
+        <item quantity="other"><xliff:g example="7" id="number">%s</xliff:g> días</item>
     </plurals>
     <string name="half_option_music_desp">Reproduce el timbre por defecto</string>
     <string name="behaviour_count">Conteo</string>
@@ -429,9 +429,9 @@
     <string name="account_delete_confirmation_title">¿Eliminar tu cuenta y toda tu información respaldada\?</string>
     <string name="account_delete_confirmation_desp">Esto <b>NO</b> afecta a tu suscripción. Puedes gestionar tu suscripción en Google Play Store.</string>
     <plurals name="minutes">
-        <item quantity="one"><xliff:g example="7" id="number">%1$s</xliff:g> minuto</item>
-        <item quantity="many"><xliff:g example="7" id="number">%1$s</xliff:g> minutos</item>
-        <item quantity="other"><xliff:g example="7" id="number">%1$s</xliff:g> minutos</item>
+        <item quantity="one">1 minuto</item>
+        <item quantity="many"><xliff:g example="7" id="number">%s</xliff:g> minutos</item>
+        <item quantity="other"><xliff:g example="7" id="number">%s</xliff:g> minutos</item>
     </plurals>
     <string name="intro_start_our_plan">Vamos a crear un ejercicio donde <b>corramos por 3 minutos</b>, después <b>caminemos 2 minutos</b>, y <b>la serie se repita 5 veces</b>.</string>
     <string name="intro_start_timer_time">Esta parte muestra <b>el tiempo restante</b>, las series restantes y el botón para ajustar el tiempo.</string>
@@ -447,9 +447,9 @@
     <string name="intro_start_step_card">Una tarjeta representa una etapa en el plan.</string>
     <string name="intro_start_finish"><b>¡Felicitaciones! Has completado el tutorial.</b></string>
     <plurals name="hours">
-        <item quantity="one"><xliff:g example="7" id="number">%1$s</xliff:g> hora</item>
-        <item quantity="many"><xliff:g example="7" id="number">%1$s</xliff:g> horas</item>
-        <item quantity="other"><xliff:g example="7" id="number">%1$s</xliff:g> horas</item>
+        <item quantity="one">1 hora</item>
+        <item quantity="many"><xliff:g example="7" id="number">%s</xliff:g> horas</item>
+        <item quantity="other"><xliff:g example="7" id="number">%s</xliff:g> horas</item>
     </plurals>
     <string name="backup_app_data">Datos de aplicación</string>
     <string name="theme_light_status_bar">Barra de estado clara</string>
@@ -599,4 +599,29 @@
     <string name="pref_category_title_app">Ajustes de la aplicación</string>
     <string name="help_feedback_desp">Envía un correo electrónico y recibe respuesta en 24 horas</string>
     <string name="billing_explanation" formatted="false">Al pulsar Suscribirse, el pago se cargará a su cuenta de Google Play Store. Su suscripción se renovará automáticamente por la misma duración del plan al mismo precio hasta que la cancele en Suscripciones en Google Play Store al menos 24 horas antes de que finalice el periodo actual. Al tocar Suscribirse, aceptas nuestra <xliff:g example="Privacy policy" id="privacy_policy">%1$s</xliff:g> y <xliff:g example="Terms" id="terms">%2$s</xliff:g>.</string>
+    <string name="scheduler_set1">Programador fijado para dentro de 1 minuto</string>
+    <string name="scheduler_set5">Programador configurado para <xliff:g example="2 minutes" id="MINUTES">%3$s</xliff:g> a partir de ahora</string>
+    <string name="scheduler_set7">Programador establecido para <xliff:g example="2 hours" id="HOURS">%2$s</xliff:g> y <xliff:g example="2 minutes" id="MINUTES">%3$s</xliff:g> a partir de ahora</string>
+    <string name="pref_screen_title_on">Mantén la pantalla encendida</string>
+    <string name="pref_screen_title_default">Utilizar los valores por defecto del sistema</string>
+    <string name="pref_screen_timing_title_open">Cuando la aplicación está abierta</string>
+    <string name="pref_screen_timing_title_running">Cuando la aplicación está abierta y hay algún temporizador en marcha</string>
+    <string name="pref_notifier_plus_title_time">Añadir más tiempo</string>
+    <string name="pref_phone_call_title_pause">Pausar todos los temporizadores</string>
+    <string name="pref_audio_focus_title_pause">Pausa otros sonidos</string>
+    <string name="pref_audio_focus_title_stop">Detener otros sonidos</string>
+    <string name="pref_audio_focus_title_lower">Bajar otros sonidos</string>
+    <string name="pref_audio_focus_title_none">Ninguno</string>
+    <string name="pref_audio_type_title_alarm">Alarma</string>
+    <string name="pref_audio_type_title_media">Medios</string>
+    <string name="scheduler_set2">Programador fijado para <xliff:g example="2 days" id="DAYS">%1$s</xliff:g> a partir de ahora</string>
+    <string name="scheduler_set3">Programador fijado para <xliff:g example="2 hours" id="HOURS">%2$s</xliff:g> a partir de ahora</string>
+    <string name="scheduler_set4">Programador fijado para <xliff:g example="2 days" id="DAYS">%1$s</xliff:g> y <xliff:g example="2 hours" id="HOURS">%2$s</xliff:g> desde ahora</string>
+    <string name="scheduler_set6">Programador configurado para <xliff:g example="2 days" id="DAYS">%1$s</xliff:g> y <xliff:g example="2 minutes" id="MINUTES">%3$s</xliff:g> a partir de ahora</string>
+    <string name="pref_screen_title_dim">Atenuar la pantalla</string>
+    <string name="pref_notifier_plus_title_return">Vuelva al último paso y ajuste el tiempo a 1m</string>
+    <string name="pref_phone_call_title_pause_resume">Pausar y reanudar todo después de la llamada</string>
+    <string name="pref_audio_type_title_notification">Notificación</string>
+    <string name="pref_phone_call_title_nothing">No hacer nada</string>
+    <string name="scheduler_set8">Programador establecido para <xliff:g example="2 days" id="DAYS">%1$s</xliff:g>, <xliff:g example="2 hours" id="HOURS">%2$s</xliff:g>, y <xliff:g example="2 minutes" id="MINUTES">%3$s</xliff:g> a partir de ahora</string>
 </resources>
