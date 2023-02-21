@@ -367,7 +367,7 @@
     <string name="theme_step_color_end">Etapa final</string>
     <string name="backup_local_backup">Local</string>
     <string name="backup_app_settings">Ajustes de aplicación</string>
-    <string name="backup_next_step">Siguiente paso</string>
+    <string name="backup_next_step">Siguiente etapa</string>
     <string name="cloud_backup_title">Respaldo en la nube</string>
     <string name="cloud_backup_account_issue_notif_title">Respaldo en la nube fallido</string>
     <string name="cloud_backup_billing_issue_notif_title">Respaldo en la nube fallido</string>
@@ -414,7 +414,7 @@
     <string name="intro_start_walk_notifier">Añade <b>otro notificador</b> para<b>que te recuerde al terminar la caminata</b>.</string>
     <string name="intro_start_run_timer"><b>Toca el temporizador</b> para acceder a la pantalla de ejecución.</string>
     <string name="intro_start_timer_steps">Esta parte muestra <b>la lista de etapas</b> y resalta <b>la etapa en ejecución</b>.</string>
-    <string name="intro_start_timer_buttons">Este es el panel de control. Aquí verás <b>Detener, Etapa anterior, Iniciar/Pausar, Siguiente etapa</b> y más opciones.</string>
+    <string name="intro_start_timer_buttons">Este es el panel de control. Aquí verás <b>Detener, Etapa anterior, Iniciar/Pausar, Etapa siguiente</b> y más opciones.</string>
     <string name="intro_start_quick_start_pause">Esto inicia un temporizador rápidamente, toca el nombre del temporizador para ver sus detalles</string>
     <string name="account_delete">Eliminar cuenta y todos los respaldos</string>
     <string name="whitelist_intro">La mayoría de los fabricantes de Android forzan el cierre de las aplicaciones en segundo plano, haciendo que las aplicaciones dejen de recordarte.
@@ -565,7 +565,7 @@
     <string name="account_signing_out">Saliendo…</string>
     <string name="billing_not_supported">Por el momento no es posible suscribirse</string>
     <string name="billing_manage_subscription">Gestionar suscripción</string>
-    <string name="whitelist_location">Encontrará la Guía de Lista blanca en \"Ayuda y comentarios\"</string>
+    <string name="whitelist_location">Puedes encontrar la Guía de Lista blanca en \"Ayuda y comentarios\"</string>
     <string name="account_deleting">Eliminando cuenta…</string>
     <string name="account_sign_in">Registrarse / Iniciar sesión</string>
     <string name="billing_iap">Compras dentro de la aplicación</string>
