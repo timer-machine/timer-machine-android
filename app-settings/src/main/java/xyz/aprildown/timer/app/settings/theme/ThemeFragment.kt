@@ -146,7 +146,7 @@ class ThemeFragment :
             )
         }
 
-        if (flavorData.supportAdvancedFeatures) {
+        if (flavorData.flavor == FlavorData.Flavor.Google) {
             val showPremiumIndicator =
                 !sharedPreferences.getBoolean(Constants.PREF_HAS_PRO, false)
             items += getAdvancedThemes().map { appThemeColor ->

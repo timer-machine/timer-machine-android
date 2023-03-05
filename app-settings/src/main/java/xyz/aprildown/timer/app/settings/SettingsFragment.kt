@@ -203,9 +203,9 @@ class SettingsFragment :
         }
 
         findPreference<Preference>(KEY_GROUP_REMINDER)?.isVisible =
-            flavorData.supportAdvancedFeatures
+            flavorData.flavor == FlavorData.Flavor.Google
         val prefBakedCount = findPreference<Preference>(KEY_BAKED_COUNT)?.apply {
-            isVisible = flavorData.supportAdvancedFeatures
+            isVisible = flavorData.flavor == FlavorData.Flavor.Google
             onPreferenceClickListener = this@SettingsFragment
         }
 
