@@ -146,20 +146,22 @@ class ThemeFragment :
             )
         }
 
-        if (flavorData.flavor == FlavorData.Flavor.Google) {
-            val showPremiumIndicator =
+        val showPremiumIndicator = when (flavorData.flavor) {
+            FlavorData.Flavor.Google -> {
                 !sharedPreferences.getBoolean(Constants.PREF_HAS_PRO, false)
-            items += getAdvancedThemes().map { appThemeColor ->
-                ThemeColor(
-                    name = appThemeColor.name,
-                    primary = appThemeColor.primaryColor,
-                    secondary = appThemeColor.secondaryColor,
-                    using = appThemeColor.primaryColor == currentPrimary &&
-                        appThemeColor.secondaryColor == currentSecondary,
-                    isPremium = showPremiumIndicator,
-                    callback = this
-                )
             }
+            FlavorData.Flavor.Dog, FlavorData.Flavor.Other -> false
+        }
+        items += getAdvancedThemes().map { appThemeColor ->
+            ThemeColor(
+                name = appThemeColor.name,
+                primary = appThemeColor.primaryColor,
+                secondary = appThemeColor.secondaryColor,
+                using = appThemeColor.primaryColor == currentPrimary &&
+                    appThemeColor.secondaryColor == currentSecondary,
+                isPremium = showPremiumIndicator,
+                callback = this
+            )
         }
 
         items += Group(context.getString(RBase.string.theme_custom_title))
