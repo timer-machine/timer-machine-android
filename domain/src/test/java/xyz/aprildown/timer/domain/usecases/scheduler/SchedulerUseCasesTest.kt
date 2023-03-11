@@ -1,4 +1,4 @@
-package xyz.aprildown.timer.domain
+package xyz.aprildown.timer.domain.usecases.scheduler
 
 import kotlinx.coroutines.runBlocking
 import org.junit.Assert.assertEquals
@@ -9,17 +9,13 @@ import org.mockito.kotlin.never
 import org.mockito.kotlin.verify
 import org.mockito.kotlin.verifyNoMoreInteractions
 import org.mockito.kotlin.whenever
+import xyz.aprildown.timer.domain.TestData
 import xyz.aprildown.timer.domain.entities.SchedulerEntity
 import xyz.aprildown.timer.domain.repositories.AppDataRepository
 import xyz.aprildown.timer.domain.repositories.SchedulerExecutor
 import xyz.aprildown.timer.domain.repositories.SchedulerRepository
+import xyz.aprildown.timer.domain.testCoroutineDispatcher
 import xyz.aprildown.timer.domain.usecases.invoke
-import xyz.aprildown.timer.domain.usecases.scheduler.AddScheduler
-import xyz.aprildown.timer.domain.usecases.scheduler.DeleteScheduler
-import xyz.aprildown.timer.domain.usecases.scheduler.GetScheduler
-import xyz.aprildown.timer.domain.usecases.scheduler.GetSchedulers
-import xyz.aprildown.timer.domain.usecases.scheduler.SaveScheduler
-import xyz.aprildown.timer.domain.usecases.scheduler.SetSchedulerEnable
 
 class SchedulerUseCasesTest {
 

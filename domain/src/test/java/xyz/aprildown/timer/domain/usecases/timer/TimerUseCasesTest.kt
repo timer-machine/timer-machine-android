@@ -1,4 +1,4 @@
-package xyz.aprildown.timer.domain
+package xyz.aprildown.timer.domain.usecases.timer
 
 import kotlinx.coroutines.runBlocking
 import org.junit.Assert.assertEquals
@@ -13,6 +13,7 @@ import org.mockito.kotlin.times
 import org.mockito.kotlin.verify
 import org.mockito.kotlin.verifyNoMoreInteractions
 import org.mockito.kotlin.whenever
+import xyz.aprildown.timer.domain.TestData
 import xyz.aprildown.timer.domain.entities.AppDataEntity
 import xyz.aprildown.timer.domain.entities.FolderSortBy
 import xyz.aprildown.timer.domain.entities.TimerEntity
@@ -23,15 +24,8 @@ import xyz.aprildown.timer.domain.repositories.SchedulerExecutor
 import xyz.aprildown.timer.domain.repositories.SchedulerRepository
 import xyz.aprildown.timer.domain.repositories.TimerRepository
 import xyz.aprildown.timer.domain.repositories.TimerStampRepository
+import xyz.aprildown.timer.domain.testCoroutineDispatcher
 import xyz.aprildown.timer.domain.usecases.Fruit
-import xyz.aprildown.timer.domain.usecases.timer.AddTimer
-import xyz.aprildown.timer.domain.usecases.timer.ChangeTimerFolder
-import xyz.aprildown.timer.domain.usecases.timer.DeleteTimer
-import xyz.aprildown.timer.domain.usecases.timer.FindTimerInfo
-import xyz.aprildown.timer.domain.usecases.timer.GetTimer
-import xyz.aprildown.timer.domain.usecases.timer.GetTimerInfo
-import xyz.aprildown.timer.domain.usecases.timer.SaveTimer
-import xyz.aprildown.timer.domain.usecases.timer.ShareTimer
 import kotlin.random.Random
 
 class TimerUseCasesTest {

@@ -1,4 +1,4 @@
-package xyz.aprildown.timer.domain
+package xyz.aprildown.timer.domain.usecases.data
 
 import kotlinx.coroutines.runBlocking
 import org.junit.Assert.assertEquals
@@ -8,6 +8,7 @@ import org.mockito.kotlin.mock
 import org.mockito.kotlin.verify
 import org.mockito.kotlin.verifyNoMoreInteractions
 import org.mockito.kotlin.whenever
+import xyz.aprildown.timer.domain.TestData
 import xyz.aprildown.timer.domain.entities.AppDataEntity
 import xyz.aprildown.timer.domain.entities.FolderEntity
 import xyz.aprildown.timer.domain.entities.SchedulerEntity
@@ -19,9 +20,7 @@ import xyz.aprildown.timer.domain.repositories.NotifierRepository
 import xyz.aprildown.timer.domain.repositories.SchedulerRepository
 import xyz.aprildown.timer.domain.repositories.TimerRepository
 import xyz.aprildown.timer.domain.repositories.TimerStampRepository
-import xyz.aprildown.timer.domain.usecases.data.ExportAppData
-import xyz.aprildown.timer.domain.usecases.data.ImportAppData
-import xyz.aprildown.timer.domain.usecases.data.NotifyDataChanged
+import xyz.aprildown.timer.domain.testCoroutineDispatcher
 
 class DataUseCaseTest {
 

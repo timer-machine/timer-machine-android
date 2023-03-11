@@ -1,4 +1,4 @@
-package xyz.aprildown.timer.domain
+package xyz.aprildown.timer.domain.usecases.record
 
 import android.text.format.DateUtils
 import androidx.collection.arrayMapOf
@@ -12,15 +12,16 @@ import org.mockito.kotlin.mock
 import org.mockito.kotlin.verify
 import org.mockito.kotlin.verifyNoMoreInteractions
 import org.mockito.kotlin.whenever
+import xyz.aprildown.timer.domain.TestData
+import xyz.aprildown.timer.domain.TimeUtils
 import xyz.aprildown.timer.domain.TimeUtils.toLocalDateTime
 import xyz.aprildown.timer.domain.entities.TimerStampEntity
 import xyz.aprildown.timer.domain.entities.toTimerInfo
 import xyz.aprildown.timer.domain.repositories.AppDataRepository
 import xyz.aprildown.timer.domain.repositories.TimerRepository
 import xyz.aprildown.timer.domain.repositories.TimerStampRepository
+import xyz.aprildown.timer.domain.testCoroutineDispatcher
 import xyz.aprildown.timer.domain.usecases.invoke
-import xyz.aprildown.timer.domain.usecases.record.AddTimerStamp
-import xyz.aprildown.timer.domain.usecases.record.GetRecords
 import java.time.Instant
 import java.time.LocalDateTime
 import java.time.LocalTime

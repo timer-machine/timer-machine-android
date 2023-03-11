@@ -1,4 +1,4 @@
-package xyz.aprildown.timer.domain
+package xyz.aprildown.timer.domain.usecases.folder
 
 import kotlinx.coroutines.runBlocking
 import org.junit.Assert.assertEquals
@@ -7,15 +7,13 @@ import org.mockito.kotlin.mock
 import org.mockito.kotlin.verify
 import org.mockito.kotlin.verifyNoMoreInteractions
 import org.mockito.kotlin.whenever
+import xyz.aprildown.timer.domain.TestData
 import xyz.aprildown.timer.domain.entities.FolderEntity
 import xyz.aprildown.timer.domain.entities.toTimerInfo
 import xyz.aprildown.timer.domain.repositories.AppDataRepository
 import xyz.aprildown.timer.domain.repositories.FolderRepository
 import xyz.aprildown.timer.domain.repositories.TimerRepository
-import xyz.aprildown.timer.domain.usecases.folder.AddFolder
-import xyz.aprildown.timer.domain.usecases.folder.DeleteFolder
-import xyz.aprildown.timer.domain.usecases.folder.GetFolders
-import xyz.aprildown.timer.domain.usecases.folder.UpdateFolder
+import xyz.aprildown.timer.domain.testCoroutineDispatcher
 import xyz.aprildown.timer.domain.usecases.invoke
 import xyz.aprildown.timer.domain.usecases.timer.DeleteTimer
 

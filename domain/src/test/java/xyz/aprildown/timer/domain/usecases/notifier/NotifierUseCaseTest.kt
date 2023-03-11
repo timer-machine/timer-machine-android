@@ -1,4 +1,4 @@
-package xyz.aprildown.timer.domain
+package xyz.aprildown.timer.domain.usecases.notifier
 
 import kotlinx.coroutines.runBlocking
 import org.junit.Assert.assertEquals
@@ -8,11 +8,11 @@ import org.mockito.kotlin.mock
 import org.mockito.kotlin.verify
 import org.mockito.kotlin.verifyNoMoreInteractions
 import org.mockito.kotlin.whenever
+import xyz.aprildown.timer.domain.TestData
 import xyz.aprildown.timer.domain.repositories.AppDataRepository
 import xyz.aprildown.timer.domain.repositories.NotifierRepository
+import xyz.aprildown.timer.domain.testCoroutineDispatcher
 import xyz.aprildown.timer.domain.usecases.invoke
-import xyz.aprildown.timer.domain.usecases.notifier.GetNotifier
-import xyz.aprildown.timer.domain.usecases.notifier.SaveNotifier
 
 class NotifierUseCaseTest {
     private val notifierRepository: NotifierRepository = mock()

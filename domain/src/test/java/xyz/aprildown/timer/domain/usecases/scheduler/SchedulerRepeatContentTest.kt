@@ -1,4 +1,4 @@
-package xyz.aprildown.timer.domain
+package xyz.aprildown.timer.domain.usecases.scheduler
 
 import org.junit.Assert.assertEquals
 import org.junit.Test
