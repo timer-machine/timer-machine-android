@@ -231,12 +231,16 @@ class IntroActivity : BaseActivity() {
             override fun onPreviousInstruction() {
                 instructionManager.previous()
             }
+
+            override fun onExitInstruction() {
+                confirmToExit()
+            }
         }
     }
 
     private fun setUpNavigation() {
         onBackPressedDispatcher.addCallback(this) {
-            confirmToExit()
+            instructionManager.previous()
         }
     }
 

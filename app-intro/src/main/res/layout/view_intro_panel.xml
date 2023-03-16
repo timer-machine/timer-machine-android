@@ -20,14 +20,25 @@
         app:srcCompat="@drawable/ic_anim_arrow_right_indicator" />
 
     <ImageButton
-        android:id="@+id/btnIntroPanelPrevious"
+        android:id="@+id/btnIntroPanelExit"
         android:layout_width="48dp"
         android:layout_height="48dp"
         android:layout_marginStart="8dp"
         android:background="?selectableItemBackgroundBorderless"
         android:contentDescription="@string/exit"
+        android:scaleX="-1"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@drawable/ic_exit" />
+
+    <ImageButton
+        android:id="@+id/btnIntroPanelPrevious"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:background="?selectableItemBackgroundBorderless"
+        android:contentDescription="@string/previous"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@id/btnIntroPanelExit"
         app:srcCompat="@drawable/ic_arrow_left_indicator" />
 
     <TextView

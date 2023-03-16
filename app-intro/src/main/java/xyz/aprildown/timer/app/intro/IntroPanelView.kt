@@ -21,6 +21,7 @@ internal class IntroPanelView(
     interface Callback {
         fun onNextInstruction()
         fun onPreviousInstruction()
+        fun onExitInstruction()
     }
 
     private val binding: ViewIntroPanelBinding
@@ -36,6 +37,9 @@ internal class IntroPanelView(
         }
         binding.btnIntroPanelPrevious.setOnClickListener {
             callback?.onPreviousInstruction()
+        }
+        binding.btnIntroPanelExit.setOnClickListener {
+            callback?.onExitInstruction()
         }
     }
 
