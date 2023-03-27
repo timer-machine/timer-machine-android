@@ -9,13 +9,16 @@ import org.mockito.kotlin.verifyNoMoreInteractions
 import org.mockito.kotlin.whenever
 import xyz.aprildown.timer.domain.TestData
 import xyz.aprildown.timer.domain.entities.FolderEntity
+import xyz.aprildown.timer.domain.entities.FolderSortBy
 import xyz.aprildown.timer.domain.entities.toTimerInfo
 import xyz.aprildown.timer.domain.repositories.AppDataRepository
 import xyz.aprildown.timer.domain.repositories.FolderRepository
+import xyz.aprildown.timer.domain.repositories.TestPreferencesRepository
 import xyz.aprildown.timer.domain.repositories.TimerRepository
 import xyz.aprildown.timer.domain.testCoroutineDispatcher
 import xyz.aprildown.timer.domain.usecases.invoke
 import xyz.aprildown.timer.domain.usecases.timer.DeleteTimer
+import kotlin.random.Random
 
 class FolderUseCaseTest {
     private val folderRepo: FolderRepository = mock()
@@ -137,6 +140,26 @@ class FolderUseCaseTest {
     }
 
     @Test
+    fun `get the default folder sorting rule`() = runBlocking {
+        val useCase = FolderSortByRule(
+            dispatcher = testCoroutineDispatcher,
+            preferencesRepository = TestPreferencesRepository(),
+        )
+        assertEquals(useCase.get(), FolderSortBy.AddedOldest)
+    }
+
+    @Test
+    fun `set the folder sorting rule`() = runBlocking {
+        val useCase = FolderSortByRule(
+            dispatcher = testCoroutineDispatcher,
+            preferencesRepository = TestPreferencesRepository(),
+        )
+        val value = FolderSortBy.values().random()
+        useCase.set(value)
+        assertEquals(useCase.get(), value)
+    }
+
+    @Test
     fun `get folders`() = runBlocking {
         val folders = listOf(
             TestData.defaultFolder,
@@ -160,6 +183,26 @@ class FolderUseCaseTest {
 
         verifyNoMoreInteractions(folderRepo)
         verifyNoMoreInteractions(appDataRepo)
+    }
+
+    @Test
+    fun `get the recent folder`() = runBlocking {
+        val useCase = RecentFolder(
+            dispatcher = testCoroutineDispatcher,
+            preferencesRepository = TestPreferencesRepository(),
+        )
+        assertEquals(useCase.get(), FolderEntity.FOLDER_DEFAULT)
+    }
+
+    @Test
+    fun `set the recent folder`() = runBlocking {
+        val useCase = RecentFolder(
+            dispatcher = testCoroutineDispatcher,
+            preferencesRepository = TestPreferencesRepository(),
+        )
+        val value = Random.nextLong()
+        useCase.set(value)
+        assertEquals(useCase.get(), value)
     }
 
     @Test
