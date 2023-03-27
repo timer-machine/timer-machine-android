@@ -2,6 +2,8 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
 
+    <uses-permission android:name="com.android.vending.BILLING" />
+
     <application android:theme="@style/AppTheme.LibraryPreview">
         <activity
             android:name="xyz.aprildown.timer.flavor.google.BillingActivity"

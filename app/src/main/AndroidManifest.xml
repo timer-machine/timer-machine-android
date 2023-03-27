@@ -27,8 +27,6 @@
     <!--Floating window-->
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
 
-    <uses-permission android:name="com.android.vending.BILLING" />
-
     <!--For desperate users to whitelist-->
     <uses-permission android:name="android.permission.REQUEST_IGNORE_BATTERY_OPTIMIZATIONS" />
 
