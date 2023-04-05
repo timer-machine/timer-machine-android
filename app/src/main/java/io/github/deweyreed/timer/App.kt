@@ -3,13 +3,13 @@ package io.github.deweyreed.timer
 import android.Manifest
 import android.app.Application
 import android.content.SharedPreferences
+import android.content.res.Configuration
 import android.os.Build
 import android.util.Log
 import androidx.core.content.ContextCompat
 import androidx.core.content.edit
 import androidx.hilt.work.HiltWorkerFactory
 import androidx.preference.PreferenceManager
-import androidx.work.Configuration
 import androidx.work.DelegatingWorkerFactory
 import com.github.deweyreed.tools.helper.hasPermissions
 import dagger.Lazy
@@ -32,10 +32,11 @@ import xyz.aprildown.timer.domain.utils.AppConfig
 import xyz.aprildown.timer.domain.utils.AppTracker
 import xyz.aprildown.timer.domain.utils.Constants
 import javax.inject.Inject
+import androidx.work.Configuration as WorkManagerConfiguration
 import xyz.aprildown.timer.app.base.R as RBase
 
 @HiltAndroidApp
-class App : Application(), Configuration.Provider {
+class App : Application(), WorkManagerConfiguration.Provider {
 
     @Inject
     lateinit var sharedPreferences: SharedPreferences
@@ -63,6 +64,11 @@ class App : Application(), Configuration.Provider {
         setUpTheme()
         setUpForFirstStart()
         setUpMissedTimerTip()
+    }
+
+    override fun onConfigurationChanged(newConfig: Configuration) {
+        super.onConfigurationChanged(newConfig)
+        AppThemeUtils.syncDynamicTheme(this)
     }
 
     private fun setUpAnalytics() {
@@ -98,6 +104,9 @@ class App : Application(), Configuration.Provider {
         }
         Theme.installDelegates(DynamicThemeDelegate())
         // Theme.get().enabled = false
+
+        // Apply again because dynamic colors may change
+        AppThemeUtils.configAppTheme(this, appTheme)
     }
 
     private fun setUpForFirstStart() {
@@ -119,11 +128,6 @@ class App : Application(), Configuration.Provider {
                 )
             }
         } else {
-            // Imported since 4.2.0 and shouldn't be removed.
-            if (sharedPreferences.getBoolean(themeMigrationKey, true)) {
-                sharedPreferences.edit { putBoolean(themeMigrationKey, false) }
-                AppThemeUtils.configAppTheme(this, appTheme)
-            }
             // Imported since 5.7.0 and shouldn't be removed.
             if (sharedPreferences.getBoolean(iapMigrationKey, true)) {
                 sharedPreferences.edit {
@@ -177,8 +181,8 @@ class App : Application(), Configuration.Provider {
         }
     }
 
-    override fun getWorkManagerConfiguration(): Configuration {
-        return Configuration.Builder()
+    override fun getWorkManagerConfiguration(): WorkManagerConfiguration {
+        return WorkManagerConfiguration.Builder()
             .setWorkerFactory(
                 DelegatingWorkerFactory().also { delegate ->
                     val factory = workerFactory.get()

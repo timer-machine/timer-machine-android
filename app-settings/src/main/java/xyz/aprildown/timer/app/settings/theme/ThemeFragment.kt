@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.SharedPreferences
 import android.content.res.ColorStateList
 import android.graphics.Color
+import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -28,6 +29,7 @@ import com.mikepenz.fastadapter.adapters.ItemAdapter
 import com.mikepenz.fastadapter.items.AbstractItem
 import dagger.hilt.android.AndroidEntryPoint
 import xyz.aprildown.timer.app.base.data.FlavorData
+import xyz.aprildown.timer.app.base.data.PreferenceData
 import xyz.aprildown.timer.app.base.data.PreferenceData.appTheme
 import xyz.aprildown.timer.app.base.data.PreferenceData.getTypeColor
 import xyz.aprildown.timer.app.base.data.PreferenceData.saveTypeColor
@@ -49,7 +51,6 @@ import xyz.aprildown.timer.component.key.R as RComponentKey
 class ThemeFragment :
     Fragment(),
     BooleanToggle.Callback,
-    ThemeColor.Callback,
     StepColor.Callback,
     ColorChooserDialog.ColorCallback,
     CustomThemeDialog.Callback {
@@ -95,7 +96,7 @@ class ThemeFragment :
             var targetSelection = RecyclerView.NO_POSITION
             for ((index, item) in itemAdapter.adapterItems.withIndex()) {
                 if (item !is ThemeColor) continue
-                if (item.using || item.name == NAME_CUSTOM) {
+                if (item.using || item.appThemeColor.name == NAME_CUSTOM) {
                     targetSelection = index
                     if (!item.using) {
                         item.using = true
@@ -114,8 +115,28 @@ class ThemeFragment :
         val items = mutableListOf<IItem<*>>()
 
         val appTheme = context.appTheme
+
+        val currentType = appTheme.type
         val currentPrimary = appTheme.colorPrimary
         val currentSecondary = appTheme.colorSecondary
+
+        fun isUsingAppTheme(appThemeColor: AppThemeColor): Boolean {
+            return when (val type = appThemeColor.type) {
+                PreferenceData.AppTheme.AppThemeType.TYPE_COLOR -> {
+                    type == currentType &&
+                        appThemeColor.primaryColor == currentPrimary &&
+                        appThemeColor.secondaryColor == currentSecondary
+                }
+                PreferenceData.AppTheme.AppThemeType.TYPE_DYNAMIC_DARK -> {
+                    currentType == type
+                }
+                PreferenceData.AppTheme.AppThemeType.TYPE_DYNAMIC_LIGHT -> {
+                    currentType == type
+                }
+                else -> error("Unsupported type $currentType")
+            }
+        }
+
         val status = appTheme.sameStatusBar
         val enableNav = appTheme.enableNav
 
@@ -136,13 +157,10 @@ class ThemeFragment :
 
         items += context.getExtraThemes().map { appThemeColor ->
             ThemeColor(
-                name = appThemeColor.name,
-                primary = appThemeColor.primaryColor,
-                secondary = appThemeColor.secondaryColor,
-                using = appThemeColor.primaryColor == currentPrimary &&
-                    appThemeColor.secondaryColor == currentSecondary,
+                appThemeColor = appThemeColor,
+                using = isUsingAppTheme(appThemeColor),
                 isPremium = false,
-                callback = this
+                callback = themeCallback,
             )
         }
 
@@ -154,24 +172,31 @@ class ThemeFragment :
         }
         items += getAdvancedThemes().map { appThemeColor ->
             ThemeColor(
-                name = appThemeColor.name,
-                primary = appThemeColor.primaryColor,
-                secondary = appThemeColor.secondaryColor,
-                using = appThemeColor.primaryColor == currentPrimary &&
-                    appThemeColor.secondaryColor == currentSecondary,
+                appThemeColor = appThemeColor,
+                using = isUsingAppTheme(appThemeColor),
                 isPremium = showPremiumIndicator,
-                callback = this
+                callback = themeCallback,
+            )
+        }
+        items += getDynamicThemes(context).map { appThemeColor ->
+            ThemeColor(
+                appThemeColor = appThemeColor,
+                using = isUsingAppTheme(appThemeColor),
+                isPremium = showPremiumIndicator,
+                callback = themeCallback,
             )
         }
 
         items += Group(context.getString(RBase.string.theme_custom_title))
 
         items += ThemeColor(
-            name = NAME_CUSTOM,
-            primary = currentPrimary,
-            secondary = currentSecondary,
+            appThemeColor = AppThemeColor(
+                name = NAME_CUSTOM,
+                primaryColor = currentPrimary,
+                secondaryColor = currentSecondary,
+            ),
             using = false,
-            callback = this
+            callback = themeCallback,
         )
 
         items += Group(context.getString(RBase.string.theme_step_color_title))
@@ -204,39 +229,50 @@ class ThemeFragment :
         return items
     }
 
-    private fun changeTheme(@ColorInt p: Int, @ColorInt a: Int) {
+    private fun changeTheme(appThemeColor: AppThemeColor) {
         val context = requireContext()
         val newAppTheme = context.appTheme.copy(
-            colorPrimary = p,
-            colorSecondary = a
+            type = appThemeColor.type,
+            colorPrimary = appThemeColor.primaryColor,
+            colorSecondary = appThemeColor.secondaryColor,
         )
         context.appTheme = newAppTheme
         AppThemeUtils.configAppTheme(context, newAppTheme)
         reload()
     }
 
-    override fun onThemeChange(name: String, primary: Int, secondary: Int, isPremium: Boolean) {
-        when {
-            name == NAME_CUSTOM -> {
-                CustomThemeDialog.newInstance(primary, secondary)
-                    .show(childFragmentManager, "custom_theme_dialog")
-            }
-            isPremium -> {
-                flavorUiInjector.orElse(null)?.useMoreTheme(
-                    fragment = this,
-                    onApply = {
-                        changeTheme(primary, secondary)
-                    }
-                )
-            }
-            else -> {
-                changeTheme(primary, secondary)
+    private val themeCallback: ThemeColor.Callback = object : ThemeColor.Callback {
+        override fun onThemeChange(appThemeColor: AppThemeColor, isPremium: Boolean) {
+            when {
+                appThemeColor.name == NAME_CUSTOM -> {
+                    CustomThemeDialog.newInstance(
+                        primary = appThemeColor.primaryColor,
+                        secondary = appThemeColor.secondaryColor
+                    ).show(childFragmentManager, "custom_theme_dialog")
+                }
+                isPremium -> {
+                    flavorUiInjector.orElse(null)?.useMoreTheme(
+                        fragment = this@ThemeFragment,
+                        onApply = {
+                            changeTheme(appThemeColor)
+                        }
+                    )
+                }
+                else -> {
+                    changeTheme(appThemeColor)
+                }
             }
         }
     }
 
     override fun onCustomThemePick(primary: Int, secondary: Int) {
-        changeTheme(primary, secondary)
+        changeTheme(
+            AppThemeColor(
+                name = NAME_CUSTOM,
+                primaryColor = primary,
+                secondaryColor = secondary,
+            )
+        )
     }
 
     override fun onBooleanToggleChange(toggleType: Int, newValue: Boolean) {
@@ -358,21 +394,14 @@ private class Group(
 }
 
 private class ThemeColor(
-    val name: String,
-    @ColorInt val primary: Int,
-    @ColorInt val secondary: Int,
+    val appThemeColor: AppThemeColor,
     var using: Boolean,
     var isPremium: Boolean = false,
     private val callback: Callback
 ) : AbstractItem<ThemeColor.ViewHolder>() {
 
     interface Callback {
-        fun onThemeChange(
-            name: String,
-            @ColorInt primary: Int,
-            @ColorInt secondary: Int,
-            isPremium: Boolean
-        )
+        fun onThemeChange(appThemeColor: AppThemeColor, isPremium: Boolean)
     }
 
     override val layoutRes: Int = R.layout.item_theme_color
@@ -382,9 +411,9 @@ private class ThemeColor(
     override fun bindView(holder: ViewHolder, payloads: List<Any>) {
         super.bindView(holder, payloads)
         holder.run {
-            bar.setBackgroundColor(primary)
-            title.text = name
-            val colorOnPrimary = AppThemeUtils.calculateOnColor(primary)
+            bar.setBackgroundColor(appThemeColor.primaryColor)
+            title.text = appThemeColor.name
+            val colorOnPrimary = AppThemeUtils.calculateOnColor(appThemeColor.primaryColor)
             title.setTextColor(colorOnPrimary)
             if (isPremium) {
                 TextViewCompat.setCompoundDrawablesRelativeWithIntrinsicBounds(
@@ -405,10 +434,10 @@ private class ThemeColor(
                 )
             }
 
-            fab.backgroundTintList = ColorStateList.valueOf(secondary)
+            fab.backgroundTintList = ColorStateList.valueOf(appThemeColor.secondaryColor)
             fab.setImageResource(if (using) RBase.drawable.ic_check else 0)
             card.setOnClickListener {
-                callback.onThemeChange(name, primary, secondary, isPremium)
+                callback.onThemeChange(appThemeColor, isPremium)
             }
         }
     }
@@ -457,9 +486,10 @@ private class StepColor(
 }
 
 private data class AppThemeColor(
+    @PreferenceData.AppTheme.AppThemeType val type: Int = PreferenceData.AppTheme.AppThemeType.TYPE_COLOR,
     val name: String,
     @ColorInt val primaryColor: Int,
-    @ColorInt val secondaryColor: Int
+    @ColorInt val secondaryColor: Int,
 )
 
 private fun Context.getExtraThemes(): List<AppThemeColor> {
@@ -468,29 +498,29 @@ private fun Context.getExtraThemes(): List<AppThemeColor> {
     fun Int.color() = color(this)
 
     list += AppThemeColor(
-        "Original",
-        RBase.color.colorPrimary.color(),
-        RBase.color.colorSecondary.color()
+        name = "Original",
+        primaryColor = RBase.color.colorPrimary.color(),
+        secondaryColor = RBase.color.colorSecondary.color(),
     )
     list += AppThemeColor(
-        "Deep Purple",
-        RMaterialize.color.md_deep_purple_500.color(),
-        RMaterialize.color.md_lime_800.color()
+        name = "Deep Purple",
+        primaryColor = RMaterialize.color.md_deep_purple_500.color(),
+        secondaryColor = RMaterialize.color.md_lime_800.color(),
     )
     list += AppThemeColor(
         name = "Red",
         primaryColor = RMaterialize.color.md_red_500.color(),
-        secondaryColor = RMaterialize.color.md_blue_500.color()
+        secondaryColor = RMaterialize.color.md_blue_500.color(),
     )
     list += AppThemeColor(
-        "Amber",
-        RMaterialize.color.md_amber_500.color(),
-        RMaterialize.color.md_deep_purple_400.color()
+        name = "Amber",
+        primaryColor = RMaterialize.color.md_amber_500.color(),
+        secondaryColor = RMaterialize.color.md_deep_purple_400.color(),
     )
     list += AppThemeColor(
-        "Lime",
-        RMaterialize.color.md_lime_500.color(),
-        RMaterialize.color.md_purple_400.color()
+        name = "Lime",
+        primaryColor = RMaterialize.color.md_lime_500.color(),
+        secondaryColor = RMaterialize.color.md_purple_400.color(),
     )
 
     return list
@@ -499,34 +529,51 @@ private fun Context.getExtraThemes(): List<AppThemeColor> {
 private fun getAdvancedThemes(): List<AppThemeColor> {
     val list = mutableListOf<AppThemeColor>()
     list += AppThemeColor(
-        "Abyss Green",
-        Color.parseColor("#2A9D8F"),
-        Color.parseColor("#E9C46A")
+        name = "Abyss Green",
+        primaryColor = Color.parseColor("#2A9D8F"),
+        secondaryColor = Color.parseColor("#E9C46A"),
     )
     list += AppThemeColor(
-        "Lipstick Red",
-        Color.parseColor("#E63946"),
-        Color.parseColor("#457B9D")
+        name = "Lipstick Red",
+        primaryColor = Color.parseColor("#E63946"),
+        secondaryColor = Color.parseColor("#457B9D"),
     )
     list += AppThemeColor(
-        "Chinese Violet",
-        Color.parseColor("#6D597A"),
-        Color.parseColor("#EAAC8B")
+        name = "Chinese Violet",
+        primaryColor = Color.parseColor("#6D597A"),
+        secondaryColor = Color.parseColor("#EAAC8B"),
     )
     list += AppThemeColor(
-        "Black Coral",
-        Color.parseColor("#495867"),
-        Color.parseColor("#FE5F55")
+        name = "Black Coral",
+        primaryColor = Color.parseColor("#495867"),
+        secondaryColor = Color.parseColor("#FE5F55"),
     )
     list += AppThemeColor(
-        "Chrome Orange",
-        Color.parseColor("#F6BD60"),
-        Color.parseColor("#40916C")
+        name = "Chrome Orange",
+        primaryColor = Color.parseColor("#F6BD60"),
+        secondaryColor = Color.parseColor("#40916C"),
     )
     list += AppThemeColor(
-        "Middle Blue Green",
-        Color.parseColor("#7DCFB6"),
-        Color.parseColor("#F79256")
+        name = "Middle Blue Green",
+        primaryColor = Color.parseColor("#7DCFB6"),
+        secondaryColor = Color.parseColor("#F79256"),
     )
     return list
+}
+
+private fun getDynamicThemes(context: Context): List<AppThemeColor> = buildList {
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+        this += AppThemeColor(
+            type = PreferenceData.AppTheme.AppThemeType.TYPE_DYNAMIC_DARK,
+            name = "Dynamic Dark",
+            primaryColor = context.color(PreferenceData.AppTheme.dynamicDarkPrimaryColorRes),
+            secondaryColor = context.color(PreferenceData.AppTheme.dynamicDarkSecondaryColorRes),
+        )
+        this += AppThemeColor(
+            type = PreferenceData.AppTheme.AppThemeType.TYPE_DYNAMIC_LIGHT,
+            name = "Dynamic Light",
+            primaryColor = context.color(PreferenceData.AppTheme.dynamicLightPrimaryColorRes),
+            secondaryColor = context.color(PreferenceData.AppTheme.dynamicLightSecondaryColorRes),
+        )
+    }
 }

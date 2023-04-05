@@ -2,8 +2,13 @@ package xyz.aprildown.timer.app.base.utils
 
 import android.content.Context
 import android.graphics.Color
+import android.os.Build
 import androidx.annotation.ColorInt
+import androidx.annotation.ColorRes
+import androidx.collection.ArrayMap
+import androidx.collection.arrayMapOf
 import com.github.deweyreed.tools.anko.dp
+import com.github.deweyreed.tools.helper.color
 import com.github.deweyreed.tools.utils.ThemeColorUtils
 import com.google.android.material.elevation.ElevationOverlayProvider
 import xyz.aprildown.theme.Theme
@@ -12,6 +17,9 @@ import xyz.aprildown.timer.app.base.data.PreferenceData.appTheme
 import com.google.android.material.R as RMaterial
 
 object AppThemeUtils {
+
+    // ColorRes -> ColorInt
+    private val dynamicColorMap: ArrayMap<Int, Int> = arrayMapOf()
 
     fun configAppTheme(context: Context, appTheme: PreferenceData.AppTheme) {
         val primary = appTheme.colorPrimary
@@ -29,6 +37,35 @@ object AppThemeUtils {
             colorStatusBar = if (sameStatusBar) primary else darkerPrimary
             colorNavigationBar = if (enableNav) primary else null
             lightStatusByPrimary = true
+        }
+
+        fun registerColorRes(@ColorRes colorRes: Int) {
+            dynamicColorMap[colorRes] = context.color(colorRes)
+        }
+
+        dynamicColorMap.clear()
+        when {
+            Build.VERSION.SDK_INT >= Build.VERSION_CODES.S &&
+                appTheme.type == PreferenceData.AppTheme.AppThemeType.TYPE_DYNAMIC_DARK -> {
+                registerColorRes(PreferenceData.AppTheme.dynamicDarkPrimaryColorRes)
+                registerColorRes(PreferenceData.AppTheme.dynamicDarkSecondaryColorRes)
+            }
+            Build.VERSION.SDK_INT >= Build.VERSION_CODES.S &&
+                appTheme.type == PreferenceData.AppTheme.AppThemeType.TYPE_DYNAMIC_LIGHT -> {
+                registerColorRes(PreferenceData.AppTheme.dynamicLightPrimaryColorRes)
+                registerColorRes(PreferenceData.AppTheme.dynamicLightSecondaryColorRes)
+            }
+            else -> Unit
+        }
+    }
+
+    /**
+     * Since I can't find a way to know when the dynamic colors change, I have to check colors
+     * manually in the [android.app.Application.onConfigurationChanged].
+     */
+    fun syncDynamicTheme(context: Context) {
+        if (dynamicColorMap.any { context.color(it.key) != it.value }) {
+            configAppTheme(context, context.appTheme)
         }
     }
 

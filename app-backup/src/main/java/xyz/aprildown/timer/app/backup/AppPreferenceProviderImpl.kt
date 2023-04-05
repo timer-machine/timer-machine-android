@@ -324,6 +324,7 @@ private class ThemePreferenceItem : PreferenceItem {
     override fun storeToMap(context: Context, map: MutableMap<String, String>) {
         val appTheme = context.appTheme
 
+        map[PreferenceData.AppTheme.PREF_TYPE] = appTheme.type.toString()
         map[PreferenceData.AppTheme.PREF_PRIMARY] = appTheme.colorPrimary.toString()
         map[PreferenceData.AppTheme.PREF_SECONDARY] = appTheme.colorSecondary.toString()
         map[PreferenceData.AppTheme.PREF_SAME_STATUS_BAR] = appTheme.sameStatusBar.toString()
@@ -345,10 +346,14 @@ private class ThemePreferenceItem : PreferenceItem {
                 prefs.ifHasKey(PreferenceData.AppTheme.PREF_SAME_STATUS_BAR) { sameStatus ->
                     prefs.ifHasKey(PreferenceData.AppTheme.PREF_ENABLE_NAV) { enableNav ->
                         PreferenceData.AppTheme(
-                            primary.toInt(),
-                            secondary.toInt(),
-                            sameStatus.toBoolean(),
-                            enableNav.toBoolean()
+                            type = prefs.getOrDefault(
+                                PreferenceData.AppTheme.PREF_TYPE,
+                                PreferenceData.AppTheme.AppThemeType.TYPE_COLOR.toString()
+                            ).toInt(),
+                            colorPrimary = primary.toInt(),
+                            colorSecondary = secondary.toInt(),
+                            sameStatusBar = sameStatus.toBoolean(),
+                            enableNav = enableNav.toBoolean(),
                         ).also {
                             context.appTheme = it
                             AppThemeUtils.configAppTheme(context, it)

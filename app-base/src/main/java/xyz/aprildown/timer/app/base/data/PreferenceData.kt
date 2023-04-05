@@ -4,10 +4,13 @@ import android.content.Context
 import android.content.SharedPreferences
 import android.media.AudioManager
 import android.net.Uri
+import android.os.Build
 import android.text.format.DateUtils
 import androidx.annotation.ColorInt
 import androidx.annotation.ColorRes
 import androidx.annotation.DrawableRes
+import androidx.annotation.IntDef
+import androidx.annotation.RequiresApi
 import androidx.annotation.StringRes
 import androidx.core.content.edit
 import androidx.core.net.toUri
@@ -15,6 +18,9 @@ import com.github.deweyreed.tools.helper.color
 import com.github.deweyreed.tools.helper.getNonNullString
 import com.github.deweyreed.tools.helper.toBoolean
 import xyz.aprildown.timer.app.base.R
+import xyz.aprildown.timer.app.base.data.PreferenceData.AppTheme.AppThemeType.Companion.TYPE_COLOR
+import xyz.aprildown.timer.app.base.data.PreferenceData.AppTheme.AppThemeType.Companion.TYPE_DYNAMIC_DARK
+import xyz.aprildown.timer.app.base.data.PreferenceData.AppTheme.AppThemeType.Companion.TYPE_DYNAMIC_LIGHT
 import xyz.aprildown.timer.app.base.utils.ScreenWakeLock
 import xyz.aprildown.timer.app.base.utils.produceTime
 import xyz.aprildown.timer.domain.entities.StepType
@@ -282,34 +288,94 @@ object PreferenceData {
     // region App Theme
 
     data class AppTheme(
+        @AppThemeType val type: Int,
         @ColorInt
         val colorPrimary: Int,
         @ColorInt
         val colorSecondary: Int,
         val sameStatusBar: Boolean = false,
-        val enableNav: Boolean = false
+        val enableNav: Boolean = false,
     ) {
+
+        @IntDef(TYPE_COLOR, TYPE_DYNAMIC_DARK, TYPE_DYNAMIC_LIGHT)
+        @Retention(AnnotationRetention.SOURCE)
+        annotation class AppThemeType {
+            companion object {
+                const val TYPE_COLOR = 0
+                const val TYPE_DYNAMIC_DARK = 1
+                const val TYPE_DYNAMIC_LIGHT = 2
+            }
+        }
+
         companion object {
             private const val PREF_PREFIX = "pref_app_theme_"
+            const val PREF_TYPE = "${PREF_PREFIX}type"
             const val PREF_PRIMARY = "${PREF_PREFIX}primary"
             const val PREF_SECONDARY = "${PREF_PREFIX}accent"
             const val PREF_SAME_STATUS_BAR = "${PREF_PREFIX}same_status_bar"
             const val PREF_ENABLE_NAV = "${PREF_PREFIX}enable_nav"
+
+            // androidx.compose.material3.dynamicLightColorScheme
+            @RequiresApi(Build.VERSION_CODES.S)
+            val dynamicDarkPrimaryColorRes: Int = android.R.color.system_accent1_200
+
+            @RequiresApi(Build.VERSION_CODES.S)
+            val dynamicDarkSecondaryColorRes: Int = android.R.color.system_accent2_200
+
+            @RequiresApi(Build.VERSION_CODES.S)
+            val dynamicLightPrimaryColorRes: Int = android.R.color.system_accent1_600
+
+            @RequiresApi(Build.VERSION_CODES.S)
+            val dynamicLightSecondaryColorRes: Int = android.R.color.system_accent2_600
         }
     }
 
     var Context.appTheme: AppTheme
         get() {
             val sp = safeSharedPreference
-            return AppTheme(
-                sp.getInt(AppTheme.PREF_PRIMARY, color(R.color.colorPrimary)),
-                sp.getInt(AppTheme.PREF_SECONDARY, color(R.color.colorSecondary)),
-                sp.getBoolean(AppTheme.PREF_SAME_STATUS_BAR, true),
-                sp.getBoolean(AppTheme.PREF_ENABLE_NAV, false)
-            )
+            val type = sp.getInt(AppTheme.PREF_TYPE, TYPE_COLOR)
+            val sameStatusBar = sp.getBoolean(AppTheme.PREF_SAME_STATUS_BAR, true)
+            val enableNav = sp.getBoolean(AppTheme.PREF_ENABLE_NAV, false)
+
+            return when {
+                Build.VERSION.SDK_INT >= Build.VERSION_CODES.S && type == TYPE_DYNAMIC_DARK -> {
+                    AppTheme(
+                        type = type,
+                        colorPrimary = color(AppTheme.dynamicDarkPrimaryColorRes),
+                        colorSecondary = color(AppTheme.dynamicDarkSecondaryColorRes),
+                        sameStatusBar = sameStatusBar,
+                        enableNav = enableNav,
+                    )
+                }
+                Build.VERSION.SDK_INT >= Build.VERSION_CODES.S && type == TYPE_DYNAMIC_LIGHT -> {
+                    AppTheme(
+                        type = type,
+                        colorPrimary = color(AppTheme.dynamicLightPrimaryColorRes),
+                        colorSecondary = color(AppTheme.dynamicLightSecondaryColorRes),
+                        sameStatusBar = sameStatusBar,
+                        enableNav = enableNav,
+                    )
+                }
+                else -> {
+                    AppTheme(
+                        type = type,
+                        colorPrimary = sp.getInt(
+                            AppTheme.PREF_PRIMARY,
+                            color(R.color.colorPrimary)
+                        ),
+                        colorSecondary = sp.getInt(
+                            AppTheme.PREF_SECONDARY,
+                            color(R.color.colorSecondary)
+                        ),
+                        sameStatusBar = sameStatusBar,
+                        enableNav = enableNav,
+                    )
+                }
+            }
         }
         set(value) {
             safeSharedPreference.edit {
+                putInt(AppTheme.PREF_TYPE, value.type)
                 putInt(AppTheme.PREF_PRIMARY, value.colorPrimary)
                 putInt(AppTheme.PREF_SECONDARY, value.colorSecondary)
                 putBoolean(AppTheme.PREF_SAME_STATUS_BAR, value.sameStatusBar)
