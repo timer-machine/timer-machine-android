@@ -1,5 +1,6 @@
 package xyz.aprildown.timer.flavor.google
 
+import android.os.Build
 import android.os.Bundle
 import android.text.Spannable
 import android.text.SpannableString
@@ -188,21 +189,31 @@ internal class BillingFragment : Fragment(R.layout.fragment_billing), MenuProvid
             .replace(
                 R.id.fragmentContainerOneTime,
                 PreferenceStyleListFragment.newInstance(
-                    PreferenceStyleListFragment.Entry(
-                        RBase.drawable.settings_theme,
-                        RBase.string.billing_more_themes_title,
-                        RBase.string.billing_more_themes_desp
-                    ),
-                    PreferenceStyleListFragment.Entry(
-                        RBase.drawable.settings_count,
-                        RBase.string.billing_baked_count_title,
-                        RBase.string.billing_baked_count_desp
-                    ),
-                    PreferenceStyleListFragment.Entry(
-                        RBase.drawable.settings_code,
-                        RBase.string.billing_future_title,
-                        RBase.string.billing_future_desp
-                    ),
+                    buildList {
+                        this += PreferenceStyleListFragment.Entry(
+                            RBase.drawable.settings_theme,
+                            RBase.string.billing_more_themes_title,
+                            RBase.string.billing_more_themes_desp
+                        )
+                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+                            this += PreferenceStyleListFragment.Entry(
+                                RBase.drawable.settings_material_you,
+                                RBase.string.billing_dynamic_themes_title,
+                                RBase.string.billing_dynamic_themes_desp,
+                            )
+                        }
+                        this += PreferenceStyleListFragment.Entry(
+                            RBase.drawable.settings_count,
+                            RBase.string.billing_baked_count_title,
+                            RBase.string.billing_baked_count_desp
+                        )
+                        this += PreferenceStyleListFragment.Entry(
+                            RBase.drawable.settings_code,
+                            RBase.string.billing_future_title,
+                            RBase.string.billing_future_desp
+                        )
+                    }
+
                 )
             )
             .commit()
@@ -210,10 +221,12 @@ internal class BillingFragment : Fragment(R.layout.fragment_billing), MenuProvid
             .replace(
                 R.id.fragmentContainerCloudBackup,
                 PreferenceStyleListFragment.newInstance(
-                    PreferenceStyleListFragment.Entry(
-                        RBase.drawable.settings_cloud_backup,
-                        RBase.string.billing_cloud_backup_title,
-                        RBase.string.billing_cloud_backup_desp
+                    listOf(
+                        PreferenceStyleListFragment.Entry(
+                            RBase.drawable.settings_cloud_backup,
+                            RBase.string.billing_cloud_backup_title,
+                            RBase.string.billing_cloud_backup_desp
+                        ),
                     )
                 )
             )

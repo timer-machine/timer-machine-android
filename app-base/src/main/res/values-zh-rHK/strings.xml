@@ -619,6 +619,7 @@
     <string name="billing_cloud_backup_desp">不再丟失個人努力的記錄</string>
     <string name="billing_more_themes_title">更多主題</string>
     <string name="billing_more_themes_desp">精挑細選的應用主題</string>
+    <string name="billing_dynamic_themes_title">動態顏色</string>
     <string name="billing_baked_count_title">預置倒數音</string>
     <string name="billing_baked_count_desp">更快更一致的倒數音</string>
     <string name="billing_future_title">未來會有更多功能</string>

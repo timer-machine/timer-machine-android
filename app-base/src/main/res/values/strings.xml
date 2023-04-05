@@ -854,6 +854,8 @@
     <string name="billing_cloud_backup_desp">Never lose your record of hard work</string>
     <string name="billing_more_themes_title">More themes</string>
     <string name="billing_more_themes_desp">Carefully picked and perfect colors for the app</string>
+    <string name="billing_dynamic_themes_title">Dynamic themes</string>
+    <string name="billing_dynamic_themes_desp" translatable="false">Android 12+</string>
     <string name="billing_baked_count_title">Baked count sound</string>
     <string name="billing_baked_count_desp">Fast and consistent count down sounds</string>
     <string name="billing_future_title">More in the future</string>

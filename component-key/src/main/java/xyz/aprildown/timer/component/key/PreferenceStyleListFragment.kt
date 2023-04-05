@@ -5,7 +5,6 @@ import android.os.Parcelable
 import android.view.View
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
-import androidx.core.os.bundleOf
 import androidx.preference.Preference
 import androidx.preference.PreferenceFragmentCompat
 import com.github.deweyreed.tools.compat.getParcelableArrayCompat
@@ -68,9 +67,11 @@ class PreferenceStyleListFragment : PreferenceFragmentCompat() {
     companion object {
         private const val EXTRA_ENTRIES = "entries"
 
-        fun newInstance(vararg entries: Entry): PreferenceStyleListFragment {
+        fun newInstance(entries: List<Entry>): PreferenceStyleListFragment {
             return PreferenceStyleListFragment().apply {
-                arguments = bundleOf(EXTRA_ENTRIES to entries)
+                arguments = Bundle().also {
+                    it.putParcelableArray(EXTRA_ENTRIES, entries.toTypedArray())
+                }
             }
         }
     }
