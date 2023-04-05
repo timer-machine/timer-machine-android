@@ -458,16 +458,25 @@ class MainActivity :
             destinationId != 0 &&
             destinationId != navController.currentDestination?.id
         ) {
+            val arguments = intent?.getBundleExtra(EXTRA_DESTINATION_ARGUMENTS)
+
             if (navController.graph.contains(destinationId)) {
-                navController.navigate(
-                    destinationId,
-                    intent?.getBundleExtra(EXTRA_DESTINATION_ARGUMENTS),
-                    NavOptions.Builder()
-                        .setPopEnterAnim(RBase.anim.close_enter)
-                        .setPopExitAnim(RBase.anim.close_exit)
-                        .build()
-                )
+                // TODO: Possible memory leak. Try later with new dependencies.
+                // Without launchWhenStarted, LeakCanary reports an odd memory leak of
+                // the start destination Fragment.
+                // launchWhenStarted solves the problem for no reason.
+                lifecycleScope.launchWhenStarted {
+                    navController.navigate(
+                        destinationId,
+                        arguments,
+                        NavOptions.Builder()
+                            .setPopEnterAnim(RBase.anim.close_enter)
+                            .setPopExitAnim(RBase.anim.close_exit)
+                            .build()
+                    )
+                }
             }
+
             intent?.removeExtra(EXTRA_DESTINATION_ID)
             intent?.removeExtra(EXTRA_DESTINATION_ARGUMENTS)
         }
