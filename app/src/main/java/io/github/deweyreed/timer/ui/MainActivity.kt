@@ -198,8 +198,14 @@ class MainActivity :
         startActivity(appNavigator.getEditIntent(timerId = timerId, folderId = folderId))
     }
 
-    override fun restartWithDestination(destinationId: Int) {
-        restartWithFading(intent(this, destinationId = destinationId))
+    override fun restartWithDestination(destinationId: Int, destinationArguments: Bundle) {
+        restartWithFading(
+            intent(
+                context = this,
+                destinationId = destinationId,
+                destinationArguments = destinationArguments,
+            )
+        )
     }
 
     override fun recreateThemeItem() {
@@ -452,17 +458,18 @@ class MainActivity :
             destinationId != 0 &&
             destinationId != navController.currentDestination?.id
         ) {
-            intent?.removeExtra(EXTRA_DESTINATION_ID)
             if (navController.graph.contains(destinationId)) {
                 navController.navigate(
                     destinationId,
-                    null,
+                    intent?.getBundleExtra(EXTRA_DESTINATION_ARGUMENTS),
                     NavOptions.Builder()
                         .setPopEnterAnim(RBase.anim.close_enter)
                         .setPopExitAnim(RBase.anim.close_exit)
                         .build()
                 )
             }
+            intent?.removeExtra(EXTRA_DESTINATION_ID)
+            intent?.removeExtra(EXTRA_DESTINATION_ARGUMENTS)
         }
     }
 
@@ -538,11 +545,13 @@ class MainActivity :
             context: Context,
             openDrawer: Boolean = false,
             showAutoDarkMsg: Boolean = false,
-            @IdRes destinationId: Int = 0
+            @IdRes destinationId: Int = 0,
+            destinationArguments: Bundle = Bundle.EMPTY,
         ): Intent = Intent(context, MainActivity::class.java)
             .putExtra(EXTRA_OPEN_DRAWER, openDrawer)
             .putExtra(EXTRA_SHOW_AUTO_DARK_MSG, showAutoDarkMsg)
             .putExtra(EXTRA_DESTINATION_ID, destinationId)
+            .putExtra(EXTRA_DESTINATION_ARGUMENTS, destinationArguments)
     }
 }
 
@@ -558,6 +567,7 @@ private const val DRAWER_ID_THEME = 90L
 private const val EXTRA_OPEN_DRAWER = "open_drawer"
 private const val EXTRA_SHOW_AUTO_DARK_MSG = "show_auto_dark_msg"
 private const val EXTRA_DESTINATION_ID = "destination_id"
+private const val EXTRA_DESTINATION_ARGUMENTS = "destination_arguments"
 
 /**
  * Original: https://github.com/mikepenz/MaterialDrawer/issues/2574

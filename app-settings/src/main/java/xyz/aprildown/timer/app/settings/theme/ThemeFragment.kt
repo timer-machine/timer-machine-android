@@ -6,6 +6,7 @@ import android.content.res.ColorStateList
 import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
+import android.os.Parcelable
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -19,6 +20,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.afollestad.materialdialogs.color.ColorChooserDialog
 import com.github.deweyreed.tools.anko.dip
+import com.github.deweyreed.tools.compat.getParcelableCompat
 import com.github.deweyreed.tools.helper.color
 import com.github.deweyreed.tools.helper.toColorStateList
 import com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -105,7 +107,11 @@ class ThemeFragment :
                     break
                 }
             }
-            if (targetSelection != RecyclerView.NO_POSITION) {
+
+            val scrollState = arguments?.getParcelableCompat<Parcelable>(EXTRA_SCROLL_STATE)
+            if (scrollState != null) {
+                lm.onRestoreInstanceState(scrollState)
+            } else if (targetSelection != RecyclerView.NO_POSITION) {
                 lm.scrollToPositionWithOffset(targetSelection, dip(108))
             }
         }
@@ -319,11 +325,20 @@ class ThemeFragment :
     }
 
     private fun reload() {
-        (requireActivity() as? MainCallback.ActivityCallback)?.restartWithDestination(RBase.id.dest_theme)
+        (requireActivity() as? MainCallback.ActivityCallback)?.restartWithDestination(
+            destinationId = RBase.id.dest_theme,
+            destinationArguments = Bundle().also {
+                it.putParcelable(
+                    EXTRA_SCROLL_STATE,
+                    (view as? RecyclerView)?.layoutManager?.onSaveInstanceState()
+                )
+            },
+        )
     }
 }
 
 private const val NAME_CUSTOM = "Custom"
+private const val EXTRA_SCROLL_STATE = "scroll_state"
 
 private class BooleanToggle(
     private val toggleType: Int,

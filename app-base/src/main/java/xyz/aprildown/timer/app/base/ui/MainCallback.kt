@@ -1,5 +1,6 @@
 package xyz.aprildown.timer.app.base.ui
 
+import android.os.Bundle
 import android.view.View
 import androidx.annotation.IdRes
 import com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -10,7 +11,11 @@ interface MainCallback {
         val snackbarView: View
         fun enterTimerScreen(itemView: View, id: Int)
         fun enterEditScreen(timerId: Int, folderId: Long)
-        fun restartWithDestination(@IdRes destinationId: Int)
+        fun restartWithDestination(
+            @IdRes destinationId: Int,
+            destinationArguments: Bundle = Bundle.EMPTY
+        )
+
         fun recreateThemeItem()
     }
 
