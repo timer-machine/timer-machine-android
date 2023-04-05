@@ -7,7 +7,7 @@ plugins {
 }
 
 android {
-    namespace 'xyz.aprildown.timer.analytics'
+    namespace 'xyz.aprildown.timer.app.analytics'
 }
 
 secrets {

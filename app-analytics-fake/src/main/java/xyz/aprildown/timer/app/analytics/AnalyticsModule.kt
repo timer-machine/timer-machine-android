@@ -1,4 +1,4 @@
-package xyz.aprildown.timer.analytics
+package xyz.aprildown.timer.app.analytics
 
 import dagger.Binds
 import dagger.Module
