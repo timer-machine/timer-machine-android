@@ -624,4 +624,5 @@
     <string name="pref_audio_type_title_notification">Notificación</string>
     <string name="pref_phone_call_title_nothing">No hacer nada</string>
     <string name="scheduler_set8">Programador establecido para <xliff:g example="2 days" id="DAYS">%1$s</xliff:g>, <xliff:g example="2 hours" id="HOURS">%2$s</xliff:g>, y <xliff:g example="2 minutes" id="MINUTES">%3$s</xliff:g> a partir de ahora</string>
+    <string name="billing_dynamic_themes_title">Temas dinámicos</string>
 </resources>
