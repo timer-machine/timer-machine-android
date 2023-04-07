@@ -6,9 +6,15 @@ A highly customizable interval timer app for Android
 
 ![Showcase](images/showcase.jpg)
 
-<a href='https://play.google.com/store/apps/details?id=io.github.deweyreed.timer.google'><img alt='Get it on Google Play' src='https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png' height='100'/></a>
-<a href='https://apt.izzysoft.de/fdroid/index/apk/io.github.deweyreed.timer.other'><img alt='Get it on IzzyOnDroid' src='https://gitlab.com/IzzyOnDroid/repo/-/raw/master/assets/IzzyOnDroid.png' height='100'/></a>
-<a href='https://github.com/timer-machine/timer-machine-android/releases'>Get it on GitHub</a>
+## Download
+
+|Link|Package Name|
+|:-:|:-:|
+|<a href='https://play.google.com/store/apps/details?id=io.github.deweyreed.timer.google'><img alt='Get it on Google Play' src='https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png' height='75'/></a>|io.github.deweyreed.timer.google|
+|[Get it on Google Drive](https://drive.google.com/open?id=1YHIdW77fuxmyQ7sFza1LEIqmhzBygEZx)<br>(AAB universial APK)|io.github.deweyreed.timer.google|
+|<a href='https://f-droid.org/en/packages/io.github.deweyreed.timer.other/'><img alt='Get it on F-Droid' src='https://fdroid.gitlab.io/artwork/badge/get-it-on.png' height='75'/></a>|io.github.deweyreed.timer.other|
+|<a href='https://apt.izzysoft.de/fdroid/index/apk/io.github.deweyreed.timer.other'><img alt='Get it on IzzyOnDroid' src='https://gitlab.com/IzzyOnDroid/repo/-/raw/master/assets/IzzyOnDroid.png' height='75'/></a>|io.github.deweyreed.timer.other|
+|[Get it on GitHub](https://github.com/timer-machine/timer-machine-android/releases)|io.github.deweyreed.timer.other|
 
 ## Structure
 
@@ -29,7 +35,7 @@ The `google` product flavor is the version in Google Play. It has some in-app pu
 uses Firebase to store backup files and AppCenter to track crashes.
 
 - Firebase: Create a Firebase project and add `google-services.json` to the project.
-    - [This optional Firebase Cloud Function](functions/index.js) removes old backup files when
+  - [This optional Firebase Cloud Function](functions/index.js) removes old backup files when
       there are too many.
 - AppCenter: Create an AppCenter project and put the app secret to your `local.properties`(
   Format: `APP_CENTER_APP_SECRET=your-app-secret`).
@@ -42,8 +48,8 @@ corresponding functions to release the app to other app stores.
 If you have any questions or suggestions, feel free
 to [open an issue](https://github.com/timer-machine/timer-machine-android/issues/new).
 
-If you would like to create a pull request, please open an issue before contributing because I'm
-cleaning up and improving the codebase. It would avoid some repetitive work.
+There are some legacy codes that I wrote while learning Android development. I plan to fix them
+when they are broken or required by a new feature.
 
 ## Translations
 
