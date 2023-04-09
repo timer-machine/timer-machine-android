@@ -27,7 +27,7 @@ import xyz.aprildown.timer.domain.entities.SchedulerRepeatMode
         SchedulerData::class,
         TimerStampData::class,
     ],
-    version = 8,
+    version = MachineDatabase.DB_VERSION,
     exportSchema = true
 )
 @TypeConverters(
@@ -46,6 +46,8 @@ abstract class MachineDatabase : RoomDatabase() {
     companion object {
         @VisibleForTesting(otherwise = VisibleForTesting.PRIVATE)
         const val DB_NAME = "timer_db"
+
+        const val DB_VERSION = 8
 
         private fun Builder<MachineDatabase>.addMyMigrations(context: Context): Builder<MachineDatabase> {
             addMigrations(getMigration1to2())
