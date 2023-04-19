@@ -13,7 +13,6 @@ A highly customizable interval timer app for Android
 |<a href='https://play.google.com/store/apps/details?id=io.github.deweyreed.timer.google'><img alt='Get it on Google Play' src='https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png' height='75'/></a>|io.github.deweyreed.timer.google|
 |[Get it on Google Drive](https://drive.google.com/open?id=1YHIdW77fuxmyQ7sFza1LEIqmhzBygEZx)<br>(AAB universial APK)|io.github.deweyreed.timer.google|
 |<a href='https://f-droid.org/en/packages/io.github.deweyreed.timer.other/'><img alt='Get it on F-Droid' src='https://fdroid.gitlab.io/artwork/badge/get-it-on.png' height='75'/></a>|io.github.deweyreed.timer.other|
-|<a href='https://apt.izzysoft.de/fdroid/index/apk/io.github.deweyreed.timer.other'><img alt='Get it on IzzyOnDroid' src='https://gitlab.com/IzzyOnDroid/repo/-/raw/master/assets/IzzyOnDroid.png' height='75'/></a>|io.github.deweyreed.timer.other|
 |[Get it on GitHub](https://github.com/timer-machine/timer-machine-android/releases)|io.github.deweyreed.timer.other|
 
 ## Structure
