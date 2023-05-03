@@ -5,7 +5,6 @@ import android.content.Context
 import com.microsoft.appcenter.AppCenter
 import com.microsoft.appcenter.crashes.Crashes
 import dagger.Reusable
-import xyz.aprildown.timer.analytics.BuildConfig
 import xyz.aprildown.timer.domain.utils.AppTracker
 import javax.inject.Inject
 
