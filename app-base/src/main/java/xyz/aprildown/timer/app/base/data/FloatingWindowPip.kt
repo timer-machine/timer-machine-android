@@ -5,7 +5,7 @@ import android.content.res.Resources
 import androidx.annotation.FloatRange
 import androidx.core.content.edit
 import androidx.core.math.MathUtils
-import com.github.deweyreed.tools.anko.dip
+import com.github.deweyreed.tools.anko.dp
 import xyz.aprildown.tools.helper.safeSharedPreference
 import kotlin.math.min
 
@@ -46,7 +46,7 @@ class FloatingWindowPip(private val context: Context) {
         val screenWidth: Int = Resources.getSystem().displayMetrics.run {
             min(widthPixels, heightPixels)
         }
-        val minWidth: Int = context.dip(FLOATING_WINDOW_MIN_WIDTH_DP)
+        val minWidth: Int = context.dp(FLOATING_WINDOW_MIN_WIDTH_DP).toInt()
         val resultWidth: Float = minWidth + (screenWidth - minWidth) * percent
         return resultWidth.toInt() to (resultWidth / ratio).toInt()
     }

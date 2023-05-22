@@ -6,7 +6,7 @@ import android.util.AttributeSet
 import android.view.View
 import androidx.annotation.ColorInt
 import androidx.appcompat.widget.TooltipCompat
-import com.github.deweyreed.tools.anko.dip
+import com.github.deweyreed.tools.anko.dp
 import com.github.deweyreed.tools.helper.setTextIfChanged
 import com.google.android.material.chip.Chip
 import com.google.android.material.chip.ChipGroup
@@ -21,7 +21,7 @@ class BehaviourLayout @JvmOverloads constructor(
     private val currentBehaviours = mutableListOf<BehaviourChipView>()
 
     init {
-        val spacing = dip(4)
+        val spacing = context.dp(4).toInt()
         chipSpacingHorizontal = spacing
         chipSpacingVertical = spacing
     }

@@ -25,7 +25,7 @@ import androidx.core.widget.doAfterTextChanged
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.github.deweyreed.tools.anko.dip
+import com.github.deweyreed.tools.anko.dp
 import com.github.deweyreed.tools.anko.snackbar
 import com.github.deweyreed.tools.arch.observeEvent
 import com.github.deweyreed.tools.helper.IntentHelper
@@ -258,7 +258,7 @@ class EditActivity :
             },
             onItemDropped = { _, to ->
                 if (shouldUpdateTotalTime) {
-                    binding.listEditSteps.updatePadding(top = dip(64))
+                    binding.listEditSteps.updatePadding(top = dp(64).toInt())
                 }
                 var isInGroup = false
                 for (index in to downTo 0) {

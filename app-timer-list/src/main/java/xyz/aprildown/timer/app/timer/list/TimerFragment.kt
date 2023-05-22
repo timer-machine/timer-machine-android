@@ -35,7 +35,7 @@ import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
 import androidx.transition.AutoTransition
 import androidx.transition.TransitionManager
-import com.github.deweyreed.tools.anko.dip
+import com.github.deweyreed.tools.anko.dp
 import com.github.deweyreed.tools.anko.snackbar
 import com.github.deweyreed.tools.arch.observeEvent
 import com.github.deweyreed.tools.arch.observeNonNull
@@ -200,7 +200,7 @@ class TimerFragment :
             SpecialItemTouchHelperCallback(
                 context,
                 SpecialItemTouchHelperCallback.Config.getEditDeleteConfig(context).apply {
-                    val padding = dip(8)
+                    val padding = context.dp(8).toInt()
                     topPadding = padding
                     bottomPadding = padding
                 },
@@ -391,11 +391,12 @@ class TimerFragment :
     }
 
     private fun setUpGridOrList(binding: FragmentTimerBinding, grid: Boolean) {
+        val context = binding.root.context
         binding.listTimers.run {
             if (grid) {
                 (layoutManager as GridLayoutManager).spanCount =
                     resources.getInteger(R.integer.timer_list_grid_count)
-                val padding = dip(8)
+                val padding = context.dp(8).toInt()
                 updatePadding(left = padding, right = padding)
                 listAdapter?.showGrid = true
                 binding.toolbarTimerFolder.setGridView(showGrid = false)

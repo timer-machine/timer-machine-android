@@ -33,8 +33,8 @@ import android.os.SystemClock
 import android.telephony.TelephonyManager
 import androidx.core.content.ContextCompat
 import androidx.core.content.getSystemService
+import androidx.core.os.BundleCompat
 import androidx.core.os.bundleOf
-import com.github.deweyreed.tools.compat.getParcelableCompat
 import com.github.deweyreed.tools.helper.getResourceUri
 import timber.log.Timber
 import xyz.aprildown.timer.app.base.R
@@ -350,7 +350,11 @@ internal class AsyncRingtonePlayer(private val mContext: Context) {
                         val data = msg.data
                         if (mPlaybackDelegate.play(
                                 context = mContext,
-                                ringtoneUri = data.getParcelableCompat(RINGTONE_URI_KEY),
+                                ringtoneUri = BundleCompat.getParcelable(
+                                    data,
+                                    RINGTONE_URI_KEY,
+                                    Uri::class.java
+                                ),
                                 crescendoDuration = data.getLong(CRESCENDO_DURATION_KEY),
                                 loop = data.getBoolean(LOOP),
                                 audioFocusType = data.getInt(AUDIO_FOCUS_TYPE),

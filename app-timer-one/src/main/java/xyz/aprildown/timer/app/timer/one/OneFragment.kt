@@ -220,7 +220,7 @@ class OneFragment :
             }
         }
 
-        binding.textOneTime.textSize = dp(context.oneOneTimeSize)
+        binding.textOneTime.textSize = context.dp(context.oneOneTimeSize)
 
         context.timePanels.let {
             if (it.isNotEmpty()) {

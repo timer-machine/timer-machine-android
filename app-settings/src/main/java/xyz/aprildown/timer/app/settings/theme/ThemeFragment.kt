@@ -14,13 +14,13 @@ import android.widget.CompoundButton
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.annotation.ColorInt
+import androidx.core.os.BundleCompat
 import androidx.core.widget.TextViewCompat
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.afollestad.materialdialogs.color.ColorChooserDialog
-import com.github.deweyreed.tools.anko.dip
-import com.github.deweyreed.tools.compat.getParcelableCompat
+import com.github.deweyreed.tools.anko.dp
 import com.github.deweyreed.tools.helper.color
 import com.github.deweyreed.tools.helper.toColorStateList
 import com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -108,11 +108,15 @@ class ThemeFragment :
                 }
             }
 
-            val scrollState = arguments?.getParcelableCompat<Parcelable>(EXTRA_SCROLL_STATE)
+            val scrollState = BundleCompat.getParcelable(
+                arguments ?: Bundle.EMPTY,
+                EXTRA_SCROLL_STATE,
+                Parcelable::class.java
+            )
             if (scrollState != null) {
                 lm.onRestoreInstanceState(scrollState)
             } else if (targetSelection != RecyclerView.NO_POSITION) {
-                lm.scrollToPositionWithOffset(targetSelection, dip(108))
+                lm.scrollToPositionWithOffset(targetSelection, context.dp(108).toInt())
             }
         }
     }

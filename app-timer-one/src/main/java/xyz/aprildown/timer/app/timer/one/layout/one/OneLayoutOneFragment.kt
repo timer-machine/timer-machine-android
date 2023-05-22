@@ -151,7 +151,7 @@ internal class OneLayoutOneFragment :
     }
 
     private fun setTimeTextSize(size: Int) {
-        view?.findViewById<TextView>(R.id.textOneTime)?.textSize = dp(size)
+        view?.findViewById<TextView>(R.id.textOneTime)?.textSize = requireContext().dp(size)
     }
 
     private fun toggleTimePanels() {

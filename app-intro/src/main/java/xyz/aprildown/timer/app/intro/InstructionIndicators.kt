@@ -14,7 +14,6 @@ import androidx.core.graphics.withSave
 import androidx.core.view.doOnAttach
 import androidx.core.view.doOnDetach
 import androidx.core.view.postDelayed
-import com.github.deweyreed.tools.anko.dip
 import com.github.deweyreed.tools.anko.dp
 import com.github.deweyreed.tools.helper.color
 import com.github.deweyreed.tools.helper.themeColor
@@ -35,7 +34,7 @@ internal fun View.showInteractionIndicator(
 ) {
     val overlay = overlay
     val drawable = GradientDrawable().apply {
-        setStroke(context.dip(4), tint)
+        setStroke(context.dp(4).toInt(), tint)
     }
     val runnable = object : Runnable {
         override fun run() {

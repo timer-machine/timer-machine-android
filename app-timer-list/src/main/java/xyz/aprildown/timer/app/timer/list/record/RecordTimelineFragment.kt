@@ -110,7 +110,8 @@ internal class RecordTimelineFragment : Fragment(R.layout.fragment_record_timeli
     }
 
     private fun BarChart.applyCommonSettings(durationFormatter: (Long) -> String) {
-        val textColorPrimary = requireContext().themeColor(android.R.attr.textColorPrimary)
+        val context = requireContext()
+        val textColorPrimary = context.themeColor(android.R.attr.textColorPrimary)
         xAxis.run {
             position = XAxis.XAxisPosition.BOTTOM
             setDrawGridLines(false)
@@ -144,8 +145,8 @@ internal class RecordTimelineFragment : Fragment(R.layout.fragment_record_timeli
         legend.isEnabled = false
         isDoubleTapToZoomEnabled = false
 
-        extraLeftOffset = dp(4)
-        extraRightOffset = dp(8)
+        extraLeftOffset = context.dp(4)
+        extraRightOffset = context.dp(8)
     }
 
     private fun BarDataSet.applyCommonSettings() {

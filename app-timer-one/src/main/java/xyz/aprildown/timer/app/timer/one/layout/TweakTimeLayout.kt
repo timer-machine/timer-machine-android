@@ -11,7 +11,7 @@ import android.view.View
 import android.widget.Button
 import android.widget.LinearLayout
 import androidx.core.view.forEachIndexed
-import com.github.deweyreed.tools.anko.dip
+import com.github.deweyreed.tools.anko.dp
 import xyz.aprildown.chromemenu.AbstractAppMenuPropertiesDelegate
 import xyz.aprildown.chromemenu.AppMenuButtonHelper
 import xyz.aprildown.chromemenu.AppMenuHandler
@@ -56,7 +56,7 @@ internal class TweakTimeLayout(
 
         if (currentSettings.hasSlot) {
             val button = View.inflate(context, R.layout.layout_tweak_time_tweak_button, null)
-            val size = dip(36)
+            val size = context.dp(36).toInt()
             addView(button, LayoutParams(size, size))
             tweakButton = button
         }

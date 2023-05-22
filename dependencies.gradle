@@ -23,7 +23,7 @@ ext {
     libs = [
 
             desugar_jdk_libs              : 'com.android.tools:desugar_jdk_libs:2.0.3',
-            tools                         : 'com.github.DeweyReed:tools:0.6.0',
+            tools                         : 'com.github.DeweyReed:tools:0.7.0',
 
             // Kotlin Coroutines
             kotlin_coroutines_core        : 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.7.1',

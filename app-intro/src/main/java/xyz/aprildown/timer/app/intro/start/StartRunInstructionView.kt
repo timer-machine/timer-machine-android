@@ -38,7 +38,7 @@ internal class StartRunInstructionView : InstructionView<LayoutIntroStartRunBind
             findViewById<View>(RTimerOne.id.cardOneTopInfo).clearInteractionIndicator()
 
             findViewById<TextView>(RTimerOne.id.textOneTime).run {
-                textSize = dp(context.oneOneTimeSize)
+                textSize = context.dp(context.oneOneTimeSize)
                 text = (timer.steps.first() as StepEntity.Step).length.produceTime()
             }
 

@@ -11,7 +11,7 @@ import android.widget.TextView
 import androidx.annotation.StringRes
 import androidx.appcompat.app.AlertDialog
 import androidx.core.view.updateLayoutParams
-import com.github.deweyreed.tools.anko.dip
+import com.github.deweyreed.tools.anko.dp
 import com.github.deweyreed.tools.helper.gone
 import com.github.deweyreed.tools.helper.onImeActionClick
 import com.github.deweyreed.tools.helper.setTextAndSelectEnd
@@ -47,7 +47,7 @@ class SimpleInputDialog(
                 builder.setTitle(titleRes)
             }
             else -> {
-                topSpace = context.dip(16)
+                topSpace = context.dp(16).toInt()
             }
         }
 

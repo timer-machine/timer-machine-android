@@ -9,10 +9,9 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
+import androidx.core.content.IntentCompat
 import androidx.core.content.edit
 import androidx.core.view.MenuItemCompat
-import com.github.deweyreed.tools.compat.getParcelableArrayExtraCompat
-import com.github.deweyreed.tools.compat.getParcelableExtraCompat
 import com.github.deweyreed.tools.helper.toColorStateList
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import dagger.hilt.android.AndroidEntryPoint
@@ -22,6 +21,8 @@ import xyz.aprildown.timer.app.base.ui.newDynamicTheme
 import xyz.aprildown.tools.helper.safeSharedPreference
 import xyz.aprildown.ultimateringtonepicker.RingtonePickerFragment
 import xyz.aprildown.ultimateringtonepicker.UltimateRingtonePicker
+import xyz.aprildown.ultimateringtonepicker.getParcelableArrayExtraCompat
+import xyz.aprildown.ultimateringtonepicker.getParcelableExtraCompat
 import xyz.aprildown.timer.app.base.R as RBase
 
 @AndroidEntryPoint
@@ -43,8 +44,11 @@ class RingtonePickerActivity :
         reference = intent?.getIntExtra(EXTRA_REFERENCE, -1) ?: -1
 
         if (savedInstanceState == null) {
-            val settings =
-                intent.getParcelableExtraCompat<UltimateRingtonePicker.Settings>(EXTRA_SETTINGS)
+            val settings = IntentCompat.getParcelableExtra(
+                intent,
+                EXTRA_SETTINGS,
+                UltimateRingtonePicker.Settings::class.java
+            )
             requireNotNull(settings)
             val fragment = settings.createFragment()
             supportFragmentManager.beginTransaction()
