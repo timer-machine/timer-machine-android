@@ -11,7 +11,6 @@ import androidx.annotation.IdRes
 import androidx.core.content.edit
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.lifecycle.Lifecycle
-import androidx.lifecycle.lifecycleScope
 import androidx.navigation.NavController
 import androidx.navigation.NavDestination
 import androidx.navigation.NavOptions
@@ -21,6 +20,7 @@ import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupWithNavController
 import com.github.deweyreed.tools.anko.longSnackbar
 import com.github.deweyreed.tools.anko.toast
+import com.github.deweyreed.tools.arch.doOnStart
 import com.github.deweyreed.tools.helper.IntentHelper
 import com.github.deweyreed.tools.helper.float
 import com.github.deweyreed.tools.helper.isDarkTheme
@@ -462,10 +462,10 @@ class MainActivity :
 
             if (navController.graph.contains(destinationId)) {
                 // TODO: Possible memory leak. Try later with new dependencies.
-                // Without launchWhenStarted, LeakCanary reports an odd memory leak of
+                // Without running in onStart, LeakCanary reports an odd memory leak of
                 // the start destination Fragment.
-                // launchWhenStarted solves the problem for no reason.
-                lifecycleScope.launchWhenStarted {
+                // Running in onStart solves the problem for no reason.
+                lifecycle.doOnStart {
                     navController.navigate(
                         destinationId,
                         arguments,
@@ -499,7 +499,7 @@ class MainActivity :
                 )
             ) {
                 intent?.putExtra(EXTRA_SHOW_AUTO_DARK_MSG, true)
-                lifecycleScope.launchWhenStarted {
+                lifecycle.doOnStart {
                     updateManualDark(isDark = !currentIsDark)
                 }
             } else {

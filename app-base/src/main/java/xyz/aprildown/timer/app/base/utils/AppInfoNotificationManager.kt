@@ -1,11 +1,14 @@
 package xyz.aprildown.timer.app.base.utils
 
+import android.Manifest
 import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.app.PendingIntent
 import android.content.Context
+import android.content.pm.PackageManager
 import android.os.Build
 import androidx.annotation.StringRes
+import androidx.core.app.ActivityCompat
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
 import xyz.aprildown.timer.app.base.R
@@ -22,16 +25,23 @@ class AppInfoNotificationManager(private val context: Context) {
     ) {
         createChannelIfNecessary()
 
-        nm.notify(
-            Constants.NOTIF_ID_APP_INFO,
-            NotificationCompat.Builder(context, Constants.CHANNEL_APP_INFO_NOTIFICATION)
-                .setSmallIcon(R.drawable.ic_notification)
-                .setContentTitle(context.getString(titleRes))
-                .setContentText(context.getString(despRes))
-                .setContentIntent(pendingIntent)
-                .setAutoCancel(true)
-                .build()
-        )
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.TIRAMISU ||
+            ActivityCompat.checkSelfPermission(
+                context,
+                Manifest.permission.POST_NOTIFICATIONS
+            ) == PackageManager.PERMISSION_GRANTED
+        ) {
+            nm.notify(
+                Constants.NOTIF_ID_APP_INFO,
+                NotificationCompat.Builder(context, Constants.CHANNEL_APP_INFO_NOTIFICATION)
+                    .setSmallIcon(R.drawable.ic_notification)
+                    .setContentTitle(context.getString(titleRes))
+                    .setContentText(context.getString(despRes))
+                    .setContentIntent(pendingIntent)
+                    .setAutoCancel(true)
+                    .build()
+            )
+        }
     }
 
     private fun createChannelIfNecessary() {

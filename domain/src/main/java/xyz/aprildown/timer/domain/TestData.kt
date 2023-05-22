@@ -18,7 +18,7 @@ import java.util.concurrent.ThreadLocalRandom
  * DO NOT TOUCH THESE FAKE DATA UNLESS YOU WANT TO REWRITE ALL TESTS.
  */
 @VisibleForTesting(otherwise = VisibleForTesting.NONE)
-@Suppress("MemberVisibilityCanBePrivate", "unused")
+@Suppress("MemberVisibilityCanBePrivate")
 object TestData {
     const val fakeFolderId = 16L
     val fakeFolder = FolderEntity(fakeFolderId, "MyFolder")

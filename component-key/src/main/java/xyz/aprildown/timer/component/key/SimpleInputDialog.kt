@@ -70,7 +70,7 @@ class SimpleInputDialog(
             positiveButton.performClick()
         }
 
-        if (preFill != null && preFill.isNotBlank()) {
+        if (!preFill.isNullOrBlank()) {
             edit.setTextAndSelectEnd(preFill)
         }
         if (hint != null) {

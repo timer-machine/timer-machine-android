@@ -1,5 +1,3 @@
-@file:Suppress("SpellCheckingInspection")
-
 package xyz.aprildown.timer.app.tasker
 
 import android.os.Bundle

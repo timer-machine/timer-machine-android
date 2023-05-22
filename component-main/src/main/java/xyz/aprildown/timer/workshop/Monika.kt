@@ -114,7 +114,6 @@ class Monika : Fragment() {
     /**
      * https://gist.github.com/nesquena/d09dc68ff07e845cc622
      */
-    @Suppress("MemberVisibilityCanBePrivate")
     private abstract class EndlessRecyclerViewScrollListener(
         layoutManager: LinearLayoutManager
     ) : RecyclerView.OnScrollListener() {
