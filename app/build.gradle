@@ -23,10 +23,6 @@ android {
         resourceConfigurations += ['en', 'zh-rCN', 'zh-rHK', 'zh-rTW', 'es']
     }
 
-    compileOptions {
-        coreLibraryDesugaringEnabled true
-    }
-
     buildTypes {
         debug {
             versionNameSuffix "-dev"
@@ -42,7 +38,6 @@ android {
 
     flavorDimensions "market"
     productFlavors {
-
         dog {
             dimension "market"
             versionNameSuffix "-dog"
@@ -58,6 +53,15 @@ android {
             dimension "market"
             applicationIdSuffix ".other"
         }
+    }
+
+    compileOptions {
+        coreLibraryDesugaringEnabled true
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
+    }
+    kotlinOptions {
+        jvmTarget = JavaVersion.VERSION_17.toString()
     }
 
     buildFeatures {

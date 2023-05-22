@@ -56,7 +56,7 @@ internal class PipHelper(
         val loop = pipView.findViewById<TextView>(R.id.textPipLoop)
 
         timeObserver = Observer {
-            textView.text = (it ?: 0).produceTime()
+            textView.text = it.produceTime()
         }
         viewModel.timerCurrentTime.observe(fragment, timeObserver)
 

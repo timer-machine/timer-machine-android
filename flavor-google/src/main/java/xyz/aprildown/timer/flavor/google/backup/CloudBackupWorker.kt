@@ -74,17 +74,17 @@ internal class CloudBackupWorker @AssistedInject constructor(
                     }
 
                     val stateObserver = object : Observer<Boolean> {
-                        override fun onChanged(t: Boolean?) {
+                        override fun onChanged(value: Boolean) {
                             supervisor.backupSubState.removeObserver(this)
                             supervisor.endConnection()
 
-                            resumeOnceOrIgnore(t == true)
+                            resumeOnceOrIgnore(value)
                         }
                     }
                     supervisor.backupSubState.observeForever(stateObserver)
 
                     val errorObserver = object : Observer<Event<BillingSupervisor.Error>> {
-                        override fun onChanged(event: Event<BillingSupervisor.Error>?) {
+                        override fun onChanged(value: Event<BillingSupervisor.Error>) {
                             supervisor.error.removeObserver(this)
                             supervisor.endConnection()
 
