@@ -17,6 +17,9 @@ android {
             buildConfigField "boolean", "OPEN_DEBUG", "false"
         }
     }
+    buildFeatures {
+        buildConfig = true
+    }
 }
 
 dependencies {

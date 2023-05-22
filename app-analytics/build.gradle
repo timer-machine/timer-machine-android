@@ -8,6 +8,9 @@ plugins {
 
 android {
     namespace 'xyz.aprildown.timer.app.analytics'
+    buildFeatures {
+        buildConfig = true
+    }
 }
 
 secrets {
