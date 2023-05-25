@@ -1,7 +1,7 @@
 ext {
     //noinspection SpellCheckingInspection
     versions = [
-            agp         : '8.0.1',
+            agp         : '8.0.2',
             kotlin      : '1.8.21',
             versions    : '0.46.0',
             detekt      : '1.22.0',
@@ -62,7 +62,7 @@ ext {
             androidx_dynamicanimation     : 'androidx.dynamicanimation:dynamicanimation:1.0.0',
             androidx_media                : 'androidx.media:media:1.6.0',
             // KTX
-            androidx_core_ktx             : 'androidx.core:core-ktx:1.9.0',
+            androidx_core_ktx             : 'androidx.core:core-ktx:1.10.1',
             androidx_collection_ktx       : 'androidx.collection:collection-ktx:1.2.0',
 
             // Material
