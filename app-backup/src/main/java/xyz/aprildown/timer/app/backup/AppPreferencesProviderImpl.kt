@@ -21,10 +21,10 @@ import xyz.aprildown.timer.app.base.data.PreferenceData.startWeekOn
 import xyz.aprildown.timer.app.base.data.PreferenceData.storedAudioFocusType
 import xyz.aprildown.timer.app.base.data.PreferenceData.storedAudioTypeValue
 import xyz.aprildown.timer.app.base.data.PreferenceData.useMediaStyleNotification
-import xyz.aprildown.timer.app.base.utils.AppPreferenceProvider
 import xyz.aprildown.timer.app.base.utils.AppThemeUtils
 import xyz.aprildown.timer.domain.entities.FolderSortBy
 import xyz.aprildown.timer.domain.entities.StepType
+import xyz.aprildown.timer.domain.repositories.AppPreferencesProvider
 import xyz.aprildown.timer.domain.usecases.folder.FolderSortByRule
 import xyz.aprildown.tools.helper.safeSharedPreference
 import javax.inject.Inject
@@ -65,10 +65,10 @@ private interface PreferenceItem {
 }
 
 @Reusable
-class AppPreferenceProviderImpl @Inject constructor(
+class AppPreferencesProviderImpl @Inject constructor(
     @ApplicationContext private val context: Context,
     private val sharedPreferences: SharedPreferences
-) : AppPreferenceProvider {
+) : AppPreferencesProvider {
     override fun getAppPreferences(): Map<String, String> {
         val result = mutableMapOf<String, String>()
         PreferenceItem.getPreferenceItems().forEach { item ->

@@ -7,7 +7,6 @@ import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.tasks.await
 import kotlinx.coroutines.withContext
-import xyz.aprildown.timer.app.base.utils.AppPreferenceProvider
 import xyz.aprildown.timer.domain.di.IoDispatcher
 import xyz.aprildown.timer.domain.usecases.Fruit
 import xyz.aprildown.timer.domain.usecases.data.ImportAppData
@@ -21,7 +20,6 @@ class RestoreFromCloud @Inject constructor(
     @IoDispatcher private val dispatcher: CoroutineDispatcher,
     @ApplicationContext private val applicationContext: Context,
     private val importAppData: ImportAppData,
-    private val appPreferenceProvider: AppPreferenceProvider
 ) {
 
     init {
@@ -35,16 +33,16 @@ class RestoreFromCloud @Inject constructor(
             try {
                 reference.getFile(destFile).await()
 
-                val prefs = importAppData(
+                importAppData(
                     ImportAppData.Params(
                         data = destFile.readText(),
                         wipeFirst = true,
                         importTimers = true,
                         importSchedulers = true,
-                        importTimerStamps = true
+                        importTimerStamps = true,
+                        importPreferences = true,
                     )
                 )
-                appPreferenceProvider.applyAppPreferences(prefs)
             } finally {
                 destFile.delete()
             }

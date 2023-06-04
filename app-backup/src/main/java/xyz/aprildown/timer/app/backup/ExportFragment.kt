@@ -17,7 +17,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.NavHostFragment
 import com.github.deweyreed.tools.anko.longSnackbar
-import com.github.deweyreed.tools.arch.observeEvent
+import com.github.deweyreed.tools.arch.observeNonNull
 import com.github.deweyreed.tools.helper.gone
 import com.github.deweyreed.tools.helper.requireCallback
 import com.github.deweyreed.tools.helper.show
@@ -25,12 +25,10 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import dagger.hilt.android.AndroidEntryPoint
 import ernestoyaquello.com.verticalstepperform.VerticalStepperFormView
 import ernestoyaquello.com.verticalstepperform.listener.StepperFormListener
-import okio.buffer
-import okio.sink
 import xyz.aprildown.timer.app.base.data.PreferenceData.lastBackupUri
 import xyz.aprildown.timer.app.base.ui.MainCallback
 import xyz.aprildown.timer.app.base.ui.newDynamicTheme
-import xyz.aprildown.timer.app.base.utils.AppPreferenceProvider
+import xyz.aprildown.timer.domain.usecases.Fruit
 import xyz.aprildown.timer.domain.usecases.data.ExportAppData
 import xyz.aprildown.timer.domain.utils.AppTracker
 import xyz.aprildown.timer.presentation.backup.ExportViewModel
@@ -47,9 +45,6 @@ class ExportFragment : Fragment(R.layout.layout_vertical_form), StepperFormListe
 
     @Inject
     lateinit var appTracker: AppTracker
-
-    @Inject
-    lateinit var appPreferenceProvider: AppPreferenceProvider
 
     private lateinit var mainCallback: MainCallback.ActivityCallback
 
@@ -85,52 +80,52 @@ class ExportFragment : Fragment(R.layout.layout_vertical_form), StepperFormListe
             .displayCancelButtonInLastStep(true)
             .lastStepCancelButtonText(getString(android.R.string.cancel))
             .init()
-        viewModel.error.observeEvent(viewLifecycleOwner) { exception ->
-            MaterialAlertDialogBuilder(context)
-                .setMessage(
-                    buildSpannedString {
-                        append(getText(RBase.string.export_error))
 
-                        (exception.localizedMessage ?: exception.message)
-                            ?.takeIf { it.isNotBlank() }
-                            ?.let { message ->
-                                append("\n\n")
-                                append(message)
-                            }
-                    }
-                )
-                .setPositiveButton(android.R.string.ok, null)
-                .setOnDismissListener {
+        viewModel.result.observeNonNull(viewLifecycleOwner) { fruit ->
+            when (fruit) {
+                is Fruit.Ripe -> {
+                    mainCallback.snackbarView.longSnackbar(RBase.string.export_done)
                     popBackToBackup()
                 }
-                .show()
+                is Fruit.Rotten -> {
+                    val exception = fruit.exception
+                    MaterialAlertDialogBuilder(context)
+                        .setMessage(
+                            buildSpannedString {
+                                append(getText(RBase.string.export_error))
+
+                                (exception.localizedMessage ?: exception.message)
+                                    ?.takeIf { it.isNotBlank() }
+                                    ?.let { message ->
+                                        append("\n\n")
+                                        append(message)
+                                    }
+                            }
+                        )
+                        .setPositiveButton(android.R.string.ok, null)
+                        .setOnDismissListener {
+                            popBackToBackup()
+                        }
+                        .show()
+                }
+            }
+            viewModel.consumeResult()
         }
     }
 
     override fun onCompletedForm() {
         val context = requireContext()
         val settings = contentStep.stepData
-        viewModel.exportAppData(
-            ExportAppData.Params(
+        viewModel.export(
+            params = ExportAppData.Params(
                 exportTimers = settings.isTimersChecked,
                 exportTimerStamps = settings.isTimerStampsChecked,
                 exportSchedulers = settings.isSchedulersChecked,
-                prefs = if (settings.isSettingsChecked) {
-                    appPreferenceProvider.getAppPreferences()
-                } else {
-                    emptyMap()
-                }
+                exportPreferences = settings.isSettingsChecked
             ),
-            onExport = { exportString ->
-                val fileUri = locationStep.stepData
-                context.contentResolver.openOutputStream(fileUri, "rwt")?.use { os ->
-                    os.sink().buffer().writeUtf8(exportString).flush()
-                }
-            },
-            onSuccess = {
-                mainCallback.snackbarView.longSnackbar(RBase.string.export_done)
-                popBackToBackup()
-            }
+            outputStream = checkNotNull(
+                context.contentResolver.openOutputStream(locationStep.stepData, "rwt")
+            )
         )
     }
 

@@ -17,7 +17,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.NavHostFragment
 import com.github.deweyreed.tools.anko.longSnackbar
-import com.github.deweyreed.tools.arch.observeEvent
+import com.github.deweyreed.tools.arch.observeNonNull
 import com.github.deweyreed.tools.helper.gone
 import com.github.deweyreed.tools.helper.requireCallback
 import com.github.deweyreed.tools.helper.restartWithFading
@@ -32,7 +32,7 @@ import xyz.aprildown.timer.app.base.data.PreferenceData.lastBackupUri
 import xyz.aprildown.timer.app.base.ui.AppNavigator
 import xyz.aprildown.timer.app.base.ui.MainCallback
 import xyz.aprildown.timer.app.base.ui.newDynamicTheme
-import xyz.aprildown.timer.app.base.utils.AppPreferenceProvider
+import xyz.aprildown.timer.domain.usecases.Fruit
 import xyz.aprildown.timer.domain.usecases.data.ImportAppData
 import xyz.aprildown.timer.domain.utils.AppTracker
 import xyz.aprildown.timer.presentation.backup.ImportViewModel
@@ -49,9 +49,6 @@ class ImportFragment : Fragment(R.layout.layout_vertical_form), StepperFormListe
 
     @Inject
     lateinit var appTracker: AppTracker
-
-    @Inject
-    lateinit var appPreferenceProvider: AppPreferenceProvider
 
     private lateinit var mainCallback: MainCallback.ActivityCallback
 
@@ -96,25 +93,43 @@ class ImportFragment : Fragment(R.layout.layout_vertical_form), StepperFormListe
             .displayCancelButtonInLastStep(true)
             .lastStepCancelButtonText(getString(android.R.string.cancel))
             .init()
-        viewModel.error.observeEvent(viewLifecycleOwner) { exception ->
-            MaterialAlertDialogBuilder(context)
-                .setMessage(
-                    buildSpannedString {
-                        append(getText(RBase.string.import_error))
 
-                        (exception.localizedMessage ?: exception.message)
-                            ?.takeIf { it.isNotBlank() }
-                            ?.let { message ->
-                                append("\n\n")
-                                append(message)
-                            }
-                    }
-                )
-                .setPositiveButton(android.R.string.ok, null)
-                .setOnDismissListener {
-                    popBackToBackup()
+        viewModel.result.observeNonNull(viewLifecycleOwner) { fruit ->
+            when (fruit) {
+                is Fruit.Ripe -> {
+                    MaterialAlertDialogBuilder(context)
+                        .setCancelable(false)
+                        .setTitle(RBase.string.import_done)
+                        .setMessage(RBase.string.import_restart_content)
+                        .setPositiveButton(RBase.string.import_restart) { _, _ ->
+                            val activity = requireActivity()
+                            activity.restartWithFading(appNavigator.getMainIntent())
+                        }
+                        .show()
                 }
-                .show()
+                is Fruit.Rotten -> {
+                    val exception = fruit.exception
+                    MaterialAlertDialogBuilder(context)
+                        .setMessage(
+                            buildSpannedString {
+                                append(getText(RBase.string.import_error))
+
+                                (exception.localizedMessage ?: exception.message)
+                                    ?.takeIf { it.isNotBlank() }
+                                    ?.let { message ->
+                                        append("\n\n")
+                                        append(message)
+                                    }
+                            }
+                        )
+                        .setPositiveButton(android.R.string.ok, null)
+                        .setOnDismissListener {
+                            popBackToBackup()
+                        }
+                        .show()
+                }
+            }
+            viewModel.consumeResult()
         }
     }
 
@@ -132,30 +147,15 @@ class ImportFragment : Fragment(R.layout.layout_vertical_form), StepperFormListe
         } catch (_: Exception) {
         }
 
-        viewModel.importAppData(
+        viewModel.import(
             ImportAppData.Params(
                 data = data,
                 wipeFirst = settings.wipeFirst,
                 importTimers = settings.isTimersChecked,
                 importTimerStamps = settings.isTimerStampsChecked,
-                importSchedulers = settings.isSchedulersChecked
-            ),
-            handlePrefs = { map ->
-                if (settings.isSettingsChecked) {
-                    appPreferenceProvider.applyAppPreferences(map)
-                }
-            },
-            onSuccess = {
-                MaterialAlertDialogBuilder(context)
-                    .setCancelable(false)
-                    .setTitle(RBase.string.import_done)
-                    .setMessage(RBase.string.import_restart_content)
-                    .setPositiveButton(RBase.string.import_restart) { _, _ ->
-                        val activity = requireActivity()
-                        activity.restartWithFading(appNavigator.getMainIntent())
-                    }
-                    .show()
-            }
+                importSchedulers = settings.isSchedulersChecked,
+                importPreferences = settings.isSettingsChecked,
+            )
         )
     }
 

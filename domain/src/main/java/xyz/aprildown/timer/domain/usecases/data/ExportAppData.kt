@@ -5,6 +5,7 @@ import kotlinx.coroutines.CoroutineDispatcher
 import xyz.aprildown.timer.domain.di.IoDispatcher
 import xyz.aprildown.timer.domain.entities.AppDataEntity
 import xyz.aprildown.timer.domain.repositories.AppDataRepository
+import xyz.aprildown.timer.domain.repositories.AppPreferencesProvider
 import xyz.aprildown.timer.domain.repositories.FolderRepository
 import xyz.aprildown.timer.domain.repositories.NotifierRepository
 import xyz.aprildown.timer.domain.repositories.SchedulerRepository
@@ -21,14 +22,15 @@ class ExportAppData @Inject constructor(
     private val timerRepo: TimerRepository,
     private val notifierRepo: NotifierRepository,
     private val timerStampRepo: TimerStampRepository,
-    private val schedulerRepo: SchedulerRepository
+    private val schedulerRepo: SchedulerRepository,
+    private val appPreferencesProvider: AppPreferencesProvider,
 ) : CoroutinesUseCase<ExportAppData.Params, String>(dispatcher) {
 
     class Params(
         val exportTimers: Boolean,
         val exportTimerStamps: Boolean,
         val exportSchedulers: Boolean,
-        val prefs: Map<String, String>
+        val exportPreferences: Boolean,
     ) {
         init {
             require(!(exportTimerStamps && !exportTimers)) {
@@ -59,7 +61,11 @@ class ExportAppData @Inject constructor(
                 } else {
                     emptyList()
                 },
-                prefs = params.prefs
+                prefs = if (params.exportPreferences) {
+                    appPreferencesProvider.getAppPreferences()
+                } else {
+                    emptyMap()
+                }
             )
         )
     }

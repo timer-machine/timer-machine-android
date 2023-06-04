@@ -19,7 +19,6 @@ import kotlinx.coroutines.tasks.await
 import kotlinx.coroutines.withContext
 import kotlinx.coroutines.yield
 import timber.log.Timber
-import xyz.aprildown.timer.app.base.utils.AppPreferenceProvider
 import xyz.aprildown.timer.domain.di.IoDispatcher
 import xyz.aprildown.timer.domain.usecases.CoroutinesUseCase
 import xyz.aprildown.timer.domain.usecases.Fruit
@@ -40,7 +39,6 @@ internal class CloudBackup @Inject constructor(
     private val currentBackupState: CurrentBackupState,
     private val currentBackupStateError: CurrentBackupStateError,
     private val exportAppData: ExportAppData,
-    private val appPreferenceProvider: AppPreferenceProvider
 ) : CoroutinesUseCase<Unit, Fruit<Unit>>(dispatcher) {
 
     init {
@@ -62,7 +60,7 @@ internal class CloudBackup @Inject constructor(
                         exportTimers = true,
                         exportSchedulers = true,
                         exportTimerStamps = true,
-                        prefs = appPreferenceProvider.getAppPreferences()
+                        exportPreferences = true,
                     )
                 )
             )

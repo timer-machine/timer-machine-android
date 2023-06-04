@@ -8,6 +8,7 @@ import xyz.aprildown.timer.domain.entities.SchedulerEntity
 import xyz.aprildown.timer.domain.entities.TimerEntity
 import xyz.aprildown.timer.domain.entities.TimerStampEntity
 import xyz.aprildown.timer.domain.repositories.AppDataRepository
+import xyz.aprildown.timer.domain.repositories.AppPreferencesProvider
 import xyz.aprildown.timer.domain.repositories.FolderRepository
 import xyz.aprildown.timer.domain.repositories.NotifierRepository
 import xyz.aprildown.timer.domain.repositories.SchedulerRepository
@@ -24,15 +25,17 @@ class ImportAppData @Inject constructor(
     private val timerRepo: TimerRepository,
     private val notifierRepo: NotifierRepository,
     private val timerStampRepository: TimerStampRepository,
-    private val schedulerRepo: SchedulerRepository
-) : CoroutinesUseCase<ImportAppData.Params, Map<String, String>>(dispatcher) {
+    private val schedulerRepo: SchedulerRepository,
+    private val appPreferencesProvider: AppPreferencesProvider,
+) : CoroutinesUseCase<ImportAppData.Params, Unit>(dispatcher) {
 
     class Params(
         val data: String,
         val wipeFirst: Boolean,
         val importTimers: Boolean,
         val importTimerStamps: Boolean,
-        val importSchedulers: Boolean
+        val importSchedulers: Boolean,
+        val importPreferences: Boolean,
     ) {
         init {
             require(!(importTimerStamps && !importTimers)) {
@@ -44,10 +47,7 @@ class ImportAppData @Inject constructor(
         }
     }
 
-    override suspend fun create(params: Params): Map<String, String> {
-        val importTimers = params.importTimers
-        val importSchedulers = params.importSchedulers
-
+    override suspend fun create(params: Params) {
         if (params.wipeFirst) {
             timerStampRepository.getAll().forEach { timerStampRepository.delete(it.id) }
             schedulerRepo.items().forEach { schedulerRepo.delete(it.id) }
@@ -59,9 +59,14 @@ class ImportAppData @Inject constructor(
                 }
             }
         }
-        val result = appDataRepository.unParcelData(params.data) ?: return emptyMap()
 
-        if (!importTimers) return result.prefs
+        val result = appDataRepository.unParcelData(params.data) ?: return
+
+        if (params.importPreferences) {
+            appPreferencesProvider.applyAppPreferences(result.prefs)
+        }
+
+        if (!params.importTimers) return
 
         val oldNewFolderIdMap = mutableMapOf<Long, Long>()
         oldNewFolderIdMap[FolderEntity.FOLDER_DEFAULT] = FolderEntity.FOLDER_DEFAULT
@@ -73,16 +78,15 @@ class ImportAppData @Inject constructor(
             }
         }
 
-        val importTimerStamps = params.importTimerStamps
         val newTimerStamps = mutableListOf<TimerStampEntity>()
-        if (importTimerStamps) {
+        if (params.importTimerStamps) {
             result.timerStamps.forEach {
                 newTimerStamps.add(it.copy(id = TimerStampEntity.NEW_ID))
             }
         }
 
         val newSchedulers = mutableListOf<SchedulerEntity>()
-        if (importSchedulers) {
+        if (params.importSchedulers) {
             result.schedulers.forEach {
                 newSchedulers.add(it.copy(id = SchedulerEntity.NEW_ID, enable = 0))
             }
@@ -125,9 +129,6 @@ class ImportAppData @Inject constructor(
             }
         }
 
-        if (importTimers) {
-            notifierRepo.set(result.notifier)
-        }
-        return result.prefs
+        notifierRepo.set(result.notifier)
     }
 }

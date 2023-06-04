@@ -1,6 +1,6 @@
-package xyz.aprildown.timer.app.base.utils
+package xyz.aprildown.timer.domain.repositories
 
-interface AppPreferenceProvider {
+interface AppPreferencesProvider {
     fun getAppPreferences(): Map<String, String>
     fun applyAppPreferences(prefs: Map<String, String>)
 }

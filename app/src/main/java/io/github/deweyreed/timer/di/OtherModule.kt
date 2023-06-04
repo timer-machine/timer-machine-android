@@ -10,12 +10,12 @@ import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import io.github.deweyreed.timer.ui.AppNavigatorImpl
-import xyz.aprildown.timer.app.backup.AppPreferenceProviderImpl
+import xyz.aprildown.timer.app.backup.AppPreferencesProviderImpl
 import xyz.aprildown.timer.app.base.ui.AppNavigator
 import xyz.aprildown.timer.app.base.ui.StepUpdater
-import xyz.aprildown.timer.app.base.utils.AppPreferenceProvider
 import xyz.aprildown.timer.app.timer.edit.UpdateStepDialog
 import xyz.aprildown.timer.app.timer.run.MachineService
+import xyz.aprildown.timer.domain.repositories.AppPreferencesProvider
 import xyz.aprildown.timer.presentation.StreamMachineIntentProvider
 import xyz.aprildown.timer.presentation.stream.TimerIndex
 
@@ -24,7 +24,7 @@ import xyz.aprildown.timer.presentation.stream.TimerIndex
 abstract class OtherModule {
 
     @Binds
-    abstract fun bindAppPreferenceProvider(impl: AppPreferenceProviderImpl): AppPreferenceProvider
+    abstract fun bindAppPreferenceProvider(impl: AppPreferencesProviderImpl): AppPreferencesProvider
 
     @Binds
     abstract fun bindAppNavigator(impl: AppNavigatorImpl): AppNavigator

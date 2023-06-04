@@ -2,35 +2,49 @@ package xyz.aprildown.timer.presentation.backup
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.github.deweyreed.tools.arch.Event
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
+import xyz.aprildown.timer.domain.di.IoDispatcher
 import xyz.aprildown.timer.domain.di.MainDispatcher
+import xyz.aprildown.timer.domain.usecases.Fruit
 import xyz.aprildown.timer.domain.usecases.data.ExportAppData
 import xyz.aprildown.timer.presentation.BaseViewModel
+import java.io.OutputStream
 import javax.inject.Inject
 
 @HiltViewModel
 class ExportViewModel @Inject constructor(
     @MainDispatcher mainDispatcher: CoroutineDispatcher,
+    @IoDispatcher private val ioDispatcher: CoroutineDispatcher,
     private val exportAppData: ExportAppData,
 ) : BaseViewModel(mainDispatcher) {
 
-    private val _error = MutableLiveData<Event<Throwable>>()
-    val error: LiveData<Event<Throwable>> = _error
+    private val _result: MutableLiveData<Fruit<Unit>?> = MutableLiveData()
+    val result: LiveData<Fruit<Unit>?> = _result
 
-    fun exportAppData(
-        params: ExportAppData.Params,
-        onExport: (String) -> Unit,
-        onSuccess: () -> Unit
-    ) = launch {
-        try {
-            val appContent = exportAppData(params)
-            onExport.invoke(appContent)
-            onSuccess.invoke()
-        } catch (e: Exception) {
-            _error.value = Event(e)
+    fun export(params: ExportAppData.Params, outputStream: OutputStream) {
+        launch {
+            try {
+                val data = exportAppData(params)
+                withContext(ioDispatcher) {
+                    outputStream.use {
+                        val writer = it.bufferedWriter()
+                        writer.write(data)
+                        writer.flush()
+                    }
+                }
+                _result.value = Fruit.Ripe(Unit)
+            } catch (e: Exception) {
+                if (e is CancellationException) throw e
+                _result.value = Fruit.Rotten(e)
+            }
         }
+    }
+
+    fun consumeResult() {
+        _result.value = null
     }
 }
