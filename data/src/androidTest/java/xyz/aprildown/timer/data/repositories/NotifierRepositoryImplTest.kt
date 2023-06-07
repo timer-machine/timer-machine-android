@@ -7,7 +7,7 @@ import androidx.core.content.edit
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.filters.SmallTest
-import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.test.runTest
 import org.junit.After
 import org.junit.Assert.assertEquals
 import org.junit.Before
@@ -48,9 +48,9 @@ class NotifierRepositoryImplTest {
     }
 
     @Test
-    fun getAndSet() {
+    fun getAndSet() = runTest {
         // First get will get a default step
-        val firstGet = runBlocking { notifierRepository.get() }
+        val firstGet = notifierRepository.get()
         assertEquals(
             firstGet,
             NotifierRepositoryImpl.getDefaultNotifier()
@@ -58,7 +58,7 @@ class NotifierRepositoryImplTest {
         )
 
         // Save and get
-        runBlocking { notifierRepository.set(TestData.fakeStepC) }
-        assertEquals(TestData.fakeStepC, runBlocking { notifierRepository.get() })
+        notifierRepository.set(TestData.fakeStepC)
+        assertEquals(TestData.fakeStepC, notifierRepository.get())
     }
 }

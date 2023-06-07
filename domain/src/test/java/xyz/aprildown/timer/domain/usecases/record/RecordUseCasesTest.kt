@@ -2,7 +2,8 @@ package xyz.aprildown.timer.domain.usecases.record
 
 import android.text.format.DateUtils
 import androidx.collection.arrayMapOf
-import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.test.StandardTestDispatcher
+import kotlinx.coroutines.test.runTest
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertTrue
 import org.junit.Test
@@ -20,7 +21,6 @@ import xyz.aprildown.timer.domain.entities.toTimerInfo
 import xyz.aprildown.timer.domain.repositories.AppDataRepository
 import xyz.aprildown.timer.domain.repositories.TimerRepository
 import xyz.aprildown.timer.domain.repositories.TimerStampRepository
-import xyz.aprildown.timer.domain.testCoroutineDispatcher
 import xyz.aprildown.timer.domain.usecases.invoke
 import java.time.Instant
 import java.time.LocalDateTime
@@ -29,19 +29,20 @@ import java.time.Month
 import java.time.YearMonth
 import java.time.ZoneId
 import kotlin.random.Random
+import kotlin.time.Duration.Companion.seconds
 
 class RecordUseCasesTest {
 
     private val timerStampRepository: TimerStampRepository = mock()
 
     @Test(expected = UnsupportedOperationException::class)
-    fun `do not call invoke`() = runBlocking<Unit> {
-        GetRecords(testCoroutineDispatcher, timerStampRepository).invoke()
+    fun `do not call invoke`() = runTest {
+        GetRecords(StandardTestDispatcher(testScheduler), timerStampRepository).invoke()
     }
 
     @Test
-    fun `overview test`() = runBlocking {
-        val getRecords = GetRecords(testCoroutineDispatcher, timerStampRepository)
+    fun `overview test`() = runTest {
+        val getRecords = GetRecords(StandardTestDispatcher(testScheduler), timerStampRepository)
         val records =
             arrayMapOf<Int, List<TimerStampEntity>>()
         whenever(timerStampRepository.getRecordsGroupedByTimer(emptyList(), 0L, 0L))
@@ -62,8 +63,8 @@ class RecordUseCasesTest {
     }
 
     @Test
-    fun `timeline days test`() = runBlocking {
-        val getRecords = GetRecords(testCoroutineDispatcher, timerStampRepository)
+    fun `timeline days test`() = runTest(timeout = 30.seconds) {
+        val getRecords = GetRecords(StandardTestDispatcher(testScheduler), timerStampRepository)
 
         val start = LocalDateTime.of(
             YearMonth.of(2018, Month.NOVEMBER).atDay(1),
@@ -132,8 +133,8 @@ class RecordUseCasesTest {
     }
 
     @Test
-    fun `timeline one day test`() = runBlocking {
-        val getRecords = GetRecords(testCoroutineDispatcher, timerStampRepository)
+    fun `timeline one day test`() = runTest {
+        val getRecords = GetRecords(StandardTestDispatcher(testScheduler), timerStampRepository)
 
         val now = System.currentTimeMillis()
         val dayStart = TimeUtils.getDayStart(now)
@@ -197,8 +198,8 @@ class RecordUseCasesTest {
     }
 
     @Test
-    fun `calendar month test`() = runBlocking {
-        val getRecords = GetRecords(testCoroutineDispatcher, timerStampRepository)
+    fun `calendar month test`() = runTest {
+        val getRecords = GetRecords(StandardTestDispatcher(testScheduler), timerStampRepository)
 
         val now = System.currentTimeMillis()
         val monthStart = TimeUtils.getMonthStart(now)
@@ -252,8 +253,8 @@ class RecordUseCasesTest {
     }
 
     @Test
-    fun `calendar day test`() = runBlocking {
-        val getRecords = GetRecords(testCoroutineDispatcher, timerStampRepository)
+    fun `calendar day test`() = runTest {
+        val getRecords = GetRecords(StandardTestDispatcher(testScheduler), timerStampRepository)
         val now = System.currentTimeMillis()
         val timerStamps =
             List(Random.nextInt(50)) { TestData.getRandomDaysTimerStamp(from = now) }
@@ -275,7 +276,7 @@ class RecordUseCasesTest {
     }
 
     @Test
-    fun add() = runBlocking {
+    fun add() = runTest {
         val timerRepo: TimerRepository = mock()
         val appDataRepository: AppDataRepository = mock()
         val stamp = TestData.fakeTimerStampA
@@ -285,7 +286,7 @@ class RecordUseCasesTest {
         assertEquals(
             1,
             AddTimerStamp(
-                testCoroutineDispatcher,
+                StandardTestDispatcher(testScheduler),
                 timerStampRepository,
                 timerRepo,
                 appDataRepository
@@ -302,7 +303,7 @@ class RecordUseCasesTest {
     }
 
     @Test
-    fun `add to no timer`() = runBlocking {
+    fun `add to no timer`() = runTest {
         val timerRepo: TimerRepository = mock()
         val appDataRepository: AppDataRepository = mock()
 
@@ -311,7 +312,7 @@ class RecordUseCasesTest {
         whenever(timerRepo.getTimerInfoByTimerId(timerStamp.timerId)).thenReturn(null)
         val useCase =
             AddTimerStamp(
-                testCoroutineDispatcher,
+                StandardTestDispatcher(testScheduler),
                 timerStampRepository,
                 timerRepo,
                 appDataRepository

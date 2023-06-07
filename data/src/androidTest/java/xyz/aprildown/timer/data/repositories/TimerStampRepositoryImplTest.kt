@@ -1,7 +1,7 @@
 package xyz.aprildown.timer.data.repositories
 
 import androidx.test.core.app.ApplicationProvider
-import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.test.runTest
 import org.junit.After
 import org.junit.Assert.assertEquals
 import org.junit.Before
@@ -29,7 +29,7 @@ class TimerStampRepositoryImplTest {
     private var timerId: Int = 0
 
     @Before
-    fun setUp() = runBlocking {
+    fun setUp() = runTest {
         val timerMapper =
             TimerMapper(StepMapper(StepOnlyMapper(BehaviourMapper())), TimerMoreMapper())
         timerId = database.timerDao().addTimer(timerMapper.mapTo(TestData.fakeTimerSimpleA)).toInt()
@@ -41,7 +41,7 @@ class TimerStampRepositoryImplTest {
     }
 
     @Test
-    fun add_get_then_delete() = runBlocking {
+    fun add_get_then_delete() = runTest {
         val stamp1 = TestData.fakeTimerStampA.copy(timerId = timerId)
         val stamp2 = TestData.fakeTimerStampB.copy(timerId = timerId)
         val stamps = listOf(stamp1, stamp2)

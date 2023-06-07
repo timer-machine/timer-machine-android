@@ -1,6 +1,7 @@
 package xyz.aprildown.timer.domain.usecases.scheduler
 
-import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.test.StandardTestDispatcher
+import kotlinx.coroutines.test.runTest
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertNull
 import org.junit.Test
@@ -14,7 +15,6 @@ import xyz.aprildown.timer.domain.entities.SchedulerEntity
 import xyz.aprildown.timer.domain.repositories.AppDataRepository
 import xyz.aprildown.timer.domain.repositories.SchedulerExecutor
 import xyz.aprildown.timer.domain.repositories.SchedulerRepository
-import xyz.aprildown.timer.domain.testCoroutineDispatcher
 import xyz.aprildown.timer.domain.usecases.invoke
 
 class SchedulerUseCasesTest {
@@ -24,12 +24,12 @@ class SchedulerUseCasesTest {
     private val appDataRepository: AppDataRepository = mock()
 
     @Test
-    fun schedulers() = runBlocking {
+    fun schedulers() = runTest {
         val schedulerList = listOf(TestData.fakeSchedulerA, TestData.fakeSchedulerB)
         whenever(schedulerRepository.items()).thenReturn(schedulerList)
         assertEquals(
             schedulerList,
-            GetSchedulers(testCoroutineDispatcher, schedulerRepository).invoke()
+            GetSchedulers(StandardTestDispatcher(testScheduler), schedulerRepository).invoke()
         )
         verify(schedulerRepository).items()
 
@@ -39,9 +39,9 @@ class SchedulerUseCasesTest {
     }
 
     @Test
-    fun scheduler() = runBlocking {
+    fun scheduler() = runTest {
         whenever(schedulerRepository.item(TestData.fakeSchedulerId)).thenReturn(TestData.fakeSchedulerA)
-        val useCase = GetScheduler(testCoroutineDispatcher, schedulerRepository)
+        val useCase = GetScheduler(StandardTestDispatcher(testScheduler), schedulerRepository)
 
         assertNull(useCase(SchedulerEntity.NULL_ID))
         verify(schedulerRepository, never()).item(TestData.fakeSchedulerId)
@@ -56,10 +56,14 @@ class SchedulerUseCasesTest {
     }
 
     @Test
-    fun add() = runBlocking {
+    fun add() = runTest {
         whenever(schedulerRepository.add(TestData.fakeSchedulerA))
             .thenReturn(TestData.fakeSchedulerId)
-        val useCase = AddScheduler(testCoroutineDispatcher, schedulerRepository, appDataRepository)
+        val useCase = AddScheduler(
+            StandardTestDispatcher(testScheduler),
+            schedulerRepository,
+            appDataRepository
+        )
 
         assertEquals(TestData.fakeSchedulerId, useCase(TestData.fakeSchedulerA))
         verify(schedulerRepository).add(TestData.fakeSchedulerA)
@@ -71,13 +75,13 @@ class SchedulerUseCasesTest {
     }
 
     @Test
-    fun save() = runBlocking {
+    fun save() = runTest {
         val old = TestData.fakeSchedulerA.copy(id = TestData.fakeSchedulerId)
         val new = TestData.fakeSchedulerB.copy(id = TestData.fakeSchedulerId)
         whenever(schedulerRepository.item(TestData.fakeSchedulerId)).thenReturn(old)
         whenever(schedulerRepository.save(new)).thenReturn(true)
         val useCase = SaveScheduler(
-            testCoroutineDispatcher,
+            StandardTestDispatcher(testScheduler),
             schedulerRepository,
             schedulerExecutor,
             appDataRepository
@@ -104,10 +108,10 @@ class SchedulerUseCasesTest {
     }
 
     @Test
-    fun delete() = runBlocking {
+    fun delete() = runTest {
         whenever(schedulerRepository.item(TestData.fakeSchedulerId)).thenReturn(TestData.fakeSchedulerA)
         val useCase = DeleteScheduler(
-            testCoroutineDispatcher,
+            StandardTestDispatcher(testScheduler),
             schedulerRepository,
             schedulerExecutor,
             appDataRepository
@@ -131,11 +135,11 @@ class SchedulerUseCasesTest {
     }
 
     @Test
-    fun setSchedulerEnable() = runBlocking {
+    fun setSchedulerEnable() = runTest {
         val old = TestData.fakeSchedulerA.copy(enable = 0)
         whenever(schedulerRepository.item(TestData.fakeSchedulerId)).thenReturn(old)
         val useCase = SetSchedulerEnable(
-            testCoroutineDispatcher,
+            StandardTestDispatcher(testScheduler),
             schedulerRepository,
             schedulerExecutor,
             appDataRepository
@@ -155,11 +159,11 @@ class SchedulerUseCasesTest {
     }
 
     @Test
-    fun setSchedulerDisable() = runBlocking {
+    fun setSchedulerDisable() = runTest {
         val old = TestData.fakeSchedulerA.copy(enable = 1)
         whenever(schedulerRepository.item(TestData.fakeSchedulerId)).thenReturn(old)
         val useCase = SetSchedulerEnable(
-            testCoroutineDispatcher,
+            StandardTestDispatcher(testScheduler),
             schedulerRepository,
             schedulerExecutor,
             appDataRepository

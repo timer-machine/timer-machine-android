@@ -2,7 +2,7 @@ package xyz.aprildown.timer.data.repositories
 
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.filters.SmallTest
-import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.test.runTest
 import org.junit.Assert.assertEquals
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -33,7 +33,7 @@ class AppDataRepositoryImplTest {
     )
 
     @Test
-    fun test() = runBlocking {
+    fun test() = runTest {
         val ad = TestData.fakeAppData
         val json = appDataRepository.collectData(ad)
         assertEquals(ad, appDataRepository.unParcelData(json))

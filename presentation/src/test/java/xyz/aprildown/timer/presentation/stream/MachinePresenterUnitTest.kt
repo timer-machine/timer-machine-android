@@ -1,10 +1,12 @@
 package xyz.aprildown.timer.presentation.stream
 
 import android.net.Uri
+import kotlinx.coroutines.test.StandardTestDispatcher
+import kotlinx.coroutines.test.TestScope
+import kotlinx.coroutines.test.runTest
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertFalse
 import org.junit.Assert.assertTrue
-import org.junit.Before
 import org.junit.Test
 import org.mockito.kotlin.mock
 import xyz.aprildown.timer.domain.TestData
@@ -13,14 +15,8 @@ import xyz.aprildown.timer.domain.entities.TimerEntity
 import xyz.aprildown.timer.domain.entities.TimerMoreEntity
 import xyz.aprildown.timer.domain.usecases.record.AddTimerStamp
 import xyz.aprildown.timer.domain.usecases.timer.GetTimer
-import xyz.aprildown.timer.presentation.testCoroutineDispatcher
 
 class MachinePresenterUnitTest {
-
-    private lateinit var machine: MachinePresenter
-    private lateinit var view: MachineTestView
-
-    private val isServiceInTheForeground get() = machine.isInTheForeground
 
     private var isForeNotifCreated = false
     private var isForeNotifShowing = false
@@ -33,483 +29,35 @@ class MachinePresenterUnitTest {
 
     private var prepared = false
 
-    @Before
-    fun setUp() {
-        machine = MachinePresenter(
-            testCoroutineDispatcher,
+    private fun TestScope.getMachine(): MachinePresenter {
+        val dispatcher = StandardTestDispatcher(testScheduler)
+        val machine = MachinePresenter(
+            dispatcher,
             mock(),
-            GetTimer(testCoroutineDispatcher, mock()),
-            AddTimerStamp(testCoroutineDispatcher, mock(), mock(), mock()),
+            GetTimer(dispatcher, mock()),
+            AddTimerStamp(dispatcher, mock(), mock(), mock()),
             mock(),
         )
-        view = MachineTestView()
-        machine.takeView(view)
+        machine.takeView(MachineTestView())
+        return machine
     }
 
     @Test
-    fun `NotifState, yes1 start, yes1 end`() {
-        val id = addFirstTimer(true)
+    fun `NotifState, yes1 start, yes1 end`() = runTest {
+        val machine = getMachine()
 
-        begin(id)
+        val id = machine.addFirstTimer(true)
+
+        machine.beginTestTimer(id)
         assertEquals(SingleTimer, machine.currentNotifState)
-        assertTrue(isServiceInTheForeground)
+        assertTrue(machine.isInTheForeground)
         assertFalse(isForeNotifCreated)
         assertFalse(isForeNotifShowing)
         assertEquals(id, foregroundNotifId)
         assertEquals(id, createdTimerId)
         assertTrue(prepared)
 
-        end(id)
-        assertEquals(NoNotif, machine.currentNotifState)
-        assertFalse(isServiceInTheForeground)
-        assertFalse(isForeNotifShowing)
-        assertFalse(prepared)
-    }
-
-    @Test
-    fun `NotifState, yes1 start, yes2 start, yes2 end, yes1 end`() {
-        val id = addFirstTimer(true)
-        val id2 = addSecondTimer(true)
-
-        begin(id)
-        assertEquals(SingleTimer, machine.currentNotifState)
-        assertTrue(isServiceInTheForeground)
-        assertFalse(isForeNotifCreated)
-        assertFalse(isForeNotifShowing)
-        assertEquals(id, foregroundNotifId)
-        assertEquals(id, createdTimerId)
-        assertTrue(prepared)
-
-        begin(id2)
-        assertEquals(ForeNotif, machine.currentNotifState)
-        assertTrue(isServiceInTheForeground)
-        assertTrue(isForeNotifCreated)
-        assertTrue(isForeNotifShowing)
-        assertEquals(-1, foregroundNotifId)
-        assertEquals(id2, createdTimerId)
-        assertTrue(prepared)
-
-        end(id2)
-        assertEquals(SingleTimer, machine.currentNotifState)
-        assertTrue(isServiceInTheForeground)
-        assertFalse(isForeNotifShowing)
-        assertEquals(id, foregroundNotifId)
-        assertEquals(id2, canceledTimerId)
-        assertTrue(prepared)
-
-        end(id)
-        assertEquals(NoNotif, machine.currentNotifState)
-        assertFalse(isServiceInTheForeground)
-        assertFalse(isForeNotifShowing)
-        assertFalse(prepared)
-    }
-
-    @Test
-    fun `NotifState, yes1 start, yes2 start, yes1 end, yes2 end`() {
-        val id = addFirstTimer(true)
-        val id2 = addSecondTimer(true)
-
-        begin(id)
-        assertEquals(SingleTimer, machine.currentNotifState)
-        assertTrue(isServiceInTheForeground)
-        assertFalse(isForeNotifCreated)
-        assertFalse(isForeNotifShowing)
-        assertEquals(id, foregroundNotifId)
-        assertEquals(id, createdTimerId)
-        assertTrue(prepared)
-
-        begin(id2)
-        assertEquals(ForeNotif, machine.currentNotifState)
-        assertTrue(isServiceInTheForeground)
-        assertTrue(isForeNotifCreated)
-        assertTrue(isForeNotifShowing)
-        assertEquals(-1, foregroundNotifId)
-        assertEquals(id2, createdTimerId)
-        assertTrue(prepared)
-
-        end(id)
-        assertEquals(SingleTimer, machine.currentNotifState)
-        assertTrue(isServiceInTheForeground)
-        assertFalse(isForeNotifShowing)
-        assertEquals(id2, foregroundNotifId)
-        assertEquals(id, canceledTimerId)
-        assertTrue(prepared)
-
-        end(id2)
-        assertEquals(NoNotif, machine.currentNotifState)
-        assertFalse(isServiceInTheForeground)
-        assertFalse(isForeNotifShowing)
-        assertFalse(prepared)
-    }
-
-    @Test
-    fun `NotifState, yes1 start, no2 start, no2 end, yes1 end`() {
-        val id = addFirstTimer(true)
-        val id2 = addSecondTimer(false)
-
-        begin(id)
-        assertEquals(SingleTimer, machine.currentNotifState)
-        assertTrue(isServiceInTheForeground)
-        assertFalse(isForeNotifCreated)
-        assertFalse(isForeNotifShowing)
-        assertEquals(id, foregroundNotifId)
-        assertEquals(id, createdTimerId)
-        assertTrue(prepared)
-
-        begin(id2)
-        assertEquals(ForeNotif, machine.currentNotifState)
-        assertTrue(isServiceInTheForeground)
-        assertTrue(isForeNotifCreated)
-        assertTrue(isForeNotifShowing)
-        assertFalse(isForeNotifUpdated)
-        assertEquals(-1, foregroundNotifId)
-        assertTrue(prepared)
-
-        end(id2)
-        assertEquals(SingleTimer, machine.currentNotifState)
-        assertTrue(isServiceInTheForeground)
-        assertFalse(isForeNotifShowing)
-        assertFalse(isForeNotifUpdated)
-        assertEquals(id, foregroundNotifId)
-        assertTrue(prepared)
-
-        end(id)
-        assertEquals(NoNotif, machine.currentNotifState)
-        assertFalse(isServiceInTheForeground)
-        assertFalse(isForeNotifShowing)
-        assertFalse(prepared)
-    }
-
-    @Test
-    fun `NotifState, yes1 start, no2 start, yes1 end, no2 end`() {
-        val id = addFirstTimer(true)
-        val id2 = addSecondTimer(false)
-
-        begin(id)
-        assertEquals(SingleTimer, machine.currentNotifState)
-        assertTrue(isServiceInTheForeground)
-        assertFalse(isForeNotifCreated)
-        assertFalse(isForeNotifShowing)
-        assertEquals(id, foregroundNotifId)
-        assertEquals(id, createdTimerId)
-        assertTrue(prepared)
-
-        begin(id2)
-        assertEquals(ForeNotif, machine.currentNotifState)
-        assertTrue(isServiceInTheForeground)
-        assertTrue(isForeNotifCreated)
-        assertTrue(isForeNotifShowing)
-        assertFalse(isForeNotifUpdated)
-        assertEquals(-1, foregroundNotifId)
-        assertTrue(prepared)
-
-        end(id)
-        assertEquals(ForeNotif, machine.currentNotifState)
-        assertTrue(isServiceInTheForeground)
-        assertTrue(isForeNotifUpdated)
-        assertTrue(isForeNotifShowing)
-        assertEquals(-1, foregroundNotifId)
-        assertTrue(prepared)
-
-        end(id2)
-        assertEquals(NoNotif, machine.currentNotifState)
-        assertFalse(isServiceInTheForeground)
-        assertFalse(isForeNotifShowing)
-        assertFalse(prepared)
-    }
-
-    @Test
-    fun `NotifState, yes1 start, yes2 start, yes3 start, yes2 end, yes1 end, yes3 end`() {
-        val id = addFirstTimer(true)
-        val id2 = addSecondTimer(true)
-        val id3 = addThirdTimer(true)
-
-        begin(id)
-        begin(id2)
-        begin(id3)
-        assertEquals(ForeNotif, machine.currentNotifState)
-        assertTrue(isServiceInTheForeground)
-        assertTrue(isForeNotifCreated)
-        assertTrue(isForeNotifShowing)
-        assertEquals(-1, foregroundNotifId)
-        assertEquals(id3, createdTimerId)
-        assertTrue(prepared)
-
-        end(id2)
-        assertEquals(ForeNotif, machine.currentNotifState)
-        assertTrue(isServiceInTheForeground)
-        assertTrue(isForeNotifShowing)
-        assertEquals(-1, foregroundNotifId)
-        assertEquals(id2, canceledTimerId)
-        assertTrue(prepared)
-
-        end(id)
-        assertEquals(SingleTimer, machine.currentNotifState)
-        assertTrue(isServiceInTheForeground)
-        assertFalse(isForeNotifShowing)
-        assertEquals(id3, foregroundNotifId)
-        assertEquals(id, canceledTimerId)
-        assertTrue(prepared)
-
-        end(id3)
-        assertEquals(NoNotif, machine.currentNotifState)
-        assertFalse(isServiceInTheForeground)
-        assertFalse(isForeNotifShowing)
-        assertFalse(prepared)
-    }
-
-    @Test
-    fun `NotifState, yes1 start, yes2 start, no3 start, yes2 end, yes1 end, no3 end`() {
-        val id = addFirstTimer(true)
-        val id2 = addSecondTimer(true)
-        val id3 = addThirdTimer(false)
-
-        begin(id)
-        begin(id2)
-        begin(id3)
-        assertEquals(ForeNotif, machine.currentNotifState)
-        assertTrue(isServiceInTheForeground)
-        assertTrue(isForeNotifCreated)
-        assertTrue(isForeNotifShowing)
-        assertEquals(-1, foregroundNotifId)
-        assertEquals(id2, createdTimerId)
-        assertTrue(prepared)
-
-        end(id2)
-        assertEquals(ForeNotif, machine.currentNotifState)
-        assertTrue(isServiceInTheForeground)
-        assertTrue(isForeNotifShowing)
-        assertTrue(isForeNotifUpdated)
-        assertEquals(-1, foregroundNotifId)
-        assertEquals(id2, canceledTimerId)
-        assertTrue(prepared)
-
-        end(id)
-        assertEquals(ForeNotif, machine.currentNotifState)
-        assertTrue(isServiceInTheForeground)
-        assertTrue(isForeNotifShowing)
-        assertTrue(isForeNotifUpdated)
-        assertEquals(-1, foregroundNotifId)
-        assertEquals(id, canceledTimerId)
-        assertTrue(prepared)
-
-        end(id3)
-        assertEquals(NoNotif, machine.currentNotifState)
-        assertFalse(isServiceInTheForeground)
-        assertFalse(isForeNotifShowing)
-        assertFalse(prepared)
-    }
-
-    @Test
-    fun `NotifState, yes1 start, yes2 start, no3 start, yes2 end, no3 end, yes1 end`() {
-        val id = addFirstTimer(true)
-        val id2 = addSecondTimer(true)
-        val id3 = addThirdTimer(false)
-
-        begin(id)
-        begin(id2)
-        begin(id3)
-        assertEquals(ForeNotif, machine.currentNotifState)
-        assertTrue(isServiceInTheForeground)
-        assertTrue(isForeNotifCreated)
-        assertTrue(isForeNotifShowing)
-        assertTrue(isForeNotifUpdated)
-        assertEquals(-1, foregroundNotifId)
-        assertEquals(id2, createdTimerId)
-        assertTrue(prepared)
-
-        end(id2)
-        assertEquals(ForeNotif, machine.currentNotifState)
-        assertTrue(isServiceInTheForeground)
-        assertTrue(isForeNotifShowing)
-        assertTrue(isForeNotifUpdated)
-        assertEquals(-1, foregroundNotifId)
-        assertEquals(id2, canceledTimerId)
-        assertTrue(prepared)
-
-        end(id3)
-        assertEquals(SingleTimer, machine.currentNotifState)
-        assertTrue(isServiceInTheForeground)
-        assertFalse(isForeNotifShowing)
-        assertEquals(id, foregroundNotifId)
-        assertTrue(prepared)
-
-        end(id)
-        assertEquals(NoNotif, machine.currentNotifState)
-        assertFalse(isServiceInTheForeground)
-        assertFalse(isForeNotifShowing)
-        assertFalse(prepared)
-    }
-
-    @Test
-    fun `NotifState, yes1 start, no2 start, no3 start, yes1 end, no3 end, yes2 end`() {
-        val id = addFirstTimer(true)
-        val id2 = addSecondTimer(false)
-        val id3 = addThirdTimer(false)
-
-        begin(id)
-        begin(id2)
-        assertEquals(ForeNotif, machine.currentNotifState)
-        assertTrue(isServiceInTheForeground)
-        assertTrue(isForeNotifCreated)
-        assertTrue(isForeNotifShowing)
-        assertEquals(-1, foregroundNotifId)
-        assertEquals(id, createdTimerId)
-        assertTrue(prepared)
-
-        begin(id3)
-        assertEquals(ForeNotif, machine.currentNotifState)
-        assertTrue(isServiceInTheForeground)
-        assertTrue(isForeNotifShowing)
-        assertTrue(isForeNotifUpdated)
-        assertEquals(-1, foregroundNotifId)
-        assertTrue(prepared)
-
-        end(id)
-        assertEquals(ForeNotif, machine.currentNotifState)
-        assertTrue(isServiceInTheForeground)
-        assertTrue(isForeNotifShowing)
-        assertTrue(isForeNotifUpdated)
-        assertEquals(-1, foregroundNotifId)
-        assertEquals(id, canceledTimerId)
-        assertTrue(prepared)
-
-        end(id3)
-        assertEquals(ForeNotif, machine.currentNotifState)
-        assertTrue(isServiceInTheForeground)
-        assertTrue(isForeNotifShowing)
-        assertTrue(isForeNotifUpdated)
-        assertEquals(-1, foregroundNotifId)
-        assertTrue(prepared)
-
-        end(id2)
-        assertEquals(NoNotif, machine.currentNotifState)
-        assertFalse(isServiceInTheForeground)
-        assertFalse(isForeNotifShowing)
-        assertFalse(prepared)
-    }
-
-    @Test
-    fun `NotifState, no start, no end`() {
-        val id = addFirstTimer(false)
-
-        begin(id)
-        assertEquals(ForeNotif, machine.currentNotifState)
-        assertTrue(isServiceInTheForeground)
-        assertTrue(isForeNotifCreated)
-        assertTrue(isForeNotifShowing)
-        assertEquals(-1, foregroundNotifId)
-        assertTrue(prepared)
-
-        end(id)
-        assertEquals(NoNotif, machine.currentNotifState)
-        assertFalse(isServiceInTheForeground)
-        assertFalse(isForeNotifShowing)
-        assertFalse(prepared)
-    }
-
-    @Test
-    fun `NotifState, no1 start, no2 start, no2 end, no1 end`() {
-        val id = addFirstTimer(false)
-        val id2 = addSecondTimer(false)
-
-        begin(id)
-        assertEquals(ForeNotif, machine.currentNotifState)
-        assertTrue(isServiceInTheForeground)
-        assertTrue(isForeNotifCreated)
-        assertTrue(isForeNotifShowing)
-        assertEquals(-1, foregroundNotifId)
-        assertTrue(prepared)
-
-        begin(id2)
-        assertEquals(ForeNotif, machine.currentNotifState)
-        assertTrue(isServiceInTheForeground)
-        assertTrue(isForeNotifShowing)
-        assertTrue(isForeNotifUpdated)
-        assertEquals(-1, foregroundNotifId)
-        assertTrue(prepared)
-
-        end(id2)
-        assertEquals(ForeNotif, machine.currentNotifState)
-        assertTrue(isServiceInTheForeground)
-        assertTrue(isForeNotifShowing)
-        assertTrue(isForeNotifUpdated)
-        assertEquals(-1, foregroundNotifId)
-        assertTrue(prepared)
-
-        end(id)
-        assertEquals(NoNotif, machine.currentNotifState)
-        assertFalse(isServiceInTheForeground)
-        assertFalse(isForeNotifShowing)
-        assertFalse(prepared)
-    }
-
-    @Test
-    fun `NotifState, no1 start, no2 start, no1 end, no2 end`() {
-        val id = addFirstTimer(false)
-        val id2 = addSecondTimer(false)
-
-        begin(id)
-        assertEquals(ForeNotif, machine.currentNotifState)
-        assertTrue(isServiceInTheForeground)
-        assertTrue(isForeNotifCreated)
-        assertTrue(isForeNotifShowing)
-        assertEquals(-1, foregroundNotifId)
-        assertTrue(prepared)
-
-        begin(id2)
-        assertEquals(ForeNotif, machine.currentNotifState)
-        assertTrue(isServiceInTheForeground)
-        assertTrue(isForeNotifShowing)
-        assertTrue(isForeNotifUpdated)
-        assertEquals(-1, foregroundNotifId)
-        assertTrue(prepared)
-
-        end(id)
-        assertEquals(ForeNotif, machine.currentNotifState)
-        assertTrue(isServiceInTheForeground)
-        assertTrue(isForeNotifShowing)
-        assertTrue(isForeNotifUpdated)
-        assertEquals(-1, foregroundNotifId)
-        assertTrue(prepared)
-
-        end(id2)
-        assertEquals(NoNotif, machine.currentNotifState)
-        assertFalse(isServiceInTheForeground)
-        assertFalse(isForeNotifShowing)
-        assertFalse(prepared)
-    }
-
-    @Test
-    fun `NotifState, no1 start, yes2 start, yes2 end, no1 end`() {
-        val id = addFirstTimer(false)
-        val id2 = addSecondTimer(true)
-
-        begin(id)
-        assertEquals(ForeNotif, machine.currentNotifState)
-        assertTrue(isServiceInTheForeground)
-        assertTrue(isForeNotifCreated)
-        assertTrue(isForeNotifShowing)
-        assertEquals(-1, foregroundNotifId)
-        assertTrue(prepared)
-
-        begin(id2)
-        assertEquals(ForeNotif, machine.currentNotifState)
-        assertTrue(isServiceInTheForeground)
-        assertTrue(isForeNotifShowing)
-        assertEquals(-1, foregroundNotifId)
-        assertEquals(id2, createdTimerId)
-        assertTrue(prepared)
-
-        end(id2)
-        assertEquals(ForeNotif, machine.currentNotifState)
-        assertTrue(isServiceInTheForeground)
-        assertTrue(isForeNotifShowing)
-        assertEquals(-1, foregroundNotifId)
-        assertEquals(id2, canceledTimerId)
-        assertTrue(prepared)
-
-        end(id)
+        machine.endTestTimer(id)
         assertEquals(NoNotif, machine.currentNotifState)
         assertFalse(machine.isInTheForeground)
         assertFalse(isForeNotifShowing)
@@ -517,35 +65,39 @@ class MachinePresenterUnitTest {
     }
 
     @Test
-    fun `NotifState, no1 start, yes2 start, no1 end, yes2 end`() {
-        val id = addFirstTimer(false)
-        val id2 = addSecondTimer(true)
+    fun `NotifState, yes1 start, yes2 start, yes2 end, yes1 end`() = runTest {
+        val machine = getMachine()
 
-        begin(id)
+        val id = machine.addFirstTimer(true)
+        val id2 = machine.addSecondTimer(true)
+
+        machine.beginTestTimer(id)
+        assertEquals(SingleTimer, machine.currentNotifState)
+        assertTrue(machine.isInTheForeground)
+        assertFalse(isForeNotifCreated)
+        assertFalse(isForeNotifShowing)
+        assertEquals(id, foregroundNotifId)
+        assertEquals(id, createdTimerId)
+        assertTrue(prepared)
+
+        machine.beginTestTimer(id2)
         assertEquals(ForeNotif, machine.currentNotifState)
-        assertTrue(isServiceInTheForeground)
+        assertTrue(machine.isInTheForeground)
         assertTrue(isForeNotifCreated)
         assertTrue(isForeNotifShowing)
         assertEquals(-1, foregroundNotifId)
-        assertTrue(prepared)
-
-        begin(id2)
-        assertEquals(ForeNotif, machine.currentNotifState)
-        assertTrue(isServiceInTheForeground)
-        assertTrue(isForeNotifShowing)
-        assertEquals(-1, foregroundNotifId)
         assertEquals(id2, createdTimerId)
         assertTrue(prepared)
 
-        end(id)
+        machine.endTestTimer(id2)
         assertEquals(SingleTimer, machine.currentNotifState)
-        assertTrue(isServiceInTheForeground)
+        assertTrue(machine.isInTheForeground)
         assertFalse(isForeNotifShowing)
-        assertEquals(id2, foregroundNotifId)
-        assertEquals(id2, createdTimerId)
+        assertEquals(id, foregroundNotifId)
+        assertEquals(id2, canceledTimerId)
         assertTrue(prepared)
 
-        end(id2)
+        machine.endTestTimer(id)
         assertEquals(NoNotif, machine.currentNotifState)
         assertFalse(machine.isInTheForeground)
         assertFalse(isForeNotifShowing)
@@ -553,143 +105,623 @@ class MachinePresenterUnitTest {
     }
 
     @Test
-    fun `NotifState, no1 start, no2 start, no3 start, no2 end, no1 end, no3 end`() {
-        val id = addFirstTimer(false)
-        val id2 = addSecondTimer(false)
-        val id3 = addThirdTimer(false)
+    fun `NotifState, yes1 start, yes2 start, yes1 end, yes2 end`() = runTest {
+        val machine = getMachine()
 
-        begin(id)
-        begin(id2)
-        begin(id3)
-        assertEquals(ForeNotif, machine.currentNotifState)
-        assertTrue(isServiceInTheForeground)
-        assertTrue(isForeNotifCreated)
-        assertTrue(isForeNotifShowing)
-        assertEquals(-1, foregroundNotifId)
-        assertTrue(prepared)
+        val id = machine.addFirstTimer(true)
+        val id2 = machine.addSecondTimer(true)
 
-        end(id2)
-        assertEquals(ForeNotif, machine.currentNotifState)
-        assertTrue(isServiceInTheForeground)
-        assertTrue(isForeNotifShowing)
-        assertTrue(isForeNotifUpdated)
-        assertEquals(-1, foregroundNotifId)
-        assertTrue(prepared)
-
-        end(id)
-        assertEquals(ForeNotif, machine.currentNotifState)
-        assertTrue(isServiceInTheForeground)
-        assertTrue(isForeNotifShowing)
-        assertTrue(isForeNotifUpdated)
-        assertEquals(-1, foregroundNotifId)
-        assertTrue(prepared)
-
-        end(id3)
-        assertEquals(NoNotif, machine.currentNotifState)
-        assertFalse(isServiceInTheForeground)
-        assertFalse(isForeNotifShowing)
-        assertFalse(prepared)
-    }
-
-    @Test
-    fun `NotifState, no1 start, no2 start, yes3 start, no1 end, no2 end, yes3 end`() {
-        val id = addFirstTimer(false)
-        val id2 = addSecondTimer(false)
-        val id3 = addThirdTimer(true)
-
-        begin(id)
-        begin(id2)
-        begin(id3)
-        assertEquals(ForeNotif, machine.currentNotifState)
-        assertTrue(isServiceInTheForeground)
-        assertTrue(isForeNotifCreated)
-        assertTrue(isForeNotifShowing)
-        assertEquals(-1, foregroundNotifId)
-        assertEquals(id3, createdTimerId)
-        assertTrue(prepared)
-
-        end(id)
-        assertEquals(ForeNotif, machine.currentNotifState)
-        assertTrue(isServiceInTheForeground)
-        assertTrue(isForeNotifShowing)
-        assertTrue(isForeNotifUpdated)
-        assertEquals(-1, foregroundNotifId)
-        assertTrue(prepared)
-
-        end(id2)
+        machine.beginTestTimer(id)
         assertEquals(SingleTimer, machine.currentNotifState)
-        assertTrue(isServiceInTheForeground)
+        assertTrue(machine.isInTheForeground)
+        assertFalse(isForeNotifCreated)
         assertFalse(isForeNotifShowing)
-        assertEquals(id3, foregroundNotifId)
-        assertEquals(id3, createdTimerId)
+        assertEquals(id, foregroundNotifId)
+        assertEquals(id, createdTimerId)
         assertTrue(prepared)
 
-        end(id3)
-        assertEquals(NoNotif, machine.currentNotifState)
-        assertFalse(isServiceInTheForeground)
-        assertFalse(isForeNotifShowing)
-        assertFalse(prepared)
-    }
-
-    @Test
-    fun `NotifState, no1 start, yes2 start, yes3 start, no1 end, yes3 end, yes2 end`() {
-        val id = addFirstTimer(false)
-        val id2 = addSecondTimer(true)
-        val id3 = addThirdTimer(true)
-
-        begin(id)
-        begin(id2)
+        machine.beginTestTimer(id2)
         assertEquals(ForeNotif, machine.currentNotifState)
-        assertTrue(isServiceInTheForeground)
+        assertTrue(machine.isInTheForeground)
         assertTrue(isForeNotifCreated)
         assertTrue(isForeNotifShowing)
         assertEquals(-1, foregroundNotifId)
         assertEquals(id2, createdTimerId)
         assertTrue(prepared)
 
-        begin(id3)
-        assertEquals(ForeNotif, machine.currentNotifState)
-        assertTrue(isServiceInTheForeground)
-        assertTrue(isForeNotifShowing)
-        assertEquals(-1, foregroundNotifId)
-        assertEquals(id3, createdTimerId)
-        assertTrue(prepared)
-
-        end(id)
-        assertEquals(ForeNotif, machine.currentNotifState)
-        assertTrue(isServiceInTheForeground)
-        assertTrue(isForeNotifShowing)
-        assertTrue(isForeNotifUpdated)
-        assertEquals(-1, foregroundNotifId)
-        assertTrue(prepared)
-
-        end(id3)
+        machine.endTestTimer(id)
         assertEquals(SingleTimer, machine.currentNotifState)
-        assertTrue(isServiceInTheForeground)
+        assertTrue(machine.isInTheForeground)
         assertFalse(isForeNotifShowing)
         assertEquals(id2, foregroundNotifId)
+        assertEquals(id, canceledTimerId)
         assertTrue(prepared)
 
-        end(id2)
+        machine.endTestTimer(id2)
         assertEquals(NoNotif, machine.currentNotifState)
-        assertFalse(isServiceInTheForeground)
+        assertFalse(machine.isInTheForeground)
         assertFalse(isForeNotifShowing)
         assertFalse(prepared)
     }
 
     @Test
-    fun `Ultimate complicated tests`() {
-        val id = addFirstTimer(true)
-        val id2 = addSecondTimer(false)
-        val id3 = addThirdTimer(false)
-        val id4 = addFourthTimer(true)
+    fun `NotifState, yes1 start, no2 start, no2 end, yes1 end`() = runTest {
+        val machine = getMachine()
 
-        begin(id)
-        begin(id2)
-        begin(id3)
-        end(id)
+        val id = machine.addFirstTimer(true)
+        val id2 = machine.addSecondTimer(false)
+
+        machine.beginTestTimer(id)
+        assertEquals(SingleTimer, machine.currentNotifState)
+        assertTrue(machine.isInTheForeground)
+        assertFalse(isForeNotifCreated)
+        assertFalse(isForeNotifShowing)
+        assertEquals(id, foregroundNotifId)
+        assertEquals(id, createdTimerId)
+        assertTrue(prepared)
+
+        machine.beginTestTimer(id2)
         assertEquals(ForeNotif, machine.currentNotifState)
-        assertTrue(isServiceInTheForeground)
+        assertTrue(machine.isInTheForeground)
+        assertTrue(isForeNotifCreated)
+        assertTrue(isForeNotifShowing)
+        assertFalse(isForeNotifUpdated)
+        assertEquals(-1, foregroundNotifId)
+        assertTrue(prepared)
+
+        machine.endTestTimer(id2)
+        assertEquals(SingleTimer, machine.currentNotifState)
+        assertTrue(machine.isInTheForeground)
+        assertFalse(isForeNotifShowing)
+        assertFalse(isForeNotifUpdated)
+        assertEquals(id, foregroundNotifId)
+        assertTrue(prepared)
+
+        machine.endTestTimer(id)
+        assertEquals(NoNotif, machine.currentNotifState)
+        assertFalse(machine.isInTheForeground)
+        assertFalse(isForeNotifShowing)
+        assertFalse(prepared)
+    }
+
+    @Test
+    fun `NotifState, yes1 start, no2 start, yes1 end, no2 end`() = runTest {
+        val machine = getMachine()
+
+        val id = machine.addFirstTimer(true)
+        val id2 = machine.addSecondTimer(false)
+
+        machine.beginTestTimer(id)
+        assertEquals(SingleTimer, machine.currentNotifState)
+        assertTrue(machine.isInTheForeground)
+        assertFalse(isForeNotifCreated)
+        assertFalse(isForeNotifShowing)
+        assertEquals(id, foregroundNotifId)
+        assertEquals(id, createdTimerId)
+        assertTrue(prepared)
+
+        machine.beginTestTimer(id2)
+        assertEquals(ForeNotif, machine.currentNotifState)
+        assertTrue(machine.isInTheForeground)
+        assertTrue(isForeNotifCreated)
+        assertTrue(isForeNotifShowing)
+        assertFalse(isForeNotifUpdated)
+        assertEquals(-1, foregroundNotifId)
+        assertTrue(prepared)
+
+        machine.endTestTimer(id)
+        assertEquals(ForeNotif, machine.currentNotifState)
+        assertTrue(machine.isInTheForeground)
+        assertTrue(isForeNotifUpdated)
+        assertTrue(isForeNotifShowing)
+        assertEquals(-1, foregroundNotifId)
+        assertTrue(prepared)
+
+        machine.endTestTimer(id2)
+        assertEquals(NoNotif, machine.currentNotifState)
+        assertFalse(machine.isInTheForeground)
+        assertFalse(isForeNotifShowing)
+        assertFalse(prepared)
+    }
+
+    @Test
+    fun `NotifState, yes1 start, yes2 start, yes3 start, yes2 end, yes1 end, yes3 end`() = runTest {
+        val machine = getMachine()
+
+        val id = machine.addFirstTimer(true)
+        val id2 = machine.addSecondTimer(true)
+        val id3 = machine.addThirdTimer(true)
+
+        machine.beginTestTimer(id)
+        machine.beginTestTimer(id2)
+        machine.beginTestTimer(id3)
+        assertEquals(ForeNotif, machine.currentNotifState)
+        assertTrue(machine.isInTheForeground)
+        assertTrue(isForeNotifCreated)
+        assertTrue(isForeNotifShowing)
+        assertEquals(-1, foregroundNotifId)
+        assertEquals(id3, createdTimerId)
+        assertTrue(prepared)
+
+        machine.endTestTimer(id2)
+        assertEquals(ForeNotif, machine.currentNotifState)
+        assertTrue(machine.isInTheForeground)
+        assertTrue(isForeNotifShowing)
+        assertEquals(-1, foregroundNotifId)
+        assertEquals(id2, canceledTimerId)
+        assertTrue(prepared)
+
+        machine.endTestTimer(id)
+        assertEquals(SingleTimer, machine.currentNotifState)
+        assertTrue(machine.isInTheForeground)
+        assertFalse(isForeNotifShowing)
+        assertEquals(id3, foregroundNotifId)
+        assertEquals(id, canceledTimerId)
+        assertTrue(prepared)
+
+        machine.endTestTimer(id3)
+        assertEquals(NoNotif, machine.currentNotifState)
+        assertFalse(machine.isInTheForeground)
+        assertFalse(isForeNotifShowing)
+        assertFalse(prepared)
+    }
+
+    @Test
+    fun `NotifState, yes1 start, yes2 start, no3 start, yes2 end, yes1 end, no3 end`() = runTest {
+        val machine = getMachine()
+
+        val id = machine.addFirstTimer(true)
+        val id2 = machine.addSecondTimer(true)
+        val id3 = machine.addThirdTimer(false)
+
+        machine.beginTestTimer(id)
+        machine.beginTestTimer(id2)
+        machine.beginTestTimer(id3)
+        assertEquals(ForeNotif, machine.currentNotifState)
+        assertTrue(machine.isInTheForeground)
+        assertTrue(isForeNotifCreated)
+        assertTrue(isForeNotifShowing)
+        assertEquals(-1, foregroundNotifId)
+        assertEquals(id2, createdTimerId)
+        assertTrue(prepared)
+
+        machine.endTestTimer(id2)
+        assertEquals(ForeNotif, machine.currentNotifState)
+        assertTrue(machine.isInTheForeground)
+        assertTrue(isForeNotifShowing)
+        assertTrue(isForeNotifUpdated)
+        assertEquals(-1, foregroundNotifId)
+        assertEquals(id2, canceledTimerId)
+        assertTrue(prepared)
+
+        machine.endTestTimer(id)
+        assertEquals(ForeNotif, machine.currentNotifState)
+        assertTrue(machine.isInTheForeground)
+        assertTrue(isForeNotifShowing)
+        assertTrue(isForeNotifUpdated)
+        assertEquals(-1, foregroundNotifId)
+        assertEquals(id, canceledTimerId)
+        assertTrue(prepared)
+
+        machine.endTestTimer(id3)
+        assertEquals(NoNotif, machine.currentNotifState)
+        assertFalse(machine.isInTheForeground)
+        assertFalse(isForeNotifShowing)
+        assertFalse(prepared)
+    }
+
+    @Test
+    fun `NotifState, yes1 start, yes2 start, no3 start, yes2 end, no3 end, yes1 end`() = runTest {
+        val machine = getMachine()
+
+        val id = machine.addFirstTimer(true)
+        val id2 = machine.addSecondTimer(true)
+        val id3 = machine.addThirdTimer(false)
+
+        machine.beginTestTimer(id)
+        machine.beginTestTimer(id2)
+        machine.beginTestTimer(id3)
+        assertEquals(ForeNotif, machine.currentNotifState)
+        assertTrue(machine.isInTheForeground)
+        assertTrue(isForeNotifCreated)
+        assertTrue(isForeNotifShowing)
+        assertTrue(isForeNotifUpdated)
+        assertEquals(-1, foregroundNotifId)
+        assertEquals(id2, createdTimerId)
+        assertTrue(prepared)
+
+        machine.endTestTimer(id2)
+        assertEquals(ForeNotif, machine.currentNotifState)
+        assertTrue(machine.isInTheForeground)
+        assertTrue(isForeNotifShowing)
+        assertTrue(isForeNotifUpdated)
+        assertEquals(-1, foregroundNotifId)
+        assertEquals(id2, canceledTimerId)
+        assertTrue(prepared)
+
+        machine.endTestTimer(id3)
+        assertEquals(SingleTimer, machine.currentNotifState)
+        assertTrue(machine.isInTheForeground)
+        assertFalse(isForeNotifShowing)
+        assertEquals(id, foregroundNotifId)
+        assertTrue(prepared)
+
+        machine.endTestTimer(id)
+        assertEquals(NoNotif, machine.currentNotifState)
+        assertFalse(machine.isInTheForeground)
+        assertFalse(isForeNotifShowing)
+        assertFalse(prepared)
+    }
+
+    @Test
+    fun `NotifState, yes1 start, no2 start, no3 start, yes1 end, no3 end, yes2 end`() = runTest {
+        val machine = getMachine()
+
+        val id = machine.addFirstTimer(true)
+        val id2 = machine.addSecondTimer(false)
+        val id3 = machine.addThirdTimer(false)
+
+        machine.beginTestTimer(id)
+        machine.beginTestTimer(id2)
+        assertEquals(ForeNotif, machine.currentNotifState)
+        assertTrue(machine.isInTheForeground)
+        assertTrue(isForeNotifCreated)
+        assertTrue(isForeNotifShowing)
+        assertEquals(-1, foregroundNotifId)
+        assertEquals(id, createdTimerId)
+        assertTrue(prepared)
+
+        machine.beginTestTimer(id3)
+        assertEquals(ForeNotif, machine.currentNotifState)
+        assertTrue(machine.isInTheForeground)
+        assertTrue(isForeNotifShowing)
+        assertTrue(isForeNotifUpdated)
+        assertEquals(-1, foregroundNotifId)
+        assertTrue(prepared)
+
+        machine.endTestTimer(id)
+        assertEquals(ForeNotif, machine.currentNotifState)
+        assertTrue(machine.isInTheForeground)
+        assertTrue(isForeNotifShowing)
+        assertTrue(isForeNotifUpdated)
+        assertEquals(-1, foregroundNotifId)
+        assertEquals(id, canceledTimerId)
+        assertTrue(prepared)
+
+        machine.endTestTimer(id3)
+        assertEquals(ForeNotif, machine.currentNotifState)
+        assertTrue(machine.isInTheForeground)
+        assertTrue(isForeNotifShowing)
+        assertTrue(isForeNotifUpdated)
+        assertEquals(-1, foregroundNotifId)
+        assertTrue(prepared)
+
+        machine.endTestTimer(id2)
+        assertEquals(NoNotif, machine.currentNotifState)
+        assertFalse(machine.isInTheForeground)
+        assertFalse(isForeNotifShowing)
+        assertFalse(prepared)
+    }
+
+    @Test
+    fun `NotifState, no start, no end`() = runTest {
+        val machine = getMachine()
+
+        val id = machine.addFirstTimer(false)
+
+        machine.beginTestTimer(id)
+        assertEquals(ForeNotif, machine.currentNotifState)
+        assertTrue(machine.isInTheForeground)
+        assertTrue(isForeNotifCreated)
+        assertTrue(isForeNotifShowing)
+        assertEquals(-1, foregroundNotifId)
+        assertTrue(prepared)
+
+        machine.endTestTimer(id)
+        assertEquals(NoNotif, machine.currentNotifState)
+        assertFalse(machine.isInTheForeground)
+        assertFalse(isForeNotifShowing)
+        assertFalse(prepared)
+    }
+
+    @Test
+    fun `NotifState, no1 start, no2 start, no2 end, no1 end`() = runTest {
+        val machine = getMachine()
+
+        val id = machine.addFirstTimer(false)
+        val id2 = machine.addSecondTimer(false)
+
+        machine.beginTestTimer(id)
+        assertEquals(ForeNotif, machine.currentNotifState)
+        assertTrue(machine.isInTheForeground)
+        assertTrue(isForeNotifCreated)
+        assertTrue(isForeNotifShowing)
+        assertEquals(-1, foregroundNotifId)
+        assertTrue(prepared)
+
+        machine.beginTestTimer(id2)
+        assertEquals(ForeNotif, machine.currentNotifState)
+        assertTrue(machine.isInTheForeground)
+        assertTrue(isForeNotifShowing)
+        assertTrue(isForeNotifUpdated)
+        assertEquals(-1, foregroundNotifId)
+        assertTrue(prepared)
+
+        machine.endTestTimer(id2)
+        assertEquals(ForeNotif, machine.currentNotifState)
+        assertTrue(machine.isInTheForeground)
+        assertTrue(isForeNotifShowing)
+        assertTrue(isForeNotifUpdated)
+        assertEquals(-1, foregroundNotifId)
+        assertTrue(prepared)
+
+        machine.endTestTimer(id)
+        assertEquals(NoNotif, machine.currentNotifState)
+        assertFalse(machine.isInTheForeground)
+        assertFalse(isForeNotifShowing)
+        assertFalse(prepared)
+    }
+
+    @Test
+    fun `NotifState, no1 start, no2 start, no1 end, no2 end`() = runTest {
+        val machine = getMachine()
+
+        val id = machine.addFirstTimer(false)
+        val id2 = machine.addSecondTimer(false)
+
+        machine.beginTestTimer(id)
+        assertEquals(ForeNotif, machine.currentNotifState)
+        assertTrue(machine.isInTheForeground)
+        assertTrue(isForeNotifCreated)
+        assertTrue(isForeNotifShowing)
+        assertEquals(-1, foregroundNotifId)
+        assertTrue(prepared)
+
+        machine.beginTestTimer(id2)
+        assertEquals(ForeNotif, machine.currentNotifState)
+        assertTrue(machine.isInTheForeground)
+        assertTrue(isForeNotifShowing)
+        assertTrue(isForeNotifUpdated)
+        assertEquals(-1, foregroundNotifId)
+        assertTrue(prepared)
+
+        machine.endTestTimer(id)
+        assertEquals(ForeNotif, machine.currentNotifState)
+        assertTrue(machine.isInTheForeground)
+        assertTrue(isForeNotifShowing)
+        assertTrue(isForeNotifUpdated)
+        assertEquals(-1, foregroundNotifId)
+        assertTrue(prepared)
+
+        machine.endTestTimer(id2)
+        assertEquals(NoNotif, machine.currentNotifState)
+        assertFalse(machine.isInTheForeground)
+        assertFalse(isForeNotifShowing)
+        assertFalse(prepared)
+    }
+
+    @Test
+    fun `NotifState, no1 start, yes2 start, yes2 end, no1 end`() = runTest {
+        val machine = getMachine()
+
+        val id = machine.addFirstTimer(false)
+        val id2 = machine.addSecondTimer(true)
+
+        machine.beginTestTimer(id)
+        assertEquals(ForeNotif, machine.currentNotifState)
+        assertTrue(machine.isInTheForeground)
+        assertTrue(isForeNotifCreated)
+        assertTrue(isForeNotifShowing)
+        assertEquals(-1, foregroundNotifId)
+        assertTrue(prepared)
+
+        machine.beginTestTimer(id2)
+        assertEquals(ForeNotif, machine.currentNotifState)
+        assertTrue(machine.isInTheForeground)
+        assertTrue(isForeNotifShowing)
+        assertEquals(-1, foregroundNotifId)
+        assertEquals(id2, createdTimerId)
+        assertTrue(prepared)
+
+        machine.endTestTimer(id2)
+        assertEquals(ForeNotif, machine.currentNotifState)
+        assertTrue(machine.isInTheForeground)
+        assertTrue(isForeNotifShowing)
+        assertEquals(-1, foregroundNotifId)
+        assertEquals(id2, canceledTimerId)
+        assertTrue(prepared)
+
+        machine.endTestTimer(id)
+        assertEquals(NoNotif, machine.currentNotifState)
+        assertFalse(machine.isInTheForeground)
+        assertFalse(isForeNotifShowing)
+        assertFalse(prepared)
+    }
+
+    @Test
+    fun `NotifState, no1 start, yes2 start, no1 end, yes2 end`() = runTest {
+        val machine = getMachine()
+
+        val id = machine.addFirstTimer(false)
+        val id2 = machine.addSecondTimer(true)
+
+        machine.beginTestTimer(id)
+        assertEquals(ForeNotif, machine.currentNotifState)
+        assertTrue(machine.isInTheForeground)
+        assertTrue(isForeNotifCreated)
+        assertTrue(isForeNotifShowing)
+        assertEquals(-1, foregroundNotifId)
+        assertTrue(prepared)
+
+        machine.beginTestTimer(id2)
+        assertEquals(ForeNotif, machine.currentNotifState)
+        assertTrue(machine.isInTheForeground)
+        assertTrue(isForeNotifShowing)
+        assertEquals(-1, foregroundNotifId)
+        assertEquals(id2, createdTimerId)
+        assertTrue(prepared)
+
+        machine.endTestTimer(id)
+        assertEquals(SingleTimer, machine.currentNotifState)
+        assertTrue(machine.isInTheForeground)
+        assertFalse(isForeNotifShowing)
+        assertEquals(id2, foregroundNotifId)
+        assertEquals(id2, createdTimerId)
+        assertTrue(prepared)
+
+        machine.endTestTimer(id2)
+        assertEquals(NoNotif, machine.currentNotifState)
+        assertFalse(machine.isInTheForeground)
+        assertFalse(isForeNotifShowing)
+        assertFalse(prepared)
+    }
+
+    @Test
+    fun `NotifState, no1 start, no2 start, no3 start, no2 end, no1 end, no3 end`() = runTest {
+        val machine = getMachine()
+
+        val id = machine.addFirstTimer(false)
+        val id2 = machine.addSecondTimer(false)
+        val id3 = machine.addThirdTimer(false)
+
+        machine.beginTestTimer(id)
+        machine.beginTestTimer(id2)
+        machine.beginTestTimer(id3)
+        assertEquals(ForeNotif, machine.currentNotifState)
+        assertTrue(machine.isInTheForeground)
+        assertTrue(isForeNotifCreated)
+        assertTrue(isForeNotifShowing)
+        assertEquals(-1, foregroundNotifId)
+        assertTrue(prepared)
+
+        machine.endTestTimer(id2)
+        assertEquals(ForeNotif, machine.currentNotifState)
+        assertTrue(machine.isInTheForeground)
+        assertTrue(isForeNotifShowing)
+        assertTrue(isForeNotifUpdated)
+        assertEquals(-1, foregroundNotifId)
+        assertTrue(prepared)
+
+        machine.endTestTimer(id)
+        assertEquals(ForeNotif, machine.currentNotifState)
+        assertTrue(machine.isInTheForeground)
+        assertTrue(isForeNotifShowing)
+        assertTrue(isForeNotifUpdated)
+        assertEquals(-1, foregroundNotifId)
+        assertTrue(prepared)
+
+        machine.endTestTimer(id3)
+        assertEquals(NoNotif, machine.currentNotifState)
+        assertFalse(machine.isInTheForeground)
+        assertFalse(isForeNotifShowing)
+        assertFalse(prepared)
+    }
+
+    @Test
+    fun `NotifState, no1 start, no2 start, yes3 start, no1 end, no2 end, yes3 end`() = runTest {
+        val machine = getMachine()
+
+        val id = machine.addFirstTimer(false)
+        val id2 = machine.addSecondTimer(false)
+        val id3 = machine.addThirdTimer(true)
+
+        machine.beginTestTimer(id)
+        machine.beginTestTimer(id2)
+        machine.beginTestTimer(id3)
+        assertEquals(ForeNotif, machine.currentNotifState)
+        assertTrue(machine.isInTheForeground)
+        assertTrue(isForeNotifCreated)
+        assertTrue(isForeNotifShowing)
+        assertEquals(-1, foregroundNotifId)
+        assertEquals(id3, createdTimerId)
+        assertTrue(prepared)
+
+        machine.endTestTimer(id)
+        assertEquals(ForeNotif, machine.currentNotifState)
+        assertTrue(machine.isInTheForeground)
+        assertTrue(isForeNotifShowing)
+        assertTrue(isForeNotifUpdated)
+        assertEquals(-1, foregroundNotifId)
+        assertTrue(prepared)
+
+        machine.endTestTimer(id2)
+        assertEquals(SingleTimer, machine.currentNotifState)
+        assertTrue(machine.isInTheForeground)
+        assertFalse(isForeNotifShowing)
+        assertEquals(id3, foregroundNotifId)
+        assertEquals(id3, createdTimerId)
+        assertTrue(prepared)
+
+        machine.endTestTimer(id3)
+        assertEquals(NoNotif, machine.currentNotifState)
+        assertFalse(machine.isInTheForeground)
+        assertFalse(isForeNotifShowing)
+        assertFalse(prepared)
+    }
+
+    @Test
+    fun `NotifState, no1 start, yes2 start, yes3 start, no1 end, yes3 end, yes2 end`() = runTest {
+        val machine = getMachine()
+
+        val id = machine.addFirstTimer(false)
+        val id2 = machine.addSecondTimer(true)
+        val id3 = machine.addThirdTimer(true)
+
+        machine.beginTestTimer(id)
+        machine.beginTestTimer(id2)
+        assertEquals(ForeNotif, machine.currentNotifState)
+        assertTrue(machine.isInTheForeground)
+        assertTrue(isForeNotifCreated)
+        assertTrue(isForeNotifShowing)
+        assertEquals(-1, foregroundNotifId)
+        assertEquals(id2, createdTimerId)
+        assertTrue(prepared)
+
+        machine.beginTestTimer(id3)
+        assertEquals(ForeNotif, machine.currentNotifState)
+        assertTrue(machine.isInTheForeground)
+        assertTrue(isForeNotifShowing)
+        assertEquals(-1, foregroundNotifId)
+        assertEquals(id3, createdTimerId)
+        assertTrue(prepared)
+
+        machine.endTestTimer(id)
+        assertEquals(ForeNotif, machine.currentNotifState)
+        assertTrue(machine.isInTheForeground)
+        assertTrue(isForeNotifShowing)
+        assertTrue(isForeNotifUpdated)
+        assertEquals(-1, foregroundNotifId)
+        assertTrue(prepared)
+
+        machine.endTestTimer(id3)
+        assertEquals(SingleTimer, machine.currentNotifState)
+        assertTrue(machine.isInTheForeground)
+        assertFalse(isForeNotifShowing)
+        assertEquals(id2, foregroundNotifId)
+        assertTrue(prepared)
+
+        machine.endTestTimer(id2)
+        assertEquals(NoNotif, machine.currentNotifState)
+        assertFalse(machine.isInTheForeground)
+        assertFalse(isForeNotifShowing)
+        assertFalse(prepared)
+    }
+
+    @Test
+    fun `Ultimate complicated tests`() = runTest {
+        val machine = getMachine()
+
+        val id = machine.addFirstTimer(true)
+        val id2 = machine.addSecondTimer(false)
+        val id3 = machine.addThirdTimer(false)
+        val id4 = addFourthTimer(machine, true)
+
+        machine.beginTestTimer(id)
+        machine.beginTestTimer(id2)
+        machine.beginTestTimer(id3)
+        machine.endTestTimer(id)
+        assertEquals(ForeNotif, machine.currentNotifState)
+        assertTrue(machine.isInTheForeground)
         assertTrue(isForeNotifCreated)
         assertTrue(isForeNotifShowing)
         assertTrue(isForeNotifUpdated)
@@ -698,19 +730,19 @@ class MachinePresenterUnitTest {
         assertEquals(id, canceledTimerId)
         assertTrue(prepared)
 
-        begin(id4)
+        machine.beginTestTimer(id4)
         assertEquals(ForeNotif, machine.currentNotifState)
-        assertTrue(isServiceInTheForeground)
+        assertTrue(machine.isInTheForeground)
         assertTrue(isForeNotifShowing)
         assertTrue(isForeNotifUpdated)
         assertEquals(-1, foregroundNotifId)
         assertEquals(id4, createdTimerId)
         assertTrue(prepared)
 
-        addFirstTimer(true)
-        begin(id)
+        machine.addFirstTimer(true)
+        machine.beginTestTimer(id)
         assertEquals(ForeNotif, machine.currentNotifState)
-        assertTrue(isServiceInTheForeground)
+        assertTrue(machine.isInTheForeground)
         assertTrue(isForeNotifCreated)
         assertTrue(isForeNotifShowing)
         assertTrue(isForeNotifUpdated)
@@ -718,72 +750,72 @@ class MachinePresenterUnitTest {
         assertEquals(id, createdTimerId)
         assertTrue(prepared)
 
-        end(id2)
-        end(id3)
+        machine.endTestTimer(id2)
+        machine.endTestTimer(id3)
         assertEquals(ForeNotif, machine.currentNotifState)
-        assertTrue(isServiceInTheForeground)
+        assertTrue(machine.isInTheForeground)
         assertTrue(isForeNotifShowing)
         assertTrue(isForeNotifUpdated)
         assertEquals(-1, foregroundNotifId)
         assertTrue(prepared)
 
-        end(id4)
+        machine.endTestTimer(id4)
         assertEquals(SingleTimer, machine.currentNotifState)
-        assertTrue(isServiceInTheForeground)
+        assertTrue(machine.isInTheForeground)
         assertFalse(isForeNotifShowing)
         assertEquals(id, foregroundNotifId)
         assertEquals(id4, canceledTimerId)
         assertTrue(prepared)
 
-        addSecondTimer(false)
-        begin(id2)
+        machine.addSecondTimer(false)
+        machine.beginTestTimer(id2)
         assertEquals(ForeNotif, machine.currentNotifState)
-        assertTrue(isServiceInTheForeground)
+        assertTrue(machine.isInTheForeground)
         assertTrue(isForeNotifShowing)
         assertEquals(-1, foregroundNotifId)
         assertTrue(prepared)
 
-        end(id)
+        machine.endTestTimer(id)
         assertEquals(ForeNotif, machine.currentNotifState)
-        assertTrue(isServiceInTheForeground)
+        assertTrue(machine.isInTheForeground)
         assertTrue(isForeNotifShowing)
         assertTrue(isForeNotifUpdated)
         assertEquals(-1, foregroundNotifId)
         assertEquals(id, canceledTimerId)
         assertTrue(prepared)
 
-        end(id2)
+        machine.endTestTimer(id2)
         assertEquals(NoNotif, machine.currentNotifState)
-        assertFalse(isServiceInTheForeground)
+        assertFalse(machine.isInTheForeground)
         assertFalse(isForeNotifShowing)
         assertFalse(prepared)
     }
 
-    private fun addFirstTimer(showNotif: Boolean): Int {
+    private fun MachinePresenter.addFirstTimer(showNotif: Boolean): Int {
         return TestData.fakeTimerSimpleA.copy(more = TimerMoreEntity(showNotif = showNotif))
-            .toMachineTimers().id
+            .toMachineTimers(this).id
     }
 
-    private fun addSecondTimer(showNotif: Boolean): Int {
+    private fun MachinePresenter.addSecondTimer(showNotif: Boolean): Int {
         return TestData.fakeTimerSimpleB.copy(more = TimerMoreEntity(showNotif = showNotif))
-            .toMachineTimers().id
+            .toMachineTimers(this).id
     }
 
-    private fun addThirdTimer(showNotif: Boolean): Int {
+    private fun MachinePresenter.addThirdTimer(showNotif: Boolean): Int {
         return TestData.fakeTimerSimpleB.copy(
             id = TestData.fakeTimerId * 2,
             more = TimerMoreEntity(showNotif = showNotif)
-        ).toMachineTimers().id
+        ).toMachineTimers(this).id
     }
 
-    private fun addFourthTimer(showNotif: Boolean): Int {
+    private fun addFourthTimer(machine: MachinePresenter, showNotif: Boolean): Int {
         return TestData.fakeTimerSimpleB.copy(
             id = TestData.fakeTimerId * 3,
             more = TimerMoreEntity(showNotif = showNotif)
-        ).toMachineTimers().id
+        ).toMachineTimers(machine).id
     }
 
-    private fun TimerEntity.toMachineTimers(): TimerEntity = apply {
+    private fun TimerEntity.toMachineTimers(machine: MachinePresenter): TimerEntity = apply {
         machine.timers[id] = MachinePresenter.TimerMachinePair(
             timer = this,
             machine = TimerMachine(this, mock())
@@ -793,22 +825,22 @@ class MachinePresenterUnitTest {
     /**
      * Copies the method content from [MachinePresenter.begin]
      */
-    private fun begin(id: Int) {
-        machine.timerBeginsAction(id)
+    private fun MachinePresenter.beginTestTimer(id: Int) {
+        timerBeginsAction(id)
     }
 
     /**
      * Copies the method content from [MachinePresenter.end]
      */
-    private fun end(id: Int) {
-        val shouldUpdateForeNotif = machine.timerEndsAction(id)
+    private fun MachinePresenter.endTestTimer(id: Int) {
+        val shouldUpdateForeNotif = timerEndsAction(id)
 
-        machine.timers.remove(id)
+        timers.remove(id)
 
         if (shouldUpdateForeNotif) {
-            machine.updateForeNotifIfPossible()
+            updateForeNotifIfPossible()
         }
-        machine.stopMachineServiceIfNotRunning()
+        stopMachineServiceIfNotRunning()
     }
 
     private inner class MachineTestView : MachineContract.View {

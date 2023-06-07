@@ -1,8 +1,9 @@
 package xyz.aprildown.timer.presentation.scheduler
 
-import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.test.StandardTestDispatcher
+import kotlinx.coroutines.test.TestScope
+import kotlinx.coroutines.test.runTest
 import org.junit.Assert.assertEquals
-import org.junit.Before
 import org.junit.Test
 import org.mockito.kotlin.any
 import org.mockito.kotlin.mock
@@ -18,7 +19,6 @@ import xyz.aprildown.timer.domain.repositories.TimerRepository
 import xyz.aprildown.timer.domain.usecases.scheduler.GetScheduler
 import xyz.aprildown.timer.domain.usecases.scheduler.SetSchedulerEnable
 import xyz.aprildown.timer.domain.usecases.timer.FindTimerInfo
-import xyz.aprildown.timer.presentation.testCoroutineDispatcher
 
 class SchedulerReceiverPresenterTest {
 
@@ -27,15 +27,13 @@ class SchedulerReceiverPresenterTest {
     private val schedulerExecutor: SchedulerExecutor = mock()
     private val appDataRepository: AppDataRepository = mock()
 
-    private lateinit var presenter: SchedulerReceiverPresenter
-
-    @Before
-    fun setUp() {
-        presenter = SchedulerReceiverPresenter(
-            FindTimerInfo(testCoroutineDispatcher, timerRepository),
-            GetScheduler(testCoroutineDispatcher, schedulerRepository),
+    private fun TestScope.getPresenter(): SchedulerReceiverPresenter {
+        val dispatcher = StandardTestDispatcher(testScheduler)
+        return SchedulerReceiverPresenter(
+            FindTimerInfo(dispatcher, timerRepository),
+            GetScheduler(dispatcher, schedulerRepository),
             SetSchedulerEnable(
-                testCoroutineDispatcher,
+                dispatcher,
                 schedulerRepository,
                 schedulerExecutor,
                 appDataRepository
@@ -44,7 +42,8 @@ class SchedulerReceiverPresenterTest {
     }
 
     @Test
-    fun handleFiredScheduler_once_and_no_more() = runBlocking<Unit> {
+    fun handleFiredScheduler_once_and_no_more() = runTest {
+        val presenter = getPresenter()
         val scheduler = TestData.fakeSchedulerA.copy(repeatMode = SchedulerRepeatMode.ONCE)
         whenever(schedulerRepository.item(scheduler.id)).thenReturn(scheduler)
         val result = presenter.handleFiredScheduler(scheduler.id)
@@ -55,7 +54,8 @@ class SchedulerReceiverPresenterTest {
     }
 
     @Test
-    fun handleFiredScheduler_repeat() = runBlocking<Unit> {
+    fun handleFiredScheduler_repeat() = runTest {
+        val presenter = getPresenter()
         val scheduler = TestData.fakeSchedulerA.copy(repeatMode = SchedulerRepeatMode.EVERY_DAYS)
         whenever(schedulerRepository.item(scheduler.id)).thenReturn(scheduler)
         val result = presenter.handleFiredScheduler(scheduler.id)

@@ -1,6 +1,5 @@
 package xyz.aprildown.timer.presentation.scheduler
 
-import kotlinx.coroutines.runBlocking
 import xyz.aprildown.timer.domain.entities.SchedulerRepeatMode
 import xyz.aprildown.timer.domain.entities.TimerEntity
 import xyz.aprildown.timer.domain.usecases.scheduler.GetScheduler
@@ -14,14 +13,12 @@ class SchedulerReceiverPresenter @Inject constructor(
     private val setSchedulerEnable: SetSchedulerEnable
 ) {
 
-    fun isValidTimerId(timerId: Int): Boolean {
-        return runBlocking {
-            findTimerInfo(timerId) != null
-        }
+    suspend fun isValidTimerId(timerId: Int): Boolean {
+        return findTimerInfo(timerId) != null
     }
 
-    fun handleFiredScheduler(schedulerId: Int): Int = runBlocking {
-        val scheduler = getScheduler.execute(schedulerId)
+    suspend fun handleFiredScheduler(schedulerId: Int): Int {
+        val scheduler = getScheduler(schedulerId)
         if (scheduler != null) {
             setSchedulerEnable
                 .execute(
@@ -31,6 +28,6 @@ class SchedulerReceiverPresenter @Inject constructor(
                     )
                 )
         }
-        scheduler?.timerId ?: TimerEntity.NULL_ID
+        return scheduler?.timerId ?: TimerEntity.NULL_ID
     }
 }

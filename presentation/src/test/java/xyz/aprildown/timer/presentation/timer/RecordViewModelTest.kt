@@ -3,7 +3,9 @@ package xyz.aprildown.timer.presentation.timer
 import android.text.format.DateUtils
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.Observer
-import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.test.StandardTestDispatcher
+import kotlinx.coroutines.test.TestScope
+import kotlinx.coroutines.test.runTest
 import org.junit.Assert.assertTrue
 import org.junit.Rule
 import org.junit.Test
@@ -25,7 +27,6 @@ import xyz.aprildown.timer.domain.usecases.folder.GetFolders
 import xyz.aprildown.timer.domain.usecases.invoke
 import xyz.aprildown.timer.domain.usecases.record.GetRecords
 import xyz.aprildown.timer.domain.usecases.timer.GetTimerInfo
-import xyz.aprildown.timer.presentation.testCoroutineDispatcher
 
 class RecordViewModelTest {
 
@@ -39,7 +40,7 @@ class RecordViewModelTest {
     private val preferencesRepository: PreferencesRepository = mock()
 
     @Test
-    fun `initial load`() = runBlocking {
+    fun `initial load`() = runTest {
         whenever(folderSortByRule.get()).thenReturn(FolderSortBy.values().random())
         val folders = listOf(
             TestData.defaultFolder,
@@ -98,7 +99,7 @@ class RecordViewModelTest {
     }
 
     @Test
-    fun `distinct params`() = runBlocking {
+    fun `distinct params`() = runTest {
         whenever(getFolders.invoke()).thenReturn(emptyList())
         whenever(folderSortByRule.get()).thenReturn(FolderSortBy.values().random())
 
@@ -114,25 +115,22 @@ class RecordViewModelTest {
         verifyNoMoreInteractions(paramsObserver)
     }
 
-    private fun newViewModel(): RecordViewModel {
-        runBlocking {
-            whenever(getRecords.getMinDateMilli()).thenReturn(TimerStampEntity.getMinDateMilli())
-            whenever(
-                preferencesRepository.getInt(any(), any())
-            ).thenReturn(RecordViewModel.START_SINCE_LAST_WEEK)
-            whenever(preferencesRepository.getNullableString(any(), any())).thenReturn(null)
-        }
+    private suspend fun TestScope.newViewModel(): RecordViewModel {
+        whenever(getRecords.getMinDateMilli()).thenReturn(TimerStampEntity.getMinDateMilli())
+        whenever(
+            preferencesRepository.getInt(any(), any())
+        ).thenReturn(RecordViewModel.START_SINCE_LAST_WEEK)
+        whenever(preferencesRepository.getNullableString(any(), any())).thenReturn(null)
         return RecordViewModel(
-            mainDispatcher = testCoroutineDispatcher,
+            mainDispatcher = StandardTestDispatcher(testScheduler),
             getRecords = getRecords,
             getFolders = getFolders,
             folderSortByRule = folderSortByRule,
             getTimerInfo = getTimerInfo,
             preferencesRepository = preferencesRepository,
         ).also {
-            runBlocking {
-                verify(getRecords).getMinDateMilli()
-            }
+            testScheduler.advanceUntilIdle()
+            verify(getRecords).getMinDateMilli()
         }
     }
 

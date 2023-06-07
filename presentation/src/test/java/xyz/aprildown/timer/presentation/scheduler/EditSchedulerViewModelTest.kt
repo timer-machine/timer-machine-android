@@ -2,10 +2,11 @@ package xyz.aprildown.timer.presentation.scheduler
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.Observer
-import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.test.StandardTestDispatcher
+import kotlinx.coroutines.test.TestScope
+import kotlinx.coroutines.test.runTest
 import org.junit.Assert.assertNull
 import org.junit.Assert.assertTrue
-import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import org.mockito.kotlin.argumentCaptor
@@ -21,7 +22,6 @@ import xyz.aprildown.timer.domain.usecases.scheduler.AddScheduler
 import xyz.aprildown.timer.domain.usecases.scheduler.GetScheduler
 import xyz.aprildown.timer.domain.usecases.scheduler.SaveScheduler
 import xyz.aprildown.timer.domain.usecases.timer.FindTimerInfo
-import xyz.aprildown.timer.presentation.testCoroutineDispatcher
 
 class EditSchedulerViewModelTest {
 
@@ -33,24 +33,23 @@ class EditSchedulerViewModelTest {
     private val addScheduler: AddScheduler = mock()
     private val saveScheduler: SaveScheduler = mock()
 
-    private lateinit var viewModel: EditSchedulerViewModel
-
     private val schedulerWithTimerInfoObserver: Observer<Pair<SchedulerEntity, TimerInfo?>> = mock()
 
-    @Before
-    fun setUp() {
-        viewModel = EditSchedulerViewModel(
-            mainDispatcher = testCoroutineDispatcher,
+    private fun TestScope.getViewModel(): EditSchedulerViewModel {
+        val viewModel = EditSchedulerViewModel(
+            mainDispatcher = StandardTestDispatcher(testScheduler),
             findTimerInfo = findTimerInfo,
             getScheduler = getScheduler,
             addScheduler = addScheduler,
             saveSchedulerUseCase = saveScheduler
         )
         viewModel.schedulerWithTimerInfo.observeForever(schedulerWithTimerInfoObserver)
+        return viewModel
     }
 
     @Test
-    fun load() = runBlocking {
+    fun load() = runTest {
+        val viewModel = getViewModel()
         val scheduler = TestData.fakeSchedulerA
         whenever(getScheduler(scheduler.id)).thenReturn(scheduler)
         val timer = TestData.fakeTimerSimpleA
@@ -68,7 +67,8 @@ class EditSchedulerViewModelTest {
     }
 
     @Test
-    fun `load new scheduler`() = runBlocking {
+    fun `load new scheduler`() = runTest {
+        val viewModel = getViewModel()
         viewModel.load(SchedulerEntity.NEW_ID).join()
         argumentCaptor<Pair<SchedulerEntity, TimerInfo?>> {
             verify(schedulerWithTimerInfoObserver).onChanged(capture())
@@ -80,7 +80,8 @@ class EditSchedulerViewModelTest {
     }
 
     @Test
-    fun `save new scheduler`() = runBlocking {
+    fun `save new scheduler`() = runTest {
+        val viewModel = getViewModel()
         val new = TestData.fakeSchedulerB.copy(id = SchedulerEntity.NEW_ID)
         viewModel.load(SchedulerEntity.NEW_ID).join()
         viewModel.saveScheduler(new).join()
@@ -96,7 +97,8 @@ class EditSchedulerViewModelTest {
     }
 
     @Test
-    fun `save scheduler`() = runBlocking {
+    fun `save scheduler`() = runTest {
+        val viewModel = getViewModel()
         val old = TestData.fakeSchedulerA.copy(enable = 0)
         val new = TestData.fakeSchedulerB.copy(id = old.id, enable = 0)
         val timerInfo = TestData.fakeTimerAdvanced.toTimerInfo()

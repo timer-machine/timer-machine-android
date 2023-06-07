@@ -1,7 +1,7 @@
 package xyz.aprildown.timer.data.repositories
 
 import androidx.test.core.app.ApplicationProvider
-import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.test.runTest
 import org.junit.After
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertNull
@@ -35,7 +35,7 @@ class TimerRepositoryImplTest {
     }
 
     @Test
-    fun items_item_add_idAndNames() = runBlocking {
+    fun items_item_add_idAndNames() = runTest {
         val list = listOf(
             TestData.fakeTimerSimpleA,
             TestData.fakeTimerSimpleB,
@@ -62,7 +62,7 @@ class TimerRepositoryImplTest {
     }
 
     @Test
-    fun save() = runBlocking {
+    fun save() = runTest {
         val id = timerRepository.add(TestData.fakeTimerSimpleA)
 
         val item = timerRepository.item(id)
@@ -74,7 +74,7 @@ class TimerRepositoryImplTest {
     }
 
     @Test
-    fun delete() = runBlocking {
+    fun delete() = runTest {
         val id = timerRepository.add(TestData.fakeTimerSimpleA)
 
         val item = timerRepository.item(id)

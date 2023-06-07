@@ -4,9 +4,10 @@ import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.Observer
 import com.github.deweyreed.tools.arch.Event
 import com.github.deweyreed.tools.helper.toInt
-import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.test.StandardTestDispatcher
+import kotlinx.coroutines.test.TestScope
+import kotlinx.coroutines.test.runTest
 import org.junit.Assert
-import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import org.mockito.kotlin.any
@@ -25,7 +26,6 @@ import xyz.aprildown.timer.domain.usecases.scheduler.DeleteScheduler
 import xyz.aprildown.timer.domain.usecases.scheduler.GetSchedulers
 import xyz.aprildown.timer.domain.usecases.scheduler.SetSchedulerEnable
 import xyz.aprildown.timer.domain.usecases.timer.FindTimerInfo
-import xyz.aprildown.timer.presentation.testCoroutineDispatcher
 
 class SchedulerViewModelTest {
 
@@ -37,16 +37,13 @@ class SchedulerViewModelTest {
     private val setSchedulerEnable: SetSchedulerEnable = mock()
     private val deleteScheduler: DeleteScheduler = mock()
 
-    private lateinit var viewModel: SchedulerViewModel
-
     private val scheduleObserver: Observer<Event<SetSchedulerEnable.Result>> = mock()
     private val schedulerWithTimerInfoObserver: Observer<List<Pair<SchedulerEntity, TimerInfo?>>> =
         mock()
 
-    @Before
-    fun setUp() {
-        viewModel = SchedulerViewModel(
-            mainDispatcher = testCoroutineDispatcher,
+    private fun TestScope.getViewModel(): SchedulerViewModel {
+        val viewModel = SchedulerViewModel(
+            mainDispatcher = StandardTestDispatcher(testScheduler),
             getSchedulers = getSchedulers,
             findTimerInfo = findTimerInfo,
             setSchedulerEnable = setSchedulerEnable,
@@ -54,10 +51,12 @@ class SchedulerViewModelTest {
         )
         viewModel.scheduleEvent.observeForever(scheduleObserver)
         viewModel.schedulerWithTimerInfo.observeForever(schedulerWithTimerInfoObserver)
+        return viewModel
     }
 
     @Test
-    fun load() = runBlocking {
+    fun load() = runTest {
+        val viewModel = getViewModel()
         val schedulers = listOf(TestData.fakeSchedulerA, TestData.fakeSchedulerB)
         val timerInfo = TestData.fakeTimerSimpleA.toTimerInfo()
         whenever(getSchedulers()).thenReturn(schedulers)
@@ -75,13 +74,16 @@ class SchedulerViewModelTest {
     }
 
     @Test
-    fun toggle() = runBlocking {
+    fun toggle() = runTest {
+        val viewModel = getViewModel()
         val scheduler = TestData.fakeSchedulerA
 
-        val result: SetSchedulerEnable.Result = mock()
+        val result: SetSchedulerEnable.Result = SetSchedulerEnable.Result.Scheduled(0L)
         whenever(setSchedulerEnable(any())).thenReturn(result)
 
         viewModel.toggleSchedulerState(scheduler.id, true)
+
+        testScheduler.advanceUntilIdle()
 
         argumentCaptor<Event<SetSchedulerEnable.Result>> {
             verify(scheduleObserver).onChanged(capture())
@@ -94,10 +96,12 @@ class SchedulerViewModelTest {
     }
 
     @Test
-    fun delete() = runBlocking {
+    fun delete() = runTest {
+        val viewModel = getViewModel()
         val s = TestData.fakeSchedulerB
         whenever(deleteScheduler(any())).thenReturn(Unit)
         viewModel.delete(s.id)
+        testScheduler.advanceUntilIdle()
         verify(deleteScheduler).invoke(s.id)
         verifyNoMoreInteractionsForAll()
     }

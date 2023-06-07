@@ -4,10 +4,9 @@ import android.content.Intent
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.Observer
 import com.github.deweyreed.tools.arch.Event
-import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.test.runTest
 import org.junit.Assert
 import org.junit.Assert.assertEquals
-import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import org.mockito.kotlin.argumentCaptor
@@ -35,17 +34,16 @@ class ScreenViewModelTest {
     private val serviceTriggerObserver: Observer<Event<Intent>> = mock()
     private val presenter: MachineContract.Presenter = mock()
 
-    private lateinit var viewModel: ScreenViewModel
-
-    @Before
-    fun setUp() {
-        viewModel = ScreenViewModel(intentProvider)
+    private fun getViewModel(): ScreenViewModel {
+        val viewModel = ScreenViewModel(intentProvider)
         viewModel.stopEvent.observeForever(stopTimerObserver)
         viewModel.intentEvent.observeForever(serviceTriggerObserver)
+        return viewModel
     }
 
     @Test
-    fun load() {
+    fun load() = runTest {
+        val viewModel = getViewModel()
         val t = TestData.fakeTimerSimpleB
         val currentIndex = TimerIndex.Step(loopIndex = 1, stepIndex = 0)
         whenever(presenter.getTimerStateInfo(t.id))
@@ -73,7 +71,8 @@ class ScreenViewModelTest {
     }
 
     @Test
-    fun stop() = runBlocking {
+    fun stop() = runTest {
+        val viewModel = getViewModel()
         val id = TestData.fakeTimerId
         val increIntent = Intent()
         whenever(intentProvider.increIntent(id)).thenReturn(increIntent)
@@ -95,7 +94,8 @@ class ScreenViewModelTest {
     }
 
     @Test
-    fun plusOneMinute() = runBlocking {
+    fun plusOneMinute() = runTest {
+        val viewModel = getViewModel()
         val id = TestData.fakeTimerId
         val time = 60_000L
         val addTimeIntent = Intent()

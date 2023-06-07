@@ -1,6 +1,7 @@
 package xyz.aprildown.timer.domain.usecases.timer
 
-import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.test.StandardTestDispatcher
+import kotlinx.coroutines.test.runTest
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertNull
 import org.junit.Assert.assertTrue
@@ -24,7 +25,6 @@ import xyz.aprildown.timer.domain.repositories.SchedulerExecutor
 import xyz.aprildown.timer.domain.repositories.SchedulerRepository
 import xyz.aprildown.timer.domain.repositories.TimerRepository
 import xyz.aprildown.timer.domain.repositories.TimerStampRepository
-import xyz.aprildown.timer.domain.testCoroutineDispatcher
 import xyz.aprildown.timer.domain.usecases.Fruit
 import kotlin.random.Random
 
@@ -35,10 +35,10 @@ class TimerUseCasesTest {
     private val appDataRepository: AppDataRepository = mock()
 
     @Test
-    fun timer() = runBlocking {
+    fun timer() = runTest {
         val timer = TestData.fakeTimerSimpleA
         whenever(timerRepository.item(TestData.fakeTimerId)).thenReturn(timer)
-        val useCase = GetTimer(testCoroutineDispatcher, timerRepository)
+        val useCase = GetTimer(StandardTestDispatcher(testScheduler), timerRepository)
 
         assertNull(useCase.execute(TimerEntity.NULL_ID))
         verify(timerRepository, never()).item(TestData.fakeTimerId)
@@ -53,10 +53,11 @@ class TimerUseCasesTest {
     }
 
     @Test
-    fun add() = runBlocking {
+    fun add() = runTest {
         val timer = TestData.fakeTimerSimpleA
         whenever(timerRepository.add(timer)).thenReturn(TestData.fakeTimerId)
-        val useCase = AddTimer(testCoroutineDispatcher, timerRepository, appDataRepository)
+        val useCase =
+            AddTimer(StandardTestDispatcher(testScheduler), timerRepository, appDataRepository)
 
         assertEquals(timer.id, useCase.execute(timer))
         verify(timerRepository).add(timer)
@@ -68,10 +69,11 @@ class TimerUseCasesTest {
     }
 
     @Test
-    fun save() = runBlocking {
+    fun save() = runTest {
         val timer = TestData.fakeTimerSimpleA
         whenever(timerRepository.save(timer)).thenReturn(true)
-        val useCase = SaveTimer(testCoroutineDispatcher, timerRepository, appDataRepository)
+        val useCase =
+            SaveTimer(StandardTestDispatcher(testScheduler), timerRepository, appDataRepository)
 
         assertEquals(false, useCase.execute(timer.copy(id = TimerEntity.NULL_ID)))
         verify(timerRepository, never()).save(any())
@@ -86,12 +88,12 @@ class TimerUseCasesTest {
     }
 
     @Test
-    fun delete() = runBlocking {
+    fun delete() = runTest {
         val schedulerRepository = mock<SchedulerRepository>()
         val schedulerExecutor = mock<SchedulerExecutor>()
         val timerStampRepository = mock<TimerStampRepository>()
         val useCase = DeleteTimer(
-            testCoroutineDispatcher,
+            StandardTestDispatcher(testScheduler),
             timerRepository,
             schedulerRepository,
             schedulerExecutor,
@@ -125,8 +127,12 @@ class TimerUseCasesTest {
     }
 
     @Test
-    fun `change timer folder`() = runBlocking {
-        val useCase = ChangeTimerFolder(testCoroutineDispatcher, timerRepository, appDataRepository)
+    fun `change timer folder`() = runTest {
+        val useCase = ChangeTimerFolder(
+            StandardTestDispatcher(testScheduler),
+            timerRepository,
+            appDataRepository
+        )
         useCase.execute(ChangeTimerFolder.Params(0, 0))
         verify(timerRepository).changeTimerFolder(0, 0)
         verify(appDataRepository).notifyDataChanged()
@@ -137,8 +143,8 @@ class TimerUseCasesTest {
     }
 
     @Test
-    fun `find null timer info`() = runBlocking {
-        val useCase = FindTimerInfo(testCoroutineDispatcher, timerRepository)
+    fun `find null timer info`() = runTest {
+        val useCase = FindTimerInfo(StandardTestDispatcher(testScheduler), timerRepository)
 
         assertEquals(null, useCase.execute(TimerEntity.NULL_ID))
 
@@ -148,12 +154,12 @@ class TimerUseCasesTest {
     }
 
     @Test
-    fun `find timer info`() = runBlocking {
+    fun `find timer info`() = runTest {
         val timer = TestData.fakeTimerSimpleA
         val timerId = timer.id
         whenever(timerRepository.getTimerInfoByTimerId(timerId)).thenReturn(timer.toTimerInfo())
 
-        val useCase = FindTimerInfo(testCoroutineDispatcher, timerRepository)
+        val useCase = FindTimerInfo(StandardTestDispatcher(testScheduler), timerRepository)
 
         assertEquals(timer.toTimerInfo(), useCase.execute(timerId))
         verify(timerRepository).getTimerInfoByTimerId(timerId)
@@ -164,7 +170,7 @@ class TimerUseCasesTest {
     }
 
     @Test
-    fun `get timer info without stamps`() = runBlocking {
+    fun `get timer info without stamps`() = runTest {
         val timers = listOf(
             TestData.fakeTimerSimpleA,
             TestData.fakeTimerSimpleB,
@@ -176,7 +182,7 @@ class TimerUseCasesTest {
         whenever(timerRepository.getTimerInfo(folderId)).thenReturn(timerInfo)
 
         val useCase = GetTimerInfo(
-            dispatcher = testCoroutineDispatcher,
+            dispatcher = StandardTestDispatcher(testScheduler),
             repository = timerRepository,
             timerStampRepository = mock()
         )
@@ -201,7 +207,7 @@ class TimerUseCasesTest {
     }
 
     @Test
-    fun `get timer info with stamps`() = runBlocking {
+    fun `get timer info with stamps`() = runTest {
         val timers = listOf(
             TestData.fakeTimerSimpleA,
             TestData.fakeTimerSimpleB,
@@ -223,7 +229,7 @@ class TimerUseCasesTest {
         }
 
         val useCase = GetTimerInfo(
-            dispatcher = testCoroutineDispatcher,
+            dispatcher = StandardTestDispatcher(testScheduler),
             repository = timerRepository,
             timerStampRepository = { timerStampRepo }
         )
@@ -244,7 +250,7 @@ class TimerUseCasesTest {
     }
 
     @Test
-    fun `share timer test`() = runBlocking {
+    fun `share timer test`() = runTest {
         val timers = listOf(
             TestData.fakeTimerSimpleA,
             TestData.fakeTimerSimpleB,
@@ -255,7 +261,7 @@ class TimerUseCasesTest {
         whenever(appDataRepository.collectData(AppDataEntity(timers = timers))).thenReturn(string)
 
         val useCase = ShareTimer(
-            dispatcher = testCoroutineDispatcher,
+            dispatcher = StandardTestDispatcher(testScheduler),
             appDataRepository = appDataRepository,
         )
 
@@ -270,7 +276,7 @@ class TimerUseCasesTest {
     }
 
     @Test
-    fun `receive shared timer test`() = runBlocking {
+    fun `receive shared timer test`() = runTest {
         val timers = listOf(
             TestData.fakeTimerSimpleA,
             TestData.fakeTimerSimpleB,
@@ -289,7 +295,7 @@ class TimerUseCasesTest {
         )
 
         val useCase = ShareTimer(
-            dispatcher = testCoroutineDispatcher,
+            dispatcher = StandardTestDispatcher(testScheduler),
             appDataRepository = appDataRepository,
         )
 

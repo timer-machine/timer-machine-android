@@ -1,19 +1,15 @@
 package xyz.aprildown.timer.presentation.backup
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
-import kotlinx.coroutines.runBlocking
-import org.junit.Assert.assertEquals
-import org.junit.Before
+import kotlinx.coroutines.test.StandardTestDispatcher
+import kotlinx.coroutines.test.runTest
 import org.junit.Rule
 import org.junit.Test
-import org.mockito.kotlin.any
 import org.mockito.kotlin.mock
 import org.mockito.kotlin.verify
 import org.mockito.kotlin.verifyNoMoreInteractions
-import org.mockito.kotlin.whenever
 import xyz.aprildown.timer.domain.usecases.data.ImportAppData
 import xyz.aprildown.timer.domain.usecases.data.NotifyDataChanged
-import xyz.aprildown.timer.presentation.testCoroutineDispatcher
 
 class ImportViewModelTest {
 
@@ -23,31 +19,24 @@ class ImportViewModelTest {
     private val importAppData: ImportAppData = mock()
     private val notifyDataChanged: NotifyDataChanged = mock()
 
-    private lateinit var viewModel: ImportViewModel
-
-    @Before
-    fun setUp() {
-        viewModel =
-            ImportViewModel(testCoroutineDispatcher, importAppData, notifyDataChanged)
-    }
-
     @Test
-    fun import() = runBlocking {
-        whenever(importAppData.invoke(any())).thenReturn(emptyMap())
-        viewModel.importAppData(
-            ImportAppData.Params(
-                data = "",
-                wipeFirst = false,
-                importTimers = false,
-                importTimerStamps = false,
-                importSchedulers = false
-            ),
-            handlePrefs = {
-                assertEquals(emptyMap<String, String>(), it)
-            }
-        ) {}.join()
+    fun import() = runTest {
+        val viewModel =
+            ImportViewModel(StandardTestDispatcher(testScheduler), importAppData, notifyDataChanged)
 
-        verify(importAppData).invoke(any())
+        val params = ImportAppData.Params(
+            data = "",
+            wipeFirst = false,
+            importTimers = false,
+            importTimerStamps = false,
+            importSchedulers = false,
+            importPreferences = false,
+        )
+        viewModel.import(params)
+
+        testScheduler.advanceUntilIdle()
+
+        verify(importAppData).invoke(params)
         verify(notifyDataChanged).invoke()
 
         verifyNoMoreInteractions(importAppData)

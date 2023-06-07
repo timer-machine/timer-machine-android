@@ -13,12 +13,14 @@ dependencies {
     api project(':domain')
     api project(':data')
 
+    testImplementation libs.kotlin_coroutines_test
     testImplementation libs.junit
     testImplementation libs.mockito
     testImplementation libs.mockito_inline
     testImplementation libs.mockito_kotlin
     testImplementation libs.androidx_arch_test
 
+    androidTestImplementation libs.kotlin_coroutines_test
     androidTestImplementation libs.mockito
     androidTestImplementation libs.mockito_android
     androidTestImplementation libs.mockito_kotlin

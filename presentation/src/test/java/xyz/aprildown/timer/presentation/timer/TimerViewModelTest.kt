@@ -5,10 +5,11 @@ import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.Observer
 import com.github.deweyreed.tools.arch.Event
 import kotlinx.coroutines.flow.emptyFlow
-import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.test.StandardTestDispatcher
+import kotlinx.coroutines.test.TestScope
+import kotlinx.coroutines.test.runTest
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertTrue
-import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import org.mockito.kotlin.any
@@ -37,7 +38,6 @@ import xyz.aprildown.timer.domain.usecases.timer.GetTimer
 import xyz.aprildown.timer.domain.usecases.timer.GetTimerInfoFlow
 import xyz.aprildown.timer.presentation.StreamMachineIntentProvider
 import xyz.aprildown.timer.presentation.stream.StreamState
-import xyz.aprildown.timer.presentation.testCoroutineDispatcher
 
 class TimerViewModelTest {
 
@@ -69,23 +69,20 @@ class TimerViewModelTest {
     private val allFoldersObserver: Observer<List<FolderEntity>> = mock()
     private val currentFolderIdObserver: Observer<Long> = mock()
 
-    private lateinit var viewModel: TimerViewModel
-
     private val folders = listOf(
         TestData.defaultFolder,
         TestData.trashFolder,
         TestData.fakeFolder
     ).shuffled()
 
-    @Before
-    fun setUp() = runBlocking {
+    private suspend fun TestScope.getViewModel(): TimerViewModel {
         whenever(getFolders()).thenReturn(folders)
         whenever(recentFolder.get()).thenReturn(FolderEntity.FOLDER_DEFAULT)
         whenever(folderSortByRule.get()).thenReturn(FolderSortBy.values().random())
         whenever(tipManager.getTipFlow(any())).thenReturn(emptyFlow())
 
-        viewModel = TimerViewModel(
-            mainDispatcher = testCoroutineDispatcher,
+        val viewModel = TimerViewModel(
+            mainDispatcher = StandardTestDispatcher(testScheduler),
             getTimerInfoFlow = getTimerInfoFlow,
             addTimer = addTimer,
             getTimer = getTimer,
@@ -106,6 +103,8 @@ class TimerViewModelTest {
         viewModel.allFolders.observeForever(allFoldersObserver)
         viewModel.currentFolderId.observeForever(currentFolderIdObserver)
 
+        testScheduler.advanceUntilIdle()
+
         verify(getFolders).invoke()
         verify(allFoldersObserver).onChanged(folders)
         verify(recentFolder).get()
@@ -113,10 +112,13 @@ class TimerViewModelTest {
         verify(folderSortByRule).get()
 
         verifyNoMoreInteractionsForAll()
+
+        return viewModel
     }
 
     @Test
-    fun bind() = runBlocking {
+    fun bind() = runTest {
+        val viewModel = getViewModel()
         val bindIntent = Intent()
         whenever(intentProvider.bindIntent()).thenReturn(bindIntent)
 
@@ -128,7 +130,9 @@ class TimerViewModelTest {
     }
 
     @Test
-    fun start_pause() = runBlocking {
+    fun start_pause() = runTest {
+        val viewModel = getViewModel()
+
         val id = TestData.fakeTimerSimpleB.id
         val startIntent = Intent()
         whenever(intentProvider.startIntent(id)).thenReturn(startIntent)
@@ -164,7 +168,9 @@ class TimerViewModelTest {
     }
 
     @Test
-    fun stop() = runBlocking {
+    fun stop() = runTest {
+        val viewModel = getViewModel()
+
         val id = TestData.fakeTimerSimpleB.id
         val resetIntent = Intent()
         whenever(intentProvider.resetIntent(id)).thenReturn(resetIntent)
@@ -191,7 +197,9 @@ class TimerViewModelTest {
     }
 
     @Test
-    fun edit_new_and_old() = runBlocking {
+    fun edit_new_and_old() = runTest {
+        val viewModel = getViewModel()
+
         viewModel.addNewTimer()
         argumentCaptor<Event<Int>> {
             verify(editObserver).onChanged(capture())
@@ -212,7 +220,9 @@ class TimerViewModelTest {
     }
 
     @Test
-    fun duplicate() = runBlocking {
+    fun duplicate() = runTest {
+        val viewModel = getViewModel()
+
         val timer = TestData.fakeTimerAdvanced
         val timerId = timer.id
         whenever(getTimer(timerId)).thenReturn(timer)
@@ -226,7 +236,9 @@ class TimerViewModelTest {
     }
 
     @Test
-    fun `duplicate none timer`() = runBlocking {
+    fun `duplicate none timer`() = runTest {
+        val viewModel = getViewModel()
+
         val timerId = TestData.fakeTimerAdvanced.id
         whenever(getTimer(timerId)).thenReturn(null)
 
@@ -238,7 +250,9 @@ class TimerViewModelTest {
     }
 
     @Test
-    fun delete() = runBlocking {
+    fun delete() = runTest {
+        val viewModel = getViewModel()
+
         val timerId = TestData.fakeTimerId
 
         viewModel.deleteTimer(timerId).join()
@@ -249,10 +263,14 @@ class TimerViewModelTest {
     }
 
     @Test
-    fun `change folder`() = runBlocking {
+    fun `change folder`() = runTest {
+        val viewModel = getViewModel()
+
         val folderId = TestData.fakeFolderId
 
         viewModel.changeFolder(folderId)
+
+        testScheduler.advanceUntilIdle()
 
         verify(currentFolderIdObserver).onChanged(folderId)
         verify(recentFolder).set(folderId)
@@ -261,7 +279,9 @@ class TimerViewModelTest {
     }
 
     @Test
-    fun `create new folder`() = runBlocking {
+    fun `create new folder`() = runTest {
+        val viewModel = getViewModel()
+
         val folder = TestData.fakeFolder
         val name = folder.name
 
@@ -269,6 +289,7 @@ class TimerViewModelTest {
         whenever(getFolders()).thenReturn(folders)
 
         viewModel.createNewFolder(name)
+        testScheduler.advanceUntilIdle()
 
         verify(addFolder).invoke(folder.copy(id = FolderEntity.NEW_ID))
         verify(getFolders, times(2)).invoke()
@@ -280,16 +301,21 @@ class TimerViewModelTest {
     }
 
     @Test
-    fun `change folder name`() = runBlocking {
+    fun `change folder name`() = runTest {
+        val viewModel = getViewModel()
+
         val folder = TestData.fakeFolder
         val name = folder.name
 
         val folderId = folder.id
         viewModel.changeFolder(folderId)
+        testScheduler.advanceUntilIdle()
+
         verify(currentFolderIdObserver, times(2)).onChanged(any())
         verify(recentFolder).set(folderId)
 
         viewModel.changeCurrentFolderName(name)
+        testScheduler.advanceUntilIdle()
 
         verify(updateFolder).invoke(FolderEntity(folderId, name))
         verify(getFolders, times(2)).invoke()
@@ -300,10 +326,13 @@ class TimerViewModelTest {
     }
 
     @Test
-    fun `change sort by`() = runBlocking {
+    fun `change sort by`() = runTest {
+        val viewModel = getViewModel()
+
         val sortBy = FolderSortBy.values().random()
 
         viewModel.changeSortBy(sortBy)
+        testScheduler.advanceUntilIdle()
 
         verify(folderSortByRule).set(sortBy)
 
@@ -311,11 +340,14 @@ class TimerViewModelTest {
     }
 
     @Test
-    fun `move timer`() = runBlocking {
+    fun `move timer`() = runTest {
+        val viewModel = getViewModel()
+
         val timerId = TestData.fakeTimerId
         val folderId = folders.random().id
 
         viewModel.moveTimerToFolder(timerId = timerId, folderId = folderId)
+        testScheduler.advanceUntilIdle()
 
         verify(changeTimerFolder).invoke(
             ChangeTimerFolder.Params(
@@ -328,8 +360,12 @@ class TimerViewModelTest {
     }
 
     @Test
-    fun `delete the default folder`() = runBlocking {
+    fun `delete the default folder`() = runTest {
+        val viewModel = getViewModel()
+
         viewModel.deleteCurrentFolder()
+
+        testScheduler.advanceUntilIdle()
 
         verify(deleteFolder).invoke(FolderEntity.FOLDER_DEFAULT)
         verify(getFolders, times(2)).invoke()
@@ -339,14 +375,19 @@ class TimerViewModelTest {
     }
 
     @Test
-    fun `delete a normal folder`() = runBlocking {
+    fun `delete a normal folder`() = runTest {
+        val viewModel = getViewModel()
+
         val folderId = TestData.fakeFolderId
 
         viewModel.changeFolder(folderId)
+        testScheduler.advanceUntilIdle()
+
         verify(currentFolderIdObserver).onChanged(folderId)
         verify(recentFolder).set(folderId)
 
         viewModel.deleteCurrentFolder()
+        testScheduler.advanceUntilIdle()
 
         verify(deleteFolder).invoke(folderId)
         verify(getFolders, times(2)).invoke()

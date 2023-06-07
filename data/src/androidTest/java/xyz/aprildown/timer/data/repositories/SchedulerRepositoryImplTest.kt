@@ -1,7 +1,7 @@
 package xyz.aprildown.timer.data.repositories
 
 import androidx.test.core.app.ApplicationProvider
-import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.test.runTest
 import org.junit.After
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertNull
@@ -37,7 +37,7 @@ class SchedulerRepositoryImplTest {
         SchedulerRepositoryImpl(database.schedulerDao(), SchedulerMapper())
 
     @Before
-    fun setUp() = runBlocking {
+    fun setUp() = runTest {
         timerId = timerRepository.add(TestData.fakeTimerSimpleA)
     }
 
@@ -47,7 +47,7 @@ class SchedulerRepositoryImplTest {
     }
 
     @Test
-    fun items_item_add_schedulersWithTimerId() = runBlocking {
+    fun items_item_add_schedulersWithTimerId() = runTest {
         val list = arrayOf(
             TestData.fakeSchedulerA.copy(timerId = timerId),
             TestData.fakeSchedulerB.copy(timerId = timerId)
@@ -75,7 +75,7 @@ class SchedulerRepositoryImplTest {
     }
 
     @Test
-    fun save() = runBlocking {
+    fun save() = runTest {
         val id = schedulerRepository.add(TestData.fakeSchedulerA.copy(timerId = timerId))
 
         val item = schedulerRepository.item(id)
@@ -88,7 +88,7 @@ class SchedulerRepositoryImplTest {
     }
 
     @Test
-    fun delete() = runBlocking {
+    fun delete() = runTest {
         val id = schedulerRepository.add(TestData.fakeSchedulerA.copy(timerId = timerId))
 
         val item = schedulerRepository.item(id)
@@ -100,7 +100,7 @@ class SchedulerRepositoryImplTest {
     }
 
     @Test
-    fun setSchedulerEnable() = runBlocking {
+    fun setSchedulerEnable() = runTest {
         val id = schedulerRepository.add(
             TestData.fakeSchedulerA.copy(timerId = timerId, enable = 0)
         )

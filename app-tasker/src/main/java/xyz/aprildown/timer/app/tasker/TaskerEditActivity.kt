@@ -24,6 +24,7 @@ import dagger.hilt.EntryPoints
 import dagger.hilt.InstallIn
 import dagger.hilt.android.AndroidEntryPoint
 import dagger.hilt.components.SingletonComponent
+import kotlinx.coroutines.runBlocking
 import xyz.aprildown.timer.app.base.ui.AppNavigator
 import xyz.aprildown.timer.app.base.ui.BaseActivity
 import xyz.aprildown.timer.app.tasker.databinding.ActivityTaskerEditBinding
@@ -169,7 +170,7 @@ internal class TaskerTimerRunner : TaskerPluginRunnerAction<Unit, Unit>() {
 
         val bundle = input.dynamic.bundle
         val timerId = bundle.getTaskerTimerId()
-        if (!presenter.isValidTimerId(timerId)) {
+        if (!runBlocking { presenter.isValidTimerId(timerId) }) {
             return TaskerPluginResultError(IllegalArgumentException("Unable to find the timer"))
         }
         when (bundle.getTaskerTimerAction()) {

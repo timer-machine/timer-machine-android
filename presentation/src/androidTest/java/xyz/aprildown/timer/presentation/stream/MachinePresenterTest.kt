@@ -5,11 +5,10 @@ import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.filters.LargeTest
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
-import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.test.runTest
 import kotlinx.coroutines.withContext
 import org.junit.Assert.assertFalse
 import org.junit.Assert.assertTrue
-import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.mockito.kotlin.mock
@@ -22,6 +21,7 @@ import xyz.aprildown.timer.domain.repositories.AppDataRepository
 import xyz.aprildown.timer.domain.repositories.TimerRepository
 import xyz.aprildown.timer.domain.usecases.record.AddTimerStamp
 import xyz.aprildown.timer.domain.usecases.timer.GetTimer
+import kotlin.time.Duration.Companion.minutes
 
 @RunWith(AndroidJUnit4::class)
 @LargeTest
@@ -30,24 +30,25 @@ class MachinePresenterTest {
     private val timerRepository: TimerRepository = mock()
     private val appDataRepository: AppDataRepository = mock()
 
-    private val view = TestView()
-    private lateinit var presenter: MachineContract.Presenter
-
-    @Before
-    fun setUp() {
-        presenter = MachinePresenter(
-            testCoroutineDispatcher,
+    private fun getPresenterView(): Pair<MachinePresenter, TestView> {
+        val dispatcher = Dispatchers.Main.immediate
+        val presenter = MachinePresenter(
+            dispatcher,
             mock(),
-            GetTimer(testCoroutineDispatcher, timerRepository),
-            AddTimerStamp(testCoroutineDispatcher, mock(), mock(), appDataRepository),
+            GetTimer(dispatcher, timerRepository),
+            AddTimerStamp(dispatcher, mock(), mock(), appDataRepository),
             mock()
         )
+        val view = TestView()
         presenter.takeView(view)
         presenter.addAllListener(view)
+        return presenter to view
     }
 
     @Test
-    fun action1() = runBlocking {
+    fun action1() = runTest(timeout = 1.minutes) {
+        val (presenter, view) = getPresenterView()
+
         val t = TestData.fakeTimerSimpleB
         val id = t.id
         whenever(timerRepository.item(id)).thenReturn(t)
@@ -100,7 +101,6 @@ class MachinePresenterTest {
             assertFalse(view.vibrating)
             assertFalse(view.showingScreen)
             assertFalse(view.reading)
-            println("hey, ${view.remaining}")
             assertTrue(view.remaining in 59_800..60_100)
 
             presenter.resetTimer(id)

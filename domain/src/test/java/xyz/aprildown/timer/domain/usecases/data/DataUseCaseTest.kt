@@ -1,6 +1,8 @@
 package xyz.aprildown.timer.domain.usecases.data
 
-import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.test.StandardTestDispatcher
+import kotlinx.coroutines.test.TestScope
+import kotlinx.coroutines.test.runTest
 import org.junit.Assert.assertEquals
 import org.junit.Test
 import org.mockito.kotlin.any
@@ -15,12 +17,12 @@ import xyz.aprildown.timer.domain.entities.SchedulerEntity
 import xyz.aprildown.timer.domain.entities.TimerEntity
 import xyz.aprildown.timer.domain.entities.TimerStampEntity
 import xyz.aprildown.timer.domain.repositories.AppDataRepository
+import xyz.aprildown.timer.domain.repositories.AppPreferencesProvider
 import xyz.aprildown.timer.domain.repositories.FolderRepository
 import xyz.aprildown.timer.domain.repositories.NotifierRepository
 import xyz.aprildown.timer.domain.repositories.SchedulerRepository
 import xyz.aprildown.timer.domain.repositories.TimerRepository
 import xyz.aprildown.timer.domain.repositories.TimerStampRepository
-import xyz.aprildown.timer.domain.testCoroutineDispatcher
 
 class DataUseCaseTest {
 
@@ -30,6 +32,7 @@ class DataUseCaseTest {
     private val notifierRepository: NotifierRepository = mock()
     private val timerStampRepository: TimerStampRepository = mock()
     private val schedulerRepository: SchedulerRepository = mock()
+    private val appPreferencesProvider: AppPreferencesProvider = mock()
 
     private val appData = TestData.fakeAppData
     private val folders = appData.folders
@@ -45,11 +48,11 @@ class DataUseCaseTest {
     // region Export
 
     @Test
-    fun `export none`() = runBlocking {
+    fun `export none`() = runTest {
         val exportAppData = setUpExportExpectation()
         whenever(
             appDataRepository.collectData(
-                AppDataEntity(emptyList(), emptyList(), null, emptyList(), emptyList(), prefs)
+                AppDataEntity(emptyList(), emptyList(), null, emptyList(), emptyList(), emptyMap())
             )
         ).thenReturn(result)
         val r = exportAppData.execute(
@@ -57,7 +60,7 @@ class DataUseCaseTest {
                 exportTimers = false,
                 exportTimerStamps = false,
                 exportSchedulers = false,
-                prefs = prefs
+                exportPreferences = false,
             )
         )
         assertEquals(result, r)
@@ -67,10 +70,11 @@ class DataUseCaseTest {
         verifyNoMoreInteractions(notifierRepository)
         verifyNoMoreInteractions(timerStampRepository)
         verifyNoMoreInteractions(schedulerRepository)
+        verifyNoMoreInteractions(appPreferencesProvider)
     }
 
     @Test
-    fun `export timers`() = runBlocking {
+    fun `export timers`() = runTest {
         val exportAppData = setUpExportExpectation()
         whenever(
             appDataRepository.collectData(
@@ -82,7 +86,7 @@ class DataUseCaseTest {
                 exportTimers = true,
                 exportTimerStamps = false,
                 exportSchedulers = false,
-                prefs = prefs
+                exportPreferences = true,
             )
         )
         assertEquals(result, r)
@@ -99,10 +103,13 @@ class DataUseCaseTest {
         verifyNoMoreInteractions(timerStampRepository)
 
         verifyNoMoreInteractions(schedulerRepository)
+
+        verify(appPreferencesProvider).getAppPreferences()
+        verifyNoMoreInteractions(appPreferencesProvider)
     }
 
     @Test
-    fun `export timers and timer stamps`() = runBlocking {
+    fun `export timers and timer stamps`() = runTest {
         val exportAppData = setUpExportExpectation()
         whenever(
             appDataRepository.collectData(
@@ -114,7 +121,7 @@ class DataUseCaseTest {
                 exportTimers = true,
                 exportTimerStamps = true,
                 exportSchedulers = false,
-                prefs = prefs
+                exportPreferences = true,
             )
         )
         assertEquals(result, r)
@@ -132,10 +139,13 @@ class DataUseCaseTest {
         verifyNoMoreInteractions(timerStampRepository)
 
         verifyNoMoreInteractions(schedulerRepository)
+
+        verify(appPreferencesProvider).getAppPreferences()
+        verifyNoMoreInteractions(appPreferencesProvider)
     }
 
     @Test
-    fun `export timers and schedulers`() = runBlocking {
+    fun `export timers and schedulers`() = runTest {
         val exportAppData = setUpExportExpectation()
         whenever(
             appDataRepository.collectData(
@@ -147,7 +157,7 @@ class DataUseCaseTest {
                 exportTimers = true,
                 exportTimerStamps = false,
                 exportSchedulers = true,
-                prefs = prefs
+                exportPreferences = true,
             )
         )
         assertEquals(result, r)
@@ -165,10 +175,13 @@ class DataUseCaseTest {
 
         verify(schedulerRepository).items()
         verifyNoMoreInteractions(schedulerRepository)
+
+        verify(appPreferencesProvider).getAppPreferences()
+        verifyNoMoreInteractions(appPreferencesProvider)
     }
 
     @Test
-    fun `export all`() = runBlocking {
+    fun `export all`() = runTest {
         val exportAppData = setUpExportExpectation()
         whenever(
             appDataRepository.collectData(
@@ -180,7 +193,7 @@ class DataUseCaseTest {
                 exportTimers = true,
                 exportTimerStamps = true,
                 exportSchedulers = true,
-                prefs = prefs
+                exportPreferences = true,
             )
         )
         assertEquals(result, r)
@@ -199,6 +212,9 @@ class DataUseCaseTest {
 
         verify(schedulerRepository).items()
         verifyNoMoreInteractions(schedulerRepository)
+
+        verify(appPreferencesProvider).getAppPreferences()
+        verifyNoMoreInteractions(appPreferencesProvider)
     }
 
     @Test(expected = IllegalArgumentException::class)
@@ -207,7 +223,7 @@ class DataUseCaseTest {
             exportTimers = false,
             exportTimerStamps = true,
             exportSchedulers = false,
-            prefs = prefs
+            exportPreferences = false,
         )
     }
 
@@ -217,7 +233,7 @@ class DataUseCaseTest {
             exportTimers = false,
             exportTimerStamps = false,
             exportSchedulers = true,
-            prefs = prefs
+            exportPreferences = false,
         )
     }
 
@@ -227,24 +243,26 @@ class DataUseCaseTest {
             exportTimers = false,
             exportTimerStamps = true,
             exportSchedulers = true,
-            prefs = prefs
+            exportPreferences = false,
         )
     }
 
-    private suspend fun setUpExportExpectation(): ExportAppData {
+    private suspend fun TestScope.setUpExportExpectation(): ExportAppData {
         whenever(folderRepository.getFolders()).thenReturn(folders)
         whenever(timerRepository.items()).thenReturn(timers)
         whenever(timerStampRepository.getAll()).thenReturn(timerStamps)
         whenever(notifierRepository.get()).thenReturn(notifier)
         whenever(schedulerRepository.items()).thenReturn(schedulers)
+        whenever(appPreferencesProvider.getAppPreferences()).thenReturn(prefs)
         return ExportAppData(
-            testCoroutineDispatcher,
+            StandardTestDispatcher(testScheduler),
             appDataRepository,
             folderRepository,
             timerRepository,
             notifierRepository,
             timerStampRepository,
-            schedulerRepository
+            schedulerRepository,
+            appPreferencesProvider,
         )
     }
 
@@ -253,45 +271,46 @@ class DataUseCaseTest {
     // region Import
 
     @Test
-    fun `wipe nothing`() = runBlocking {
+    fun `wipe nothing`() = runTest {
         val newTimerId = TestData.fakeTimerId
         whenever(timerRepository.add(any())).thenReturn(newTimerId)
 
         val importAppData = setUpImportExpectation()
-        val p = importAppData.execute(
+        importAppData.execute(
             ImportAppData.Params(
                 data = result,
                 wipeFirst = false,
                 importTimers = false,
                 importTimerStamps = false,
-                importSchedulers = false
+                importSchedulers = false,
+                importPreferences = false,
             )
         )
-        assertEquals(prefs, p)
 
         verifyNoMoreInteractions(folderRepository)
         verifyNoMoreInteractions(timerRepository)
         verifyNoMoreInteractions(notifierRepository)
         verifyNoMoreInteractions(timerStampRepository)
         verifyNoMoreInteractions(schedulerRepository)
+        verifyNoMoreInteractions(appPreferencesProvider)
     }
 
     @Test
-    fun `wipe first`() = runBlocking {
+    fun `wipe first`() = runTest {
         val newTimerId = TestData.fakeTimerId
         whenever(timerRepository.add(any())).thenReturn(newTimerId)
 
         val importAppData = setUpImportExpectation()
-        val p = importAppData.execute(
+        importAppData.execute(
             ImportAppData.Params(
                 data = result,
                 wipeFirst = true,
                 importTimers = false,
                 importTimerStamps = false,
-                importSchedulers = false
+                importSchedulers = false,
+                importPreferences = false,
             )
         )
-        assertEquals(prefs, p)
 
         verify(folderRepository).getFolders()
         folders.forEach {
@@ -321,26 +340,28 @@ class DataUseCaseTest {
             verify(schedulerRepository).delete(it.id)
         }
         verifyNoMoreInteractions(schedulerRepository)
+
+        verifyNoMoreInteractions(appPreferencesProvider)
     }
 
     @Test
-    fun `import timers and don't wipe`() = runBlocking {
+    fun `import timers and don't wipe`() = runTest {
         val newFolderId = TestData.fakeFolderId
         whenever(folderRepository.addFolder(any())).thenReturn(newFolderId)
         val newTimerId = TestData.fakeTimerId
         whenever(timerRepository.add(any())).thenReturn(newTimerId)
 
         val importAppData = setUpImportExpectation()
-        val p = importAppData.execute(
+        importAppData.execute(
             ImportAppData.Params(
                 data = result,
                 wipeFirst = false,
                 importTimers = true,
                 importTimerStamps = false,
-                importSchedulers = false
+                importSchedulers = false,
+                importPreferences = false,
             )
         )
-        assertEquals(prefs, p)
 
         folders.forEach {
             if (!it.isTrash && !it.isDefault) {
@@ -372,26 +393,28 @@ class DataUseCaseTest {
         verifyNoMoreInteractions(timerStampRepository)
 
         verifyNoMoreInteractions(schedulerRepository)
+
+        verifyNoMoreInteractions(appPreferencesProvider)
     }
 
     @Test
-    fun `import timers and wipe first`() = runBlocking {
+    fun `import timers and wipe first`() = runTest {
         val newFolderId = TestData.fakeFolderId
         whenever(folderRepository.addFolder(any())).thenReturn(newFolderId)
         val newTimerId = TestData.fakeTimerId
         whenever(timerRepository.add(any())).thenReturn(newTimerId)
 
         val importAppData = setUpImportExpectation()
-        val p = importAppData.execute(
+        importAppData.execute(
             ImportAppData.Params(
                 data = result,
                 wipeFirst = true,
                 importTimers = true,
                 importTimerStamps = false,
-                importSchedulers = false
+                importSchedulers = false,
+                importPreferences = false,
             )
         )
-        assertEquals(prefs, p)
 
         verify(folderRepository).getFolders()
         folders.forEach {
@@ -436,26 +459,28 @@ class DataUseCaseTest {
             verify(schedulerRepository).delete(it.id)
         }
         verifyNoMoreInteractions(schedulerRepository)
+
+        verifyNoMoreInteractions(appPreferencesProvider)
     }
 
     @Test
-    fun `import timers and timer stamps and don't wipe`() = runBlocking {
+    fun `import timers and timer stamps and don't wipe`() = runTest {
         val newFolderId = TestData.fakeFolderId
         whenever(folderRepository.addFolder(any())).thenReturn(newFolderId)
         val newTimerId = TestData.fakeTimerId
         whenever(timerRepository.add(any())).thenReturn(newTimerId)
 
         val importAppData = setUpImportExpectation()
-        val p = importAppData.execute(
+        importAppData.execute(
             ImportAppData.Params(
                 data = result,
                 wipeFirst = false,
                 importTimers = true,
                 importTimerStamps = true,
-                importSchedulers = false
+                importSchedulers = false,
+                importPreferences = false,
             )
         )
-        assertEquals(prefs, p)
 
         folders.forEach {
             if (!it.isTrash && !it.isDefault) {
@@ -492,279 +517,28 @@ class DataUseCaseTest {
         verifyNoMoreInteractions(timerStampRepository)
 
         verifyNoMoreInteractions(schedulerRepository)
+
+        verifyNoMoreInteractions(appPreferencesProvider)
     }
 
     @Test
-    fun `import timers and timer stamps and wipe first`() = runBlocking {
+    fun `import timers and timer stamps and wipe first`() = runTest {
         val newFolderId = TestData.fakeFolderId
         whenever(folderRepository.addFolder(any())).thenReturn(newFolderId)
         val newTimerId = TestData.fakeTimerId
         whenever(timerRepository.add(any())).thenReturn(newTimerId)
 
         val importAppData = setUpImportExpectation()
-        val p = importAppData.execute(
+        importAppData.execute(
             ImportAppData.Params(
                 data = result,
                 wipeFirst = true,
                 importTimers = true,
                 importTimerStamps = true,
-                importSchedulers = false
+                importSchedulers = false,
+                importPreferences = false,
             )
         )
-        assertEquals(prefs, p)
-
-        verify(folderRepository).getFolders()
-        folders.forEach {
-            if (!it.isTrash && !it.isDefault) {
-                verify(folderRepository).deleteFolder(it.id)
-                verify(folderRepository).addFolder(it.copy(id = FolderEntity.NEW_ID))
-            }
-        }
-        verifyNoMoreInteractions(folderRepository)
-
-        verify(timerRepository).items()
-        timers.forEach {
-            val folderId = it.folderId
-            verify(timerRepository).delete(it.id)
-            verify(timerRepository).add(
-                it.copy(
-                    id = TimerEntity.NEW_ID,
-                    folderId = if (folderId == FolderEntity.FOLDER_DEFAULT ||
-                        folderId == FolderEntity.FOLDER_TRASH
-                    ) {
-                        folderId
-                    } else {
-                        newFolderId
-                    }
-                )
-            )
-        }
-        verifyNoMoreInteractions(timerRepository)
-
-        verify(notifierRepository).set(null)
-        verify(notifierRepository).set(notifier)
-        verifyNoMoreInteractions(notifierRepository)
-
-        verify(timerStampRepository).getAll()
-        timerStamps.forEach {
-            verify(timerStampRepository).delete(it.id)
-        }
-        timerStamps.forEach {
-            verify(timerStampRepository).add(
-                it.copy(id = TimerStampEntity.NEW_ID, timerId = newTimerId)
-            )
-        }
-        verifyNoMoreInteractions(timerStampRepository)
-
-        verify(schedulerRepository).items()
-        schedulers.forEach {
-            verify(schedulerRepository).delete(it.id)
-        }
-        verifyNoMoreInteractions(schedulerRepository)
-    }
-
-    @Test
-    fun `import timers and schedulers and don't wipe`() = runBlocking {
-        val newFolderId = TestData.fakeFolderId
-        whenever(folderRepository.addFolder(any())).thenReturn(newFolderId)
-        val newTimerId = TestData.fakeTimerId
-        whenever(timerRepository.add(any())).thenReturn(newTimerId)
-
-        val importAppData = setUpImportExpectation()
-        val p = importAppData.execute(
-            ImportAppData.Params(
-                data = result,
-                wipeFirst = false,
-                importTimers = true,
-                importTimerStamps = false,
-                importSchedulers = true
-            )
-        )
-        assertEquals(prefs, p)
-
-        folders.forEach {
-            if (!it.isTrash && !it.isDefault) {
-                verify(folderRepository).addFolder(it.copy(id = FolderEntity.NEW_ID))
-            }
-        }
-        verifyNoMoreInteractions(folderRepository)
-
-        timers.forEach {
-            val folderId = it.folderId
-            verify(timerRepository).add(
-                it.copy(
-                    id = TimerEntity.NEW_ID,
-                    folderId = if (folderId == FolderEntity.FOLDER_DEFAULT ||
-                        folderId == FolderEntity.FOLDER_TRASH
-                    ) {
-                        folderId
-                    } else {
-                        newFolderId
-                    }
-                )
-            )
-        }
-        verifyNoMoreInteractions(timerRepository)
-
-        verify(notifierRepository).set(notifier)
-        verifyNoMoreInteractions(notifierRepository)
-
-        verifyNoMoreInteractions(timerStampRepository)
-
-        schedulers.forEach {
-            verify(schedulerRepository).add(
-                it.copy(id = SchedulerEntity.NEW_ID, timerId = newTimerId, enable = 0)
-            )
-        }
-        verifyNoMoreInteractions(schedulerRepository)
-    }
-
-    @Test
-    fun `import timers and schedulers and wipe first`() = runBlocking {
-        val newFolderId = TestData.fakeFolderId
-        whenever(folderRepository.addFolder(any())).thenReturn(newFolderId)
-        val newTimerId = TestData.fakeTimerId
-        whenever(timerRepository.add(any())).thenReturn(newTimerId)
-
-        val importAppData = setUpImportExpectation()
-        val p = importAppData.execute(
-            ImportAppData.Params(
-                data = result,
-                wipeFirst = true,
-                importTimers = true,
-                importTimerStamps = false,
-                importSchedulers = true
-            )
-        )
-        assertEquals(prefs, p)
-
-        verify(folderRepository).getFolders()
-        folders.forEach {
-            if (!it.isTrash && !it.isDefault) {
-                verify(folderRepository).deleteFolder(it.id)
-                verify(folderRepository).addFolder(it.copy(id = FolderEntity.NEW_ID))
-            }
-        }
-        verifyNoMoreInteractions(folderRepository)
-
-        verify(timerRepository).items()
-        timers.forEach {
-            val folderId = it.folderId
-            verify(timerRepository).delete(it.id)
-            verify(timerRepository).add(
-                it.copy(
-                    id = TimerEntity.NEW_ID,
-                    folderId = if (folderId == FolderEntity.FOLDER_DEFAULT ||
-                        folderId == FolderEntity.FOLDER_TRASH
-                    ) {
-                        folderId
-                    } else {
-                        newFolderId
-                    }
-                )
-            )
-        }
-        verifyNoMoreInteractions(timerRepository)
-
-        verify(notifierRepository).set(null)
-        verify(notifierRepository).set(notifier)
-        verifyNoMoreInteractions(notifierRepository)
-
-        verify(timerStampRepository).getAll()
-        timerStamps.forEach {
-            verify(timerStampRepository).delete(it.id)
-        }
-        verifyNoMoreInteractions(timerStampRepository)
-
-        verify(schedulerRepository).items()
-        schedulers.forEach {
-            verify(schedulerRepository).delete(it.id)
-            verify(schedulerRepository).add(
-                it.copy(id = SchedulerEntity.NEW_ID, timerId = newTimerId, enable = 0)
-            )
-        }
-        verifyNoMoreInteractions(schedulerRepository)
-    }
-
-    @Test
-    fun `import all and don't wipe`() = runBlocking {
-        val newFolderId = TestData.fakeFolderId
-        whenever(folderRepository.addFolder(any())).thenReturn(newFolderId)
-        val newTimerId = TestData.fakeTimerId
-        whenever(timerRepository.add(any())).thenReturn(newTimerId)
-
-        val importAppData = setUpImportExpectation()
-        val p = importAppData.execute(
-            ImportAppData.Params(
-                data = result,
-                wipeFirst = false,
-                importTimers = true,
-                importTimerStamps = true,
-                importSchedulers = true
-            )
-        )
-        assertEquals(prefs, p)
-
-        folders.forEach {
-            if (!it.isTrash && !it.isDefault) {
-                verify(folderRepository).addFolder(it.copy(id = FolderEntity.NEW_ID))
-            }
-        }
-        verifyNoMoreInteractions(folderRepository)
-
-        timers.forEach {
-            val folderId = it.folderId
-            verify(timerRepository).add(
-                it.copy(
-                    id = TimerEntity.NEW_ID,
-                    folderId = if (folderId == FolderEntity.FOLDER_DEFAULT ||
-                        folderId == FolderEntity.FOLDER_TRASH
-                    ) {
-                        folderId
-                    } else {
-                        newFolderId
-                    }
-                )
-            )
-        }
-        verifyNoMoreInteractions(timerRepository)
-
-        verify(notifierRepository).set(notifier)
-        verifyNoMoreInteractions(notifierRepository)
-
-        timerStamps.forEach {
-            verify(timerStampRepository).add(
-                it.copy(id = TimerStampEntity.NEW_ID, timerId = newTimerId)
-            )
-        }
-        verifyNoMoreInteractions(timerStampRepository)
-
-        schedulers.forEach {
-            verify(schedulerRepository).add(
-                it.copy(id = SchedulerEntity.NEW_ID, timerId = newTimerId, enable = 0)
-            )
-        }
-        verifyNoMoreInteractions(schedulerRepository)
-    }
-
-    @Test
-    fun `import all and wipe first`() = runBlocking {
-        val newFolderId = TestData.fakeFolderId
-        whenever(folderRepository.addFolder(any())).thenReturn(newFolderId)
-        val newTimerId = TestData.fakeTimerId
-        whenever(timerRepository.add(any())).thenReturn(newTimerId)
-
-        val importAppData = setUpImportExpectation()
-        val p = importAppData.execute(
-            ImportAppData.Params(
-                data = result,
-                wipeFirst = true,
-                importTimers = true,
-                importTimerStamps = true,
-                importSchedulers = true
-            )
-        )
-        assertEquals(prefs, p)
 
         verify(folderRepository).getFolders()
         folders.forEach {
@@ -812,11 +586,276 @@ class DataUseCaseTest {
         verify(schedulerRepository).items()
         schedulers.forEach {
             verify(schedulerRepository).delete(it.id)
+        }
+        verifyNoMoreInteractions(schedulerRepository)
+
+        verifyNoMoreInteractions(appPreferencesProvider)
+    }
+
+    @Test
+    fun `import timers and schedulers and don't wipe`() = runTest {
+        val newFolderId = TestData.fakeFolderId
+        whenever(folderRepository.addFolder(any())).thenReturn(newFolderId)
+        val newTimerId = TestData.fakeTimerId
+        whenever(timerRepository.add(any())).thenReturn(newTimerId)
+
+        val importAppData = setUpImportExpectation()
+        importAppData.execute(
+            ImportAppData.Params(
+                data = result,
+                wipeFirst = false,
+                importTimers = true,
+                importTimerStamps = false,
+                importSchedulers = true,
+                importPreferences = false,
+            )
+        )
+
+        folders.forEach {
+            if (!it.isTrash && !it.isDefault) {
+                verify(folderRepository).addFolder(it.copy(id = FolderEntity.NEW_ID))
+            }
+        }
+        verifyNoMoreInteractions(folderRepository)
+
+        timers.forEach {
+            val folderId = it.folderId
+            verify(timerRepository).add(
+                it.copy(
+                    id = TimerEntity.NEW_ID,
+                    folderId = if (folderId == FolderEntity.FOLDER_DEFAULT ||
+                        folderId == FolderEntity.FOLDER_TRASH
+                    ) {
+                        folderId
+                    } else {
+                        newFolderId
+                    }
+                )
+            )
+        }
+        verifyNoMoreInteractions(timerRepository)
+
+        verify(notifierRepository).set(notifier)
+        verifyNoMoreInteractions(notifierRepository)
+
+        verifyNoMoreInteractions(timerStampRepository)
+
+        schedulers.forEach {
             verify(schedulerRepository).add(
                 it.copy(id = SchedulerEntity.NEW_ID, timerId = newTimerId, enable = 0)
             )
         }
         verifyNoMoreInteractions(schedulerRepository)
+
+        verifyNoMoreInteractions(appPreferencesProvider)
+    }
+
+    @Test
+    fun `import timers and schedulers and wipe first`() = runTest {
+        val newFolderId = TestData.fakeFolderId
+        whenever(folderRepository.addFolder(any())).thenReturn(newFolderId)
+        val newTimerId = TestData.fakeTimerId
+        whenever(timerRepository.add(any())).thenReturn(newTimerId)
+
+        val importAppData = setUpImportExpectation()
+        importAppData.execute(
+            ImportAppData.Params(
+                data = result,
+                wipeFirst = true,
+                importTimers = true,
+                importTimerStamps = false,
+                importSchedulers = true,
+                importPreferences = false,
+            )
+        )
+
+        verify(folderRepository).getFolders()
+        folders.forEach {
+            if (!it.isTrash && !it.isDefault) {
+                verify(folderRepository).deleteFolder(it.id)
+                verify(folderRepository).addFolder(it.copy(id = FolderEntity.NEW_ID))
+            }
+        }
+        verifyNoMoreInteractions(folderRepository)
+
+        verify(timerRepository).items()
+        timers.forEach {
+            val folderId = it.folderId
+            verify(timerRepository).delete(it.id)
+            verify(timerRepository).add(
+                it.copy(
+                    id = TimerEntity.NEW_ID,
+                    folderId = if (folderId == FolderEntity.FOLDER_DEFAULT ||
+                        folderId == FolderEntity.FOLDER_TRASH
+                    ) {
+                        folderId
+                    } else {
+                        newFolderId
+                    }
+                )
+            )
+        }
+        verifyNoMoreInteractions(timerRepository)
+
+        verify(notifierRepository).set(null)
+        verify(notifierRepository).set(notifier)
+        verifyNoMoreInteractions(notifierRepository)
+
+        verify(timerStampRepository).getAll()
+        timerStamps.forEach {
+            verify(timerStampRepository).delete(it.id)
+        }
+        verifyNoMoreInteractions(timerStampRepository)
+
+        verify(schedulerRepository).items()
+        schedulers.forEach {
+            verify(schedulerRepository).delete(it.id)
+            verify(schedulerRepository).add(
+                it.copy(id = SchedulerEntity.NEW_ID, timerId = newTimerId, enable = 0)
+            )
+        }
+        verifyNoMoreInteractions(schedulerRepository)
+
+        verifyNoMoreInteractions(appPreferencesProvider)
+    }
+
+    @Test
+    fun `import all and don't wipe`() = runTest {
+        val newFolderId = TestData.fakeFolderId
+        whenever(folderRepository.addFolder(any())).thenReturn(newFolderId)
+        val newTimerId = TestData.fakeTimerId
+        whenever(timerRepository.add(any())).thenReturn(newTimerId)
+
+        val importAppData = setUpImportExpectation()
+        importAppData.execute(
+            ImportAppData.Params(
+                data = result,
+                wipeFirst = false,
+                importTimers = true,
+                importTimerStamps = true,
+                importSchedulers = true,
+                importPreferences = true,
+            )
+        )
+
+        folders.forEach {
+            if (!it.isTrash && !it.isDefault) {
+                verify(folderRepository).addFolder(it.copy(id = FolderEntity.NEW_ID))
+            }
+        }
+        verifyNoMoreInteractions(folderRepository)
+
+        timers.forEach {
+            val folderId = it.folderId
+            verify(timerRepository).add(
+                it.copy(
+                    id = TimerEntity.NEW_ID,
+                    folderId = if (folderId == FolderEntity.FOLDER_DEFAULT ||
+                        folderId == FolderEntity.FOLDER_TRASH
+                    ) {
+                        folderId
+                    } else {
+                        newFolderId
+                    }
+                )
+            )
+        }
+        verifyNoMoreInteractions(timerRepository)
+
+        verify(notifierRepository).set(notifier)
+        verifyNoMoreInteractions(notifierRepository)
+
+        timerStamps.forEach {
+            verify(timerStampRepository).add(
+                it.copy(id = TimerStampEntity.NEW_ID, timerId = newTimerId)
+            )
+        }
+        verifyNoMoreInteractions(timerStampRepository)
+
+        schedulers.forEach {
+            verify(schedulerRepository).add(
+                it.copy(id = SchedulerEntity.NEW_ID, timerId = newTimerId, enable = 0)
+            )
+        }
+        verifyNoMoreInteractions(schedulerRepository)
+
+        verify(appPreferencesProvider).applyAppPreferences(prefs)
+        verifyNoMoreInteractions(appPreferencesProvider)
+    }
+
+    @Test
+    fun `import all and wipe first`() = runTest {
+        val newFolderId = TestData.fakeFolderId
+        whenever(folderRepository.addFolder(any())).thenReturn(newFolderId)
+        val newTimerId = TestData.fakeTimerId
+        whenever(timerRepository.add(any())).thenReturn(newTimerId)
+
+        val importAppData = setUpImportExpectation()
+        importAppData.execute(
+            ImportAppData.Params(
+                data = result,
+                wipeFirst = true,
+                importTimers = true,
+                importTimerStamps = true,
+                importSchedulers = true,
+                importPreferences = true,
+            )
+        )
+
+        verify(folderRepository).getFolders()
+        folders.forEach {
+            if (!it.isTrash && !it.isDefault) {
+                verify(folderRepository).deleteFolder(it.id)
+                verify(folderRepository).addFolder(it.copy(id = FolderEntity.NEW_ID))
+            }
+        }
+        verifyNoMoreInteractions(folderRepository)
+
+        verify(timerRepository).items()
+        timers.forEach {
+            val folderId = it.folderId
+            verify(timerRepository).delete(it.id)
+            verify(timerRepository).add(
+                it.copy(
+                    id = TimerEntity.NEW_ID,
+                    folderId = if (folderId == FolderEntity.FOLDER_DEFAULT ||
+                        folderId == FolderEntity.FOLDER_TRASH
+                    ) {
+                        folderId
+                    } else {
+                        newFolderId
+                    }
+                )
+            )
+        }
+        verifyNoMoreInteractions(timerRepository)
+
+        verify(notifierRepository).set(null)
+        verify(notifierRepository).set(notifier)
+        verifyNoMoreInteractions(notifierRepository)
+
+        verify(timerStampRepository).getAll()
+        timerStamps.forEach {
+            verify(timerStampRepository).delete(it.id)
+        }
+        timerStamps.forEach {
+            verify(timerStampRepository).add(
+                it.copy(id = TimerStampEntity.NEW_ID, timerId = newTimerId)
+            )
+        }
+        verifyNoMoreInteractions(timerStampRepository)
+
+        verify(schedulerRepository).items()
+        schedulers.forEach {
+            verify(schedulerRepository).delete(it.id)
+            verify(schedulerRepository).add(
+                it.copy(id = SchedulerEntity.NEW_ID, timerId = newTimerId, enable = 0)
+            )
+        }
+        verifyNoMoreInteractions(schedulerRepository)
+
+        verify(appPreferencesProvider).applyAppPreferences(prefs)
+        verifyNoMoreInteractions(appPreferencesProvider)
     }
 
     @Test(expected = IllegalArgumentException::class)
@@ -826,7 +865,8 @@ class DataUseCaseTest {
             wipeFirst = true,
             importTimers = false,
             importTimerStamps = true,
-            importSchedulers = false
+            importSchedulers = false,
+            importPreferences = false,
         )
     }
 
@@ -837,7 +877,8 @@ class DataUseCaseTest {
             wipeFirst = false,
             importTimers = false,
             importTimerStamps = true,
-            importSchedulers = false
+            importSchedulers = false,
+            importPreferences = false,
         )
     }
 
@@ -848,7 +889,8 @@ class DataUseCaseTest {
             wipeFirst = true,
             importTimers = false,
             importTimerStamps = false,
-            importSchedulers = true
+            importSchedulers = true,
+            importPreferences = false,
         )
     }
 
@@ -859,7 +901,8 @@ class DataUseCaseTest {
             wipeFirst = false,
             importTimers = false,
             importTimerStamps = false,
-            importSchedulers = true
+            importSchedulers = true,
+            importPreferences = false,
         )
     }
 
@@ -870,7 +913,8 @@ class DataUseCaseTest {
             wipeFirst = true,
             importTimers = false,
             importTimerStamps = true,
-            importSchedulers = true
+            importSchedulers = true,
+            importPreferences = false,
         )
     }
 
@@ -881,11 +925,12 @@ class DataUseCaseTest {
             wipeFirst = false,
             importTimers = false,
             importTimerStamps = true,
-            importSchedulers = true
+            importSchedulers = true,
+            importPreferences = false,
         )
     }
 
-    private suspend fun setUpImportExpectation(): ImportAppData {
+    private suspend fun TestScope.setUpImportExpectation(): ImportAppData {
         whenever(folderRepository.getFolders()).thenReturn(folders)
         whenever(timerRepository.items()).thenReturn(timers)
         whenever(timerStampRepository.getAll()).thenReturn(timerStamps)
@@ -894,23 +939,16 @@ class DataUseCaseTest {
             AppDataEntity(folders, timers, notifier, timerStamps, schedulers, prefs)
         )
         return ImportAppData(
-            testCoroutineDispatcher,
+            StandardTestDispatcher(testScheduler),
             appDataRepository,
             folderRepository,
             timerRepository,
             notifierRepository,
             timerStampRepository,
-            schedulerRepository
+            schedulerRepository,
+            appPreferencesProvider,
         )
     }
 
     // endregion Import
-
-    @Test
-    fun `notify data changed`() = runBlocking {
-        val useCase = NotifyDataChanged(appDataRepository)
-        useCase.invoke()
-        verify(appDataRepository).notifyDataChanged()
-        verifyNoMoreInteractions(appDataRepository)
-    }
 }

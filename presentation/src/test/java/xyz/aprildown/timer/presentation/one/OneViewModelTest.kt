@@ -4,10 +4,11 @@ import android.content.Intent
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.Observer
 import com.github.deweyreed.tools.arch.Event
-import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.test.StandardTestDispatcher
+import kotlinx.coroutines.test.TestScope
+import kotlinx.coroutines.test.runTest
 import org.junit.Assert
 import org.junit.Assert.assertEquals
-import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import org.mockito.kotlin.any
@@ -30,7 +31,6 @@ import xyz.aprildown.timer.presentation.stream.MachineContract
 import xyz.aprildown.timer.presentation.stream.StreamState
 import xyz.aprildown.timer.presentation.stream.TimerIndex
 import xyz.aprildown.timer.presentation.stream.getFirstIndex
-import xyz.aprildown.timer.presentation.testCoroutineDispatcher
 
 class OneViewModelTest {
 
@@ -48,30 +48,32 @@ class OneViewModelTest {
 
     private val presenter: MachineContract.Presenter = mock()
 
-    private lateinit var viewModel: OneViewModel
-
-    @Before
-    fun setUp() {
-        viewModel = OneViewModel(
-            testCoroutineDispatcher,
-            GetTimer(testCoroutineDispatcher, timerRepository),
-            SaveTimer(testCoroutineDispatcher, timerRepository, appDataRepository),
-            FindTimerInfo(testCoroutineDispatcher, timerRepository),
+    private fun TestScope.getViewModel(): OneViewModel {
+        val dispatcher = StandardTestDispatcher(testScheduler)
+        val viewModel = OneViewModel(
+            dispatcher,
+            GetTimer(dispatcher, timerRepository),
+            SaveTimer(dispatcher, timerRepository, appDataRepository),
+            FindTimerInfo(dispatcher, timerRepository),
             intentProvider,
             mock()
         )
         viewModel.timer.observeForever(timerObserver)
         viewModel.editTimerEvent.observeForever(editTimerObserver)
         viewModel.intentEvent.observeForever(serviceTriggerObserver)
+        return viewModel
     }
 
     @Test
-    fun load() = runBlocking {
+    fun load() = runTest {
+        val viewModel = getViewModel()
         val t = TestData.fakeTimerAdvanced
         whenever(timerRepository.item(t.id)).thenReturn(t)
         whenever(presenter.getTimerStateInfo(t.id)).thenReturn(null)
         viewModel.setTimerId(t.id)
         viewModel.setPresenter(presenter)
+
+        testScheduler.advanceUntilIdle()
 
         verify(presenter).addListener(t.id, viewModel)
 
@@ -92,7 +94,8 @@ class OneViewModelTest {
     }
 
     @Test
-    fun actions() {
+    fun actions() = runTest {
+        val viewModel = getViewModel()
         val id = TestData.fakeTimerId
         viewModel.setTimerId(id)
         val startIntent = Intent()
@@ -187,7 +190,8 @@ class OneViewModelTest {
     }
 
     @Test
-    fun action_edit() {
+    fun action_edit() = runTest {
+        val viewModel = getViewModel()
         val id = TestData.fakeTimerId
         viewModel.setTimerId(id)
         viewModel.onEdit()
@@ -199,7 +203,8 @@ class OneViewModelTest {
     }
 
     @Test
-    fun `action update start step`() = runBlocking {
+    fun `action update start step`() = runTest {
+        val viewModel = getViewModel()
         val t = TestData.fakeTimerAdvanced
         whenever(timerRepository.save(any())).thenReturn(true)
         val newStep = TestData.fakeStepB
@@ -213,7 +218,8 @@ class OneViewModelTest {
     }
 
     @Test
-    fun `action update end step`() = runBlocking {
+    fun `action update end step`() = runTest {
+        val viewModel = getViewModel()
         val t = TestData.fakeTimerAdvanced
         whenever(timerRepository.save(any())).thenReturn(true)
         val newStep = TestData.fakeStepB
@@ -227,7 +233,8 @@ class OneViewModelTest {
     }
 
     @Test
-    fun `action update normal step`() = runBlocking {
+    fun `action update normal step`() = runTest {
+        val viewModel = getViewModel()
         val t = TestData.fakeTimerAdvanced
         whenever(timerRepository.save(any())).thenReturn(true)
         val newStep = TestData.fakeStepB
@@ -244,7 +251,8 @@ class OneViewModelTest {
     }
 
     @Test
-    fun `action update group step`() = runBlocking {
+    fun `action update group step`() = runTest {
+        val viewModel = getViewModel()
         val t = TestData.fakeTimerAdvanced
         whenever(timerRepository.save(any())).thenReturn(true)
         val newStep = TestData.fakeStepA

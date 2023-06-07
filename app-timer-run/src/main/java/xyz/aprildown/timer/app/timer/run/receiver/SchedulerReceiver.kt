@@ -9,6 +9,7 @@ import androidx.core.content.ContextCompat
 import androidx.core.content.getSystemService
 import com.github.deweyreed.tools.helper.HandlerHelper
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.runBlocking
 import xyz.aprildown.timer.app.timer.run.MachineService
 import xyz.aprildown.timer.data.job.SchedulerJob
 import xyz.aprildown.timer.data.job.SchedulerJob.Companion.EXTRA_ACTION
@@ -33,8 +34,10 @@ class SchedulerReceiver : BroadcastReceiver() {
         val schedulerId = intent.getIntExtra(EXTRA_ID, SchedulerEntity.NULL_ID)
         when (intent.getIntExtra(EXTRA_ACTION, -1)) {
             SchedulerEntity.ACTION_START -> {
-                val timerId = presenter.handleFiredScheduler(schedulerId)
-                if (timerId != TimerEntity.NULL_ID && presenter.isValidTimerId(timerId)) {
+                val timerId = runBlocking { presenter.handleFiredScheduler(schedulerId) }
+                if (timerId != TimerEntity.NULL_ID &&
+                    runBlocking { presenter.isValidTimerId(timerId) }
+                ) {
                     // https://proandroiddev.com/when-your-app-makes-android-foreground-services-misbehave-8dbcc57dd99c
                     HandlerHelper.post {
                         ContextCompat.startForegroundService(
@@ -45,8 +48,10 @@ class SchedulerReceiver : BroadcastReceiver() {
                 }
             }
             SchedulerEntity.ACTION_END -> {
-                val timerId = presenter.handleFiredScheduler(schedulerId)
-                if (timerId != TimerEntity.NULL_ID && presenter.isValidTimerId(timerId)) {
+                val timerId = runBlocking { presenter.handleFiredScheduler(schedulerId) }
+                if (timerId != TimerEntity.NULL_ID &&
+                    runBlocking { presenter.isValidTimerId(timerId) }
+                ) {
                     fun sendStopIntent() {
                         HandlerHelper.post {
                             ContextCompat.startForegroundService(

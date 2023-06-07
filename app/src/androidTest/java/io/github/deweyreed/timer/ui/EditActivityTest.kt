@@ -27,10 +27,10 @@ import dagger.hilt.android.testing.HiltAndroidTest
 import io.github.deweyreed.timer.TestDataModule
 import kotlinx.coroutines.runBlocking
 import org.hamcrest.Matcher
-import org.hamcrest.Matchers.`is`
 import org.hamcrest.Matchers.allOf
 import org.hamcrest.Matchers.containsString
 import org.hamcrest.Matchers.endsWith
+import org.hamcrest.Matchers.`is`
 import org.junit.After
 import org.junit.Assert.assertEquals
 import org.junit.Before

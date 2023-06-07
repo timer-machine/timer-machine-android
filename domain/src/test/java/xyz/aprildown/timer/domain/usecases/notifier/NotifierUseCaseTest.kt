@@ -1,6 +1,7 @@
 package xyz.aprildown.timer.domain.usecases.notifier
 
-import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.test.StandardTestDispatcher
+import kotlinx.coroutines.test.runTest
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertTrue
 import org.junit.Test
@@ -11,7 +12,6 @@ import org.mockito.kotlin.whenever
 import xyz.aprildown.timer.domain.TestData
 import xyz.aprildown.timer.domain.repositories.AppDataRepository
 import xyz.aprildown.timer.domain.repositories.NotifierRepository
-import xyz.aprildown.timer.domain.testCoroutineDispatcher
 import xyz.aprildown.timer.domain.usecases.invoke
 
 class NotifierUseCaseTest {
@@ -21,9 +21,12 @@ class NotifierUseCaseTest {
     private var step = TestData.fakeStepA
 
     @Test
-    fun get() = runBlocking {
+    fun get() = runTest {
         whenever(notifierRepository.get()).thenReturn(step)
-        assertEquals(step, GetNotifier(testCoroutineDispatcher, notifierRepository).invoke())
+        assertEquals(
+            step,
+            GetNotifier(StandardTestDispatcher(testScheduler), notifierRepository).invoke()
+        )
         verify(notifierRepository).get()
 
         verifyNoMoreInteractions(notifierRepository)
@@ -31,9 +34,13 @@ class NotifierUseCaseTest {
     }
 
     @Test
-    fun save() = runBlocking {
+    fun save() = runTest {
         whenever(notifierRepository.set(step)).thenReturn(true)
-        val useCase = SaveNotifier(testCoroutineDispatcher, notifierRepository, appDataRepository)
+        val useCase = SaveNotifier(
+            StandardTestDispatcher(testScheduler),
+            notifierRepository,
+            appDataRepository
+        )
 
         assertTrue(useCase.execute(step))
         verify(notifierRepository).set(step)

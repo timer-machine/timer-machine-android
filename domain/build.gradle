@@ -28,6 +28,7 @@ dependencies {
     api libs.kotlin_coroutines_core
     api libs.kotlin_coroutines_android
 
+    testImplementation libs.kotlin_coroutines_test
     testImplementation libs.junit
     testImplementation libs.mockito
     testImplementation libs.mockito_inline

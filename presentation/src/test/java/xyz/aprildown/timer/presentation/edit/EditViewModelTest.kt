@@ -3,12 +3,13 @@ package xyz.aprildown.timer.presentation.edit
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.Observer
 import com.github.deweyreed.tools.arch.Event
-import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.test.StandardTestDispatcher
+import kotlinx.coroutines.test.TestScope
+import kotlinx.coroutines.test.runTest
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertFalse
 import org.junit.Assert.assertNull
 import org.junit.Assert.assertTrue
-import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import org.mockito.kotlin.argumentCaptor
@@ -36,7 +37,6 @@ import xyz.aprildown.timer.domain.usecases.timer.FindTimerInfo
 import xyz.aprildown.timer.domain.usecases.timer.GetTimer
 import xyz.aprildown.timer.domain.usecases.timer.SaveTimer
 import xyz.aprildown.timer.presentation.R
-import xyz.aprildown.timer.presentation.testCoroutineDispatcher
 
 class EditViewModelTest {
 
@@ -56,12 +56,9 @@ class EditViewModelTest {
     private val startEndLoaderObserver: Observer<Event<Pair<StepEntity?, StepEntity?>>> = mock()
     private val timerInfoObserver: Observer<Event<TimerInfo?>> = mock()
 
-    private lateinit var viewModel: EditViewModel
-
-    @Before
-    fun setUp() {
-        viewModel = EditViewModel(
-            mainDispatcher = testCoroutineDispatcher,
+    private fun TestScope.getViewModel(): EditViewModel {
+        val viewModel = EditViewModel(
+            mainDispatcher = StandardTestDispatcher(testScheduler),
             addTimer = addTimer,
             saveTimer = saveTimer,
             deleteTimer = { deleteTimer },
@@ -76,10 +73,12 @@ class EditViewModelTest {
         viewModel.updatedEvent.observeForever(timerUpdatedObserver)
         viewModel.startEndEvent.observeForever(startEndLoaderObserver)
         viewModel.timerInfoEvent.observeForever(timerInfoObserver)
+        return viewModel
     }
 
     @Test
-    fun notifier() = runBlocking {
+    fun notifier() = runTest {
+        val viewModel = getViewModel()
         whenever(getNotifier()).thenReturn(TestData.fakeStepC)
         viewModel.loadStoredNotifierStep().join()
         assertEquals(viewModel.notifier, TestData.fakeStepC)
@@ -88,7 +87,8 @@ class EditViewModelTest {
     }
 
     @Test
-    fun add_wrongCases() = runBlocking {
+    fun add_wrongCases() = runTest {
+        val viewModel = getViewModel()
         viewModel.init(TimerEntity.NEW_ID, FolderEntity.FOLDER_DEFAULT)
         assertTrue(viewModel.isNewTimer)
 
@@ -135,7 +135,7 @@ class EditViewModelTest {
         viewModel.more.value = new.more
         viewModel.saveTimer(new.steps, new.startStep, new.endStep)?.join()
         verify(addTimer).invoke(new.copy(id = TimerEntity.NEW_ID))
-        argumentCaptor<Int> {
+        argumentCaptor {
             verify(timerUpdatedObserver).onChanged(capture())
             assertEquals(1, allValues.size)
             assertEquals(EditViewModel.UPDATE_CREATE, firstValue)
@@ -145,7 +145,8 @@ class EditViewModelTest {
     }
 
     @Test
-    fun save() = runBlocking {
+    fun save() = runTest {
+        val viewModel = getViewModel()
         val old = TestData.fakeTimerSimpleA
         val new = TestData.fakeTimerAdvanced.copy(id = old.id)
 
@@ -171,7 +172,7 @@ class EditViewModelTest {
         viewModel.more.value = new.more
         viewModel.saveTimer(new.steps, new.startStep, new.endStep)?.join()
         verify(saveTimer).invoke(new)
-        argumentCaptor<Int> {
+        argumentCaptor {
             verify(timerUpdatedObserver).onChanged(capture())
             assertEquals(1, allValues.size)
             assertEquals(EditViewModel.UPDATE_UPDATE, firstValue)
@@ -181,7 +182,8 @@ class EditViewModelTest {
     }
 
     @Test
-    fun `load timer info`() = runBlocking {
+    fun `load timer info`() = runTest {
+        val viewModel = getViewModel()
         val timer = TestData.fakeTimerSimpleA
         val timerId = timer.id
         whenever(findTimerInfo.invoke(timerId)).thenReturn(timer.toTimerInfo())
@@ -199,14 +201,15 @@ class EditViewModelTest {
     }
 
     @Test
-    fun delete() = runBlocking {
+    fun delete() = runTest {
+        val viewModel = getViewModel()
         val timer = TestData.fakeTimerSimpleA
 
         viewModel.init(timer.id, timer.folderId)
         viewModel.deleteTimer().join()
 
         verify(deleteTimer).invoke(timer.id)
-        argumentCaptor<Int> {
+        argumentCaptor {
             verify(timerUpdatedObserver).onChanged(capture())
             assertEquals(1, allValues.size)
             assertEquals(EditViewModel.UPDATE_DELETE, firstValue)
@@ -216,7 +219,8 @@ class EditViewModelTest {
     }
 
     @Test
-    fun `same new`() = runBlocking {
+    fun `same new`() = runTest {
+        val viewModel = getViewModel()
         viewModel.init(TimerEntity.NEW_ID, FolderEntity.FOLDER_DEFAULT)
         viewModel.loadTimerData()?.join()
         val newSteps = listOf(StepEntity.Step("", 60_000, listOf()))
@@ -226,7 +230,8 @@ class EditViewModelTest {
     }
 
     @Test
-    fun `same new edit name`() = runBlocking {
+    fun `same new edit name`() = runTest {
+        val viewModel = getViewModel()
         viewModel.init(TimerEntity.NEW_ID, FolderEntity.FOLDER_DEFAULT)
         viewModel.loadTimerData()
         viewModel.name.value = "abc"
@@ -237,7 +242,8 @@ class EditViewModelTest {
     }
 
     @Test
-    fun `same test new edit loop`() = runBlocking {
+    fun `same test new edit loop`() = runTest {
+        val viewModel = getViewModel()
         viewModel.init(TimerEntity.NEW_ID, FolderEntity.FOLDER_DEFAULT)
         viewModel.loadTimerData()
         viewModel.loop.value = 1
@@ -248,7 +254,8 @@ class EditViewModelTest {
     }
 
     @Test
-    fun `same new edit more`() = runBlocking {
+    fun `same new edit more`() = runTest {
+        val viewModel = getViewModel()
         viewModel.init(TimerEntity.NEW_ID, FolderEntity.FOLDER_DEFAULT)
         viewModel.loadTimerData()
         viewModel.more.value = TimerMoreEntity(showNotif = false, notifCount = false)
@@ -259,7 +266,8 @@ class EditViewModelTest {
     }
 
     @Test
-    fun `same new edit steps`() = runBlocking {
+    fun `same new edit steps`() = runTest {
+        val viewModel = getViewModel()
         viewModel.init(TimerEntity.NEW_ID, FolderEntity.FOLDER_DEFAULT)
         viewModel.loadTimerData()
         assertFalse(viewModel.isTimerRemainingSame(listOf(StepEntity.Step("", 60_001, listOf()))))
@@ -280,7 +288,8 @@ class EditViewModelTest {
     }
 
     @Test
-    fun `same old`() = runBlocking {
+    fun `same old`() = runTest {
+        val viewModel = getViewModel()
         val timer = TestData.fakeTimerAdvanced
         whenever(getTimer(timer.id)).thenReturn(timer)
         viewModel.init(timer.id, timer.folderId)
@@ -298,7 +307,8 @@ class EditViewModelTest {
     }
 
     @Test
-    fun `same old edit name`() = runBlocking {
+    fun `same old edit name`() = runTest {
+        val viewModel = getViewModel()
         val timer = TestData.fakeTimerAdvanced
         whenever(getTimer(timer.id)).thenReturn(timer)
         viewModel.init(timer.id, timer.folderId)
@@ -317,7 +327,8 @@ class EditViewModelTest {
     }
 
     @Test
-    fun `same old edit loop`() = runBlocking {
+    fun `same old edit loop`() = runTest {
+        val viewModel = getViewModel()
         val timer = TestData.fakeTimerAdvanced
         whenever(getTimer(timer.id)).thenReturn(timer)
         viewModel.init(timer.id, timer.folderId)
@@ -336,7 +347,8 @@ class EditViewModelTest {
     }
 
     @Test
-    fun `same old edit more`() = runBlocking {
+    fun `same old edit more`() = runTest {
+        val viewModel = getViewModel()
         val timer = TestData.fakeTimerAdvanced
         whenever(getTimer(timer.id)).thenReturn(timer)
         viewModel.init(timer.id, timer.folderId)
@@ -355,7 +367,8 @@ class EditViewModelTest {
     }
 
     @Test
-    fun `same old edit steps`() = runBlocking {
+    fun `same old edit steps`() = runTest {
+        val viewModel = getViewModel()
         val timer = TestData.fakeTimerAdvanced
         whenever(getTimer(timer.id)).thenReturn(timer)
         viewModel.init(timer.id, timer.folderId)
@@ -382,7 +395,8 @@ class EditViewModelTest {
     }
 
     @Test
-    fun saveNotifier() = runBlocking {
+    fun saveNotifier() = runTest {
+        val viewModel = getViewModel()
         val step = TestData.fakeStepA
         whenever(saveNotifier.invoke(step)).thenReturn(true)
         viewModel.notifier = step
@@ -393,13 +407,15 @@ class EditViewModelTest {
     }
 
     @Test
-    fun `don't save notifier if not changed`() = runBlocking {
+    fun `don't save notifier if not changed`() = runTest {
+        val viewModel = getViewModel()
         viewModel.saveNotifierStep().join()
         verifyNoMoreInteractionsForAll()
     }
 
     @Test
-    fun `populate sample timer`() {
+    fun `populate sample timer`() = runTest {
+        val viewModel = getViewModel()
         val timer = TestData.fakeTimerAdvanced
         viewModel.loadSampleTimer(timer)
         assertEquals(timer.name, viewModel.name.value)
