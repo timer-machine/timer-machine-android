@@ -112,11 +112,8 @@ dependencies {
     implementation libs.kotlin_coroutines_core
     implementation libs.kotlin_coroutines_android
 
-    testImplementation libs.junit
-    androidTestImplementation libs.mockito
-    androidTestImplementation libs.mockito_android
     androidTestImplementation libs.mockito_kotlin
-
+    androidTestImplementation libs.mockito_android
     androidTestImplementation libs.androidx_test_core
     androidTestImplementation libs.androidx_test_runner
     androidTestImplementation libs.androidx_test_rules
