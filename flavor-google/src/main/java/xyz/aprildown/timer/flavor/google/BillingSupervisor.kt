@@ -10,18 +10,21 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.distinctUntilChanged
 import com.android.billingclient.api.AcknowledgePurchaseParams
 import com.android.billingclient.api.BillingClient
+import com.android.billingclient.api.BillingClient.ProductType
 import com.android.billingclient.api.BillingClientStateListener
 import com.android.billingclient.api.BillingFlowParams
 import com.android.billingclient.api.BillingResult
 import com.android.billingclient.api.ConsumeParams
+import com.android.billingclient.api.ProductDetails
 import com.android.billingclient.api.Purchase
 import com.android.billingclient.api.PurchaseHistoryRecord
 import com.android.billingclient.api.PurchasesUpdatedListener
-import com.android.billingclient.api.SkuDetails
-import com.android.billingclient.api.SkuDetailsParams
+import com.android.billingclient.api.QueryProductDetailsParams
+import com.android.billingclient.api.QueryPurchaseHistoryParams
+import com.android.billingclient.api.QueryPurchasesParams
+import com.android.billingclient.api.queryProductDetails
 import com.android.billingclient.api.queryPurchaseHistory
 import com.android.billingclient.api.queryPurchasesAsync
-import com.android.billingclient.api.querySkuDetails
 import com.github.deweyreed.tools.arch.Event
 import com.github.deweyreed.tools.arch.call
 import com.github.deweyreed.tools.helper.HandlerHelper
@@ -63,8 +66,8 @@ internal class BillingSupervisor(
     private val sharedPreferences = applicationContext.safeSharedPreference
 
     /** [requireSkuDetails] */
-    private val _proSkuDetails: MutableLiveData<SkuDetails> = MutableLiveData()
-    val proSkuDetails: LiveData<SkuDetails> = _proSkuDetails
+    private val _proSkuDetails: MutableLiveData<ProductDetails> = MutableLiveData()
+    val proSkuDetails: LiveData<ProductDetails> = _proSkuDetails
 
     /** [requireSkuDetails] */
     private val _goProEvent: MutableLiveData<Event<Unit>> = MutableLiveData()
@@ -75,8 +78,8 @@ internal class BillingSupervisor(
     val proState: LiveData<Boolean> = _proState.distinctUntilChanged()
 
     /** [requireSkuDetails] */
-    private val _backupSubSkuDetails: MutableLiveData<SkuDetails> = MutableLiveData()
-    val backupSubSkuDetails: LiveData<SkuDetails> = _backupSubSkuDetails
+    private val _backupSubSkuDetails: MutableLiveData<ProductDetails> = MutableLiveData()
+    val backupSubSkuDetails: LiveData<ProductDetails> = _backupSubSkuDetails
 
     /** [requireSkuDetails] */
     private val _backupSubEvent: MutableLiveData<Event<Unit>> = MutableLiveData()
@@ -153,11 +156,26 @@ internal class BillingSupervisor(
         }
     }
 
-    fun launchBillingFlow(activity: Activity, skuDetails: SkuDetails) {
+    fun launchBillingFlow(activity: Activity, skuDetails: ProductDetails) {
         billingClient.launchBillingFlow(
             activity,
             BillingFlowParams.newBuilder()
-                .setSkuDetails(skuDetails)
+                .setProductDetailsParamsList(
+                    listOf(
+                        BillingFlowParams.ProductDetailsParams.newBuilder()
+                            .setProductDetails(skuDetails)
+                            .let {
+                                val offerToken =
+                                    skuDetails.subscriptionOfferDetails?.firstOrNull()?.offerToken
+                                if (offerToken != null) {
+                                    it.setOfferToken(offerToken)
+                                } else {
+                                    it
+                                }
+                            }
+                            .build()
+                    )
+                )
                 .build()
         )
     }
@@ -204,17 +222,23 @@ internal class BillingSupervisor(
     // endregion BillingClientStateListener
 
     private suspend fun querySkuDetails() {
-        val inAppResult = billingClient.querySkuDetails(
-            SkuDetailsParams.newBuilder()
-                .setSkusList(listOf(PRO))
-                .setType(BillingClient.SkuType.INAPP)
+        val inAppResult = billingClient.queryProductDetails(
+            QueryProductDetailsParams.newBuilder()
+                .setProductList(
+                    listOf(
+                        QueryProductDetailsParams.Product.newBuilder()
+                            .setProductType(ProductType.INAPP)
+                            .setProductId(PRO)
+                            .build()
+                    )
+                )
                 .build()
         )
         when (inAppResult.billingResult.responseCode) {
             BillingClient.BillingResponseCode.OK -> {
-                val skuDetails = inAppResult.skuDetailsList?.find { it.sku == PRO }
+                val skuDetails = inAppResult.productDetailsList?.find { it.productId == PRO }
                 if (skuDetails != null) {
-                    val sd: SkuDetails = skuDetails // Otherwise the compiler complains
+                    val sd: ProductDetails = skuDetails // Otherwise the compiler complains
                     _proSkuDetails.value = sd
                 }
             }
@@ -223,17 +247,23 @@ internal class BillingSupervisor(
             }
         }
 
-        val subResult = billingClient.querySkuDetails(
-            SkuDetailsParams.newBuilder()
-                .setSkusList(listOf(BACKUP_SUB))
-                .setType(BillingClient.SkuType.SUBS)
+        val subResult = billingClient.queryProductDetails(
+            QueryProductDetailsParams.newBuilder()
+                .setProductList(
+                    listOf(
+                        QueryProductDetailsParams.Product.newBuilder()
+                            .setProductType(ProductType.SUBS)
+                            .setProductId(BACKUP_SUB)
+                            .build()
+                    )
+                )
                 .build()
         )
         when (subResult.billingResult.responseCode) {
             BillingClient.BillingResponseCode.OK -> {
-                val skuDetails = subResult.skuDetailsList?.find { it.sku == BACKUP_SUB }
+                val skuDetails = subResult.productDetailsList?.find { it.productId == BACKUP_SUB }
                 if (skuDetails != null) {
-                    val sd: SkuDetails = skuDetails
+                    val sd: ProductDetails = skuDetails
                     _backupSubSkuDetails.value = sd
                 }
             }
@@ -252,7 +282,9 @@ internal class BillingSupervisor(
         }
 
         if (findSubscription(
-                billingClient.queryPurchasesAsync(BillingClient.SkuType.SUBS).purchasesList.toSet(),
+                billingClient.queryPurchasesAsync(
+                    QueryPurchasesParams.newBuilder().setProductType(ProductType.SUBS).build()
+                ).purchasesList.toSet(),
                 OLD_SUB
             )
         ) {
@@ -268,7 +300,11 @@ internal class BillingSupervisor(
             queryNewestPurchases()
             updateIapIndicator()
         } else {
-            val result = billingClient.queryPurchaseHistory(BillingClient.SkuType.SUBS)
+            val result = billingClient.queryPurchaseHistory(
+                QueryPurchaseHistoryParams.newBuilder()
+                    .setProductType(ProductType.SUBS)
+                    .build()
+            )
 
             if (result.billingResult.responseCode == BillingClient.BillingResponseCode.OK) {
                 val hasHistorySub = processHistorySubscription(
@@ -293,15 +329,17 @@ internal class BillingSupervisor(
     private suspend fun queryNewestPurchases() {
         if (requestProState) {
             _proState.value = findProState(
-                billingClient.queryPurchasesAsync(BillingClient.SkuType.INAPP)
-                    .purchasesList.toSet()
+                billingClient.queryPurchasesAsync(
+                    QueryPurchasesParams.newBuilder().setProductType(ProductType.INAPP).build()
+                ).purchasesList.toSet()
             )
         }
         if (requestBackupSubState) {
             if (isSubscriptionSupported()) {
                 _backupSubState.value = findSubscription(
-                    billingClient.queryPurchasesAsync(BillingClient.SkuType.SUBS)
-                        .purchasesList.toSet(),
+                    billingClient.queryPurchasesAsync(
+                        QueryPurchasesParams.newBuilder().setProductType(ProductType.SUBS).build()
+                    ).purchasesList.toSet(),
                     BACKUP_SUB,
                     OLD_SUB
                 )
@@ -314,7 +352,7 @@ internal class BillingSupervisor(
     private fun findProState(purchases: Set<Purchase>): Boolean {
         var hasActivePurchase = false
         purchases.forEach { purchase ->
-            if (PRO in purchase.skus || OLD_PRO in purchase.skus) {
+            if (PRO in purchase.products || OLD_PRO in purchase.products) {
                 if (purchase.purchaseState == Purchase.PurchaseState.PURCHASED) {
                     if (!purchase.isAcknowledged) {
                         billingClient.acknowledgePurchase(
@@ -329,7 +367,7 @@ internal class BillingSupervisor(
                                 .setPurchaseToken(purchase.purchaseToken)
                                 .build()
                         ) { _, _ ->
-                            Timber.tag(TAG).i("Consumed ${purchase.skus.joinToString()}")
+                            Timber.tag(TAG).i("Consumed ${purchase.products.joinToString()}")
                         }
                     }
                     hasActivePurchase = true
@@ -343,7 +381,7 @@ internal class BillingSupervisor(
     private fun findSubscription(purchases: Set<Purchase>, vararg skus: String): Boolean {
         var hasActivePurchase = false
         purchases.forEach { purchase ->
-            val targetSku = purchase.skus.find { it in skus }
+            val targetSku = purchase.products.find { it in skus }
             if (targetSku != null) {
                 if (purchase.purchaseState == Purchase.PurchaseState.PURCHASED) {
                     if (!purchase.isAcknowledged) {
@@ -364,7 +402,7 @@ internal class BillingSupervisor(
     private fun processHistorySubscription(purchases: Set<PurchaseHistoryRecord>): Boolean {
         var hasPurchase = false
         purchases.forEach { purchase ->
-            if (OLD_SUB in purchase.skus) {
+            if (OLD_SUB in purchase.products) {
                 hasPurchase = true
                 recentSubSku = OLD_SUB
             }

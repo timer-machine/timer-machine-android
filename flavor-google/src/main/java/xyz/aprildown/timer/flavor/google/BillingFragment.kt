@@ -83,7 +83,8 @@ internal class BillingFragment : Fragment(R.layout.fragment_billing), MenuProvid
                     TransitionManager.beginDelayedTransition(binding.cardPro)
 
                     binding.textProPrice.show()
-                    binding.textProPrice.text = proSkuDetails.price
+                    binding.textProPrice.text =
+                        proSkuDetails.oneTimePurchaseOfferDetails?.formattedPrice
                     binding.btnProPurchase.isEnabled = true
                     binding.btnProPurchase.setText(RBase.string.billing_purchase)
                     binding.btnProPurchase.setOnClickListener {
@@ -113,9 +114,14 @@ internal class BillingFragment : Fragment(R.layout.fragment_billing), MenuProvid
 
                     binding.textBackupSubPrice.show()
                     binding.textBackupSubPrice.text = buildString {
-                        append(backupSubSkuDetails.price)
-                        // https://developer.android.com/reference/com/android/billingclient/api/SkuDetails#getsubscriptionperiod
-                        if (backupSubSkuDetails.subscriptionPeriod == "P1Y") {
+                        val target = backupSubSkuDetails.subscriptionOfferDetails
+                            ?.firstOrNull()
+                            ?.pricingPhases
+                            ?.pricingPhaseList
+                            ?.firstOrNull()
+                        append(target?.formattedPrice)
+                        // https://developer.android.com/reference/com/android/billingclient/api/ProductDetails.PricingPhase#getBillingPeriod()
+                        if (target?.billingPeriod == "P1Y") {
                             append(getString(RBase.string.billing_per_year))
                         }
                     }

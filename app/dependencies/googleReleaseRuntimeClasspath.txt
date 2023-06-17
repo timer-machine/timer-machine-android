@@ -107,8 +107,8 @@ androidx.work:work-runtime:2.7.1
 cn.carbswang.android:NumberPickerView:1.2.0
 com.afollestad.material-dialogs:commons:0.9.6.0
 com.afollestad.material-dialogs:core:0.9.6.0
-com.android.billingclient:billing-ktx:4.1.0
-com.android.billingclient:billing:4.1.0
+com.android.billingclient:billing-ktx:6.0.0
+com.android.billingclient:billing:6.0.0
 com.ernestoyaquello.stepperform:vertical-stepper-form:2.5.0
 com.firebaseui:firebase-ui-auth:8.0.2
 com.github.DeweyReed:ToastCompat:d0a4d6cac3
@@ -118,6 +118,9 @@ com.github.DeweyReed:tools:0.7.0
 com.github.PhilJay:MPAndroidChart:v3.1.0
 com.github.kizitonwose:CalendarView:1.0.4
 com.github.zawadz88.materialpopupmenu:material-popup-menu:4.1.0
+com.google.android.datatransport:transport-api:3.0.0
+com.google.android.datatransport:transport-backend-cct:3.1.8
+com.google.android.datatransport:transport-runtime:3.1.8
 com.google.android.flexbox:flexbox:3.0.0
 com.google.android.gms:play-services-auth-api-phone:18.0.1
 com.google.android.gms:play-services-auth-base:18.0.4
@@ -144,6 +147,9 @@ com.google.firebase:firebase-bom:32.0.0
 com.google.firebase:firebase-common-ktx:20.3.2
 com.google.firebase:firebase-common:20.3.2
 com.google.firebase:firebase-components:17.1.0
+com.google.firebase:firebase-encoders-json:18.0.0
+com.google.firebase:firebase-encoders-proto:16.0.0
+com.google.firebase:firebase-encoders:17.0.0
 com.google.firebase:firebase-storage-ktx:20.2.0
 com.google.firebase:firebase-storage:20.2.0
 com.google.guava:listenablefuture:1.0
