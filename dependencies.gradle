@@ -4,7 +4,7 @@ ext {
             agp         : '8.0.2',
             kotlin      : '1.8.21',
             versions    : '0.47.0',
-            detekt      : '1.22.0',
+            detekt      : '1.23.0',
             hilt        : '2.45',
             secrets     : '2.0.1',
             gms         : '4.3.14',

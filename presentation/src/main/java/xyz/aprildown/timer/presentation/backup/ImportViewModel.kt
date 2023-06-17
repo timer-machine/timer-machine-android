@@ -29,8 +29,9 @@ class ImportViewModel @Inject constructor(
                 importAppData(params)
                 notifyDataChanged()
                 _result.value = Fruit.Ripe(Unit)
+            } catch (e: CancellationException) {
+                throw e
             } catch (e: Exception) {
-                if (e is CancellationException) throw e
                 _result.value = Fruit.Rotten(e)
             }
         }

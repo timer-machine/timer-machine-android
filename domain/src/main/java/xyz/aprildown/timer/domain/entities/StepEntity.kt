@@ -1,7 +1,7 @@
 package xyz.aprildown.timer.domain.entities
 
 enum class StepType {
-    NORMAL, NOTIFIER, START, END;
+    NORMAL, NOTIFIER, START, END
 }
 
 sealed class StepEntity {

@@ -461,7 +461,7 @@ class MainActivity :
             val arguments = intent?.getBundleExtra(EXTRA_DESTINATION_ARGUMENTS)
 
             if (navController.graph.contains(destinationId)) {
-                // TODO: Possible memory leak. Try later with new dependencies.
+                // Possible memory leak. Try later with new dependencies.
                 // Without running in onStart, LeakCanary reports an odd memory leak of
                 // the start destination Fragment.
                 // Running in onStart solves the problem for no reason.

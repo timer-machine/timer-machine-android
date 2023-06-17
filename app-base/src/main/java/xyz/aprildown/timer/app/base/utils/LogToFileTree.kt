@@ -36,7 +36,7 @@ class LogToFileTree(private val context: Context) : Timber.Tree() {
                         !logFile.exists() -> {
                             logFile.createNewFile()
                         }
-                        logFile.length() > 10 /* MB */ * 1024 /* KB */ * 1024L /* B */ -> {
+                        logFile.length() > 10 * 1024 * 1024L -> { // MB KB B
                             logFile.delete()
                             logFile.createNewFile()
                         }
