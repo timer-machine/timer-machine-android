@@ -1,5 +1,6 @@
 package xyz.aprildown.timer.app.base.ui
 
+import androidx.activity.ComponentActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import dagger.BindsOptionalOf
@@ -14,6 +15,7 @@ interface FlavorUiInjector {
     fun toCloudBackupFragment(currentFragment: Fragment)
     fun toBakedCountDialog(fragment: Fragment)
     fun useMoreTheme(fragment: Fragment, onApply: () -> Unit)
+    fun onMainActivityCreated(activity: ComponentActivity)
 }
 
 @Retention(AnnotationRetention.BINARY)

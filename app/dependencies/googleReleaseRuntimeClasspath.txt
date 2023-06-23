@@ -130,7 +130,10 @@ com.google.android.gms:play-services-basement:18.2.0
 com.google.android.gms:play-services-fido:20.0.1
 com.google.android.gms:play-services-tasks:18.0.2
 com.google.android.material:material:1.4.0
+com.google.android.play:core-common:2.0.2
 com.google.android.play:integrity:1.1.0
+com.google.android.play:review-ktx:2.0.1
+com.google.android.play:review:2.0.1
 com.google.android.recaptcha:recaptcha:18.1.2
 com.google.code.findbugs:jsr305:3.0.2
 com.google.dagger:dagger-lint-aar:2.45

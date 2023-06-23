@@ -449,6 +449,7 @@ class MainActivity :
             navController.graph.addDestination(
                 navController.navInflater.inflate(flavorUiInjector.cloudBackupNavGraphId)
             )
+            flavorUiInjector.onMainActivityCreated(this)
         }
 
         navController.addOnDestinationChangedListener(this)

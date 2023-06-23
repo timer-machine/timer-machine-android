@@ -106,6 +106,7 @@ ext {
             firebase_auth_ui              : 'com.firebaseui:firebase-ui-auth:8.0.2',
             firebase_storage              : 'com.google.firebase:firebase-storage-ktx',
             play_services_auth            : 'com.google.android.gms:play-services-auth:20.5.0',
+            play_services_review          : 'com.google.android.play:review-ktx:2.0.1',
 
             // Internet - Other
             appcenter_crashes             : 'com.microsoft.appcenter:appcenter-crashes:5.0.1',

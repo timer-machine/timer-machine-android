@@ -2,25 +2,34 @@ package xyz.aprildown.timer.flavor.google
 
 import android.graphics.Typeface
 import android.text.Spanned
+import android.text.format.DateUtils
 import android.text.style.StyleSpan
+import androidx.activity.ComponentActivity
 import androidx.core.text.buildSpannedString
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.DefaultLifecycleObserver
 import androidx.lifecycle.LifecycleOwner
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.github.deweyreed.tools.anko.toast
+import com.github.deweyreed.tools.arch.doOnResume
 import com.github.deweyreed.tools.arch.observeEvent
+import com.google.android.play.core.review.ReviewManagerFactory
 import dagger.Reusable
+import kotlinx.coroutines.launch
 import xyz.aprildown.timer.app.base.ui.FlavorUiInjector
 import xyz.aprildown.timer.app.base.utils.NavigationUtils.subLevelNavigate
+import xyz.aprildown.timer.domain.repositories.PreferencesRepository
 import xyz.aprildown.timer.flavor.google.count.BakedCountDialog
 import xyz.aprildown.timer.flavor.google.utils.IapPromotionDialog
 import javax.inject.Inject
 import xyz.aprildown.timer.app.base.R as RBase
 
 @Reusable
-class FlavorUiInjectorImpl @Inject constructor() : FlavorUiInjector {
+class FlavorUiInjectorImpl @Inject constructor(
+    private val preferencesRepository: PreferencesRepository,
+) : FlavorUiInjector {
 
     override fun showInAppPurchases(activity: FragmentActivity) {
         activity.startActivity(BillingActivity.getIntent(activity))
@@ -97,6 +106,32 @@ class FlavorUiInjectorImpl @Inject constructor() : FlavorUiInjector {
                     else -> it.toString()
                 }
             )
+        }
+    }
+
+    override fun onMainActivityCreated(activity: ComponentActivity) {
+        activity.lifecycleScope.launch {
+            val installTimeKey = "flavor_google_install_time"
+            val launchTimesKey = "flavor_google_launch_times"
+            val now = System.currentTimeMillis()
+            if (!preferencesRepository.contains(installTimeKey)) {
+                preferencesRepository.setLong(installTimeKey, now)
+                preferencesRepository.setInt(launchTimesKey, 1)
+                return@launch
+            }
+
+            val installTime = preferencesRepository.getLong(installTimeKey, now)
+            val launchTimes = preferencesRepository.getInt(launchTimesKey, 0) + 1
+            preferencesRepository.setInt(launchTimesKey, launchTimes)
+
+            if (now - installTime >= 9 * DateUtils.DAY_IN_MILLIS && launchTimes >= 9) {
+                val reviewManager = ReviewManagerFactory.create(activity)
+                reviewManager.requestReviewFlow().addOnSuccessListener {
+                    activity.lifecycle.doOnResume {
+                        reviewManager.launchReviewFlow(activity, it)
+                    }
+                }
+            }
         }
     }
 }
