@@ -13,6 +13,16 @@
             </intent-filter>
         </activity>
 
+        <activity
+            android:name=".TaskerTimerEventActivity"
+            android:exported="true"
+            android:icon="@drawable/ic_launcher"
+            android:label="@string/tasker_edit_title">
+            <intent-filter>
+                <action android:name="net.dinglisch.android.tasker.ACTION_EDIT_EVENT" />
+            </intent-filter>
+        </activity>
+
         <receiver
             android:name="com.joaomgcd.taskerpluginlibrary.action.BroadcastReceiverAction"
             android:exported="true"

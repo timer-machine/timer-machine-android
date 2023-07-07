@@ -18,11 +18,10 @@ internal class TaskerEditViewModel @Inject constructor(
     private val findTimerInfo: FindTimerInfo
 ) : BaseViewModel(mainDispatcher) {
     private val _timerId = MutableLiveData<Int>()
-    val timerInfo: LiveData<TimerInfo?>
-        get() = _timerId.switchMap {
-            requireNotNull(it)
-            liveData { emit(findTimerInfo(it)) }
-        }
+    val timerInfo: LiveData<TimerInfo?> = _timerId.switchMap {
+        requireNotNull(it)
+        liveData { emit(findTimerInfo(it)) }
+    }
 
     fun loadTimer(timerId: Int) {
         _timerId.value = timerId

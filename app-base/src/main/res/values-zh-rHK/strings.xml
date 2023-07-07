@@ -580,6 +580,8 @@
     <string name="update_title">更新內容</string>
     <!--Tasker-->
     <string name="tasker_edit_title">計時機器插件</string>
+    <string name="tasker_event_timer_starts">當 <xliff:g example="Timer name" id="timer_name">%s</xliff:g> 開始時觸發</string>
+    <string name="tasker_event_timer_stops">當 <xliff:g example="Timer name" id="timer_name">%s</xliff:g> 停止時觸發</string>
     <!--Whitelist-->
     <string name="whitelist_disclaimer"><b>許多Android製造商可能會在鎖屏或切換到其他應用時，強行停止正在運行中應用</b>。這是Android上一個棘手的問題。\n\n本應用盡最大努力完成工作，但仍有可能失效。\n\n<b>請在系統設置中將本應用白名單</b>。</string>
     <string name="whitelist_disclaimer_yes">查看白名單指南</string>

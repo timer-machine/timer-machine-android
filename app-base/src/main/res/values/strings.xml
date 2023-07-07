@@ -809,6 +809,8 @@
 
     <!--Tasker-->
     <string name="tasker_edit_title">TimeR Machine Plugin</string>
+    <string name="tasker_event_timer_starts">Trigger when <xliff:g example="Timer name" id="timer_name">%s</xliff:g> starts</string>
+    <string name="tasker_event_timer_stops">Trigger when <xliff:g example="Timer name" id="timer_name">%s</xliff:g> stops</string>
 
     <!--Whitelist-->
     <string name="whitelist_disclaimer"><b>Many Android manufacturers may kill running apps when the screen is off or switching to another app</b>, which is an infamous Android problem.\n\nThis app tries its best to do its job well, but there\'s still a chance of failing.\n\n<b>Please whitelist this app in the system settings</b>.</string>

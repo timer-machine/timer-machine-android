@@ -25,6 +25,7 @@ import xyz.aprildown.timer.domain.entities.toScreenAction
 import xyz.aprildown.timer.domain.entities.toVibrationAction
 import xyz.aprildown.timer.domain.entities.toVoiceAction
 import xyz.aprildown.timer.domain.repositories.PreferencesRepository
+import xyz.aprildown.timer.domain.repositories.TaskerEventTrigger
 import xyz.aprildown.timer.domain.usecases.record.AddTimerStamp
 import xyz.aprildown.timer.domain.usecases.timer.GetTimer
 import xyz.aprildown.timer.domain.utils.AppTracker
@@ -39,6 +40,7 @@ class MachinePresenter @Inject constructor(
     private val getTimer: GetTimer,
     private val addTimerStamp: AddTimerStamp,
     private val appTracker: AppTracker,
+    private val taskerEventTrigger: TaskerEventTrigger,
 ) : MachineContract.Presenter, TimerMachine.Listener {
 
     internal data class TimerMachinePair(val timer: TimerEntity, val machine: TimerMachine)
@@ -518,6 +520,8 @@ class MachinePresenter @Inject constructor(
     override fun begin(timerId: Int) {
         timerBeginsAction(timerId)
 
+        taskerEventTrigger.timerStart(timerId)
+
         listeners[timerId]?.forEach { it.begin(0) }
         allListeners.forEach { it.begin(timerId) }
     }
@@ -581,6 +585,8 @@ class MachinePresenter @Inject constructor(
                 )
             }
         }
+
+        taskerEventTrigger.timerEnd(timerId)
 
         // toList avoids ConcurrentModificationException.
         listeners[timerId]?.toList()?.forEach { it.end(0, forced) }
