@@ -82,8 +82,8 @@ ext {
             androidx_navigation_ui        : 'androidx.navigation:navigation-ui-ktx:2.5.3',
 
             // WorkManager
-            androidx_work                 : 'androidx.work:work-runtime-ktx:2.7.1',
-            androidx_work_test            : 'androidx.work:work-testing:2.7.1',
+            androidx_work                 : 'androidx.work:work-runtime-ktx:2.8.1',
+            androidx_work_test            : 'androidx.work:work-testing:2.8.1',
 
             // App Components
             hilt_android                  : "com.google.dagger:hilt-android:${versions.hilt}",

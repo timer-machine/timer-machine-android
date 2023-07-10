@@ -102,8 +102,8 @@ androidx.versionedparcelable:versionedparcelable:1.1.1
 androidx.viewpager2:viewpager2:1.0.0
 androidx.viewpager:viewpager:1.0.0
 androidx.window:window:1.0.0
-androidx.work:work-runtime-ktx:2.7.1
-androidx.work:work-runtime:2.7.1
+androidx.work:work-runtime-ktx:2.8.1
+androidx.work:work-runtime:2.8.1
 cn.carbswang.android:NumberPickerView:1.2.0
 com.afollestad.material-dialogs:commons:0.9.6.0
 com.afollestad.material-dialogs:core:0.9.6.0
