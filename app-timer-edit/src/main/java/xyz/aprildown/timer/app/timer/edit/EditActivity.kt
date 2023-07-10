@@ -279,13 +279,33 @@ class EditActivity :
                 }
             },
             onItemSwiped = { position ->
-                val item = fastAdapter.getItem(position) as? EditableStep
-                when (item?.stepType) {
+                val item = fastAdapter.getItem(position) as? EditableStep ?: return@StepTouchHelper
+                when (item.stepType) {
                     StepType.START -> startAdapter.clear()
                     StepType.END -> endAdapter.clear()
                     else -> stepAdapter.remove(position)
                 }
                 postUpdateTotalTime()
+
+                binding.root.snackbar(
+                    message = getString(RBase.string.delete_done_template, item.label),
+                    actionText = getString(RBase.string.undo),
+                ) {
+                    when (item.stepType) {
+                        StepType.START -> startAdapter.set(listOf(item))
+                        StepType.END -> endAdapter.set(listOf(item))
+                        else -> {
+                            stepAdapter.add(
+                                position.coerceIn(
+                                    fastAdapter.getPreItemCountByOrder(stepAdapter.order),
+                                    fastAdapter.getPreItemCountByOrder(stepAdapter.order + 1)
+                                ),
+                                item
+                            )
+                        }
+                    }
+                    postUpdateTotalTime()
+                }
             }
         )
 
