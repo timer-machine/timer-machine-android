@@ -111,24 +111,25 @@ class FlavorUiInjectorImpl @Inject constructor(
 
     override fun onMainActivityCreated(activity: ComponentActivity) {
         activity.lifecycleScope.launch {
-            val installTimeKey = "flavor_google_install_time"
+            val requestTimeKey = "flavor_google_request_time"
             val launchTimesKey = "flavor_google_launch_times"
-            val now = System.currentTimeMillis()
-            if (!preferencesRepository.contains(installTimeKey)) {
-                preferencesRepository.setLong(installTimeKey, now)
-                preferencesRepository.setInt(launchTimesKey, 1)
-                return@launch
-            }
 
-            val installTime = preferencesRepository.getLong(installTimeKey, now)
+            val now = System.currentTimeMillis()
+
+            val requestTime = preferencesRepository.getLong(requestTimeKey, now)
             val launchTimes = preferencesRepository.getInt(launchTimesKey, 0) + 1
             preferencesRepository.setInt(launchTimesKey, launchTimes)
 
-            if (now - installTime >= 9 * DateUtils.DAY_IN_MILLIS && launchTimes >= 9) {
+            if (now - requestTime >= 9 * DateUtils.DAY_IN_MILLIS && launchTimes >= 9) {
                 val reviewManager = ReviewManagerFactory.create(activity)
-                reviewManager.requestReviewFlow().addOnSuccessListener {
+                reviewManager.requestReviewFlow().addOnSuccessListener(activity) { reviewInfo ->
                     activity.lifecycle.doOnResume {
-                        reviewManager.launchReviewFlow(activity, it)
+                        reviewManager.launchReviewFlow(activity, reviewInfo)
+                            .addOnCompleteListener(activity) {
+                                activity.lifecycleScope.launch {
+                                    preferencesRepository.setLong(requestTimeKey, now)
+                                }
+                            }
                     }
                 }
             }
