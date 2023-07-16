@@ -50,7 +50,7 @@
     <string name="voice_variable_step_duration_desp">Duración de la etapa</string>
     <string name="voice_variable_other_group">Otro</string>
     <string name="voice_variable_other_clock_time_desp">Hora actual</string>
-    <string name="tts_error_template" formatted="false">Error de texto a voz: %s</string>
+    <string name="tts_error_template">Error de texto a voz: %s</string>
     <string name="behaviour_beep">Bip</string>
     <string name="behaviour_beep_help">Reproduce un bip cada segundo</string>
     <string name="beep_count_title">Conteo de bips</string>
@@ -559,7 +559,7 @@
     <string name="whitelist_links">Enlaces</string>
     <string name="whitelist_quick_settings">Algunos ajustes rápidos</string>
     <string name="whitelist_ignore_battery_optimization">Ignorar optimización de la batería</string>
-    <string name="whitelist_settings_template" formatted="false">Ajuste del sistema %d</string>
+    <string name="whitelist_settings_template">Ajuste del sistema %d</string>
     <string name="account_sign_out_confirmation">¿Salir\?</string>
     <string name="account_sign_out">Salir</string>
     <string name="account_signing_out">Saliendo…</string>
@@ -598,7 +598,7 @@
     <string name="billing_help_title">Ayuda</string>
     <string name="pref_category_title_app">Ajustes de la aplicación</string>
     <string name="help_feedback_desp">Envía un correo electrónico y recibe respuesta en 24 horas</string>
-    <string name="billing_explanation" formatted="false">Al pulsar Suscribirse, el pago se cargará a su cuenta de Google Play Store. Su suscripción se renovará automáticamente por la misma duración del plan al mismo precio hasta que la cancele en Suscripciones en Google Play Store al menos 24 horas antes de que finalice el periodo actual. Al tocar Suscribirse, aceptas nuestra <xliff:g example="Privacy policy" id="privacy_policy">%1$s</xliff:g> y <xliff:g example="Terms" id="terms">%2$s</xliff:g>.</string>
+    <string name="billing_explanation">Al pulsar Suscribirse, el pago se cargará a su cuenta de Google Play Store. Su suscripción se renovará automáticamente por la misma duración del plan al mismo precio hasta que la cancele en Suscripciones en Google Play Store al menos 24 horas antes de que finalice el periodo actual. Al tocar Suscribirse, aceptas nuestra <xliff:g example="Privacy policy" id="privacy_policy">%1$s</xliff:g> y <xliff:g example="Terms" id="terms">%2$s</xliff:g>.</string>
     <string name="scheduler_set1">Programador fijado para dentro de 1 minuto</string>
     <string name="scheduler_set5">Programador configurado para <xliff:g example="2 minutes" id="MINUTES">%3$s</xliff:g> a partir de ahora</string>
     <string name="scheduler_set7">Programador establecido para <xliff:g example="2 hours" id="HOURS">%2$s</xliff:g> y <xliff:g example="2 minutes" id="MINUTES">%3$s</xliff:g> a partir de ahora</string>

@@ -243,7 +243,7 @@
     <string name="voice_variable_other_clock_time" translatable="false">{OClockTime}</string>
     <string name="voice_variable_other_clock_time_desp">Current clock time</string>
 
-    <string name="tts_error_template" formatted="false">TextToSpeech error: %s</string>
+    <string name="tts_error_template">TextToSpeech error: %s</string>
 
     <string name="behaviour_beep">Beep</string>
     <string name="behaviour_beep_help">Play a beep every second</string>
@@ -828,7 +828,7 @@
     <string name="whitelist_quick_settings">Some quick Settings</string>
     <string name="whitelist_ignore_battery_optimization">Ignore Battery Optimization</string>
 
-    <string name="whitelist_settings_template" formatted="false">System setting %d</string>
+    <string name="whitelist_settings_template">System setting %d</string>
 
     <!--Account-->
     <string name="account_sign_out_confirmation">Sign out?</string>
@@ -847,7 +847,7 @@
     <string name="billing_subscribe">Subscribe</string>
     <string name="billing_owned">Owned</string>
     <string name="billing_per_year">/Year</string>
-    <string name="billing_explanation" formatted="false">"By tapping "Subscribe," your payment will be charged to your Google Play Store account. Your subscription will automatically renew for the same plan length at the same price until you cancel it on Subscriptions in the Google Play Store at least 24 hours before the end of the current period. By tapping "Subscribe," you agree to our <xliff:g example="Privacy policy" id="privacy_policy">%1$s</xliff:g> and <xliff:g example="Terms" id="terms">%2$s</xliff:g>."</string>
+    <string name="billing_explanation">"By tapping "Subscribe," your payment will be charged to your Google Play Store account. Your subscription will automatically renew for the same plan length at the same price until you cancel it on Subscriptions in the Google Play Store at least 24 hours before the end of the current period. By tapping "Subscribe," you agree to our <xliff:g example="Privacy policy" id="privacy_policy">%1$s</xliff:g> and <xliff:g example="Terms" id="terms">%2$s</xliff:g>."</string>
     <string name="billing_cancel_anytime">Recurring billing. Cancel anytime.</string>
     <string name="billing_not_supported">Subscriptions are not supported at the moment</string>
     <string name="billing_connect_issue">There was an error connecting with Google Play.\n\nThis issue might be temporary, so please try again in a few minutes.</string>
