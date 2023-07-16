@@ -36,6 +36,9 @@ internal class VoiceVariableTableView(
             binding.variableStepName.updateLayoutParams<MarginLayoutParams> {
                 topMargin = binding.variableTimerName.top
             }
+            binding.variableStepNameNext.updateLayoutParams<MarginLayoutParams> {
+                topMargin = binding.variableTimerLoop.top
+            }
             binding.variableStepDuration.updateLayoutParams<MarginLayoutParams> {
                 topMargin = binding.variableTimerDuration.top
             }
@@ -66,6 +69,7 @@ internal class VoiceVariableTableView(
             binding.variableGroupEndTime,
 
             binding.variableStepName,
+            binding.variableStepNameNext,
             binding.variableStepDuration,
             binding.variableStepEndTime,
 
@@ -105,6 +109,7 @@ internal class VoiceVariableTableView(
         binding.variableGroupEndTime withTooltip RBase.string.voice_variable_group_end_time_desp
 
         binding.variableStepName withTooltip RBase.string.voice_variable_step_name_desp
+        binding.variableStepNameNext withTooltip RBase.string.voice_variable_step_name_next_desp
         binding.variableStepDuration withTooltip RBase.string.voice_variable_step_duration_desp
         binding.variableStepEndTime withTooltip RBase.string.voice_variable_step_end_time_desp
 

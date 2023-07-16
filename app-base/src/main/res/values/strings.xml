@@ -232,6 +232,8 @@
     <string name="voice_variable_step_group">Step</string>
     <string name="voice_variable_step_name" translatable="false">{SName}</string>
     <string name="voice_variable_step_name_desp">Step name</string>
+    <string name="voice_variable_step_name_next" translatable="false">{SNameNext}</string>
+    <string name="voice_variable_step_name_next_desp">The next step\'s name</string>
     <string name="voice_variable_step_duration" translatable="false">{SDuration}</string>
     <string name="voice_variable_step_duration_desp">Step duration</string>
     <string name="voice_variable_step_end_time" translatable="false">{SEndTime}</string>

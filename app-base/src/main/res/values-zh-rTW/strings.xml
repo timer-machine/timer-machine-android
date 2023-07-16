@@ -189,6 +189,7 @@
     <string name="voice_variable_group_end_time_desp">組結束時間</string>
     <string name="voice_variable_step_group">步驟</string>
     <string name="voice_variable_step_name_desp">步驟名稱</string>
+    <string name="voice_variable_step_name_next_desp">下一步驟的名稱</string>
     <string name="voice_variable_step_duration_desp">步驟時長</string>
     <string name="voice_variable_step_end_time_desp">步驟結束時間</string>
     <string name="voice_variable_other_group">其他</string>

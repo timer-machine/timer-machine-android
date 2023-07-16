@@ -138,16 +138,22 @@
             tools:layout_marginTop="50dp" />
 
         <com.google.android.material.chip.Chip
+            android:id="@+id/variableStepNameNext"
+            style="@style/Widget.AppTheme.Chip.VoiceVariableTable"
+            android:text="@string/voice_variable_step_name_next"
+            tools:layout_marginTop="100dp" />
+
+        <com.google.android.material.chip.Chip
             android:id="@+id/variableStepDuration"
             style="@style/Widget.AppTheme.Chip.VoiceVariableTable"
             android:text="@string/voice_variable_step_duration"
-            tools:layout_marginTop="100dp" />
+            tools:layout_marginTop="150dp" />
 
         <com.google.android.material.chip.Chip
             android:id="@+id/variableStepEndTime"
             style="@style/Widget.AppTheme.Chip.VoiceVariableTable"
             android:text="@string/voice_variable_step_end_time"
-            tools:layout_marginTop="150dp" />
+            tools:layout_marginTop="200dp" />
 
         <com.google.android.material.chip.Chip
             android:id="@+id/variableStepWidthPlaceholder"
@@ -157,7 +163,7 @@
             android:focusable="false"
             android:text="@string/voice_variable_timer_remaining_percent"
             android:visibility="invisible"
-            tools:layout_marginTop="200dp" />
+            tools:layout_marginTop="250dp" />
 
     </FrameLayout>
 

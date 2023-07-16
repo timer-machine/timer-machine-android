@@ -241,6 +241,7 @@ data class VoiceAction(
         const val VOICE_VARIABLE_GROUP_END_TIME = "{GEndTime}"
 
         const val VOICE_VARIABLE_STEP_NAME = "{SName}"
+        const val VOICE_VARIABLE_STEP_NAME_NEXT = "{SNameNext}"
         const val VOICE_VARIABLE_STEP_DURATION = "{SDuration}"
         const val VOICE_VARIABLE_STEP_END_TIME = "{SEndTime}"
 
