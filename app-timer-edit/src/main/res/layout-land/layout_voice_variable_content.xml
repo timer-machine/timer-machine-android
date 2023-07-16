@@ -58,6 +58,7 @@
         app:layout_constraintGuide_percent="0.5" />
 
     <FrameLayout
+        android:id="@+id/layoutButtonsContainer"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -78,7 +79,7 @@
         android:layout_weight="1"
         android:fadeScrollbars="false"
         android:scrollbars="horizontal|vertical"
-        app:layout_constraintBottom_toTopOf="@id/layoutButtons"
+        app:layout_constraintBottom_toTopOf="@id/layoutButtonsContainer"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/guideline"
         app:layout_constraintTop_toTopOf="parent">
