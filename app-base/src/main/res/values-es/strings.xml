@@ -625,4 +625,6 @@
     <string name="pref_phone_call_title_nothing">No hacer nada</string>
     <string name="scheduler_set8">Programador establecido para <xliff:g example="2 days" id="DAYS">%1$s</xliff:g>, <xliff:g example="2 hours" id="HOURS">%2$s</xliff:g>, y <xliff:g example="2 minutes" id="MINUTES">%3$s</xliff:g> a partir de ahora</string>
     <string name="billing_dynamic_themes_title">Temas dinámicos</string>
+    <string name="tasker_event_timer_stops">Activar cuando <xliff:g example="Timer name" id="timer_name">%s</xliff:g> se detiene</string>
+    <string name="tasker_event_timer_starts">Activar cuando <xliff:g example="Timer name" id="timer_name">%s</xliff:g> comienza</string>
 </resources>
