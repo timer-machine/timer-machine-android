@@ -627,4 +627,5 @@
     <string name="billing_dynamic_themes_title">Temas dinámicos</string>
     <string name="tasker_event_timer_stops">Activar cuando <xliff:g example="Timer name" id="timer_name">%s</xliff:g> se detiene</string>
     <string name="tasker_event_timer_starts">Activar cuando <xliff:g example="Timer name" id="timer_name">%s</xliff:g> comienza</string>
+    <string name="voice_variable_step_name_next_desp">El nombre del siguiente paso</string>
 </resources>
