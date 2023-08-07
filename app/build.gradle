@@ -99,6 +99,7 @@ dependencies {
     implementation project(':app-timer-run')
     implementation project(':app-timer-list')
     implementation project(':app-timer-one')
+    implementation project(':app-tts')
     implementation project(':component-key')
     implementation project(':component-main')
     implementation project(':component-settings')

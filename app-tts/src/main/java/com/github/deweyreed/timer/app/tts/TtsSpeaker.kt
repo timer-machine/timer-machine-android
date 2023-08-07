@@ -1,4 +1,4 @@
-package xyz.aprildown.timer.app.base.media
+package com.github.deweyreed.timer.app.tts
 
 import android.app.Application
 import android.content.Context
@@ -15,11 +15,17 @@ import androidx.core.os.bundleOf
 import androidx.core.os.postDelayed
 import com.github.deweyreed.tools.anko.longToast
 import com.github.deweyreed.tools.helper.HandlerHelper
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 import xyz.aprildown.timer.app.base.R
 import xyz.aprildown.timer.app.base.data.PreferenceData
+import xyz.aprildown.timer.app.base.data.PreferenceData.isTtsBakeryOpen
 import xyz.aprildown.timer.app.base.data.PreferenceData.storedAudioFocusType
 import xyz.aprildown.timer.app.base.data.PreferenceData.storedAudioTypeValue
 import xyz.aprildown.timer.app.base.data.PreferenceData.useBakedCount
+import xyz.aprildown.timer.app.base.media.AudioFocusManager
+import xyz.aprildown.timer.app.base.media.RingtonePreviewKlaxon
+import xyz.aprildown.timer.domain.utils.fireAndForget
 import xyz.aprildown.tools.helper.safeSharedPreference
 import java.io.File
 
@@ -278,40 +284,54 @@ private class WelcomingTextToSpeech(
     fun speak(text: CharSequence, streamType: Int = AudioManager.STREAM_MUSIC) {
         if (text.isBlank()) return
 
-        val bakedCountUri = getBakedCountUri(context = application, content = text)
-        if (bakedCountUri != null) {
-            if (initialized) {
-                if (textToSpeech.isSpeaking) {
-                    textToSpeech.stop()
+        fireAndForget(Dispatchers.Main.immediate) {
+            val isTtsBakeryOpen = application.safeSharedPreference.isTtsBakeryOpen
+
+            val speechUri = withContext(Dispatchers.IO) {
+                getBakedCountUri(context = application, content = text)
+                    ?: if (isTtsBakeryOpen) {
+                        TtsBakery.getSpeechFile(application, text.toString())?.toUri()
+                    } else {
+                        null
+                    }
+            }
+            if (speechUri != null) {
+                if (initialized) {
+                    if (textToSpeech.isSpeaking) {
+                        textToSpeech.stop()
+                    }
                 }
+
+                RingtonePreviewKlaxon.start(
+                    context = application,
+                    uri = speechUri,
+                    crescendoDuration = 0L,
+                    loop = false,
+                    audioFocusType = 0, // AudioManager.AUDIOFOCUS_NONE
+                    streamType = streamType
+                )
+
+                listener.onStart()
+                return@fireAndForget
             }
 
-            RingtonePreviewKlaxon.start(
-                context = application,
-                uri = bakedCountUri,
-                crescendoDuration = 0L,
-                loop = false,
-                audioFocusType = 0, // AudioManager.AUDIOFOCUS_NONE
-                streamType = streamType
+            if (!initialized) {
+                pendingText = text
+                return@fireAndForget
+            }
+
+            textToSpeech.speak(
+                text,
+                TextToSpeech.QUEUE_FLUSH,
+                bundleOf(
+                    TextToSpeech.Engine.KEY_PARAM_STREAM to streamType
+                ),
+                text.hashCode().toString()
             )
-
-            listener.onStart()
-            return
+            if (isTtsBakeryOpen) {
+                TtsBakery.scheduleBaking(application, text.toString())
+            }
         }
-
-        if (!initialized) {
-            pendingText = text
-            return
-        }
-
-        textToSpeech.speak(
-            text,
-            TextToSpeech.QUEUE_FLUSH,
-            bundleOf(
-                TextToSpeech.Engine.KEY_PARAM_STREAM to streamType
-            ),
-            text.hashCode().toString()
-        )
     }
 
     fun stop() {

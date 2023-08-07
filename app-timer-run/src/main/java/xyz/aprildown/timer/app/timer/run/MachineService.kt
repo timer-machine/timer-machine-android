@@ -18,6 +18,7 @@ import androidx.core.app.NotificationCompat
 import androidx.core.app.ServiceCompat
 import androidx.core.os.postDelayed
 import androidx.core.text.buildSpannedString
+import com.github.deweyreed.timer.app.tts.TtsSpeaker
 import com.github.deweyreed.tools.helper.HandlerHelper
 import com.github.deweyreed.tools.helper.getNumberFormattedQuantityString
 import dagger.hilt.android.AndroidEntryPoint
@@ -31,7 +32,6 @@ import xyz.aprildown.timer.app.base.data.PreferenceData.storedAudioTypeValue
 import xyz.aprildown.timer.app.base.media.Beeper
 import xyz.aprildown.timer.app.base.media.RingtonePreviewKlaxon
 import xyz.aprildown.timer.app.base.media.Torch
-import xyz.aprildown.timer.app.base.media.TtsSpeaker
 import xyz.aprildown.timer.app.base.media.VibrateHelper
 import xyz.aprildown.timer.app.base.ui.AppNavigator
 import xyz.aprildown.timer.app.base.utils.ScreenWakeLock

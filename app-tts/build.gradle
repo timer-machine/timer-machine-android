@@ -1,0 +1,23 @@
+plugins {
+    id 'com.android.library'
+    id 'org.jetbrains.kotlin.android'
+    id 'kotlin-kapt'
+    id 'dagger.hilt.android.plugin'
+}
+
+android {
+    namespace 'com.github.deweyreed.timer.app.tts'
+}
+
+dependencies {
+    implementation project(':app-base')
+
+    implementation libs.androidx_work
+
+    implementation libs.hilt_android
+    kapt libs.hilt_compiler
+    implementation libs.hilt_workmanager
+    kapt libs.hilt_workmanager_compiler
+
+    implementation libs.disk_lru_cache
+}

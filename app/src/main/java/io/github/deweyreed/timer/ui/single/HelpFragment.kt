@@ -10,6 +10,7 @@ import androidx.fragment.app.DialogFragment
 import androidx.navigation.fragment.NavHostFragment
 import androidx.preference.Preference
 import androidx.preference.PreferenceFragmentCompat
+import com.github.deweyreed.timer.app.tts.TtsSpeaker
 import com.github.deweyreed.tools.helper.IntentHelper
 import com.github.deweyreed.tools.helper.createChooserIntentIfDead
 import com.github.deweyreed.tools.helper.show
@@ -18,7 +19,6 @@ import dagger.hilt.android.AndroidEntryPoint
 import io.github.deweyreed.timer.R
 import io.github.deweyreed.timer.databinding.DialogTtsTestBinding
 import xyz.aprildown.timer.app.base.data.FlavorData
-import xyz.aprildown.timer.app.base.media.TtsSpeaker
 import xyz.aprildown.timer.app.base.ui.AppNavigator
 import xyz.aprildown.timer.app.base.utils.NavigationUtils.subLevelNavigate
 import xyz.aprildown.timer.app.base.utils.openWebsiteWithWarning

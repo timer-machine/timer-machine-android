@@ -6,7 +6,7 @@ import androidx.media.AudioFocusRequestCompat
 import androidx.media.AudioManagerCompat
 import java.util.WeakHashMap
 
-internal object AudioFocusManager {
+object AudioFocusManager {
     private val sListenerRequestMap =
         WeakHashMap<AudioManager.OnAudioFocusChangeListener, AudioFocusRequestCompat>()
 

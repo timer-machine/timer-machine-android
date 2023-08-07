@@ -9,6 +9,7 @@
 :app-timer-list
 :app-timer-one
 :app-timer-run
+:app-tts
 :component-key
 :component-main
 :component-settings
@@ -106,6 +107,7 @@ com.github.DeweyReed:UltimateRingtonePicker:3.2.0
 com.github.DeweyReed:android-job:a04c817792
 com.github.DeweyReed:tools:0.7.0
 com.github.PhilJay:MPAndroidChart:v3.1.0
+com.github.bumptech.glide:disklrucache:4.15.1
 com.github.kizitonwose:CalendarView:1.0.4
 com.github.zawadz88.materialpopupmenu:material-popup-menu:4.1.0
 com.google.android.flexbox:flexbox:3.0.0
