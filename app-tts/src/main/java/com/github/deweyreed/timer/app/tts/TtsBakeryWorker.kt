@@ -17,6 +17,7 @@ import kotlinx.coroutines.suspendCancellableCoroutine
 import kotlinx.coroutines.sync.Mutex
 import kotlinx.coroutines.sync.withLock
 import kotlinx.coroutines.withContext
+import timber.log.Timber
 import xyz.aprildown.timer.domain.di.IoDispatcher
 import java.io.File
 import java.util.UUID
@@ -60,7 +61,7 @@ internal class TtsBakeryWorker @AssistedInject constructor(
         } catch (e: CancellationException) {
             throw e
         } catch (e: Exception) {
-            e.printStackTrace()
+            Timber.e(e)
             Result.retry()
         } finally {
             textToSpeech?.run {
@@ -93,7 +94,7 @@ internal class TtsBakeryWorker @AssistedInject constructor(
             val retriever = MediaMetadataRetriever()
             retriever.setDataSource(file.canonicalPath)
             retriever.extractMetadata(MediaMetadataRetriever.METADATA_KEY_HAS_AUDIO) != null
-        } catch (e: Exception) {
+        } catch (_: Exception) {
             false
         }
     }

@@ -2,6 +2,7 @@ package com.github.deweyreed.timer.app.tts
 
 import android.content.Context
 import com.bumptech.glide.disklrucache.DiskLruCache
+import timber.log.Timber
 import java.io.File
 import java.io.IOException
 import java.security.MessageDigest
@@ -27,7 +28,7 @@ internal object TtsBakeryDiskCache {
         try {
             result = getDiskLruCache(context).get(key)?.getFile(0)
         } catch (e: IOException) {
-            e.printStackTrace()
+            Timber.e(e)
         }
         return result
     }
