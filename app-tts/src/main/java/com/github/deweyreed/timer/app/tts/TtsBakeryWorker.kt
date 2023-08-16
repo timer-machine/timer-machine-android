@@ -1,7 +1,6 @@
 package com.github.deweyreed.timer.app.tts
 
 import android.content.Context
-import android.media.MediaMetadataRetriever
 import android.os.Bundle
 import android.speech.tts.TextToSpeech
 import android.speech.tts.UtteranceProgressListener
@@ -79,24 +78,7 @@ internal class TtsBakeryWorker @AssistedInject constructor(
         }
         val file = File(folder, UUID.randomUUID().toString())
         textToSpeech.synthesizeToFile(text, file)
-
-        if (!isValidTtsFile(file)) {
-            if (file.exists()) {
-                file.delete()
-            }
-            error("Invalid speech file")
-        }
         TtsBakeryDiskCache.put(applicationContext, text, file)
-    }
-
-    private fun isValidTtsFile(file: File): Boolean {
-        return try {
-            val retriever = MediaMetadataRetriever()
-            retriever.setDataSource(file.canonicalPath)
-            retriever.extractMetadata(MediaMetadataRetriever.METADATA_KEY_HAS_AUDIO) != null
-        } catch (_: Exception) {
-            false
-        }
     }
 
     companion object {

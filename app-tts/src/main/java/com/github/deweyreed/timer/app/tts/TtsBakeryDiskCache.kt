@@ -1,6 +1,7 @@
 package com.github.deweyreed.timer.app.tts
 
 import android.content.Context
+import android.media.MediaMetadataRetriever
 import com.bumptech.glide.disklrucache.DiskLruCache
 import timber.log.Timber
 import java.io.File
@@ -30,10 +31,29 @@ internal object TtsBakeryDiskCache {
         } catch (e: IOException) {
             Timber.e(e)
         }
+        if (result != null && !isValidTtsFile(result)) {
+            delete(context, text)
+            result = null
+        }
         return result
     }
 
+    private fun isValidTtsFile(file: File): Boolean {
+        return try {
+            val retriever = MediaMetadataRetriever()
+            retriever.setDataSource(file.canonicalPath)
+            retriever.extractMetadata(MediaMetadataRetriever.METADATA_KEY_HAS_AUDIO) != null
+        } catch (_: Exception) {
+            false
+        }
+    }
+
     fun put(context: Context, text: String, file: File): Unit = synchronized(this) {
+        if (!isValidTtsFile(file)) {
+            file.delete()
+            error("Invalid TTS file")
+        }
+
         val key = getSpeechKey(text)
         try {
             val editor = getDiskLruCache(context).edit(key)
@@ -46,9 +66,18 @@ internal object TtsBakeryDiskCache {
                 editor.abortUnlessCommitted()
             }
         } catch (e: IOException) {
-            e.printStackTrace()
+            Timber.e(e)
         } finally {
             file.delete()
+        }
+    }
+
+    private fun delete(context: Context, text: String) {
+        val key = getSpeechKey(text)
+        try {
+            getDiskLruCache(context).remove(key)
+        } catch (e: IOException) {
+            Timber.e(e)
         }
     }
 
