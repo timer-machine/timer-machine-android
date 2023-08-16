@@ -2,7 +2,7 @@ ext {
     //noinspection SpellCheckingInspection
     versions = [
             agp         : '8.0.2',
-            kotlin      : '1.8.21',
+            kotlin      : '1.8.22',
             versions    : '0.47.0',
             detekt      : '1.23.0',
             hilt        : '2.45',
@@ -33,8 +33,8 @@ ext {
 
             // Unit Test
             junit                         : 'junit:junit:4.13.2',
-            mockito_kotlin                : 'org.mockito.kotlin:mockito-kotlin:5.0.0',
-            mockito_android               : 'org.mockito:mockito-android:5.3.1',
+            mockito_kotlin                : 'org.mockito.kotlin:mockito-kotlin:5.1.0',
+            mockito_android               : 'org.mockito:mockito-android:5.4.0',
 
             // Instrumentation Test
             // https://developer.android.com/training/testing/set-up-project#gradle-dependencies
@@ -67,7 +67,7 @@ ext {
             material                      : 'com.google.android.material:material:1.4.0',
 
             // Assistants
-            leak_cannary                  : 'com.squareup.leakcanary:leakcanary-android:2.11',
+            leak_cannary                  : 'com.squareup.leakcanary:leakcanary-android:2.12',
             timber                        : 'com.jakewharton.timber:timber:5.0.1',
             pandora                       : 'com.github.whataa:pandora:2.1.0',
 
@@ -101,15 +101,15 @@ ext {
 
             // Internet - Google
             billing                       : 'com.android.billingclient:billing-ktx:6.0.0',
-            firebase_bom                  : 'com.google.firebase:firebase-bom:32.1.1',
+            firebase_bom                  : 'com.google.firebase:firebase-bom:32.2.2',
             firebase_auth                 : 'com.google.firebase:firebase-auth-ktx',
             firebase_auth_ui              : 'com.firebaseui:firebase-ui-auth:8.0.2',
             firebase_storage              : 'com.google.firebase:firebase-storage-ktx',
-            play_services_auth            : 'com.google.android.gms:play-services-auth:20.5.0',
+            play_services_auth            : 'com.google.android.gms:play-services-auth:20.6.0',
             play_services_review          : 'com.google.android.play:review-ktx:2.0.1',
 
             // Internet - Other
-            appcenter_crashes             : 'com.microsoft.appcenter:appcenter-crashes:5.0.1',
+            appcenter_crashes             : 'com.microsoft.appcenter:appcenter-crashes:5.0.2',
 
             // Other Utils
             android_job                   : 'com.github.DeweyReed:android-job:a04c817792',
