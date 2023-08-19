@@ -121,15 +121,12 @@ class FlavorUiInjectorImpl @Inject constructor(
             preferencesRepository.setInt(launchTimesKey, launchTimes)
 
             if (now - requestTime >= 9 * DateUtils.DAY_IN_MILLIS && launchTimes >= 9) {
+                preferencesRepository.setLong(requestTimeKey, now)
+
                 val reviewManager = ReviewManagerFactory.create(activity)
                 reviewManager.requestReviewFlow().addOnSuccessListener(activity) { reviewInfo ->
                     activity.lifecycle.doOnResume {
                         reviewManager.launchReviewFlow(activity, reviewInfo)
-                            .addOnCompleteListener(activity) {
-                                activity.lifecycleScope.launch {
-                                    preferencesRepository.setLong(requestTimeKey, now)
-                                }
-                            }
                     }
                 }
             }
