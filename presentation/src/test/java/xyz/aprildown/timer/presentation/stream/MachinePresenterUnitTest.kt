@@ -37,6 +37,7 @@ class MachinePresenterUnitTest {
             GetTimer(dispatcher, mock()),
             AddTimerStamp(dispatcher, mock(), mock(), mock()),
             mock(),
+            mock(),
         )
         machine.takeView(MachineTestView())
         return machine

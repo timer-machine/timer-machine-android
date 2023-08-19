@@ -37,7 +37,8 @@ class MachinePresenterTest {
             mock(),
             GetTimer(dispatcher, timerRepository),
             AddTimerStamp(dispatcher, mock(), mock(), appDataRepository),
-            mock()
+            mock(),
+            mock(),
         )
         val view = TestView()
         presenter.takeView(view)
