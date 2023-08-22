@@ -721,13 +721,17 @@ private fun generateVoiceContent(
         VoiceAction.VOICE_VARIABLE_STEP_NAME,
         VoiceAction.VARIABLE_STEP_NAME -> step.label
         VoiceAction.VOICE_VARIABLE_STEP_NAME_NEXT -> {
-            timer.getStep(
-                getNextIndexWithStep(
-                    steps = timer.steps,
-                    totalLoop = timer.loop,
-                    currentIndex = index,
-                ).first
-            )?.label.toString()
+            if (index is TimerIndex.End) {
+                null
+            } else {
+                timer.getStep(
+                    getNextIndexWithStep(
+                        steps = timer.steps,
+                        totalLoop = timer.loop,
+                        currentIndex = index,
+                    ).first
+                )
+            }?.label.toString()
         }
         VoiceAction.VOICE_VARIABLE_STEP_DURATION,
         VoiceAction.VARIABLE_STEP_DURATION -> timeFormatter.formatDuration(step.length)
