@@ -116,7 +116,10 @@ class FlavorUiInjectorImpl @Inject constructor(
 
             val now = System.currentTimeMillis()
 
-            val requestTime = preferencesRepository.getLong(requestTimeKey, now)
+            if (!preferencesRepository.contains(requestTimeKey)) {
+                preferencesRepository.setLong(requestTimeKey, now)
+            }
+            val requestTime = preferencesRepository.getLong(requestTimeKey, 0L)
             val launchTimes = preferencesRepository.getInt(launchTimesKey, 0) + 1
             preferencesRepository.setInt(launchTimesKey, launchTimes)
 
