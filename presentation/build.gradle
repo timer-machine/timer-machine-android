@@ -1,8 +1,8 @@
 plugins {
-    id 'com.android.library'
-    id 'kotlin-android'
-    id 'kotlin-kapt'
-    id 'dagger.hilt.android.plugin'
+    alias(libs.plugins.android.library)
+    alias(libs.plugins.kotlin.android)
+    alias(libs.plugins.kotlin.kapt)
+    alias(libs.plugins.hilt)
 }
 
 android {
@@ -11,25 +11,22 @@ android {
 
 dependencies {
     api project(':domain')
-    api project(':data')
 
     testImplementation libs.junit
-    testImplementation libs.kotlin_coroutines_test
-    testImplementation libs.mockito_kotlin
-    testImplementation libs.androidx_arch_test
+    testImplementation libs.kotlin.coroutines.test
+    testImplementation libs.bundles.mockito
+    testImplementation libs.androidx.test.arch
 
-    androidTestImplementation libs.kotlin_coroutines_test
-    androidTestImplementation libs.mockito_kotlin
-    androidTestImplementation libs.mockito_android
-    androidTestImplementation libs.androidx_test_runner
-    androidTestImplementation libs.androidx_test_junit
-    androidTestImplementation libs.androidx_test_espresso
+    androidTestImplementation libs.kotlin.coroutines.test
+    androidTestImplementation libs.bundles.mockito
+    androidTestImplementation libs.bundles.androidx.test
+    androidTestImplementation libs.bundles.androidx.test.espresso
 
-    api libs.androidx_lifecycle_runtime
-    api libs.androidx_lifecycle_livedata
-    api libs.androidx_lifecycle_viewmodel
+    api libs.androidx.lifecycle.runtime
+    api libs.androidx.lifecycle.liveData
+    api libs.androidx.lifecycle.viewModel
 
-    implementation libs.hilt_android
-    kapt libs.hilt_compiler
+    implementation libs.hilt.android
+    kapt libs.hilt.compiler
 
 }

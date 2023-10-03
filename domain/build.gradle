@@ -1,8 +1,8 @@
 plugins {
-    id 'com.android.library'
-    id 'kotlin-android'
-    id 'kotlin-kapt'
-    id 'dagger.hilt.android.plugin'
+    alias(libs.plugins.android.library)
+    alias(libs.plugins.kotlin.android)
+    alias(libs.plugins.kotlin.kapt)
+    alias(libs.plugins.hilt)
 }
 
 android {
@@ -25,23 +25,22 @@ android {
 dependencies {
     api libs.tools
 
-    api libs.kotlin_coroutines_core
-    api libs.kotlin_coroutines_android
+    api libs.kotlin.coroutines.android
 
     testImplementation libs.junit
-    testImplementation libs.kotlin_coroutines_test
-    testImplementation libs.mockito_kotlin
+    testImplementation libs.kotlin.coroutines.test
+    testImplementation libs.bundles.mockito
 
-    api libs.androidx_appcompat
-    implementation libs.androidx_preference
-    api libs.androidx_core_ktx
-    api libs.androidx_collection_ktx
+    api libs.androidx.appcompat
+    implementation libs.androidx.preference
+    api libs.androidx.core
+    api libs.androidx.collection
 
-    api libs.androidx_lifecycle_livedata
+    api libs.androidx.lifecycle.liveData
 
     api libs.timber
 
-    implementation libs.hilt_android
-    kapt libs.hilt_compiler
+    implementation libs.hilt.android
+    kapt libs.hilt.compiler
 
 }

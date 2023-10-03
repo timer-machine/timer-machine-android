@@ -1,7 +1,7 @@
 plugins {
-    id 'com.android.library'
-    id 'kotlin-android'
-    id 'kotlin-parcelize'
+    alias(libs.plugins.android.library)
+    alias(libs.plugins.kotlin.android)
+    alias(libs.plugins.kotlin.parcelize)
 }
 
 android {
@@ -9,13 +9,13 @@ android {
 }
 
 dependencies {
-    api project(':app-base')
+    implementation project(':app-base')
 
-    implementation libs.androidx_preference
+    implementation libs.androidx.preference
 
     implementation libs.flexbox
-    implementation libs.hms_picker
-    implementation libs.material_popup_menu
-    implementation libs.scroll_hms_picker
+    implementation libs.hmsPicker
+    implementation libs.materialPopupMenu
+    implementation libs.scrollHmsPicker
 
 }

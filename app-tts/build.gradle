@@ -1,8 +1,8 @@
 plugins {
-    id 'com.android.library'
-    id 'org.jetbrains.kotlin.android'
-    id 'kotlin-kapt'
-    id 'dagger.hilt.android.plugin'
+    alias(libs.plugins.android.library)
+    alias(libs.plugins.kotlin.android)
+    alias(libs.plugins.kotlin.kapt)
+    alias(libs.plugins.hilt)
 }
 
 android {
@@ -12,12 +12,12 @@ android {
 dependencies {
     implementation project(':app-base')
 
-    implementation libs.androidx_work
+    implementation libs.androidx.work
 
-    implementation libs.hilt_android
-    kapt libs.hilt_compiler
-    implementation libs.hilt_workmanager
-    kapt libs.hilt_workmanager_compiler
+    implementation libs.hilt.android
+    kapt libs.hilt.compiler
+    implementation libs.hilt.work
+    kapt libs.hilt.work.compiler
 
-    implementation libs.disk_lru_cache
+    implementation libs.diskLruCache
 }

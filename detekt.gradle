@@ -1,11 +1,11 @@
 apply plugin: "io.gitlab.arturbosch.detekt"
 
 dependencies {
-    detektPlugins "io.gitlab.arturbosch.detekt:detekt-formatting:${versions.detekt}"
+    detektPlugins libs.detekt.formatting
 }
 
 detekt {
-    toolVersion = "${versions.detekt}"
+    toolVersion = libs.versions.detekt.get()
     config = files(buildscript.sourceFile.getParent().toString() + "/detekt-config.yml")
     buildUponDefaultConfig = true
 }

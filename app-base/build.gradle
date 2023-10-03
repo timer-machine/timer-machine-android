@@ -1,8 +1,8 @@
 plugins {
-    id 'com.android.library'
-    id 'kotlin-android'
-    id 'kotlin-kapt'
-    id 'dagger.hilt.android.plugin'
+    alias(libs.plugins.android.library)
+    alias(libs.plugins.kotlin.android)
+    alias(libs.plugins.kotlin.kapt)
+    alias(libs.plugins.hilt)
 }
 
 android {
@@ -14,24 +14,23 @@ dependencies {
 
     testImplementation libs.junit
 
-    api libs.androidx_recyclerview
-    implementation libs.androidx_preference
-    api libs.androidx_constraintlayout
-    implementation libs.androidx_custom_tabs
-    implementation libs.androidx_media
-    api libs.androidx_fragment
+    api libs.androidx.recyclerView
+    api libs.androidx.constraintLayout
+    implementation libs.androidx.customTabs
+    implementation libs.androidx.media
+    api libs.androidx.fragment
 
     api libs.material
 
-    api libs.androidx_navigation_fragment
-    api libs.androidx_navigation_ui
+    api libs.androidx.navigation.fragment
+    api libs.androidx.navigation.ui
 
-    implementation libs.hilt_android
-    kapt libs.hilt_compiler
+    implementation libs.hilt.android
+    kapt libs.hilt.compiler
 
-    implementation libs.fastadapter
+    implementation libs.fastAdapter
 
-    implementation libs.material_popup_menu
+    implementation libs.materialPopupMenu
     api libs.materialize
     implementation libs.theme
 

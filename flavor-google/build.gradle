@@ -1,8 +1,8 @@
 plugins {
-    id 'com.android.library'
-    id 'kotlin-android'
-    id 'kotlin-kapt'
-    id 'dagger.hilt.android.plugin'
+    alias(libs.plugins.android.library)
+    alias(libs.plugins.kotlin.android)
+    alias(libs.plugins.kotlin.kapt)
+    alias(libs.plugins.hilt)
 }
 
 android {
@@ -13,29 +13,29 @@ dependencies {
     implementation project(':app-base')
     implementation project(':component-key')
 
-    implementation libs.kotlin_coroutines_play
+    implementation libs.kotlin.coroutines.play
 
-    implementation libs.androidx_preference
+    implementation libs.androidx.preference
 
-    implementation libs.androidx_work
+    implementation libs.androidx.work
 
-    implementation libs.hilt_android
-    kapt libs.hilt_compiler
-    implementation libs.hilt_navigation
-    implementation libs.hilt_workmanager
-    kapt libs.hilt_workmanager_compiler
+    implementation libs.hilt.android
+    kapt libs.hilt.compiler
+    implementation libs.hilt.navigation
+    implementation libs.hilt.work
+    kapt libs.hilt.work.compiler
 
     implementation libs.billing
 
-    implementation platform(libs.firebase_bom)
-    implementation libs.firebase_auth
-    implementation libs.firebase_auth_ui
-    implementation libs.firebase_storage
-    implementation libs.play_services_auth
-    implementation libs.play_services_review
+    implementation platform(libs.firebase.bom)
+    implementation libs.firebase.auth
+    implementation libs.firebase.auth.ui
+    implementation libs.firebase.storage
+    implementation libs.playServices.auth
+    implementation libs.playServices.review
 
-    implementation libs.fastadapter
-    implementation libs.fastadapter_binding
+    implementation libs.fastAdapter
+    implementation libs.fastAdapter.binding
 
     implementation libs.zip4j
 

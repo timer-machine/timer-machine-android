@@ -1,8 +1,8 @@
 plugins {
-    id 'com.android.library'
-    id 'kotlin-android'
-    id 'kotlin-kapt'
-    id 'dagger.hilt.android.plugin'
+    alias(libs.plugins.android.library)
+    alias(libs.plugins.kotlin.android)
+    alias(libs.plugins.kotlin.kapt)
+    alias(libs.plugins.hilt)
 }
 
 android {
@@ -14,15 +14,15 @@ dependencies {
     implementation project(':component-key')
     implementation project(':component-settings')
 
-    implementation libs.androidx_dynamicanimation
+    implementation libs.androidx.dynamicAnimation
 
-    implementation libs.hilt_android
-    kapt libs.hilt_compiler
+    implementation libs.hilt.android
+    kapt libs.hilt.compiler
 
-    implementation libs.fastadapter
+    implementation libs.fastAdapter
 
-    implementation libs.chrome_menu
+    implementation libs.chromeMenu
     implementation libs.flexbox
-    implementation libs.material_popup_menu
+    implementation libs.materialPopupMenu
 
 }

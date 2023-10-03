@@ -1,8 +1,8 @@
 plugins {
-    id 'com.android.library'
-    id 'kotlin-android'
-    id 'kotlin-kapt'
-    id 'dagger.hilt.android.plugin'
+    alias(libs.plugins.android.library)
+    alias(libs.plugins.kotlin.android)
+    alias(libs.plugins.kotlin.kapt)
+    alias(libs.plugins.hilt)
 }
 
 android {
@@ -27,23 +27,21 @@ android {
 dependencies {
     implementation project(':domain')
 
-    androidTestImplementation libs.kotlin_coroutines_test
-    androidTestImplementation libs.androidx_test_core
-    androidTestImplementation libs.androidx_test_runner
-    androidTestImplementation libs.androidx_test_junit
-    androidTestImplementation libs.androidx_test_espresso
-    androidTestImplementation libs.androidx_room_test
+    androidTestImplementation libs.kotlin.coroutines.test
+    androidTestImplementation libs.bundles.androidx.test
+    androidTestImplementation libs.bundles.androidx.test.espresso
+    androidTestImplementation libs.androidx.room.test
 
-    implementation libs.androidx_room_runtime
-    implementation libs.androidx_room_ktx
-    kapt libs.androidx_room_compiler
+    implementation libs.androidx.room.runtime
+    implementation libs.androidx.room.ktx
+    kapt libs.androidx.room.compiler
 
-    implementation libs.hilt_android
-    kapt libs.hilt_compiler
+    implementation libs.hilt.android
+    kapt libs.hilt.compiler
 
     implementation libs.moshi
-    kapt libs.moshi_kotlin_gen
+    kapt libs.moshi.kotlinGen
 
-    implementation libs.android_job
+    implementation libs.androidJob
 
 }

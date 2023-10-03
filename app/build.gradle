@@ -1,21 +1,19 @@
 plugins {
-    id 'com.android.application'
-    id 'kotlin-android'
-    id 'kotlin-kapt'
-    id 'dagger.hilt.android.plugin'
-    id 'com.google.gms.google-services'
-    id "com.dropbox.dependency-guard"
+    alias(libs.plugins.android.application)
+    alias(libs.plugins.kotlin.android)
+    alias(libs.plugins.kotlin.kapt)
+    alias(libs.plugins.hilt)
+
+    alias(libs.plugins.gms)
+    alias(libs.plugins.dependencyGuard)
 }
 
 android {
     namespace 'io.github.deweyreed.timer'
-    compileSdkVersion versions.compile_sdk
     defaultConfig {
         applicationId "io.github.deweyreed.timer"
-        minSdkVersion versions.min_sdk
-        targetSdkVersion versions.target_sdk
-        versionCode versions.version_code
-        versionName versions.version_name
+        versionCode libs.versions.versionCode.get() as Integer
+        versionName libs.versions.versionName.get()
         testInstrumentationRunner "io.github.deweyreed.timer.TestRunner"
         vectorDrawables.useSupportLibrary true
 
@@ -84,8 +82,6 @@ android {
 }
 
 dependencies {
-    coreLibraryDesugaring libs.desugar_jdk_libs
-
     implementation project(':domain')
     implementation project(':data')
     implementation project(':presentation')
@@ -110,59 +106,51 @@ dependencies {
 
     implementation libs.tools
 
-    implementation libs.kotlin_coroutines_core
-    implementation libs.kotlin_coroutines_android
+    implementation libs.kotlin.coroutines.android
 
-    androidTestImplementation libs.mockito_kotlin
-    androidTestImplementation libs.mockito_android
-    androidTestImplementation libs.androidx_test_core
-    androidTestImplementation libs.androidx_test_runner
-    androidTestImplementation libs.androidx_test_rules
-    androidTestImplementation libs.androidx_test_junit
-    androidTestImplementation libs.androidx_test_espresso
-    androidTestImplementation libs.androidx_test_espresso_contrib
-    androidTestImplementation libs.androidx_test_espresso_intents
-    androidTestImplementation libs.hms_picker
-    androidTestImplementation libs.scroll_hms_picker
-    androidTestImplementation libs.hilt_android_test
-    kaptAndroidTest libs.hilt_compiler
+    androidTestImplementation libs.bundles.mockito
+    androidTestImplementation libs.bundles.androidx.test
+    androidTestImplementation libs.bundles.androidx.test.espresso
+    androidTestImplementation libs.hmsPicker
+    androidTestImplementation libs.scrollHmsPicker
+    androidTestImplementation libs.hilt.testing
+    kaptAndroidTest libs.hilt.compiler
 
-    implementation libs.androidx_appcompat
-    implementation libs.androidx_recyclerview
-    implementation libs.androidx_preference
-    implementation libs.androidx_constraintlayout
-    implementation libs.androidx_lifecycle_runtime
-    implementation libs.androidx_lifecycle_livedata
-    implementation libs.androidx_lifecycle_viewmodel
+    implementation libs.androidx.appcompat
+    implementation libs.androidx.recyclerView
+    implementation libs.androidx.preference
+    implementation libs.androidx.constraintLayout
+    implementation libs.androidx.lifecycle.runtime
+    implementation libs.androidx.lifecycle.liveData
+    implementation libs.androidx.lifecycle.viewModel
 
     implementation libs.material
 
-    debugImplementation libs.leak_cannary
-    // debugImplementation libs.pandora
+    debugImplementation libs.leakCannary
 
-    implementation libs.androidx_room_runtime
+    implementation libs.androidx.room.runtime
 
-    implementation libs.androidx_navigation_fragment
-    implementation libs.androidx_navigation_ui
+    implementation libs.androidx.navigation.fragment
+    implementation libs.androidx.navigation.ui
 
-    implementation libs.androidx_work
+    implementation libs.androidx.work
 
-    implementation libs.hilt_android
-    kapt libs.hilt_compiler
-    implementation libs.hilt_workmanager
+    implementation libs.hilt.android
+    kapt libs.hilt.compiler
+    implementation libs.hilt.work
 
     implementation libs.okio
     implementation libs.permission
 
     implementation libs.flexbox
-    implementation libs.material_drawer
-    implementation libs.scroll_hms_picker
+    implementation libs.materialDrawer
+    implementation libs.scrollHmsPicker
     implementation libs.theme
-    implementation libs.toggle_button_group
-    implementation libs.ultimate_ringtone_picker
-    implementation libs.vertical_stepper_form
+    implementation libs.toggleButtonGroup
+    implementation libs.ultimateRingtonePicker
+    implementation libs.verticalStepperForm
 
-    androidTestCompileOnly libs.tasker_plugin
+    androidTestCompileOnly libs.taskerPlugin
 }
 
 android.applicationVariants.all { variant ->
