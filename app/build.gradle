@@ -29,8 +29,7 @@ android {
         release {
             minifyEnabled true
             shrinkResources true
-            // TODO: (2021-07-04): proguard-android-optimize.txt removes used resources.
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
 
