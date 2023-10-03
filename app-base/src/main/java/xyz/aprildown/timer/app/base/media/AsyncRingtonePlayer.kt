@@ -30,7 +30,7 @@ import android.os.HandlerThread
 import android.os.Looper
 import android.os.Message
 import android.os.SystemClock
-import android.telephony.TelephonyManager
+import android.telecom.TelecomManager
 import androidx.core.content.ContextCompat
 import androidx.core.content.getSystemService
 import androidx.core.os.BundleCompat
@@ -398,9 +398,10 @@ private const val STREAM_TYPE = "STREAM_TYPE"
  * @return `true` iff the device is currently in a telephone call
  */
 private fun isInTelephoneCall(context: Context): Boolean {
-    val tm = context.getSystemService<TelephonyManager>()
+    val telecomManager = context.getSystemService<TelecomManager>()
     return try {
-        tm?.callState != TelephonyManager.CALL_STATE_IDLE
+        @Suppress("MissingPermission")
+        telecomManager?.isInCall == true
     } catch (_: SecurityException) {
         false
     }

@@ -181,12 +181,12 @@ class MachineService :
             screenTiming = getString(RBase.string.pref_screen_timing_value_service)
         )
         if (shouldPausePhoneCall) {
-            phoneCallReceiver?.unListen()
+            phoneCallReceiver?.unregister()
             phoneCallReceiver = PhoneCallReceiver(
                 context = this,
                 onListenFailed = { sharedPreferences.disablePhoneCallBehavior() }
             ).apply {
-                listen(this@MachineService)
+                register(this@MachineService)
             }
             phoneCallPausedTimerIds = null
         }
@@ -217,7 +217,7 @@ class MachineService :
             context = this,
             screenTiming = getString(RBase.string.pref_screen_timing_value_service)
         )
-        phoneCallReceiver?.unListen()
+        phoneCallReceiver?.unregister()
         phoneCallReceiver = null
         phoneCallPausedTimerIds = null
     }
