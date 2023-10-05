@@ -19,6 +19,8 @@ import androidx.core.content.getSystemService
 import androidx.core.net.toUri
 import androidx.core.text.buildSpannedString
 import androidx.core.view.MenuCompat
+import androidx.core.view.WindowCompat
+import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.isVisible
 import androidx.core.view.updatePadding
 import androidx.core.widget.doAfterTextChanged
@@ -154,6 +156,8 @@ class EditActivity :
             setNavigationContentDescription(RBase.string.nav_up)
             setNavigationOnClickListener { onBackPressedDispatcher.onBackPressed() }
             setOnMenuItemClickListener { item ->
+                hideKeyboard()
+
                 when (item.itemId) {
                     R.id.action_save_timer -> {
                         saveTimer()
@@ -254,6 +258,8 @@ class EditActivity :
         }
         val stepTouchHelper = StepTouchHelper(
             onItemMoved = { from, to ->
+                hideKeyboard()
+
                 stepAdapter.move(from, to)
             },
             onItemDropped = { _, to ->
@@ -279,6 +285,8 @@ class EditActivity :
                 }
             },
             onItemSwiped = { position ->
+                hideKeyboard()
+
                 val item = fastAdapter.getItem(position) as? EditableStep ?: return@StepTouchHelper
                 when (item.stepType) {
                     StepType.START -> startAdapter.clear()
@@ -361,6 +369,8 @@ class EditActivity :
     }
 
     override fun onLengthClick(view: View, position: Int) {
+        hideKeyboard()
+
         DurationPicker(this) { hours, minutes, seconds ->
             val time = (hours * 3600L + minutes * 60L + seconds) * 1000L
             val item = getStepFromFastAdapter(position)
@@ -374,6 +384,8 @@ class EditActivity :
     }
 
     override fun onAddBtnClick(view: View, position: Int) {
+        hideKeyboard()
+
         val editableStep = fastAdapter.getItem(position) as EditableStep
         val isInAGroup = editableStep.isInAGroup
         popupMenu {
@@ -429,6 +441,8 @@ class EditActivity :
     }
 
     override fun onGroupDeleteButtonClick(view: View, position: Int) {
+        hideKeyboard()
+
         var removeCount = 1
         for (bias in 1 until stepAdapter.adapterItemCount) {
             val iItem = fastAdapter.getItem(position + bias)
@@ -449,6 +463,8 @@ class EditActivity :
     }
 
     override fun onGroupEndClick(view: View, position: Int) {
+        hideKeyboard()
+
         popupMenu {
             dropdownGravity = Gravity.START or Gravity.TOP
             section {
@@ -525,6 +541,8 @@ class EditActivity :
 
     private fun setUpOtherViews() {
         binding.btnEditMore.setOnClickListener {
+            hideKeyboard()
+
             showBottomMoreDialog(viewModel, appNavigator)
         }
         if (showTimerTotalTime) {
@@ -593,12 +611,18 @@ class EditActivity :
         }
     }
 
+    override fun onBehaviourListShow() {
+        hideKeyboard()
+    }
+
     override fun showBehaviourSettingsView(
         view: View,
         layout: EditableBehaviourLayout,
         current: BehaviourEntity,
         position: Int
     ) {
+        hideKeyboard()
+
         val type = current.type
         popupMenu {
             when (current.type) {
@@ -836,11 +860,26 @@ class EditActivity :
     // region Footer steps actions
 
     private fun buildFooterClickListeners(): List<View.OnClickListener> = listOf(
-        View.OnClickListener { addNormalStep() },
-        View.OnClickListener { addNotifierStep() },
-        View.OnClickListener { addStartStep() },
-        View.OnClickListener { addEndStep() },
-        View.OnClickListener { addGroup() }
+        View.OnClickListener {
+            hideKeyboard()
+            addNormalStep()
+        },
+        View.OnClickListener {
+            hideKeyboard()
+            addNotifierStep()
+        },
+        View.OnClickListener {
+            hideKeyboard()
+            addStartStep()
+        },
+        View.OnClickListener {
+            hideKeyboard()
+            addEndStep()
+        },
+        View.OnClickListener {
+            hideKeyboard()
+            addGroup()
+        }
     )
 
     @VisibleForTesting(otherwise = VisibleForTesting.PRIVATE)
@@ -1114,6 +1153,11 @@ class EditActivity :
                 .setNeutralButton(android.R.string.cancel, null)
                 .show()
         }
+    }
+
+    private fun hideKeyboard() {
+        WindowCompat.getInsetsController(window, binding.root).hide(WindowInsetsCompat.Type.ime())
+        currentFocus?.clearFocus()
     }
 
     companion object {

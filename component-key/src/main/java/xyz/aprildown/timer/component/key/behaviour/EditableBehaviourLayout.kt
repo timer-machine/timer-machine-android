@@ -30,6 +30,7 @@ class EditableBehaviourLayout(
 ) : FlexboxLayout(context, attrs) {
 
     interface Listener {
+        fun onBehaviourListShow(): Unit = Unit
         fun showBehaviourSettingsView(
             view: View,
             layout: EditableBehaviourLayout,
@@ -50,7 +51,6 @@ class EditableBehaviourLayout(
     private val enabledBehaviourTypes = BehaviourType.values()
 
     init {
-
         flexWrap = FlexWrap.WRAP
         setShowDivider(SHOW_DIVIDER_MIDDLE)
         setDividerDrawable(context.drawable(R.drawable.divider_normal_flexbox))
@@ -83,6 +83,7 @@ class EditableBehaviourLayout(
                         }
                     }
                 }.show(context, view)
+                listener?.onBehaviourListShow()
             }
         }
     }

@@ -50,6 +50,7 @@ class EditableStep(
         fun onLengthClick(view: View, position: Int)
         fun onAddBtnClick(view: View, position: Int)
 
+        fun onBehaviourListShow()
         fun showBehaviourSettingsView(
             view: View,
             layout: EditableBehaviourLayout,
@@ -98,15 +99,27 @@ class EditableStep(
                 handler.onLengthClick(it, bindingAdapterPosition)
             }
 
-            behaviour.setListener(object : EditableBehaviourLayout.Listener {
-                override fun showBehaviourSettingsView(
-                    view: View,
-                    layout: EditableBehaviourLayout,
-                    current: BehaviourEntity
-                ) {
-                    handler.showBehaviourSettingsView(view, layout, current, bindingAdapterPosition)
+            behaviour.setListener(
+                object : EditableBehaviourLayout.Listener {
+                    override fun onBehaviourListShow() {
+                        super.onBehaviourListShow()
+                        handler.onBehaviourListShow()
+                    }
+
+                    override fun showBehaviourSettingsView(
+                        view: View,
+                        layout: EditableBehaviourLayout,
+                        current: BehaviourEntity
+                    ) {
+                        handler.showBehaviourSettingsView(
+                            view,
+                            layout,
+                            current,
+                            bindingAdapterPosition
+                        )
+                    }
                 }
-            })
+            )
         }
 
         fun bindView(item: EditableStep, payloads: List<Any>) {
