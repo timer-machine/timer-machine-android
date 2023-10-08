@@ -418,22 +418,24 @@ class EditActivity :
                     }
                 }
             }
-            section {
-                item {
-                    label = getString(RBase.string.duplicate)
-                    callback = {
-                        val currentStep = editableStep.toStep()
-                        addStep(
-                            position + 1,
-                            EditableStep(
-                                label = currentStep.label,
-                                length = currentStep.length,
-                                behaviour = currentStep.behaviour,
-                                stepType = currentStep.type,
-                                handler = this@EditActivity,
-                                isInAGroup = editableStep.isInAGroup
+            if (editableStep.stepType != StepType.START && editableStep.stepType != StepType.END) {
+                section {
+                    item {
+                        label = getString(RBase.string.duplicate)
+                        callback = {
+                            val currentStep = editableStep.toStep()
+                            addStep(
+                                position + 1,
+                                EditableStep(
+                                    label = currentStep.label,
+                                    length = currentStep.length,
+                                    behaviour = currentStep.behaviour,
+                                    stepType = currentStep.type,
+                                    handler = this@EditActivity,
+                                    isInAGroup = editableStep.isInAGroup
+                                )
                             )
-                        )
+                        }
                     }
                 }
             }
