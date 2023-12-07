@@ -24,9 +24,9 @@
     <string name="plus_one_minute">Legg till ett minutt</string>
     <string name="unknown">Ukjent</string>
     <string name="never_show_again">Aldri vis igjen</string>
-    <string name="thanks">Takk for din støtte.</string>
-    <string name="consume_data_warning">Dette vil åpne en nettside og bruke mobildata.</string>
-    <string name="no_action_found">Ingen programmer kan utføre denne handlingen.</string>
+    <string name="thanks">Takk for din støtte!</string>
+    <string name="consume_data_warning">Dette vil åpne en nettside og bruke mobildata</string>
+    <string name="no_action_found">Ingen programmer kan utføre denne handlingen</string>
     <string name="empty">Tom</string>
     <string name="delete_confirmation_template">Slett «%s»\?</string>
     <string name="delete_done_template">%s slettet</string>
