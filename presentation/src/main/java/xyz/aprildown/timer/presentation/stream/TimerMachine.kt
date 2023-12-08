@@ -152,10 +152,19 @@ internal class TimerMachine(
                             )
                         }
                         BehaviourType.COUNT -> {
+                            val action = behaviour.toCountAction()
                             addTickListener(
                                 CountTickListener(
-                                    times = behaviour.toCountAction().times,
-                                    count = listener::countRead,
+                                    times = action.times,
+                                    count = if (action.beep) {
+                                        {
+                                            if (it.isNotBlank()) {
+                                                listener.beep()
+                                            }
+                                        }
+                                    } else {
+                                        { listener.countRead(it) }
+                                    },
                                 )
                             )
                         }

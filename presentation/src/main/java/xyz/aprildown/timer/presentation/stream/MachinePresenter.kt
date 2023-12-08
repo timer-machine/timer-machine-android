@@ -18,6 +18,7 @@ import xyz.aprildown.timer.domain.entities.TimerEntity
 import xyz.aprildown.timer.domain.entities.TimerStampEntity
 import xyz.aprildown.timer.domain.entities.VibrationAction
 import xyz.aprildown.timer.domain.entities.toBeepAction
+import xyz.aprildown.timer.domain.entities.toCountAction
 import xyz.aprildown.timer.domain.entities.toFlashlightAction
 import xyz.aprildown.timer.domain.entities.toMusicAction
 import xyz.aprildown.timer.domain.entities.toNotificationAction
@@ -284,6 +285,14 @@ class MachinePresenter @Inject constructor(
                                 tone = action.soundIndex,
                                 count = action.count,
                                 respectOtherSound = action.respectOtherSound
+                            )
+                        }
+                        BehaviourType.COUNT -> {
+                            val action = behavior.toCountAction()
+                            view?.enableTone(
+                                tone = 0,
+                                count = action.times,
+                                respectOtherSound = true,
                             )
                         }
                         BehaviourType.NOTIFICATION -> {

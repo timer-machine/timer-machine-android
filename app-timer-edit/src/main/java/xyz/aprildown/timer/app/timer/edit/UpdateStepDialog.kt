@@ -242,9 +242,14 @@ class UpdateStepDialog :
                         action = current.toCountAction(),
                         onCountTimes = { newTimes ->
                             changeBehaviour(BehaviourType.COUNT) {
-                                it.toCountAction().copy(newTimes).toBehaviourEntity()
+                                it.toCountAction().copy(times = newTimes).toBehaviourEntity()
                             }
-                        }
+                        },
+                        onBeep = { newBeep ->
+                            changeBehaviour(BehaviourType.COUNT) {
+                                it.toCountAction().copy(beep = newBeep).toBehaviourEntity()
+                            }
+                        },
                     )
                 }
                 BehaviourType.NOTIFICATION -> {

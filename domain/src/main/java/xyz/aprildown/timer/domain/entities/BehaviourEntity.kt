@@ -309,11 +309,15 @@ fun BehaviourEntity.toHalfAction(): HalfAction {
 
 // region Count
 
-data class CountAction(val times: Int = DEFAULT_TIMES) : Action {
+data class CountAction(
+    val times: Int = DEFAULT_TIMES,
+    val beep: Boolean = false,
+) : Action {
     override fun toBehaviourEntity(): BehaviourEntity {
         return BehaviourEntity(
             BehaviourType.COUNT,
-            str1 = if (times == DEFAULT_TIMES) "" else times.toString()
+            str1 = if (times == DEFAULT_TIMES) "" else times.toString(),
+            str2 = if (beep) "1" else "0",
         )
     }
 
@@ -324,7 +328,10 @@ data class CountAction(val times: Int = DEFAULT_TIMES) : Action {
 
 fun BehaviourEntity.toCountAction(): CountAction {
     require(type == BehaviourType.COUNT)
-    return CountAction(str1.toIntOrNull() ?: CountAction.DEFAULT_TIMES)
+    return CountAction(
+        times = str1.toIntOrNull() ?: CountAction.DEFAULT_TIMES,
+        beep = str2.toIntOrNull() == 1,
+    )
 }
 
 // endregion Count

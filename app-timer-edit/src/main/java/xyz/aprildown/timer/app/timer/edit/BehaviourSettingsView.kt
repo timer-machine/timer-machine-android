@@ -213,7 +213,8 @@ internal fun MaterialPopupMenuBuilder.addHalfItems(
 internal fun MaterialPopupMenuBuilder.addCountItems(
     context: Context,
     action: CountAction,
-    onCountTimes: (Int) -> Unit
+    onCountTimes: (Int) -> Unit,
+    onBeep: (Boolean) -> Unit,
 ) {
     section {
         item {
@@ -227,6 +228,15 @@ internal fun MaterialPopupMenuBuilder.addCountItems(
                 ) {
                     onCountTimes.invoke(it.toIntOrNull() ?: CountAction.DEFAULT_TIMES)
                 }
+            }
+        }
+        switchItem {
+            label = context.getString(RBase.string.behaviour_beep)
+            onBind = {
+                it.isChecked = action.beep
+            }
+            onCheckedChange = { _, isChecked ->
+                onBeep(isChecked)
             }
         }
     }

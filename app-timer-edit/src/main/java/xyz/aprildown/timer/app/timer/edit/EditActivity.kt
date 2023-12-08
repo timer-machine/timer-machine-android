@@ -739,7 +739,12 @@ class EditActivity :
                             changeBehaviour(BehaviourType.COUNT, position) {
                                 it.toCountAction().copy(times = newTimes).toBehaviourEntity()
                             }
-                        }
+                        },
+                        onBeep = { newBeep ->
+                            changeBehaviour(BehaviourType.COUNT, position) {
+                                it.toCountAction().copy(beep = newBeep).toBehaviourEntity()
+                            }
+                        },
                     )
                 }
                 BehaviourType.NOTIFICATION -> {
