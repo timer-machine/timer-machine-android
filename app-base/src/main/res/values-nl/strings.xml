@@ -101,7 +101,7 @@
     <string name="scheduler_canceled_template">%1$s geannuleerd</string>
     <string name="settings_floating_window_pip_floating_alpha">Venstertransparantie</string>
     <string name="behaviour_music">Muziek</string>
-    <string name="folder_name">Groepnaam</string>
+    <string name="folder_name">Setnaam</string>
     <string name="behaviour_count_help">De laatste paar seconden aftellen</string>
     <string name="behaviour_vibration">Trillen</string>
     <string name="intro_save_for_later">Je kunt dit na de inleiding proberen</string>
@@ -261,7 +261,7 @@
     <string name="voice_variable_timer_total_loop_desp">Timer totale lus</string>
     <string name="edit_add_end">Eindstap</string>
     <string name="main_action_timers">Timers</string>
-    <string name="edit_step_name">Naam stap</string>
+    <string name="edit_step_name">Stapnaam</string>
     <string name="delete">Verwijderen</string>
     <string name="perm_rational_floating">Geef de app toestemming om een zwevend venster te tonen</string>
     <string name="duplicate">Dupliceren</string>
@@ -286,7 +286,7 @@
     <string name="help_tts_desp">Stem- en aftelherinneringen zijn ervan afhankelijk</string>
     <string name="never_show_again">Nooit meer tonen</string>
     <string name="scheduler_time">Tijd</string>
-    <string name="behaviour_voice_help">Lees de naam van deze stap</string>
+    <string name="behaviour_voice_help">Lees deze stapnaam</string>
     <string name="pref_screen_title_dim">Het scherm dimmen</string>
     <string name="notification_duration">Duur</string>
     <string name="ok">Oké</string>
@@ -365,7 +365,7 @@
     <string name="voice_variable_group_end_time_desp">Groep eindtijd</string>
     <string name="undo">Ongedaan maken</string>
     <string name="pref_audio_focus_title_stop">Overige geluiden stoppen</string>
-    <string name="voice_variable_timer_name_desp">Naam timer</string>
+    <string name="voice_variable_timer_name_desp">Timernaam</string>
     <string name="cloud_backup_recent_error">Recente fout</string>
     <string name="edit_group_start">Groep start</string>
     <string name="pref_audio_type_title_alarm">Alarm</string>
@@ -400,7 +400,7 @@
     <string name="record_all_timers">Alle timers</string>
     <string name="billing_connect_issue">Er is een fout opgetreden in de verbinding met Google Play.
 \n
-\nDit kan een tijdelijk probleem zijn, dus probeer het binnen een paar minuten opnieuw.</string>
+\nDit kan een tijdelijk probleem zijn, dus probeer het over een paar minuten opnieuw.</string>
     <string name="edit_add_start_too_many">Er is al een beginstap</string>
     <string name="theme_step_color_normal">Normale stap</string>
     <string name="one_action_show_float">Zwevend venster</string>
@@ -476,7 +476,7 @@
     <string name="settings_floating_window_pip_floating_size">Venstergrootte</string>
     <string name="trash_done_template">%s in prullenmand</string>
     <string name="record_today">Vandaag</string>
-    <string name="voice_step_name">Naam stap</string>
+    <string name="voice_step_name">Stapnaam</string>
     <string name="scheduler_repeat_every">Elke</string>
     <string name="pref_audio_focus_title_lower">Overige geluiden verlagen</string>
     <string name="notif_channel_fore_title">Voorgronddienst</string>
@@ -491,7 +491,7 @@
     <string name="edit_add_start_desp">Voer een keer een stap uit aan het begin van de hele taak om jezelf voor te bereiden</string>
     <string name="voice_variable_step_name_next_desp">De naam van de volgende stap</string>
     <string name="music_pick_ringtone">Kies muziek bij stap</string>
-    <string name="voice_variable_step_name_desp">Naam stap</string>
+    <string name="voice_variable_step_name_desp">Stapnaam</string>
     <string name="intro_start_add_walk_step">Voeg een <b>Normale</b> stap toe om te wandelen.</string>
     <string name="half_option_vibration_desp">Normaal patroon, tweemaal</string>
     <string name="pref_open_notif_setting">Meldingsinstellingen openen</string>
@@ -586,7 +586,7 @@
     <string name="whitelist_disclaimer_no_confirmation">Handleiding overslaan?</string>
     <string name="notif_channel_b_notif_desp">Gebruikt door meldingsherinnering</string>
     <string name="plus_one_minute">1 minuut erbij</string>
-    <string name="folder_default">Standaard set</string>
+    <string name="folder_default">Standaardset</string>
     <string name="edit_wrong_empty_steps">Er moet minimaal één stap zijn</string>
     <string name="one_action_more">Meer timerinstellingen</string>
     <string name="billing_help_title">Hulp</string>
@@ -595,7 +595,7 @@
     <string name="intro_start_timer_steps">Dit deel toont <b>de stappenlijst</b> en benadrukt <b>de huidige lopende stap</b>.</string>
     <string name="notification_duration_desp_0_meaning">0 voor het niet automatisch afwijzen</string>
     <string name="pref_week_start_title">Eerste weekdag</string>
-    <string name="scheduler_name">Planner naam</string>
+    <string name="scheduler_name">Plannernaam</string>
     <string name="pref_reminder_baked_count_downloading">Bronnen downloaden…</string>
     <string name="main_action_help">Hulp &amp; reacties</string>
     <string name="shortcut_not_support">De huidige launcher kan geen snelkoppeling maken</string>
