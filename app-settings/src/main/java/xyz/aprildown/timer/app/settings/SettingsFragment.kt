@@ -12,6 +12,7 @@ import androidx.navigation.fragment.NavHostFragment
 import androidx.preference.ListPreference
 import androidx.preference.Preference
 import androidx.preference.PreferenceFragmentCompat
+import com.github.deweyreed.timer.app.tts.TtsBakery
 import com.github.deweyreed.tools.helper.IntentHelper
 import com.github.deweyreed.tools.helper.createChooserIntentIfDead
 import com.github.deweyreed.tools.helper.hasPermissions
@@ -28,6 +29,7 @@ import xyz.aprildown.timer.app.base.utils.NavigationUtils.subLevelNavigate
 import xyz.aprildown.timer.component.settings.DarkThemeDialog
 import xyz.aprildown.timer.component.settings.TweakTimeDialog
 import xyz.aprildown.timer.domain.TimeUtils
+import xyz.aprildown.timer.domain.utils.fireAndForget
 import java.text.DateFormatSymbols
 import java.util.Calendar
 import java.util.Locale
@@ -82,6 +84,14 @@ class SettingsFragment :
                     !requireContext().hasPermissions(Manifest.permission.READ_PHONE_STATE)
                 ) {
                     phoneStateLauncher.launch(Manifest.permission.READ_PHONE_STATE)
+                }
+            }
+            KEY_TTS_BAKERY -> {
+                if (newValue == false) {
+                    val context = requireContext().applicationContext
+                    fireAndForget {
+                        TtsBakery.tearDown(context)
+                    }
                 }
             }
         }
@@ -187,6 +197,7 @@ class SettingsFragment :
         }
         findPreference<Preference>(KEY_FLOATING_WINDOW_PIP)?.onPreferenceClickListener = this
         findPreference<Preference>(KEY_PHONE_CALL)?.onPreferenceChangeListener = this
+        findPreference<Preference>(KEY_TTS_BAKERY)?.onPreferenceChangeListener = this
         findPreference<ListPreference>(KEY_WEEK_START)?.run {
             val weekdays = listOf(
                 Calendar.MONDAY,
@@ -202,7 +213,7 @@ class SettingsFragment :
             entryValues = weekdays.map { it.toString() }.toTypedArray()
         }
 
-        findPreference<Preference>(KEY_GROUP_REMINDER)?.isVisible =
+        findPreference<Preference>(KEY_BAKED_COUNT)?.isVisible =
             flavorData.flavor == FlavorData.Flavor.Google
         val prefBakedCount = findPreference<Preference>(KEY_BAKED_COUNT)?.apply {
             isVisible = flavorData.flavor == FlavorData.Flavor.Google
@@ -311,9 +322,8 @@ private const val KEY_SCREEN_TIMING = PreferenceData.KEY_SCREEN_TIMING
 private const val KEY_TWEAK_TIME = "key_tweak_time"
 private const val KEY_FLOATING_WINDOW_PIP = "key_floating_window_pip"
 
-private const val KEY_GROUP_REMINDER = "pref_group_reminder"
-
 private const val KEY_BAKED_COUNT = PreferenceData.PREF_BAKED_COUNT
+private const val KEY_TTS_BAKERY = PreferenceData.PREF_IS_TTS_BAKERY_OPEN
 
 private const val KEY_PHONE_CALL = PreferenceData.KEY_PHONE_CALL
 

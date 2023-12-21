@@ -81,6 +81,14 @@ internal object TtsBakeryDiskCache {
         }
     }
 
+    fun deleteAll(context: Context) {
+        try {
+            getDiskLruCache(context).delete()
+        } catch (e: IOException) {
+            Timber.e(e)
+        }
+    }
+
     // From Glide SafeKeyGenerator
     private fun getSpeechKey(text: String): String {
         val messageDigest = MessageDigest.getInstance("SHA-256")

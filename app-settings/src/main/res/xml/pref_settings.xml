@@ -90,9 +90,7 @@
 
     </PreferenceCategory>
 
-    <PreferenceCategory
-        app:key="pref_group_reminder"
-        app:title="@string/pref_reminder">
+    <PreferenceCategory app:title="@string/pref_reminder">
 
         <xyz.aprildown.timer.app.settings.BakedCountPreference
             app:icon="@drawable/settings_count"
@@ -101,6 +99,15 @@
             app:title="@string/pref_reminder_baked_count_title"
             app:widgetLayout="@layout/layout_baked_count_widget"
             tools:summary="@string/pref_reminder_baked_count_off" />
+
+        <SwitchPreferenceCompat
+            app:defaultValue="false"
+            app:icon="@drawable/settings_tts_bakery"
+            app:key="pref_is_tts_bakery_open"
+            app:singleLineTitle="false"
+            app:summaryOff="@string/pref_tts_bakery_off"
+            app:summaryOn="@string/pref_tts_bakery_on"
+            app:title="@string/pref_tts_bakery" />
 
     </PreferenceCategory>
 

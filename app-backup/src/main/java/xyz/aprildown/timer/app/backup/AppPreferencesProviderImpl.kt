@@ -58,6 +58,7 @@ private interface PreferenceItem {
                 ShowTimerTotalTimePreferenceItem(),
                 FolderSortByItem(),
                 GridTimerListItem(),
+                TtsBakeryListItem(),
                 MediaStyleNotificationItem(),
             )
         }
@@ -436,6 +437,26 @@ private class GridTimerListItem : PreferenceItem {
 
     companion object {
         private const val KEY = PreferenceData.PREF_GRID_TIMER_LIST
+    }
+}
+
+private class TtsBakeryListItem : PreferenceItem {
+    override fun storeToMap(context: Context, map: MutableMap<String, String>) {
+        map[KEY] = context.safeSharedPreference.getBoolean(KEY, false).toString()
+    }
+
+    override fun storeToApp(
+        context: Context,
+        prefs: Map<String, String>,
+        editor: SharedPreferences.Editor
+    ) {
+        prefs.ifHasKey(KEY) {
+            editor.putBoolean(KEY, it.toBoolean())
+        }
+    }
+
+    companion object {
+        private const val KEY = PreferenceData.PREF_IS_TTS_BAKERY_OPEN
     }
 }
 

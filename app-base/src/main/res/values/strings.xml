@@ -681,6 +681,11 @@
     <string name="pref_show_timer_total_time_on">Show the total time of the timer and groups</string>
     <string name="pref_show_timer_total_time_off">Hide it</string>
 
+    <!--Use the previously generated speech synthesis file instead of synthesizing the voice every time. Similar to caching.-->
+    <string name="pref_tts_bakery">Text-to-speech bakery</string>
+    <string name="pref_tts_bakery_off">Generate the audio file of every Text-to-speech content for a quick speech afterward</string>
+    <string name="pref_tts_bakery_on">If Text-to-speech malfunctions, please turn off this option</string>
+
     <string name="pref_media_style_notification">Media Style Notification</string>
 
     <!--Reminder preferences-->

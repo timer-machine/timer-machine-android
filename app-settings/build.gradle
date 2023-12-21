@@ -11,6 +11,7 @@ android {
 
 dependencies {
     implementation project(':app-base')
+    implementation project(':app-tts')
     implementation project(':component-key')
     implementation project(':component-settings')
 

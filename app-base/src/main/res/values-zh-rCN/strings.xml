@@ -504,6 +504,9 @@
     <string name="pref_show_timer_total_time">编辑时的总时间</string>
     <string name="pref_show_timer_total_time_on">显示计时器和组的总时间</string>
     <string name="pref_show_timer_total_time_off">隐藏</string>
+    <string name="pref_tts_bakery">文字转语音缓存</string>
+    <string name="pref_tts_bakery_off">生成每次文字转语音的语音文件，用于之后快速发声</string>
+    <string name="pref_tts_bakery_on">如文字转语音出错或失效，请尝试关闭该选项</string>
     <string name="pref_media_style_notification">媒体样式通知</string>
     <!--Reminder preferences-->
     <string name="pref_reminder">提醒方式</string>

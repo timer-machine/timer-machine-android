@@ -449,7 +449,7 @@ object PreferenceData {
         get() = getBoolean(PREF_USE_VOICE_CONTENT2, false)
         set(value) = edit { putBoolean(PREF_USE_VOICE_CONTENT2, value) }
 
-    private const val PREF_IS_TTS_BAKERY_OPEN = "pref_is_tts_bakery_open"
+    const val PREF_IS_TTS_BAKERY_OPEN = "pref_is_tts_bakery_open"
     var SharedPreferences.isTtsBakeryOpen: Boolean
         get() = getBoolean(PREF_IS_TTS_BAKERY_OPEN, false)
         set(value) = edit { putBoolean(PREF_IS_TTS_BAKERY_OPEN, value) }

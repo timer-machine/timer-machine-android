@@ -7,7 +7,7 @@ import androidx.work.OneTimeWorkRequest
 import androidx.work.WorkManager
 import java.io.File
 
-internal object TtsBakery {
+object TtsBakery {
     fun getSpeechFile(context: Context, text: String): File? {
         return TtsBakeryDiskCache.get(context, text)
     }
@@ -27,5 +27,9 @@ internal object TtsBakery {
                     )
                     .build()
             )
+    }
+
+    fun tearDown(context: Context) {
+        TtsBakeryDiskCache.deleteAll(context)
     }
 }
