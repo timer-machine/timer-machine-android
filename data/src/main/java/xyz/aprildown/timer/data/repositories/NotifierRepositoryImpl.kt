@@ -1,12 +1,9 @@
 package xyz.aprildown.timer.data.repositories
 
-import android.content.Context
 import android.content.SharedPreferences
 import androidx.annotation.VisibleForTesting
 import com.squareup.moshi.Moshi
 import dagger.Reusable
-import dagger.hilt.android.qualifiers.ApplicationContext
-import xyz.aprildown.timer.data.R
 import xyz.aprildown.timer.data.datas.StepData
 import xyz.aprildown.timer.data.json.BehaviourDataJsonAdapter
 import xyz.aprildown.timer.data.mappers.StepOnlyMapper
@@ -16,12 +13,13 @@ import xyz.aprildown.timer.domain.entities.StepEntity
 import xyz.aprildown.timer.domain.entities.StepType
 import xyz.aprildown.timer.domain.repositories.NotifierRepository
 import javax.inject.Inject
+import javax.inject.Named
 
 @Reusable
 internal class NotifierRepositoryImpl @Inject constructor(
-    @ApplicationContext private val context: Context,
     private val sharedPreferences: SharedPreferences,
     private val stepOnlyMapper: StepOnlyMapper,
+    @Named(NotifierRepository.NAMED_DEFAULT_NOTIFIER_NAME) private val defaultNotifierName: String,
 ) : NotifierRepository {
 
     override suspend fun get(): StepEntity.Step {
@@ -69,7 +67,7 @@ internal class NotifierRepositoryImpl @Inject constructor(
     }
 
     private fun translatedDefaultNotifier(): StepEntity.Step {
-        return getDefaultNotifier().copy(label = context.getString(R.string.edit_default_notifier_name))
+        return getDefaultNotifier().copy(label = defaultNotifierName)
     }
 
     companion object {

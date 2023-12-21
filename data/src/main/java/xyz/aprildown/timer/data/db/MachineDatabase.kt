@@ -11,7 +11,6 @@ import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
 import androidx.room.migration.Migration
 import androidx.sqlite.db.SupportSQLiteDatabase
-import xyz.aprildown.timer.data.R
 import xyz.aprildown.timer.data.datas.FolderData
 import xyz.aprildown.timer.data.datas.SchedulerData
 import xyz.aprildown.timer.data.datas.StepData
@@ -49,34 +48,35 @@ abstract class MachineDatabase : RoomDatabase() {
 
         const val DB_VERSION = 8
 
-        private fun Builder<MachineDatabase>.addMyMigrations(context: Context): Builder<MachineDatabase> {
+        private fun Builder<MachineDatabase>.addMyMigrations(): Builder<MachineDatabase> {
             addMigrations(getMigration1to2())
             addMigrations(getMigration2to3())
             addMigrations(getMigration3to4())
             addMigrations(getMigration4to5())
             addMigrations(getMigration5to6())
             addMigrations(getMigration6to7())
-            addMigrations(getMigration7to8(context))
+            addMigrations(getMigration7to8())
             return this
         }
 
-        private fun Builder<MachineDatabase>.addCallback(context: Context): Builder<MachineDatabase> {
+        private fun Builder<MachineDatabase>.addCallback(): Builder<MachineDatabase> {
             return addCallback(
                 object : Callback() {
                     override fun onCreate(db: SupportSQLiteDatabase) {
-                        addHostFolders(context, db)
+                        addHostFolders(db)
                     }
                 }
             )
         }
 
-        private fun addHostFolders(context: Context, db: SupportSQLiteDatabase) {
+        private fun addHostFolders(db: SupportSQLiteDatabase) {
+            // Names are empty because we populate them at runtime.
             db.insert(
                 "Folder",
                 SQLiteDatabase.CONFLICT_IGNORE,
                 contentValuesOf(
                     "id" to FolderEntity.FOLDER_DEFAULT,
-                    "name" to context.getString(R.string.folder_default),
+                    "name" to "",
                 )
             )
             db.insert(
@@ -84,7 +84,7 @@ abstract class MachineDatabase : RoomDatabase() {
                 SQLiteDatabase.CONFLICT_IGNORE,
                 contentValuesOf(
                     "id" to FolderEntity.FOLDER_TRASH,
-                    "name" to context.getString(R.string.folder_trash),
+                    "name" to "",
                 )
             )
         }
@@ -93,8 +93,8 @@ abstract class MachineDatabase : RoomDatabase() {
         fun createInMemoryDatabase(context: Context): MachineDatabase {
             return Room.inMemoryDatabaseBuilder(context, MachineDatabase::class.java)
                 .allowMainThreadQueries()
-                .addMyMigrations(context)
-                .addCallback(context)
+                .addMyMigrations()
+                .addCallback()
                 .build()
         }
 
@@ -104,8 +104,8 @@ abstract class MachineDatabase : RoomDatabase() {
                 MachineDatabase::class.java,
                 DB_NAME
             )
-                .addMyMigrations(context)
-                .addCallback(context)
+                .addMyMigrations()
+                .addCallback()
                 .build()
         }
 
@@ -209,7 +209,7 @@ abstract class MachineDatabase : RoomDatabase() {
          * Add [FolderData] and [TimerData.folderId].
          */
         @VisibleForTesting(otherwise = VisibleForTesting.PRIVATE)
-        fun getMigration7to8(context: Context): Migration = object : Migration(7, 8) {
+        fun getMigration7to8(): Migration = object : Migration(7, 8) {
             override fun migrate(database: SupportSQLiteDatabase) {
                 database.execSQL(
                     "ALTER TABLE TimerItem " +
@@ -219,7 +219,7 @@ abstract class MachineDatabase : RoomDatabase() {
                     "CREATE TABLE IF NOT EXISTS `Folder` " +
                         "(`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `name` TEXT NOT NULL)"
                 )
-                addHostFolders(context, database)
+                addHostFolders(database)
             }
         }
     }

@@ -1,5 +1,6 @@
 package io.github.deweyreed.timer.di
 
+import android.app.Application
 import android.content.Context
 import android.content.Intent
 import dagger.Binds
@@ -16,8 +17,11 @@ import xyz.aprildown.timer.app.base.ui.StepUpdater
 import xyz.aprildown.timer.app.timer.edit.UpdateStepDialog
 import xyz.aprildown.timer.app.timer.run.MachineService
 import xyz.aprildown.timer.domain.repositories.AppPreferencesProvider
+import xyz.aprildown.timer.domain.repositories.NotifierRepository
 import xyz.aprildown.timer.presentation.StreamMachineIntentProvider
 import xyz.aprildown.timer.presentation.stream.TimerIndex
+import javax.inject.Named
+import xyz.aprildown.timer.app.base.R as RBase
 
 @Module
 @InstallIn(SingletonComponent::class)
@@ -72,5 +76,11 @@ abstract class OtherModule {
 
         @Provides
         fun provideStepUpdater(): StepUpdater = UpdateStepDialog
+
+        @Provides
+        @Named(NotifierRepository.NAMED_DEFAULT_NOTIFIER_NAME)
+        fun provideDefaultNotifierName(context: Application): String {
+            return context.getString(RBase.string.edit_default_notifier_name)
+        }
     }
 }

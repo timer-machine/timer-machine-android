@@ -1,6 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <item name="folder_default" type="string" />
-    <item name="folder_trash" type="string" />
-    <item name="edit_default_notifier_name" type="string" />
-</resources>
