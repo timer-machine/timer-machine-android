@@ -6,7 +6,7 @@ plugins {
 }
 
 android {
-    namespace 'com.github.deweyreed.timer.app.tts'
+    namespace 'com.github.deweyreed.timer.component.tts'
 }
 
 dependencies {

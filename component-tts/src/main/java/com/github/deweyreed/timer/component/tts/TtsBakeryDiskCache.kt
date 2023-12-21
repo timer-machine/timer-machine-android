@@ -1,4 +1,4 @@
-package com.github.deweyreed.timer.app.tts
+package com.github.deweyreed.timer.component.tts
 
 import android.content.Context
 import android.media.MediaMetadataRetriever

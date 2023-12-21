@@ -18,7 +18,7 @@ import androidx.core.app.NotificationCompat
 import androidx.core.app.ServiceCompat
 import androidx.core.os.postDelayed
 import androidx.core.text.buildSpannedString
-import com.github.deweyreed.timer.app.tts.TtsSpeaker
+import com.github.deweyreed.timer.component.tts.TtsSpeaker
 import com.github.deweyreed.tools.helper.HandlerHelper
 import com.github.deweyreed.tools.helper.getNumberFormattedQuantityString
 import dagger.hilt.android.AndroidEntryPoint

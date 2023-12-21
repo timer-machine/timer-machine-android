@@ -9,10 +9,10 @@
 :app-timer-list
 :app-timer-one
 :app-timer-run
-:app-tts
 :component-key
 :component-main
 :component-settings
+:component-tts
 :data
 :domain
 :presentation

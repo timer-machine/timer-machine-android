@@ -11,9 +11,9 @@ android {
 
 dependencies {
     implementation project(':app-base')
-    implementation project(':app-tts')
     implementation project(':component-key')
     implementation project(':component-settings')
+    implementation project(':component-tts')
 
     implementation libs.androidx.preference
 

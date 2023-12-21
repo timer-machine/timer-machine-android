@@ -12,7 +12,7 @@ import androidx.navigation.fragment.NavHostFragment
 import androidx.preference.ListPreference
 import androidx.preference.Preference
 import androidx.preference.PreferenceFragmentCompat
-import com.github.deweyreed.timer.app.tts.TtsBakery
+import com.github.deweyreed.timer.component.tts.TtsBakery
 import com.github.deweyreed.tools.helper.IntentHelper
 import com.github.deweyreed.tools.helper.createChooserIntentIfDead
 import com.github.deweyreed.tools.helper.hasPermissions

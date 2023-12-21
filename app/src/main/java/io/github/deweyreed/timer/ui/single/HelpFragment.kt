@@ -10,7 +10,7 @@ import androidx.fragment.app.DialogFragment
 import androidx.navigation.fragment.NavHostFragment
 import androidx.preference.Preference
 import androidx.preference.PreferenceFragmentCompat
-import com.github.deweyreed.timer.app.tts.TtsSpeaker
+import com.github.deweyreed.timer.component.tts.TtsSpeaker
 import com.github.deweyreed.tools.helper.IntentHelper
 import com.github.deweyreed.tools.helper.createChooserIntentIfDead
 import com.github.deweyreed.tools.helper.show
