@@ -628,6 +628,8 @@
     <string name="billing_dynamic_themes_title">動態顏色</string>
     <string name="billing_baked_count_title">預置倒數音</string>
     <string name="billing_baked_count_desp">更快更一致的倒數音</string>
+    <string name="billing_ad_off_title">無廣告</string>
+    <string name="billing_ad_off_desp">幫助應用保持開源無廣告</string>
     <string name="billing_future_title">未來會有更多功能</string>
     <string name="billing_future_desp">你的幫助讓應用更好地成長！</string>
     <string name="billing_a_part_of_iap">這是應用內購的一部分。</string>

@@ -867,6 +867,8 @@
     <string name="billing_dynamic_themes_desp" translatable="false">Android 12+</string>
     <string name="billing_baked_count_title">Baked count sound</string>
     <string name="billing_baked_count_desp">Fast and consistent count down sounds</string>
+    <string name="billing_ad_off_title">No ads</string>
+    <string name="billing_ad_off_desp">Help the app stay ad-free and open-sourced</string>
     <string name="billing_future_title">More in the future</string>
     <string name="billing_future_desp">Your help makes the app better!</string>
     <string name="billing_a_part_of_iap">This is a part of in-app purchases.</string>

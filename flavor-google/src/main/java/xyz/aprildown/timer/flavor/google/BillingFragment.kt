@@ -214,6 +214,11 @@ internal class BillingFragment : Fragment(R.layout.fragment_billing), MenuProvid
                             RBase.string.billing_baked_count_desp
                         )
                         this += PreferenceStyleListFragment.Entry(
+                            RBase.drawable.ic_ad_off,
+                            RBase.string.billing_ad_off_title,
+                            RBase.string.billing_ad_off_desp
+                        )
+                        this += PreferenceStyleListFragment.Entry(
                             RBase.drawable.settings_code,
                             RBase.string.billing_future_title,
                             RBase.string.billing_future_desp
