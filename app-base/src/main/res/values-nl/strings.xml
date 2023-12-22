@@ -52,7 +52,7 @@
     <string name="tip_android_12_battery">Taak-ondersteuning vereist toestemming voor \"Batterijoptimalisatie negeren\"</string>
     <string name="notif_channel_timing_desp">Toont de informatie van een lopende timer en zijn acties</string>
     <string name="intro_start_step_time">Klik op <b>de tijd naast de stapnaam</b> en verander de tijd in <b>3 minuten</b>.</string>
-    <string name="edit_add_notifier">Melding</string>
+    <string name="edit_add_notifier">Meldinggever</string>
     <string name="beep_count_title">Piep aantal</string>
     <string name="music_saf_pick_desp">Als je muziek wilt kiezen zonder toestemming te verlenen, of als de standaard beltoon-kiezer je muziek niet toont, kan het inschakelen van deze optie helpen.</string>
     <string name="tip_missed_timer"><b> Sommige timers worden abnormaal gestopt!</b>
@@ -81,7 +81,7 @@
     <string name="intro_start_timer_buttons">Dit is het bedieningspaneel met <b>Stop, Vorige stap, Start/Pauze, Volgende stap</b> en meer opties.</string>
     <string name="terms_of_service">Voorwaarden</string>
     <string name="pref_show_timer_total_time_on">Toon de totale tijd van de timer en groepen</string>
-    <string name="edit_default_notifier_name">Melding</string>
+    <string name="edit_default_notifier_name">Meldinggever</string>
     <string name="behaviour_half_help">Lees \"Halverwege de tijd\" wanneer deze stap halverwege is</string>
     <string name="nav_up">Naar omhoog</string>
     <string name="edit_share_as_text">Delen als tekst</string>
