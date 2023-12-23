@@ -289,11 +289,13 @@ class MachinePresenter @Inject constructor(
                         }
                         BehaviourType.COUNT -> {
                             val action = behavior.toCountAction()
-                            view?.enableTone(
-                                tone = 0,
-                                count = action.times,
-                                respectOtherSound = true,
-                            )
+                            if (action.beep) {
+                                view?.enableTone(
+                                    tone = 0,
+                                    count = action.times,
+                                    respectOtherSound = true,
+                                )
+                            }
                         }
                         BehaviourType.NOTIFICATION -> {
                             val action = behavior.toNotificationAction()
