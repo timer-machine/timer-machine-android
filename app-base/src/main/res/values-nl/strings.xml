@@ -306,7 +306,7 @@
     <string name="sample_timer_template_3_stages_2">Fase 2</string>
     <string name="discard">Weggooien</string>
     <string name="billing_future_title">Meer in de toekomst</string>
-    <string name="tts_error_template">TextToSpeech-fout: %s</string>
+    <string name="tts_error_template">Tekst-naar-spraak-fout: %s</string>
     <string name="voice_content2_enable">Nieuwe variabelen gebruiken</string>
     <string name="settings_floating_window_pip">Zwevend venster &amp; PiP</string>
     <string name="seconds_0">0 seconden</string>
@@ -621,4 +621,9 @@
     <string name="tweak_time_main_title">Hoofdknoppen</string>
     <string name="sample_timer_template_2_stages_low">Lage intensiteit</string>
     <string name="delete_done_template">%s verwijderd</string>
+    <string name="pref_tts_bakery">Tekst-naar-spraak-omzetting</string>
+    <string name="billing_ad_off_title">Geen reclame</string>
+    <string name="pref_tts_bakery_on">Als Tekst-naar-spraak niet goed werkt, schakel dan deze optie uit</string>
+    <string name="pref_tts_bakery_off">Genereer het audiobestand van elke Tekst-naar-spraak-inhoud voor een snelle spraakmelding</string>
+    <string name="billing_ad_off_desp">Help om de app om vrij van reclame en open source te blijven</string>
 </resources>
