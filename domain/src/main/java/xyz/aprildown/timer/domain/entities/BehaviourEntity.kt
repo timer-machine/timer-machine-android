@@ -330,7 +330,7 @@ fun BehaviourEntity.toCountAction(): CountAction {
     require(type == BehaviourType.COUNT)
     return CountAction(
         times = str1.toIntOrNull() ?: CountAction.DEFAULT_TIMES,
-        beep = str2.toIntOrNull() == 1,
+        beep = str2 == "1",
     )
 }
 
