@@ -24,6 +24,7 @@ import xyz.aprildown.timer.app.base.data.PreferenceData.AppTheme.AppThemeType.Co
 import xyz.aprildown.timer.app.base.utils.ScreenWakeLock
 import xyz.aprildown.timer.app.base.utils.produceTime
 import xyz.aprildown.timer.domain.entities.StepType
+import xyz.aprildown.timer.domain.utils.AppConfig
 import xyz.aprildown.tools.helper.safeSharedPreference
 import java.time.DayOfWeek
 import java.util.Calendar.FRIDAY
@@ -451,6 +452,6 @@ object PreferenceData {
 
     const val PREF_IS_TTS_BAKERY_OPEN = "pref_is_tts_bakery_open"
     var SharedPreferences.isTtsBakeryOpen: Boolean
-        get() = getBoolean(PREF_IS_TTS_BAKERY_OPEN, false)
+        get() = getBoolean(PREF_IS_TTS_BAKERY_OPEN, false || AppConfig.openDebug)
         set(value) = edit { putBoolean(PREF_IS_TTS_BAKERY_OPEN, value) }
 }
