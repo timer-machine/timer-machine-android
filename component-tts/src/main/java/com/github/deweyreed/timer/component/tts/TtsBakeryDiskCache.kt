@@ -9,10 +9,10 @@ import java.io.IOException
 import java.security.MessageDigest
 
 internal object TtsBakeryDiskCache {
-    private lateinit var diskLruCache: DiskLruCache
+    private var diskLruCache: DiskLruCache? = null
 
     private fun getDiskLruCache(context: Context): DiskLruCache {
-        if (!::diskLruCache.isInitialized) {
+        if (diskLruCache == null) {
             diskLruCache = DiskLruCache.open(
                 File(context.cacheDir, "tts-bakery"),
                 1,
@@ -20,7 +20,7 @@ internal object TtsBakeryDiskCache {
                 100 * 1024 * 1024
             )
         }
-        return diskLruCache
+        return checkNotNull(diskLruCache)
     }
 
     fun get(context: Context, text: String): File? {
@@ -84,6 +84,7 @@ internal object TtsBakeryDiskCache {
     fun deleteAll(context: Context) {
         try {
             getDiskLruCache(context).delete()
+            diskLruCache = null
         } catch (e: IOException) {
             Timber.e(e)
         }
