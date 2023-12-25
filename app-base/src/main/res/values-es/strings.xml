@@ -628,4 +628,9 @@
     <string name="tasker_event_timer_stops">Activar cuando <xliff:g example="Timer name" id="timer_name">%s</xliff:g> se detiene</string>
     <string name="tasker_event_timer_starts">Activar cuando <xliff:g example="Timer name" id="timer_name">%s</xliff:g> comienza</string>
     <string name="voice_variable_step_name_next_desp">El nombre del siguiente paso</string>
+    <string name="pref_tts_bakery">Almacenamiento en caché de texto a voz</string>
+    <string name="billing_ad_off_title">Sin anuncios</string>
+    <string name="pref_tts_bakery_on">Si la función de texto a voz no funciona correctamente, desactive esta opción</string>
+    <string name="pref_tts_bakery_off">Genere el archivo de audio de cualquier contenido de texto a voz para recibir notificaciones de voz rápidas</string>
+    <string name="billing_ad_off_desp">Ayude a que la aplicación siga siendo gratuita y de código abierto</string>
 </resources>
