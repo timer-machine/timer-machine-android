@@ -71,9 +71,9 @@ class TipManager @Inject constructor(
         return withContext(dispatcher) {
             val key = tip.tipKey
             if (default) {
-                repo.getBoolean(key, default)
+                repo.getBoolean(key, true)
             } else {
-                repo.contains(key) && repo.getBoolean(key, default)
+                repo.contains(key) && repo.getBoolean(key, false)
             }
         }
     }

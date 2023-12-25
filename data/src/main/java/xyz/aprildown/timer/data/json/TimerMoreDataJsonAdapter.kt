@@ -50,7 +50,7 @@ internal class TimerMoreDataJsonAdapter {
         value.showNotif.let {
             if (!it) {
                 writer.name("showNotif")
-                writer.value(it)
+                writer.value(false)
             }
         }
 

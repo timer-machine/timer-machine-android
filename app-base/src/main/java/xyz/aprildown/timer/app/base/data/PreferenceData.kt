@@ -452,6 +452,6 @@ object PreferenceData {
 
     const val PREF_IS_TTS_BAKERY_OPEN = "pref_is_tts_bakery_open"
     var SharedPreferences.isTtsBakeryOpen: Boolean
-        get() = getBoolean(PREF_IS_TTS_BAKERY_OPEN, false || AppConfig.openDebug)
+        get() = getBoolean(PREF_IS_TTS_BAKERY_OPEN, AppConfig.openDebug)
         set(value) = edit { putBoolean(PREF_IS_TTS_BAKERY_OPEN, value) }
 }
