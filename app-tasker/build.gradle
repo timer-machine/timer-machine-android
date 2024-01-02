@@ -7,6 +7,9 @@ plugins {
 
 android {
     namespace 'xyz.aprildown.timer.app.tasker'
+    defaultConfig {
+        consumerProguardFiles "consumer-rules.pro"
+    }
 }
 
 dependencies {
