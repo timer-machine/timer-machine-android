@@ -5,7 +5,7 @@ compileSdk = "33"
 minSdk = "23"
 targetSdk = "33"
 
-versionCode = "7040000"
+versionCode = "7040001"
 versionName = "7.4.0"
 
 kotlin = "1.8.22"
