@@ -55,6 +55,8 @@ when they are broken or required by a new feature.
 If you'd like to add translations, please join the project
 on [Weblate](https://hosted.weblate.org/engage/timer-machine/).
 
+[![Translation status](https://hosted.weblate.org/widget/timer-machine/android/multi-auto.svg)](https://hosted.weblate.org/engage/timer-machine/)
+
 ## License
 
 TimeR Machine is under the [GNU General Public License v3.0](LICENSE).
