@@ -57,7 +57,7 @@ interface MachineContract {
         fun startVibrating(pattern: LongArray, repeat: Boolean)
         fun stopVibrating()
 
-        fun showScreen(timerItem: TimerEntity, currentStepName: String, fullScreen: Boolean)
+        fun showScreen(timerItem: TimerEntity, currentStepName: String, fullScreen: Boolean, imagePath: String)
         fun closeScreen()
 
         // Halt is handled in the presenter

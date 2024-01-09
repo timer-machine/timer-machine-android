@@ -269,7 +269,7 @@ class MachinePresenter @Inject constructor(
                         // Handle screen first. This may help priority.
                         BehaviourType.SCREEN -> {
                             val action = behavior.toScreenAction()
-                            view?.showScreen(timer, currentStep.label, action.fullScreen)
+                            view?.showScreen(timer, currentStep.label, action.fullScreen, action.uri)
                         }
                         BehaviourType.VIBRATION -> {
                             val action = behavior.toVibrationAction()

@@ -5,9 +5,12 @@ import android.net.Uri
 import android.os.Bundle
 import android.view.View
 import android.widget.EditText
+import androidx.activity.result.PickVisualMediaRequest
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.cardview.widget.CardView
 import androidx.core.net.toUri
 import androidx.core.widget.ImageViewCompat
+import androidx.documentfile.provider.DocumentFile
 import androidx.fragment.app.DialogFragment
 import com.github.deweyreed.tools.helper.gone
 import com.github.deweyreed.tools.helper.toColorStateList
@@ -179,6 +182,35 @@ class UpdateStepDialog :
                     addScreenItems(
                         context = context,
                         action = current.toScreenAction(),
+                        onPickImageClick = {
+                            registerForActivityResult(
+                                ActivityResultContracts.PickVisualMedia()
+                            ) { uri ->
+                                var title = ""
+                                if (uri != null) {
+                                    val file = DocumentFile.fromSingleUri(
+                                        context,
+                                        uri
+                                    )
+                                    title = file?.name ?: ""
+                                }
+
+                                changeBehaviour(BehaviourType.SCREEN) {
+                                    it
+                                        .toScreenAction()
+                                        .copy(
+                                            title = title,
+                                            uri = uri.toString()
+                                        )
+                                        .toBehaviourEntity()
+                                }
+                            }
+                                .launch(
+                                    PickVisualMediaRequest(
+                                        ActivityResultContracts.PickVisualMedia.ImageOnly
+                                    )
+                                )
+                        },
                         onFullscreenChanged = { isChecked ->
                             changeBehaviour(BehaviourType.SCREEN) {
                                 it.toScreenAction().copy(fullScreen = isChecked).toBehaviourEntity()

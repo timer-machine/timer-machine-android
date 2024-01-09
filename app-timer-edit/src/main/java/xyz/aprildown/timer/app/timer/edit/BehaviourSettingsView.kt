@@ -99,9 +99,16 @@ internal fun MaterialPopupMenuBuilder.addVibrationItems(
 internal fun MaterialPopupMenuBuilder.addScreenItems(
     context: Context,
     action: ScreenAction,
+    onPickImageClick: () -> Unit,
     onFullscreenChanged: (Boolean) -> Unit
 ) {
     section {
+        item {
+            label = context.getString(RBase.string.screen_pick_image)
+            callback = {
+                onPickImageClick.invoke()
+            }
+        }
         switchItem {
             label = context.getString(RBase.string.screen_fullscreen)
             onBind = {

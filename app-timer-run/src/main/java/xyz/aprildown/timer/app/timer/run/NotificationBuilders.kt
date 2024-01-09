@@ -257,7 +257,8 @@ private fun Builder.withMediaStyleNotification(context: Context): Builder {
  */
 internal fun Context.buildScreenNotificationBuilder(
     timerItem: TimerEntity,
-    currentStepName: String
+    currentStepName: String,
+    imagePath: String,
 ): Builder {
     val res = resources
     val actions = arrayListOf<Action>()
@@ -280,7 +281,7 @@ internal fun Context.buildScreenNotificationBuilder(
     )
 
     val showScreenIntent =
-        ScreenActivity.intent(this, timerId, timerItem.name, currentStepName)
+        ScreenActivity.intent(this, timerId, timerItem.name, currentStepName, imagePath)
     val pendingShowScreenIntent = pendingActivityIntent(showScreenIntent, timerId)
 
     // Full screen intent has flags so it is different than the content intent.

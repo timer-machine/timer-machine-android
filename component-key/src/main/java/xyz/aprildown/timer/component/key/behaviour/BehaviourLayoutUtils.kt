@@ -11,6 +11,7 @@ import xyz.aprildown.timer.domain.entities.toCountAction
 import xyz.aprildown.timer.domain.entities.toHalfAction
 import xyz.aprildown.timer.domain.entities.toMusicAction
 import xyz.aprildown.timer.domain.entities.toNotificationAction
+import xyz.aprildown.timer.domain.entities.toScreenAction
 import xyz.aprildown.timer.domain.entities.toVibrationAction
 import xyz.aprildown.timer.domain.entities.toVoiceAction
 import xyz.aprildown.timer.app.base.R as RBase
@@ -73,6 +74,9 @@ internal fun BehaviourEntity.getChipText(context: Context): String {
         BehaviourType.NOTIFICATION -> {
             val duration = toNotificationAction().duration
             if (duration != 0) "${getDefaultName()} $duration" else null
+        }
+        BehaviourType.SCREEN -> {
+            toScreenAction().title.ifBlank { null }
         }
         else -> null
     } ?: getDefaultName()

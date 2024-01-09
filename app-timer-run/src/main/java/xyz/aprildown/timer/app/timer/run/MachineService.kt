@@ -353,20 +353,21 @@ class MachineService :
         VibrateHelper.stop(this)
     }
 
-    override fun showScreen(timerItem: TimerEntity, currentStepName: String, fullScreen: Boolean) {
+    override fun showScreen(timerItem: TimerEntity, currentStepName: String, fullScreen: Boolean, imagePath: String) {
         if (fullScreen) {
             startActivity(
                 ScreenActivity.intent(
                     this,
                     timerItem.id,
                     timerItem.name,
-                    currentStepName
+                    currentStepName,
+                    imagePath
                 ).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
             )
         } else {
             notificationManager.notify(
                 Constants.NOTIF_ID_SCREEN,
-                buildScreenNotificationBuilder(timerItem, currentStepName).build()
+                buildScreenNotificationBuilder(timerItem, currentStepName, imagePath).build()
             )
         }
     }

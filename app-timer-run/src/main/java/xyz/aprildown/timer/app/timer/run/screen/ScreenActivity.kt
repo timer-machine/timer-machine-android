@@ -6,6 +6,7 @@ import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
 import android.content.ServiceConnection
+import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.os.IBinder
@@ -18,6 +19,7 @@ import androidx.core.view.WindowCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.updateLayoutParams
 import androidx.core.view.updatePadding
+import com.bumptech.glide.Glide
 import com.github.deweyreed.tools.arch.observeEvent
 import com.github.deweyreed.tools.helper.startDrawableAnimation
 import com.github.deweyreed.tools.helper.stopDrawableAnimation
@@ -30,6 +32,7 @@ import xyz.aprildown.timer.domain.entities.TimerEntity
 import xyz.aprildown.timer.domain.utils.Constants
 import xyz.aprildown.timer.presentation.screen.ScreenViewModel
 import xyz.aprildown.timer.presentation.stream.MachineContract
+import java.io.File
 import com.github.deweyreed.tools.R as RTools
 
 @AndroidEntryPoint
@@ -67,6 +70,17 @@ class ScreenActivity : BaseActivity() {
                     loopString = "",
                     stepName = stepName
                 )
+            }
+        }
+
+        intent?.getStringExtra(EXTRA_IMAGE_PATH)?.let { imagePath ->
+            if (imagePath.isNotEmpty()) {
+                val image = File(imagePath)
+                if (image.extension == "gif")
+                    Glide.with(this).asGif().load(Uri.parse(imagePath)).into(binding.image)
+                else
+                    Glide.with(this).asBitmap().load(Uri.parse(imagePath)).into(binding.image)
+//                binding.image.setImageURI(Uri.parse(imagePath))
             }
         }
 
@@ -162,13 +176,9 @@ class ScreenActivity : BaseActivity() {
 
     override fun onResume() {
         super.onResume()
-        binding.imageRingtone.post {
-            binding.imageRingtone.startDrawableAnimation()
-        }
     }
 
     override fun onPause() {
-        binding.imageRingtone.stopDrawableAnimation()
         super.onPause()
     }
 
@@ -190,15 +200,17 @@ class ScreenActivity : BaseActivity() {
     companion object {
         private const val EXTRA_NAME = "extra_name"
         private const val EXTRA_STEP_NAME = "extra_step_name"
+        private const val EXTRA_IMAGE_PATH = "extra_image_path"
 
         @SuppressLint("StaticFieldLeak")
         var screen: Activity? = null
 
-        fun intent(context: Context, id: Int, timerName: String, stepName: String): Intent {
+        fun intent(context: Context, id: Int, timerName: String, stepName: String, imagePath: String): Intent {
             return Intent(context, ScreenActivity::class.java)
                 .putExtra(Constants.EXTRA_TIMER_ID, id)
                 .putExtra(EXTRA_NAME, timerName)
                 .putExtra(EXTRA_STEP_NAME, stepName)
+                .putExtra(EXTRA_IMAGE_PATH, imagePath)
         }
     }
 }

@@ -137,15 +137,17 @@ fun BehaviourEntity.toVibrationAction(): VibrationAction {
 
 // region Screen
 
-data class ScreenAction(val fullScreen: Boolean = false) : Action {
+data class ScreenAction(
+    val title: String = "", val uri: String = "", val fullScreen: Boolean = false
+) : Action {
     override fun toBehaviourEntity(): BehaviourEntity {
-        return BehaviourEntity(BehaviourType.SCREEN, str1 = if (fullScreen) "1" else "0")
+        return BehaviourEntity(BehaviourType.SCREEN, title, uri, fullScreen)
     }
 }
 
 fun BehaviourEntity.toScreenAction(): ScreenAction {
     require(type == BehaviourType.SCREEN)
-    return ScreenAction(str1.toIntOrNull() == 1)
+    return ScreenAction(str1, str2, bool)
 }
 
 // endregion Screen

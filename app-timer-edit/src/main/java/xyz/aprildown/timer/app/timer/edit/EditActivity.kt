@@ -2,6 +2,7 @@ package xyz.aprildown.timer.app.timer.edit
 
 import android.app.Activity
 import android.content.ClipboardManager
+import android.content.Intent
 import android.graphics.Typeface
 import android.net.Uri
 import android.os.Bundle
@@ -12,6 +13,7 @@ import android.view.View
 import androidx.activity.addCallback
 import androidx.activity.result.ActivityResult
 import androidx.activity.result.ActivityResultCallback
+import androidx.activity.result.PickVisualMediaRequest
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
 import androidx.annotation.VisibleForTesting
@@ -24,6 +26,7 @@ import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.isVisible
 import androidx.core.view.updatePadding
 import androidx.core.widget.doAfterTextChanged
+import androidx.documentfile.provider.DocumentFile
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -68,6 +71,7 @@ import xyz.aprildown.timer.domain.usecases.Fruit
 import xyz.aprildown.timer.domain.utils.Constants
 import xyz.aprildown.timer.presentation.edit.EditViewModel
 import xyz.aprildown.timer.presentation.stream.accumulateTime
+import xyz.aprildown.ultimateringtonepicker.getParcelableArrayExtraCompat
 import javax.inject.Inject
 import xyz.aprildown.timer.app.base.R as RBase
 
@@ -94,6 +98,30 @@ class EditActivity :
         ActivityResultContracts.StartActivityForResult(),
         getRingtonePickerResultCallback()
     )
+
+    private var imagePickerLauncherPosition = -1
+    private val imagePickerLauncher = registerForActivityResult(
+        ActivityResultContracts.PickVisualMedia()
+    ) { uri ->
+        var title = ""
+        if (uri != null) {
+            val file = DocumentFile.fromSingleUri(
+                this@EditActivity,
+                uri
+            )
+            title = file?.name ?: ""
+        }
+
+        changeBehaviour(BehaviourType.SCREEN, imagePickerLauncherPosition) {
+            it
+                .toScreenAction()
+                .copy(
+                    title = title,
+                    uri = uri?.toString() ?: ""
+                )
+                .toBehaviourEntity()
+        }
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -674,6 +702,16 @@ class EditActivity :
                     addScreenItems(
                         context = this@EditActivity,
                         action = current.toScreenAction(),
+                        onPickImageClick = {
+                            imagePickerLauncherPosition = position
+
+                            imagePickerLauncher
+                                .launch(
+                                    PickVisualMediaRequest(
+                                        ActivityResultContracts.PickVisualMedia.ImageOnly
+                                    )
+                                )
+                        },
                         onFullscreenChanged = { isChecked ->
                             changeBehaviour(BehaviourType.SCREEN, position) {
                                 it.toScreenAction().copy(fullScreen = isChecked).toBehaviourEntity()
