@@ -7,10 +7,37 @@
     android:background="?colorPrimarySurface"
     tools:ignore="Overdraw">
 
+    <ImageView
+        android:id="@+id/image"
+        android:layout_width="367dp"
+        android:layout_height="295dp"
+        android:layout_marginBottom="12dp"
+        android:adjustViewBounds="true"
+        android:cropToPadding="false"
+        android:importantForAccessibility="no"
+        android:scaleType="center"
+        app:layout_constraintBottom_toTopOf="@id/btnStop"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/btnAddOneMinute"
+        style="@style/Widget.MaterialComponents.Button.TextButton"
+        android:layout_width="70dp"
+        android:layout_height="47dp"
+        android:layout_marginStart="36dp"
+        android:layout_marginBottom="8dp"
+        android:text="@string/one_action_add_one_minute"
+        android:textColor="?colorOnPrimarySurface"
+        app:layout_constraintBottom_toTopOf="@id/textTime"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:rippleColor="?colorOnPrimarySurface" />
+
     <TextView
         android:id="@+id/textStepInfo"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_width="335dp"
+        android:layout_height="69dp"
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
         android:ellipsize="end"
@@ -19,31 +46,17 @@
         app:autoSizeMaxTextSize="24sp"
         app:autoSizeTextType="uniform"
         app:layout_constrainedHeight="true"
-        app:layout_constraintBottom_toTopOf="@+id/imageRingtone"
+        app:layout_constraintBottom_toTopOf="@+id/image"
         app:layout_constraintEnd_toEndOf="@id/textTime"
         app:layout_constraintStart_toStartOf="@id/textTime"
         app:layout_constraintTop_toBottomOf="@id/textTime"
+        app:layout_constraintVertical_bias="0.0"
         tools:text="@tools:sample/lorem/random" />
-
-    <ImageView
-        android:id="@+id/imageRingtone"
-        android:layout_width="128dp"
-        android:layout_height="128dp"
-        android:layout_marginBottom="24dp"
-        android:importantForAccessibility="no"
-        android:scaleType="fitXY"
-        app:layout_constraintBottom_toTopOf="@id/btnStop"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:srcCompat="@drawable/ic_anim_ringing"
-        app:tint="?colorOnPrimarySurface" />
 
     <TextView
         android:id="@+id/textTime"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginEnd="8dp"
+        android:layout_width="338dp"
+        android:layout_height="131dp"
         android:fontFamily="@font/digital_numbers_colon"
         android:maxLines="1"
         android:paddingTop="24dp"
@@ -51,35 +64,25 @@
         android:textColor="?colorOnPrimarySurface"
         android:textSize="108sp"
         app:autoSizeTextType="uniform"
-        app:layout_constraintBottom_toTopOf="@id/imageRingtone"
+        app:layout_constraintBottom_toTopOf="@id/image"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.4"
+        app:layout_constraintVertical_bias="0.424"
         tools:text="12:34" />
-
-    <Button
-        android:id="@+id/btnAddOneMinute"
-        style="@style/Widget.MaterialComponents.Button.TextButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:text="@string/one_action_add_one_minute"
-        android:textColor="?colorOnPrimarySurface"
-        app:layout_constraintBottom_toTopOf="@id/textTime"
-        app:layout_constraintStart_toStartOf="parent"
-        app:rippleColor="?colorOnPrimarySurface" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/btnStop"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="83dp"
+        android:layout_height="74dp"
+        android:layout_marginBottom="52dp"
         android:contentDescription="@string/stop"
-        app:fabCustomSize="156dp"
+        app:fabCustomSize="78dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:maxImageSize="72dp"
+        app:maxImageSize="48dp"
         app:srcCompat="@drawable/ic_stop" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

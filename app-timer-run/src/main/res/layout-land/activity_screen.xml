@@ -9,44 +9,35 @@
 
     <TextView
         android:id="@+id/textStepInfo"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp"
+        android:layout_width="191dp"
+        android:layout_height="113dp"
+        android:layout_marginTop="16dp"
         android:textColor="?colorOnPrimarySurface"
         android:textSize="24sp"
         app:autoSizeMaxTextSize="24sp"
         app:autoSizeTextType="uniform"
         app:layout_constrainedHeight="true"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@id/textTime"
-        app:layout_constraintStart_toStartOf="@id/textTime"
-        app:layout_constraintTop_toBottomOf="@id/textTime"
-        app:layout_constraintVertical_bias="0"
+        app:layout_constraintTop_toBottomOf="@+id/textTime"
+        tools:layout_editor_absoluteX="16dp"
         tools:text="@tools:sample/lorem/random" />
 
     <ImageView
-        android:id="@+id/imageRingtone"
-        android:layout_width="128dp"
-        android:layout_height="128dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="32dp"
+        android:id="@+id/image"
+        android:layout_width="384dp"
+        android:layout_height="368dp"
+        android:layout_marginStart="14dp"
+        android:layout_marginEnd="20dp"
         android:importantForAccessibility="no"
-        android:scaleType="fitXY"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/btnStop"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@id/textTime"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/ic_anim_ringing"
-        app:tint="?colorOnPrimarySurface" />
+        android:scaleType="center"
+        app:layout_constraintEnd_toStartOf="@+id/btnStop"
+        app:layout_constraintStart_toEndOf="@+id/textStepInfo"
+        tools:layout_editor_absoluteY="21dp" />
 
     <TextView
         android:id="@+id/textTime"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginBottom="8dp"
+        android:layout_width="188dp"
+        android:layout_height="104dp"
+        android:layout_marginTop="21dp"
         android:fontFamily="@font/digital_numbers_colon"
         android:maxLines="1"
         android:paddingTop="24dp"
@@ -54,11 +45,8 @@
         android:textColor="?colorOnPrimarySurface"
         android:textSize="108sp"
         app:autoSizeTextType="uniform"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/imageRingtone"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnAddOneMinute"
+        tools:layout_editor_absoluteX="16dp"
         tools:text="12:34" />
 
     <Button
@@ -66,27 +54,22 @@
         style="@style/Widget.MaterialComponents.Button.TextButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
         android:text="@string/one_action_add_one_minute"
         android:textColor="?colorOnPrimarySurface"
-        app:layout_constraintBottom_toTopOf="@id/textTime"
-        app:layout_constraintStart_toStartOf="parent"
-        app:rippleColor="?colorOnPrimarySurface" />
+        app:rippleColor="?colorOnPrimarySurface"
+        tools:layout_editor_absoluteX="16dp"
+        tools:layout_editor_absoluteY="16dp" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/btnStop"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
+        android:layout_width="90dp"
+        android:layout_height="124dp"
         android:contentDescription="@string/stop"
-        app:fabCustomSize="156dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@id/imageRingtone"
-        app:layout_constraintTop_toTopOf="parent"
+        app:fabCustomSize="94dp"
         app:maxImageSize="72dp"
-        app:srcCompat="@drawable/ic_stop" />
+        app:srcCompat="@drawable/ic_stop"
+        tools:layout_editor_absoluteX="625dp"
+        tools:layout_editor_absoluteY="165dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 
