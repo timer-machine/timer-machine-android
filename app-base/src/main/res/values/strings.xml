@@ -162,6 +162,7 @@
 
     <string name="behaviour_screen">Screen</string>
     <string name="behaviour_screen_help">Wake up the phone and show a reminding screen</string>
+    <string name="screen_pick_image">Pick Step Image</string>
     <string name="screen_fullscreen">Always Fullscreen</string>
 
     <string name="behaviour_halt">Halt</string>
