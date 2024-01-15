@@ -10,9 +10,9 @@ versionName = "7.4.0"
 
 kotlin = "1.9.22"
 
-dagger = "2.47"
+dagger = "2.50"
 
-detekt = "1.23.0"
+detekt = "1.23.4"
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
@@ -42,7 +42,7 @@ kotlin-coroutines-play = "org.jetbrains.kotlinx:kotlinx-coroutines-play-services
 kotlin-coroutines-test = "org.jetbrains.kotlinx:kotlinx-coroutines-test:1.7.3"
 
 junit = "junit:junit:4.13.2"
-mockito-kotlin = "org.mockito.kotlin:mockito-kotlin:5.1.0"
+mockito-kotlin = "org.mockito.kotlin:mockito-kotlin:5.2.1"
 mockito-android = "org.mockito:mockito-android:5.9.0"
 androidx-test-arch = "androidx.arch.core:core-testing:2.2.0"
 
@@ -86,9 +86,9 @@ timber = "com.jakewharton.timber:timber:5.0.1"
 hilt-android = { module = "com.google.dagger:hilt-android", version.ref = "dagger" }
 hilt-compiler = { module = "com.google.dagger:hilt-compiler", version.ref = "dagger" }
 hilt-testing = { module = "com.google.dagger:hilt-android-testing", version.ref = "dagger" }
-hilt-navigation = "androidx.hilt:hilt-navigation-fragment:1.0.0"
-hilt-work = "androidx.hilt:hilt-work:1.0.0"
-hilt-work-compiler = "androidx.hilt:hilt-compiler:1.0.0"
+hilt-navigation = "androidx.hilt:hilt-navigation-fragment:1.1.0"
+hilt-work = "androidx.hilt:hilt-work:1.1.0"
+hilt-work-compiler = "androidx.hilt:hilt-compiler:1.1.0"
 
 moshi = "com.squareup.moshi:moshi:1.15.0"
 moshi-kotlinGen = "com.squareup.moshi:moshi-kotlin-codegen:1.15.0"
@@ -104,7 +104,7 @@ playServices_review = "com.google.android.play:review-ktx:2.0.1"
 appcenter_crashes = "com.microsoft.appcenter:appcenter-crashes:5.0.4"
 
 androidJob = "com.github.DeweyReed:android-job:a04c817792"
-okio = "com.squareup.okio:okio:3.3.0"
+okio = "com.squareup.okio:okio:3.7.0"
 permission = "pub.devrel:easypermissions:3.0.0"
 
 fastAdapter = "com.mikepenz:fastadapter:5.7.0"
@@ -129,7 +129,7 @@ toggleButtonGroup = "com.nex3z:toggle-button-group:1.2.3"
 ultimateRingtonePicker = "com.github.DeweyReed:UltimateRingtonePicker:3.2.0"
 verticalStepperForm = "com.ernestoyaquello.stepperform:vertical-stepper-form:2.5.0"
 zip4j = "net.lingala.zip4j:zip4j:2.11.5"
-taskerPlugin = "com.joaomgcd:taskerpluginlibrary:0.4.7"
+taskerPlugin = "com.joaomgcd:taskerpluginlibrary:0.4.10"
 diskLruCache = "com.github.bumptech.glide:disklrucache:4.16.0"
 
 [bundles]
