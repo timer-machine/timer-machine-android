@@ -181,25 +181,26 @@ class App : Application(), WorkManagerConfiguration.Provider {
         }
     }
 
-    override fun getWorkManagerConfiguration(): WorkManagerConfiguration {
-        return WorkManagerConfiguration.Builder()
-            .setWorkerFactory(
-                DelegatingWorkerFactory().also { delegate ->
-                    val factory = workerFactory.get()
-                    if (factory != null) {
-                        delegate.addFactory(factory)
+    override val workManagerConfiguration: WorkManagerConfiguration
+        get() {
+            return WorkManagerConfiguration.Builder()
+                .setWorkerFactory(
+                    DelegatingWorkerFactory().also { delegate ->
+                        val factory = workerFactory.get()
+                        if (factory != null) {
+                            delegate.addFactory(factory)
+                        }
+                    }
+                )
+                .run {
+                    if (AppConfig.openDebug) {
+                        setMinimumLoggingLevel(Log.VERBOSE)
+                    } else {
+                        this
                     }
                 }
-            )
-            .run {
-                if (AppConfig.openDebug) {
-                    setMinimumLoggingLevel(Log.VERBOSE)
-                } else {
-                    this
-                }
-            }
-            .build()
-    }
+                .build()
+        }
 }
 
 private const val PREF_FIRST_START = "pref_first_start_app"
