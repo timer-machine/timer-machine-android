@@ -34,7 +34,7 @@ detekt = { id = "io.gitlab.arturbosch.detekt", version.ref = "detekt" }
 
 [libraries]
 detekt-formatting = { module = "io.gitlab.arturbosch.detekt:detekt-formatting", version.ref = "detekt" }
-desugarJdkLibs = "com.android.tools:desugar_jdk_libs:2.0.3"
+desugarJdkLibs = "com.android.tools:desugar_jdk_libs:2.0.4"
 tools = "com.github.DeweyReed:tools:0.7.0"
 
 kotlin-coroutines-android = "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.3"
@@ -43,7 +43,7 @@ kotlin-coroutines-test = "org.jetbrains.kotlinx:kotlinx-coroutines-test:1.7.3"
 
 junit = "junit:junit:4.13.2"
 mockito-kotlin = "org.mockito.kotlin:mockito-kotlin:5.1.0"
-mockito-android = "org.mockito:mockito-android:5.4.0"
+mockito-android = "org.mockito:mockito-android:5.9.0"
 androidx-test-arch = "androidx.arch.core:core-testing:2.2.0"
 
 androidx-test-core = "androidx.test:core:1.5.0"
@@ -80,7 +80,7 @@ androidx-work = "androidx.work:work-runtime-ktx:2.9.0"
 
 material = "com.google.android.material:material:1.4.0"
 
-leakCannary = "com.squareup.leakcanary:leakcanary-android-startup:2.12"
+leakCannary = "com.squareup.leakcanary:leakcanary-android-startup:2.13"
 timber = "com.jakewharton.timber:timber:5.0.1"
 
 hilt-android = { module = "com.google.dagger:hilt-android", version.ref = "dagger" }
@@ -94,14 +94,14 @@ moshi = "com.squareup.moshi:moshi:1.15.0"
 moshi-kotlinGen = "com.squareup.moshi:moshi-kotlin-codegen:1.15.0"
 
 billing = "com.android.billingclient:billing-ktx:6.0.1"
-firebase_bom = "com.google.firebase:firebase-bom:32.2.2"
-firebase_auth = { module = "com.google.firebase:firebase-auth-ktx" }
+firebase_bom = "com.google.firebase:firebase-bom:32.7.0"
+firebase_auth = { module = "com.google.firebase:firebase-auth" }
 firebase_auth_ui = "com.firebaseui:firebase-ui-auth:8.0.2"
-firebase_storage = { module = "com.google.firebase:firebase-storage-ktx" }
-playServices_auth = "com.google.android.gms:play-services-auth:20.6.0"
+firebase_storage = { module = "com.google.firebase:firebase-storage" }
+playServices_auth = "com.google.android.gms:play-services-auth:20.7.0"
 playServices_review = "com.google.android.play:review-ktx:2.0.1"
 
-appcenter_crashes = "com.microsoft.appcenter:appcenter-crashes:5.0.2"
+appcenter_crashes = "com.microsoft.appcenter:appcenter-crashes:5.0.4"
 
 androidJob = "com.github.DeweyReed:android-job:a04c817792"
 okio = "com.squareup.okio:okio:3.3.0"
