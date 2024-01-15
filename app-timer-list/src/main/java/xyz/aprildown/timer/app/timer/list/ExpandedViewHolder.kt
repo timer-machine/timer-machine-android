@@ -18,7 +18,7 @@ internal class ExpandedViewHolder(
 ) : RecyclerView.ViewHolder(view) {
 
     sealed class MutableTimerEvent {
-        object State : MutableTimerEvent()
+        data object State : MutableTimerEvent()
         data class Timing(val time: Long) : MutableTimerEvent()
         data class Index(val index: TimerIndex) : MutableTimerEvent()
     }

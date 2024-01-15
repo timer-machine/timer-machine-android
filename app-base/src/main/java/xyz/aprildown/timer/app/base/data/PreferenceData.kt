@@ -270,7 +270,7 @@ object PreferenceData {
     const val TIME_PANELS = "time_panels"
     var Context.timePanels: List<TimePanel>
         get() = safeSharedPreference.getString(TIME_PANELS, null)?.let { content ->
-            val values = TimePanel.values()
+            val values = TimePanel.entries
             content.split(",").mapNotNull { str ->
                 values.getOrNull(str.toIntOrNull() ?: -1)
             }

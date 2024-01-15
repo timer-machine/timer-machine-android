@@ -78,7 +78,7 @@ class TimerViewModelTest {
     private suspend fun TestScope.getViewModel(): TimerViewModel {
         whenever(getFolders()).thenReturn(folders)
         whenever(recentFolder.get()).thenReturn(FolderEntity.FOLDER_DEFAULT)
-        whenever(folderSortByRule.get()).thenReturn(FolderSortBy.values().random())
+        whenever(folderSortByRule.get()).thenReturn(FolderSortBy.entries.random())
         whenever(tipManager.getTipFlow(any())).thenReturn(emptyFlow())
 
         val viewModel = TimerViewModel(
@@ -329,7 +329,7 @@ class TimerViewModelTest {
     fun `change sort by`() = runTest {
         val viewModel = getViewModel()
 
-        val sortBy = FolderSortBy.values().random()
+        val sortBy = FolderSortBy.entries.random()
 
         viewModel.changeSortBy(sortBy)
         testScheduler.advanceUntilIdle()

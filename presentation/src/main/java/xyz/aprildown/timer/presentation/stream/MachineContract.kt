@@ -19,9 +19,9 @@ import xyz.aprildown.timer.domain.entities.TimerEntity
  */
 sealed class NotifState
 
-internal object NoNotif : NotifState()
-internal object SingleTimer : NotifState()
-internal object ForeNotif : NotifState()
+internal data object NoNotif : NotifState()
+internal data object SingleTimer : NotifState()
+internal data object ForeNotif : NotifState()
 
 /**
  * Has to be here since this contract use [StreamState] which is Android specific.

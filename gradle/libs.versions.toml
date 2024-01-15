@@ -8,7 +8,7 @@ targetSdk = "34"
 versionCode = "7040001"
 versionName = "7.4.0"
 
-kotlin = "1.8.22"
+kotlin = "1.9.22"
 
 dagger = "2.47"
 

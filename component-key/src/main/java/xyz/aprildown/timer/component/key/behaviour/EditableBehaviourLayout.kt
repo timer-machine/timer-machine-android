@@ -48,7 +48,7 @@ class EditableBehaviourLayout(
     val addButton: ImageButton
     private val emptyText: TextView
 
-    private val enabledBehaviourTypes = BehaviourType.values()
+    private val enabledBehaviourTypes = BehaviourType.entries
 
     init {
         flexWrap = FlexWrap.WRAP

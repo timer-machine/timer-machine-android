@@ -14,7 +14,7 @@ class FolderSortByRule @Inject constructor(
     private val preferencesRepository: PreferencesRepository,
 ) {
     suspend fun get(): FolderSortBy = withContext(dispatcher) {
-        FolderSortBy.values()[
+        FolderSortBy.entries[
             preferencesRepository.getInt(
                 PREF_FOLDER_SORT_BY,
                 FolderSortBy.AddedOldest.ordinal

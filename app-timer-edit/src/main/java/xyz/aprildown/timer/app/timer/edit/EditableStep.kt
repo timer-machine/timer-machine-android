@@ -36,9 +36,9 @@ class EditableStep(
 ) : AbstractItem<EditableStep.ViewHolder>() {
 
     sealed class Event {
-        object Length : Event()
-        object Behaviour : Event()
-        object InOutGroup : Event()
+        data object Length : Event()
+        data object Behaviour : Event()
+        data object InOutGroup : Event()
     }
 
     /**
