@@ -6,7 +6,7 @@ dependencies {
 
 detekt {
     toolVersion = libs.versions.detekt.get()
-    config = files(buildscript.sourceFile.getParent().toString() + "/detekt-config.yml")
+    config.setFrom(buildscript.sourceFile.getParent().toString() + "/detekt-config.yml")
     buildUponDefaultConfig = true
 }
 
