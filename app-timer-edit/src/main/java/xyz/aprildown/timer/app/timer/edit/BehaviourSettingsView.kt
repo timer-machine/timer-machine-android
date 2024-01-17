@@ -101,14 +101,16 @@ internal fun MaterialPopupMenuBuilder.addScreenItems(
     action: ScreenAction,
     onFullscreenChanged: (Boolean) -> Unit
 ) {
-    section {
-        switchItem {
-            label = context.getString(RBase.string.screen_fullscreen)
-            onBind = {
-                it.isChecked = action.fullScreen == true
-            }
-            onCheckedChange = { _, isChecked ->
-                onFullscreenChanged.invoke(isChecked)
+    if (Build.VERSION.SDK_INT < Build.VERSION_CODES.UPSIDE_DOWN_CAKE) {
+        section {
+            switchItem {
+                label = context.getString(RBase.string.screen_fullscreen)
+                onBind = {
+                    it.isChecked = action.fullScreen == true
+                }
+                onCheckedChange = { _, isChecked ->
+                    onFullscreenChanged.invoke(isChecked)
+                }
             }
         }
     }
