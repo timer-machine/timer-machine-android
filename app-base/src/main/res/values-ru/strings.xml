@@ -5,7 +5,7 @@
     <string name="voice_variable_group_elapsed_desp">Прошедшее время группового этапа</string>
     <string name="voice_variable_timer_elapsed_percent_desp">Прошедшее время в процентах</string>
     <string name="voice_variable_group_name_desp">Название группы</string>
-    <string name="folder_sort_z_to_a">Имя. Я ➝ А</string>
+    <string name="folder_sort_z_to_a">Название. Я ➝ А</string>
     <string name="save_changes">Сохранить изменения?</string>
     <string name="save">Сохранить</string>
     <string name="folder_empty_trash_confirmation">Отчистить корзину?</string>
@@ -23,7 +23,7 @@
     <string name="voice_content2_disable">Использовать старые переменные</string>
     <string name="open_menu">Открыть меню</string>
     <string name="terms_of_service">Условия</string>
-    <string name="edit_default_notifier_name">Уведомление</string>
+    <string name="edit_default_notifier_name">Оповещение</string>
     <string name="behaviour_half_help">Озвучить \"Половина времени\", когда этот этап будет пройден наполовину</string>
     <string name="nav_up">Перейти вверх</string>
     <string name="edit_share_as_text">Поделиться в виде текста</string>
@@ -60,23 +60,23 @@
     <string name="voice_variable_info_usage">* Переменные будут заменены соответствующим значением при запуске.</string>
     <string name="edit_start_step">Запуск Таймера</string>
     <string name="edit">Редактировать</string>
-    <string name="behaviour_no_behaviours">Беззвучное действие</string>
+    <string name="behaviour_no_behaviours">Беззвучный шаг</string>
     <string name="voice_variable_group_total_loop_desp">Всего циклов в групповом этапе</string>
     <string name="behaviour_halt">Остановка</string>
     <string name="folder_sort_run_oldest">Последний запуск. Старые</string>
     <string name="voice_content_info_variables_intro">* Чтобы выбрать переменные, нажмите внизу кнопку \"Переменные\". При запуске они будут заменены соответствующими значениеми.</string>
     <string name="folder_delete_timer_explanation">Таймер с его записями и планировщиками будет безвозвратно удален</string>
-    <string name="edit_more_trigger">После завершения таймера, запустить</string>
-    <string name="edit_add_start">Подготовительный этап</string>
+    <string name="edit_more_trigger">Когда таймер завершится, запустить</string>
+    <string name="edit_add_start">Начальный шаг</string>
     <string name="edit_more_show_notif">Показывать уведомление о времени</string>
     <string name="voice_current_time">Текущее время (например, %s)</string>
-    <string name="behaviour_halt_help">Остановка на этом этапе, пока вы в ручную не перейдёте к следующему действию</string>
+    <string name="behaviour_halt_help">Остановиться на этом этапе, пока вы вручную не перейдёте к следующему действию</string>
     <string name="vibration_short">Короткая Вибрация</string>
     <string name="main_action_dark">Темная тема</string>
-    <string name="behaviour_beep">Звуковой сигнал</string>
+    <string name="behaviour_beep">Сигнал</string>
     <string name="edit_cant_move_footer">Невозможно переместить эти кнопки</string>
     <string name="voice_variable_timer_total_loop_desp">Всего циклов таймера</string>
-    <string name="edit_add_end">Финальный этап</string>
+    <string name="edit_add_end">Конечный шаг</string>
     <string name="main_action_timers">Таймеры</string>
     <string name="edit_step_name">Название Действия</string>
     <string name="delete">Удалить</string>
@@ -86,7 +86,7 @@
     <string name="edit_cant_move_group">Невозможно переместить группу</string>
     <string name="folder_trash">Корзина</string>
     <string name="timer_pick_required">Нажмите здесь, чтобы выбрать таймер</string>
-    <string name="vibration_count_desp_0">Введите 0(ноль) для вибрации до конца этапа</string>
+    <string name="vibration_count_desp_0">Введите 0(ноль), чтобы вибрация продолжалась до конца этапа</string>
     <string name="screen_fullscreen">Всегда Полноэкранный режим</string>
     <string name="voice_variable_timer_group">Таймер</string>
     <string name="folder_to_grid_view">Переключить в режим сетки</string>
@@ -103,7 +103,7 @@
     <string name="tts_error_template">Ошибка \"TextToSpeech\": %s</string>
     <string name="voice_content2_enable">Использовать новые переменные</string>
     <string name="edit_add_normal_desp">Добавить обычный шаг</string>
-    <string name="beep_count_intro_0_meaning">Введите 0(ноль) для звукового сигнала до конца этапа</string>
+    <string name="beep_count_intro_0_meaning">Введите 0(ноль), чтобы звуковой сигнал продолжался до конца этапа</string>
     <string name="behaviour_vibration_help">Включить вибрацию телефона на этом этапе</string>
     <string name="edit_group">Группа</string>
     <string name="voice_step_duration">Длительность этапа</string>
@@ -114,8 +114,8 @@
     <string name="previous">Предыдущий</string>
     <string name="beep_sound">Выбор звукового сигнала</string>
     <string name="folder_sort_run_newest">Последний запуск. Недавние</string>
-    <string name="edit_end_step">Завершение Таймера</string>
-    <string name="edit_cant_move_start">Невозможно переместить подготовительный этап</string>
+    <string name="edit_end_step">Конец таймера</string>
+    <string name="edit_cant_move_start">Переместить начальный шаг невозможно</string>
     <string name="folder_sort">Сортировать по</string>
     <string name="voice_variable_group_end_time_desp">Время окончания группового этапа</string>
     <string name="undo">Отменить</string>
@@ -133,7 +133,7 @@
     <string name="vibration_long">Долгая Вибрация</string>
     <string name="delete_confirmation_template">Удалить %s?</string>
     <string name="more">Больше</string>
-    <string name="edit_add_start_too_many">Подготовительный этап уже создан</string>
+    <string name="edit_add_start_too_many">Начинающий шаг уже создан</string>
     <string name="beep_count_intro_usage">Введите время, после которого звуковой сигнал прекратится</string>
     <string name="voice_variable_timer_remaining_desp">Оставшееся время работы</string>
     <string name="edit_wrong_negative_loop">Цикл должен быть положительным числом</string>
@@ -161,7 +161,7 @@
     <string name="thanks">Спасибо за поддержку!</string>
     <string name="edit_cant_move_end">Невозможно переместить финальный этап</string>
     <string name="expand">Развернуть</string>
-    <string name="behaviour_screen_help">Разбудить телефон и показать экран с напоминанием</string>
+    <string name="behaviour_screen_help">Пробудить телефон и показать экран с напоминанием</string>
     <string name="edit_at_least_1s">Длительность должна составлять не менее 1 секунды</string>
     <string name="voice_group_end_time">Время окончания группы</string>
     <string name="empty">Пустой</string>
@@ -178,9 +178,9 @@
     <string name="folder_rename">Переименовать подход</string>
     <string name="share">Поделиться</string>
     <string name="add">Добавить</string>
-    <string name="time_picker_type_scroll">Прокрутить</string>
+    <string name="time_picker_type_scroll">Спираль</string>
     <string name="edit_wrong_empty_name">Имя таймера не должно быть пустым</string>
-    <string name="edit_more_notif_count">Отображать оставшееся время в окне уведомлений</string>
+    <string name="edit_more_notif_count">Показывать оставшееся время в уведомлении</string>
     <string name="time_picker_type_panel">Панель</string>
     <string name="timer_pick_hint">Выберите таймер</string>
     <string name="behaviour_beep_help">Воспроизводить звуковой сигнал каждую секунду</string>
@@ -188,7 +188,7 @@
     <string name="folder_default">Набор по умолчанию</string>
     <string name="edit_wrong_empty_steps">Должен быть хотя бы один шаг</string>
     <string name="main_action_help">Помощь &amp; Обратная связь</string>
-    <string name="folder_sort_a_to_z">Имя. А ➝ Я</string>
+    <string name="folder_sort_a_to_z">Название. А ➝ Я</string>
     <string name="voice_variable_step_duration_desp">Длительность этапа</string>
     <string name="voice_variable_timer_end_time_desp">Время окончания таймера</string>
     <string name="delete_done_template">%s удалено</string>
@@ -202,9 +202,9 @@
     <string name="grant">Наделить</string>
     <string name="trash_done_template">Таймер %s перемещён в Корзину</string>
     <string name="music_saf_pick">Выбрать через SAF</string>
-    <string name="edit_add_notifier_desp">Удобное оповещение шага. Помнит ваши изменения</string>
+    <string name="edit_add_notifier_desp">Удобное напоминание о шаге. Помнит ваши изменения</string>
     <string name="vibration_pattern">Частота</string>
-    <string name="half_option">Оповещение о половине</string>
+    <string name="half_option">Напоминание о половине</string>
     <string name="half_option_voice">Голос</string>
     <string name="half_option_voice_desp">(По умолчанию) Прочитать \"Половина времени прошла\"</string>
     <string name="half_option_music">Музыка</string>
@@ -220,7 +220,7 @@
     <string name="behaviour_notification_help">Показать дополнительное уведомление, когда шаг начнётся</string>
     <string name="notification_duration">Длительность</string>
     <string name="notification_duration_desp_usage">Введите число секунд, после которых уведомление будет автоматически скрыто</string>
-    <string name="notification_duration_desp_0_meaning">Введите 0, чтобы не скрывать автоматически</string>
+    <string name="notification_duration_desp_0_meaning">Введите 0(ноль), чтобы не скрывать автоматически</string>
     <string name="notification_settings">Настройки уведомлений</string>
     <string name="behaviour_flashlight">Фонарик</string>
     <string name="behaviour_flashlight_help">Фонарик будет мигать</string>
@@ -276,7 +276,7 @@
     <string name="notif_channel_fore_desp">Управляет всеми уведомлениями</string>
     <string name="notif_channel_timing_desp">Показывает информацию о текущем таймере и его действиях</string>
     <string name="notif_channel_timing_title">Уведомление о времени</string>
-    <string name="notif_channel_screen_desp">Используется экранными напоминаниями</string>
+    <string name="notif_channel_screen_desp">Используется напоминаниями на экране</string>
     <string name="notif_timer_title">%1$s: %2$s</string>
     <string name="notif_timer_paused">%1$s приостановлен</string>
     <string name="notif_timer_running">%1$s работает</string>
@@ -314,16 +314,16 @@
     <string name="scheduler_set4">Планировщик сработает через <xliff:g example="2 days" id="DAYS">%1$s</xliff:g> и <xliff:g example="2 hours" id="HOURS">%2$s</xliff:g></string>
     <string name="scheduler_set5">Планировщик сработает через <xliff:g example="2 minutes" id="MINUTES">%3$s</xliff:g></string>
     <string name="scheduler_set6">Планировщик сработает через <xliff:g example="2 days" id="DAYS">%1$s</xliff:g> и <xliff:g example="2 minutes" id="MINUTES">%3$s</xliff:g></string>
-    <string name="help_whitelist">Инструкция белого списка</string>
+    <string name="help_whitelist">Инструкция по снятию ограничений</string>
     <string name="pref_screen_title">Яркость экрана</string>
     <string name="pref_screen_title_on">Оставлять экран включённым</string>
     <string name="pref_screen_title_dim">Затемнить экран</string>
-    <string name="whitelist_disclaimer_yes">Перейти к инструкции белого списка</string>
+    <string name="whitelist_disclaimer_yes">Перейти к инструкции по снятию ограничений</string>
     <string name="whitelist_disclaimer_no_confirmation">Пропустить инструкцию?</string>
     <string name="billing_more_themes_desp">Аккуратно выбранные и безупречные цвета для приложения</string>
     <string name="billing_more_themes_title">Больше тем</string>
     <string name="scheduler_set8">Планировщих сработает через <xliff:g example="2 days" id="DAYS">%1$s</xliff:g>, <xliff:g example="2 hours" id="HOURS">%2$s</xliff:g>, и <xliff:g example="2 minutes" id="MINUTES">%3$s</xliff:g></string>
-    <string name="whitelist_location">Инструкцию белого списка можно найти в разделе \"Помощь &amp; Обратная связь\"</string>
+    <string name="whitelist_location">Инструкцию по снятию ограничений можно найти в разделе \"Помощь &amp; Обратная связь\"</string>
     <string name="billing_purchase">Купить</string>
     <string name="billing_iap">Внутренние покупки</string>
     <string name="one_action_tweak_time">Подправить время</string>
@@ -337,7 +337,38 @@
     <string name="one_action_unlock_ui">Разблокировать интерфейс</string>
     <string name="one_ui_locked">Интерфейс заблокирован</string>
     <string name="one_ui_unlock">Разблокировать</string>
-    <string name="tip_missed_timer"><b>Некоторые таймеры остановились неправильно!</b>
+    <string name="tip_missed_timer"><b>Некоторые таймеры остановились неествественно!</b>
 \n
-\nВозможно это происходит из-за того, что система убивает приложение в фоновом режиме. <b>Чтобы решить эту проблему, вы можете снять ограничения с этого приложения в настройках вашего устройства.</b></string>
+\nВозможно это происходит из-за того, что система закрывает приложение, когда оно в фоновом режиме. <b>Чтобы решить эту проблему, вы можете снять ограничения с этого приложения в настройках вашего устройства.</b></string>
+    <string name="intro_start_our_plan">Создадим план тренировки, в которой мы <b>бежим 3 минуты</b>, потом <b>шагаем 2 минуты</b> и <b>повторяем процесс 5 раз</b>.</string>
+    <string name="intro_start_step_time">Нажмите на <b>время справа от названия шага</b> и поменяйте время на <b>З минуты</b>.</string>
+    <string name="intro_start_notifier">В этом приложении вы должны <b>сами добавлять напоминания после каждого шага, иначе напоминания не будет</b>.</string>
+    <string name="whitelist_quick_settings">Быстрые настройки</string>
+    <string name="whitelist_intro">Многие производители устройств на Android принудительно прерывают работу фоновых приложений, не давая им возможности оповещать вас.
+\n
+\nПожалуйста, разрешите автоматический запуск, работу в фоновом режиме, приоритетное выполнение и т.п. в настройках.
+\n
+\nВот некоторые рекомендации:</string>
+    <string name="intro_start_welcome">Добро пожаловать!
+\nНажмите на <b>стрелку вправо</b> внизу, чтобы начать руководство.</string>
+    <string name="billing_cancel_anytime">Периодический платёж. Можно отменить в любое время.</string>
+    <string name="notif_channel_b_notif_desp">Используется напоминаниями в уведомлениях</string>
+    <string name="theme_step_color_start">Начальный шаг</string>
+    <string name="theme_step_color_end">Конечный шаг</string>
+    <string name="help_tutorial">Руководство</string>
+    <string name="help_whitelist_desp">Предотвратите приложение от остановки во время его работы</string>
+    <string name="pref_reminder">Напоминания</string>
+    <string name="intro_start_create_timer">Нажмите ➕, чтобы создать новый таймер.</string>
+    <string name="intro_start_enter_loop">Сначала впишите <b>5</b> в поле <b>Цикл</b>.</string>
+    <string name="intro_location">Вы можете найти руководство в разделе \"Помощь &amp; Обратная связь\"</string>
+    <string name="whitelist_disclaimer_no">Нет, я осознаю последствия</string>
+    <string name="intro_start_step_card">Карточка является одним из шагов плана.</string>
+    <string name="intro_start_sample_timer_step1">Бежать 3 минуты</string>
+    <string name="intro_start_sample_timer_name">План тренировки</string>
+    <string name="intro_start_finish"><b>Поздравляю! Вы завершили руководство.</b></string>
+    <string name="intro_exit_confirmation">Пропустить руководство?</string>
+    <string name="intro_exit_difficult_app_alert">Без завершения руководства, приложение может быть запутанным в использовании.</string>
+    <string name="whitelist_links">Ссылки</string>
+    <string name="whitelist_don_t_kill_desp">Сайт, содержащий множество решений</string>
+    <string name="whitelist_ignore_battery_optimization">Игнорировать оптимизацию батареи</string>
 </resources>
