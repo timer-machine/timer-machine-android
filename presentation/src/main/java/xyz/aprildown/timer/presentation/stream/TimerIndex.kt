@@ -7,14 +7,14 @@ import android.content.Intent
  */
 sealed class TimerIndex {
 
-    object Start : TimerIndex()
+    data object Start : TimerIndex()
 
     data class Step(val loopIndex: Int, val stepIndex: Int) : TimerIndex()
 
     data class Group(val loopIndex: Int, val stepIndex: Int, val groupStepIndex: Step) :
         TimerIndex()
 
-    object End : TimerIndex()
+    data object End : TimerIndex()
 }
 
 private const val KEY_INDEX_TYPE = "timer_index_type"

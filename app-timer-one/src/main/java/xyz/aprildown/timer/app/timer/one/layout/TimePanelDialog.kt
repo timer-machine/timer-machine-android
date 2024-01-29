@@ -26,7 +26,7 @@ internal fun Context.showTimePanelPickerDialog(onDone: () -> Unit) {
         .setNegativeButton(android.R.string.cancel, null)
         .show()
 
-    val allTimePanels = PreferenceData.TimePanel.values()
+    val allTimePanels = PreferenceData.TimePanel.entries
 
     binding.layoutTimePanel.setPanels(currentTimePanels)
     currentTimePanels.forEach {

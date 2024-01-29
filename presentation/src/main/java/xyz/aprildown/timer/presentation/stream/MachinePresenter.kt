@@ -68,7 +68,7 @@ class MachinePresenter @Inject constructor(
      */
     override fun dropView() {
         stopAll()
-        require(timers.isEmpty)
+        require(timers.isEmpty())
 
         listeners.clear()
         allListeners.clear()
@@ -518,7 +518,7 @@ class MachinePresenter @Inject constructor(
 
     @VisibleForTesting(otherwise = VisibleForTesting.PRIVATE)
     fun stopMachineServiceIfNotRunning() {
-        if (timers.isEmpty) {
+        if (timers.isEmpty()) {
             isInTheForeground = false
             view?.run {
                 cleanUpWorkArea()

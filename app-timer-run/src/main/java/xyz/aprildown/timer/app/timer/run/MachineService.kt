@@ -7,6 +7,7 @@ import android.content.Intent
 import android.content.SharedPreferences
 import android.net.Uri
 import android.os.Binder
+import android.os.Build
 import android.os.Handler
 import android.os.IBinder
 import android.os.Looper
@@ -354,7 +355,9 @@ class MachineService :
     }
 
     override fun showScreen(timerItem: TimerEntity, currentStepName: String, fullScreen: Boolean) {
-        if (fullScreen) {
+        if (fullScreen && Build.VERSION.SDK_INT < Build.VERSION_CODES.UPSIDE_DOWN_CAKE) {
+            // As restrictions on starting activities from the background get increasingly strict,
+            // this option becomes unpredictable. We'll have to rely on full-screen intent.
             startActivity(
                 ScreenActivity.intent(
                     this,

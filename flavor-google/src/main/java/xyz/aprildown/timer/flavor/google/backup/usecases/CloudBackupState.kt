@@ -28,8 +28,9 @@ internal class CurrentBackupState @Inject constructor(
     private val sharedPreferences: SharedPreferences
 ) {
     fun get(): CloudBackupState {
-        return CloudBackupState
-            .values()[sharedPreferences.getInt(CloudBackupState.PREF_CLOUD_BACKUP_STATE, 0)]
+        return CloudBackupState.entries[
+            sharedPreferences.getInt(CloudBackupState.PREF_CLOUD_BACKUP_STATE, 0)
+        ]
     }
 
     fun set(value: CloudBackupState) {

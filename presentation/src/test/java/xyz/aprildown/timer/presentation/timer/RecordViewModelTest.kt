@@ -41,7 +41,7 @@ class RecordViewModelTest {
 
     @Test
     fun `initial load`() = runTest {
-        whenever(folderSortByRule.get()).thenReturn(FolderSortBy.values().random())
+        whenever(folderSortByRule.get()).thenReturn(FolderSortBy.entries.random())
         val folders = listOf(
             TestData.defaultFolder,
             TestData.trashFolder,
@@ -101,7 +101,7 @@ class RecordViewModelTest {
     @Test
     fun `distinct params`() = runTest {
         whenever(getFolders.invoke()).thenReturn(emptyList())
-        whenever(folderSortByRule.get()).thenReturn(FolderSortBy.values().random())
+        whenever(folderSortByRule.get()).thenReturn(FolderSortBy.entries.random())
 
         val viewModel = newViewModel()
 

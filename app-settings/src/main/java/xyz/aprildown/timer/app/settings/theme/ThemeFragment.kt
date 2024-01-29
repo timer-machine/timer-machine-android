@@ -131,17 +131,17 @@ class ThemeFragment :
         val currentSecondary = appTheme.colorSecondary
 
         fun isUsingAppTheme(appThemeColor: AppThemeColor): Boolean {
-            return when (val type = appThemeColor.type) {
+            return when (appThemeColor.type) {
                 PreferenceData.AppTheme.AppThemeType.TYPE_COLOR -> {
-                    type == currentType &&
+                    currentType == PreferenceData.AppTheme.AppThemeType.TYPE_COLOR &&
                         appThemeColor.primaryColor == currentPrimary &&
                         appThemeColor.secondaryColor == currentSecondary
                 }
                 PreferenceData.AppTheme.AppThemeType.TYPE_DYNAMIC_DARK -> {
-                    currentType == type
+                    currentType == PreferenceData.AppTheme.AppThemeType.TYPE_DYNAMIC_DARK
                 }
                 PreferenceData.AppTheme.AppThemeType.TYPE_DYNAMIC_LIGHT -> {
-                    currentType == type
+                    currentType == PreferenceData.AppTheme.AppThemeType.TYPE_DYNAMIC_LIGHT
                 }
                 else -> error("Unsupported type $currentType")
             }

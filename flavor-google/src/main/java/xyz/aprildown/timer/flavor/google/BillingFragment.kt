@@ -4,13 +4,13 @@ import android.os.Build
 import android.os.Bundle
 import android.text.Spannable
 import android.text.SpannableString
-import android.text.method.LinkMovementMethod
 import android.text.style.ClickableSpan
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
 import android.view.View
 import android.widget.TextView
+import androidx.core.text.method.LinkMovementMethodCompat
 import androidx.core.view.MenuProvider
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Lifecycle
@@ -186,7 +186,7 @@ internal class BillingFragment : Fragment(R.layout.fragment_billing), MenuProvid
         textView.run {
             show()
             setText(spannable, TextView.BufferType.SPANNABLE)
-            movementMethod = LinkMovementMethod.getInstance()
+            movementMethod = LinkMovementMethodCompat.getInstance()
         }
     }
 

@@ -29,7 +29,7 @@ class GetRecords @Inject constructor(
 ) : CoroutinesUseCase<Unit, ArrayMap<Int, List<TimerStampEntity>>>(dispatcher) {
 
     sealed class Signal<out Type> {
-        object Processing : Signal<Nothing>()
+        data object Processing : Signal<Nothing>()
         data class Result<out Type>(val result: Type) : Signal<Type>()
     }
 

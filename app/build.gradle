@@ -33,7 +33,7 @@ android {
         }
     }
 
-    flavorDimensions "market"
+    flavorDimensions += "market"
     productFlavors {
         dog {
             dimension "market"
@@ -152,9 +152,9 @@ dependencies {
     androidTestCompileOnly libs.taskerPlugin
 }
 
-android.applicationVariants.all { variant ->
+android.applicationVariants.configureEach { variant ->
     if (variant.name.contains('dog') || variant.name.contains('other')) {
-        project.tasks.getByName('process' + variant.name.capitalize() + 'GoogleServices').enabled = false
+        project.tasks.named('process' + variant.name.capitalize() + 'GoogleServices').getOrNull()?.enabled = false
     }
 }
 

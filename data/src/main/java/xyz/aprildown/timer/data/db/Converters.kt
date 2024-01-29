@@ -98,7 +98,7 @@ internal class SchedulerRepeatModeConverter {
 
     @TypeConverter
     fun fromJson(json: String?): SchedulerRepeatMode {
-        return SchedulerRepeatMode.values().find { it.name == json }
+        return SchedulerRepeatMode.entries.find { it.name == json }
             ?: SchedulerRepeatMode.ONCE
     }
 }

@@ -48,12 +48,7 @@ internal class BillingSupervisor(
 ) : PurchasesUpdatedListener, BillingClientStateListener, CoroutineScope by MainScope() {
 
     sealed class Error {
-        object SubscriptionNotSupported : Error() {
-            override fun toString(): String {
-                return "SubscriptionNotSupported"
-            }
-        }
-
+        data object SubscriptionNotSupported : Error()
         data class Message(val code: Int, val content: String) : Error()
     }
 

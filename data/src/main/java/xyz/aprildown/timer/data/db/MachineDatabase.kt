@@ -114,9 +114,9 @@ abstract class MachineDatabase : RoomDatabase() {
          */
         @VisibleForTesting(otherwise = VisibleForTesting.PRIVATE)
         fun getMigration1to2(): Migration = object : Migration(1, 2) {
-            override fun migrate(database: SupportSQLiteDatabase) {
-                database.execSQL("ALTER TABLE TimerItem ADD COLUMN startStep TEXT DEFAULT ''")
-                database.execSQL("ALTER TABLE TimerItem ADD COLUMN endStep TEXT DEFAULT ''")
+            override fun migrate(db: SupportSQLiteDatabase) {
+                db.execSQL("ALTER TABLE TimerItem ADD COLUMN startStep TEXT DEFAULT ''")
+                db.execSQL("ALTER TABLE TimerItem ADD COLUMN endStep TEXT DEFAULT ''")
             }
         }
 
@@ -125,9 +125,9 @@ abstract class MachineDatabase : RoomDatabase() {
          */
         @VisibleForTesting(otherwise = VisibleForTesting.PRIVATE)
         fun getMigration2to3(): Migration = object : Migration(2, 3) {
-            override fun migrate(database: SupportSQLiteDatabase) {
-                database.execSQL("DELETE FROM TimerItem")
-                database.execSQL("DELETE FROM TimerScheduler")
+            override fun migrate(db: SupportSQLiteDatabase) {
+                db.execSQL("DELETE FROM TimerItem")
+                db.execSQL("DELETE FROM TimerScheduler")
             }
         }
 
@@ -136,8 +136,8 @@ abstract class MachineDatabase : RoomDatabase() {
          */
         @VisibleForTesting(otherwise = VisibleForTesting.PRIVATE)
         fun getMigration3to4(): Migration = object : Migration(3, 4) {
-            override fun migrate(database: SupportSQLiteDatabase) {
-                database.execSQL("ALTER TABLE TimerScheduler ADD COLUMN repeatMode TEXT DEFAULT 'ONCE'")
+            override fun migrate(db: SupportSQLiteDatabase) {
+                db.execSQL("ALTER TABLE TimerScheduler ADD COLUMN repeatMode TEXT DEFAULT 'ONCE'")
                 val converter = BooleanConverters()
                 val repeatEveryWeekCv = ContentValues().apply {
                     put("repeatMode", SchedulerRepeatMode.EVERY_WEEK.name)
@@ -145,12 +145,12 @@ abstract class MachineDatabase : RoomDatabase() {
                 val repeatOnceCv = ContentValues().apply {
                     put("repeatMode", SchedulerRepeatMode.ONCE.name)
                 }
-                database.query("SELECT * FROM TimerScheduler").run {
+                db.query("SELECT * FROM TimerScheduler").run {
                     if (moveToFirst()) {
                         while (!isAfterLast) {
                             val days =
                                 converter.stringToBooleanList(getString(getColumnIndexOrThrow("days")))
-                            database.update(
+                            db.update(
                                 "TimerScheduler",
                                 SQLiteDatabase.CONFLICT_REPLACE,
                                 if (days.any { it }) repeatEveryWeekCv else repeatOnceCv,
@@ -169,8 +169,8 @@ abstract class MachineDatabase : RoomDatabase() {
          */
         @VisibleForTesting(otherwise = VisibleForTesting.PRIVATE)
         fun getMigration4to5(): Migration = object : Migration(4, 5) {
-            override fun migrate(database: SupportSQLiteDatabase) {
-                database.execSQL(
+            override fun migrate(db: SupportSQLiteDatabase) {
+                db.execSQL(
                     "CREATE TABLE IF NOT EXISTS `TimerStamp` " +
                         "(`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, " +
                         "`timerId` INTEGER NOT NULL, " +
@@ -186,8 +186,8 @@ abstract class MachineDatabase : RoomDatabase() {
          */
         @VisibleForTesting(otherwise = VisibleForTesting.PRIVATE)
         fun getMigration5to6(): Migration = object : Migration(5, 6) {
-            override fun migrate(database: SupportSQLiteDatabase) {
-                database.execSQL(
+            override fun migrate(db: SupportSQLiteDatabase) {
+                db.execSQL(
                     "CREATE INDEX `index_TimerStamp_timerId` ON `TimerStamp` (`timerId`)"
                 )
             }
@@ -198,8 +198,8 @@ abstract class MachineDatabase : RoomDatabase() {
          */
         @VisibleForTesting(otherwise = VisibleForTesting.PRIVATE)
         fun getMigration6to7(): Migration = object : Migration(6, 7) {
-            override fun migrate(database: SupportSQLiteDatabase) {
-                database.execSQL(
+            override fun migrate(db: SupportSQLiteDatabase) {
+                db.execSQL(
                     "ALTER TABLE TimerStamp ADD COLUMN start INTEGER DEFAULT 0 NOT NULL"
                 )
             }
@@ -210,16 +210,16 @@ abstract class MachineDatabase : RoomDatabase() {
          */
         @VisibleForTesting(otherwise = VisibleForTesting.PRIVATE)
         fun getMigration7to8(): Migration = object : Migration(7, 8) {
-            override fun migrate(database: SupportSQLiteDatabase) {
-                database.execSQL(
+            override fun migrate(db: SupportSQLiteDatabase) {
+                db.execSQL(
                     "ALTER TABLE TimerItem " +
                         "ADD COLUMN `folderId` INTEGER NOT NULL DEFAULT ${FolderEntity.FOLDER_DEFAULT}"
                 )
-                database.execSQL(
+                db.execSQL(
                     "CREATE TABLE IF NOT EXISTS `Folder` " +
                         "(`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `name` TEXT NOT NULL)"
                 )
-                addHostFolders(database)
+                addHostFolders(db)
             }
         }
     }

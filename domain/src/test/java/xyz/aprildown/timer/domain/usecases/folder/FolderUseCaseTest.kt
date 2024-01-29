@@ -172,7 +172,7 @@ class FolderUseCaseTest {
             dispatcher = StandardTestDispatcher(testScheduler),
             preferencesRepository = TestPreferencesRepository(),
         )
-        val value = FolderSortBy.values().random()
+        val value = FolderSortBy.entries.random()
         useCase.set(value)
         assertEquals(useCase.get(), value)
     }
