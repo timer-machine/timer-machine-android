@@ -24,9 +24,11 @@ package xyz.aprildown.timer.domain.entities
  *     str1: last n seconds, 0 for always
  * FLASHLIGHT:
  *     empty for now
+ * IMAGE:
+ *     str1: The image path
  */
 enum class BehaviourType {
-    MUSIC, VIBRATION, SCREEN, HALT, VOICE, BEEP, HALF, COUNT, NOTIFICATION, FLASHLIGHT;
+    MUSIC, VIBRATION, SCREEN, HALT, VOICE, BEEP, HALF, COUNT, NOTIFICATION, FLASHLIGHT, IMAGE;
 
     val hasBoolValue: Boolean
         get() = this == MUSIC || this == BEEP
@@ -358,7 +360,7 @@ fun BehaviourEntity.toNotificationAction(): NotificationAction {
 
 // endregion Notification
 
-// region Notification
+// region Flashlight
 
 data class FlashlightAction(val step: Long = 500L) : Action {
     override fun toBehaviourEntity(): BehaviourEntity {
@@ -371,4 +373,19 @@ fun BehaviourEntity.toFlashlightAction(): FlashlightAction {
     return FlashlightAction()
 }
 
-// endregion Notification
+// endregion Flashlight
+
+// region Image
+
+data class ImageAction(val path: String) : Action {
+    override fun toBehaviourEntity(): BehaviourEntity {
+        return BehaviourEntity(type = BehaviourType.IMAGE, str1 = path)
+    }
+}
+
+fun BehaviourEntity.toImageAction(): ImageAction {
+    require(type == BehaviourType.IMAGE)
+    return ImageAction(path = str1)
+}
+
+// endregion Image
