@@ -279,6 +279,9 @@
     <string name="behaviour_flashlight">Flashlight</string>
     <string name="behaviour_flashlight_help">Turn the flashlight on and off</string>
 
+    <string name="behaviour_image">Image</string>
+    <string name="behaviour_image_help">Attach an image to the step</string>
+
     <!--Sample timers strings-->
     <string name="sample_timer_template_title">Timer Template</string>
     <string name="sample_timer_template_prepare">Prepare</string>
