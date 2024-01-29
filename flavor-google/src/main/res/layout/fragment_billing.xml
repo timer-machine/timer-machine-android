@@ -150,7 +150,7 @@
                     android:layout_marginBottom="16dp"
                     android:gravity="center"
                     android:textAppearance="?textAppearanceCaption"
-                    android:visibility="visible"
+                    android:visibility="gone"
                     tools:text="@string/billing_explanation"
                     tools:visibility="visible" />
 
