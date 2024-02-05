@@ -3,27 +3,35 @@ package xyz.aprildown.timer.component.key.behaviour
 import android.content.Context
 import android.content.res.ColorStateList
 import android.util.AttributeSet
+import android.view.LayoutInflater
 import android.view.View
+import android.widget.LinearLayout
 import androidx.annotation.ColorInt
 import androidx.appcompat.widget.TooltipCompat
-import com.github.deweyreed.tools.anko.dp
+import androidx.core.view.isEmpty
+import androidx.core.view.isVisible
+import com.bumptech.glide.Glide
+import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.github.deweyreed.tools.helper.setTextIfChanged
 import com.google.android.material.chip.Chip
-import com.google.android.material.chip.ChipGroup
 import xyz.aprildown.timer.component.key.R
+import xyz.aprildown.timer.component.key.databinding.LayoutBehaviourBinding
+import xyz.aprildown.timer.component.key.databinding.LayoutEditableBehaviourImageBinding
 import xyz.aprildown.timer.domain.entities.BehaviourEntity
+import xyz.aprildown.timer.domain.entities.BehaviourType
+import xyz.aprildown.timer.domain.entities.toImageAction
 
 class BehaviourLayout @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null
-) : ChipGroup(context, attrs) {
+) : LinearLayout(context, attrs) {
+
+    private val binding = LayoutBehaviourBinding.inflate(LayoutInflater.from(context), this)
 
     private val currentBehaviours = mutableListOf<BehaviourChipView>()
 
     init {
-        val spacing = context.dp(4).toInt()
-        chipSpacingHorizontal = spacing
-        chipSpacingVertical = spacing
+        orientation = VERTICAL
     }
 
     fun setBehaviours(list: List<BehaviourEntity>) {
@@ -34,7 +42,7 @@ class BehaviourLayout @JvmOverloads constructor(
             repeat(removeCount) {
                 val index = currentSize - it - 1
                 val chipView = currentBehaviours[index]
-                removeView(chipView.chip)
+                binding.chipGroup.removeView(chipView.chip)
                 currentBehaviours.remove(chipView)
             }
         }
@@ -50,6 +58,25 @@ class BehaviourLayout @JvmOverloads constructor(
         }
 
         require(currentBehaviours.size == list.size)
+
+        val imageBehaviour = list.find { it.type == BehaviourType.IMAGE }
+        if (imageBehaviour != null) {
+            binding.layoutImage.isVisible = true
+            val imageView = if (binding.layoutImage.isEmpty()) {
+                LayoutEditableBehaviourImageBinding.inflate(
+                    LayoutInflater.from(context), binding.layoutImage, true
+                ).root
+            } else {
+                LayoutEditableBehaviourImageBinding.bind(binding.layoutImage.getChildAt(0)).root
+            }
+            Glide.with(imageView)
+                .load(imageBehaviour.toImageAction().path)
+                .transition(DrawableTransitionOptions.withCrossFade())
+                .into(imageView)
+        } else {
+            binding.layoutImage.isVisible = false
+            binding.layoutImage.removeAllViews()
+        }
     }
 
     fun setEnabledColor(@ColorInt color: Int) {
@@ -60,7 +87,7 @@ class BehaviourLayout @JvmOverloads constructor(
 
     private fun createNewChip(): Chip {
         val chip = View.inflate(context, R.layout.view_behavior_chip, null) as Chip
-        addView(chip)
+        binding.chipGroup.addView(chip)
         return chip
     }
 
