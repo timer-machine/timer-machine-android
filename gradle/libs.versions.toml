@@ -5,6 +5,7 @@ compileSdk = "34"
 minSdk = "23"
 targetSdk = "34"
 
+# F-Droid depends on the format of the two lines below to update
 versionCode = "7040001"
 versionName = "7.4.0"
 
