@@ -10,7 +10,6 @@ import androidx.core.widget.ImageViewCompat
 import androidx.core.widget.TextViewCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.github.deweyreed.tools.helper.attachToView
-import com.github.deweyreed.tools.helper.gone
 import com.github.deweyreed.tools.helper.onLongClick
 import com.github.deweyreed.tools.helper.toColorStateList
 import com.mikepenz.fastadapter.items.AbstractItem
@@ -80,7 +79,7 @@ internal class VisibleStep(
                     binding.textTime,
                     R.style.TextAppearance_Stepper_NonSelected
                 )
-                binding.layoutBehaviour.gone()
+                binding.layoutBehaviour.isVisible = false
             }
 
             val typeColor = step.type.getTypeColor(context)
