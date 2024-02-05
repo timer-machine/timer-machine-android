@@ -12,6 +12,7 @@ import android.view.View
 import androidx.activity.addCallback
 import androidx.activity.result.ActivityResult
 import androidx.activity.result.ActivityResultCallback
+import androidx.activity.result.PickVisualMediaRequest
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
 import androidx.annotation.VisibleForTesting
@@ -59,6 +60,7 @@ import xyz.aprildown.timer.domain.entities.TimerEntity
 import xyz.aprildown.timer.domain.entities.toBeepAction
 import xyz.aprildown.timer.domain.entities.toCountAction
 import xyz.aprildown.timer.domain.entities.toHalfAction
+import xyz.aprildown.timer.domain.entities.toImageAction
 import xyz.aprildown.timer.domain.entities.toMusicAction
 import xyz.aprildown.timer.domain.entities.toNotificationAction
 import xyz.aprildown.timer.domain.entities.toScreenAction
@@ -94,6 +96,18 @@ class EditActivity :
         ActivityResultContracts.StartActivityForResult(),
         getRingtonePickerResultCallback()
     )
+
+    private val pickImageLauncher = registerForActivityResult(
+        ActivityResultContracts.PickVisualMedia()
+    ) { uri ->
+        if (uri == null || uri == Uri.EMPTY) return@registerForActivityResult
+        val position = viewModel.imagePosition
+        if (position == -1) return@registerForActivityResult
+        changeBehaviour(type = BehaviourType.IMAGE, position = position) {
+            it.toImageAction().copy(path = uri.toString()).toBehaviourEntity()
+        }
+        viewModel.imagePosition = -1
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -759,6 +773,12 @@ class EditActivity :
                         }
                     )
                 }
+                BehaviourType.IMAGE -> {
+                    addImageItems(
+                        context = this@EditActivity,
+                        onPick = { onImageClick(position) },
+                    )
+                }
                 else -> Unit
             }
             section {
@@ -802,8 +822,17 @@ class EditActivity :
     ) {
         val step = getStepFromFastAdapter(position)
         val newBehaviours = mutableListOf<BehaviourEntity>()
+        var found = false
         step.behaviour.forEach {
-            newBehaviours.add(if (it.type == type) transform(it) else it)
+            if (it.type == type) {
+                newBehaviours += transform(it)
+                found = true
+            } else {
+                newBehaviours += it
+            }
+        }
+        if (!found) {
+            newBehaviours += transform(BehaviourEntity(type))
         }
         // The code after this causes setBehaviors which doesn't call onBehaviourAddedOrRemoved
         // so we check here.
@@ -818,6 +847,13 @@ class EditActivity :
         if (getStepFromFastAdapter(position).stepType == StepType.NOTIFIER) {
             viewModel.notifier = viewModel.notifier.copy(behaviour = newBehaviours)
         }
+    }
+
+    override fun onImageClick(position: Int) {
+        viewModel.imagePosition = position
+        pickImageLauncher.launch(
+            PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly)
+        )
     }
 
     private fun postUpdateTotalTime() {

@@ -17,5 +17,6 @@ dependencies {
     implementation libs.hmsPicker
     implementation libs.materialPopupMenu
     implementation libs.scrollHmsPicker
+    implementation libs.glide
 
 }

@@ -2,6 +2,7 @@ package xyz.aprildown.timer.presentation.edit
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.viewModelScope
 import com.github.deweyreed.tools.arch.Event
 import dagger.Lazy
@@ -41,6 +42,8 @@ import javax.inject.Named
  */
 @HiltViewModel
 class EditViewModel @Inject constructor(
+    private val savedStateHandle: SavedStateHandle,
+
     @MainDispatcher mainDispatcher: CoroutineDispatcher,
     private val addTimer: AddTimer,
     private val saveTimer: SaveTimer,
@@ -55,6 +58,12 @@ class EditViewModel @Inject constructor(
 ) : BaseViewModel(mainDispatcher) {
 
     private var timerHash: Int = 0
+
+    var imagePosition: Int
+        get() = savedStateHandle[KEY_IMAGE_POSITION] ?: -1
+        set(value) {
+            savedStateHandle[KEY_IMAGE_POSITION] = value
+        }
 
     // Updated instantly
     val name = MutableLiveData<String>()
@@ -287,5 +296,7 @@ class EditViewModel @Inject constructor(
         const val UPDATE_CREATE = 0
         const val UPDATE_UPDATE = 1
         const val UPDATE_DELETE = 2
+
+        private const val KEY_IMAGE_POSITION = "image_position"
     }
 }
