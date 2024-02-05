@@ -11,6 +11,7 @@ import android.widget.ImageButton
 import androidx.annotation.ColorInt
 import androidx.appcompat.widget.TooltipCompat
 import androidx.appcompat.widget.TooltipCompatFix
+import androidx.core.view.isEmpty
 import androidx.core.view.isVisible
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
@@ -126,12 +127,12 @@ class EditableBehaviourLayout(
 
         val imageAction = bs.find { it.type == BehaviourType.IMAGE }?.toImageAction()
         if (imageAction != null) {
-            val imageView = if (binding.layoutImage.childCount == 0) {
+            val imageView = if (binding.layoutImage.isEmpty()) {
                 LayoutEditableBehaviourImageBinding.inflate(
                     LayoutInflater.from(context), binding.layoutImage, true
                 ).root
             } else {
-                LayoutEditableBehaviourImageBinding.bind(binding.layoutImage).root
+                LayoutEditableBehaviourImageBinding.bind(binding.layoutImage.getChildAt(0)).root
             }
             Glide.with(imageView)
                 .load(imageAction.path)

@@ -2,6 +2,7 @@ package xyz.aprildown.timer.app.timer.edit
 
 import android.app.Activity
 import android.content.ClipboardManager
+import android.content.Intent
 import android.graphics.Typeface
 import android.net.Uri
 import android.os.Bundle
@@ -103,6 +104,7 @@ class EditActivity :
         if (uri == null || uri == Uri.EMPTY) return@registerForActivityResult
         val position = viewModel.imagePosition
         if (position == -1) return@registerForActivityResult
+        contentResolver.takePersistableUriPermission(uri, Intent.FLAG_GRANT_READ_URI_PERMISSION)
         changeBehaviour(type = BehaviourType.IMAGE, position = position) {
             it.toImageAction().copy(path = uri.toString()).toBehaviourEntity()
         }
