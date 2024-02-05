@@ -58,6 +58,7 @@ class EditViewModelTest {
 
     private fun TestScope.getViewModel(): EditViewModel {
         val viewModel = EditViewModel(
+            savedStateHandle = mock(),
             mainDispatcher = StandardTestDispatcher(testScheduler),
             addTimer = addTimer,
             saveTimer = saveTimer,

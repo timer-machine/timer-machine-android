@@ -282,6 +282,8 @@
     <string name="behaviour_image">Image</string>
     <string name="behaviour_image_help">Attach an image to the step</string>
 
+    <string name="image_pick">Pick an image</string>
+
     <!--Sample timers strings-->
     <string name="sample_timer_template_title">Timer Template</string>
     <string name="sample_timer_template_prepare">Prepare</string>
