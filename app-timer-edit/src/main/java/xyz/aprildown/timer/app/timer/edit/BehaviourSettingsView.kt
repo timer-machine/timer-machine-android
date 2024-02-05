@@ -295,3 +295,15 @@ internal fun MaterialPopupMenuBuilder.addNotificationItems(
         }
     }
 }
+
+internal fun MaterialPopupMenuBuilder.addImageItems(
+    context: Context,
+    onPick: () -> Unit,
+) {
+    section {
+        item {
+            label = context.getString(RBase.string.image_pick)
+            callback = onPick
+        }
+    }
+}

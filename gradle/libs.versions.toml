@@ -132,6 +132,7 @@ ultimateRingtonePicker = "com.github.DeweyReed:UltimateRingtonePicker:3.3.0"
 verticalStepperForm = "com.ernestoyaquello.stepperform:vertical-stepper-form:2.5.0"
 zip4j = "net.lingala.zip4j:zip4j:2.11.5"
 taskerPlugin = "com.joaomgcd:taskerpluginlibrary:0.4.10"
+glide = "com.github.bumptech.glide:glide:4.16.0"
 diskLruCache = "com.github.bumptech.glide:disklrucache:4.16.0"
 
 [bundles]

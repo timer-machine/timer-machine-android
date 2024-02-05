@@ -4,25 +4,29 @@ import android.content.Context
 import android.graphics.Color
 import android.util.AttributeSet
 import android.view.Gravity
+import android.view.LayoutInflater
 import android.view.View
 import android.view.View.OnClickListener
 import android.widget.ImageButton
-import android.widget.TextView
 import androidx.annotation.ColorInt
 import androidx.appcompat.widget.TooltipCompat
 import androidx.appcompat.widget.TooltipCompatFix
+import androidx.core.view.isVisible
+import com.bumptech.glide.Glide
+import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.github.deweyreed.tools.helper.drawable
-import com.github.deweyreed.tools.helper.gone
 import com.github.deweyreed.tools.helper.setTextIfChanged
-import com.github.deweyreed.tools.helper.show
 import com.github.deweyreed.tools.helper.toColorStateList
 import com.github.zawadz88.materialpopupmenu.popupMenu
 import com.google.android.flexbox.FlexWrap
 import com.google.android.flexbox.FlexboxLayout
 import com.google.android.material.chip.Chip
 import xyz.aprildown.timer.component.key.R
+import xyz.aprildown.timer.component.key.databinding.LayoutEditableBehaviourBinding
+import xyz.aprildown.timer.component.key.databinding.LayoutEditableBehaviourImageBinding
 import xyz.aprildown.timer.domain.entities.BehaviourEntity
 import xyz.aprildown.timer.domain.entities.BehaviourType
+import xyz.aprildown.timer.domain.entities.toImageAction
 
 class EditableBehaviourLayout(
     context: Context,
@@ -36,7 +40,12 @@ class EditableBehaviourLayout(
             layout: EditableBehaviourLayout,
             current: BehaviourEntity
         )
+
+        fun onImageClick(): Unit = Unit
     }
+
+    private val binding =
+        LayoutEditableBehaviourBinding.inflate(LayoutInflater.from(context), this)
 
     @ColorInt
     private var colorEnabled: Int = Color.RED
@@ -45,8 +54,7 @@ class EditableBehaviourLayout(
     private var listener: Listener? = null
     private var onBehaviourAddedOrRemovedCallback: (() -> Unit)? = null
 
-    val addButton: ImageButton
-    private val emptyText: TextView
+    val addButton: ImageButton get() = binding.btnBehaviourAdd
 
     private val enabledBehaviourTypes = BehaviourType.entries
 
@@ -55,11 +63,7 @@ class EditableBehaviourLayout(
         setShowDivider(SHOW_DIVIDER_MIDDLE)
         setDividerDrawable(context.drawable(R.drawable.divider_normal_flexbox))
 
-        View.inflate(context, R.layout.layout_editable_behaviour, this)
-
-        emptyText = findViewById(R.id.textBehaviourEmpty)
-        addButton = findViewById(R.id.btnBehaviourAdd)
-        addButton.setOnClickListener { view ->
+        binding.btnBehaviourAdd.setOnClickListener { view ->
             val currentTypes = data.keys
             val showTypes = enabledBehaviourTypes.filter { type -> type !in currentTypes }
             if (showTypes.isNotEmpty()) {
@@ -77,7 +81,11 @@ class EditableBehaviourLayout(
                                     )
                                 }
                                 callback = {
-                                    addStubBehaviour(BehaviourEntity(type), true)
+                                    if (type == BehaviourType.IMAGE) {
+                                        listener?.onImageClick()
+                                    } else {
+                                        addStubBehaviour(BehaviourEntity(type), true)
+                                    }
                                 }
                             }
                         }
@@ -115,6 +123,24 @@ class EditableBehaviourLayout(
             addStubBehaviour(it, false)
             setViewWithEntity(it)
         }
+
+        val imageAction = bs.find { it.type == BehaviourType.IMAGE }?.toImageAction()
+        if (imageAction != null) {
+            val imageView = if (binding.layoutImage.childCount == 0) {
+                LayoutEditableBehaviourImageBinding.inflate(
+                    LayoutInflater.from(context), binding.layoutImage, true
+                ).root
+            } else {
+                LayoutEditableBehaviourImageBinding.bind(binding.layoutImage).root
+            }
+            Glide.with(imageView)
+                .load(imageAction.path)
+                .transition(DrawableTransitionOptions.withCrossFade())
+                .into(imageView)
+        } else {
+            binding.layoutImage.removeAllViews()
+        }
+
         updateHelperViews()
     }
 
@@ -125,7 +151,7 @@ class EditableBehaviourLayout(
         val type = behaviour.type
         removeBehaviour(type)
         val newView = generateBehaviourView(type)
-        addView(newView, childCount - 1)
+        addView(newView, indexOfChild(binding.layoutBottomBar))
         data[type] = newView to behaviour
 
         if (fromUser) {
@@ -140,6 +166,10 @@ class EditableBehaviourLayout(
         removeView(view)
         data.remove(behaviourType)
         updateHelperViews()
+
+        if (behaviourType == BehaviourType.IMAGE) {
+            binding.layoutImage.removeAllViews()
+        }
 
         onBehaviourAddedOrRemovedCallback?.invoke()
     }
@@ -167,8 +197,8 @@ class EditableBehaviourLayout(
 
     private fun updateHelperViews() {
         val dataSize = data.size
-        if (dataSize >= enabledBehaviourTypes.size) addButton.gone() else addButton.show()
-        if (dataSize == 0) emptyText.show() else emptyText.gone()
+        binding.btnBehaviourAdd.isVisible = dataSize < enabledBehaviourTypes.size
+        binding.textBehaviourEmpty.isVisible = dataSize == 0
     }
 
     private fun createNewBehaviourChip(
