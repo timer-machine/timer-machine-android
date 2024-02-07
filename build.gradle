@@ -26,7 +26,6 @@ subprojects {
                 defaultConfig {
                     minSdk libs.versions.minSdk.get() as Integer
                     targetSdk libs.versions.targetSdk.get() as Integer
-                    testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
                     vectorDrawables.useSupportLibrary true
                 }
 

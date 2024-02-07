@@ -7,6 +7,9 @@ plugins {
 
 android {
     namespace 'xyz.aprildown.timer.presentation'
+    defaultConfig {
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
 }
 
 dependencies {
@@ -14,11 +17,11 @@ dependencies {
 
     testImplementation libs.junit
     testImplementation libs.kotlin.coroutines.test
-    testImplementation libs.bundles.mockito
+    testImplementation libs.bundles.mockito.core
     testImplementation libs.androidx.test.arch
 
     androidTestImplementation libs.kotlin.coroutines.test
-    androidTestImplementation libs.bundles.mockito
+    androidTestImplementation libs.bundles.mockito.android
     androidTestImplementation libs.bundles.androidx.test
     androidTestImplementation libs.bundles.androidx.test.espresso
 

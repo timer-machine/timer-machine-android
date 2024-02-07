@@ -8,6 +8,7 @@ plugins {
 android {
     namespace 'xyz.aprildown.timer.data'
     defaultConfig {
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         javaCompileOptions {
             annotationProcessorOptions {
                 arguments += [

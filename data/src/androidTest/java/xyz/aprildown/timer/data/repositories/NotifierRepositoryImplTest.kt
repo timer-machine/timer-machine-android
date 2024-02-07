@@ -13,7 +13,6 @@ import org.junit.Assert.assertEquals
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
-import xyz.aprildown.timer.data.R
 import xyz.aprildown.timer.data.mappers.BehaviourMapper
 import xyz.aprildown.timer.data.mappers.StepOnlyMapper
 import xyz.aprildown.timer.domain.TestData
@@ -24,6 +23,7 @@ import xyz.aprildown.timer.domain.repositories.NotifierRepository
 class NotifierRepositoryImplTest {
 
     private val context = ApplicationProvider.getApplicationContext<Context>()
+    private val defaultNotifierName = "default"
 
     private lateinit var prefs: SharedPreferences
 
@@ -34,7 +34,7 @@ class NotifierRepositoryImplTest {
         prefs = context.getSharedPreferences("test", Context.MODE_PRIVATE)
         prefs.edit { clear() }
         notifierRepository =
-            NotifierRepositoryImpl(context, prefs, StepOnlyMapper(BehaviourMapper()))
+            NotifierRepositoryImpl(prefs, StepOnlyMapper(BehaviourMapper()), defaultNotifierName)
     }
 
     @After
@@ -53,8 +53,7 @@ class NotifierRepositoryImplTest {
         val firstGet = notifierRepository.get()
         assertEquals(
             firstGet,
-            NotifierRepositoryImpl.getDefaultNotifier()
-                .copy(label = context.getString(R.string.edit_default_notifier_name))
+            NotifierRepositoryImpl.getDefaultNotifier().copy(label = defaultNotifierName)
         )
 
         // Save and get

@@ -29,7 +29,7 @@ dependencies {
 
     testImplementation libs.junit
     testImplementation libs.kotlin.coroutines.test
-    testImplementation libs.bundles.mockito
+    testImplementation libs.bundles.mockito.core
 
     api libs.androidx.appcompat
     implementation libs.androidx.preference
