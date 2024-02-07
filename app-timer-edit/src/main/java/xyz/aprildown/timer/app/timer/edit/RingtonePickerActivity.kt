@@ -21,8 +21,6 @@ import xyz.aprildown.timer.app.base.ui.newDynamicTheme
 import xyz.aprildown.tools.helper.safeSharedPreference
 import xyz.aprildown.ultimateringtonepicker.RingtonePickerFragment
 import xyz.aprildown.ultimateringtonepicker.UltimateRingtonePicker
-import xyz.aprildown.ultimateringtonepicker.getParcelableArrayExtraCompat
-import xyz.aprildown.ultimateringtonepicker.getParcelableExtraCompat
 import xyz.aprildown.timer.app.base.R as RBase
 
 @AndroidEntryPoint
@@ -49,7 +47,10 @@ class RingtonePickerActivity :
                 EXTRA_SETTINGS,
                 UltimateRingtonePicker.Settings::class.java
             )
-            requireNotNull(settings)
+            if (settings == null) {
+                finish()
+                return
+            }
             val fragment = settings.createFragment()
             supportFragmentManager.beginTransaction()
                 .replace(
@@ -114,9 +115,15 @@ class RingtonePickerActivity :
     private fun applyNewSafPickSetting() {
         invalidateOptionsMenu()
 
-        val currentSettings =
-            intent.getParcelableExtraCompat<UltimateRingtonePicker.Settings>(EXTRA_SETTINGS)
-        requireNotNull(currentSettings)
+        val currentSettings = IntentCompat.getParcelableExtra(
+            intent,
+            EXTRA_SETTINGS,
+            UltimateRingtonePicker.Settings::class.java
+        )
+        if (currentSettings == null) {
+            finish()
+            return
+        }
         val newSettings = currentSettings.copy(
             systemRingtonePicker = currentSettings.systemRingtonePicker?.copy(
                 customSection = currentSettings.systemRingtonePicker?.customSection?.copy(
@@ -176,9 +183,11 @@ class RingtonePickerActivity :
         }
 
         fun getPickerResult(intent: Intent): List<UltimateRingtonePicker.RingtoneEntry> {
-            return intent
-                .getParcelableArrayExtraCompat<UltimateRingtonePicker.RingtoneEntry>(EXTRA_RESULT)
-                .toList()
+            return IntentCompat.getParcelableArrayExtra(
+                intent,
+                EXTRA_RESULT,
+                UltimateRingtonePicker.RingtoneEntry::class.java
+            )?.filterIsInstance<UltimateRingtonePicker.RingtoneEntry>() ?: emptyList()
         }
 
         fun getPickerReference(intent: Intent): Int {
