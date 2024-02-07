@@ -114,7 +114,7 @@ com.android.billingclient:billing:6.0.1
 com.ernestoyaquello.stepperform:vertical-stepper-form:2.5.0
 com.firebaseui:firebase-ui-auth:8.0.2
 com.github.DeweyReed:ToastCompat:d0a4d6cac3
-com.github.DeweyReed:UltimateRingtonePicker:3.2.0
+com.github.DeweyReed:UltimateRingtonePicker:3.3.0-RC1
 com.github.DeweyReed:android-job:a04c817792
 com.github.DeweyReed:tools:0.7.0
 com.github.PhilJay:MPAndroidChart:v3.1.0

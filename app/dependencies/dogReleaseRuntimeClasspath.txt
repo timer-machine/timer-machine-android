@@ -104,7 +104,7 @@ com.afollestad.material-dialogs:commons:0.9.6.0
 com.afollestad.material-dialogs:core:0.9.6.0
 com.ernestoyaquello.stepperform:vertical-stepper-form:2.5.0
 com.github.DeweyReed:ToastCompat:d0a4d6cac3
-com.github.DeweyReed:UltimateRingtonePicker:3.2.0
+com.github.DeweyReed:UltimateRingtonePicker:3.3.0-RC1
 com.github.DeweyReed:android-job:a04c817792
 com.github.DeweyReed:tools:0.7.0
 com.github.PhilJay:MPAndroidChart:v3.1.0
