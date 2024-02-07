@@ -18,6 +18,7 @@ interface AppNavigator {
     fun getStartTimerShortcutIntent(timerId: Int, openOnClick: Boolean): Intent
     fun getShortcutCreatedIntent(): Intent
     fun getIntroIntent(isOnBoarding: Boolean = false): Intent
+    fun getImagePreviewIntent(path: String): Intent
 
     /**
      * @param [timerInfo] is always not empty.

@@ -11,6 +11,7 @@ import xyz.aprildown.timer.app.timer.edit.EditActivity
 import xyz.aprildown.timer.app.timer.list.TimerPicker
 import xyz.aprildown.timer.app.timer.one.OneActivity
 import xyz.aprildown.timer.app.timer.run.PhantomActivity
+import xyz.aprildown.timer.component.key.ImagePreviewActivity
 import xyz.aprildown.timer.domain.utils.Constants
 import javax.inject.Inject
 
@@ -52,6 +53,10 @@ class AppNavigatorImpl @Inject constructor(
 
     override fun getIntroIntent(isOnBoarding: Boolean): Intent {
         return IntroActivity.getIntent(context, isOnBoarding)
+    }
+
+    override fun getImagePreviewIntent(path: String): Intent {
+        return ImagePreviewActivity.getIntent(context, path)
     }
 
     override fun pickTimer(
