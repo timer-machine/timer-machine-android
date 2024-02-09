@@ -10,8 +10,7 @@ import androidx.annotation.ColorInt
 import androidx.appcompat.widget.TooltipCompat
 import androidx.core.view.isEmpty
 import androidx.core.view.isVisible
-import com.bumptech.glide.Glide
-import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
+import coil.load
 import com.github.deweyreed.tools.helper.setTextIfChanged
 import com.google.android.material.chip.Chip
 import xyz.aprildown.timer.component.key.R
@@ -69,10 +68,9 @@ class BehaviourLayout @JvmOverloads constructor(
             } else {
                 LayoutEditableBehaviourImageBinding.bind(binding.layoutImage.getChildAt(0)).root
             }
-            Glide.with(imageView)
-                .load(imageBehaviour.toImageAction().path)
-                .transition(DrawableTransitionOptions.withCrossFade())
-                .into(imageView)
+            imageView.load(imageBehaviour.toImageAction().path) {
+                crossfade(true)
+            }
         } else {
             binding.layoutImage.isVisible = false
             binding.layoutImage.removeAllViews()

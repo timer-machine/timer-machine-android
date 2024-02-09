@@ -11,6 +11,10 @@ import androidx.core.content.edit
 import androidx.hilt.work.HiltWorkerFactory
 import androidx.preference.PreferenceManager
 import androidx.work.DelegatingWorkerFactory
+import coil.ImageLoader
+import coil.ImageLoaderFactory
+import coil.decode.GifDecoder
+import coil.decode.ImageDecoderDecoder
 import com.github.deweyreed.tools.helper.hasPermissions
 import dagger.Lazy
 import dagger.hilt.android.HiltAndroidApp
@@ -36,7 +40,7 @@ import androidx.work.Configuration as WorkManagerConfiguration
 import xyz.aprildown.timer.app.base.R as RBase
 
 @HiltAndroidApp
-class App : Application(), WorkManagerConfiguration.Provider {
+class App : Application(), WorkManagerConfiguration.Provider, ImageLoaderFactory {
 
     @Inject
     lateinit var sharedPreferences: SharedPreferences
@@ -201,6 +205,19 @@ class App : Application(), WorkManagerConfiguration.Provider {
                 }
                 .build()
         }
+
+    override fun newImageLoader(): ImageLoader {
+        return ImageLoader.Builder(this)
+            .components {
+                // https://coil-kt.github.io/coil/gifs/
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
+                    add(ImageDecoderDecoder.Factory())
+                } else {
+                    add(GifDecoder.Factory())
+                }
+            }
+            .build()
+    }
 }
 
 private const val PREF_FIRST_START = "pref_first_start_app"
