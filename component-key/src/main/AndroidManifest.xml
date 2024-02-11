@@ -1,6 +1,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
 
     <application android:theme="@style/AppTheme.LibraryPreview">
-        <activity android:name=".ImagePreviewActivity" />
+        <activity
+            android:name=".ImagePreviewActivity"
+            android:launchMode="singleTop"
+            android:theme="@style/AppTheme.ImagePreview" />
     </application>
 </manifest>
