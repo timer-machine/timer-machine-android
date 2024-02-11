@@ -30,5 +30,6 @@ dependencies {
     implementation libs.scrollHmsPicker
     implementation libs.coil
     implementation libs.coil.compose
+    implementation libs.zoomable
 
 }
