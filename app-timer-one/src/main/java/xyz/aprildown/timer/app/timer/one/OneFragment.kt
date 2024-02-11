@@ -136,6 +136,9 @@ class OneFragment :
                     actionUpdateStepTime(index)
                 }
             }
+            imageCheckListener = {
+                startActivity(appNavigator.getImagePreviewIntent(it.path))
+            }
         }
 
         viewModel.timer.observe(viewLifecycleOwner) {

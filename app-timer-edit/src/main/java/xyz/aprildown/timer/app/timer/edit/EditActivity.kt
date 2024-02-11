@@ -55,6 +55,7 @@ import xyz.aprildown.timer.component.key.behaviour.EditableBehaviourLayout
 import xyz.aprildown.timer.domain.entities.BehaviourEntity
 import xyz.aprildown.timer.domain.entities.BehaviourType
 import xyz.aprildown.timer.domain.entities.FolderEntity
+import xyz.aprildown.timer.domain.entities.ImageAction
 import xyz.aprildown.timer.domain.entities.StepEntity
 import xyz.aprildown.timer.domain.entities.StepType
 import xyz.aprildown.timer.domain.entities.TimerEntity
@@ -101,14 +102,14 @@ class EditActivity :
     private val pickImageLauncher = registerForActivityResult(
         ActivityResultContracts.PickVisualMedia()
     ) { uri ->
-        if (uri == null || uri == Uri.EMPTY) return@registerForActivityResult
         val position = viewModel.imagePosition
+        viewModel.imagePosition = -1
+        if (uri == null || uri == Uri.EMPTY) return@registerForActivityResult
         if (position == -1) return@registerForActivityResult
         contentResolver.takePersistableUriPermission(uri, Intent.FLAG_GRANT_READ_URI_PERMISSION)
         changeBehaviour(type = BehaviourType.IMAGE, position = position) {
             it.toImageAction().copy(path = uri.toString()).toBehaviourEntity()
         }
-        viewModel.imagePosition = -1
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -778,7 +779,7 @@ class EditActivity :
                 BehaviourType.IMAGE -> {
                     addImageItems(
                         context = this@EditActivity,
-                        onPick = { onImageClick(position) },
+                        onPick = { onImageAdding(position) },
                     )
                 }
                 else -> Unit
@@ -851,11 +852,15 @@ class EditActivity :
         }
     }
 
-    override fun onImageClick(position: Int) {
+    override fun onImageAdding(position: Int) {
         viewModel.imagePosition = position
         pickImageLauncher.launch(
             PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly)
         )
+    }
+
+    override fun onImageCheck(position: Int, action: ImageAction) {
+        startActivity(appNavigator.getImagePreviewIntent(action.path))
     }
 
     private fun postUpdateTotalTime() {

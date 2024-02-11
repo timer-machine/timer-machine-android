@@ -18,6 +18,7 @@ import xyz.aprildown.timer.component.key.databinding.LayoutBehaviourBinding
 import xyz.aprildown.timer.component.key.databinding.LayoutEditableBehaviourImageBinding
 import xyz.aprildown.timer.domain.entities.BehaviourEntity
 import xyz.aprildown.timer.domain.entities.BehaviourType
+import xyz.aprildown.timer.domain.entities.ImageAction
 import xyz.aprildown.timer.domain.entities.toImageAction
 
 class BehaviourLayout @JvmOverloads constructor(
@@ -28,6 +29,8 @@ class BehaviourLayout @JvmOverloads constructor(
     private val binding = LayoutBehaviourBinding.inflate(LayoutInflater.from(context), this)
 
     private val currentBehaviours = mutableListOf<BehaviourChipView>()
+
+    var onImageCheck: ((ImageAction) -> Unit)? = null
 
     init {
         orientation = VERTICAL
@@ -68,7 +71,9 @@ class BehaviourLayout @JvmOverloads constructor(
             } else {
                 LayoutEditableBehaviourImageBinding.bind(binding.layoutImage.getChildAt(0)).root
             }
-            imageView.load(imageBehaviour.toImageAction().path) {
+            val action = imageBehaviour.toImageAction()
+            imageView.setOnClickListener { onImageCheck?.invoke(action) }
+            imageView.load(action.path) {
                 crossfade(true)
             }
         } else {

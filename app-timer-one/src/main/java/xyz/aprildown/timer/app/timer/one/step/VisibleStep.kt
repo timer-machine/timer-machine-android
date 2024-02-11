@@ -17,6 +17,7 @@ import xyz.aprildown.timer.app.base.data.PreferenceData.getTypeColor
 import xyz.aprildown.timer.app.base.utils.produceTime
 import xyz.aprildown.timer.app.timer.one.R
 import xyz.aprildown.timer.app.timer.one.databinding.ItemStepStepBinding
+import xyz.aprildown.timer.domain.entities.ImageAction
 import xyz.aprildown.timer.domain.entities.StepEntity
 import xyz.aprildown.timer.app.base.R as RBase
 
@@ -25,12 +26,18 @@ internal class VisibleStep(
     private val number: Int,
     id: Long,
     private val currentPositionCallback: CurrentPositionCallback,
-    private val stepLongClickListener: OnStepLongClickListener
+    private val stepLongClickListener: OnStepLongClickListener,
+    private val imageCheckListener: ((ImageAction) -> Unit)?,
 ) : AbstractItem<VisibleStep.ViewHolder>() {
 
     override val layoutRes: Int = R.layout.item_step_step
     override val type: Int = RBase.id.type_step_step
-    override fun getViewHolder(v: View): ViewHolder = ViewHolder(v)
+    override fun getViewHolder(v: View): ViewHolder {
+        return ViewHolder(v).also {
+            it.binding.layoutBehaviour.onImageCheck = imageCheckListener
+        }
+    }
+
     override var identifier: Long = id
 
     override fun bindView(holder: ViewHolder, payloads: List<Any>) {

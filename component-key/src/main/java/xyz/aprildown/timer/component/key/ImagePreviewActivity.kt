@@ -3,11 +3,34 @@ package xyz.aprildown.timer.component.key
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import androidx.activity.ComponentActivity
+import androidx.activity.SystemBarStyle
 import androidx.activity.compose.setContent
-import androidx.compose.material3.Text
-import xyz.aprildown.timer.app.base.ui.BaseActivity
+import androidx.activity.enableEdgeToEdge
+import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
+import androidx.compose.foundation.gestures.detectTapGestures
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.setValue
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.input.pointer.pointerInput
+import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.unit.dp
+import coil.compose.rememberAsyncImagePainter
+import coil.request.ImageRequest
+import net.engawapg.lib.zoomable.rememberZoomState
+import net.engawapg.lib.zoomable.zoomable
+import android.graphics.Color as AndroidColor
+import androidx.compose.ui.graphics.Color.Companion as ComposeColor
 
-class ImagePreviewActivity : BaseActivity() {
+class ImagePreviewActivity : ComponentActivity() {
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val path = intent?.getStringExtra(EXTRA_PATH)
@@ -15,8 +38,30 @@ class ImagePreviewActivity : BaseActivity() {
             finish()
             return
         }
+
+        enableEdgeToEdge(
+            statusBarStyle = SystemBarStyle.dark(AndroidColor.TRANSPARENT),
+            navigationBarStyle = SystemBarStyle.dark(
+                AndroidColor.argb(0x80, 0x1b, 0x1b, 0x1b)
+            ) // DefaultDarkScrim
+        )
+
         setContent {
-            Text(text = path)
+            var data: String? by rememberSaveable { mutableStateOf(path) }
+
+            LaunchedEffect(Unit) {
+                addOnNewIntentListener { intent ->
+                    intent?.getStringExtra(EXTRA_PATH)?.takeIf { it.isNotBlank() }?.let {
+                        data = it
+                    }
+                }
+            }
+
+            ImagePreview(
+                data = data,
+                onDismiss = ::finish,
+                modifier = Modifier.fillMaxSize(),
+            )
         }
     }
 
@@ -27,4 +72,29 @@ class ImagePreviewActivity : BaseActivity() {
                 .putExtra(EXTRA_PATH, path)
         }
     }
+}
+
+@Composable
+private fun ImagePreview(
+    data: Any?,
+    onDismiss: () -> Unit,
+    modifier: Modifier = Modifier,
+) {
+    Image(
+        painter = rememberAsyncImagePainter(
+            model = ImageRequest.Builder(LocalContext.current)
+                .data(data)
+                .crossfade(true)
+                .build(),
+        ),
+        contentDescription = null,
+        modifier = modifier
+            .fillMaxSize()
+            .background(ComposeColor.Black.copy(alpha = 0.5f))
+            .pointerInput(onDismiss) {
+                detectTapGestures(onTap = { onDismiss() })
+            }
+            .padding(16.dp)
+            .zoomable(zoomState = rememberZoomState()),
+    )
 }

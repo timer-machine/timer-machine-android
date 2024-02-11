@@ -26,6 +26,7 @@ import xyz.aprildown.timer.component.key.databinding.LayoutEditableBehaviourBind
 import xyz.aprildown.timer.component.key.databinding.LayoutEditableBehaviourImageBinding
 import xyz.aprildown.timer.domain.entities.BehaviourEntity
 import xyz.aprildown.timer.domain.entities.BehaviourType
+import xyz.aprildown.timer.domain.entities.ImageAction
 import xyz.aprildown.timer.domain.entities.toImageAction
 
 class EditableBehaviourLayout(
@@ -41,7 +42,8 @@ class EditableBehaviourLayout(
             current: BehaviourEntity
         )
 
-        fun onImageClick(): Unit = Unit
+        fun onImageAdding(): Unit = Unit
+        fun onImageContentClick(action: ImageAction): Unit = Unit
     }
 
     private val binding =
@@ -82,7 +84,7 @@ class EditableBehaviourLayout(
                                 }
                                 callback = {
                                     if (type == BehaviourType.IMAGE) {
-                                        listener?.onImageClick()
+                                        listener?.onImageAdding()
                                     } else {
                                         addStubBehaviour(BehaviourEntity(type), true)
                                     }
@@ -133,6 +135,7 @@ class EditableBehaviourLayout(
             } else {
                 LayoutEditableBehaviourImageBinding.bind(binding.layoutImage.getChildAt(0)).root
             }
+            imageView.setOnClickListener { listener?.onImageContentClick(imageAction) }
             imageView.load(imageAction.path) {
                 crossfade(true)
             }
