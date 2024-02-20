@@ -1,5 +1,6 @@
 package xyz.aprildown.timer.data.repositories
 
+import android.content.Context
 import androidx.test.core.app.ApplicationProvider
 import kotlinx.coroutines.test.runTest
 import org.junit.After
@@ -24,13 +25,13 @@ import xyz.aprildown.timer.domain.repositories.TimerRepository
 
 class SchedulerRepositoryImplTest {
 
-    private val database = MachineDatabase.createInMemoryDatabase(
-        ApplicationProvider.getApplicationContext()
-    )
+    private val context = ApplicationProvider.getApplicationContext<Context>()
+    private val database = MachineDatabase.createInMemoryDatabase(context)
     private val timerRepository: TimerRepository = TimerRepositoryImpl(
-        database.timerDao(),
-        TimerMapper(StepMapper(StepOnlyMapper(BehaviourMapper())), TimerMoreMapper()),
-        TimerInfoMapper()
+        context = context,
+        timerDao = database.timerDao(),
+        timerMapper = TimerMapper(StepMapper(StepOnlyMapper(BehaviourMapper())), TimerMoreMapper()),
+        timerInfoMapper = TimerInfoMapper(),
     )
     private var timerId: Int = TimerEntity.NULL_ID
     private val schedulerRepository: SchedulerRepository =
