@@ -13,16 +13,24 @@ import android.view.View
 import android.view.WindowManager
 import androidx.activity.viewModels
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.core.graphics.ColorUtils
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.updateLayoutParams
 import androidx.core.view.updatePadding
+import androidx.core.widget.ImageViewCompat
 import com.github.deweyreed.tools.arch.observeEvent
+import com.github.deweyreed.tools.arch.observeNonNull
 import com.github.deweyreed.tools.helper.startDrawableAnimation
 import com.github.deweyreed.tools.helper.stopDrawableAnimation
+import com.github.deweyreed.tools.helper.toColorStateList
+import com.github.deweyreed.tools.utils.ThemeColorUtils
 import dagger.hilt.android.AndroidEntryPoint
+import xyz.aprildown.timer.app.base.data.PreferenceData.getTypeColor
 import xyz.aprildown.timer.app.base.ui.BaseActivity
+import xyz.aprildown.timer.app.base.ui.newDynamicTheme
+import xyz.aprildown.timer.app.base.utils.AppThemeUtils
 import xyz.aprildown.timer.app.base.utils.setTime
 import xyz.aprildown.timer.app.timer.run.MachineService
 import xyz.aprildown.timer.app.timer.run.databinding.ActivityScreenBinding
@@ -60,16 +68,6 @@ class ScreenActivity : BaseActivity() {
     }
 
     private fun init() {
-        intent?.getStringExtra(EXTRA_NAME)?.let { timerName ->
-            intent?.getStringExtra(EXTRA_STEP_NAME)?.let { stepName ->
-                binding.textStepInfo.text = ScreenViewModel.formatStepInfo(
-                    timerName = timerName,
-                    loopString = "",
-                    stepName = stepName
-                )
-            }
-        }
-
         viewModel.setTimerId(
             intent?.getIntExtra(Constants.EXTRA_TIMER_ID, TimerEntity.NULL_ID)
                 ?: TimerEntity.NULL_ID
@@ -139,6 +137,33 @@ class ScreenActivity : BaseActivity() {
     }
 
     private fun setUpObservers() {
+        viewModel.step.observeNonNull(this) { step ->
+            val color = step.type.getTypeColor(this)
+            val isLightColor = ThemeColorUtils.isLightColor(color)
+            val onColor = AppThemeUtils.calculateOnColor(color)
+
+            window?.statusBarColor = color
+            WindowCompat.getInsetsController(window, binding.root).run {
+                isAppearanceLightStatusBars = isLightColor
+                isAppearanceLightNavigationBars = isLightColor
+            }
+
+            binding.root.setBackgroundColor(color)
+            binding.textStepInfo.setTextColor(onColor)
+            ImageViewCompat.setImageTintList(binding.imageRingtone, onColor.toColorStateList())
+            binding.textTime.setTextColor(onColor)
+            binding.btnAddOneMinute.setTextColor(onColor)
+
+            if (ColorUtils.calculateContrast(newDynamicTheme.colorSecondary, color) <=
+                3.0 /* Min contrast */
+            ) {
+                ViewCompat.setBackgroundTintList(
+                    binding.btnStop,
+                    ThemeColorUtils.setAlpha(onColor, 1f).toColorStateList()
+                )
+                ImageViewCompat.setImageTintList(binding.btnStop, color.toColorStateList())
+            }
+        }
         viewModel.timerStepInfo.observe(this) {
             binding.textStepInfo.text = it
         }
@@ -188,17 +213,12 @@ class ScreenActivity : BaseActivity() {
     }
 
     companion object {
-        private const val EXTRA_NAME = "extra_name"
-        private const val EXTRA_STEP_NAME = "extra_step_name"
-
         @SuppressLint("StaticFieldLeak")
         var screen: Activity? = null
 
-        fun intent(context: Context, id: Int, timerName: String, stepName: String): Intent {
+        fun intent(context: Context, id: Int): Intent {
             return Intent(context, ScreenActivity::class.java)
                 .putExtra(Constants.EXTRA_TIMER_ID, id)
-                .putExtra(EXTRA_NAME, timerName)
-                .putExtra(EXTRA_STEP_NAME, stepName)
         }
     }
 }

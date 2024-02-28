@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="?colorPrimarySurface"
+    tools:background="?colorPrimarySurface"
     tools:ignore="Overdraw">
 
     <TextView
@@ -13,7 +13,6 @@
         android:layout_height="0dp"
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
-        android:textColor="?colorOnPrimarySurface"
         android:textSize="24sp"
         app:autoSizeMaxTextSize="24sp"
         app:autoSizeTextType="uniform"
@@ -23,7 +22,8 @@
         app:layout_constraintStart_toStartOf="@id/textTime"
         app:layout_constraintTop_toBottomOf="@id/textTime"
         app:layout_constraintVertical_bias="0"
-        tools:text="@tools:sample/lorem/random" />
+        tools:text="@tools:sample/lorem/random"
+        tools:textColor="?colorOnPrimarySurface" />
 
     <ImageView
         android:id="@+id/imageRingtone"
@@ -39,7 +39,7 @@
         app:layout_constraintStart_toEndOf="@id/textTime"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/ic_anim_ringing"
-        app:tint="?colorOnPrimarySurface" />
+        tools:tint="?colorOnPrimarySurface" />
 
     <TextView
         android:id="@+id/textTime"
@@ -51,7 +51,6 @@
         android:maxLines="1"
         android:paddingTop="24dp"
         android:paddingBottom="24dp"
-        android:textColor="?colorOnPrimarySurface"
         android:textSize="108sp"
         app:autoSizeTextType="uniform"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -59,7 +58,8 @@
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:text="12:34" />
+        tools:text="12:34"
+        tools:textColor="?colorOnPrimarySurface" />
 
     <Button
         android:id="@+id/btnAddOneMinute"
@@ -68,10 +68,10 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:text="@string/one_action_add_one_minute"
-        android:textColor="?colorOnPrimarySurface"
         app:layout_constraintBottom_toTopOf="@id/textTime"
         app:layout_constraintStart_toStartOf="parent"
-        app:rippleColor="?colorOnPrimarySurface" />
+        app:rippleColor="?colorOnPrimarySurface"
+        tools:textColor="?colorOnPrimarySurface" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/btnStop"

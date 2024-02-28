@@ -20,6 +20,7 @@ import androidx.core.app.ServiceCompat
 import androidx.core.os.postDelayed
 import androidx.core.text.buildSpannedString
 import com.github.deweyreed.timer.component.tts.TtsSpeaker
+import com.github.deweyreed.tools.anko.newTask
 import com.github.deweyreed.tools.helper.HandlerHelper
 import com.github.deweyreed.tools.helper.getNumberFormattedQuantityString
 import dagger.hilt.android.AndroidEntryPoint
@@ -358,14 +359,7 @@ class MachineService :
         if (fullScreen && Build.VERSION.SDK_INT < Build.VERSION_CODES.UPSIDE_DOWN_CAKE) {
             // As restrictions on starting activities from the background get increasingly strict,
             // this option becomes unpredictable. We'll have to rely on full-screen intent.
-            startActivity(
-                ScreenActivity.intent(
-                    this,
-                    timerItem.id,
-                    timerItem.name,
-                    currentStepName
-                ).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-            )
+            startActivity(ScreenActivity.intent(this, timerItem.id).newTask())
         } else {
             notificationManager.notify(
                 Constants.NOTIF_ID_SCREEN,

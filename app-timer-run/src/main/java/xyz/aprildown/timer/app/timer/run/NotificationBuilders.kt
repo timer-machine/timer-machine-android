@@ -279,8 +279,7 @@ internal fun Context.buildScreenNotificationBuilder(
         )
     )
 
-    val showScreenIntent =
-        ScreenActivity.intent(this, timerId, timerItem.name, currentStepName)
+    val showScreenIntent = ScreenActivity.intent(this, timerId)
     val pendingShowScreenIntent = pendingActivityIntent(showScreenIntent, timerId)
 
     // Full screen intent has flags so it is different than the content intent.
