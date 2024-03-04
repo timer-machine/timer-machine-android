@@ -3,8 +3,10 @@ package xyz.aprildown.timer.presentation.screen
 import android.content.Intent
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.distinctUntilChanged
 import com.github.deweyreed.tools.arch.Event
 import dagger.hilt.android.lifecycle.HiltViewModel
+import xyz.aprildown.timer.domain.entities.StepEntity
 import xyz.aprildown.timer.domain.entities.TimerEntity
 import xyz.aprildown.timer.presentation.SimpleViewModel
 import xyz.aprildown.timer.presentation.StreamMachineIntentProvider
@@ -23,6 +25,9 @@ class ScreenViewModel @Inject constructor(
 
     val timerCurrentTime = MutableLiveData<Long>().apply { value = 0L }
     val timerStepInfo = MutableLiveData<String>()
+
+    private val _step: MutableLiveData<StepEntity.Step?> = MutableLiveData()
+    val step: LiveData<StepEntity.Step?> = _step.distinctUntilChanged()
 
     private val _stopEvent = MutableLiveData<Event<Unit>>()
     val stopEvent: LiveData<Event<Unit>> = _stopEvent
@@ -47,11 +52,13 @@ class ScreenViewModel @Inject constructor(
         presenter?.getTimerStateInfo(timerId)?.run {
             if (timerEntity.id == timerId && !state.isReset) {
                 timerCurrentTime.value = time
+                val currentStep = timerEntity.getStep(index)
+                _step.value = currentStep
                 timerStepInfo.value = if (index !is TimerIndex.Group) {
                     formatStepInfo(
                         timerName = timerEntity.name,
                         loopString = index.getNiceLoopString(max = timerEntity.loop),
-                        stepName = timerEntity.getStep(index)?.label.toString()
+                        stepName = currentStep?.label.toString(),
                     )
                 } else {
                     val group = timerEntity.getGroup(index)
@@ -64,7 +71,7 @@ class ScreenViewModel @Inject constructor(
                             append(group?.name ?: "")
                         },
                         loopString = index.groupStepIndex.getNiceLoopString(max = group?.loop ?: 0),
-                        stepName = timerEntity.getStep(index)?.label.toString()
+                        stepName = currentStep?.label.toString(),
                     )
                 }
             } else {

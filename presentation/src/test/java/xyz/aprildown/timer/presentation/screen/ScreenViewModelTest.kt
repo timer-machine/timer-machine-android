@@ -16,6 +16,7 @@ import org.mockito.kotlin.verifyNoInteractions
 import org.mockito.kotlin.verifyNoMoreInteractions
 import org.mockito.kotlin.whenever
 import xyz.aprildown.timer.domain.TestData
+import xyz.aprildown.timer.domain.entities.StepEntity
 import xyz.aprildown.timer.presentation.StreamMachineIntentProvider
 import xyz.aprildown.timer.presentation.stream.MachineContract
 import xyz.aprildown.timer.presentation.stream.StreamState
@@ -32,12 +33,14 @@ class ScreenViewModelTest {
     private val intentProvider: StreamMachineIntentProvider = mock()
     private val stopTimerObserver: Observer<Event<Unit>> = mock()
     private val serviceTriggerObserver: Observer<Event<Intent>> = mock()
+    private val stepObserver: Observer<StepEntity.Step?> = mock()
     private val presenter: MachineContract.Presenter = mock()
 
     private fun getViewModel(): ScreenViewModel {
         val viewModel = ScreenViewModel(intentProvider)
         viewModel.stopEvent.observeForever(stopTimerObserver)
         viewModel.intentEvent.observeForever(serviceTriggerObserver)
+        viewModel.step.observeForever(stepObserver)
         return viewModel
     }
 
@@ -65,6 +68,12 @@ class ScreenViewModelTest {
         )
 
         assertEquals(10_000L, viewModel.timerCurrentTime.value)
+
+        argumentCaptor {
+            verify(stepObserver).onChanged(capture())
+            assertEquals(1, allValues.size)
+            Assert.assertTrue(firstValue == t.getStep(currentIndex))
+        }
 
         viewModel.dropPresenter()
         verify(presenter).removeListener(t.id, viewModel)
