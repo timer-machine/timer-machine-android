@@ -85,8 +85,6 @@ compose-material = { module = "androidx.compose.material3:material3" }
 compose-activity = "androidx.activity:activity-compose:1.8.2"
 compose-liveData = { module = "androidx.compose.runtime:runtime-livedata" }
 compose-constraintLayout = "androidx.constraintlayout:constraintlayout-compose:1.0.1"
-compose-tooling-preview = { module = "androidx.compose.ui:ui-tooling-preview" }
-compose-tooling-debug = { module = "androidx.compose.ui:ui-tooling" }
 
 material = "com.google.android.material:material:1.4.0"
 
