@@ -21,8 +21,6 @@ dependencies {
 
     implementation platform(libs.compose.bom)
     implementation libs.bundles.compose
-    implementation libs.compose.tooling.preview
-    debugImplementation libs.compose.tooling.debug
 
     implementation libs.flexbox
     implementation libs.hmsPicker

@@ -7,6 +7,12 @@ plugins {
 
 android {
     namespace 'xyz.aprildown.timer.app.backup'
+    buildFeatures {
+        compose true
+    }
+    composeOptions {
+        kotlinCompilerExtensionVersion = libs.versions.composeCompiler.get()
+    }
 }
 
 dependencies {
@@ -14,6 +20,9 @@ dependencies {
     implementation project(':component-key')
 
     implementation libs.androidx.preference
+
+    implementation platform(libs.compose.bom)
+    implementation libs.bundles.compose
 
     implementation libs.hilt.android
     kapt libs.hilt.compiler
