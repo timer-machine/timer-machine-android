@@ -61,9 +61,8 @@
 
     <fragment
         android:id="@id/dest_export"
-        android:name="xyz.aprildown.timer.app.backup.ExportFragment"
-        android:label="@string/export_data_title"
-        tools:layout="@layout/layout_vertical_form" />
+        android:name="xyz.aprildown.timer.app.backup.Export2Fragment"
+        android:label="@string/export_data_title" />
 
     <fragment
         android:id="@id/dest_import"
