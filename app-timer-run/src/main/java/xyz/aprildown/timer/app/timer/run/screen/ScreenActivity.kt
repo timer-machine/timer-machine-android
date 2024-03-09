@@ -155,7 +155,7 @@ class ScreenActivity : BaseActivity() {
             binding.btnAddOneMinute.setTextColor(onColor)
 
             if (ColorUtils.calculateContrast(newDynamicTheme.colorSecondary, color) <=
-                3.0 /* Min contrast */
+                3.0 // Min contrast
             ) {
                 ViewCompat.setBackgroundTintList(
                     binding.btnStop,
