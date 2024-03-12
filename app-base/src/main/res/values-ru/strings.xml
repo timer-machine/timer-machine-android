@@ -371,4 +371,8 @@
     <string name="whitelist_links">Ссылки</string>
     <string name="whitelist_don_t_kill_desp">Сайт, содержащий множество решений</string>
     <string name="whitelist_ignore_battery_optimization">Игнорировать оптимизацию батареи</string>
+    <string name="notif_a11y_pause_ally">Приостановить все таймеры</string>
+    <string name="notif_a11y_start_ally">Запустить все таймеры</string>
+    <string name="scheduler_starts_action_template">Запустить %1$s</string>
+    <string name="scheduler_stops_action_template">Остановить %1$s</string>
 </resources>
