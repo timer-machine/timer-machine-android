@@ -1,5 +1,5 @@
 [versions]
-agp = "8.1.4"
+agp = "8.2.2"
 
 compileSdk = "34"
 minSdk = "23"
@@ -9,7 +9,7 @@ targetSdk = "34"
 versionCode = "7050000"
 versionName = "7.5.0"
 
-kotlin = "1.9.23"
+kotlin = "1.9.22"
 
 dagger = "2.51"
 
