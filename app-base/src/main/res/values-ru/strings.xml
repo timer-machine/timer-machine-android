@@ -375,4 +375,10 @@
     <string name="notif_a11y_start_ally">Запустить все таймеры</string>
     <string name="scheduler_starts_action_template">Запустить %1$s</string>
     <string name="scheduler_stops_action_template">Остановить %1$s</string>
+    <string name="shortcut_timer_started">Таймер запущен</string>
+    <string name="billing_explanation">После нажатия кнопки Оформить подписку оплата будет снята с вашего аккаунта в Google Play. Ваша подписка будет автоматически продлеваться на ту же длину плана и по той же цене, пока вы не отмените её по крайней мере за 24 часа до конца текущего периода в разделе Подписки в Google Play. Оформляя подписку, вы принимаете наши <xliff:g example="условия" id="terms">%2$s</xliff:g> и <xliff:g example="политику конфиденциальности" id="privacy_policy">%1$s</xliff:g>.</string>
+    <string name="billing_subscribe">Оформить подписку</string>
+    <string name="billing_connect_issue">Произошла ошибка в соединении с Google Play.
+\n
+\nСкорее всего проблема временная, поэтому попробуйте снова через пару минут.</string>
 </resources>
