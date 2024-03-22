@@ -79,7 +79,7 @@ class TimerViewModel @Inject constructor(
             folders.find { it.id == id }
         }.asLiveData()
 
-    private val currentSortBy = MutableLiveData<FolderSortBy>()
+    private val currentSortBy: MutableLiveData<FolderSortBy> = MutableLiveData()
 
     val timerInfo: LiveData<List<TimerInfo>> =
         currentFolderId.asFlow().combine(currentSortBy.asFlow()) { id, by ->
@@ -106,12 +106,14 @@ class TimerViewModel @Inject constructor(
             } else {
                 FolderEntity.FOLDER_DEFAULT
             }
-            currentSortBy.value = folderSortByRule.get()
+            val folderSortBy: FolderSortBy = folderSortByRule.get()
+            currentSortBy.value = folderSortBy
         }
     }
 
     private suspend fun refreshFolders() {
-        _allFolders.value = getFolders.invoke()
+        val folders: List<FolderEntity> = getFolders()
+        _allFolders.value = folders
     }
 
     fun changeFolder(folderId: Long) {

@@ -62,12 +62,13 @@ class RecordViewModel @Inject constructor(
             getRecords.calculateTimeline(it)
         }
 
-    private val _minDateMilli = MutableLiveData<Long>()
+    private val _minDateMilli: MutableLiveData<Long> = MutableLiveData()
     val minDateMilli: LiveData<Long> = _minDateMilli
 
     init {
         launch {
-            _minDateMilli.value = getRecords.getMinDateMilli()
+            val minDateMilli: Long = getRecords.getMinDateMilli()
+            _minDateMilli.value = minDateMilli
 
             val all = mutableListOf<TimerInfo>()
             val sortBy = folderSortByRule.get()
