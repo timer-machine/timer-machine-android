@@ -9,7 +9,7 @@ targetSdk = "34"
 versionCode = "7050000"
 versionName = "7.5.0"
 
-kotlin = "1.9.22"
+kotlin = "1.9.23"
 
 dagger = "2.51"
 
@@ -96,7 +96,7 @@ moshi = "com.squareup.moshi:moshi:1.15.1"
 moshi-kotlinGen = "com.squareup.moshi:moshi-kotlin-codegen:1.15.1"
 
 billing = "com.android.billingclient:billing-ktx:6.2.0"
-firebase_bom = "com.google.firebase:firebase-bom:32.7.4"
+firebase_bom = "com.google.firebase:firebase-bom:32.8.0"
 firebase_auth = { module = "com.google.firebase:firebase-auth" }
 firebase_auth_ui = "com.firebaseui:firebase-ui-auth:8.0.2"
 firebase_storage = { module = "com.google.firebase:firebase-storage" }
