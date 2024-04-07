@@ -140,10 +140,10 @@ verticalStepperForm = "com.ernestoyaquello.stepperform:vertical-stepper-form:2.5
 zip4j = "net.lingala.zip4j:zip4j:2.11.5"
 taskerPlugin = "com.joaomgcd:taskerpluginlibrary:0.4.10"
 diskLruCache = "com.github.bumptech.glide:disklrucache:4.16.0"
-coil = "io.coil-kt:coil:2.5.0"
-coil-compose = "io.coil-kt:coil-compose:2.5.0"
-coil-gif = "io.coil-kt:coil-gif:2.5.0"
-zoomable = "net.engawapg.lib:zoomable:1.6.0"
+coil = "io.coil-kt:coil:2.6.0"
+coil-compose = "io.coil-kt:coil-compose:2.6.0"
+coil-gif = "io.coil-kt:coil-gif:2.6.0"
+zoomable = "net.engawapg.lib:zoomable:1.6.1"
 
 [bundles]
 mockito-core = ["mockito-kotlin", "mockito-core"]
