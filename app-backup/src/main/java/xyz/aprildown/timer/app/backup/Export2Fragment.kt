@@ -182,9 +182,9 @@ private fun Export2(
             }
         }
 
-        if (screen.exportError != null) {
+        if (screen.exportErrorMessage != null) {
             ExportError(
-                error = screen.exportError,
+                message = screen.exportErrorMessage,
                 consume = screen.consumeExportError,
             )
         }
@@ -212,42 +212,52 @@ private fun SaveLocation(
     location: String?,
     modifier: Modifier = Modifier,
 ) {
-    if (!location.isNullOrBlank()) {
-        ListItem(
-            headlineContent = {
-                Text(text = location)
-            },
-            modifier = modifier,
-            overlineContent = {
-                Text(text = stringResource(id = RBase.string.export_select_location))
-            },
-            leadingContent = {
-                Icon(imageVector = Icons.Rounded.Description, contentDescription = null)
-            },
-            trailingContent = {
-                Icon(
-                    imageVector = Icons.AutoMirrored.Rounded.NavigateNext,
-                    contentDescription = null,
-                )
-            },
-        )
+    if (location.isNullOrBlank()) {
+        SaveLocationEmpty(modifier = modifier)
     } else {
-        ListItem(
-            headlineContent = {
-                Text(text = stringResource(id = RBase.string.export_select_location))
-            },
-            modifier = modifier,
-            leadingContent = {
-                Icon(imageVector = Icons.Rounded.Description, contentDescription = null)
-            },
-            trailingContent = {
-                Icon(
-                    imageVector = Icons.AutoMirrored.Rounded.NavigateNext,
-                    contentDescription = null,
-                )
-            },
-        )
+        SaveLocationPath(location = location, modifier = modifier)
     }
+}
+
+@Composable
+private fun SaveLocationPath(location: String, modifier: Modifier) {
+    ListItem(
+        headlineContent = {
+            Text(text = location)
+        },
+        modifier = modifier,
+        overlineContent = {
+            Text(text = stringResource(id = RBase.string.export_select_location))
+        },
+        leadingContent = {
+            Icon(imageVector = Icons.Rounded.Description, contentDescription = null)
+        },
+        trailingContent = {
+            Icon(
+                imageVector = Icons.AutoMirrored.Rounded.NavigateNext,
+                contentDescription = null,
+            )
+        },
+    )
+}
+
+@Composable
+private fun SaveLocationEmpty(modifier: Modifier) {
+    ListItem(
+        headlineContent = {
+            Text(text = stringResource(id = RBase.string.export_select_location))
+        },
+        modifier = modifier,
+        leadingContent = {
+            Icon(imageVector = Icons.Rounded.Description, contentDescription = null)
+        },
+        trailingContent = {
+            Icon(
+                imageVector = Icons.AutoMirrored.Rounded.NavigateNext,
+                contentDescription = null,
+            )
+        },
+    )
 }
 
 @Composable
@@ -274,7 +284,7 @@ private fun DataEntry(
 
 @Composable
 private fun ExportError(
-    error: Throwable,
+    message: String,
     consume: () -> Unit,
 ) {
     AlertDialog(
@@ -290,12 +300,10 @@ private fun ExportError(
                 text = buildString {
                     append(context.getString(RBase.string.export_error))
 
-                    (error.localizedMessage ?: error.message)
-                        ?.takeIf { it.isNotBlank() }
-                        ?.let { message ->
-                            append("\n\n")
-                            append(message)
-                        }
+                    if (message.isNotBlank()) {
+                        append("\n\n")
+                        append(message)
+                    }
                 },
             )
         }
