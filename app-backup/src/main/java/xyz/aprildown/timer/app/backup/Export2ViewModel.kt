@@ -33,7 +33,7 @@ internal class Export2ViewModel @Inject constructor() : ViewModel() {
         val onExport: () -> Unit,
         val exporting: Boolean = false,
 
-        val exportError: Throwable? = null,
+        val exportErrorMessage: String? = null,
         val consumeExportError: () -> Unit,
     )
 
@@ -96,7 +96,9 @@ internal class Export2ViewModel @Inject constructor() : ViewModel() {
             _screen.update { it.copy(exporting = true) }
             try {
                 delay(5500)
-                _screen.update { it.copy(exportError = Throwable("Hey")) }
+                _screen.update {
+                    it.copy(exportErrorMessage = "Hey")
+                }
             } finally {
                 _screen.update { it.copy(exporting = false) }
             }
@@ -104,6 +106,6 @@ internal class Export2ViewModel @Inject constructor() : ViewModel() {
     }
 
     private fun consumeExportError() {
-        _screen.update { it.copy(exportError = null) }
+        _screen.update { it.copy(exportErrorMessage = null) }
     }
 }
