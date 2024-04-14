@@ -66,9 +66,8 @@
 
     <fragment
         android:id="@id/dest_import"
-        android:name="xyz.aprildown.timer.app.backup.ImportFragment"
-        android:label="@string/import_data_title"
-        tools:layout="@layout/layout_vertical_form" />
+        android:name="xyz.aprildown.timer.app.backup.Import2Fragment"
+        android:label="@string/import_data_title" />
 
     <fragment
         android:id="@id/dest_one_layout"

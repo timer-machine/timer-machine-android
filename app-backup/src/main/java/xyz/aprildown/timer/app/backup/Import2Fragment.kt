@@ -9,12 +9,18 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.material3.Icon
+import androidx.compose.material3.ListItem
+import androidx.compose.material3.Switch
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.ComposeView
 import androidx.compose.ui.platform.ViewCompositionStrategy
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.documentfile.provider.DocumentFile
 import androidx.fragment.app.Fragment
@@ -24,16 +30,13 @@ import dagger.hilt.android.AndroidEntryPoint
 import xyz.aprildown.timer.app.base.data.PreferenceData.lastBackupUri
 import xyz.aprildown.timer.app.base.ui.MainCallback
 import xyz.aprildown.timer.domain.utils.AppTracker
-import java.text.SimpleDateFormat
-import java.util.Date
-import java.util.Locale
 import javax.inject.Inject
 import xyz.aprildown.timer.app.base.R as RBase
 
 @AndroidEntryPoint
-class Export2Fragment : Fragment() {
+class Import2Fragment : Fragment() {
 
-    private val viewModel: Export2ViewModel by viewModels()
+    private val viewModel: Import2ViewModel by viewModels()
 
     private lateinit var mainCallback: MainCallback.ActivityCallback
 
@@ -63,8 +66,9 @@ class Export2Fragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         (view as ComposeView).setContent {
-            Export(
+            Import(
                 screen = viewModel.screen.collectAsState().value,
+                importScreen = viewModel.importScreen.collectAsState().value,
                 onLocationChange = ::onLocationChange,
                 modifier = Modifier.fillMaxSize(),
             )
@@ -72,19 +76,15 @@ class Export2Fragment : Fragment() {
     }
 
     private fun onLocationChange() {
-        val date = Date()
-        val timeString = SimpleDateFormat("yyyy-MM-dd-kk-mm", Locale.getDefault()).format(date)
-        val initialFilename = "timer-machine-$timeString.json"
         SafIntentSafeBelt(
             context = requireContext(),
             appTracker = appTracker,
             viewForSnackbar = mainCallback.snackbarView
         ).drive(
             launcher = launcher,
-            intent = Intent(Intent.ACTION_CREATE_DOCUMENT)
+            intent = Intent(Intent.ACTION_OPEN_DOCUMENT)
                 .addCategory(Intent.CATEGORY_OPENABLE)
                 .setType("*/*")
-                .putExtra(Intent.EXTRA_TITLE, initialFilename)
         )
     }
 
@@ -102,18 +102,49 @@ class Export2Fragment : Fragment() {
 }
 
 @Composable
-private fun Export(
+private fun Import(
     screen: BaseBackupViewModel.Screen,
+    importScreen: Import2ViewModel.ImportScreen,
     onLocationChange: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
     Backup(
         screen = screen,
-        contentLocationTitle = stringResource(id = RBase.string.export_path_title),
-        contentLocationButtonText = stringResource(id = RBase.string.export_select_location),
+        contentLocationTitle = stringResource(id = RBase.string.import_path_title),
+        contentLocationButtonText = stringResource(id = RBase.string.import_select_location),
         onChangeContentLocation = onLocationChange,
-        backupButtonText = stringResource(id = RBase.string.export_action),
-        backupErrorHint = stringResource(id = RBase.string.export_error),
+        backupButtonText = stringResource(id = RBase.string.import_action),
+        backupErrorHint = stringResource(id = RBase.string.import_error),
         modifier = modifier,
+        extraOptions = {
+            WipeContent(
+                wipe = importScreen.wipe,
+                onWipeChanged = importScreen.onWipeChanged,
+                modifier = Modifier.fillMaxSize(),
+            )
+        },
+    )
+}
+
+@Composable
+private fun WipeContent(
+    wipe: Boolean,
+    onWipeChanged: (Boolean) -> Unit,
+    modifier: Modifier = Modifier
+) {
+    ListItem(
+        headlineContent = {
+            Text(text = stringResource(id = RBase.string.import_wipe_first))
+        },
+        modifier = modifier.clickable { onWipeChanged(!wipe) },
+        leadingContent = {
+            Icon(
+                painter = painterResource(id = RBase.drawable.ic_delete),
+                contentDescription = null,
+            )
+        },
+        trailingContent = {
+            Switch(checked = wipe, onCheckedChange = onWipeChanged)
+        },
     )
 }
