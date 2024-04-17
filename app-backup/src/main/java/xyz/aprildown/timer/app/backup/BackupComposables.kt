@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.selection.toggleable
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.rounded.NavigateNext
@@ -26,13 +27,15 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
+import xyz.aprildown.timer.domain.usecases.Fruit
 import xyz.aprildown.timer.app.base.R as RBase
 
 @Composable
 internal fun Backup(
-    screen: BaseBackupViewModel.Screen,
+    screen: BaseBackupViewModel.Screen<*>,
     contentLocationTitle: String,
     contentLocationButtonText: String,
     onChangeContentLocation: () -> Unit,
@@ -52,7 +55,7 @@ internal fun Backup(
 
             ContentLocation(
                 title = contentLocationButtonText,
-                location = screen.contentName ?: screen.contentLocation,
+                location = screen.contentName,
                 modifier = Modifier.clickable(onClick = onChangeContentLocation),
             )
 
@@ -88,7 +91,7 @@ internal fun Backup(
             Button(
                 onClick = screen.onBackup,
                 modifier = Modifier.align(Alignment.CenterHorizontally),
-                enabled = !screen.contentLocation.isNullOrBlank() &&
+                enabled = screen.content != null &&
                     (screen.includeTimers || screen.includeSettings) &&
                     !screen.backupOngoing,
             ) {
@@ -96,10 +99,10 @@ internal fun Backup(
             }
         }
 
-        if (screen.backupErrorMessage != null) {
+        if (screen.backupResult?.fruit is Fruit.Rotten) {
             BackupError(
                 hint = backupErrorHint,
-                message = screen.backupErrorMessage,
+                message = (screen.backupResult.fruit as Fruit.Rotten).exception.message.toString(),
                 consume = screen.consumeBackupError,
             )
         }
@@ -195,12 +198,17 @@ private fun DataEntry(
         headlineContent = {
             Text(text = stringResource(id = nameRes))
         },
-        modifier = modifier.clickable { onIncludedChange(!include) },
+        modifier = modifier
+            .toggleable(
+                value = include,
+                role = Role.Switch,
+                onValueChange = onIncludedChange
+            ),
         leadingContent = {
             Icon(painter = painterResource(id = iconRes), contentDescription = null)
         },
         trailingContent = {
-            Switch(checked = include, onCheckedChange = onIncludedChange)
+            Switch(checked = include, onCheckedChange = null)
         },
     )
 }
