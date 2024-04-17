@@ -11,7 +11,9 @@ import android.view.ViewGroup
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.ComposeView
 import androidx.compose.ui.platform.ViewCompositionStrategy
@@ -19,10 +21,14 @@ import androidx.compose.ui.res.stringResource
 import androidx.documentfile.provider.DocumentFile
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
+import com.github.deweyreed.tools.anko.longSnackbar
 import com.github.deweyreed.tools.helper.requireCallback
 import dagger.hilt.android.AndroidEntryPoint
+import okio.sink
 import xyz.aprildown.timer.app.base.data.PreferenceData.lastBackupUri
 import xyz.aprildown.timer.app.base.ui.MainCallback
+import xyz.aprildown.timer.domain.usecases.Fruit
 import xyz.aprildown.timer.domain.utils.AppTracker
 import java.text.SimpleDateFormat
 import java.util.Date
@@ -62,9 +68,21 @@ class Export2Fragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        val navController = findNavController()
         (view as ComposeView).setContent {
+            val screen by viewModel.screen.collectAsState()
+            LaunchedEffect(screen.backupResult) {
+                val result = screen.backupResult
+                if (result?.fruit is Fruit.Ripe) {
+                    mainCallback.snackbarView.longSnackbar(RBase.string.export_done)
+                    navController.popBackStack(
+                        destinationId = RBase.id.dest_backup_restore,
+                        inclusive = false,
+                    )
+                }
+            }
             Export(
-                screen = viewModel.screen.collectAsState().value,
+                screen = screen,
                 onLocationChange = ::onLocationChange,
                 modifier = Modifier.fillMaxSize(),
             )
@@ -94,16 +112,26 @@ class Export2Fragment : Fragment() {
         if (uri.toString().isBlank() || uri == Uri.EMPTY) return
         val context = requireContext()
         context.lastBackupUri = uri
-        viewModel.changeContentLocation(
-            location = uri.toString(),
-            name = DocumentFile.fromSingleUri(context, uri)?.name,
+        val contentResolver = context.contentResolver
+        val documentFile = DocumentFile.fromSingleUri(context, uri)
+        viewModel.changeContent(
+            content = Export2ViewModel.WritableContent(
+                getSink = {
+                    checkNotNull(contentResolver.openOutputStream(uri)).sink()
+                },
+                delete = {
+                    // ContentResolver.delete doesn't work
+                    documentFile?.delete()
+                },
+            ),
+            name = documentFile?.name?.takeIf { it.isNotBlank() } ?: uri.toString(),
         )
     }
 }
 
 @Composable
 private fun Export(
-    screen: BaseBackupViewModel.Screen,
+    screen: BaseBackupViewModel.Screen<*>,
     onLocationChange: () -> Unit,
     modifier: Modifier = Modifier,
 ) {

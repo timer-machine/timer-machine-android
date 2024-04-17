@@ -9,26 +9,37 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.selection.toggleable
+import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Icon
 import androidx.compose.material3.ListItem
 import androidx.compose.material3.Switch
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.ComposeView
 import androidx.compose.ui.platform.ViewCompositionStrategy
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.semantics.Role
 import androidx.documentfile.provider.DocumentFile
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.github.deweyreed.tools.helper.requireCallback
+import com.github.deweyreed.tools.helper.restartWithFading
 import dagger.hilt.android.AndroidEntryPoint
+import okio.source
 import xyz.aprildown.timer.app.base.data.PreferenceData.lastBackupUri
+import xyz.aprildown.timer.app.base.ui.AppNavigator
 import xyz.aprildown.timer.app.base.ui.MainCallback
+import xyz.aprildown.timer.domain.usecases.Fruit
 import xyz.aprildown.timer.domain.utils.AppTracker
 import javax.inject.Inject
 import xyz.aprildown.timer.app.base.R as RBase
@@ -39,6 +50,9 @@ class Import2Fragment : Fragment() {
     private val viewModel: Import2ViewModel by viewModels()
 
     private lateinit var mainCallback: MainCallback.ActivityCallback
+
+    @Inject
+    lateinit var appNavigator: AppNavigator
 
     @Inject
     lateinit var appTracker: AppTracker
@@ -66,12 +80,21 @@ class Import2Fragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         (view as ComposeView).setContent {
+            val screen by viewModel.screen.collectAsState()
             Import(
-                screen = viewModel.screen.collectAsState().value,
+                screen = screen,
                 importScreen = viewModel.importScreen.collectAsState().value,
                 onLocationChange = ::onLocationChange,
                 modifier = Modifier.fillMaxSize(),
             )
+
+            if (screen.backupResult?.fruit is Fruit.Ripe) {
+                RestartDialog(
+                    onRestart = {
+                        requireActivity().restartWithFading(appNavigator.getMainIntent())
+                    },
+                )
+            }
         }
     }
 
@@ -94,16 +117,22 @@ class Import2Fragment : Fragment() {
         if (uri.toString().isBlank() || uri == Uri.EMPTY) return
         val context = requireContext()
         context.lastBackupUri = uri
-        viewModel.changeContentLocation(
-            location = uri.toString(),
-            name = DocumentFile.fromSingleUri(context, uri)?.name,
+        val contentResolver = context.contentResolver
+        val documentFile = DocumentFile.fromSingleUri(context, uri)
+        viewModel.changeContent(
+            content = Import2ViewModel.ReadableContent(
+                getSource = {
+                    checkNotNull(contentResolver.openInputStream(uri)).source()
+                }
+            ),
+            name = documentFile?.name?.takeIf { it.isNotBlank() },
         )
     }
 }
 
 @Composable
 private fun Import(
-    screen: BaseBackupViewModel.Screen,
+    screen: BaseBackupViewModel.Screen<*>,
     importScreen: Import2ViewModel.ImportScreen,
     onLocationChange: () -> Unit,
     modifier: Modifier = Modifier,
@@ -132,11 +161,27 @@ private fun WipeContent(
     onWipeChanged: (Boolean) -> Unit,
     modifier: Modifier = Modifier
 ) {
+    var showAlert by remember { mutableStateOf(false) }
+    val onWipeChangedAlert: (Boolean) -> Unit = remember(onWipeChanged) {
+        { wipe: Boolean ->
+            if (wipe) {
+                showAlert = true
+            } else {
+                onWipeChanged(false)
+            }
+        }
+    }
+
     ListItem(
         headlineContent = {
             Text(text = stringResource(id = RBase.string.import_wipe_first))
         },
-        modifier = modifier.clickable { onWipeChanged(!wipe) },
+        modifier = modifier
+            .toggleable(
+                value = wipe,
+                role = Role.Switch,
+                onValueChange = onWipeChangedAlert,
+            ),
         leadingContent = {
             Icon(
                 painter = painterResource(id = RBase.drawable.ic_delete),
@@ -144,7 +189,44 @@ private fun WipeContent(
             )
         },
         trailingContent = {
-            Switch(checked = wipe, onCheckedChange = onWipeChanged)
+            Switch(checked = wipe, onCheckedChange = null)
+        },
+    )
+
+    if (showAlert) {
+        AlertDialog(
+            onDismissRequest = { showAlert = false },
+            confirmButton = {
+                TextButton(
+                    onClick = {
+                        onWipeChanged(true)
+                        showAlert = false
+                    },
+                ) {
+                    Text(text = stringResource(id = RBase.string.ok))
+                }
+            },
+            text = {
+                Text(text = stringResource(id = RBase.string.import_wipe_warning))
+            },
+        )
+    }
+}
+
+@Composable
+private fun RestartDialog(onRestart: () -> Unit) {
+    AlertDialog(
+        onDismissRequest = {},
+        confirmButton = {
+            TextButton(onClick = onRestart) {
+                Text(text = stringResource(id = RBase.string.import_restart))
+            }
+        },
+        title = {
+            Text(text = stringResource(id = RBase.string.import_done))
+        },
+        text = {
+            Text(text = stringResource(id = RBase.string.import_restart_content))
         },
     )
 }

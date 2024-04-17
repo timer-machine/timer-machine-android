@@ -10,10 +10,11 @@ import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import xyz.aprildown.timer.domain.usecases.Fruit
 
-internal abstract class BaseBackupViewModel : ViewModel() {
+internal abstract class BaseBackupViewModel<ContentType : BaseBackupViewModel.Screen.Content> :
+    ViewModel() {
     @Immutable
-    data class Screen(
-        val contentLocation: String? = null,
+    data class Screen<ContentType : Screen.Content>(
+        val content: ContentType? = null,
         val contentName: String? = null,
 
         val includeTimers: Boolean = true,
@@ -31,11 +32,17 @@ internal abstract class BaseBackupViewModel : ViewModel() {
         val onBackup: () -> Unit,
         val backupOngoing: Boolean = false,
 
-        val backupErrorMessage: String? = null,
+        val backupResult: Result? = null,
         val consumeBackupError: () -> Unit,
-    )
+    ) {
+        @Immutable
+        interface Content
 
-    private val _screen: MutableStateFlow<Screen> = MutableStateFlow(
+        @Immutable
+        data class Result(val fruit: Fruit<Unit>)
+    }
+
+    private val _screen: MutableStateFlow<Screen<ContentType>> = MutableStateFlow(
         Screen(
             onTimersChange = ::onTimersChange,
             onRecordsChange = ::onRecordsChange,
@@ -45,10 +52,10 @@ internal abstract class BaseBackupViewModel : ViewModel() {
             consumeBackupError = ::consumeBackupError,
         )
     )
-    val screen: StateFlow<Screen> = _screen.asStateFlow()
+    val screen: StateFlow<Screen<ContentType>> = _screen.asStateFlow()
 
-    fun changeContentLocation(location: String, name: String?) {
-        _screen.update { it.copy(contentLocation = location, contentName = name) }
+    fun changeContent(content: ContentType, name: String?) {
+        _screen.update { it.copy(content = content, contentName = name) }
     }
 
     private fun onTimersChange(include: Boolean) {
@@ -85,24 +92,20 @@ internal abstract class BaseBackupViewModel : ViewModel() {
         }
     }
 
-    abstract suspend fun backup(screen: Screen): Fruit<Unit>
+    abstract suspend fun backup(screen: Screen<ContentType>): Fruit<Unit>
 
     private fun onBackup() {
         val screen = _screen.value
-        if (screen.contentLocation.isNullOrBlank()) return
+        if (screen.content == null) return
         if (!screen.includeTimers && !screen.includeSettings) return
         if (screen.backupOngoing) return
 
         viewModelScope.launch {
             _screen.update { it.copy(backupOngoing = true) }
             try {
-                when (val fruit = backup(screen)) {
-                    is Fruit.Ripe -> Unit
-                    is Fruit.Rotten -> {
-                        _screen.update {
-                            it.copy(backupErrorMessage = fruit.exception.message)
-                        }
-                    }
+                val result = Screen.Result(backup(screen))
+                _screen.update {
+                    it.copy(backupResult = result)
                 }
             } finally {
                 _screen.update { it.copy(backupOngoing = false) }
@@ -111,6 +114,6 @@ internal abstract class BaseBackupViewModel : ViewModel() {
     }
 
     private fun consumeBackupError() {
-        _screen.update { it.copy(backupErrorMessage = null) }
+        _screen.update { it.copy(backupResult = null) }
     }
 }
