@@ -45,7 +45,7 @@ internal class TimerRepositoryImpl @Inject constructor(
 
     private fun TimerEntity.withRealImagePath(): TimerEntity {
         return transformImageActions {
-            it.copy(path = imageSaver.getFullPath(id, it.path))
+            it.copy(data = imageSaver.getFullPath(id, it.data))
         }
     }
 
@@ -71,7 +71,7 @@ internal class TimerRepositoryImpl @Inject constructor(
 
     private fun TimerEntity.saveImages(): TimerEntity {
         return transformImageActions {
-            it.copy(path = imageSaver.save(id, it.path))
+            it.copy(data = imageSaver.save(id, it.data))
         }
     }
 
