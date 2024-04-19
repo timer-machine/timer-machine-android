@@ -136,7 +136,7 @@ class EditableBehaviourLayout(
                 LayoutEditableBehaviourImageBinding.bind(binding.layoutImage.getChildAt(0)).root
             }
             imageView.setOnClickListener { listener?.onImageContentClick(imageAction) }
-            imageView.load(imageAction.path) {
+            imageView.load(imageAction.data) {
                 crossfade(true)
             }
         } else {

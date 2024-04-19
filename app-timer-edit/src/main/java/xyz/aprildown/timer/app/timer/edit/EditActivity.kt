@@ -108,7 +108,7 @@ class EditActivity :
         if (position == -1) return@registerForActivityResult
         contentResolver.takePersistableUriPermission(uri, Intent.FLAG_GRANT_READ_URI_PERMISSION)
         changeBehaviour(type = BehaviourType.IMAGE, position = position) {
-            it.toImageAction().copy(path = uri.toString()).toBehaviourEntity()
+            it.toImageAction().copy(data = uri.toString()).toBehaviourEntity()
         }
     }
 
@@ -860,7 +860,7 @@ class EditActivity :
     }
 
     override fun onImageCheck(position: Int, action: ImageAction) {
-        startActivity(appNavigator.getImagePreviewIntent(action.path))
+        startActivity(appNavigator.getImagePreviewIntent(action.data))
     }
 
     private fun postUpdateTotalTime() {

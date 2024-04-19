@@ -137,7 +137,7 @@ class OneFragment :
                 }
             }
             imageCheckListener = {
-                startActivity(appNavigator.getImagePreviewIntent(it.path))
+                startActivity(appNavigator.getImagePreviewIntent(it.data))
             }
         }
 
