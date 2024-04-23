@@ -7,7 +7,7 @@ import okio.ByteString.Companion.toByteString
 import java.io.ByteArrayOutputStream
 
 object Base64BitmapConverter {
-    const val PREFIX = "base64,"
+    const val PREFIX = "data:image/png;base64,"
 
     fun Bitmap.encodeToBase64(quality: Int = 100): String {
         val outputStream = ByteArrayOutputStream()
