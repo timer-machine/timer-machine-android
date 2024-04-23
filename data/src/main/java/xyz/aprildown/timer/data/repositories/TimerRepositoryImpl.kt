@@ -1,9 +1,8 @@
 package xyz.aprildown.timer.data.repositories
 
-import android.content.ContentResolver
 import android.content.Context
+import android.graphics.BitmapFactory
 import android.webkit.MimeTypeMap
-import androidx.core.net.toFile
 import androidx.core.net.toUri
 import dagger.Reusable
 import dagger.hilt.android.qualifiers.ApplicationContext
@@ -15,11 +14,17 @@ import xyz.aprildown.timer.data.mappers.TimerMapper
 import xyz.aprildown.timer.data.mappers.fromWithMapper
 import xyz.aprildown.timer.domain.entities.BehaviourType
 import xyz.aprildown.timer.domain.entities.ImageAction
+import xyz.aprildown.timer.domain.entities.ResourceContentType
 import xyz.aprildown.timer.domain.entities.StepEntity
 import xyz.aprildown.timer.domain.entities.TimerEntity
 import xyz.aprildown.timer.domain.entities.TimerInfo
+import xyz.aprildown.timer.domain.entities.inferResourcesContentType
 import xyz.aprildown.timer.domain.entities.toImageAction
 import xyz.aprildown.timer.domain.repositories.TimerRepository
+import xyz.aprildown.timer.domain.utils.Base64BitmapConverter.decodeBitmapByteArrayFromBase64
+import xyz.aprildown.timer.domain.utils.Base64BitmapConverter.encodeToBase64
+import xyz.aprildown.timer.domain.utils.ensureDirExistence
+import xyz.aprildown.timer.domain.utils.ensureNewFile
 import java.io.File
 import java.util.UUID
 import javax.inject.Inject
@@ -31,29 +36,38 @@ internal class TimerRepositoryImpl @Inject constructor(
     private val timerMapper: TimerMapper,
     private val timerInfoMapper: TimerInfoMapper,
 ) : TimerRepository {
-    private val imageSaver: TimerImageSaver by lazy { TimerImageSaver(context) }
+    private val imageManager by lazy { TimerImageManager(context) }
 
     override suspend fun items(): List<TimerEntity> {
-        return timerDao.getTimers().map { timerMapper.mapFrom(it).withRealImagePath() }
+        return timerDao.getTimers().map { timerMapper.mapFrom(it).withImageCanonicalPath() }
     }
 
     override suspend fun item(id: Int): TimerEntity? {
         return timerDao.getTimer(id).let {
-            return@let if (it == null) null else timerMapper.mapFrom(it).withRealImagePath()
+            return@let if (it == null) null else timerMapper.mapFrom(it).withImageCanonicalPath()
         }
     }
 
-    private fun TimerEntity.withRealImagePath(): TimerEntity {
-        return transformImageActions {
-            it.copy(data = imageSaver.getFullPath(id, it.data))
+    private fun TimerEntity.withImageCanonicalPath(): TimerEntity {
+        return transformImageActions { data ->
+            ImageAction(data = data.convertImageDataToCanonicalPath(id))
         }
     }
 
     override suspend fun add(item: TimerEntity): Int {
-        val tempTimerFolder = imageSaver.getTimerFolder(item.id)
-        val timerId = timerDao.addTimer(timerMapper.mapTo(item.saveImages())).toInt()
+        val tempTimerFolder = imageManager.getTimerFolder(item.id)
+        val timerId = timerDao.addTimer(
+            timerMapper.mapTo(
+                item.transformImageActions {
+                    ImageAction(
+                        data = imageManager.save(timerId = item.id, data = it)
+                            .convertImageCanonicalPathToDataType(ResourceContentType.RelativePath)
+                    )
+                }
+            )
+        ).toInt()
         if (tempTimerFolder.exists()) {
-            val newTimerFolder = imageSaver.getTimerFolder(timerId)
+            val newTimerFolder = imageManager.getTimerFolder(timerId)
             tempTimerFolder.copyRecursively(newTimerFolder)
             tempTimerFolder.deleteRecursively()
         }
@@ -61,22 +75,19 @@ internal class TimerRepositoryImpl @Inject constructor(
     }
 
     override suspend fun save(item: TimerEntity): Boolean {
-        try {
-            imageSaver.trackSavedImages()
-            return timerDao.updateTimer(timerMapper.mapTo(item.saveImages())) == 1
-        } finally {
-            imageSaver.deleteUnusedImages(item.id)
+        val savedItem = imageManager.trackSaving(timerId = item.id) {
+            item.transformImageActions {
+                ImageAction(
+                    data = save(data = it)
+                        .convertImageCanonicalPathToDataType(ResourceContentType.RelativePath)
+                )
+            }
         }
-    }
-
-    private fun TimerEntity.saveImages(): TimerEntity {
-        return transformImageActions {
-            it.copy(data = imageSaver.save(id, it.data))
-        }
+        return timerDao.updateTimer(timerMapper.mapTo(savedItem)) == 1
     }
 
     private fun TimerEntity.transformImageActions(
-        transform: (ImageAction) -> ImageAction
+        transform: (data: String) -> ImageAction
     ): TimerEntity {
         fun StepEntity.transformStep(): StepEntity {
             return when (this) {
@@ -85,7 +96,7 @@ internal class TimerRepositoryImpl @Inject constructor(
                         copy(
                             behaviour = behaviour.map {
                                 if (it.type == BehaviourType.IMAGE) {
-                                    transform(it.toImageAction()).toBehaviourEntity()
+                                    transform(it.toImageAction().data).toBehaviourEntity()
                                 } else {
                                     it
                                 }
@@ -109,7 +120,7 @@ internal class TimerRepositoryImpl @Inject constructor(
 
     override suspend fun delete(id: Int) {
         timerDao.deleteTimer(id)
-        imageSaver.deleteAll(id)
+        imageManager.delete(id)
     }
 
     override suspend fun getTimerInfoByTimerId(timerId: Int): TimerInfo? {
@@ -131,78 +142,132 @@ internal class TimerRepositoryImpl @Inject constructor(
     override suspend fun moveFolderTimersToAnother(originalFolderId: Long, targetFolderId: Long) {
         timerDao.moveFolderTimersToAnother(originalFolderId, targetFolderId)
     }
+
+    override suspend fun changeContentType(
+        timers: List<TimerEntity>,
+        type: ResourceContentType,
+    ): List<TimerEntity> {
+        return timers.map { timer ->
+            timer.transformImageActions { data ->
+                ImageAction(
+                    data = data.convertImageDataToCanonicalPath(timerId = timer.id)
+                        .convertImageCanonicalPathToDataType(type = type),
+                )
+            }
+        }
+    }
+
+    private fun String.convertImageDataToCanonicalPath(timerId: Int): String {
+        return imageManager.save(timerId = timerId, data = this)
+    }
+
+    private fun String.convertImageCanonicalPathToDataType(type: ResourceContentType): String {
+        return when (type) {
+            ResourceContentType.CanonicalPath -> this
+            ResourceContentType.RelativePath -> File(this).name
+            ResourceContentType.Uri -> error("Unsupported")
+            ResourceContentType.Base64 -> {
+                BitmapFactory.decodeFile(this).encodeToBase64(quality = 90)
+            }
+        }
+    }
 }
 
-private class TimerImageSaver(private val context: Context) {
-    private val imageFolder = File(context.filesDir, FOLDER)
+private class TimerImageManager(private val context: Context) {
+    interface TrackingScope {
+        /**
+         * [TimerImageManager.save]
+         */
+        fun save(data: String): String
+    }
 
-    private var savedFilenames = mutableListOf<String>()
+    private val imageFolder = File(context.filesDir, FOLDER)
 
     fun getTimerFolder(timerId: Int): File {
         return File(imageFolder, timerId.toString())
     }
 
-    fun getFullPath(timerId: Int, path: String): String {
-        return File(getTimerFolder(timerId), path).toUri().toString()
-    }
-
     /**
-     * @return The saved image filename
+     * @return [ResourceContentType.RelativePath], [File.getCanonicalPath]
      */
-    fun save(timerId: Int, path: String): String {
-        val uri = path.toUri()
+    fun save(timerId: Int, data: String): String {
+        imageFolder.ensureDirExistence()
+
         val timerFolder = getTimerFolder(timerId)
-        if (uri.scheme == ContentResolver.SCHEME_FILE) {
-            val imageFile = uri.toFile()
-            if (imageFile.parentFile?.canonicalPath == timerFolder.canonicalPath) {
-                return imageFile.name.also {
-                    savedFilenames += it
+        val imageFile: File
+        when (data.inferResourcesContentType()) {
+            ResourceContentType.CanonicalPath -> {
+                val existingFile = File(data)
+                if (existingFile.parentFile?.canonicalPath == timerFolder.canonicalPath) {
+                    imageFile = existingFile
+                } else {
+                    imageFile = File(
+                        imageFolder.ensureDirExistence(),
+                        "${UUID.randomUUID()}.${existingFile.extension}"
+                    ).ensureNewFile()
+                    imageFile.inputStream().use { inputStream ->
+                        existingFile.outputStream().use { outputStream ->
+                            inputStream.copyTo(outputStream)
+                        }
+                    }
                 }
             }
-        }
-
-        if (!imageFolder.exists()) imageFolder.mkdirs()
-        if (!timerFolder.exists()) timerFolder.mkdirs()
-
-        return when (uri.scheme) {
-            ContentResolver.SCHEME_CONTENT -> {
+            ResourceContentType.RelativePath -> {
+                imageFile = File(timerFolder.ensureDirExistence(), data)
+            }
+            ResourceContentType.Uri -> {
+                val uri = data.toUri()
                 val extension = MimeTypeMap.getSingleton()
                     .getExtensionFromMimeType(context.contentResolver.getType(uri)) ?: "jpg"
-                val imageFile = File(timerFolder, "${UUID.randomUUID()}.$extension")
-                if (imageFile.exists()) {
-                    imageFile.delete()
-                    imageFile.createNewFile()
-                }
+                imageFile =
+                    File(timerFolder.ensureDirExistence(), "${UUID.randomUUID()}.$extension")
+                        .ensureNewFile()
                 context.contentResolver.openInputStream(uri)?.use { inputStream ->
                     imageFile.outputStream().use { outputStream ->
                         inputStream.copyTo(outputStream)
                     }
                 }
                 require(imageFile.exists() && imageFile.length() > 0L)
-                imageFile.name.also {
-                    savedFilenames += it
+                imageFile.canonicalPath
+            }
+            ResourceContentType.Base64 -> {
+                imageFile = File(timerFolder.ensureDirExistence(), "${UUID.randomUUID()}.webp")
+                    .ensureNewFile()
+                val byteArray = data.decodeBitmapByteArrayFromBase64()
+                imageFile.outputStream().use {
+                    it.write(byteArray)
+                    it.flush()
                 }
             }
-            else -> error("Unsupported path $path")
         }
+        require(imageFile.exists() && imageFile.length() > 0L)
+        return imageFile.canonicalPath
     }
 
-    fun trackSavedImages() {
-        savedFilenames.clear()
-    }
-
-    fun deleteUnusedImages(timerId: Int) {
-        val timerFolder = getTimerFolder(timerId)
-        if (!timerFolder.exists()) return
-        timerFolder.listFiles()?.toList()?.forEach { file ->
-            if (file.name !in savedFilenames) {
-                file.delete()
+    fun <T> trackSaving(timerId: Int, block: TrackingScope.() -> T): T {
+        val saved = mutableListOf<String>()
+        val scope = object : TrackingScope {
+            override fun save(data: String): String {
+                val savedData = save(timerId = timerId, data = data)
+                saved += savedData
+                return savedData
             }
         }
-        savedFilenames.clear()
+        return try {
+            block(scope)
+        } finally {
+            val timerFolder = getTimerFolder(timerId)
+            if (timerFolder.exists()) {
+                timerFolder.listFiles()?.toList()?.forEach { file ->
+                    if (file.canonicalPath !in saved) {
+                        file.delete()
+                    }
+                }
+            }
+        }
     }
 
-    fun deleteAll(timerId: Int) {
+    fun delete(timerId: Int) {
         val timerFolder = getTimerFolder(timerId)
         if (timerFolder.exists()) {
             timerFolder.deleteRecursively()

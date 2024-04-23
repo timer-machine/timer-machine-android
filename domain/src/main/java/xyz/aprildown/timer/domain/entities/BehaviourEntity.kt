@@ -377,11 +377,9 @@ fun BehaviourEntity.toFlashlightAction(): FlashlightAction {
 
 // region Image
 
-/**
- * @data It can be a relative path when being stored in the database, a canonical path when showing,
- * or an Uri string when editing
- */
 data class ImageAction(val data: String) : Action {
+    val type: ResourceContentType = data.inferResourcesContentType()
+
     override fun toBehaviourEntity(): BehaviourEntity {
         return BehaviourEntity(type = BehaviourType.IMAGE, str1 = data)
     }
