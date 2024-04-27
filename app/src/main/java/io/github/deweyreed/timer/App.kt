@@ -29,6 +29,7 @@ import xyz.aprildown.timer.app.base.data.PreferenceData.shouldPausePhoneCall
 import xyz.aprildown.timer.app.base.data.PreferenceData.useVoiceContent2
 import xyz.aprildown.timer.app.base.utils.AppThemeUtils
 import xyz.aprildown.timer.app.base.utils.LogToFileTree
+import xyz.aprildown.timer.component.key.ImageActionMapper
 import xyz.aprildown.timer.data.job.initJob
 import xyz.aprildown.timer.domain.repositories.PreferencesRepository
 import xyz.aprildown.timer.domain.usecases.home.TipManager
@@ -215,6 +216,7 @@ class App : Application(), WorkManagerConfiguration.Provider, ImageLoaderFactory
                 } else {
                     add(GifDecoder.Factory())
                 }
+                add(ImageActionMapper())
             }
             .build()
     }
