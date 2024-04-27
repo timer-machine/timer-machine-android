@@ -73,7 +73,7 @@ class BehaviourLayout @JvmOverloads constructor(
             }
             val action = imageBehaviour.toImageAction()
             imageView.setOnClickListener { onImageCheck?.invoke(action) }
-            imageView.load(action.data) {
+            imageView.load(action) {
                 crossfade(true)
             }
         } else {
