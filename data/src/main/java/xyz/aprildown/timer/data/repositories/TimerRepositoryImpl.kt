@@ -1,7 +1,7 @@
 package xyz.aprildown.timer.data.repositories
 
+import android.content.ContentResolver
 import android.content.Context
-import android.graphics.BitmapFactory
 import android.webkit.MimeTypeMap
 import androidx.core.net.toUri
 import dagger.Reusable
@@ -21,8 +21,6 @@ import xyz.aprildown.timer.domain.entities.TimerInfo
 import xyz.aprildown.timer.domain.entities.inferResourcesContentType
 import xyz.aprildown.timer.domain.entities.toImageAction
 import xyz.aprildown.timer.domain.repositories.TimerRepository
-import xyz.aprildown.timer.domain.utils.Base64BitmapConverter.decodeBitmapByteArrayFromBase64
-import xyz.aprildown.timer.domain.utils.Base64BitmapConverter.encodeToBase64
 import xyz.aprildown.timer.domain.utils.ensureDirExistence
 import xyz.aprildown.timer.domain.utils.ensureNewFile
 import java.io.File
@@ -39,7 +37,9 @@ internal class TimerRepositoryImpl @Inject constructor(
     private val imageManager by lazy { TimerImageManager(context) }
 
     override suspend fun items(): List<TimerEntity> {
-        return timerDao.getTimers().map { timerMapper.mapFrom(it).withImageCanonicalPath() }
+        return timerDao.getTimers().map {
+            timerMapper.mapFrom(it).withImageCanonicalPath()
+        }
     }
 
     override suspend fun item(id: Int): TimerEntity? {
@@ -50,7 +50,13 @@ internal class TimerRepositoryImpl @Inject constructor(
 
     private fun TimerEntity.withImageCanonicalPath(): TimerEntity {
         return transformImageActions { data ->
-            ImageAction(data = data.convertImageDataToCanonicalPath(id))
+            ImageAction(
+                data = data.convertImageData(
+                    id = id,
+                    imageManager = imageManager,
+                    targetType = ResourceContentType.CanonicalPath,
+                ),
+            )
         }
     }
 
@@ -60,8 +66,13 @@ internal class TimerRepositoryImpl @Inject constructor(
             timerMapper.mapTo(
                 item.transformImageActions {
                     ImageAction(
-                        data = imageManager.save(timerId = item.id, data = it)
-                            .convertImageCanonicalPathToDataType(ResourceContentType.RelativePath)
+                        data = imageManager
+                            .save(id = item.id, data = it)
+                            .convertImageData(
+                                id = item.id,
+                                imageManager = imageManager,
+                                targetType = ResourceContentType.RelativePath,
+                            ),
                     )
                 }
             )
@@ -75,11 +86,14 @@ internal class TimerRepositoryImpl @Inject constructor(
     }
 
     override suspend fun save(item: TimerEntity): Boolean {
-        val savedItem = imageManager.trackSaving(timerId = item.id) {
+        val savedItem = imageManager.trackSaving(id = item.id) {
             item.transformImageActions {
                 ImageAction(
-                    data = save(data = it)
-                        .convertImageCanonicalPathToDataType(ResourceContentType.RelativePath)
+                    data = save(data = it).convertImageData(
+                        id = item.id,
+                        imageManager = imageManager,
+                        targetType = ResourceContentType.RelativePath,
+                    ),
                 )
             }
         }
@@ -150,36 +164,26 @@ internal class TimerRepositoryImpl @Inject constructor(
         return timers.map { timer ->
             timer.transformImageActions { data ->
                 ImageAction(
-                    data = data.convertImageDataToCanonicalPath(timerId = timer.id)
-                        .convertImageCanonicalPathToDataType(type = type),
+                    data = data.convertImageData(
+                        id = timer.id,
+                        imageManager = imageManager,
+                        targetType = type,
+                    )
                 )
-            }
-        }
-    }
-
-    private fun String.convertImageDataToCanonicalPath(timerId: Int): String {
-        return imageManager.save(timerId = timerId, data = this)
-    }
-
-    private fun String.convertImageCanonicalPathToDataType(type: ResourceContentType): String {
-        return when (type) {
-            ResourceContentType.CanonicalPath -> this
-            ResourceContentType.RelativePath -> File(this).name
-            ResourceContentType.Uri -> error("Unsupported")
-            ResourceContentType.Base64 -> {
-                BitmapFactory.decodeFile(this).encodeToBase64(quality = 90)
             }
         }
     }
 }
 
-private class TimerImageManager(private val context: Context) {
+private class TimerImageManager(context: Context) {
     interface TrackingScope {
         /**
          * [TimerImageManager.save]
          */
         fun save(data: String): String
     }
+
+    val contentResolver: ContentResolver = context.contentResolver
 
     private val imageFolder = File(context.filesDir, FOLDER)
 
@@ -190,10 +194,10 @@ private class TimerImageManager(private val context: Context) {
     /**
      * @return [ResourceContentType.RelativePath], [File.getCanonicalPath]
      */
-    fun save(timerId: Int, data: String): String {
+    fun save(id: Int, data: String): String {
         imageFolder.ensureDirExistence()
 
-        val timerFolder = getTimerFolder(timerId)
+        val timerFolder = getTimerFolder(id)
         val imageFile: File
         when (data.inferResourcesContentType()) {
             ResourceContentType.CanonicalPath -> {
@@ -202,8 +206,8 @@ private class TimerImageManager(private val context: Context) {
                     imageFile = existingFile
                 } else {
                     imageFile = File(
-                        imageFolder.ensureDirExistence(),
-                        "${UUID.randomUUID()}.${existingFile.extension}"
+                        timerFolder.ensureDirExistence(),
+                        "${generateImageName()}.${existingFile.extension}"
                     ).ensureNewFile()
                     imageFile.inputStream().use { inputStream ->
                         existingFile.outputStream().use { outputStream ->
@@ -218,37 +222,32 @@ private class TimerImageManager(private val context: Context) {
             ResourceContentType.Uri -> {
                 val uri = data.toUri()
                 val extension = MimeTypeMap.getSingleton()
-                    .getExtensionFromMimeType(context.contentResolver.getType(uri)) ?: "jpg"
-                imageFile =
-                    File(timerFolder.ensureDirExistence(), "${UUID.randomUUID()}.$extension")
-                        .ensureNewFile()
-                context.contentResolver.openInputStream(uri)?.use { inputStream ->
+                    .getExtensionFromMimeType(contentResolver.getType(uri)) ?: "jpg"
+                imageFile = File(
+                    timerFolder.ensureDirExistence(),
+                    "${generateImageName()}.$extension"
+                ).ensureNewFile()
+                contentResolver.openInputStream(uri)?.use { inputStream ->
                     imageFile.outputStream().use { outputStream ->
                         inputStream.copyTo(outputStream)
                     }
                 }
-                require(imageFile.exists() && imageFile.length() > 0L)
                 imageFile.canonicalPath
-            }
-            ResourceContentType.Base64 -> {
-                imageFile = File(timerFolder.ensureDirExistence(), "${UUID.randomUUID()}.webp")
-                    .ensureNewFile()
-                val byteArray = data.decodeBitmapByteArrayFromBase64()
-                imageFile.outputStream().use {
-                    it.write(byteArray)
-                    it.flush()
-                }
             }
         }
         require(imageFile.exists() && imageFile.length() > 0L)
         return imageFile.canonicalPath
     }
 
-    fun <T> trackSaving(timerId: Int, block: TrackingScope.() -> T): T {
+    private fun generateImageName(): String {
+        return UUID.randomUUID().toString()
+    }
+
+    fun <T> trackSaving(id: Int, block: TrackingScope.() -> T): T {
         val saved = mutableListOf<String>()
         val scope = object : TrackingScope {
             override fun save(data: String): String {
-                val savedData = save(timerId = timerId, data = data)
+                val savedData = save(id = id, data = data)
                 saved += savedData
                 return savedData
             }
@@ -256,7 +255,7 @@ private class TimerImageManager(private val context: Context) {
         return try {
             block(scope)
         } finally {
-            val timerFolder = getTimerFolder(timerId)
+            val timerFolder = getTimerFolder(id)
             if (timerFolder.exists()) {
                 timerFolder.listFiles()?.toList()?.forEach { file ->
                     if (file.canonicalPath !in saved) {
@@ -267,8 +266,8 @@ private class TimerImageManager(private val context: Context) {
         }
     }
 
-    fun delete(timerId: Int) {
-        val timerFolder = getTimerFolder(timerId)
+    fun delete(id: Int) {
+        val timerFolder = getTimerFolder(id)
         if (timerFolder.exists()) {
             timerFolder.deleteRecursively()
         }
@@ -276,5 +275,43 @@ private class TimerImageManager(private val context: Context) {
 
     companion object {
         private const val FOLDER = "timer_images"
+    }
+}
+
+private fun String.convertImageData(
+    id: Int = TimerEntity.NULL_ID,
+    imageManager: TimerImageManager,
+    targetType: ResourceContentType,
+): String {
+    fun String.save(): String {
+        return imageManager.save(id = id, data = this)
+    }
+
+    fun String.convert(targetType: ResourceContentType): String {
+        return convertImageData(id = id, imageManager = imageManager, targetType)
+    }
+
+    return when (inferResourcesContentType()) {
+        ResourceContentType.CanonicalPath -> {
+            when (targetType) {
+                ResourceContentType.CanonicalPath -> save()
+                ResourceContentType.RelativePath -> File(this).name
+                ResourceContentType.Uri -> error("Unable to convert CanonicalPath to Uri")
+            }
+        }
+        ResourceContentType.RelativePath -> {
+            when (targetType) {
+                ResourceContentType.CanonicalPath -> save()
+                ResourceContentType.RelativePath -> return this
+                ResourceContentType.Uri -> error("Unable to convert RelativePath to Uri")
+            }
+        }
+        ResourceContentType.Uri -> {
+            when (targetType) {
+                ResourceContentType.CanonicalPath -> save()
+                ResourceContentType.RelativePath -> save().convert(ResourceContentType.RelativePath)
+                ResourceContentType.Uri -> return this
+            }
+        }
     }
 }
