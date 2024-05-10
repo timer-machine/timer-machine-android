@@ -381,4 +381,7 @@
     <string name="billing_connect_issue">Произошла ошибка в соединении с Google Play.
 \n
 \nСкорее всего проблема временная, поэтому попробуйте снова через пару минут.</string>
+    <string name="notif_channel_app_info_desp">Используется для показа ошибок, проблем с оплатой, проблем с аккаунтом и прочего</string>
+    <string name="notif_timers_running">%1$s работают</string>
+    <string name="notif_timers_paused">%1$s приостановлено</string>
 </resources>
