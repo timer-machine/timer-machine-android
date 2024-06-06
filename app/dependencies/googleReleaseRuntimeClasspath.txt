@@ -70,7 +70,7 @@ androidx.lifecycle:lifecycle-service:2.7.0
 androidx.lifecycle:lifecycle-viewmodel-ktx:2.7.0
 androidx.lifecycle:lifecycle-viewmodel-savedstate:2.7.0
 androidx.lifecycle:lifecycle-viewmodel:2.7.0
-androidx.loader:loader:1.1.0
+androidx.loader:loader:1.0.0
 androidx.localbroadcastmanager:localbroadcastmanager:1.0.0
 androidx.media:media:1.7.0
 androidx.navigation:navigation-common-ktx:2.7.7
@@ -125,9 +125,9 @@ com.google.android.datatransport:transport-api:3.0.0
 com.google.android.datatransport:transport-backend-cct:3.1.8
 com.google.android.datatransport:transport-runtime:3.1.8
 com.google.android.flexbox:flexbox:3.0.0
-com.google.android.gms:play-services-auth-api-phone:18.0.2
-com.google.android.gms:play-services-auth-base:18.0.10
-com.google.android.gms:play-services-auth:21.0.0
+com.google.android.gms:play-services-auth-api-phone:18.0.1
+com.google.android.gms:play-services-auth-base:18.0.4
+com.google.android.gms:play-services-auth:20.6.0
 com.google.android.gms:play-services-base:18.3.0
 com.google.android.gms:play-services-basement:18.3.0
 com.google.android.gms:play-services-fido:20.0.1

@@ -100,7 +100,7 @@ firebase_bom = "com.google.firebase:firebase-bom:32.8.0"
 firebase_auth = { module = "com.google.firebase:firebase-auth" }
 firebase_auth_ui = "com.firebaseui:firebase-ui-auth:8.0.2"
 firebase_storage = { module = "com.google.firebase:firebase-storage" }
-playServices_auth = "com.google.android.gms:play-services-auth:21.0.0"
+playServices_auth = "com.google.android.gms:play-services-auth:20.7.0"
 playServices_review = "com.google.android.play:review-ktx:2.0.1"
 
 appcenter_crashes = "com.microsoft.appcenter:appcenter-crashes:5.0.4"
