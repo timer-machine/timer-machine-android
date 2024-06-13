@@ -17,7 +17,7 @@ android {
         testInstrumentationRunner "io.github.deweyreed.timer.TestRunner"
         vectorDrawables.useSupportLibrary true
 
-        archivesBaseName = "TimeR Machine-v${versionName}(${versionCode})"
+        archivesBaseName = "TimeR.Machine-v${versionName}(${versionCode})"
         resourceConfigurations += ['en', 'es', 'nl', 'zh-rCN', 'zh-rHK', 'zh-rTW']
     }
 
