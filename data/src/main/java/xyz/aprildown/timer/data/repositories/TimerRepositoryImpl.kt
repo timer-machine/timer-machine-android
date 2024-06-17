@@ -12,14 +12,11 @@ import xyz.aprildown.timer.data.db.TimerDao
 import xyz.aprildown.timer.data.mappers.TimerInfoMapper
 import xyz.aprildown.timer.data.mappers.TimerMapper
 import xyz.aprildown.timer.data.mappers.fromWithMapper
-import xyz.aprildown.timer.domain.entities.BehaviourType
 import xyz.aprildown.timer.domain.entities.ImageAction
 import xyz.aprildown.timer.domain.entities.ResourceContentType
-import xyz.aprildown.timer.domain.entities.StepEntity
 import xyz.aprildown.timer.domain.entities.TimerEntity
 import xyz.aprildown.timer.domain.entities.TimerInfo
 import xyz.aprildown.timer.domain.entities.inferResourcesContentType
-import xyz.aprildown.timer.domain.entities.toImageAction
 import xyz.aprildown.timer.domain.repositories.TimerRepository
 import xyz.aprildown.timer.domain.utils.ensureDirExistence
 import xyz.aprildown.timer.domain.utils.ensureNewFile
@@ -49,15 +46,16 @@ internal class TimerRepositoryImpl @Inject constructor(
     }
 
     private fun TimerEntity.withImageCanonicalPath(): TimerEntity {
-        return transformImageActions { data ->
-            ImageAction(
-                data = data.convertImageData(
-                    id = id,
-                    imageManager = imageManager,
-                    targetType = ResourceContentType.CanonicalPath,
-                ),
-            )
-        }
+        return this
+        // return transformImageActions { data ->
+        //     ImageAction(
+        //         data = data.convertImageData(
+        //             id = id,
+        //             imageManager = imageManager,
+        //             targetType = ResourceContentType.CanonicalPath,
+        //         ),
+        //     )
+        // }
     }
 
     override suspend fun add(item: TimerEntity): Int {
@@ -103,33 +101,34 @@ internal class TimerRepositoryImpl @Inject constructor(
     private fun TimerEntity.transformImageActions(
         transform: (data: String) -> ImageAction
     ): TimerEntity {
-        fun StepEntity.transformStep(): StepEntity {
-            return when (this) {
-                is StepEntity.Step -> {
-                    if (behaviour.any { it.type == BehaviourType.IMAGE }) {
-                        copy(
-                            behaviour = behaviour.map {
-                                if (it.type == BehaviourType.IMAGE) {
-                                    transform(it.toImageAction().data).toBehaviourEntity()
-                                } else {
-                                    it
-                                }
-                            }
-                        )
-                    } else {
-                        this
-                    }
-                }
-                is StepEntity.Group -> {
-                    copy(steps = steps.map { it.transformStep() })
-                }
-            }
-        }
-        return copy(
-            steps = steps.map { it.transformStep() },
-            startStep = startStep?.transformStep() as? StepEntity.Step,
-            endStep = endStep?.transformStep() as? StepEntity.Step,
-        )
+        return this
+        // fun StepEntity.transformStep(): StepEntity {
+        //     return when (this) {
+        //         is StepEntity.Step -> {
+        //             if (behaviour.any { it.type == BehaviourType.IMAGE }) {
+        //                 copy(
+        //                     behaviour = behaviour.map {
+        //                         if (it.type == BehaviourType.IMAGE) {
+        //                             transform(it.toImageAction().data).toBehaviourEntity()
+        //                         } else {
+        //                             it
+        //                         }
+        //                     }
+        //                 )
+        //             } else {
+        //                 this
+        //             }
+        //         }
+        //         is StepEntity.Group -> {
+        //             copy(steps = steps.map { it.transformStep() })
+        //         }
+        //     }
+        // }
+        // return copy(
+        //     steps = steps.map { it.transformStep() },
+        //     startStep = startStep?.transformStep() as? StepEntity.Step,
+        //     endStep = endStep?.transformStep() as? StepEntity.Step,
+        // )
     }
 
     override suspend fun delete(id: Int) {
