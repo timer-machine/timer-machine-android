@@ -27,6 +27,7 @@ import com.github.deweyreed.tools.helper.requireCallback
 import dagger.hilt.android.AndroidEntryPoint
 import okio.sink
 import xyz.aprildown.timer.app.base.data.PreferenceData.lastBackupUri
+import xyz.aprildown.timer.app.base.ui.AppTheme
 import xyz.aprildown.timer.app.base.ui.MainCallback
 import xyz.aprildown.timer.domain.usecases.Fruit
 import xyz.aprildown.timer.domain.utils.AppTracker
@@ -135,13 +136,15 @@ private fun Export(
     onLocationChange: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
-    Backup(
-        screen = screen,
-        contentLocationTitle = stringResource(id = RBase.string.export_path_title),
-        contentLocationButtonText = stringResource(id = RBase.string.export_select_location),
-        onChangeContentLocation = onLocationChange,
-        backupButtonText = stringResource(id = RBase.string.export_action),
-        backupErrorHint = stringResource(id = RBase.string.export_error),
-        modifier = modifier,
-    )
+    AppTheme {
+        Backup(
+            screen = screen,
+            contentLocationTitle = stringResource(id = RBase.string.export_path_title),
+            contentLocationButtonText = stringResource(id = RBase.string.export_select_location),
+            onChangeContentLocation = onLocationChange,
+            backupButtonText = stringResource(id = RBase.string.export_action),
+            backupErrorHint = stringResource(id = RBase.string.export_error),
+            modifier = modifier,
+        )
+    }
 }

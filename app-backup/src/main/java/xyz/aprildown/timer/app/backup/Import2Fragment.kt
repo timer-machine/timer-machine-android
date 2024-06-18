@@ -38,6 +38,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import okio.source
 import xyz.aprildown.timer.app.base.data.PreferenceData.lastBackupUri
 import xyz.aprildown.timer.app.base.ui.AppNavigator
+import xyz.aprildown.timer.app.base.ui.AppTheme
 import xyz.aprildown.timer.app.base.ui.MainCallback
 import xyz.aprildown.timer.domain.usecases.Fruit
 import xyz.aprildown.timer.domain.utils.AppTracker
@@ -137,22 +138,24 @@ private fun Import(
     onLocationChange: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
-    Backup(
-        screen = screen,
-        contentLocationTitle = stringResource(id = RBase.string.import_path_title),
-        contentLocationButtonText = stringResource(id = RBase.string.import_select_location),
-        onChangeContentLocation = onLocationChange,
-        backupButtonText = stringResource(id = RBase.string.import_action),
-        backupErrorHint = stringResource(id = RBase.string.import_error),
-        modifier = modifier,
-        extraOptions = {
-            WipeContent(
-                wipe = importScreen.wipe,
-                onWipeChanged = importScreen.onWipeChanged,
-                modifier = Modifier.fillMaxSize(),
-            )
-        },
-    )
+    AppTheme {
+        Backup(
+            screen = screen,
+            contentLocationTitle = stringResource(id = RBase.string.import_path_title),
+            contentLocationButtonText = stringResource(id = RBase.string.import_select_location),
+            onChangeContentLocation = onLocationChange,
+            backupButtonText = stringResource(id = RBase.string.import_action),
+            backupErrorHint = stringResource(id = RBase.string.import_error),
+            modifier = modifier,
+            extraOptions = {
+                WipeContent(
+                    wipe = importScreen.wipe,
+                    onWipeChanged = importScreen.onWipeChanged,
+                    modifier = Modifier.fillMaxSize(),
+                )
+            },
+        )
+    }
 }
 
 @Composable

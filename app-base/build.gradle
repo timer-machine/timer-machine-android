@@ -7,6 +7,12 @@ plugins {
 
 android {
     namespace 'xyz.aprildown.timer.app.base'
+    buildFeatures {
+        compose true
+    }
+    composeOptions {
+        kotlinCompilerExtensionVersion = libs.versions.composeCompiler.get()
+    }
 }
 
 dependencies {
@@ -24,6 +30,10 @@ dependencies {
 
     api libs.androidx.navigation.fragment
     api libs.androidx.navigation.ui
+
+    implementation platform(libs.compose.bom)
+    implementation libs.bundles.compose
+    implementation libs.materialColorUtilities
 
     implementation libs.hilt.android
     kapt libs.hilt.compiler

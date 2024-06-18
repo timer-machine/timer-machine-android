@@ -44,72 +44,70 @@ internal fun Backup(
     modifier: Modifier = Modifier,
     extraOptions: @Composable () -> Unit = {},
 ) {
-    MaterialTheme {
-        Column(
-            modifier = modifier
-                .verticalScroll(rememberScrollState())
-                .padding(16.dp),
-            verticalArrangement = Arrangement.spacedBy(16.dp),
+    Column(
+        modifier = modifier
+            .verticalScroll(rememberScrollState())
+            .padding(16.dp),
+        verticalArrangement = Arrangement.spacedBy(16.dp),
+    ) {
+        Header(text = contentLocationTitle)
+
+        ContentLocation(
+            title = contentLocationButtonText,
+            location = screen.contentName,
+            modifier = Modifier.clickable(onClick = onChangeContentLocation),
+        )
+
+        Header(text = stringResource(id = RBase.string.backup_app_data))
+
+        extraOptions()
+
+        DataEntry(
+            iconRes = RBase.drawable.ic_timer,
+            nameRes = RBase.string.main_action_timers,
+            include = screen.includeTimers,
+            onIncludedChange = screen.onTimersChange,
+        )
+        DataEntry(
+            iconRes = RBase.drawable.ic_scheduler,
+            nameRes = RBase.string.main_action_schedulers,
+            include = screen.includeSchedulers,
+            onIncludedChange = screen.onSchedulersChange,
+        )
+        DataEntry(
+            iconRes = RBase.drawable.ic_stat,
+            nameRes = RBase.string.main_action_record,
+            include = screen.includeRecords,
+            onIncludedChange = screen.onRecordsChange,
+        )
+        DataEntry(
+            iconRes = RBase.drawable.ic_settings,
+            nameRes = RBase.string.main_action_settings,
+            include = screen.includeSettings,
+            onIncludedChange = screen.onSettingsChange,
+        )
+
+        Button(
+            onClick = screen.onBackup,
+            modifier = Modifier.align(Alignment.CenterHorizontally),
+            enabled = screen.content != null &&
+                (screen.includeTimers || screen.includeSettings) &&
+                !screen.backupOngoing,
         ) {
-            Header(text = contentLocationTitle)
-
-            ContentLocation(
-                title = contentLocationButtonText,
-                location = screen.contentName,
-                modifier = Modifier.clickable(onClick = onChangeContentLocation),
-            )
-
-            Header(text = stringResource(id = RBase.string.backup_app_data))
-
-            extraOptions()
-
-            DataEntry(
-                iconRes = RBase.drawable.ic_timer,
-                nameRes = RBase.string.main_action_timers,
-                include = screen.includeTimers,
-                onIncludedChange = screen.onTimersChange,
-            )
-            DataEntry(
-                iconRes = RBase.drawable.ic_scheduler,
-                nameRes = RBase.string.main_action_schedulers,
-                include = screen.includeSchedulers,
-                onIncludedChange = screen.onSchedulersChange,
-            )
-            DataEntry(
-                iconRes = RBase.drawable.ic_stat,
-                nameRes = RBase.string.main_action_record,
-                include = screen.includeRecords,
-                onIncludedChange = screen.onRecordsChange,
-            )
-            DataEntry(
-                iconRes = RBase.drawable.ic_settings,
-                nameRes = RBase.string.main_action_settings,
-                include = screen.includeSettings,
-                onIncludedChange = screen.onSettingsChange,
-            )
-
-            Button(
-                onClick = screen.onBackup,
-                modifier = Modifier.align(Alignment.CenterHorizontally),
-                enabled = screen.content != null &&
-                    (screen.includeTimers || screen.includeSettings) &&
-                    !screen.backupOngoing,
-            ) {
-                Text(text = backupButtonText)
-            }
+            Text(text = backupButtonText)
         }
+    }
 
-        if (screen.backupResult?.fruit is Fruit.Rotten) {
-            BackupError(
-                hint = backupErrorHint,
-                message = (screen.backupResult.fruit as Fruit.Rotten).exception.message.toString(),
-                consume = screen.consumeBackupError,
-            )
-        }
+    if (screen.backupResult?.fruit is Fruit.Rotten) {
+        BackupError(
+            hint = backupErrorHint,
+            message = (screen.backupResult.fruit as Fruit.Rotten).exception.message.toString(),
+            consume = screen.consumeBackupError,
+        )
+    }
 
-        if (screen.backupOngoing) {
-            BackupOngoingDialog()
-        }
+    if (screen.backupOngoing) {
+        BackupOngoingDialog()
     }
 }
 
@@ -121,6 +119,7 @@ private fun Header(
     Text(
         text = text,
         modifier = modifier.padding(horizontal = 12.dp, vertical = 12.dp),
+        color = MaterialTheme.colorScheme.onBackground,
         style = MaterialTheme.typography.titleSmall,
     )
 }
