@@ -6,14 +6,13 @@ import okio.Sink
 import okio.buffer
 import xyz.aprildown.timer.domain.usecases.Fruit
 import xyz.aprildown.timer.domain.usecases.data.ExportAppData
-import java.io.IOException
 import javax.inject.Inject
 
 @HiltViewModel
-internal class Export2ViewModel @Inject constructor(
+internal class ExportViewModel @Inject constructor(
     private val savedStateHandle: SavedStateHandle,
     private val exportAppData: ExportAppData,
-) : BaseBackupViewModel<Export2ViewModel.WritableContent>() {
+) : BaseBackupViewModel<ExportViewModel.WritableContent>() {
     class WritableContent(
         val getSink: () -> Sink,
         val delete: () -> Unit,
@@ -37,7 +36,7 @@ internal class Export2ViewModel @Inject constructor(
             }
             savedStateHandle[KEY_HAS_EXPORTED] = true
             Fruit.Ripe(Unit)
-        } catch (e: IOException) {
+        } catch (e: Exception) {
             Fruit.Rotten(e)
         }
     }

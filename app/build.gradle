@@ -147,7 +147,6 @@ dependencies {
     implementation libs.theme
     implementation libs.toggleButtonGroup
     implementation libs.ultimateRingtonePicker
-    implementation libs.verticalStepperForm
     implementation libs.coil
     implementation libs.coil.gif
 

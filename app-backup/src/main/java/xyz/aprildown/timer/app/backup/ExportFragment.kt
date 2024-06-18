@@ -3,35 +3,34 @@ package xyz.aprildown.timer.app.backup
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
-import android.graphics.Color
 import android.net.Uri
 import android.os.Bundle
-import android.provider.OpenableColumns
+import android.view.LayoutInflater
 import android.view.View
-import android.widget.Button
-import android.widget.TextView
+import android.view.ViewGroup
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.core.database.getStringOrNull
-import androidx.core.text.buildSpannedString
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.ComposeView
+import androidx.compose.ui.platform.ViewCompositionStrategy
+import androidx.compose.ui.res.stringResource
+import androidx.documentfile.provider.DocumentFile
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.fragment.findNavController
 import com.github.deweyreed.tools.anko.longSnackbar
-import com.github.deweyreed.tools.arch.observeNonNull
-import com.github.deweyreed.tools.helper.gone
 import com.github.deweyreed.tools.helper.requireCallback
-import com.github.deweyreed.tools.helper.show
-import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import dagger.hilt.android.AndroidEntryPoint
-import ernestoyaquello.com.verticalstepperform.VerticalStepperFormView
-import ernestoyaquello.com.verticalstepperform.listener.StepperFormListener
+import okio.sink
 import xyz.aprildown.timer.app.base.data.PreferenceData.lastBackupUri
+import xyz.aprildown.timer.app.base.ui.AppTheme
 import xyz.aprildown.timer.app.base.ui.MainCallback
-import xyz.aprildown.timer.app.base.ui.newDynamicTheme
 import xyz.aprildown.timer.domain.usecases.Fruit
-import xyz.aprildown.timer.domain.usecases.data.ExportAppData
 import xyz.aprildown.timer.domain.utils.AppTracker
-import xyz.aprildown.timer.presentation.backup.ExportViewModel
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
@@ -39,17 +38,14 @@ import javax.inject.Inject
 import xyz.aprildown.timer.app.base.R as RBase
 
 @AndroidEntryPoint
-class ExportFragment : Fragment(R.layout.layout_vertical_form), StepperFormListener {
+class ExportFragment : Fragment() {
 
     private val viewModel: ExportViewModel by viewModels()
 
-    @Inject
-    lateinit var appTracker: AppTracker
-
     private lateinit var mainCallback: MainCallback.ActivityCallback
 
-    private lateinit var locationStep: ExportLocationStep
-    private lateinit var contentStep: ExportContentStep
+    @Inject
+    lateinit var appTracker: AppTracker
 
     private val launcher =
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
@@ -61,83 +57,40 @@ class ExportFragment : Fragment(R.layout.layout_vertical_form), StepperFormListe
         mainCallback = requireCallback()
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        val context = view.context
-        val form = view as VerticalStepperFormView
-        locationStep = ExportLocationStep(resources.getString(RBase.string.export_path_title), this)
-        contentStep = ExportContentStep(resources.getString(RBase.string.export_content_title))
-        form.setup(this, locationStep, contentStep)
-            .displayBottomNavigation(false)
-            .apply {
-                newDynamicTheme.run {
-                    basicColorScheme(colorPrimary, colorPrimaryVariant, colorOnPrimary)
-                    nextButtonColors(colorSecondary, colorSecondary, Color.WHITE, Color.WHITE)
-                }
-            }
-            .stepNextButtonText(getString(RBase.string.backup_next_step))
-            .confirmationStepTitle(resources.getString(RBase.string.export_begin))
-            .lastStepNextButtonText(getString(RBase.string.export_action))
-            .displayCancelButtonInLastStep(true)
-            .lastStepCancelButtonText(getString(android.R.string.cancel))
-            .init()
-
-        viewModel.result.observeNonNull(viewLifecycleOwner) { fruit ->
-            when (fruit) {
-                is Fruit.Ripe -> {
-                    mainCallback.snackbarView.longSnackbar(RBase.string.export_done)
-                    popBackToBackup()
-                }
-                is Fruit.Rotten -> {
-                    val exception = fruit.exception
-                    MaterialAlertDialogBuilder(context)
-                        .setMessage(
-                            buildSpannedString {
-                                append(getText(RBase.string.export_error))
-
-                                (exception.localizedMessage ?: exception.message)
-                                    ?.takeIf { it.isNotBlank() }
-                                    ?.let { message ->
-                                        append("\n\n")
-                                        append(message)
-                                    }
-                            }
-                        )
-                        .setPositiveButton(android.R.string.ok, null)
-                        .setOnDismissListener {
-                            popBackToBackup()
-                        }
-                        .show()
-                }
-            }
-            viewModel.consumeResult()
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
+        return ComposeView(requireContext()).apply {
+            setViewCompositionStrategy(ViewCompositionStrategy.DisposeOnViewTreeLifecycleDestroyed)
         }
     }
 
-    override fun onCompletedForm() {
-        val context = requireContext()
-        val settings = contentStep.stepData
-        viewModel.export(
-            params = ExportAppData.Params(
-                exportTimers = settings.isTimersChecked,
-                exportTimerStamps = settings.isTimerStampsChecked,
-                exportSchedulers = settings.isSchedulersChecked,
-                exportPreferences = settings.isSettingsChecked
-            ),
-            outputStream = checkNotNull(
-                context.contentResolver.openOutputStream(locationStep.stepData, "rwt")
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        val navController = findNavController()
+        (view as ComposeView).setContent {
+            val screen by viewModel.screen.collectAsState()
+            LaunchedEffect(screen.backupResult) {
+                val result = screen.backupResult
+                if (result?.fruit is Fruit.Ripe) {
+                    mainCallback.snackbarView.longSnackbar(RBase.string.export_done)
+                    navController.popBackStack(
+                        destinationId = RBase.id.dest_backup_restore,
+                        inclusive = false,
+                    )
+                }
+            }
+            Export(
+                screen = screen,
+                onLocationChange = ::onLocationChange,
+                modifier = Modifier.fillMaxSize(),
             )
-        )
+        }
     }
 
-    override fun onCancelledForm() {
-        popBackToBackup()
-    }
-
-    private fun popBackToBackup() {
-        NavHostFragment.findNavController(this).popBackStack(RBase.id.dest_backup_restore, false)
-    }
-
-    fun pickExportPath() {
+    private fun onLocationChange() {
         val date = Date()
         val timeString = SimpleDateFormat("yyyy-MM-dd-kk-mm", Locale.getDefault()).format(date)
         val initialFilename = "timer-machine-$timeString.json"
@@ -155,101 +108,43 @@ class ExportFragment : Fragment(R.layout.layout_vertical_form), StepperFormListe
     }
 
     private fun handleActivityResult(resultCode: Int, data: Intent?) {
-        if (resultCode == Activity.RESULT_OK) {
-            val uri = data?.data ?: return
-            val context = requireContext()
-            var name: String? = null
-
-            try {
-                context.contentResolver.query(
-                    uri,
-                    arrayOf(OpenableColumns.DISPLAY_NAME),
-                    null,
-                    null,
-                    null,
-                    null
-                )?.use { cursor ->
-                    if (cursor.moveToFirst()) {
-                        name =
-                            cursor.getStringOrNull(cursor.getColumnIndex(OpenableColumns.DISPLAY_NAME))
-                    }
-                }
-            } catch (e: Exception) {
-                appTracker.trackError(e)
-                mainCallback.snackbarView.longSnackbar(e.message.toString())
-                return
-            }
-
-            context.lastBackupUri = uri
-            locationStep.locationPicked(uri, name)
-        }
-    }
-}
-
-private class ExportLocationStep(
-    title: String,
-    private val parentFragment: ExportFragment
-) : AbstractStep<Uri>(title) {
-
-    private var locationUri: Uri = Uri.EMPTY
-    private lateinit var locationTextView: TextView
-
-    override fun createStepContentLayout(): View {
-        val context = context
-        val view = View.inflate(context, R.layout.step_text_button, null)
-        locationTextView = view.findViewById<TextView>(R.id.textStepTextButton).apply {
-            gone()
-        }
-        view.findViewById<Button>(R.id.btnStepTextButton).run {
-            setText(RBase.string.export_select_location)
-            setOnClickListener {
-                parentFragment.pickExportPath()
-            }
-        }
-        return view
-    }
-
-    fun locationPicked(uri: Uri, content: String? = null) {
-        locationUri = uri
-        locationTextView.show()
-        locationTextView.text = content
-        markAsCompletedOrUncompleted(true)
-    }
-
-    override fun isStepDataValid(stepData: Uri?): IsDataValid {
-        return IsDataValid(
-            stepData != Uri.EMPTY,
-            context.getString(RBase.string.export_select_location)
+        if (resultCode != Activity.RESULT_OK) return
+        val uri = data?.data ?: return
+        if (uri.toString().isBlank() || uri == Uri.EMPTY) return
+        val context = requireContext()
+        context.lastBackupUri = uri
+        val contentResolver = context.contentResolver
+        val documentFile = DocumentFile.fromSingleUri(context, uri)
+        viewModel.changeContent(
+            content = ExportViewModel.WritableContent(
+                getSink = {
+                    checkNotNull(contentResolver.openOutputStream(uri)).sink()
+                },
+                delete = {
+                    // ContentResolver.delete doesn't work
+                    documentFile?.delete()
+                },
+            ),
+            name = documentFile?.name?.takeIf { it.isNotBlank() } ?: uri.toString(),
         )
     }
-
-    override fun getStepDataAsHumanReadableString(): String = locationTextView.text.toString()
-    override fun getStepData(): Uri = locationUri
 }
 
-private class ExportContentStep(
-    title: String
-) : AbstractStep<SelectAppContentSettings>(title) {
-
-    private lateinit var helper: SelectAppContentHelper
-
-    override fun createStepContentLayout(): View {
-        val context = context
-        val view = View.inflate(context, R.layout.step_select_content, null)
-        helper = SelectAppContentHelper().apply {
-            setUpView(view)
-            removeWipeItem()
-        }
-        return view
-    }
-
-    override fun isStepDataValid(stepData: SelectAppContentSettings): IsDataValid {
-        return IsDataValid(true)
-    }
-
-    override fun getStepDataAsHumanReadableString(): String = ""
-
-    override fun getStepData(): SelectAppContentSettings {
-        return helper.settings
+@Composable
+private fun Export(
+    screen: BaseBackupViewModel.Screen<*>,
+    onLocationChange: () -> Unit,
+    modifier: Modifier = Modifier,
+) {
+    AppTheme {
+        Backup(
+            screen = screen,
+            contentLocationTitle = stringResource(id = RBase.string.export_path_title),
+            contentLocationButtonText = stringResource(id = RBase.string.export_select_location),
+            onChangeContentLocation = onLocationChange,
+            backupButtonText = stringResource(id = RBase.string.export_action),
+            backupErrorHint = stringResource(id = RBase.string.export_error),
+            modifier = modifier,
+        )
     }
 }
