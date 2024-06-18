@@ -158,7 +158,6 @@ com.afollestad.material-dialogs:commons:0.9.6.0
 com.afollestad.material-dialogs:core:0.9.6.0
 com.android.billingclient:billing-ktx:6.2.0
 com.android.billingclient:billing:6.2.0
-com.ernestoyaquello.stepperform:vertical-stepper-form:2.5.0
 com.firebaseui:firebase-ui-auth:8.0.2
 com.github.DeweyReed:ToastCompat:d0a4d6cac3
 com.github.DeweyReed:UltimateRingtonePicker:3.3.0

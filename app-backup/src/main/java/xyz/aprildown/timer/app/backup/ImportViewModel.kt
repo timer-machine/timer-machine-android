@@ -11,14 +11,13 @@ import okio.buffer
 import xyz.aprildown.timer.domain.usecases.Fruit
 import xyz.aprildown.timer.domain.usecases.data.ImportAppData
 import xyz.aprildown.timer.domain.usecases.data.NotifyDataChanged
-import java.io.IOException
 import javax.inject.Inject
 
 @HiltViewModel
-internal class Import2ViewModel @Inject constructor(
+internal class ImportViewModel @Inject constructor(
     private val importAppData: ImportAppData,
     private val notifyDataChanged: NotifyDataChanged,
-) : BaseBackupViewModel<Import2ViewModel.ReadableContent>() {
+) : BaseBackupViewModel<ImportViewModel.ReadableContent>() {
     @Immutable
     data class ImportScreen(
         val wipe: Boolean = false,
@@ -52,7 +51,7 @@ internal class Import2ViewModel @Inject constructor(
             )
             notifyDataChanged()
             Fruit.Ripe(Unit)
-        } catch (e: IOException) {
+        } catch (e: Exception) {
             Fruit.Rotten(e)
         }
     }

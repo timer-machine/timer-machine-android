@@ -19,6 +19,8 @@ dependencies {
     implementation project(':app-base')
     implementation project(':component-key')
 
+    testImplementation libs.junit
+
     implementation libs.androidx.preference
 
     implementation platform(libs.compose.bom)
@@ -29,7 +31,5 @@ dependencies {
 
     implementation libs.okio
     implementation libs.permission
-
-    implementation libs.verticalStepperForm
 
 }
