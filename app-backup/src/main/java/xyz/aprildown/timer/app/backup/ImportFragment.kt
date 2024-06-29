@@ -150,7 +150,7 @@ private fun Import(
             extraOptions = {
                 WipeContent(
                     wipe = importScreen.wipe,
-                    onWipeChanged = importScreen.onWipeChanged,
+                    onWipeChanged = importScreen.onWipeChange,
                     modifier = Modifier.fillMaxSize(),
                 )
             },

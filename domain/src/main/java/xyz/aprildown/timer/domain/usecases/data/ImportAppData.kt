@@ -29,7 +29,7 @@ class ImportAppData @Inject constructor(
     private val appPreferencesProvider: AppPreferencesProvider,
 ) : CoroutinesUseCase<ImportAppData.Params, Unit>(dispatcher) {
 
-    class Params(
+    data class Params(
         val data: String,
         val wipeFirst: Boolean,
         val importTimers: Boolean,
