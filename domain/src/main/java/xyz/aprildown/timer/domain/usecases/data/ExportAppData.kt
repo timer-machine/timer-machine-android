@@ -26,7 +26,7 @@ class ExportAppData @Inject constructor(
     private val appPreferencesProvider: AppPreferencesProvider,
 ) : CoroutinesUseCase<ExportAppData.Params, String>(dispatcher) {
 
-    class Params(
+    data class Params(
         val exportTimers: Boolean,
         val exportTimerStamps: Boolean,
         val exportSchedulers: Boolean,

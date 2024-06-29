@@ -20,6 +20,8 @@ dependencies {
     implementation project(':component-key')
 
     testImplementation libs.junit
+    testImplementation libs.kotlin.coroutines.test
+    testImplementation libs.bundles.mockito.core
 
     implementation libs.androidx.preference
 

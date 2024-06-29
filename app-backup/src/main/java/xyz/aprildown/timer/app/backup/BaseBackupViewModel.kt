@@ -1,17 +1,19 @@
 package xyz.aprildown.timer.app.backup
 
 import androidx.compose.runtime.Immutable
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
+import kotlinx.coroutines.CancellationException
+import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import xyz.aprildown.timer.domain.usecases.Fruit
+import xyz.aprildown.timer.presentation.BaseViewModel
 
-internal abstract class BaseBackupViewModel<ContentType : BaseBackupViewModel.Screen.Content> :
-    ViewModel() {
+internal abstract class BaseBackupViewModel<ContentType : BaseBackupViewModel.Screen.Content>(
+    mainDispatcher: CoroutineDispatcher,
+) : BaseViewModel(mainDispatcher) {
     @Immutable
     data class Screen<ContentType : Screen.Content>(
         val content: ContentType? = null,
@@ -92,7 +94,7 @@ internal abstract class BaseBackupViewModel<ContentType : BaseBackupViewModel.Sc
         }
     }
 
-    abstract suspend fun backup(screen: Screen<ContentType>): Fruit<Unit>
+    protected abstract suspend fun backup(screen: Screen<ContentType>)
 
     private fun onBackup() {
         val screen = _screen.value
@@ -100,15 +102,25 @@ internal abstract class BaseBackupViewModel<ContentType : BaseBackupViewModel.Sc
         if (!screen.includeTimers && !screen.includeSettings) return
         if (screen.backupOngoing) return
 
-        viewModelScope.launch {
+        launch {
             _screen.update { it.copy(backupOngoing = true) }
             try {
-                val result = Screen.Result(backup(screen))
+                backup(screen)
                 _screen.update {
-                    it.copy(backupResult = result)
+                    it.copy(
+                        backupOngoing = false,
+                        backupResult = Screen.Result(Fruit.Ripe(Unit)),
+                    )
                 }
-            } finally {
-                _screen.update { it.copy(backupOngoing = false) }
+            } catch (e: CancellationException) {
+                throw e
+            } catch (e: Exception) {
+                _screen.update {
+                    it.copy(
+                        backupOngoing = false,
+                        backupResult = Screen.Result(Fruit.Rotten(e)),
+                    )
+                }
             }
         }
     }
