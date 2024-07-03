@@ -85,7 +85,7 @@ internal class ExportViewModelTest : BaseBackupViewModelTest() {
         viewModel.screen.value.onBackup()
         testScheduler.advanceUntilIdle()
 
-        assertTrue(viewModel.screen.value.backupResult?.fruit is Fruit.Ripe<*>)
+        assertTrue(viewModel.screen.value.backupResult is Fruit.Ripe<*>)
         assertEquals(data, buffer.readUtf8())
 
         verify(exportAppData).invoke(

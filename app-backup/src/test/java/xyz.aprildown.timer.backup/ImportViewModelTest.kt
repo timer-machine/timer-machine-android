@@ -74,7 +74,7 @@ internal class ImportViewModelTest : BaseBackupViewModelTest() {
         viewModel.screen.value.onBackup()
         testScheduler.advanceUntilIdle()
 
-        assertTrue(viewModel.screen.value.backupResult?.fruit is Fruit.Ripe<*>)
+        assertTrue(viewModel.screen.value.backupResult is Fruit.Ripe<*>)
         verify(importAppData).invoke(
             ImportAppData.Params(
                 data = data,
