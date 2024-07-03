@@ -89,7 +89,7 @@ class ImportFragment : Fragment() {
                 modifier = Modifier.fillMaxSize(),
             )
 
-            if (screen.backupResult?.fruit is Fruit.Ripe) {
+            if (screen.backupResult is Fruit.Ripe) {
                 RestartDialog(
                     onRestart = {
                         requireActivity().restartWithFading(appNavigator.getMainIntent())

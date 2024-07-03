@@ -98,10 +98,10 @@ internal fun Backup(
         }
     }
 
-    if (screen.backupResult?.fruit is Fruit.Rotten) {
+    if (screen.backupResult is Fruit.Rotten) {
         BackupError(
             hint = backupErrorHint,
-            message = (screen.backupResult.fruit as Fruit.Rotten).exception.message.toString(),
+            message = screen.backupResult.exception.message.toString(),
             consume = screen.consumeBackupError,
         )
     }
@@ -201,7 +201,7 @@ private fun DataEntry(
             .toggleable(
                 value = include,
                 role = Role.Switch,
-                onValueChange = onIncludedChange
+                onValueChange = onIncludedChange,
             ),
         leadingContent = {
             Icon(painter = painterResource(id = iconRes), contentDescription = null)
