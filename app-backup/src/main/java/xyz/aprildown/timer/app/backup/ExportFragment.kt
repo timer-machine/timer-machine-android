@@ -73,8 +73,7 @@ class ExportFragment : Fragment() {
         (view as ComposeView).setContent {
             val screen by viewModel.screen.collectAsState()
             LaunchedEffect(screen.backupResult) {
-                val result = screen.backupResult
-                if (result?.fruit is Fruit.Ripe) {
+                if (screen.backupResult is Fruit.Ripe) {
                     mainCallback.snackbarView.longSnackbar(RBase.string.export_done)
                     navController.popBackStack(
                         destinationId = RBase.id.dest_backup_restore,

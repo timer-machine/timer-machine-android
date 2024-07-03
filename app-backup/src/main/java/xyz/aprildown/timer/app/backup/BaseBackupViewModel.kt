@@ -34,14 +34,10 @@ internal abstract class BaseBackupViewModel<ContentType : BaseBackupViewModel.Sc
         val onBackup: () -> Unit,
         val backupOngoing: Boolean = false,
 
-        val backupResult: Result? = null,
+        val backupResult: Fruit<Unit>? = null,
         val consumeBackupError: () -> Unit,
     ) {
-        @Immutable
         interface Content
-
-        @Immutable
-        data class Result(val fruit: Fruit<Unit>)
     }
 
     private val _screen: MutableStateFlow<Screen<ContentType>> = MutableStateFlow(
@@ -109,7 +105,7 @@ internal abstract class BaseBackupViewModel<ContentType : BaseBackupViewModel.Sc
                 _screen.update {
                     it.copy(
                         backupOngoing = false,
-                        backupResult = Screen.Result(Fruit.Ripe(Unit)),
+                        backupResult = Fruit.Ripe(Unit),
                     )
                 }
             } catch (e: CancellationException) {
@@ -118,7 +114,7 @@ internal abstract class BaseBackupViewModel<ContentType : BaseBackupViewModel.Sc
                 _screen.update {
                     it.copy(
                         backupOngoing = false,
-                        backupResult = Screen.Result(Fruit.Rotten(e)),
+                        backupResult = Fruit.Rotten(e),
                     )
                 }
             }
