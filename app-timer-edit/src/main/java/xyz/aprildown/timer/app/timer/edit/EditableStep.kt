@@ -124,12 +124,10 @@ class EditableStep(
                     }
 
                     override fun onImageAdding() {
-                        super.onImageAdding()
                         handler.onImageAdding(bindingAdapterPosition)
                     }
 
                     override fun onImageContentClick(action: ImageAction) {
-                        super.onImageContentClick(action)
                         handler.onImageCheck(bindingAdapterPosition, action)
                     }
                 }

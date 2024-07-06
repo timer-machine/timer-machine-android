@@ -1,10 +1,13 @@
 package xyz.aprildown.timer.app.timer.edit
 
 import android.app.Dialog
+import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.view.View
 import android.widget.EditText
+import androidx.activity.result.PickVisualMediaRequest
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.cardview.widget.CardView
 import androidx.core.net.toUri
 import androidx.core.widget.ImageViewCompat
@@ -13,7 +16,9 @@ import com.github.deweyreed.tools.helper.gone
 import com.github.deweyreed.tools.helper.toColorStateList
 import com.github.zawadz88.materialpopupmenu.popupMenu
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import dagger.hilt.android.AndroidEntryPoint
 import xyz.aprildown.timer.app.base.data.PreferenceData.getTypeColor
+import xyz.aprildown.timer.app.base.ui.AppNavigator
 import xyz.aprildown.timer.app.base.ui.StepUpdater
 import xyz.aprildown.timer.app.base.utils.produceTime
 import xyz.aprildown.timer.component.key.DurationPicker
@@ -21,10 +26,12 @@ import xyz.aprildown.timer.component.key.RoundTextView
 import xyz.aprildown.timer.component.key.behaviour.EditableBehaviourLayout
 import xyz.aprildown.timer.domain.entities.BehaviourEntity
 import xyz.aprildown.timer.domain.entities.BehaviourType
+import xyz.aprildown.timer.domain.entities.ImageAction
 import xyz.aprildown.timer.domain.entities.StepEntity
 import xyz.aprildown.timer.domain.entities.toBeepAction
 import xyz.aprildown.timer.domain.entities.toCountAction
 import xyz.aprildown.timer.domain.entities.toHalfAction
+import xyz.aprildown.timer.domain.entities.toImageAction
 import xyz.aprildown.timer.domain.entities.toMusicAction
 import xyz.aprildown.timer.domain.entities.toNotificationAction
 import xyz.aprildown.timer.domain.entities.toScreenAction
@@ -32,11 +39,16 @@ import xyz.aprildown.timer.domain.entities.toVibrationAction
 import xyz.aprildown.timer.domain.entities.toVoiceAction
 import xyz.aprildown.ultimateringtonepicker.RingtonePickerDialog
 import xyz.aprildown.ultimateringtonepicker.UltimateRingtonePicker
+import javax.inject.Inject
 import xyz.aprildown.timer.app.base.R as RBase
 
+@AndroidEntryPoint
 class UpdateStepDialog :
     DialogFragment(),
     EditableBehaviourLayout.Listener {
+
+    @Inject
+    lateinit var appNavigator: AppNavigator
 
     private lateinit var editName: EditText
     private lateinit var behaviourLayout: EditableBehaviourLayout
@@ -45,6 +57,17 @@ class UpdateStepDialog :
 
     var step: StepEntity.Step? = null
     var onUpdate: ((StepEntity.Step) -> Unit)? = null
+
+    private val pickImageLauncher = registerForActivityResult(
+        ActivityResultContracts.PickVisualMedia()
+    ) { uri ->
+        if (uri == null || uri == Uri.EMPTY) return@registerForActivityResult
+        requireContext().contentResolver
+            .takePersistableUriPermission(uri, Intent.FLAG_GRANT_READ_URI_PERMISSION)
+        changeBehaviour(type = BehaviourType.IMAGE) {
+            it.toImageAction().copy(data = uri.toString()).toBehaviourEntity()
+        }
+    }
 
     init {
         isCancelable = false
@@ -277,15 +300,34 @@ class UpdateStepDialog :
         }.show(context, view)
     }
 
+    override fun onImageAdding() {
+        pickImageLauncher.launch(
+            PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly)
+        )
+    }
+
+    override fun onImageContentClick(action: ImageAction) {
+        startActivity(appNavigator.getImagePreviewIntent(action.data))
+    }
+
     private fun changeBehaviour(
         type: BehaviourType,
         transform: (BehaviourEntity) -> BehaviourEntity
     ) {
-        behaviourLayout.setBehaviours(
-            behaviourLayout.getBehaviours().map {
-                if (it.type == type) transform.invoke(it) else it
+        var found = false
+        val newBehaviours = mutableListOf<BehaviourEntity>()
+        behaviourLayout.getBehaviours().forEach {
+            if (it.type == type) {
+                newBehaviours += transform.invoke(it)
+                found = true
+            } else {
+                newBehaviours += it
             }
-        )
+        }
+        if (!found) {
+            newBehaviours += transform(BehaviourEntity(type))
+        }
+        behaviourLayout.setBehaviours(newBehaviours)
     }
 
     companion object : StepUpdater {
