@@ -9,6 +9,7 @@ import android.view.View
 import android.view.View.OnClickListener
 import android.widget.ImageButton
 import androidx.annotation.ColorInt
+import androidx.annotation.EmptySuper
 import androidx.appcompat.widget.TooltipCompat
 import androidx.appcompat.widget.TooltipCompatFix
 import androidx.core.view.isEmpty
@@ -42,7 +43,10 @@ class EditableBehaviourLayout(
             current: BehaviourEntity
         )
 
+        @EmptySuper
         fun onImageAdding(): Unit = Unit
+
+        @EmptySuper
         fun onImageContentClick(action: ImageAction): Unit = Unit
     }
 
