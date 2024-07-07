@@ -31,6 +31,12 @@ import androidx.compose.ui.graphics.Color.Companion as ComposeColor
 class ImagePreviewActivity : ComponentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        enableEdgeToEdge(
+            statusBarStyle = SystemBarStyle.dark(AndroidColor.TRANSPARENT),
+            navigationBarStyle = SystemBarStyle.dark(
+                AndroidColor.argb(0x80, 0x1b, 0x1b, 0x1b)
+            ) // DefaultDarkScrim
+        )
         super.onCreate(savedInstanceState)
         val path = intent?.getStringExtra(EXTRA_PATH)
         if (path.isNullOrBlank()) {
@@ -38,19 +44,13 @@ class ImagePreviewActivity : ComponentActivity() {
             return
         }
 
-        enableEdgeToEdge(
-            statusBarStyle = SystemBarStyle.dark(AndroidColor.TRANSPARENT),
-            navigationBarStyle = SystemBarStyle.dark(
-                AndroidColor.argb(0x80, 0x1b, 0x1b, 0x1b)
-            ) // DefaultDarkScrim
-        )
 
         setContent {
             var data: String? by rememberSaveable { mutableStateOf(path) }
 
             LaunchedEffect(Unit) {
                 addOnNewIntentListener { intent ->
-                    intent?.getStringExtra(EXTRA_PATH)?.takeIf { it.isNotBlank() }?.let {
+                    intent.getStringExtra(EXTRA_PATH)?.takeIf { it.isNotBlank() }?.let {
                         data = it
                     }
                 }
