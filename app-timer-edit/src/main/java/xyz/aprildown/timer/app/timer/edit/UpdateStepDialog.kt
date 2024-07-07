@@ -287,8 +287,10 @@ class UpdateStepDialog :
                         }
                     )
                 }
-                else -> {
+                BehaviourType.IMAGE -> {
+                    addImageItems(context = context, onPick = ::onImageAdding)
                 }
+                else -> Unit
             }
             section {
                 item {
