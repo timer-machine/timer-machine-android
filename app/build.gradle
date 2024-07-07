@@ -117,6 +117,7 @@ dependencies {
 
     implementation libs.androidx.appcompat
     implementation libs.androidx.recyclerView
+    implementation libs.androidx.viewPager2
     implementation libs.androidx.preference
     implementation libs.androidx.constraintLayout
     implementation libs.androidx.lifecycle.runtime
