@@ -633,4 +633,7 @@
     <string name="pref_tts_bakery_on">Si la función de texto a voz no funciona correctamente, desactive esta opción</string>
     <string name="pref_tts_bakery_off">Genere el archivo de audio de cualquier contenido de texto a voz para recibir notificaciones de voz rápidas</string>
     <string name="billing_ad_off_desp">Ayude a que la aplicación siga siendo gratuita y de código abierto</string>
+    <string name="image_pick">Elige una imagen</string>
+    <string name="behaviour_image">Imagen</string>
+    <string name="behaviour_image_help">Adjuntar una imagen para el paso</string>
 </resources>
