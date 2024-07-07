@@ -4,12 +4,10 @@ import android.graphics.Color
 import android.view.GestureDetector
 import android.view.MotionEvent
 import android.view.View
-import androidx.core.view.GestureDetectorCompat
 import androidx.core.view.isVisible
 import androidx.core.widget.ImageViewCompat
 import androidx.core.widget.TextViewCompat
 import androidx.recyclerview.widget.RecyclerView
-import com.github.deweyreed.tools.helper.attachToView
 import com.github.deweyreed.tools.helper.onLongClick
 import com.github.deweyreed.tools.helper.toColorStateList
 import com.mikepenz.fastadapter.items.AbstractItem
@@ -41,7 +39,7 @@ internal class VisibleStep(
 
         holder.run {
             val context = binding.root.context
-            GestureDetectorCompat(
+            GestureDetector(
                 binding.root.context,
                 object : GestureDetector.SimpleOnGestureListener() {
                     override fun onLongPress(e: MotionEvent) {
@@ -53,7 +51,12 @@ internal class VisibleStep(
                         return true
                     }
                 }
-            ).attachToView(binding.viewClickArea)
+            ).let {
+                @Suppress("ClickableViewAccessibility")
+                binding.viewClickArea.setOnTouchListener { _, event ->
+                    it.onTouchEvent(event)
+                }
+            }
 
             binding.viewTimeClickArea.onLongClick {
                 stepLongClickListener.onStepTimeLongClick(this@VisibleStep)

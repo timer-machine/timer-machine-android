@@ -79,7 +79,7 @@ class ScreenActivity : BaseActivity() {
         val isLandscape = resources.getBoolean(RTools.bool.is_landscape)
         ViewCompat.setOnApplyWindowInsetsListener(binding.root) { v, insets ->
             val targetInsets = insets.getInsets(WindowInsetsCompat.Type.systemBars())
-            val isLtr = ViewCompat.getLayoutDirection(v) == ViewCompat.LAYOUT_DIRECTION_LTR
+            val isLtr = v.layoutDirection == View.LAYOUT_DIRECTION_LTR
             if (!isLandscape) {
                 binding.root.updatePadding(
                     left = targetInsets.left,

@@ -1,7 +1,6 @@
 package io.github.deweyreed.timer.ui
 
 import android.view.View
-import androidx.core.view.ViewCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.mikepenz.materialdrawer.model.AbstractDrawerItem
 import com.mikepenz.materialdrawer.model.DividerDrawerItem
@@ -24,10 +23,7 @@ internal class DrawerDividerItem :
             isClickable = false
             isEnabled = false
             minimumHeight = 1
-            ViewCompat.setImportantForAccessibility(
-                this,
-                ViewCompat.IMPORTANT_FOR_ACCESSIBILITY_NO
-            )
+            importantForAccessibility = View.IMPORTANT_FOR_ACCESSIBILITY_NO
         }
     }
 
