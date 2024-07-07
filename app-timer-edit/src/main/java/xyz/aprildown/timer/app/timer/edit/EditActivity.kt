@@ -779,7 +779,7 @@ class EditActivity :
                 BehaviourType.IMAGE -> {
                     addImageItems(
                         context = this@EditActivity,
-                        onPick = { onImageAdding(position) },
+                        onPick = { onImageAdd(position) },
                     )
                 }
                 else -> Unit
@@ -852,7 +852,7 @@ class EditActivity :
         }
     }
 
-    override fun onImageAdding(position: Int) {
+    override fun onImageAdd(position: Int) {
         viewModel.imagePosition = position
         pickImageLauncher.launch(
             PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly)

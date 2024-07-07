@@ -59,7 +59,7 @@ class EditableStep(
             position: Int
         )
 
-        fun onImageAdding(position: Int)
+        fun onImageAdd(position: Int)
         fun onImageCheck(position: Int, action: ImageAction)
 
         fun onBehaviourAddedOrRemoved(position: Int, newBehaviours: List<BehaviourEntity>)
@@ -124,7 +124,7 @@ class EditableStep(
                     }
 
                     override fun onImageAdding() {
-                        handler.onImageAdding(bindingAdapterPosition)
+                        handler.onImageAdd(bindingAdapterPosition)
                     }
 
                     override fun onImageContentClick(action: ImageAction) {

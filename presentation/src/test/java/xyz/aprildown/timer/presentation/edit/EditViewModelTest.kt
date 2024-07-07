@@ -2,6 +2,7 @@ package xyz.aprildown.timer.presentation.edit
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.Observer
+import androidx.lifecycle.SavedStateHandle
 import com.github.deweyreed.tools.arch.Event
 import kotlinx.coroutines.test.StandardTestDispatcher
 import kotlinx.coroutines.test.TestScope
@@ -58,7 +59,7 @@ class EditViewModelTest {
 
     private fun TestScope.getViewModel(): EditViewModel {
         val viewModel = EditViewModel(
-            savedStateHandle = mock(),
+            savedStateHandle = SavedStateHandle(),
             mainDispatcher = StandardTestDispatcher(testScheduler),
             addTimer = addTimer,
             saveTimer = saveTimer,

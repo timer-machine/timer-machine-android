@@ -32,11 +32,7 @@ internal class VisibleStep(
 
     override val layoutRes: Int = R.layout.item_step_step
     override val type: Int = RBase.id.type_step_step
-    override fun getViewHolder(v: View): ViewHolder {
-        return ViewHolder(v).also {
-            it.binding.layoutBehaviour.onImageCheck = imageCheckListener
-        }
-    }
+    override fun getViewHolder(v: View): ViewHolder = ViewHolder(v)
 
     override var identifier: Long = id
 
@@ -100,6 +96,7 @@ internal class VisibleStep(
             binding.layoutBehaviour.run {
                 setBehaviours(step.behaviour)
                 setEnabledColor(typeColor)
+                onImageCheck = this@VisibleStep.imageCheckListener
             }
         }
     }
