@@ -224,6 +224,9 @@
     <string name="notification_settings">修改通知设置</string>
     <string name="behaviour_flashlight">闪光</string>
     <string name="behaviour_flashlight_help">交替开关闪光灯</string>
+    <string name="behaviour_image">图片</string>
+    <string name="behaviour_image_help">为该步骤附加一张图片</string>
+    <string name="image_pick">选择图片</string>
     <!--Sample timers strings-->
     <string name="sample_timer_template_title">计时器模板</string>
     <string name="sample_timer_template_prepare">准备</string>
