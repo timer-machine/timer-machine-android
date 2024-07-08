@@ -626,4 +626,7 @@
     <string name="pref_tts_bakery_on">Als Tekst-naar-spraak niet goed werkt, schakel dan deze optie uit</string>
     <string name="pref_tts_bakery_off">Genereer het audiobestand van elke Tekst-naar-spraak-inhoud voor een snelle spraakmelding</string>
     <string name="billing_ad_off_desp">Help om de app om vrij van reclame en open source te blijven</string>
+    <string name="behaviour_image">Afbeelding</string>
+    <string name="behaviour_image_help">Voeg een afbeelding bij de stap</string>
+    <string name="image_pick">Kies een afbeelding</string>
 </resources>
