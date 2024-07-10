@@ -11,6 +11,8 @@ plugins {
     alias(libs.plugins.gms) apply false
     alias(libs.plugins.secrets) apply false
     alias(libs.plugins.detekt)
+    alias(libs.plugins.androidTest) apply false
+    alias(libs.plugins.baselineprofile) apply false
 }
 
 subprojects {
