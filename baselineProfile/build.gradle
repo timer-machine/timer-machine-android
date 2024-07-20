@@ -1,25 +1,25 @@
 plugins {
-    alias(libs.plugins.androidTest)
+    alias(libs.plugins.android.test)
     alias(libs.plugins.kotlin.android)
-    alias(libs.plugins.baselineprofile)
+    alias(libs.plugins.androidx.baselineprofile)
 }
 
 android {
     namespace 'io.github.deweyreed.timer.baselineprofile'
-    compileSdk 34
+    compileSdk libs.versions.compileSdk.get().toInteger()
 
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
     }
 
     kotlinOptions {
-        jvmTarget = "1.8"
+        jvmTarget = JavaVersion.VERSION_17.toString()
     }
 
     defaultConfig {
         minSdk 28
-        targetSdk 34
+        targetSdk libs.versions.targetSdk.get().toInteger()
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -35,8 +35,6 @@ android {
 
 }
 
-// This is the configuration block for the Baseline Profile plugin.
-// You can specify to run the generators on a managed devices or connected devices.
 baselineProfile {
     useConnectedDevices = true
 }
@@ -44,8 +42,8 @@ baselineProfile {
 dependencies {
     implementation libs.androidx.test.junit
     implementation libs.androidx.test.espresso.core
-    implementation libs.androidx.uiautomator
-    implementation libs.androidx.benchmark.macro.junit4
+    implementation libs.androidx.test.uiautomator
+    implementation libs.androidx.test.benchmarkMacroJunit4
 }
 
 androidComponents {

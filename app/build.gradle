@@ -6,7 +6,7 @@ plugins {
 
     alias(libs.plugins.gms)
     alias(libs.plugins.dependencyGuard)
-    alias(libs.plugins.baselineprofile)
+    alias(libs.plugins.androidx.baselineprofile)
 }
 
 def keystoreProperties = new Properties()
@@ -112,12 +112,12 @@ dependencies {
     implementation project(':component-main')
     implementation project(':component-settings')
     implementation project(':component-tts')
-    implementation libs.androidx.profileinstaller
-    baselineProfile project(':baselineprofile')
     googleImplementation project(':flavor-google')
     dogImplementation project(':app-analytics-fake')
     googleImplementation project(':app-analytics')
     otherImplementation project(':app-analytics-fake')
+
+    baselineProfile project(':baselineprofile')
 
     implementation libs.tools
 
@@ -139,6 +139,7 @@ dependencies {
     implementation libs.androidx.lifecycle.runtime
     implementation libs.androidx.lifecycle.liveData
     implementation libs.androidx.lifecycle.viewModel
+    implementation libs.androidx.profileinstaller
 
     implementation libs.material
 
