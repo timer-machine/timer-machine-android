@@ -8,6 +8,12 @@ plugins {
     alias(libs.plugins.dependencyGuard)
 }
 
+def keystoreProperties = new Properties()
+def keystorePropertiesFile = rootProject.file('local.properties')
+if (keystorePropertiesFile.exists()) {
+    keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
+}
+
 android {
     namespace 'io.github.deweyreed.timer'
     defaultConfig {
@@ -26,6 +32,17 @@ android {
             minifyEnabled true
             shrinkResources true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    if (keystoreProperties['storeFile'] != null) {
+        signingConfigs {
+            debug {
+                storeFile file(keystoreProperties['storeFile'])
+                storePassword keystoreProperties['storePassword']
+                keyAlias keystoreProperties['keyAlias']
+                keyPassword keystoreProperties['keyPassword']
+            }
         }
     }
 
