@@ -1,0 +1,57 @@
+plugins {
+    alias(libs.plugins.android.test)
+    alias(libs.plugins.kotlin.android)
+    alias(libs.plugins.androidx.baselineprofile)
+}
+
+android {
+    namespace 'io.github.deweyreed.timer.baselineprofile'
+    compileSdk libs.versions.compileSdk.get().toInteger()
+
+    compileOptions {
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
+    }
+
+    kotlinOptions {
+        jvmTarget = JavaVersion.VERSION_17.toString()
+    }
+
+    defaultConfig {
+        minSdk 28
+        targetSdk libs.versions.targetSdk.get().toInteger()
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    targetProjectPath = ":app"
+
+    flavorDimensions += ["market"]
+    productFlavors {
+        dog { dimension = "market" }
+        google { dimension = "market" }
+        other { dimension = "market" }
+    }
+
+}
+
+baselineProfile {
+    useConnectedDevices = true
+}
+
+dependencies {
+    implementation libs.androidx.test.junit
+    implementation libs.androidx.test.espresso.core
+    implementation libs.androidx.test.uiautomator
+    implementation libs.androidx.test.benchmarkMacroJunit4
+}
+
+androidComponents {
+    onVariants(selector().all()) { v ->
+        def artifactsLoader = v.artifacts.getBuiltArtifactsLoader()
+        v.instrumentationRunnerArguments.put(
+                "targetAppId",
+                v.testedApks.map { artifactsLoader.load(it)?.applicationId }
+        )
+    }
+}

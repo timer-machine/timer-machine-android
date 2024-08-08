@@ -6,6 +6,7 @@ plugins {
 
     alias(libs.plugins.gms)
     alias(libs.plugins.dependencyGuard)
+    alias(libs.plugins.androidx.baselineprofile)
 }
 
 def keystoreProperties = new Properties()
@@ -116,6 +117,8 @@ dependencies {
     googleImplementation project(':app-analytics')
     otherImplementation project(':app-analytics-fake')
 
+    baselineProfile project(':baselineprofile')
+
     implementation libs.tools
 
     implementation libs.kotlin.coroutines.android
@@ -136,6 +139,7 @@ dependencies {
     implementation libs.androidx.lifecycle.runtime
     implementation libs.androidx.lifecycle.liveData
     implementation libs.androidx.lifecycle.viewModel
+    implementation libs.androidx.profileinstaller
 
     implementation libs.material
 
