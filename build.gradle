@@ -8,11 +8,11 @@ plugins {
     alias(libs.plugins.hilt) apply false
     alias(libs.plugins.versions)
     alias(libs.plugins.dependencyGuard) apply false
-    alias(libs.plugins.gms) apply false
-    alias(libs.plugins.secrets) apply false
     alias(libs.plugins.detekt)
     alias(libs.plugins.android.test) apply false
     alias(libs.plugins.androidx.baselineprofile) apply false
+    alias(libs.plugins.gms) apply false
+    alias(libs.plugins.firebase.crashlytics) apply false
 }
 
 subprojects {

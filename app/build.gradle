@@ -4,9 +4,11 @@ plugins {
     alias(libs.plugins.kotlin.kapt)
     alias(libs.plugins.hilt)
 
-    alias(libs.plugins.gms)
     alias(libs.plugins.dependencyGuard)
     alias(libs.plugins.androidx.baselineprofile)
+
+    alias(libs.plugins.gms)
+    alias(libs.plugins.firebase.crashlytics)
 }
 
 def keystoreProperties = new Properties()
@@ -114,7 +116,6 @@ dependencies {
     implementation project(':component-tts')
     googleImplementation project(':flavor-google')
     dogImplementation project(':app-analytics-fake')
-    googleImplementation project(':app-analytics')
     otherImplementation project(':app-analytics-fake')
 
     baselineProfile project(':baselineprofile')
@@ -173,7 +174,9 @@ dependencies {
 
 android.applicationVariants.configureEach { variant ->
     if (variant.name.contains('dog') || variant.name.contains('other')) {
-        project.tasks.named('process' + variant.name.capitalize() + 'GoogleServices').getOrNull()?.enabled = false
+        def variantNameCapitalized = variant.name.capitalize()
+        project.tasks.named("process${variantNameCapitalized}GoogleServices").getOrNull()?.enabled = false
+        project.tasks.named("injectCrashlyticsMappingFileId${variantNameCapitalized}").getOrNull()?.enabled = false
     }
 }
 

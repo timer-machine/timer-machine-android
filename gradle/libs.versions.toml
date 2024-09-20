@@ -31,10 +31,10 @@ hilt = { id = "com.google.dagger.hilt.android", version.ref = "dagger" }
 versions = "com.github.ben-manes.versions:0.51.0"
 dependencyGuard = "com.dropbox.dependency-guard:0.5.0"
 
-gms = "com.google.gms.google-services:4.4.2"
-secrets = "com.google.android.libraries.mapsplatform.secrets-gradle-plugin:2.0.1"
-
 detekt = { id = "io.gitlab.arturbosch.detekt", version.ref = "detekt" }
+
+gms = "com.google.gms.google-services:4.4.2"
+firebase-crashlytics = "com.google.firebase.crashlytics:3.0.2"
 
 [libraries]
 detekt-formatting = { module = "io.gitlab.arturbosch.detekt:detekt-formatting", version.ref = "detekt" }
@@ -111,14 +111,13 @@ moshi = "com.squareup.moshi:moshi:1.15.1"
 moshi-kotlinGen = "com.squareup.moshi:moshi-kotlin-codegen:1.15.1"
 
 billing = "com.android.billingclient:billing-ktx:6.2.0"
-firebase_bom = "com.google.firebase:firebase-bom:33.1.1"
+firebase_bom = "com.google.firebase:firebase-bom:33.2.0"
 firebase_auth = { module = "com.google.firebase:firebase-auth" }
 firebase_auth_ui = "com.firebaseui:firebase-ui-auth:8.0.2"
 firebase_storage = { module = "com.google.firebase:firebase-storage" }
+firebase_crashlytics = { module = "com.google.firebase:firebase-crashlytics" }
 playServices_auth = "com.google.android.gms:play-services-auth:20.7.0"
 playServices_review = "com.google.android.play:review-ktx:2.0.1"
-
-appcenter_crashes = "com.microsoft.appcenter:appcenter-crashes:5.0.4"
 
 androidJob = "com.github.DeweyReed:android-job:a04c817792"
 okio = "com.squareup.okio:okio:3.9.0"
