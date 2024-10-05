@@ -10,23 +10,14 @@ dependencyResolutionManagement {
     repositories {
         google()
         mavenCentral()
-        //noinspection JcenterRepositoryObsolete
-        jcenter {
-            content {
-                includeModule "com.afollestad.material-dialogs", "core"
-                includeModule "com.afollestad.material-dialogs", "commons"
-                includeModule "com.github.zawadz88.materialpopupmenu", "material-popup-menu"
-                includeModule "cn.carbswang.android", "NumberPickerView"
-            }
-        }
         maven {
             url "https://jitpack.io"
             content {
-                includeGroup "xyz.aprildown"
                 includeGroup "com.github.DeweyReed"
                 includeModule "com.github.PhilJay", "MPAndroidChart"
                 includeModule "com.github.kizitonwose", "CalendarView"
-                includeGroup "com.github.whataa"
+                includeModule "com.github.zawadz88", "MaterialPopupMenu"
+                includeModule "com.github.Carbs0126", "NumberPickerView"
             }
         }
     }

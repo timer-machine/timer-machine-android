@@ -3,6 +3,7 @@ package xyz.aprildown.timer.app.timer.one.layout
 import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Context
+import android.os.Bundle
 import android.util.AttributeSet
 import android.view.Gravity
 import android.view.Menu
@@ -13,8 +14,10 @@ import android.widget.LinearLayout
 import androidx.core.view.forEachIndexed
 import com.github.deweyreed.tools.anko.dp
 import xyz.aprildown.chromemenu.AbstractAppMenuPropertiesDelegate
-import xyz.aprildown.chromemenu.AppMenuButtonHelper
+import xyz.aprildown.chromemenu.AppMenuCoordinatorFactory
+import xyz.aprildown.chromemenu.AppMenuDelegate
 import xyz.aprildown.chromemenu.AppMenuHandler
+import xyz.aprildown.chromemenu.AppMenuPropertiesDelegate
 import xyz.aprildown.timer.app.base.data.PreferenceData
 import xyz.aprildown.timer.app.base.utils.produceTime
 import xyz.aprildown.timer.app.timer.one.R
@@ -68,30 +71,47 @@ internal class TweakTimeLayout(
         secondButton?.setOnClickListener { callback.onTweakTime(currentSettings.secondTime) }
 
         val slots = currentSettings.slots
-        val delegate = object : AbstractAppMenuPropertiesDelegate() {
-            override fun prepareMenu(menu: Menu) {
-                menu.forEachIndexed { index, item ->
-                    val time = slots[index]
-                    if (time != 0L) {
-                        item.isVisible = true
-                        item.title = time.produceActionString()
-                    } else {
-                        item.isVisible = false
-                    }
-                }
-            }
 
-            override fun onMenuItemClicked(item: MenuItem) {
-                val index = item.order
-                if (index in slots.indices) {
-                    callback.onTweakTime(slots[index])
-                }
-            }
-        }
-        tweakButton?.setOnTouchListener(
-            AppMenuButtonHelper(
-                AppMenuHandler(activity, delegate, R.menu.one_tweak_time)
-            )
+        val menuButton = tweakButton
+        menuButton?.setOnTouchListener(
+            AppMenuCoordinatorFactory.createAppMenuCoordinator(
+                activity,
+                { menuButton },
+                object : AppMenuDelegate {
+                    override fun onOptionsItemSelected(
+                        item: MenuItem,
+                        menuItemData: Bundle?
+                    ): Boolean {
+                        val index = item.order
+                        if (index in slots.indices) {
+                            callback.onTweakTime(slots[index])
+                        }
+                        return true
+                    }
+
+                    override fun createAppMenuPropertiesDelegate(): AppMenuPropertiesDelegate {
+                        return object : AbstractAppMenuPropertiesDelegate() {
+                            override fun getAppMenuLayoutId(): Int = R.menu.one_tweak_time
+
+                            override fun prepareMenu(menu: Menu, handler: AppMenuHandler) {
+                                super.prepareMenu(menu, handler)
+                                menu.forEachIndexed { index, item ->
+                                    val time = slots[index]
+                                    if (time != 0L) {
+                                        item.isVisible = true
+                                        item.title = time.produceActionString()
+                                    } else {
+                                        item.isVisible = false
+                                    }
+                                }
+                            }
+                        }
+                    }
+
+                    override fun shouldShowAppMenu(): Boolean = true
+                },
+                activity.window.decorView
+            ).appMenuHandler.createAppMenuButtonHelper()
         )
     }
 }
