@@ -9,8 +9,8 @@ targetSdk = "34"
 versionCode = "7050100"
 versionName = "7.5.1"
 
-kotlin = "1.9.24"
-dagger = "2.51.1"
+kotlin = "1.9.25"
+dagger = "2.52"
 composeCompiler = "1.5.14"
 
 detekt = "1.23.6"
