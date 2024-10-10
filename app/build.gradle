@@ -52,6 +52,7 @@ android {
     flavorDimensions += "market"
     productFlavors {
         dog {
+            isDefault = true
             dimension "market"
             versionNameSuffix "-dog"
             applicationIdSuffix ".dog"
