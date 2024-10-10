@@ -18,6 +18,7 @@ dependencyResolutionManagement {
                 includeModule "com.github.kizitonwose", "CalendarView"
                 includeModule "com.github.zawadz88", "MaterialPopupMenu"
                 includeModule "com.github.Carbs0126", "NumberPickerView"
+                includeModule "com.github.ultimate-deej", "twowaynestedscrollview"
             }
         }
     }

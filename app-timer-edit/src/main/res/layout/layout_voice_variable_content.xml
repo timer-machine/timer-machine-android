@@ -33,7 +33,7 @@
 
         </com.google.android.material.textfield.TextInputLayout>
 
-        <xyz.aprildown.timer.app.timer.edit.voice.TwoWayNestedScrollView
+        <org.deejdev.twowaynestedscrollview.TwoWayNestedScrollView
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
@@ -74,7 +74,7 @@
 
             </RelativeLayout>
 
-        </xyz.aprildown.timer.app.timer.edit.voice.TwoWayNestedScrollView>
+        </org.deejdev.twowaynestedscrollview.TwoWayNestedScrollView>
 
         <include
             android:id="@+id/layoutButtons"
