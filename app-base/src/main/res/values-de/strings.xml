@@ -271,4 +271,11 @@
     <string name="one_layout_click_hint">Klicke einfach alles an, um zu sehen, was angepasst werden kann</string>
     <string name="notif_channel_fore_desp">Kontrolliert alle Benachrichtigungen</string>
     <string name="notif_channel_screen_title">Bildschirm-Benachrichtigung</string>
+    <string name="behaviour_half">Halb</string>
+    <string name="behaviour_half_help">Sage \"Halbzeit\" wenn dieser Abschnitt zur Hälfte vorbei ist</string>
+    <string name="half_option">Halbzeit Erinnerung</string>
+    <string name="half_content">Halbzeit</string>
+    <string name="count_times_desp">* Gib die Anzahl der Countdown Sekunden am Ende des Abschnitts ein</string>
+    <string name="behaviour_flashlight">Taschenlampe</string>
+    <string name="behaviour_flashlight_help">Schalte Taschenlampe ein und aus</string>
 </resources>
