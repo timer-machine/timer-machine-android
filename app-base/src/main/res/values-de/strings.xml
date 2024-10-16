@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <string name="cancel">Abbrechen</string>
     <string name="expand">Erweitern</string>
     <string name="share">Teilen</string>
@@ -278,4 +278,66 @@
     <string name="count_times_desp">* Gib die Anzahl der Countdown Sekunden am Ende des Abschnitts ein</string>
     <string name="behaviour_flashlight">Taschenlampe</string>
     <string name="behaviour_flashlight_help">Schalte Taschenlampe ein und aus</string>
+    <string name="scheduler_alert_title">Bitte verwenden Sie den Zeitplaner auf eigene Gefahr</string>
+    <string name="scheduler_alert_content">Die Planung von Arbeiten unter Android ist schwierig. Es besteht die Möglichkeit, dass das System keinen Zeitplaner auslöst. Bitte testen Sie selbst, bevor Sie sich auf Zeitplaner verlassen.</string>
+    <string name="scheduler_default_name">Zeitplaner</string>
+    <string name="scheduler_title">Zeitplaner bearbeiten</string>
+    <string name="scheduler_name">Zeitplaner-Name</string>
+    <string name="scheduler_timer">Timer</string>
+    <string name="scheduler_action">Aktion</string>
+    <string name="scheduler_start">Timer starten</string>
+    <string name="scheduler_end">Timer stoppen</string>
+    <string name="scheduler_time">Zeit</string>
+    <string name="scheduler_repeat">wiederholen</string>
+    <string name="scheduler_repeat_once">Einmalig</string>
+    <string name="scheduler_repeat_every_week">Jede Woche wiederholen</string>
+    <string name="scheduler_repeat_every_days">Alle paar Tage wiederholen</string>
+    <string name="scheduler_repeat_every">Alle/Jeden</string>
+    <plurals name="scheduler_repeat_days">
+        <item quantity="one">Tag</item>
+        <item quantity="other">Tage</item>
+    </plurals>
+    <string name="scheduler_repeat_every_day">Jeden Tag</string>
+    <string name="scheduler_repeat_tomorrow">Morgen</string>
+    <string name="scheduler_repeat_today">Heute</string>
+    <string name="scheduler_wrong_timer_id">Dieser Planer benötigt einen Timer</string>
+    <string name="scheduler_wrong_every_days">Dieser Wert sollte zwischen 1 und 127 liegen</string>
+    <string name="scheduler_set1">Zeitplaner für weniger als 1 Minute ab jetzt festgelegt</string>
+    <string name="scheduler_set2">Zeitplaner eingestellt für <xliff:g example="2 days" id="DAYS">%1$s</xliff:g> ab jetzt</string>
+    <string name="scheduler_set3">Zeitplaner eingestellt für <xliff:g example="2 hours" id="HOURS">%2$s</xliff:g> ab jetzt</string>
+    <string name="scheduler_set4">Zeitplaner eingestellt für <xliff:g example="2 days" id="DAYS">%1$s</xliff:g> and <xliff:g example="2 hours" id="HOURS">%2$s</xliff:g> ab jetzt</string>
+    <string name="scheduler_starts_action_template">Start %1$s</string>
+    <string name="scheduler_set5">Zeitplaner eingestellt für <xliff:g example="2 minutes" id="MINUTES">%3$s</xliff:g> ab jetzt</string>
+    <string name="scheduler_set6">Zeitplaner eingestellt für <xliff:g example="2 days" id="DAYS">%1$s</xliff:g> and <xliff:g example="2 minutes" id="MINUTES">%3$s</xliff:g> ab jetzt</string>
+    <string name="scheduler_schedule_failed">Einstellung des Schedulers fehlgeschlagen %s</string>
+    <string name="scheduler_canceled_template">%1$s abgebrochen</string>
+    <string name="scheduler_set7">Zeitplaner eingestellt für <xliff:g example="2 hours" id="HOURS">%2$s</xliff:g> and <xliff:g example="2 minutes" id="MINUTES">%3$s</xliff:g> ab jetzt</string>
+    <string name="scheduler_set8">Zeitplaner eingestellt für <xliff:g example="2 days" id="DAYS">%1$s</xliff:g>, <xliff:g example="2 hours" id="HOURS">%2$s</xliff:g>, and <xliff:g example="2 minutes" id="MINUTES">%3$s</xliff:g> ab jetzt</string>
+    <string name="scheduler_stops_action_template">Stop %1$s</string>
+    <plurals name="schedulers">
+        <item quantity="one">1 Zeitplaner</item>
+        <item quantity="other">%1$s Zeitplaner</item>
+    </plurals>
+    <plurals name="days">
+        <item quantity="one">1 Tag</item>
+        <item quantity="other"><xliff:g example="7" id="number">%s</xliff:g> Tage</item>
+    </plurals>
+    <plurals name="hours">
+        <item quantity="one">1 Stunde</item>
+        <item quantity="other"><xliff:g example="7" id="number">%s</xliff:g> Stunden</item>
+    </plurals>
+    <plurals name="minutes">
+        <item quantity="one">1 Minute</item>
+        <item quantity="other"><xliff:g example="7" id="number">%s</xliff:g> Minuten</item>
+    </plurals>
+    <string name="seconds_0">0 Sekunden</string>
+    <plurals name="seconds">
+        <item quantity="one">1 Sekunde</item>
+        <item quantity="other"><xliff:g example="7" id="number">%s</xliff:g> Sekunden</item>
+    </plurals>
+    <string name="shortcut_created">Verknüpfung erstellt</string>
+    <string name="shortcut_disabled">Timer nicht gefunden. Bitte erstellen Sie einen neuen</string>
+    <string name="shortcut_not_support">Der aktuelle Launcher kann keine Verknüpfung erstellen</string>
+    <string name="shortcut_remove_old">Bitte löschen Sie zuerst die alte Verknüpfung dieses Timers</string>
+    <string name="shortcut_timer_started">Der Timer wurde gestartet</string>
 </resources>
