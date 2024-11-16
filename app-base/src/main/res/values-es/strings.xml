@@ -362,7 +362,7 @@
     <string name="theme_step_color_dialog_title">Seleccionar color de etapa</string>
     <string name="theme_step_color_title">Color de etapa</string>
     <string name="theme_step_color_normal">Etapa normal</string>
-    <string name="theme_step_color_notifier">Etapa nitificador</string>
+    <string name="theme_step_color_notifier">Etapa notificador</string>
     <string name="theme_step_color_start">Iniciar etapa</string>
     <string name="theme_step_color_end">Etapa final</string>
     <string name="backup_local_backup">Local</string>
