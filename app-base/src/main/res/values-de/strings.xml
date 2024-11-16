@@ -21,7 +21,7 @@
     <string name="exit">Verlassen</string>
     <string name="move">Verschieben</string>
     <string name="deselect">Markierung aufheben</string>
-    <string name="dismiss">Verwerfen</string>
+    <string name="dismiss">Zurückweisen</string>
     <string name="grant">Zulassen</string>
     <string name="start">Starten</string>
     <string name="pause">Pause</string>
@@ -63,13 +63,13 @@
     <string name="edit_edit_timer">Timer bearbeiten</string>
     <string name="edit_step_name">Schritt-Name</string>
     <string name="edit_default_step_name">Schritt</string>
-    <string name="edit_default_notifier_name">Benachrichtigung</string>
+    <string name="edit_default_notifier_name">Mitteiler</string>
     <string name="edit_delete_group">Gruppe löschen</string>
     <string name="edit_step">Schritt bearbeiten</string>
     <string name="edit_group_start">Gruppen-Start</string>
     <string name="edit_end_step">Timer-Ende</string>
     <string name="edit_add_normal">Normal</string>
-    <string name="edit_add_notifier">Benachrichtigung</string>
+    <string name="edit_add_notifier">Mitteiler</string>
     <string name="edit_add_notifier_desp">Ein praktischer Erinnerungsschritt. Er merkt sich Ihre Bearbeitung</string>
     <string name="edit_add_group">Gruppe</string>
     <string name="edit_add_start_desp">Führen Sie einmal zu Beginn der gesamten Aufgabe einen Schritt aus, um sich vorzubereiten</string>
@@ -113,7 +113,7 @@
     <string name="behaviour_halt">Halt</string>
     <string name="behaviour_voice_help">Schritt-Name vorlesen</string>
     <string name="voice_content_title">Textausgabe-Inhalt</string>
-    <string name="voice_content_info_empty">* Wenn das Feld leer ist, wird der Schritt-Name gesprochen</string>
+    <string name="voice_content_info_empty">* Wenn das Feld leer ist, wird der Schritt-Name gesprochen.</string>
     <string name="voice_content_group_variables">* Variablen, deren Beschreibung mit \"(Gruppe)\" beginnt, bedeuten, dass der Wert auf der Grundlage der Gruppe und nicht des Timers berechnet wird, wenn der Schritt in einer Gruppe ist.</string>
     <string name="voice_variables">Variablen</string>
     <string name="voice_loop">Aktueller Loop</string>
@@ -182,7 +182,7 @@
     <string name="edit_add_group_desp">Sie hat einen Namen und Loops und kann Schritte enthalten</string>
     <string name="edit_add_end_desp">Führen Sie einmal am Ende der gesamten Aufgabe einen Schritt aus, um die Aufgabe abzuschließen</string>
     <string name="main_action_backup">Sichern &amp; wiederherstellen</string>
-    <string name="perm_rational_floating">Um ein \"Floating Window\" anzuzeigen, muss die Berechtigung \"Einblendung über anderen Apps\" aktiviert werden.</string>
+    <string name="perm_rational_floating">Um ein \"Floating Window\" anzuzeigen, muss die Berechtigung \"Einblendung über anderen Apps\" aktiviert werden</string>
     <string name="folder_delete">Set löschen</string>
     <string name="folder_delete_timer_explanation">Der Timer inkl. seiner Einträge und Zeitplaner wird dauerhaft gelöscht</string>
     <string name="folder_trash_folder_confirmation">Timer in den Papierkorb verschieben?</string>
@@ -228,7 +228,7 @@
     <string name="record_overview">Übersicht</string>
     <string name="record_overview_total_time">Gesamtlaufzeit</string>
     <string name="record_overview_total_count">Gesamtzahl der Timer-Läufe</string>
-    <string name="record_timeline">Timeline</string>
+    <string name="record_timeline">Zeitleiste</string>
     <string name="record_timeline_time">Laufzeit</string>
     <string name="record_timeline_count">Anzahl der Timer-Läufe</string>
     <string name="record_today">Heute</string>
