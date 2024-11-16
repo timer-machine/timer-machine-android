@@ -134,7 +134,7 @@
     <string name="scheduler_canceled_template">%1$s avbrutt</string>
     <plurals name="minutes">
         <item quantity="one">1 minutt</item>
-        <item quantity="other"><xliff:g example="7" id="number">%1$s</xliff:g> minutter</item>
+        <item quantity="other"><xliff:g example="7" id="number">%s</xliff:g> minutter</item>
     </plurals>
     <string name="seconds_0">0 sekund</string>
     <string name="shortcut_created">Snarvei opprettet</string>
@@ -179,11 +179,11 @@
     <string name="theme_custom_title">Egendefinert drakt</string>
     <plurals name="days">
         <item quantity="one">1 dag</item>
-        <item quantity="other"><xliff:g example="7" id="number">%1$s</xliff:g> dager</item>
+        <item quantity="other"><xliff:g example="7" id="number">%s</xliff:g> dager</item>
     </plurals>
     <plurals name="hours">
         <item quantity="one">1 time</item>
-        <item quantity="other"><xliff:g example="7" id="number">%1$s</xliff:g> timer</item>
+        <item quantity="other"><xliff:g example="7" id="number">%s</xliff:g> timer</item>
     </plurals>
     <plurals name="seconds">
         <item quantity="one">1 sekund</item>
