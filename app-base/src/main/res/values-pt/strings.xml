@@ -534,4 +534,14 @@
     <string name="pref_category_title_scheduler_setting">Configurações do agendador</string>
     <string name="pref_week_start_title">Dia de início da semana</string>
     <string name="pref_category_notif">Notificações</string>
+    <string name="intro_start_reminder_usage">Você pode <b>segurar um lembrete para checar seu uso</b>, nos lembretes adicionados ou quando selecioná-los.</string>
+    <string name="intro_start_add_reminder">Toque ➕ abaixo da duração do passo para adicionar lembretes. Vamos adicionar <b>Música</b> e <b>Vibração</b>.</string>
+    <string name="intro_start_welcome">Bem-vinda/o! \nToque a <b>seta direita</b> abaixo para iniciar o tutorial.</string>
+    <string name="intro_start_our_plan">Vamos criar um plano de exercício em que <b>corremos por 3 minutos</b> e <b>caminhamos por 2 minutos</b>, e então <b>repetimos o processo 5 vezes</b>.</string>
+    <string name="intro_start_create_timer">Toque ➕ para criar um novo temporizador.</string>
+    <string name="intro_start_enter_loop">Primeiro, ajuste a <b>Série</b> para <b>5</b>.</string>
+    <string name="intro_start_step_card">Um cartão representa um passo do plano.</string>
+    <string name="intro_start_step_time">Toque no <b>tempo ao lado do nome do passo</b> e mude o tempo para <b>3 minutos</b>.</string>
+    <string name="intro_start_notifier">Nesse aplicativo, <b>você deve adicionar lembretes após um passo, ou o app não vai te lembrar</b>.</string>
+    <string name="intro_start_add_notifier">Toque o botão <b>Notificador</b> para adicionar um passo que te lembre após a corrida.</string>
 </resources>
