@@ -438,7 +438,7 @@
     <string name="intro_start_enter_loop">Primero, ajusta la <b>Serie</b> a <b>5</b>.</string>
     <string name="intro_start_step_time">Toca <b>el tiempo al costado de nombre de la etapa</b> y cámbialo a <b>3 minutos</b>.</string>
     <string name="intro_start_walk_step_name">Ajusta el tiempo a <b>2 minutos</b>.</string>
-    <string name="intro_start_timer_done">¡La configuración está lista! Toca ✔ en la parte superior para <b>gardar el temporizador</b>.</string>
+    <string name="intro_start_timer_done">¡La configuración está lista! Toca ✔ en la parte superior para <b>guardar el temporizador</b>.</string>
     <plurals name="seconds">
         <item quantity="one"><xliff:g example="7" id="number">%s</xliff:g> segundo</item>
         <item quantity="many"><xliff:g example="7" id="number">%s</xliff:g> segundos</item>
