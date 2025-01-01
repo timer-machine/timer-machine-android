@@ -544,4 +544,44 @@
     <string name="intro_start_step_time">Toque no <b>tempo ao lado do nome do passo</b> e mude o tempo para <b>3 minutos</b>.</string>
     <string name="intro_start_notifier">Nesse aplicativo, <b>você deve adicionar lembretes após um passo, ou o app não vai te lembrar</b>.</string>
     <string name="intro_start_add_notifier">Toque o botão <b>Notificador</b> para adicionar um passo que te lembre após a corrida.</string>
+    <string name="intro_start_timer_steps">Esta parte mostra <b>a lista de etapas</b> e destaca <b>a etapa em execução</b>.</string>
+    <string name="intro_start_add_walk_step">Adicione uma etapa <b>normal</b> para caminhada.</string>
+    <string name="intro_start_walk_step_name">Ajuste o tempo para <b>2 minutos</b>.</string>
+    <string name="intro_start_walk_notifier">Adicione <b>outro notificador</b> para <b>ser lembrado ao final da caminhada</b>.</string>
+    <string name="intro_start_timer_done">A configuração está pronta! Clique em ✔ na parte superior para <b>salvar o temporizador</b>.</string>
+    <string name="intro_start_run_timer"><b>Clique no temporizador</b> para acessar a tela de execução.</string>
+    <string name="intro_start_timer_buttons">Este é o painel de controle. Aqui verá <b>Parar, Etapa anterior, Iniciar/Pausar, Próxima etapa</b> e outras opções.</string>
+    <string name="intro_start_finish"><b>Parabéns! Você concluiu o tutorial.</b></string>
+    <string name="intro_start_edit_behaviour">Um clique permite editar um lembrete. Por enquanto, por favor conclua o tutorial primeiro</string>
+    <string name="intro_start_quick_start_pause">Isto inicia um temporizador rapidamente, clique no nome do temporizador para ver seus detalhes</string>
+    <string name="intro_save_for_later">Você pode tentar isto depois do tutorial</string>
+    <string name="intro_exit_difficult_app_alert">Sem terminar o tutorial o app pode ser confuso de usar.</string>
+    <string name="intro_exit_previous_hint">Para voltar ao passo anterior, clique na <b>seta esquerda</b> na parte inferior da tela.</string>
+    <string name="intro_location">Você pode encontrar o tutorial em \"Ajuda e comentários\"</string>
+    <string name="tip_android_12_phone_calls">Pausar em chamadas telefônicas agora requer a permissão \"Ler estado do telefone\"</string>
+    <string name="tip_android_12_battery">A compatibilidade com o Tasker agora requer a permissão \"Ignorar otimização da bateria\"</string>
+    <string name="update_title">Registro de mudanças</string>
+    <string name="tasker_edit_title">Plugin para o TimeR Machine</string>
+    <string name="tasker_event_timer_starts">Ativar quando <xliff:g example="Timer name" id="timer_name">%s</xliff:g> começa</string>
+    <string name="whitelist_disclaimer_no">Não, eu entendo as consequências</string>
+    <string name="whitelist_disclaimer_yes">Checar o guia da lista de autorização</string>
+    <string name="whitelist_disclaimer_no_confirmation">Pular o guia?</string>
+    <string name="whitelist_location">Você pode encontrar o Guia da Lista de Autorização em \"Ajuda e comentários\"</string>
+    <string name="whitelist_intro">A maioria dos fabricantes de aparelhos Android encerram à força apps executando em segundo plano, fazendo com que lembretes falhem.\n\nPor favor autorize o início automático, a execução em segundo plano, desligue a otimização da bateria etc., nas configurações.\n\nAqui estão algumas instruções:</string>
+    <string name="whitelist_don_t_kill_desp">Um website que fornece muitas soluções</string>
+    <string name="whitelist_setting">Configurar</string>
+    <string name="whitelist_links">Links</string>
+    <string name="whitelist_quick_settings">Alguns ajustes rápidos</string>
+    <string name="whitelist_ignore_battery_optimization">Ignorar otimização da bateria</string>
+    <string name="whitelist_settings_template">Configuração do sistema %d</string>
+    <string name="account_sign_out_confirmation">Sair?</string>
+    <string name="account_sign_out">Sair</string>
+    <string name="account_signing_out">Saindo…</string>
+    <string name="account_delete">Apagar conta e todos os backups</string>
+    <string name="account_delete_confirmation_title">Apagar sua conta e todos os dados de backup?</string>
+    <string name="intro_start_timer_time">Esta parte mostra <b>o tempo restante</b>, as séries restantes e o botão para ajustar o tempo.</string>
+    <string name="whitelist_disclaimer"><b>Muitos fabricantes de aparelhos Android podem encerrar os apps quando a tela estiver desligada ou ao mudar a outro app</b>, o que é um problema conhecido do Android.\n\nEste app tenta da melhor maneira cumprir sua função, mas ainda existe a chance de falhar.\n\n<b>Por favor adicione este app à lista de autorização nas configurações do sistema</b>.</string>
+    <string name="intro_exit_confirmation">Sair do tutorial?</string>
+    <string name="tip_missed_timer"><b>Alguns temporizadores pararam anormalmente!</b>\n\nIsso pode acontecer quando o sistema encerra o app em segundo plano. <b>Para resolver este problema, por favor considere adicionar este app à lista de autorizações nas configurações do sistema.</b></string>
+    <string name="tasker_event_timer_stops">Ativar quando <xliff:g example="Timer name" id="timer_name">%s</xliff:g> para</string>
 </resources>
