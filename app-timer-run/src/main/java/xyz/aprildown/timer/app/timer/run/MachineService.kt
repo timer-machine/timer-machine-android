@@ -168,14 +168,10 @@ class MachineService :
      * Just release all resources
      */
     override fun onDestroy() {
-        binder = null
-        presenter.dropView()
-        phoneCallReceiver?.unregister()
-        phoneCallReceiver = null
-        toForegroundHandler.removeCallbacksAndMessages(null)
-        foregroundNotifHandler?.removeCallbacksAndMessages(null)
-        foregroundNotifHandler = null
         super.onDestroy()
+        binder = null
+        cancelForegroundNotif()
+        presenter.dropView()
     }
 
     //
