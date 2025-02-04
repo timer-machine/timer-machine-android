@@ -137,7 +137,7 @@
     <string name="account_sign_out_confirmation">Afmelden?</string>
     <string name="notif_timer_screen_showing">%1$s wekt het scherm</string>
     <string name="edit_add_notifier_desp">Een handige herinneringsstap. Het herinnert je bewerking</string>
-    <string name="billing_explanation">Door op Abonneren te tikken, wordt jouw betaling in rekening gebracht op je Google Play Store-account. Je abonnement wordt automatisch verlengd voor dezelfde planlengte tegen dezelfde prijs totdat je het ten minste 24 uur voor het einde van de huidige periode in de Google Play Store annuleert. Door op Abonneren te tikken, ga je akkoord met onze <xliff:g example="Privacy policy" id="privacy_policy">%1$s</xliff:g> en <xliff:g example="Terms" id="terms">%2$s</xliff:g>.</string>
+    <string name="billing_explanation">Door op Abonneren te tikken, wordt jouw betaling in rekening gebracht op je Google Play Store-account. Je abonnement wordt automatisch verlengd voor dezelfde planlengte tegen dezelfde prijs totdat je het ten minste 24 uur voor het einde van de huidige periode in de Google Play Store annuleert. Door op Abonneren te tikken, \"ga je akkoord met onze <xliff:g example="Privacy policy" id="privacy_policy">%1$s</xliff:g> en <xliff:g example="Terms" id="terms">%2$s</xliff:g>.\"</string>
     <string name="pref_notifier_plus_title_time">Meer tijd toevoegen</string>
     <string name="voice_variable_group_remaining_percent_desp">Groep resterende tijd procentueel</string>
     <string name="intro_start_step_card">Een kaart vertegenwoordigt een stap in het plan.</string>
