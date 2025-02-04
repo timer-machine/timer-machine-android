@@ -13,6 +13,7 @@ import androidx.core.content.getSystemService
 import androidx.core.net.toUri
 import androidx.core.os.bundleOf
 import androidx.core.os.postDelayed
+import com.github.deweyreed.timer.component.tts.TtsSpeaker.onDone
 import com.github.deweyreed.tools.anko.longToast
 import com.github.deweyreed.tools.helper.HandlerHelper
 import kotlinx.coroutines.Dispatchers
@@ -25,6 +26,7 @@ import xyz.aprildown.timer.app.base.data.PreferenceData.storedAudioTypeValue
 import xyz.aprildown.timer.app.base.data.PreferenceData.useBakedCount
 import xyz.aprildown.timer.app.base.media.AudioFocusManager
 import xyz.aprildown.timer.app.base.media.RingtonePreviewKlaxon
+import xyz.aprildown.timer.app.base.media.getMediaDuration
 import xyz.aprildown.timer.domain.utils.fireAndForget
 import xyz.aprildown.tools.helper.safeSharedPreference
 import java.io.File
@@ -232,15 +234,11 @@ private class WelcomingTextToSpeech(
         tts.setOnUtteranceProgressListener(
             object : UtteranceProgressListener() {
                 override fun onStart(utteranceId: String?) {
-                    HandlerHelper.runOnUiThread {
-                        listener.onStart()
-                    }
+                    HandlerHelper.runOnUiThread(listener::onStart)
                 }
 
                 override fun onDone(utteranceId: String?) {
-                    HandlerHelper.runOnUiThread {
-                        listener.onDone()
-                    }
+                    HandlerHelper.runOnUiThread(listener::onDone)
                 }
 
                 @Suppress("OVERRIDE_DEPRECATION")
@@ -312,6 +310,12 @@ private class WelcomingTextToSpeech(
                 )
 
                 listener.onStart()
+
+                HandlerHelper.postDelayed(
+                    speechUri.getMediaDuration(application) + 100L,
+                    listener::onDone
+                )
+
                 return@fireAndForget
             }
 
@@ -336,10 +340,12 @@ private class WelcomingTextToSpeech(
 
     fun stop() {
         textToSpeech.stop()
+        HandlerHelper.remove(listener::onDone)
     }
 
     fun shutdown() {
         textToSpeech.shutdown()
+        HandlerHelper.remove(listener::onDone)
     }
 }
 
