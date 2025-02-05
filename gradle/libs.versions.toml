@@ -13,7 +13,7 @@ kotlin = "1.9.25"
 dagger = "2.52"
 composeCompiler = "1.5.15"
 
-detekt = "1.23.6"
+detekt = "1.23.7"
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

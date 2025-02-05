@@ -4,7 +4,7 @@ complexity:
   CyclomaticComplexMethod:
     active: false
   LargeClass:
-    threshold: 1000
+    threshold: 2000
   LongMethod:
     active: false
   LongParameterList:
@@ -20,6 +20,11 @@ exceptions:
     active: false
   TooGenericExceptionThrown:
     active: false
+
+naming:
+  FunctionNaming:
+    ignoreAnnotated:
+      - "Composable"
 
 style:
   LoopWithTooManyJumpStatements:

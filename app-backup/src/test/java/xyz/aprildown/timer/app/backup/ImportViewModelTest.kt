@@ -1,4 +1,4 @@
-package xyz.aprildown.timer.backup
+package xyz.aprildown.timer.app.backup
 
 import kotlinx.coroutines.test.StandardTestDispatcher
 import kotlinx.coroutines.test.TestScope
@@ -13,7 +13,6 @@ import org.junit.Test
 import org.mockito.kotlin.mock
 import org.mockito.kotlin.verify
 import org.mockito.kotlin.verifyNoMoreInteractions
-import xyz.aprildown.timer.app.backup.ImportViewModel
 import xyz.aprildown.timer.domain.usecases.Fruit
 import xyz.aprildown.timer.domain.usecases.data.ImportAppData
 import xyz.aprildown.timer.domain.usecases.data.NotifyDataChanged

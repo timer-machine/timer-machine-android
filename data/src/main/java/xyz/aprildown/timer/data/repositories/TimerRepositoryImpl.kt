@@ -1,8 +1,6 @@
 package xyz.aprildown.timer.data.repositories
 
-import android.content.Context
 import dagger.Reusable
-import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import xyz.aprildown.timer.data.db.TimerDao
@@ -16,7 +14,6 @@ import javax.inject.Inject
 
 @Reusable
 internal class TimerRepositoryImpl @Inject constructor(
-    @ApplicationContext context: Context,
     private val timerDao: TimerDao,
     private val timerMapper: TimerMapper,
     private val timerInfoMapper: TimerInfoMapper,

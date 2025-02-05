@@ -29,8 +29,8 @@ import org.junit.runner.RunWith
  * You should run the benchmarks on a physical device, not an Android emulator, because the
  * emulator doesn't represent real world performance and shares system resources with its host.
  *
- * For more information, see the [Macrobenchmark documentation](https://d.android.com/macrobenchmark#create-macrobenchmark)
- * and the [instrumentation arguments documentation](https://d.android.com/topic/performance/benchmarking/macrobenchmark-instrumentation-args).
+ * For more information, see the https://d.android.com/macrobenchmark#create-macrobenchmark
+ * and the https://d.android.com/topic/performance/benchmarking/macrobenchmark-instrumentation-args.
  **/
 @RunWith(AndroidJUnit4::class)
 @LargeTest

@@ -1,4 +1,4 @@
-package xyz.aprildown.timer.backup
+package xyz.aprildown.timer.app.backup
 
 import androidx.lifecycle.SavedStateHandle
 import kotlinx.coroutines.test.StandardTestDispatcher
@@ -17,7 +17,6 @@ import org.mockito.kotlin.mock
 import org.mockito.kotlin.verify
 import org.mockito.kotlin.verifyNoMoreInteractions
 import org.mockito.kotlin.whenever
-import xyz.aprildown.timer.app.backup.ExportViewModel
 import xyz.aprildown.timer.domain.usecases.Fruit
 import xyz.aprildown.timer.domain.usecases.data.ExportAppData
 

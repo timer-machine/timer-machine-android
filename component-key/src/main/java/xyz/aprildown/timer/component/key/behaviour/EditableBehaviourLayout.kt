@@ -134,7 +134,9 @@ class EditableBehaviourLayout(
         if (imageAction != null) {
             val imageView = if (binding.layoutImage.isEmpty()) {
                 LayoutEditableBehaviourImageBinding.inflate(
-                    LayoutInflater.from(context), binding.layoutImage, true
+                    LayoutInflater.from(context),
+                    binding.layoutImage,
+                    true
                 ).root
             } else {
                 LayoutEditableBehaviourImageBinding.bind(binding.layoutImage.getChildAt(0)).root

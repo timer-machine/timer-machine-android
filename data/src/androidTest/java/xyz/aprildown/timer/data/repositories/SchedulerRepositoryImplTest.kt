@@ -28,7 +28,6 @@ class SchedulerRepositoryImplTest {
     private val context = ApplicationProvider.getApplicationContext<Context>()
     private val database = MachineDatabase.createInMemoryDatabase(context)
     private val timerRepository: TimerRepository = TimerRepositoryImpl(
-        context = context,
         timerDao = database.timerDao(),
         timerMapper = TimerMapper(StepMapper(StepOnlyMapper(BehaviourMapper())), TimerMoreMapper()),
         timerInfoMapper = TimerInfoMapper(),

@@ -1,4 +1,4 @@
-package xyz.aprildown.timer.backup
+package xyz.aprildown.timer.app.backup
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
@@ -9,7 +9,6 @@ import org.junit.Assert.assertFalse
 import org.junit.Assert.assertNull
 import org.junit.Assert.assertTrue
 import org.junit.Test
-import xyz.aprildown.timer.app.backup.BaseBackupViewModel
 
 internal abstract class BaseBackupViewModelTest {
 
