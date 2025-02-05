@@ -165,15 +165,6 @@ private fun WipeContent(
     modifier: Modifier = Modifier
 ) {
     var showAlert by remember { mutableStateOf(false) }
-    val onWipeChangedAlert: (Boolean) -> Unit = remember(onWipeChanged) {
-        { wipe: Boolean ->
-            if (wipe) {
-                showAlert = true
-            } else {
-                onWipeChanged(false)
-            }
-        }
-    }
 
     ListItem(
         headlineContent = {
@@ -183,7 +174,13 @@ private fun WipeContent(
             .toggleable(
                 value = wipe,
                 role = Role.Switch,
-                onValueChange = onWipeChangedAlert,
+                onValueChange = {
+                    if (it) {
+                        showAlert = true
+                    } else {
+                        onWipeChanged(false)
+                    }
+                },
             ),
         leadingContent = {
             Icon(

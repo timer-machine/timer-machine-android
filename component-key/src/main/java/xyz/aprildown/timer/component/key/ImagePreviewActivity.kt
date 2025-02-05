@@ -44,7 +44,6 @@ class ImagePreviewActivity : ComponentActivity() {
             return
         }
 
-
         setContent {
             var data: String? by rememberSaveable { mutableStateOf(path) }
 

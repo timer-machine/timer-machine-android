@@ -1,8 +1,8 @@
 package xyz.aprildown.timer.app.backup
 
 import androidx.compose.runtime.Immutable
-import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.CoroutineDispatcher
+import kotlinx.coroutines.ensureActive
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -108,9 +108,8 @@ internal abstract class BaseBackupViewModel<ContentType : BaseBackupViewModel.Sc
                         backupResult = Fruit.Ripe(Unit),
                     )
                 }
-            } catch (e: CancellationException) {
-                throw e
             } catch (e: Exception) {
+                coroutineContext.ensureActive()
                 _screen.update {
                     it.copy(
                         backupOngoing = false,
