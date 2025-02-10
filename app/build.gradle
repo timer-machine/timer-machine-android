@@ -174,10 +174,14 @@ dependencies {
 }
 
 android.applicationVariants.configureEach { variant ->
-    if (variant.name.contains('dog') || variant.name.contains('other')) {
+    if (variant.flavorName != "google") {
         def variantNameCapitalized = variant.name.capitalize()
         project.tasks.named("process${variantNameCapitalized}GoogleServices").getOrNull()?.enabled = false
         project.tasks.named("injectCrashlyticsMappingFileId${variantNameCapitalized}").getOrNull()?.enabled = false
+        try {
+            project.tasks.named("uploadCrashlyticsMappingFile${variantNameCapitalized}").getOrNull()?.enabled = false
+        } catch (UnknownTaskException ignored) {
+        }
     }
 }
 
