@@ -6,8 +6,8 @@ minSdk = "23"
 targetSdk = "34"
 
 # F-Droid depends on the format of the two lines below to update
-versionCode = "7050100"
-versionName = "7.5.1"
+versionCode = "7060000"
+versionName = "7.6.0"
 
 kotlin = "1.9.25"
 dagger = "2.52"
