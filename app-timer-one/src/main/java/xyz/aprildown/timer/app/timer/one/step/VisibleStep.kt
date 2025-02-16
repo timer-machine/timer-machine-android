@@ -55,6 +55,7 @@ internal class VisibleStep(
                 @Suppress("ClickableViewAccessibility")
                 binding.viewClickArea.setOnTouchListener { _, event ->
                     it.onTouchEvent(event)
+                    true
                 }
             }
 

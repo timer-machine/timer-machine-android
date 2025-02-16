@@ -39,6 +39,7 @@ internal class VisibleGroup(
                 @Suppress("ClickableViewAccessibility")
                 indicatorLayout.setOnTouchListener { _, event ->
                     it.onTouchEvent(event)
+                    true
                 }
             }
 
