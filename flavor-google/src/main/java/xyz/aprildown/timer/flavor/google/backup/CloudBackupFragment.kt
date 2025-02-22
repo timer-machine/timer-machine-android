@@ -1,6 +1,5 @@
 package xyz.aprildown.timer.flavor.google.backup
 
-import android.app.Activity
 import android.content.Context
 import android.content.SharedPreferences
 import android.graphics.Typeface
@@ -9,11 +8,12 @@ import android.os.CountDownTimer
 import android.text.Spanned
 import android.text.style.StyleSpan
 import android.view.View
-import androidx.activity.result.ActivityResult
-import androidx.activity.result.ActivityResultCallback
-import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AlertDialog
 import androidx.core.text.buildSpannedString
+import androidx.credentials.ClearCredentialStateRequest
+import androidx.credentials.CredentialManager
+import androidx.credentials.CustomCredential
+import androidx.credentials.GetCredentialRequest
 import androidx.hilt.navigation.fragment.hiltNavGraphViewModels
 import androidx.lifecycle.DefaultLifecycleObserver
 import androidx.lifecycle.LifecycleOwner
@@ -22,7 +22,6 @@ import androidx.navigation.fragment.findNavController
 import androidx.preference.Preference
 import androidx.preference.PreferenceFragmentCompat
 import androidx.preference.SwitchPreferenceCompat
-import com.firebase.ui.auth.AuthUI
 import com.github.deweyreed.tools.anko.longSnackbar
 import com.github.deweyreed.tools.anko.newTask
 import com.github.deweyreed.tools.anko.snackbar
@@ -30,18 +29,20 @@ import com.github.deweyreed.tools.arch.observeEvent
 import com.github.deweyreed.tools.helper.IntentHelper
 import com.github.deweyreed.tools.helper.createChooserIntentIfDead
 import com.github.deweyreed.tools.helper.startActivityOrNothing
+import com.google.android.libraries.identity.googleid.GetSignInWithGoogleOption
+import com.google.android.libraries.identity.googleid.GoogleIdTokenCredential
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import com.google.firebase.auth.GoogleAuthProvider
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.ktx.storage
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.ensureActive
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.tasks.await
 import xyz.aprildown.timer.app.base.data.FlavorData
 import xyz.aprildown.timer.app.base.utils.NavigationUtils.subLevelNavigate
 import xyz.aprildown.timer.domain.usecases.Fruit
-import xyz.aprildown.timer.domain.utils.AppConfig
-import xyz.aprildown.timer.domain.utils.Constants
 import xyz.aprildown.timer.flavor.google.BillingActivity
 import xyz.aprildown.timer.flavor.google.R
 import xyz.aprildown.timer.flavor.google.backup.usecases.AutoCloudBackup
@@ -53,6 +54,7 @@ import xyz.aprildown.timer.flavor.google.showErrorDialog
 import xyz.aprildown.timer.flavor.google.utils.IapPromotionDialog
 import xyz.aprildown.timer.flavor.google.utils.causeFirstMessage
 import xyz.aprildown.tools.helper.safeSharedPreference
+import java.util.UUID
 import javax.inject.Inject
 import xyz.aprildown.timer.app.base.R as RBase
 
@@ -74,11 +76,6 @@ internal class CloudBackupFragment : PreferenceFragmentCompat() {
     lateinit var flavorData: FlavorData
 
     private var manualBackupDialog: AlertDialog? = null
-
-    private val signInLauncher = registerForActivityResult(
-        ActivityResultContracts.StartActivityForResult(),
-        getSignInResultCallback()
-    )
 
     override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
         setPreferencesFromResource(R.xml.pref_cloud_back, rootKey)
@@ -285,33 +282,41 @@ internal class CloudBackupFragment : PreferenceFragmentCompat() {
     }
 
     private fun launchSignInFlow() {
-        signInLauncher.launch(
-            AuthUI.getInstance()
-                .createSignInIntentBuilder()
-                .setLogo(RBase.mipmap.app_icon_square)
-                .setTosAndPrivacyPolicyUrls(
-                    Constants.getTermsOfServiceLink(),
-                    Constants.getPrivacyPolicyLink()
-                )
-                .setAvailableProviders(
-                    mutableListOf<AuthUI.IdpConfig>().apply {
-                        add(AuthUI.IdpConfig.GoogleBuilder().build())
-                        if (AppConfig.openDebug) {
-                            add(AuthUI.IdpConfig.EmailBuilder().build())
-                        }
+        val context = requireContext()
+        lifecycleScope.launch {
+            try {
+                val result = CredentialManager.create(context)
+                    .getCredential(
+                        context,
+                        GetCredentialRequest.Builder()
+                            .addCredentialOption(
+                                GetSignInWithGoogleOption.Builder(
+                                    context.getString(R.string.default_web_client_id)
+                                )
+                                    .setNonce(UUID.randomUUID().toString())
+                                    .build()
+                            )
+                            .build()
+                    )
+                val credential = result.credential
+                if (credential is CustomCredential &&
+                    credential.type == GoogleIdTokenCredential.TYPE_GOOGLE_ID_TOKEN_CREDENTIAL
+                ) {
+                    val googleIdTokenCredential =
+                        GoogleIdTokenCredential.createFrom(credential.data)
+                    val idToken = googleIdTokenCredential.idToken
+                    Firebase.auth.signInWithCredential(
+                        GoogleAuthProvider.getCredential(idToken, null)
+                    ).await()
+                    onAccountPaymentChanged()
+                    if (Firebase.auth.currentUser != null) {
+                        viewModel.tryToSetUpForNewSubscriber()
                     }
-                )
-                .build()
-        )
-    }
-
-    private fun getSignInResultCallback(): ActivityResultCallback<ActivityResult> {
-        return ActivityResultCallback { result ->
-            if (result.resultCode == Activity.RESULT_OK) {
-                onAccountPaymentChanged()
-                if (Firebase.auth.currentUser != null) {
-                    viewModel.tryToSetUpForNewSubscriber()
                 }
+            } catch (e: Exception) {
+                ensureActive()
+                e.printStackTrace()
+                requireView().longSnackbar(e.localizedMessage?.toString().toString())
             }
         }
     }
@@ -345,7 +350,10 @@ internal class CloudBackupFragment : PreferenceFragmentCompat() {
                     .show()
                 viewLifecycleOwner.lifecycleScope.launch {
                     try {
-                        AuthUI.getInstance().signOut(context).await()
+                        Firebase.auth.signOut()
+                        CredentialManager.create(context).clearCredentialState(
+                            ClearCredentialStateRequest()
+                        )
                         CloudBackup.cancel(context, currentBackupState)
                         onAccountPaymentChanged()
                     } catch (e: Exception) {
@@ -395,7 +403,10 @@ internal class CloudBackupFragment : PreferenceFragmentCompat() {
 
             viewLifecycleOwner.lifecycleScope.launch {
                 try {
-                    AuthUI.getInstance().delete(context).await()
+                    Firebase.auth.currentUser?.delete()?.await()
+                    CredentialManager.create(context).clearCredentialState(
+                        ClearCredentialStateRequest()
+                    )
                     CloudBackup.cancel(context, currentBackupState)
                     onAccountPaymentChanged()
                 } catch (e: Exception) {

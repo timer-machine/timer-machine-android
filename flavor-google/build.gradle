@@ -28,11 +28,9 @@ dependencies {
     implementation libs.billing
 
     implementation platform(libs.firebase.bom)
-    implementation libs.firebase.auth
-    implementation libs.firebase.auth.ui
+    implementation libs.bundles.firebase.auth
     implementation libs.firebase.storage
     implementation libs.firebase.crashlytics
-    implementation libs.playServices.auth
     implementation libs.playServices.review
 
     implementation libs.fastAdapter

@@ -13,4 +13,6 @@
 
     <string name="backup_key_auto_cloud_backup" translatable="false">pref_auto_cloud_backup</string>
 
+    <string name="default_web_client_id" />
+
 </resources>
