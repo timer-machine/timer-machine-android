@@ -198,4 +198,6 @@
     <string name="grant">Permetti</string>
     <string name="unknown">Sconosciuto</string>
     <string name="time_picker_type_scroll">Scorri</string>
+    <string name="edit_add_notifier_desp">Uno step utile come memo. Ricorda la tua modifica</string>
+    <string name="music_saf_pick">Scegli SAF</string>
 </resources>
