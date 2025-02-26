@@ -53,7 +53,7 @@
     <string name="timer_pick_hint">Scegli un cronometro</string>
     <string name="folder_default">Set default</string>
     <string name="folder_trash">Cestino</string>
-    <string name="folder_name">Nome del gruppo</string>
+    <string name="folder_name">Nome Set</string>
     <string name="folder_delete_timer_explanation">Il cronometro (assieme alle sue registrazioni e alle programmazioni associate) verrà eliminato definitivamente</string>
     <string name="folder_trash_folder_confirmation">Spostare i cronometri nel cestino?</string>
     <string name="folder_empty_trash_confirmation">Svuotare il cestino?</string>
@@ -75,16 +75,16 @@
     <string name="edit_group_end">Fine gruppo</string>
     <string name="edit_group_start">Inizio gruppo</string>
     <string name="edit_delete_group">Cancella gruppo</string>
-    <string name="edit_add_end">Passaggio fine</string>
+    <string name="edit_add_end">Step finale</string>
     <string name="edit_step">Modifica step</string>
     <string name="edit_add_step">Aggiungi un nuovo step</string>
     <string name="edit_add_normal">Normale</string>
     <string name="edit_add_normal_desp">Aggiungi uno step normale</string>
     <string name="edit_add_notifier">Notifica</string>
     <string name="edit_add_group">Gruppo</string>
-    <string name="edit_add_group_desp">Ha il suo nome, il proprio loop, e può contenere passaggi arbitrari</string>
+    <string name="edit_add_group_desp">Ha il suo nome, il proprio loop, e può contenere step arbitrari</string>
     <string name="edit_add_start">Passaggio iniziale</string>
-    <string name="edit_add_start_desp">Esegui un passaggio iniziale per prepararti</string>
+    <string name="edit_add_start_desp">Esegui uno step iniziale per prepararti</string>
     <string name="edit_add_start_too_many">C\'è già un passaggio iniziale</string>
     <string name="edit_add_end_desp">Esegui un passaggio alla fine per terminare</string>
     <string name="edit_add_end_too_many">C\'è già un passaggio finale</string>
@@ -92,7 +92,7 @@
     <string name="edit_wrong_empty_name">Il nome del cronometro non deve essere vuoto</string>
     <string name="edit_wrong_negative_loop">Le ripetizioni devono essere un numero positivo</string>
     <string name="edit_wrong_empty_steps">Deve esserci almeno un passaggio</string>
-    <string name="edit_more_show_notif">Mostra notifica del tempo</string>
+    <string name="edit_more_show_notif">Mostra la notifica del tempo</string>
     <string name="edit_more_notif_count">Mostra il tempo rimanente nella notifica</string>
     <string name="edit_cant_move_end">Non è possibile muovere il passaggio finale</string>
     <string name="edit_cant_move_group">Non è possibile spostare un gruppo</string>
@@ -183,7 +183,7 @@
     <string name="voice_content_group_variables">* Se la descrizione di una variabile inizia per \"(Gruppo)\" significa che il valore della variabile è calcolato usando il contesto del gruppo anziché quello del cronometro.</string>
     <string name="voice_loop">Ripetizione corrente</string>
     <string name="voice_total_loop">Totale ripetizioni</string>
-    <string name="voice_current_time">Tempo corrente (per esempio %s)</string>
+    <string name="voice_current_time">Tempo corrente (%s)</string>
     <string name="voice_variable_timer_duration_desp">Durata del cronometro</string>
     <string name="voice_variable_timer_total_loop_desp">Cronometro: ripetizioni totali</string>
     <string name="voice_variable_timer_loop_desp">Cronometro: ripetizione corrente</string>
@@ -192,7 +192,10 @@
     <string name="beep_count_intro_0_meaning">0 riproduce il bip (in continuazione) fino alla fine del passaggio</string>
     <string name="half_option">Memo a metà</string>
     <string name="half_option_music">Musica</string>
-    <string name="beep_respect_other">Rispetta altri suoni</string>
+    <string name="beep_respect_other">Rispetta gli altri suoni</string>
     <string name="beep_count_intro_usage">Inserire la durata del suono del bip</string>
     <string name="half_option_voice_desp">(Default) Leggi \"Metà del tempo\"</string>
+    <string name="grant">Permetti</string>
+    <string name="unknown">Sconosciuto</string>
+    <string name="time_picker_type_scroll">Scorri</string>
 </resources>
