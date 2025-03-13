@@ -68,6 +68,9 @@ android {
             applicationIdSuffix ".other"
         }
     }
+    dependenciesInfo {
+        includeInApk = false
+    }
 
     compileOptions {
         coreLibraryDesugaringEnabled true
