@@ -3,20 +3,14 @@ package xyz.aprildown.timer.app.base.utils
 import android.content.ActivityNotFoundException
 import android.content.Context
 import android.content.Intent
-import android.view.LayoutInflater
 import androidx.browser.customtabs.CustomTabColorSchemeParams
 import androidx.browser.customtabs.CustomTabsIntent
 import androidx.core.content.ContextCompat
-import androidx.core.content.edit
 import androidx.core.net.toUri
 import com.github.deweyreed.tools.helper.isDarkTheme
-import com.github.deweyreed.tools.helper.isNetworkCheap
-import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import xyz.aprildown.timer.app.base.data.DarkTheme
 import xyz.aprildown.timer.app.base.data.PreferenceData.appTheme
-import xyz.aprildown.timer.app.base.databinding.DialogWebsiteWarningBinding
 import xyz.aprildown.timer.app.base.ui.newDynamicTheme
-import xyz.aprildown.tools.helper.safeSharedPreference
 
 private fun Context.openWebsiteWithCustomTabs(url: String) {
     val darkTheme = DarkTheme(this)
@@ -80,26 +74,6 @@ private fun Context.openWebsiteWithCustomTabs(url: String) {
     }
 }
 
-private const val KEY_SHOW_WEBSITE_WARNING = "warning_website"
-
-fun Context.openWebsiteWithWarning(url: String) {
-    if (isNetworkCheap() || !safeSharedPreference.getBoolean(KEY_SHOW_WEBSITE_WARNING, true)) {
-        openWebsiteWithCustomTabs(url)
-    } else {
-        val binding = DialogWebsiteWarningBinding.inflate(LayoutInflater.from(this))
-        val dialog = MaterialAlertDialogBuilder(this)
-            .setView(binding.root)
-            .setPositiveButton(android.R.string.ok) { _, _ ->
-                openWebsiteWithCustomTabs(url)
-            }
-            .setNegativeButton(android.R.string.cancel, null)
-            .show()
-        dialog.setOnDismissListener {
-            if (binding.check.isChecked) {
-                safeSharedPreference.edit {
-                    putBoolean(KEY_SHOW_WEBSITE_WARNING, false)
-                }
-            }
-        }
-    }
+fun Context.openLink(url: String) {
+    openWebsiteWithCustomTabs(url)
 }

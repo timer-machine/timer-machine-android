@@ -11,7 +11,7 @@ import com.github.deweyreed.tools.helper.IntentHelper
 import com.github.deweyreed.tools.helper.startActivityOrNothing
 import io.github.deweyreed.timer.BuildConfig
 import io.github.deweyreed.timer.R
-import xyz.aprildown.timer.app.base.utils.openWebsiteWithWarning
+import xyz.aprildown.timer.app.base.utils.openLink
 import xyz.aprildown.timer.app.settings.LogFragment
 import xyz.aprildown.timer.domain.utils.AppConfig
 import xyz.aprildown.timer.domain.utils.Constants
@@ -40,7 +40,7 @@ class AboutPreferenceFragment : PreferenceFragmentCompat() {
             "${BuildConfig.VERSION_NAME}(${BuildConfig.VERSION_CODE})"
 
         findPreference<Preference>("key_about_source_code")?.setOnPreferenceClickListener {
-            context.openWebsiteWithWarning("https://github.com/timer-machine/timer-machine-android")
+            context.openLink("https://github.com/timer-machine/timer-machine-android")
             true
         }
 
@@ -52,7 +52,7 @@ class AboutPreferenceFragment : PreferenceFragmentCompat() {
         }
 
         findPreference<Preference>("key_about_changelog")?.setOnPreferenceClickListener {
-            context.openWebsiteWithWarning(Constants.getChangeLogLink())
+            context.openLink(Constants.getChangeLogLink())
             true
         }
 
@@ -69,12 +69,12 @@ class AboutPreferenceFragment : PreferenceFragmentCompat() {
         }
 
         findPreference<Preference>("key_about_privacy_policy")?.setOnPreferenceClickListener {
-            context.openWebsiteWithWarning(Constants.getPrivacyPolicyLink())
+            context.openLink(Constants.getPrivacyPolicyLink())
             true
         }
 
         findPreference<Preference>("key_about_terms_of_service")?.setOnPreferenceClickListener {
-            context.openWebsiteWithWarning(Constants.getTermsOfServiceLink())
+            context.openLink(Constants.getTermsOfServiceLink())
             true
         }
 
@@ -87,7 +87,7 @@ class AboutPreferenceFragment : PreferenceFragmentCompat() {
         }
 
         findPreference<Preference>("key_about_github")?.setOnPreferenceClickListener {
-            context.openWebsiteWithWarning("https://github.com/DeweyReed")
+            context.openLink("https://github.com/DeweyReed")
             true
         }
 

@@ -168,8 +168,6 @@
     <string name="start">Iniciar</string>
     <string name="pause">Pausar</string>
     <string name="plus_one_minute">Añadir 1 minuto</string>
-    <string name="never_show_again">No mostrar de nuevo</string>
-    <string name="consume_data_warning">Esto abrirá una web que podría consumir datos móviles</string>
     <string name="no_action_found">Ninguna aplicación puede realizar esta acción</string>
     <string name="terms_of_service">Términos</string>
     <string name="main_action_timers">Temporizadores</string>

@@ -32,9 +32,7 @@
     <string name="stop">Arrêter</string>
     <string name="plus_one_minute">Ajouter 1 minute</string>
     <string name="unknown">Inconnu</string>
-    <string name="never_show_again">Ne plus afficher</string>
     <string name="thanks">Merci de votre soutien !</string>
-    <string name="consume_data_warning">Ceci ouvrira une page web et consommera des données mobiles</string>
     <string name="main_action_timers">Minuteries</string>
     <string name="main_action_backup">Sauvegarde et restauration</string>
     <string name="main_action_dark">Thème sombre</string>

@@ -11,7 +11,7 @@ import androidx.preference.Preference
 import androidx.preference.PreferenceCategory
 import androidx.preference.PreferenceFragmentCompat
 import com.github.deweyreed.tools.helper.startActivityOrNothing
-import xyz.aprildown.timer.app.base.utils.openWebsiteWithWarning
+import xyz.aprildown.timer.app.base.utils.openLink
 import xyz.aprildown.timer.app.base.R as RBase
 
 class WhitelistFragment : PreferenceFragmentCompat() {
@@ -26,7 +26,7 @@ class WhitelistFragment : PreferenceFragmentCompat() {
                 title = "Don't kill my app!"
                 setSummary(RBase.string.whitelist_don_t_kill_desp)
                 setOnPreferenceClickListener {
-                    context.openWebsiteWithWarning(
+                    context.openLink(
                         "https://dontkillmyapp.com?app=${getString(RBase.string.app_name)}"
                     )
                     true

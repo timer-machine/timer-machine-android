@@ -27,9 +27,7 @@
     <string name="pause">Pause</string>
     <string name="stop">Stop</string>
     <string name="plus_one_minute">1 Minute hinzufügen</string>
-    <string name="never_show_again">Nicht wieder anzeigen</string>
     <string name="thanks">Danke für Ihre Unterstützung!</string>
-    <string name="consume_data_warning">Dies wird eine Website öffnen und mobile Daten verbrauchen</string>
     <string name="no_action_found">Keine App kann diese Aktion ausführen</string>
     <string name="empty">Leer</string>
     <string name="delete_confirmation_template">%s löschen?</string>

@@ -29,7 +29,6 @@
     <string name="pause">Pausa</string>
     <string name="stop">Stop</string>
     <string name="plus_one_minute">Aggiungi 1 minuto</string>
-    <string name="consume_data_warning">L\'applicazione aprirà una pagina web e consumerà dati mobili</string>
     <string name="no_action_found">Nessuna applicazione può eseguire questa azione</string>
     <string name="empty">Vuoto</string>
     <string name="delete_confirmation_template">Cancellare %s?</string>
@@ -144,7 +143,6 @@
     <string name="open_menu">Apri menu</string>
     <string name="deselect">Deseleziona</string>
     <string name="dismiss">Ignora</string>
-    <string name="never_show_again">Non mostrare più</string>
     <string name="thanks">Grazie per il tuo aiuto!</string>
     <string name="edit_default_timer_name">Cronometro</string>
     <string name="edit_group">Gruppo</string>

@@ -174,7 +174,6 @@
 \n1. Opnieuw importeren.
 \n2. App bijwerken naar de nieuwste versie.
 \n3. App-gegevens opschonen en deze opnieuw importeren.</string>
-    <string name="consume_data_warning">Hiermee wordt een webpagina geopend en worden mobiele gegevens gebruikt</string>
     <string name="theme_pick_back">Terug</string>
     <string name="folder_to_list_view">Lijstweergave</string>
     <string name="edit_step">Stap bewerken</string>
@@ -284,7 +283,6 @@
     <string name="folder_to_grid_view">Rasterweergave</string>
     <string name="intro_start_quick_start_pause">Dit start een timer op een snelle manier. Klik voor nu op de timernaam om de details te zien</string>
     <string name="help_tts_desp">Stem- en aftelherinneringen zijn ervan afhankelijk</string>
-    <string name="never_show_again">Nooit meer tonen</string>
     <string name="scheduler_time">Tijd</string>
     <string name="behaviour_voice_help">Lees deze stapnaam</string>
     <string name="pref_screen_title_dim">Het scherm dimmen</string>

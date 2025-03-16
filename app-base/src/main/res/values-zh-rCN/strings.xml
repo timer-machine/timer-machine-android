@@ -34,9 +34,7 @@
     <string name="plus_one_minute">增加1分钟</string>
     <!--Common-->
     <string name="unknown">未知</string>
-    <string name="never_show_again">不再提示</string>
     <string name="thanks">谢谢支持！</string>
-    <string name="consume_data_warning">此操作将打开一个网页并消耗移动数据</string>
     <string name="no_action_found">没有应用可执行此操作</string>
     <string name="empty">什么都没有</string>
     <string name="delete_confirmation_template">删除 %s?</string>

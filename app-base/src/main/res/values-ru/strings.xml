@@ -52,7 +52,6 @@
     <string name="behaviour_add_new">Добавить напоминание</string>
     <string name="voice_variable_group_group">Группа</string>
     <string name="pause">Пауза</string>
-    <string name="consume_data_warning">Это откроет веб-страницу и будет потреблять мобильные данные</string>
     <string name="folder_to_list_view">Переключить в режим списка</string>
     <string name="edit_step">Редактировать Действие</string>
     <string name="vibration_count">Отсчет</string>
@@ -90,7 +89,6 @@
     <string name="screen_fullscreen">Всегда Полноэкранный режим</string>
     <string name="voice_variable_timer_group">Таймер</string>
     <string name="folder_to_grid_view">Переключить в режим сетки</string>
-    <string name="never_show_again">Больше не показывать</string>
     <string name="behaviour_voice_help">Озвучить название этого этапа</string>
     <string name="ok">Ок</string>
     <string name="voice_content_group_variables">* Переменные, описание которых начинается с \"(Группа)\", означают, что когда шаг находится в группе, значение вычисляется на основе группы, а не таймера.</string>

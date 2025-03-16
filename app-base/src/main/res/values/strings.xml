@@ -38,9 +38,7 @@
 
     <!--Common-->
     <string name="unknown">Unknown</string>
-    <string name="never_show_again">Never show again</string>
     <string name="thanks">Thanks for your support!</string>
-    <string name="consume_data_warning">This will open a web page and consume mobile data</string>
     <string name="no_action_found">No apps can perform this action</string>
     <string name="empty">Empty</string>
     <string name="delete_confirmation_template">Delete %s?</string>

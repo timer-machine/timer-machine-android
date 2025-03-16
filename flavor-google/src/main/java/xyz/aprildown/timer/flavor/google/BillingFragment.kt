@@ -26,7 +26,7 @@ import com.github.deweyreed.tools.helper.startActivityOrNothing
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import dagger.hilt.android.AndroidEntryPoint
 import xyz.aprildown.timer.app.base.data.FlavorData
-import xyz.aprildown.timer.app.base.utils.openWebsiteWithWarning
+import xyz.aprildown.timer.app.base.utils.openLink
 import xyz.aprildown.timer.component.key.PreferenceStyleListFragment
 import xyz.aprildown.timer.domain.utils.Constants
 import xyz.aprildown.timer.flavor.google.databinding.FragmentBillingBinding
@@ -163,7 +163,7 @@ internal class BillingFragment : Fragment(R.layout.fragment_billing), MenuProvid
         spannable.setSpan(
             object : ClickableSpan() {
                 override fun onClick(widget: View) {
-                    context.openWebsiteWithWarning(Constants.getPrivacyPolicyLink())
+                    context.openLink(Constants.getPrivacyPolicyLink())
                 }
             },
             privacyPolicyIndex,
@@ -175,7 +175,7 @@ internal class BillingFragment : Fragment(R.layout.fragment_billing), MenuProvid
         spannable.setSpan(
             object : ClickableSpan() {
                 override fun onClick(widget: View) {
-                    context.openWebsiteWithWarning(Constants.getTermsOfServiceLink())
+                    context.openLink(Constants.getTermsOfServiceLink())
                 }
             },
             termsIndex,
