@@ -41,8 +41,14 @@ internal class FolderToolbar(
         cardElevation = context.dimen(R.dimen.elevation_timer_card).toFloat()
         binding = ViewFolderToolbarBinding.inflate(LayoutInflater.from(context), this)
 
-        fun requestFolderName(f: (String) -> Unit) {
-            SimpleInputDialog(context).show(titleRes = RBase.string.folder_name) {
+        fun requestFolderName(
+            prefill: String? = null,
+            f: (String) -> Unit,
+        ) {
+            SimpleInputDialog(context).show(
+                titleRes = RBase.string.folder_name,
+                preFill = prefill,
+            ) {
                 if (it.isNotBlank()) {
                     f.invoke(it)
                 }
@@ -124,7 +130,10 @@ internal class FolderToolbar(
                         item {
                             labelRes = RBase.string.folder_rename
                             callback = {
-                                requestFolderName {
+                                requestFolderName(
+                                    prefill = binding.textFolderToolbarCurrent.text.toString()
+                                        .takeIf { it.isNotBlank() },
+                                ) {
                                     this@FolderToolbar.callback?.onChangeCurrentFolderName(it)
                                 }
                             }

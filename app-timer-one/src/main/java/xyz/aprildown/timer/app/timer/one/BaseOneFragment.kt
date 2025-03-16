@@ -39,6 +39,7 @@ import xyz.aprildown.timer.presentation.one.OneViewModel
 import xyz.aprildown.timer.presentation.stream.MachineContract
 import xyz.aprildown.timer.presentation.stream.StreamState
 import xyz.aprildown.timer.presentation.stream.TimerIndex
+import xyz.aprildown.timer.presentation.stream.getLoop
 import xyz.aprildown.timer.presentation.stream.getStep
 import javax.inject.Inject
 import javax.inject.Provider
@@ -245,7 +246,9 @@ abstract class BaseOneFragment<T : ViewBinding>(
     protected fun showPickLoopDialog(maxLoop: Int, onPick: (Int) -> Unit) {
         SimpleInputDialog(requireContext()).show(
             inputType = InputType.TYPE_CLASS_NUMBER,
-            hint = getString(RBase.string.name_loop_loop_hint)
+            preFill = viewModel.timerCurrentIndex.value
+                ?.getLoop(viewModel.timer.value?.loop ?: 0)?.toString(),
+            hint = getString(RBase.string.name_loop_loop_hint),
         ) { input ->
             input.toIntOrNull()
                 ?.takeIf { it in 1..maxLoop }

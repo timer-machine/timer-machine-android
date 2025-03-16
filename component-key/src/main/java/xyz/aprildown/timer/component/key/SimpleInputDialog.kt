@@ -14,7 +14,6 @@ import androidx.core.view.updateLayoutParams
 import com.github.deweyreed.tools.anko.dp
 import com.github.deweyreed.tools.helper.gone
 import com.github.deweyreed.tools.helper.onImeActionClick
-import com.github.deweyreed.tools.helper.setTextAndSelectEnd
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import xyz.aprildown.timer.app.base.R as RBase
 
@@ -71,7 +70,8 @@ class SimpleInputDialog(
         }
 
         if (!preFill.isNullOrBlank()) {
-            edit.setTextAndSelectEnd(preFill)
+            edit.setText(preFill)
+            edit.post { edit.selectAll() }
         }
         if (hint != null) {
             edit.hint = hint
