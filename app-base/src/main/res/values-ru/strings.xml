@@ -351,8 +351,6 @@
 \nНажмите на <b>стрелку вправо</b> внизу, чтобы начать руководство.</string>
     <string name="billing_cancel_anytime">Периодический платёж. Можно отменить в любое время.</string>
     <string name="notif_channel_b_notif_desp">Используется напоминаниями в уведомлениях</string>
-    <string name="theme_step_color_start">Начальный шаг</string>
-    <string name="theme_step_color_end">Конечный шаг</string>
     <string name="help_tutorial">Руководство</string>
     <string name="help_whitelist_desp">Предотвратите приложение от остановки во время его работы</string>
     <string name="pref_reminder">Напоминания</string>

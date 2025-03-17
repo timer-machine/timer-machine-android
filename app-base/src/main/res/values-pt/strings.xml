@@ -126,7 +126,6 @@
     <string name="theme_light_status_bar">Barra de status clara</string>
     <string name="theme_title">Tema do aplicativo</string>
     <string name="theme_pick_colors">Personalizada</string>
-    <string name="theme_step_color_normal">Etapa normal</string>
     <string name="cloud_backup_account_issue_notif_desp">Não é possível encontrar sua conta. Clique aqui para entrar</string>
     <string name="cloud_backup_state_running">Em progresso</string>
     <string name="cloud_backup_state_up_to_date">Atualizado</string>
@@ -402,9 +401,6 @@
     <string name="theme_pick_back">Voltar</string>
     <string name="theme_step_color_dialog_title">Selecionar cor de etapa</string>
     <string name="theme_step_color_title">Cor de etapa</string>
-    <string name="theme_step_color_notifier">Etapa notificador</string>
-    <string name="theme_step_color_start">Iniciar etapa</string>
-    <string name="theme_step_color_end">Etapa final</string>
     <string name="backup_local_backup">Local</string>
     <string name="backup_app_data">Dados do aplicativo</string>
     <string name="backup_app_settings">Configurações do aplicativo</string>

@@ -377,10 +377,6 @@
     <string name="theme_pick_back">返回</string>
     <string name="theme_step_color_dialog_title">選擇步驟顏色</string>
     <string name="theme_step_color_title">步驟顏色</string>
-    <string name="theme_step_color_normal">普通步驟</string>
-    <string name="theme_step_color_notifier">通知步驟</string>
-    <string name="theme_step_color_start">起始步驟</string>
-    <string name="theme_step_color_end">結束步驟</string>
     <!--Backup-->
     <string name="backup_local_backup">本地</string>
     <string name="backup_app_data">應用數據</string>

@@ -483,10 +483,6 @@
 
     <string name="theme_step_color_dialog_title">Pick Step Color</string>
     <string name="theme_step_color_title">Step Color</string>
-    <string name="theme_step_color_normal">Normal step</string>
-    <string name="theme_step_color_notifier">Notifier step</string>
-    <string name="theme_step_color_start">Start step</string>
-    <string name="theme_step_color_end">End step</string>
 
     <!--Backup-->
     <string name="backup_local_backup">Local</string>

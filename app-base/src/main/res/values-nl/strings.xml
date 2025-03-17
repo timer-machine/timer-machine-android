@@ -311,7 +311,6 @@
     <string name="edit_add_normal_desp">Normale stap toevoegen</string>
     <string name="beep_count_intro_0_meaning">0 om te blijven piepen tot het einde van de stap</string>
     <string name="pref_phone_call_title_nothing">Doe niets</string>
-    <string name="theme_step_color_end">Eindstap</string>
     <string name="billing_not_supported">Abonnementen worden momenteel niet ondersteund</string>
     <string name="behaviour_vibration_help">De telefoon laten trillen bij de stap</string>
     <string name="one_layout_edit">Opmaak bewerken</string>
@@ -325,7 +324,6 @@
     <string name="pref_screen_timing_title_open">Wanneer de app geopend is</string>
     <string name="behaviour_notification_help">Toon aan het begin van een stap nog een melding</string>
     <string name="half_option">Herinnering halverwege</string>
-    <string name="theme_step_color_notifier">Meldingsstap</string>
     <string name="intro_start_edit_behaviour">Klik om een herinnering te bewerken. Maak voorlopig eerst de tutorial af</string>
     <string name="sample_timer_template_3_stages_1">Fase 1</string>
     <string name="edit_group">Groep</string>
@@ -400,7 +398,6 @@
 \n
 \nDit kan een tijdelijk probleem zijn, dus probeer het over een paar minuten opnieuw.</string>
     <string name="edit_add_start_too_many">Er is al een beginstap</string>
-    <string name="theme_step_color_normal">Normale stap</string>
     <string name="one_action_show_float">Zwevend venster</string>
     <string name="record_other_data">Overige</string>
     <string name="beep_count_intro_usage">Voer de tijden in waarna de piep moet stoppen</string>
@@ -557,7 +554,6 @@
     <string name="voice_variable_group_loop_desp">Groep huidige lus</string>
     <string name="scheduler_repeat_today">Vandaag</string>
     <string name="dark_theme_scheduled_dark_now">Overgeschakeld naar het donkere thema</string>
-    <string name="theme_step_color_start">Beginstap</string>
     <string name="one_layout_click_hint">Klik wat rond om te zien wat er kan worden aangepast</string>
     <string name="intro_start_sample_timer_name">Trainingsplan</string>
     <string name="app_name">TimeR Machine</string>

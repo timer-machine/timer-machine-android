@@ -212,25 +212,25 @@ class ThemeFragment :
         items += Group(context.getString(RBase.string.theme_step_color_title))
 
         items += StepColor(
-            context.getString(RBase.string.theme_step_color_normal),
+            context.getString(RBase.string.edit_add_normal),
             StepType.NORMAL,
             StepType.NORMAL.getTypeColor(context),
             this
         )
         items += StepColor(
-            context.getString(RBase.string.theme_step_color_notifier),
+            context.getString(RBase.string.edit_add_notifier),
             StepType.NOTIFIER,
             StepType.NOTIFIER.getTypeColor(context),
             this
         )
         items += StepColor(
-            context.getString(RBase.string.theme_step_color_start),
+            context.getString(RBase.string.edit_add_start),
             StepType.START,
             StepType.START.getTypeColor(context),
             this
         )
         items += StepColor(
-            context.getString(RBase.string.theme_step_color_end),
+            context.getString(RBase.string.edit_add_end),
             StepType.END,
             StepType.END.getTypeColor(context),
             this
