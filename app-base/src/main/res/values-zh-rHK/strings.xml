@@ -277,7 +277,6 @@
     <string name="one_shortcut_open_on_click">點擊時打開計時界面</string>
     <string name="one_layout_bar">計時條</string>
     <string name="one_layout_time_size">時間文字大小</string>
-    <string name="one_layout_click_hint">到處點一點，找一找可以設置哪些東西</string>
     <string name="one_layout_edit">編輯頁面</string>
     <!--Time panels-->
     <string name="time_panel_picker">時間標籤選擇</string>

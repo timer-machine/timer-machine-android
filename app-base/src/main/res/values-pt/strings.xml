@@ -321,7 +321,6 @@
     <string name="one_ui_unlock">Desbloquear</string>
     <string name="one_shortcut_name">Nome do atalho</string>
     <string name="one_shortcut_open_on_click">Abrir tela do temporizador ao clicar</string>
-    <string name="one_layout_click_hint">Clique nos elementos para ver o que pode ser personalizado</string>
     <string name="one_layout_edit">Editar layout</string>
     <string name="time_panel_picker">Opções do painel de tempo</string>
     <string name="time_panel_elapsed_time">Tempo decorrido</string>

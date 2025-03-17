@@ -554,7 +554,6 @@
     <string name="voice_variable_group_loop_desp">Groep huidige lus</string>
     <string name="scheduler_repeat_today">Vandaag</string>
     <string name="dark_theme_scheduled_dark_now">Overgeschakeld naar het donkere thema</string>
-    <string name="one_layout_click_hint">Klik wat rond om te zien wat er kan worden aangepast</string>
     <string name="intro_start_sample_timer_name">Trainingsplan</string>
     <string name="app_name">TimeR Machine</string>
     <string name="one_ui_unlock">Ontgrendelen</string>

@@ -49,10 +49,4 @@
         app:li_divider="margin"
         app:li_textPrimary="@string/time_panel_picker" />
 
-    <xyz.aprildown.timer.component.key.ListItemWithLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:li_divider="margin"
-        app:li_textPrimary="@string/one_layout_click_hint" />
-
 </LinearLayout>

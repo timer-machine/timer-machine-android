@@ -97,7 +97,6 @@
     <string name="one_ui_unlock">Desbloquear</string>
     <string name="one_shortcut_open_on_click">Abrir pantalla del temporizador al tocar</string>
     <string name="one_layout_time_size">Tamaño del texto de tiempo</string>
-    <string name="one_layout_click_hint">Toca para ver lo que se puede personalizar</string>
     <string name="one_layout_edit">Editar diseño</string>
     <string name="time_panel_picker">Opciones del panel de tiempo</string>
     <string name="time_panel_elapsed_time">Tiempo transcurrido</string>

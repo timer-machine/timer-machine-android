@@ -266,7 +266,6 @@
     <string name="one_shortcut_open_on_click">Timer-Bildschirm mit Klick öffnen</string>
     <string name="one_layout_time_size">Zeit Textgröße</string>
     <string name="record_other_data">Andere</string>
-    <string name="one_layout_click_hint">Klicke einfach alles an, um zu sehen, was angepasst werden kann</string>
     <string name="notif_channel_fore_desp">Kontrolliert alle Benachrichtigungen</string>
     <string name="notif_channel_screen_title">Bildschirm-Benachrichtigung</string>
     <string name="behaviour_half">Halb</string>

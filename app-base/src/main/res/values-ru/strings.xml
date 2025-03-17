@@ -260,7 +260,6 @@
     <string name="one_shortcut_open_on_click">Открыть экран таймера по нажатию</string>
     <string name="one_action_lock_ui">Заблокировать интерфейс</string>
     <string name="one_layout_time_size">Размер шрифта времени</string>
-    <string name="one_layout_click_hint">Нажимайте всё, чтобы узнать, что можно настроить</string>
     <string name="one_layout_bar">Полоска времени</string>
     <string name="one_layout_edit">Изменить расстановку</string>
     <string name="time_panel_picker">Элементы панели времени</string>
