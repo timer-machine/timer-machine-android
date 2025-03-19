@@ -49,7 +49,6 @@
     <string name="voice_time_variable">Tijd</string>
     <string name="scheduler_starts_action_template">%1$s starten</string>
     <string name="name_loop_loop_hint">Lus</string>
-    <string name="tip_android_12_battery">Taak-ondersteuning vereist toestemming voor \"Batterijoptimalisatie negeren\"</string>
     <string name="notif_channel_timing_desp">Toont de informatie van een lopende timer en zijn acties</string>
     <string name="intro_start_step_time">Klik op <b>de tijd naast de stapnaam</b> en verander de tijd in <b>3 minuten</b>.</string>
     <string name="edit_add_notifier">Meldinggever</string>
@@ -145,7 +144,6 @@
     <string name="voice_variable_timer_loop_desp">Timer huidige lus</string>
     <string name="scheduler_alert_content">Het plannen van werk op Android is lastig. Er is een kans dat het systeem een planner niet activeert. Test planners zelf vooraf, voordat je erop vertrouwt.</string>
     <string name="vibration_count_desp_range">Het aantal moet tussen 0 en 100 liggen</string>
-    <string name="grant">Verlenen</string>
     <string name="help_tts">Tekst-naar-spraak configuratie</string>
     <string name="intro_start_add_reminder">Klik op ➕ onder de stapduur om herinneringen toe te voegen. Laten we <b>muziek</b> en <b>trillen</b> toevoegen.</string>
     <string name="edit_add_group">Groep</string>
@@ -383,7 +381,6 @@
     <string name="delete_confirmation_template">%s verwijderen?</string>
     <string name="pref_audio_focus_title_none">Geen</string>
     <string name="pref_category_title_audio">Audio</string>
-    <string name="tip_android_12_phone_calls">Voor het pauzeren tijdens telefoongesprekken is toestemming vereist voor \"Lees telefoonstatus\"</string>
     <string name="count_times_desp">* Voer aan het einde van de stap het aantal aftelseconden in</string>
     <string name="pref_tweak_time_off">Uitgeschakeld</string>
     <string name="cloud_backup_state_error">Fout</string>

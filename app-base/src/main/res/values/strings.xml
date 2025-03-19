@@ -28,7 +28,6 @@
     <string name="deselect">Deselect</string>
     <string name="share">Share</string>
     <string name="dismiss">Dismiss</string>
-    <string name="grant">Grant</string>
 
     <!--App actions-->
     <string name="start">Start</string>
@@ -806,9 +805,6 @@
     <string name="intro_location">You can find the tutorial in \"Help &amp; Feedback\"</string>
 
     <string name="tip_missed_timer"><b>Some timers are stopped abnormally!</b>\n\nIt is probably because the system kills the app in the background. <b>To resolve this problem, please consider whitelisting this app in system settings.</b></string>
-
-    <string name="tip_android_12_phone_calls">Pausing on phone calls now requires \"Read phone status\" permission</string>
-    <string name="tip_android_12_battery">Tasker support now requires \"Ignore Battery Optimization\" permission</string>
 
     <!--Updates-->
     <string name="update_title">Changelog</string>

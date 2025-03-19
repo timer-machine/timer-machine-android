@@ -26,7 +26,6 @@
     <string name="deselect">取消选择</string>
     <string name="share">分享</string>
     <string name="dismiss">关闭</string>
-    <string name="grant">授权</string>
     <!--App actions-->
     <string name="start">开始</string>
     <string name="pause">暂停</string>
@@ -575,8 +574,6 @@
     <string name="intro_exit_previous_hint">如果要返回上一步，请点击屏幕底端的<b>左箭头</b>。</string>
     <string name="intro_location">你可以在“帮助与反馈”中找到该使用教程</string>
     <string name="tip_missed_timer"><b>计时器被非正常地停止了！</b>\n\n这很有可能是系统杀掉了在后台的应用。<b>为了解决该问题，请考虑将本应用在系统设置中白名单。</b></string>
-    <string name="tip_android_12_phone_calls">当手机在通话时暂停计时器现需要\"获取手机信息\"的权限</string>
-    <string name="tip_android_12_battery">Tasker支持现需要\"忽略电池优化\"的权限</string>
     <!--Updates-->
     <string name="update_title">更新内容</string>
     <!--Tasker-->

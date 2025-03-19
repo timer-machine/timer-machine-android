@@ -197,7 +197,6 @@
     <string name="record_this_year">В этом году</string>
     <string name="record_total_time">С первого дня</string>
     <string name="billing_a_part_of_iap">Это одно из покупок внутри приложения.</string>
-    <string name="grant">Наделить</string>
     <string name="trash_done_template">Таймер %s перемещён в Корзину</string>
     <string name="music_saf_pick">Выбрать через SAF</string>
     <string name="edit_add_notifier_desp">Удобное напоминание о шаге. Помнит ваши изменения</string>

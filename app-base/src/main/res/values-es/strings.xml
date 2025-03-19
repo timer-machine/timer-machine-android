@@ -159,7 +159,6 @@
     <string name="exit">Salir</string>
     <string name="dismiss">Descartar</string>
     <string name="deselect">Deseleccionar</string>
-    <string name="grant">Conceder</string>
     <string name="stop">Detener</string>
     <string name="thanks">¡Gracias por tu apoyo!</string>
     <string name="timer_pick_required">Toca para seleccionar un temporizador</string>
@@ -535,8 +534,6 @@
     <string name="intro_exit_confirmation">¿Salir del tutorial\?</string>
     <string name="intro_exit_difficult_app_alert">Sin terminar el tutorial, la aplicación puede resultar confusa de usar.</string>
     <string name="intro_location">Puedes encontrar el tutorial en \"Ayuda y comentarios\"</string>
-    <string name="tip_android_12_phone_calls">La pausa en las llamadas telefónicas ahora requiere el permiso \"Leer estado del teléfono\"</string>
-    <string name="tip_android_12_battery">La compatibilidad con Tasker ahora requiere el permiso \"Ignorar optimización de batería\"</string>
     <string name="tasker_edit_title">Plugin para TimeR Machine</string>
     <string name="update_title">Registro de cambios</string>
     <string name="whitelist_disclaimer"><b>Muchos fabricantes de Android pueden detener las aplicaciones en ejecución cuando la pantalla está apagada o al cambiar a otra aplicación</b>, que es un problema conocido de Android.

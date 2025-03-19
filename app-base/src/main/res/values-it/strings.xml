@@ -193,7 +193,6 @@
     <string name="beep_respect_other">Rispetta gli altri suoni</string>
     <string name="beep_count_intro_usage">Inserire la durata del suono del bip</string>
     <string name="half_option_voice_desp">(Default) Leggi \"Metà del tempo\"</string>
-    <string name="grant">Permetti</string>
     <string name="unknown">Sconosciuto</string>
     <string name="time_picker_type_scroll">Scorri</string>
     <string name="edit_add_notifier_desp">Uno step utile come memo. Ricorda la tua modifica</string>

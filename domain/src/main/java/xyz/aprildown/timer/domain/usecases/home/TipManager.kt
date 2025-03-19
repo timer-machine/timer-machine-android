@@ -1,6 +1,5 @@
 package xyz.aprildown.timer.domain.usecases.home
 
-import android.os.Build
 import dagger.Reusable
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.CoroutineScope
@@ -34,9 +33,6 @@ class TipManager @Inject constructor(
             when {
                 !isOldUser && !isTipChecked(TIP_TUTORIAL) -> {
                     tipFlow.value = TIP_TUTORIAL
-
-                    // This tip only affects old users.
-                    checkTip(TIP_ANDROID_12)
                 }
                 !isOldUser && !isTipChecked(TIP_WHITELIST) -> {
                     tipFlow.value = TIP_WHITELIST
@@ -44,9 +40,6 @@ class TipManager @Inject constructor(
                 !isTipChecked(TIP_MISSED_TIMER, default = true) &&
                     !appTracker.hasCrashedInLastSession() -> {
                     tipFlow.value = TIP_MISSED_TIMER
-                }
-                Build.VERSION.SDK_INT >= Build.VERSION_CODES.S && !isTipChecked(TIP_ANDROID_12) -> {
-                    tipFlow.value = TIP_ANDROID_12
                 }
             }
         }
@@ -58,7 +51,7 @@ class TipManager @Inject constructor(
 
         when (tip) {
             TIP_TUTORIAL -> tipFlow.value = TIP_WHITELIST
-            TIP_WHITELIST, TIP_MISSED_TIMER, TIP_ANDROID_12 -> tipFlow.value = TIP_NO_MORE
+            TIP_WHITELIST, TIP_MISSED_TIMER -> tipFlow.value = TIP_NO_MORE
             else -> error("Unknown onboarding tip $tip")
         }
     }
@@ -92,7 +85,7 @@ class TipManager @Inject constructor(
         const val TIP_TUTORIAL = 1
         const val TIP_WHITELIST = 2
         const val TIP_MISSED_TIMER = 3
-        const val TIP_ANDROID_12 = 4
+        // const val TIP_ANDROID_12 = 4 // Legacy
 
         private const val PREF_OLD_INTRO = "pref_first_start_app_screen"
     }

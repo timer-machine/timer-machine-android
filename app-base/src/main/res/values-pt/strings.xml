@@ -28,7 +28,6 @@
     <string name="deselect">Desmarcar</string>
     <string name="share">Compartilhar</string>
     <string name="dismiss">Dispensar</string>
-    <string name="grant">Conceder</string>
     <string name="start">Iniciar</string>
     <string name="pause">Pausar</string>
     <string name="stop">Parar</string>
@@ -551,8 +550,6 @@
     <string name="intro_exit_difficult_app_alert">Sem terminar o tutorial o app pode ser confuso de usar.</string>
     <string name="intro_exit_previous_hint">Para voltar ao passo anterior, clique na <b>seta esquerda</b> na parte inferior da tela.</string>
     <string name="intro_location">Você pode encontrar o tutorial em \"Ajuda e comentários\"</string>
-    <string name="tip_android_12_phone_calls">Pausar em chamadas telefônicas agora requer a permissão \"Ler estado do telefone\"</string>
-    <string name="tip_android_12_battery">A compatibilidade com o Tasker agora requer a permissão \"Ignorar otimização da bateria\"</string>
     <string name="update_title">Registro de mudanças</string>
     <string name="tasker_edit_title">Plugin para o TimeR Machine</string>
     <string name="tasker_event_timer_starts">Ativar quando <xliff:g example="Timer name" id="timer_name">%s</xliff:g> começa</string>
