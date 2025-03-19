@@ -389,15 +389,21 @@ class EditActivity :
         hideKeyboard()
 
         DurationPicker(this) { hours, minutes, seconds ->
-            val time = (hours * 3600L + minutes * 60L + seconds) * 1000L
-            val item = getStepFromFastAdapter(position)
-            if (item.stepType == StepType.NOTIFIER) {
-                viewModel.notifier = viewModel.notifier.copy(length = time)
-            }
-            item.length = time
-            fastAdapter.notifyAdapterItemChanged(position, EditableStep.Event.Length)
-            postUpdateTotalTime()
+            updateStepLength(
+                position = position,
+                length = (hours * 3600L + minutes * 60L + seconds) * 1000L,
+            )
         }.show()
+    }
+
+    private fun updateStepLength(position: Int, length: Long) {
+        val item = getStepFromFastAdapter(position)
+        if (item.stepType == StepType.NOTIFIER) {
+            viewModel.notifier = viewModel.notifier.copy(length = length)
+        }
+        item.length = length
+        fastAdapter.notifyAdapterItemChanged(position, EditableStep.Event.Length)
+        postUpdateTotalTime()
     }
 
     override fun onAddBtnClick(view: View, position: Int) {
@@ -666,7 +672,10 @@ class EditActivity :
                             changeBehaviour(BehaviourType.MUSIC, position) {
                                 it.toMusicAction().copy(loop = isChecked).toBehaviourEntity()
                             }
-                        }
+                        },
+                        onTrimStepDuration = { duration ->
+                            updateStepLength(position = position, length = duration)
+                        },
                     )
                 }
                 BehaviourType.VIBRATION -> {

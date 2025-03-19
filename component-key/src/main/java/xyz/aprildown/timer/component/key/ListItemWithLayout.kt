@@ -67,6 +67,7 @@ class ListItemWithLayout(
 
     override fun setEnabled(enabled: Boolean) {
         super.setEnabled(enabled)
+        listItem.isEnabled = enabled
         inflatedView?.isEnabled = enabled
     }
 

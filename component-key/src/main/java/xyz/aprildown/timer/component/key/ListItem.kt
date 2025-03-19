@@ -85,4 +85,10 @@ class ListItem(
             minimumHeight = res.getDimensionPixelSize(R.dimen.list_item_two_lines_height)
         }
     }
+
+    override fun setEnabled(enabled: Boolean) {
+        super.setEnabled(enabled)
+        primaryTextView.isEnabled = enabled
+        secondaryTextView.isEnabled = enabled
+    }
 }

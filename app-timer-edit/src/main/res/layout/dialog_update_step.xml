@@ -4,6 +4,7 @@
     android:layout_height="wrap_content">
 
     <include
+        android:id="@+id/layoutStep"
         layout="@layout/item_edit_step"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

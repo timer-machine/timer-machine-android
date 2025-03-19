@@ -14,11 +14,13 @@ import com.github.zawadz88.materialpopupmenu.MaterialPopupMenuBuilder
 import xyz.aprildown.timer.app.base.data.PreferenceData.storedAudioFocusType
 import xyz.aprildown.timer.app.base.data.PreferenceData.storedAudioTypeValue
 import xyz.aprildown.timer.app.base.data.PreferenceData.useVoiceContent2
+import xyz.aprildown.timer.app.base.media.getMediaDuration
 import xyz.aprildown.timer.app.timer.edit.media.BeepDialog
 import xyz.aprildown.timer.app.timer.edit.media.HalfDialog
 import xyz.aprildown.timer.app.timer.edit.media.VibrationDialog
 import xyz.aprildown.timer.app.timer.edit.media.VoiceDialog
 import xyz.aprildown.timer.app.timer.edit.voice.VoiceVariableDialog
+import xyz.aprildown.timer.component.key.ListItem
 import xyz.aprildown.timer.component.key.SimpleInputDialog
 import xyz.aprildown.timer.component.key.switchItem
 import xyz.aprildown.timer.domain.entities.BeepAction
@@ -32,12 +34,14 @@ import xyz.aprildown.timer.domain.entities.VoiceAction
 import xyz.aprildown.timer.domain.utils.Constants
 import xyz.aprildown.tools.helper.safeSharedPreference
 import xyz.aprildown.timer.app.base.R as RBase
+import xyz.aprildown.timer.component.key.R as RComponent
 
 internal fun MaterialPopupMenuBuilder.addMusicItems(
     context: Context,
     action: MusicAction,
     onPickMusicClick: () -> Unit,
-    onLoopChanged: (Boolean) -> Unit
+    onLoopChanged: (Boolean) -> Unit,
+    onTrimStepDuration: (Long) -> Unit,
 ) {
     section {
         item {
@@ -54,6 +58,28 @@ internal fun MaterialPopupMenuBuilder.addMusicItems(
             onCheckedChange = { _, isChecked ->
                 onLoopChanged.invoke(isChecked)
             }
+        }
+        customItem {
+            layoutResId = RComponent.layout.layout_list_item
+            val uri = action.uri.takeIf { it.isNotBlank() }?.toUri()
+            viewBoundCallback = { view ->
+                val listItem = view as ListItem
+                listItem.setPrimaryText(RBase.string.music_trim_step_duration)
+                listItem.isEnabled = uri != null
+            }
+            if (uri != null) {
+                callback = {
+                    val duration = uri.getMediaDuration(context)
+                    var result = duration / 1000L * 1000L
+                    if (result < duration) {
+                        result += 1000L
+                    }
+                    if (duration >= 1000L) {
+                        onTrimStepDuration(duration)
+                    }
+                }
+            }
+            dismissOnSelect = false
         }
     }
 }

@@ -5,10 +5,8 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.view.View
-import android.widget.EditText
 import androidx.activity.result.PickVisualMediaRequest
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.cardview.widget.CardView
 import androidx.core.net.toUri
 import androidx.core.widget.ImageViewCompat
 import androidx.fragment.app.DialogFragment
@@ -21,8 +19,9 @@ import xyz.aprildown.timer.app.base.data.PreferenceData.getTypeColor
 import xyz.aprildown.timer.app.base.ui.AppNavigator
 import xyz.aprildown.timer.app.base.ui.StepUpdater
 import xyz.aprildown.timer.app.base.utils.produceTime
+import xyz.aprildown.timer.app.timer.edit.databinding.DialogUpdateStepBinding
+import xyz.aprildown.timer.app.timer.edit.databinding.ItemEditStepBinding
 import xyz.aprildown.timer.component.key.DurationPicker
-import xyz.aprildown.timer.component.key.RoundTextView
 import xyz.aprildown.timer.component.key.behaviour.EditableBehaviourLayout
 import xyz.aprildown.timer.domain.entities.BehaviourEntity
 import xyz.aprildown.timer.domain.entities.BehaviourType
@@ -50,8 +49,7 @@ class UpdateStepDialog :
     @Inject
     lateinit var appNavigator: AppNavigator
 
-    private lateinit var editName: EditText
-    private lateinit var behaviourLayout: EditableBehaviourLayout
+    private lateinit var binding: ItemEditStepBinding
 
     private var length = 0L
 
@@ -75,14 +73,15 @@ class UpdateStepDialog :
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         val context = requireContext()
-        val view = View.inflate(context, R.layout.dialog_update_step, null)
+        val dialogBinding = DialogUpdateStepBinding.inflate(layoutInflater)
+        binding = dialogBinding.layoutStep
         val step = step
         val onUpdate = onUpdate
         if (step == null || onUpdate == null) {
             dismiss()
             return super.onCreateDialog(savedInstanceState)
         }
-        view.setUpUpdateStepView(step)
+        binding.setUpUpdateStepView(step)
         return MaterialAlertDialogBuilder(context)
             .setCancelable(false)
             .setTitle(RBase.string.edit_step)
@@ -90,10 +89,10 @@ class UpdateStepDialog :
             .setPositiveButton(android.R.string.ok) { _, _ ->
                 onUpdate.invoke(
                     StepEntity.Step(
-                        editName.text.toString(),
-                        length,
-                        behaviourLayout.getBehaviours(),
-                        step.type
+                        label = binding.editStepName.text.toString(),
+                        length = length,
+                        behaviour = binding.layoutBehaviour.getBehaviours(),
+                        type = step.type,
                     )
                 )
             }
@@ -101,38 +100,37 @@ class UpdateStepDialog :
             .create()
     }
 
-    private fun View.setUpUpdateStepView(step: StepEntity.Step) {
-        val context = context
+    private fun ItemEditStepBinding.setUpUpdateStepView(step: StepEntity.Step) {
+        val context = root.context
 
-        findViewById<CardView>(R.id.cardEditStep).cardElevation = 0f
+        cardEditStep.cardElevation = 0f
 
         val color = step.type.getTypeColor(context)
-        ImageViewCompat.setImageTintList(findViewById(R.id.colorStep), color.toColorStateList())
-        findViewById<View>(R.id.viewStepGroupIndicatorStart).gone()
-        findViewById<View>(R.id.viewStepGroupIndicatorEnd).gone()
+        ImageViewCompat.setImageTintList(colorStep, color.toColorStateList())
+        viewStepGroupIndicatorStart.gone()
+        viewStepGroupIndicatorEnd.gone()
 
-        editName = findViewById(R.id.editStepName)
-        editName.setText(step.label)
+        editStepName.setText(step.label)
 
-        val lengthLabel = findViewById<RoundTextView>(R.id.textStepLength)
-        lengthLabel.setBgColor(color)
-        fun updateLength(length: Long) {
-            lengthLabel.text = length.produceTime()
-            this@UpdateStepDialog.length = length
-        }
+        textStepLength.setBgColor(color)
+
         updateLength(step.length)
-        lengthLabel.setOnClickListener {
+        textStepLength.setOnClickListener {
             DurationPicker(context) { hours, minutes, seconds ->
                 updateLength((hours * 3600L + minutes * 60L + seconds) * 1000L)
             }.show()
         }
 
-        findViewById<View>(R.id.btnStepAdd).gone()
+        btnStepAdd.gone()
 
-        behaviourLayout = findViewById(R.id.layoutBehaviour)
-        behaviourLayout.setEnabledColor(color)
-        behaviourLayout.setBehaviours(step.behaviour)
-        behaviourLayout.setListener(this@UpdateStepDialog)
+        layoutBehaviour.setEnabledColor(color)
+        layoutBehaviour.setBehaviours(step.behaviour)
+        layoutBehaviour.setListener(this@UpdateStepDialog)
+    }
+
+    private fun updateLength(length: Long) {
+        binding.textStepLength.text = length.produceTime()
+        this@UpdateStepDialog.length = length
     }
 
     override fun showBehaviourSettingsView(
@@ -177,7 +175,8 @@ class UpdateStepDialog :
                             changeBehaviour(BehaviourType.MUSIC) {
                                 it.toMusicAction().copy(loop = isChecked).toBehaviourEntity()
                             }
-                        }
+                        },
+                        onTrimStepDuration = ::updateLength,
                     )
                 }
                 BehaviourType.VIBRATION -> {
@@ -318,7 +317,7 @@ class UpdateStepDialog :
     ) {
         var found = false
         val newBehaviours = mutableListOf<BehaviourEntity>()
-        behaviourLayout.getBehaviours().forEach {
+        binding.layoutBehaviour.getBehaviours().forEach {
             if (it.type == type) {
                 newBehaviours += transform.invoke(it)
                 found = true
@@ -329,7 +328,7 @@ class UpdateStepDialog :
         if (!found) {
             newBehaviours += transform(BehaviourEntity(type))
         }
-        behaviourLayout.setBehaviours(newBehaviours)
+        binding.layoutBehaviour.setBehaviours(newBehaviours)
     }
 
     companion object : StepUpdater {
