@@ -144,8 +144,6 @@
     <string name="behaviour_music_help">Play music at this step</string>
     <string name="music_pick_ringtone">Pick Step Music</string>
     <string name="music_loop">Loop</string>
-    <string name="music_saf_pick">SAF Pick</string>
-    <string name="music_saf_pick_desp">If you would like to pick music without granting permission, or the default ringtone picker doesn\'t show your music, enabling this option might help.</string>
     <string name="music_trim_step_duration">Trim step duration</string>
 
     <string name="behaviour_vibration">Vibration</string>

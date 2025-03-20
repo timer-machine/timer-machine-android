@@ -6,14 +6,14 @@ import android.content.Intent
 import android.media.RingtoneManager
 import android.net.Uri
 import android.os.Bundle
+import android.text.Spanned
+import android.text.style.ForegroundColorSpan
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import androidx.core.content.IntentCompat
 import androidx.core.content.edit
-import androidx.core.view.MenuItemCompat
-import com.github.deweyreed.tools.helper.toColorStateList
-import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import androidx.core.text.buildSpannedString
 import dagger.hilt.android.AndroidEntryPoint
 import xyz.aprildown.timer.app.base.data.PreferenceData.storedAudioTypeValue
 import xyz.aprildown.timer.app.base.ui.BaseActivity
@@ -75,40 +75,32 @@ class RingtonePickerActivity :
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        menuInflater.inflate(R.menu.ringtone_picker, menu)
+        menu?.add("")?.run {
+            setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM)
+            setOnMenuItemClickListener {
+                usingSafPick = !usingSafPick
+                applyNewSafPickSetting()
+                true
+            }
+        }
         return true
     }
 
     override fun onPrepareOptionsMenu(menu: Menu?): Boolean {
-        menu?.findItem(R.id.action_ringtone_picker_saf)?.let {
-            MenuItemCompat.setIconTintList(
-                it,
-                if (usingSafPick) newDynamicTheme.colorSecondary.toColorStateList() else null
-            )
-        }
-        return true
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when (item.itemId) {
-            R.id.action_ringtone_picker_saf -> {
+        val menuItem = menu?.getItem(0)
+        menuItem?.setTitle(
+            buildSpannedString {
+                append("SAF")
                 if (usingSafPick) {
-                    usingSafPick = false
-                    applyNewSafPickSetting()
-                } else {
-                    MaterialAlertDialogBuilder(this)
-                        .setTitle(RBase.string.music_saf_pick)
-                        .setMessage(RBase.string.music_saf_pick_desp)
-                        .setPositiveButton(RBase.string.enable) { _, _ ->
-                            usingSafPick = true
-                            applyNewSafPickSetting()
-                        }
-                        .setNegativeButton(RBase.string.cancel, null)
-                        .show()
+                    setSpan(
+                        ForegroundColorSpan(newDynamicTheme.colorSecondary),
+                        0,
+                        length,
+                        Spanned.SPAN_EXCLUSIVE_EXCLUSIVE
+                    )
                 }
             }
-            else -> return false
-        }
+        )
         return true
     }
 

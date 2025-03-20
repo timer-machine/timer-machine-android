@@ -104,7 +104,6 @@
     <string name="behaviour_music_help">Riproduci della musica in questo passaggio</string>
     <string name="music_pick_ringtone">Scegli la musica del passaggio</string>
     <string name="music_loop">Ripeti</string>
-    <string name="music_saf_pick_desp">Abilitare questa opzione potrebbe aiutare se vuoi scegliere la musica senza dare il permesso oppure se la scelta della suoneria di default non mostra la tua musica.</string>
     <string name="behaviour_vibration">Vibrazione</string>
     <string name="vibration_count">Numero di vibrazioni</string>
     <string name="vibration_pattern">Tipo di vibrazione</string>
@@ -196,5 +195,4 @@
     <string name="unknown">Sconosciuto</string>
     <string name="time_picker_type_scroll">Scorri</string>
     <string name="edit_add_notifier_desp">Uno step utile come memo. Ricorda la tua modifica</string>
-    <string name="music_saf_pick">Scegli SAF</string>
 </resources>

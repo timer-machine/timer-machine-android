@@ -130,8 +130,6 @@
     <string name="behaviour_music_help">在此步驟播放音樂</string>
     <string name="music_pick_ringtone">選擇步驟鈴聲</string>
     <string name="music_loop">循環</string>
-    <string name="music_saf_pick">SAF音樂選擇</string>
-    <string name="music_saf_pick_desp">如果你想在不授予許可權的情況下挑選音樂，或者預設的鈴聲挑選器不顯示你的音樂，啟用此選項可能有幫助。</string>
     <string name="music_trim_step_duration">裁剪步驟時長</string>
     <string name="behaviour_vibration">振動</string>
     <string name="behaviour_vibration_help">在此步驟振動手機</string>

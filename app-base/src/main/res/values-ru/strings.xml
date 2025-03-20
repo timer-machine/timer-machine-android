@@ -15,7 +15,6 @@
     <string name="name_loop_loop_hint">Цикл</string>
     <string name="edit_add_notifier">Оповещение</string>
     <string name="beep_count_title">Количество звуковых сигналов</string>
-    <string name="music_saf_pick_desp">Если вы хотите выбирать музыку без разрешения или в программе выбора рингтонов по умолчанию не отображается ваша музыка, включение этой опции может помочь.</string>
     <string name="edit_add_end_desp">Одно действие в конце всего задания, для завершения</string>
     <string name="voice_variable_timer_elapsed_desp">Прошедшее время со старта</string>
     <string name="edit_more_a11y">Другие настройки таймера</string>
@@ -198,7 +197,6 @@
     <string name="record_total_time">С первого дня</string>
     <string name="billing_a_part_of_iap">Это одно из покупок внутри приложения.</string>
     <string name="trash_done_template">Таймер %s перемещён в Корзину</string>
-    <string name="music_saf_pick">Выбрать через SAF</string>
     <string name="edit_add_notifier_desp">Удобное напоминание о шаге. Помнит ваши изменения</string>
     <string name="vibration_pattern">Частота</string>
     <string name="half_option">Напоминание о половине</string>

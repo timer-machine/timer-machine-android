@@ -53,7 +53,6 @@
     <string name="intro_start_step_time">Klik op <b>de tijd naast de stapnaam</b> en verander de tijd in <b>3 minuten</b>.</string>
     <string name="edit_add_notifier">Meldinggever</string>
     <string name="beep_count_title">Piep aantal</string>
-    <string name="music_saf_pick_desp">Als je muziek wilt kiezen zonder toestemming te verlenen, of als de standaard beltoon-kiezer je muziek niet toont, kan het inschakelen van deze optie helpen.</string>
     <string name="tip_missed_timer"><b> Sommige timers worden abnormaal gestopt!</b>
 \n
 \nDit komt waarschijnlijk omdat het systeem de app op de achtergrond stopt. <b>Om dit probleem op te lossen, kun je deze app in de systeeminstellingen op de Witte lijst zetten.</b></string>
@@ -542,7 +541,6 @@
     <string name="record_deleted_timer">Verwijderd</string>
     <string name="time_panel_elapsed_time">Verstreken tijd</string>
     <string name="scheduler_repeat_tomorrow">Morgen</string>
-    <string name="music_saf_pick">SAF kiezen</string>
     <string name="sample_timer_template_title">Timer-sjabloon</string>
     <string name="notif_a11y_start_ally">Alle timers starten</string>
     <string name="help_tts_test_system_settings">Nee. Ik wil graag naar de systeeminstellingen gaan</string>

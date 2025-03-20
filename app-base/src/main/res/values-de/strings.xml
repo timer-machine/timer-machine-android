@@ -93,8 +93,6 @@
     <string name="behaviour_music">Musik</string>
     <string name="music_pick_ringtone">Schritt-Musik auswählen</string>
     <string name="music_loop">Musik-Loop</string>
-    <string name="music_saf_pick">SAF-Auswahl</string>
-    <string name="music_saf_pick_desp">Wenn Sie Musik auswählen möchten, ohne eine Erlaubnis zu erteilen, oder wenn die Standard-Klingeltonauswahl Ihre Musik nicht anzeigt, kann die Aktivierung dieser Option helfen.</string>
     <string name="behaviour_vibration">Vibration</string>
     <string name="behaviour_vibration_help">Bei diesem Schritt vibrieren</string>
     <string name="vibration_count">Anzahl</string>

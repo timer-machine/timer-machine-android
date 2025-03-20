@@ -206,8 +206,6 @@
     <string name="behaviour_music_help">Tocar música nesta etapa</string>
     <string name="music_pick_ringtone">Selecionar música de etapa</string>
     <string name="music_loop">Em repetição</string>
-    <string name="music_saf_pick">Seleção SAF</string>
-    <string name="music_saf_pick_desp">Se quer escolher música sem autorizar a permissão, ou o menu padrão de toques não mostra a sua música, habilitar esta opção pode ajudar.</string>
     <string name="behaviour_vibration">Vibração</string>
     <string name="behaviour_vibration_help">Vibrar o dispositivo nesta etapa</string>
     <string name="vibration_count_desp_0">0 para vibrar durante toda esta etapa</string>
