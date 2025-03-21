@@ -617,4 +617,5 @@
     <string name="behaviour_image">Afbeelding</string>
     <string name="behaviour_image_help">Voeg een afbeelding bij de stap</string>
     <string name="image_pick">Kies een afbeelding</string>
+    <string name="music_trim_step_duration">Stap duur inkorten</string>
 </resources>
