@@ -13,6 +13,7 @@ import xyz.aprildown.timer.app.base.data.PreferenceData.getTypeColor
 import xyz.aprildown.timer.app.base.data.PreferenceData.oneLayout
 import xyz.aprildown.timer.app.base.data.PreferenceData.oneOneFourActions
 import xyz.aprildown.timer.app.base.data.PreferenceData.oneOneTimeSize
+import xyz.aprildown.timer.app.base.data.PreferenceData.oneOneUsingStep
 import xyz.aprildown.timer.app.base.data.PreferenceData.oneOneUsingTimingBar
 import xyz.aprildown.timer.app.base.data.PreferenceData.saveTypeColor
 import xyz.aprildown.timer.app.base.data.PreferenceData.shouldNotifierPlusGoBack
@@ -284,6 +285,7 @@ private class AudioTypePreferenceItem : PreferenceItem {
 private class OneLayoutPreferenceItem : PreferenceItem {
     override fun storeToMap(context: Context, map: MutableMap<String, String>) {
         map[KEY_LAYOUT] = context.oneLayout
+        map[KEY_ONE_STEP] = context.oneOneUsingStep.toString()
         map[KEY_ONE_BAR] = context.oneOneUsingTimingBar.toString()
         map[KEY_ONE_SIZE] = context.oneOneTimeSize.toString()
         map[KEY_FOUR_ACTIONS] = context.oneOneFourActions.joinToString(separator = ",")
@@ -297,6 +299,9 @@ private class OneLayoutPreferenceItem : PreferenceItem {
     ) {
         prefs.ifHasKey(KEY_LAYOUT) {
             editor.putString(KEY_LAYOUT, it)
+        }
+        prefs.ifHasKey(KEY_ONE_STEP) {
+            context.oneOneUsingStep = it.toBoolean()
         }
         prefs.ifHasKey(KEY_ONE_BAR) {
             context.oneOneUsingTimingBar = it.toBoolean()
@@ -314,6 +319,7 @@ private class OneLayoutPreferenceItem : PreferenceItem {
 
     companion object {
         private const val KEY_LAYOUT = PreferenceData.KEY_ONE_LAYOUT
+        private const val KEY_ONE_STEP = PreferenceData.PREF_ONE_LAYOUT_ONE_STEP
         private const val KEY_ONE_BAR = PreferenceData.PREF_ONE_LAYOUT_ONE_TIMING_BAR
         private const val KEY_ONE_SIZE = PreferenceData.PREF_ONE_LAYOUT_ONE_TIME_SIZE
         private const val KEY_FOUR_ACTIONS = PreferenceData.PREF_ONE_LAYOUT_ONE_ACTIONS

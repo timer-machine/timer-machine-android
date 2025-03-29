@@ -347,6 +347,7 @@
     <string name="one_shortcut_name">Shortcut name</string>
     <string name="one_shortcut_open_on_click">Open timer screen on click</string>
 
+    <string name="one_layout_step">Step</string>
     <string name="one_layout_bar">Timing Bar</string>
     <string name="one_layout_time_size">Time Text Size</string>
 
