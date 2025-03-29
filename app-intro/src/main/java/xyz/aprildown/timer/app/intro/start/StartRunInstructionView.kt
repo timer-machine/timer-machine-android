@@ -42,6 +42,11 @@ internal class StartRunInstructionView : InstructionView<LayoutIntroStartRunBind
                 text = (timer.steps.first() as StepEntity.Step).length.produceTime()
             }
 
+            findViewById<TextView>(RTimerOne.id.textOneStep).run {
+                textSize = context.dp(context.oneOneTimeSize)
+                text = (timer.steps.first() as StepEntity.Step).label
+            }
+
             findViewById<TextView>(RTimerOne.id.textOneLoop)
                 .text = index.getNiceLoopString(max = timer.loop)
 

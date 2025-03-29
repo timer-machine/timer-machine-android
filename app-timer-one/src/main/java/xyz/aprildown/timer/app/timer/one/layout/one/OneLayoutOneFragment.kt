@@ -5,6 +5,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.ViewStub
 import android.widget.CompoundButton
+import android.widget.LinearLayout
 import android.widget.ProgressBar
 import android.widget.SeekBar
 import android.widget.TextView
@@ -17,6 +18,7 @@ import com.github.zawadz88.materialpopupmenu.popupMenu
 import xyz.aprildown.timer.app.base.data.PreferenceData
 import xyz.aprildown.timer.app.base.data.PreferenceData.oneOneFourActions
 import xyz.aprildown.timer.app.base.data.PreferenceData.oneOneTimeSize
+import xyz.aprildown.timer.app.base.data.PreferenceData.oneOneUsingStep
 import xyz.aprildown.timer.app.base.data.PreferenceData.oneOneUsingTimingBar
 import xyz.aprildown.timer.app.base.data.PreferenceData.timePanels
 import xyz.aprildown.timer.app.base.data.ShowcaseData
@@ -45,6 +47,9 @@ internal class OneLayoutOneFragment :
         view.findViewById<TextView>(R.id.textOneTime).run {
             text = 8158000L.produceTime()
         }
+        view.findViewById<TextView>(R.id.textOneStep).run {
+            text = ShowcaseData.getSampleSteps()[0].label
+        }
         view.findViewById<TextView>(R.id.textOneLoop).text = "1/3"
         view.findViewById<StepListView>(R.id.listOneSteps).run {
             setHasFixedSize(true)
@@ -56,6 +61,7 @@ internal class OneLayoutOneFragment :
         view.findViewById<TweakTimeLayout>(R.id.layoutOneTweakTime)
             .setCallback(requireActivity(), this)
 
+        toggleStep(context.oneOneUsingStep)
         toggleTimingBar(context.oneOneUsingTimingBar)
         setTimeTextSize(context.oneOneTimeSize)
         toggleTimePanels()
@@ -96,6 +102,16 @@ internal class OneLayoutOneFragment :
         val context = requireContext()
         val view = View.inflate(context, R.layout.layout_one_settings_one, null)
 
+        view.findViewById<ListItemWithLayout>(R.id.itemOneLayoutOneStep).run {
+            getLayoutView<CompoundButton>().run {
+                isChecked = context.oneOneUsingStep
+                setOnCheckedChangeListener { _, isChecked ->
+                    toggleStep(isChecked)
+                    context.oneOneUsingStep = isChecked
+                }
+            }
+        }
+
         view.findViewById<ListItemWithLayout>(R.id.itemOneLayoutOneBar).run {
             getLayoutView<CompoundButton>().run {
                 isChecked = context.oneOneUsingTimingBar
@@ -133,6 +149,11 @@ internal class OneLayoutOneFragment :
         return view
     }
 
+    private fun toggleStep(show: Boolean) {
+        val view = requireView()
+        view.findViewById<LinearLayout?>(R.id.layoutTextOneStep).visibility = if (show) View.VISIBLE else View.GONE
+    }
+
     private fun toggleTimingBar(show: Boolean) {
         val view = requireView()
         val stub: ViewStub? = view.findViewById(R.id.stubTimingBar)
@@ -152,6 +173,7 @@ internal class OneLayoutOneFragment :
 
     private fun setTimeTextSize(size: Int) {
         view?.findViewById<TextView>(R.id.textOneTime)?.textSize = requireContext().dp(size)
+        view?.findViewById<TextView>(R.id.textOneStep)?.textSize = requireContext().dp(size)
     }
 
     private fun toggleTimePanels() {

@@ -180,6 +180,11 @@ object PreferenceData {
 
     // region One Layout: One
 
+    const val PREF_ONE_LAYOUT_ONE_STEP = "pref_one_one_step"
+    var Context.oneOneUsingStep: Boolean
+        get() = safeSharedPreference.getBoolean(PREF_ONE_LAYOUT_ONE_STEP, false)
+        set(value) = safeSharedPreference.edit { putBoolean(PREF_ONE_LAYOUT_ONE_STEP, value) }
+
     const val PREF_ONE_LAYOUT_ONE_TIMING_BAR = "pref_one_one_timing_bar"
     var Context.oneOneUsingTimingBar: Boolean
         get() = safeSharedPreference.getBoolean(PREF_ONE_LAYOUT_ONE_TIMING_BAR, false)
