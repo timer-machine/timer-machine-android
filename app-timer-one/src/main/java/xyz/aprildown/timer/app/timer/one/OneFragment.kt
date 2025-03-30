@@ -19,6 +19,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import xyz.aprildown.timer.app.base.data.PreferenceData
 import xyz.aprildown.timer.app.base.data.PreferenceData.oneOneFourActions
 import xyz.aprildown.timer.app.base.data.PreferenceData.oneOneTimeSize
+import xyz.aprildown.timer.app.base.data.PreferenceData.oneOneUsingStep
 import xyz.aprildown.timer.app.base.data.PreferenceData.oneOneUsingTimingBar
 import xyz.aprildown.timer.app.base.data.PreferenceData.timePanels
 import xyz.aprildown.timer.app.base.utils.produceTime
@@ -213,6 +214,11 @@ class OneFragment :
 
     private fun applySettings(binding: FragmentOneBinding) {
         val context = binding.root.context
+
+        binding.textOneStep.textSize = context.dp(context.oneOneTimeSize)
+        binding.layoutTextOneStep.visibility = if (context.oneOneUsingStep) View.VISIBLE else View.GONE
+        binding.textOneStep.isSelected = true // to allow it to scroll horizontally
+
         if (context.oneOneUsingTimingBar) {
             val mpb = binding.stubTimingBar.inflate() as LinearProgressIndicator
             viewModel.timerCurrentTime.observe(viewLifecycleOwner) {
@@ -289,11 +295,25 @@ class OneFragment :
         viewModel.timerCurrentIndex.observe(viewLifecycleOwner) { index ->
             if (index == null) return@observe
             val totalLoop = viewModel.timer.value?.loop ?: return@observe
+            binding.textOneStep.setTextIfChanged(when (index) {
+                is TimerIndex.Start -> viewModel.timer.value?.startStep?.label
+                is TimerIndex.Step -> (viewModel.timer.value?.steps?.get(index.stepIndex) as StepEntity.Step).label
+                is TimerIndex.Group -> ((viewModel.timer.value?.steps?.get(index.stepIndex) as StepEntity.Group).steps[index.groupStepIndex.stepIndex] as StepEntity.Step).label
+                is TimerIndex.End -> viewModel.timer.value?.endStep?.label
+                else -> ""
+            })
             binding.textOneLoop.setTextIfChanged(index.getNiceLoopString(totalLoop))
             binding.listOneSteps.toIndex(index)
         }
         viewModel.timer.observe(viewLifecycleOwner) { timer ->
             if (timer == null) return@observe
+            binding.textOneStep.setTextIfChanged(when (val currentIndex = viewModel.timerCurrentIndex.value) {
+                is TimerIndex.Start -> timer.startStep?.label
+                is TimerIndex.Step -> (timer.steps[currentIndex.stepIndex] as StepEntity.Step).label
+                is TimerIndex.Group -> ((timer.steps[currentIndex.stepIndex] as StepEntity.Group).steps[currentIndex.groupStepIndex.stepIndex] as StepEntity.Step).label
+                is TimerIndex.End -> timer.endStep?.label
+                else -> ""
+            })
             binding.listOneSteps.setTimer(timer)
         }
         viewModel.timerCurrentState.observe(viewLifecycleOwner) { state ->

@@ -6,6 +6,14 @@
     android:orientation="vertical">
 
     <xyz.aprildown.timer.component.key.ListItemWithLayout
+        android:id="@+id/itemOneLayoutOneStep"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:li_divider="margin"
+        app:li_layout="@layout/view_list_item_with_layout_switch"
+        app:li_textPrimary="@string/one_layout_step" />
+
+    <xyz.aprildown.timer.component.key.ListItemWithLayout
         android:id="@+id/itemOneLayoutOneBar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
