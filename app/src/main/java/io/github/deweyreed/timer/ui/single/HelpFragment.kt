@@ -9,7 +9,6 @@ import androidx.core.view.postDelayed
 import androidx.fragment.app.DialogFragment
 import androidx.navigation.fragment.NavHostFragment
 import androidx.preference.Preference
-import androidx.preference.PreferenceFragmentCompat
 import com.github.deweyreed.timer.component.tts.TtsSpeaker
 import com.github.deweyreed.tools.helper.IntentHelper
 import com.github.deweyreed.tools.helper.createChooserIntentIfDead
@@ -20,6 +19,7 @@ import io.github.deweyreed.timer.R
 import io.github.deweyreed.timer.databinding.DialogTtsTestBinding
 import xyz.aprildown.timer.app.base.data.FlavorData
 import xyz.aprildown.timer.app.base.ui.AppNavigator
+import xyz.aprildown.timer.app.base.ui.BasePreferenceFragmentCompat
 import xyz.aprildown.timer.app.base.utils.NavigationUtils.subLevelNavigate
 import xyz.aprildown.timer.app.base.utils.openLink
 import xyz.aprildown.timer.domain.utils.Constants
@@ -27,7 +27,7 @@ import javax.inject.Inject
 import xyz.aprildown.timer.app.base.R as RBase
 
 @AndroidEntryPoint
-class HelpFragment : PreferenceFragmentCompat() {
+class HelpFragment : BasePreferenceFragmentCompat() {
 
     @Inject
     lateinit var appNavigator: AppNavigator

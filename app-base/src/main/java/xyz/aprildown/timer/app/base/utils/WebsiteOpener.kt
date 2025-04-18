@@ -23,7 +23,6 @@ private fun Context.openWebsiteWithCustomTabs(url: String) {
                     CustomTabColorSchemeParams.Builder()
                         .setToolbarColor(colorPrimary)
                         .setSecondaryToolbarColor(colorPrimaryVariant)
-                        .setNavigationBarColor(colorNavigationBar)
                         .build()
                 )
             }
@@ -43,11 +42,6 @@ private fun Context.openWebsiteWithCustomTabs(url: String) {
             CustomTabColorSchemeParams.Builder()
                 .setToolbarColor(appTheme.colorPrimary)
                 .setSecondaryToolbarColor(appTheme.colorSecondary)
-                .apply {
-                    if (appTheme.enableNav) {
-                        setNavigationBarColor(appTheme.colorPrimary)
-                    }
-                }
                 .build()
         )
         .setColorSchemeParams(
@@ -58,9 +52,6 @@ private fun Context.openWebsiteWithCustomTabs(url: String) {
                         AppThemeUtils.calculateToolbarColorDuringNight(this@openWebsiteWithCustomTabs)
                     setToolbarColor(color)
                     setSecondaryToolbarColor(color)
-                    if (appTheme.enableNav) {
-                        setNavigationBarColor(color)
-                    }
                 }
                 .build()
         )

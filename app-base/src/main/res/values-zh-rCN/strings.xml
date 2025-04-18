@@ -364,8 +364,6 @@
     <string name="shortcut_timer_started">计时器已启动</string>
     <!--Theme-->
     <string name="theme_title">应用主题</string>
-    <string name="theme_light_status_bar">浅色状态栏</string>
-    <string name="theme_theme_nav_bar">导航栏着色</string>
     <string name="theme_custom_title">自定义主题</string>
     <string name="theme_custom_primary">主颜色</string>
     <string name="theme_custom_secondary">强调色</string>

@@ -14,7 +14,7 @@ import xyz.aprildown.timer.app.base.R as RBase
 
 typealias ButtonImageView = Pair<View, ImageView>
 
-class FiveActionsView constructor(
+class FiveActionsView(
     context: Context,
     attrs: AttributeSet? = null
 ) : ConstraintLayout(context, attrs) {

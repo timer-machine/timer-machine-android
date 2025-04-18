@@ -9,12 +9,12 @@ import android.provider.Settings
 import androidx.core.net.toUri
 import androidx.preference.Preference
 import androidx.preference.PreferenceCategory
-import androidx.preference.PreferenceFragmentCompat
 import com.github.deweyreed.tools.helper.startActivityOrNothing
+import xyz.aprildown.timer.app.base.ui.BasePreferenceFragmentCompat
 import xyz.aprildown.timer.app.base.utils.openLink
 import xyz.aprildown.timer.app.base.R as RBase
 
-class WhitelistFragment : PreferenceFragmentCompat() {
+class WhitelistFragment : BasePreferenceFragmentCompat() {
     override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
         val context = requireContext()
 

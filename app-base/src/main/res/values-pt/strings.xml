@@ -122,7 +122,6 @@
     </plurals>
     <string name="seconds_0">0 segundo</string>
     <string name="shortcut_timer_started">O temporizador foi iniciado</string>
-    <string name="theme_light_status_bar">Barra de status clara</string>
     <string name="theme_title">Tema do aplicativo</string>
     <string name="theme_pick_colors">Personalizada</string>
     <string name="cloud_backup_account_issue_notif_desp">Não é possível encontrar sua conta. Clique aqui para entrar</string>
@@ -389,7 +388,6 @@
     <string name="shortcut_disabled">Temporizador não encontrado. Por favor recrie um</string>
     <string name="shortcut_not_support">O lançador atual não pode criar um atalho</string>
     <string name="shortcut_remove_old">Por favor exclua o atalho anterior deste temporizador primeiro</string>
-    <string name="theme_theme_nav_bar">Colorir barra de navegação</string>
     <string name="theme_custom_title">Tema personalizado</string>
     <string name="theme_custom_primary">Cor primária</string>
     <string name="theme_custom_secondary">Cor secundária</string>

@@ -18,6 +18,8 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.edit
 import androidx.core.text.buildSpannedString
 import androidx.core.view.MenuProvider
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.isVisible
 import androidx.core.view.updatePadding
 import androidx.fragment.app.Fragment
@@ -35,6 +37,7 @@ import com.github.deweyreed.tools.anko.snackbar
 import com.github.deweyreed.tools.arch.observeEvent
 import com.github.deweyreed.tools.arch.observeNonNull
 import com.github.deweyreed.tools.helper.IntentHelper
+import com.github.deweyreed.tools.helper.dimen
 import com.github.deweyreed.tools.helper.gone
 import com.github.deweyreed.tools.helper.hasPermissions
 import com.github.deweyreed.tools.helper.show
@@ -186,6 +189,12 @@ class TimerFragment :
                 changeDuration = duration
                 moveDuration = duration
                 removeDuration = duration
+            }
+            ViewCompat.setOnApplyWindowInsetsListener(list) { view, insets ->
+                val target =
+                    insets.getInsets(WindowInsetsCompat.Type.navigationBars())
+                view.updatePadding(bottom = context.dimen(RBase.dimen.fab_height) + target.bottom)
+                WindowInsetsCompat.CONSUMED
             }
         }
         ItemTouchHelper(

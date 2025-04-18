@@ -9,6 +9,9 @@ import android.widget.CompoundButton
 import androidx.activity.OnBackPressedCallback
 import androidx.annotation.IdRes
 import androidx.core.content.edit
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowInsetsCompat
+import androidx.core.view.updatePadding
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.lifecycle.Lifecycle
 import androidx.navigation.NavController
@@ -18,6 +21,7 @@ import androidx.navigation.contains
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupWithNavController
+import com.github.deweyreed.tools.anko.dp
 import com.github.deweyreed.tools.anko.longSnackbar
 import com.github.deweyreed.tools.anko.toast
 import com.github.deweyreed.tools.arch.doOnStart
@@ -53,7 +57,6 @@ import xyz.aprildown.timer.app.base.ui.FlavorUiInjector
 import xyz.aprildown.timer.app.base.ui.FlavorUiInjectorQualifier
 import xyz.aprildown.timer.app.base.ui.MainCallback
 import xyz.aprildown.timer.app.base.ui.newDynamicTheme
-import xyz.aprildown.timer.app.base.utils.AppThemeUtils
 import xyz.aprildown.timer.app.base.utils.NavigationUtils.createMainFragmentNavOptions
 import xyz.aprildown.timer.app.base.utils.NavigationUtils.getCurrentFragment
 import xyz.aprildown.timer.app.timer.one.OneActivity
@@ -85,9 +88,6 @@ class MainActivity :
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        // The value may be changed when our app is in the background.
-        AppThemeUtils.configThemeForDark(this, isDark = resources.isDarkTheme)
-
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
@@ -219,6 +219,12 @@ class MainActivity :
                 fragment.onFabClick(it)
             }
         }
+        ViewCompat.setOnApplyWindowInsetsListener(binding.mainRoot.fab) { view, insets ->
+            val target =
+                insets.getInsets(WindowInsetsCompat.Type.navigationBars())
+            view.updatePadding(bottom = dp(16).toInt() + target.bottom)
+            insets
+        }
         volumeControlStream = storedAudioTypeValue
         // Theme will do this for us.
         // drawerLayout.setStatusBarBackgroundColor(withDynamicTheme { colorStatusBar })
@@ -329,6 +335,12 @@ class MainActivity :
         }
 
         binding.slider.addStickyFooterItem(createThemeDrawerItem())
+        ViewCompat.setOnApplyWindowInsetsListener(binding.slider) { view, insets ->
+            val target =
+                insets.getInsets(WindowInsetsCompat.Type.navigationBars())
+            view.updatePadding(bottom = target.bottom)
+            insets
+        }
 
         binding.slider.closeOnClick = false
         binding.slider.headerDivider = false

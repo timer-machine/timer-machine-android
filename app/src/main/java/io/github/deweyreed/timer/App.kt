@@ -104,8 +104,6 @@ class App : Application(), WorkManagerConfiguration.Provider, ImageLoaderFactory
             colorSecondaryRes = RBase.color.colorSecondary
             colorSecondaryVariantRes = RBase.color.colorSecondaryVariant
             colorOnSecondaryRes = RBase.color.colorOnSecondary
-            colorStatusBarRes = RBase.color.colorStatusBar
-            lightStatusByPrimary = true
         }
         Theme.installDelegates(DynamicThemeDelegate())
         // Theme.get().enabled = false

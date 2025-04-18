@@ -14,7 +14,7 @@
         <Constraint
             android:id="@+id/viewIntroPanel"
             android:layout_width="0dp"
-            android:layout_height="@dimen/height_intro_panel_view"
+            android:layout_height="wrap_content"
             motion:layout_constraintBottom_toBottomOf="parent"
             motion:layout_constraintEnd_toEndOf="parent"
             motion:layout_constraintStart_toStartOf="parent" />

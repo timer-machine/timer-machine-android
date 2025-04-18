@@ -13,6 +13,16 @@
         android:layout_height="64dp"
         android:background="?colorPrimarySurface"
         android:elevation="4dp"
+        app:layout_constraintBottom_toTopOf="@id/viewNavigationBar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <xyz.aprildown.timer.app.base.ui.NavigationBarView
+        android:id="@+id/viewNavigationBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?colorPrimarySurface"
+        android:elevation="4dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />

@@ -4,6 +4,9 @@ import android.os.Bundle
 import android.view.View
 import android.widget.ScrollView
 import android.widget.TextView
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowInsetsCompat
+import androidx.core.view.updatePadding
 import androidx.fragment.app.Fragment
 import com.github.deweyreed.tools.helper.scrollToBottom
 import xyz.aprildown.timer.domain.utils.Constants
@@ -14,6 +17,11 @@ class LogFragment : Fragment(R.layout.fragment_log) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         val context = view.context
+        ViewCompat.setOnApplyWindowInsetsListener(view) { v, insets ->
+            val target = insets.getInsets(WindowInsetsCompat.Type.navigationBars())
+            v.updatePadding(bottom = target.bottom)
+            WindowInsetsCompat.CONSUMED
+        }
         val textView = view.findViewById<TextView>(R.id.textLogBody)
         val logFile = File(context.filesDir, Constants.FILENAME_RUNNING_LOG)
         if (logFile.exists()) {

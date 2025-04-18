@@ -21,6 +21,7 @@ import androidx.core.content.getSystemService
 import androidx.core.net.toUri
 import androidx.core.text.buildSpannedString
 import androidx.core.view.MenuCompat
+import androidx.core.view.ViewCompat
 import androidx.core.view.WindowCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.isVisible
@@ -272,6 +273,14 @@ class EditActivity :
         binding.listEditSteps.run {
             layoutManager = LinearLayoutManager(this@EditActivity)
             adapter = fastAdapter
+        }
+        ViewCompat.setOnApplyWindowInsetsListener(binding.listEditSteps) { _, insets ->
+            val systemBars = insets.getInsets(
+                WindowInsetsCompat.Type.systemBars() or
+                    WindowInsetsCompat.Type.ime()
+            )
+            binding.listEditSteps.updatePadding(bottom = systemBars.bottom)
+            insets
         }
         val stepTouchHelper = StepTouchHelper(
             onItemMoved = { from, to ->

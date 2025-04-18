@@ -3,6 +3,9 @@ package xyz.aprildown.timer.app.timer.list.record
 import android.graphics.Color
 import android.os.Bundle
 import android.view.View
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowInsetsCompat
+import androidx.core.view.updatePadding
 import androidx.fragment.app.Fragment
 import com.github.deweyreed.tools.helper.color
 import com.github.deweyreed.tools.helper.gone
@@ -29,6 +32,11 @@ internal class RecordOverviewFragment : Fragment(R.layout.fragment_record_overvi
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         val binding = FragmentRecordOverviewBinding.bind(view)
+        ViewCompat.setOnApplyWindowInsetsListener(binding.layoutRecordContent) { v, insets ->
+            val target = insets.getInsets(WindowInsetsCompat.Type.navigationBars())
+            v.updatePadding(bottom = target.bottom)
+            WindowInsetsCompat.CONSUMED
+        }
 
         binding.chartRecordTotalTime.applyCommonSettings()
         binding.chartRecordTotalCount.applyCommonSettings()

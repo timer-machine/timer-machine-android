@@ -468,8 +468,6 @@
 
     <!--Theme-->
     <string name="theme_title">App Theme</string>
-    <string name="theme_light_status_bar">Light status bar</string>
-    <string name="theme_theme_nav_bar">Tint navigation bar</string>
     <string name="theme_custom_title">Custom Theme</string>
     <string name="theme_custom_primary">Primary color</string>
     <string name="theme_custom_secondary">Accent color</string>

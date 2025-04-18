@@ -364,8 +364,6 @@
     <string name="shortcut_timer_started">計時器已啟動</string>
     <!--Theme-->
     <string name="theme_title">應用主題</string>
-    <string name="theme_light_status_bar">淺色狀態列</string>
-    <string name="theme_theme_nav_bar">導航欄著色</string>
     <string name="theme_custom_title">自定義主題</string>
     <string name="theme_custom_primary">主顏色</string>
     <string name="theme_custom_secondary">強調色</string>

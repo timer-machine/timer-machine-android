@@ -16,7 +16,10 @@ import android.widget.TextView
 import androidx.activity.OnBackPressedCallback
 import androidx.core.os.bundleOf
 import androidx.core.view.MenuProvider
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.forEachIndexed
+import androidx.core.view.updatePadding
 import androidx.core.widget.doAfterTextChanged
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -120,6 +123,11 @@ class EditSchedulerFragment : Fragment(R.layout.fragment_edit_scheduler), MenuPr
 
     private fun setUpViews(view: View) {
         layoutScrollRoot = view.findViewById(R.id.layoutSchedulerEditRoot)
+        ViewCompat.setOnApplyWindowInsetsListener(checkNotNull(layoutScrollRoot)) { v, insets ->
+            val target = insets.getInsets(WindowInsetsCompat.Type.navigationBars())
+            v.updatePadding(bottom = target.bottom)
+            WindowInsetsCompat.CONSUMED
+        }
         editName = view.findViewById(R.id.editSchedulerName)
         targetTimerTextView = view.findViewById(R.id.btnSchedulerEditTimers)
         radioStart = view.findViewById(R.id.checkSchedulerEditActionStart)

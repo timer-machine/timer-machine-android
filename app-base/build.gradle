@@ -21,6 +21,7 @@ dependencies {
     testImplementation libs.junit
 
     api libs.androidx.recyclerView
+    implementation libs.androidx.preference
     api libs.androidx.constraintLayout
     implementation libs.androidx.customTabs
     implementation libs.androidx.media

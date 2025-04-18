@@ -75,7 +75,6 @@ class ScreenActivity : BaseActivity() {
     }
 
     private fun setUpFullscreen() {
-        WindowCompat.setDecorFitsSystemWindows(window, false)
         val isLandscape = resources.getBoolean(RTools.bool.is_landscape)
         ViewCompat.setOnApplyWindowInsetsListener(binding.root) { v, insets ->
             val targetInsets = insets.getInsets(WindowInsetsCompat.Type.systemBars())
@@ -142,7 +141,6 @@ class ScreenActivity : BaseActivity() {
             val isLightColor = ThemeColorUtils.isLightColor(color)
             val onColor = AppThemeUtils.calculateOnColor(color)
 
-            window?.statusBarColor = color
             WindowCompat.getInsetsController(window, binding.root).run {
                 isAppearanceLightStatusBars = isLightColor
                 isAppearanceLightNavigationBars = isLightColor

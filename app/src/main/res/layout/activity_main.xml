@@ -7,7 +7,10 @@
 
     <include
         android:id="@+id/mainRoot"
-        layout="@layout/content_main" />
+        layout="@layout/content_main"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fitsSystemWindows="true" />
 
     <com.mikepenz.materialdrawer.widget.MaterialDrawerSliderView
         android:id="@+id/slider"

@@ -58,7 +58,8 @@
         <activity
             android:name=".ui.MainActivity"
             android:exported="true"
-            android:theme="@style/AppTheme.Main">
+            android:theme="@style/AppTheme.Main"
+            android:windowSoftInputMode="adjustResize">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -71,7 +72,8 @@
 
         <activity
             android:name="xyz.aprildown.timer.app.timer.edit.EditActivity"
-            android:parentActivityName=".ui.MainActivity" />
+            android:parentActivityName=".ui.MainActivity"
+            android:windowSoftInputMode="adjustResize" />
 
         <activity
             android:name="xyz.aprildown.timer.app.timer.one.OneActivity"
@@ -79,7 +81,7 @@
             android:parentActivityName=".ui.MainActivity"
             android:resizeableActivity="true"
             android:supportsPictureInPicture="true"
-            android:windowSoftInputMode="adjustPan"
+            android:windowSoftInputMode="adjustResize"
             tools:targetApi="n" />
 
         <provider
