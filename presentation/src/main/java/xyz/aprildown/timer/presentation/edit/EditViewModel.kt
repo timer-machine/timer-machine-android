@@ -127,7 +127,7 @@ class EditViewModel @Inject constructor(
         else -> {
             // Default
             name.value = defaultName
-            loop.value = defaultLoop
+            loop.value = DEFAULT_LOOP
             null
         }
     }
@@ -219,7 +219,7 @@ class EditViewModel @Inject constructor(
         end: StepEntity.Step? = null
     ): Boolean {
         return if (isNewTimer) {
-            name.value == defaultName && loop.value == defaultLoop && more.value == null &&
+            name.value == defaultName && loop.value == DEFAULT_LOOP && more.value == null &&
                 start == null && end == null && newSteps.size == 1 &&
                 newSteps[0].let {
                     it is StepEntity.Step && it.length == 60_000L &&
@@ -264,7 +264,7 @@ class EditViewModel @Inject constructor(
                         TimerEntity(
                             id = TimerEntity.NEW_ID,
                             name = name.value ?: "",
-                            loop = loop.value ?: defaultLoop,
+                            loop = loop.value ?: DEFAULT_LOOP,
                             steps = newSteps,
                             startStep = start,
                             endStep = end,
@@ -291,7 +291,7 @@ class EditViewModel @Inject constructor(
     }
 
     companion object {
-        const val defaultLoop = 3
+        const val DEFAULT_LOOP = 3
 
         const val UPDATE_CREATE = 0
         const val UPDATE_UPDATE = 1
