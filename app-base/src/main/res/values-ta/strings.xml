@@ -126,7 +126,7 @@
     <string name="intro_start_timer_time">இந்த பகுதி <b> மீதமுள்ள நேரம் </b>, மீதமுள்ள வளையத்தையும், நேரத்தை மாற்றுவதற்கான பொத்தானையும் காட்டுகிறது.</string>
     <string name="intro_start_timer_steps">இந்த பகுதி <b> படி பட்டியல் </b> ஐக் காட்டுகிறது <b> தற்போதைய இயங்கும் படி </b> ஐ எடுத்துக்காட்டுகிறது.</string>
     <string name="intro_start_timer_buttons">இது கட்டுப்பாட்டு குழு. அவை <b> நிறுத்தம், முந்தைய படி, தொடக்க/இடைநிறுத்தம், அடுத்த படி </b> மற்றும் கூடுதல் விருப்பங்கள்.</string>
-    <string name="intro_start_finish">&lt;b&gt; வாழ்த்துக்கள்! நீங்கள் டுடோரியலை முடித்துவிட்டீர்கள். &lt;/B&gt;</string>
+    <string name="intro_start_finish"><b> வாழ்த்துக்கள்! நீங்கள் டுடோரியலை முடித்துவிட்டீர்கள். </b></string>
     <string name="intro_start_edit_behaviour">ஒரு நினைவூட்டலைத் திருத்த உங்களை அனுமதிக்கிறது. இப்போதைக்கு, முதலில் டுடோரியலை முடிக்கவும்</string>
     <string name="intro_start_quick_start_pause">இது விரைவாக ஒரு டைமரைத் தொடங்குகிறது. இப்போதைக்கு, நேரங்குறிகருவி பெயரை அதன் விவரங்களைக் காண சொடுக்கு செய்க</string>
     <string name="intro_save_for_later">டுடோரியலுக்குப் பிறகு இதை முயற்சி செய்யலாம்</string>
@@ -342,9 +342,9 @@
     <string name="intro_start_sample_timer_name">உடற்பயிற்சி திட்டம்</string>
     <string name="intro_start_sample_timer_step1">3 நிமிடங்கள் இயக்கவும்</string>
     <string name="intro_start_sample_timer_step3">2 நிமிடங்கள் நடக்க</string>
-    <string name="intro_start_step_time">&lt;b&gt; படி பெயரின் பக்கத்திலுள்ள நேரத்தைக் சொடுக்கு செய்து, நேரத்தை &lt;b&gt; 3 நிமிடங்கள் &lt;/b&gt; ஆக மாற்றவும்.</string>
+    <string name="intro_start_step_time"><b> படி பெயரின் பக்கத்தில் உள்ள நேரத்தைக் </b>சொடுக்கு செய்து, நேரத்தை <b> 3 நிமிடங்கள் </b> ஆக மாற்று.</string>
     <string name="intro_start_add_notifier">இயக்கப்பட்ட பிறகு உங்களுக்கு நினைவூட்ட ஒரு படி சேர்க்க <b> அறிவிப்பாளர் </b> பொத்தானைக் சொடுக்கு செய்க.</string>
-    <string name="intro_start_reminder_usage">கூடுதல் நினைவூட்டல்களில் அல்லது தேர்ந்தெடுக்கும்போது, அதன் பயன்பாட்டை சரிபார்க்க ஒரு நினைவூட்டலை நீங்கள் &lt;b&gt; நீண்ட நேரம் அழுத்தலாம்.</string>
+    <string name="intro_start_reminder_usage">கூடுதல் நினைவூட்டல்களில் அல்லது தேர்ந்தெடுக்கும்போது, அதன் <b>பயன்பாட்டைச் சரிபார்க்க ஒரு நினைவூட்டலை நீங்கள் </b>நீண்ட நேரம் அழுத்தலாம்.</string>
     <string name="intro_start_add_walk_step">ஒரு <b> இயல்பான </b> நடைபயிற்சி படி.</string>
     <string name="intro_start_walk_step_name">நடை நேரத்தை <b> 2 நிமிடங்கள் </b> க்கு அமைக்கவும்.</string>
     <string name="intro_start_walk_notifier"><b> மற்றொரு அறிவிப்பாளரைச் சேர்க்கவும் </b> <b> நடைப்பயணத்திற்குப் பிறகு நினைவூட்டப்படுங்கள் </b>.</string>
@@ -493,7 +493,7 @@
     <string name="scheduler_set5">&lt;Xliff: g எடுத்துக்காட்டு = \"2 நிமிடங்கள்\" ஐடி = \"நிமிடங்கள்\"&gt;%3$s &lt;/xliff: g&gt; க்கான திட்டமிடல் அமைக்கப்படுகிறது</string>
     <string name="scheduler_set4">&lt;Xliff: g எடுத்துக்காட்டு = \"2 நாட்கள்\" ஐடி = \"நாட்கள்\"&gt;%1$s &lt;/xliff: g&gt; மற்றும் &lt;xliff: g எடுத்துக்காட்டு = \"2 மணிநேரம்\" ஐடி = \"மணிநேரம்\"&gt;%2$s &lt;/xliff: g&gt;</string>
     <string name="scheduler_set7">&lt;Xliff: g எடுத்துக்காட்டு = \"2 மணிநேரம்\" ஐடி = \"மணிநேரம்\"&gt;%2$s &lt;/xliff: g&gt; மற்றும் &lt;xliff: g எடுத்துக்காட்டு = \"2 நிமிடங்கள்\" ஐடி = \"நிமிடங்கள்\"&gt;%3$s &lt;/xliff: g&gt;</string>
-    <string name="scheduler_set8">&lt;Xliff: g எடுத்துக்காட்டு = \"2 நாட்கள்\" ஐடி = \"நாட்கள்\"&gt;%1$s &lt;/xliff: g&gt;, &lt;xliff: g எடுத்துக்காட்டு = \"2 மணிநேரம்\" ஐடி = \"மணிநேரம்\"</string>
+    <string name="scheduler_set8">திட்டமிடுபவர் அமைக்கப்பட்டது &lt;xliff:g example=\"2 நாட்கள்\" id=\"நாட்கள்\"&gt;%1$s&lt;/xliff:g&gt;, &lt;xliff:g example=\"2 மணிநேரம்\" id=\"மணிநேரம்\"&gt;%2$s&lt;/xliff:g&gt;, and &lt;xliff:g example=\"2 நிமையங்கள்\" id=\"நிமையங்கள்\"&gt;%3$s&lt;/xliff:g&gt;இப்பொழுதிலிருந்து</string>
     <string name="scheduler_schedule_failed">திட்டமிடலை அமைத்தல் %s தோல்வியுற்றது</string>
     <string name="scheduler_canceled_template">%1$s ரத்து செய்யப்பட்டன</string>
     <string name="scheduler_stops_action_template">%1$s ஐ நிறுத்துங்கள்</string>
@@ -596,4 +596,5 @@
     <string name="billing_future_title">எதிர்காலத்தில் மேலும்</string>
     <string name="billing_subscription_service">இது சந்தா பணி.</string>
     <string name="billing_help_title">உதவி</string>
+    <string name="music_trim_step_duration">படி கால அளவைக் குறை</string>
 </resources>
