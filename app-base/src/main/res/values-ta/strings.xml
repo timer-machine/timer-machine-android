@@ -270,8 +270,6 @@
     <string name="shortcut_created">குறுக்குவழி உருவாக்கப்பட்டது</string>
     <string name="shortcut_disabled">நேரங்குறிகருவி கண்டுபிடிக்கப்படவில்லை. தயவுசெய்து ஒன்றை மீண்டும் உருவாக்கவும்</string>
     <string name="theme_title">பயன்பாட்டு கருப்பொருள்</string>
-    <string name="theme_light_status_bar">ஒளி நிலை பட்டி</string>
-    <string name="theme_theme_nav_bar">சாயல் வழிசெலுத்தல் பட்டி</string>
     <string name="theme_step_color_dialog_title">படி நிறத்தைத் தேர்ந்தெடுங்கள்</string>
     <string name="theme_step_color_title">படி நிறம்</string>
     <string name="backup_local_backup">உள்ளக</string>
