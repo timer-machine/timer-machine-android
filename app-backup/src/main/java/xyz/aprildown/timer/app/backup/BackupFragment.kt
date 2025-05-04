@@ -3,8 +3,8 @@ package xyz.aprildown.timer.app.backup
 import android.os.Bundle
 import androidx.navigation.fragment.NavHostFragment
 import androidx.preference.Preference
-import androidx.preference.PreferenceFragmentCompat
 import dagger.hilt.android.AndroidEntryPoint
+import xyz.aprildown.timer.app.base.ui.BasePreferenceFragmentCompat
 import xyz.aprildown.timer.app.base.ui.FlavorUiInjector
 import xyz.aprildown.timer.app.base.ui.FlavorUiInjectorQualifier
 import xyz.aprildown.timer.app.base.utils.NavigationUtils.subLevelNavigate
@@ -13,7 +13,7 @@ import javax.inject.Inject
 import xyz.aprildown.timer.app.base.R as RBase
 
 @AndroidEntryPoint
-class BackupFragment : PreferenceFragmentCompat() {
+class BackupFragment : BasePreferenceFragmentCompat() {
 
     @Inject
     @FlavorUiInjectorQualifier

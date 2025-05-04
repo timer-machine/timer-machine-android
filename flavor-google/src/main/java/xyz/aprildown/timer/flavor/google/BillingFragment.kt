@@ -12,6 +12,9 @@ import android.view.View
 import android.widget.TextView
 import androidx.core.text.method.LinkMovementMethodCompat
 import androidx.core.view.MenuProvider
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowInsetsCompat
+import androidx.core.view.updatePadding
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Lifecycle
 import androidx.transition.TransitionManager
@@ -58,6 +61,11 @@ internal class BillingFragment : Fragment(R.layout.fragment_billing), MenuProvid
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         val binding = FragmentBillingBinding.bind(view)
+        ViewCompat.setOnApplyWindowInsetsListener(view) { v, insets ->
+            val target = insets.getInsets(WindowInsetsCompat.Type.navigationBars())
+            v.updatePadding(bottom = target.bottom)
+            WindowInsetsCompat.CONSUMED
+        }
 
         if (savedInstanceState == null) {
             setUpEntries()

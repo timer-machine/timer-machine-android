@@ -10,11 +10,13 @@ import android.os.Parcelable
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.CompoundButton
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.annotation.ColorInt
 import androidx.core.os.BundleCompat
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowInsetsCompat
+import androidx.core.view.updatePadding
 import androidx.core.widget.TextViewCompat
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -52,7 +54,6 @@ import xyz.aprildown.timer.component.key.R as RComponentKey
 @AndroidEntryPoint
 class ThemeFragment :
     Fragment(),
-    BooleanToggle.Callback,
     StepColor.Callback,
     ColorChooserDialog.ColorCallback,
     CustomThemeDialog.Callback {
@@ -78,8 +79,16 @@ class ThemeFragment :
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View = RecyclerView(inflater.context).apply {
-        setHasFixedSize(true)
+    ): View {
+        return RecyclerView(inflater.context).apply {
+            setHasFixedSize(true)
+            clipToPadding = false
+            ViewCompat.setOnApplyWindowInsetsListener(this) { v, insets ->
+                val target = insets.getInsets(WindowInsetsCompat.Type.navigationBars())
+                v.updatePadding(bottom = target.bottom)
+                WindowInsetsCompat.CONSUMED
+            }
+        }
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -146,22 +155,6 @@ class ThemeFragment :
                 else -> error("Unsupported type $currentType")
             }
         }
-
-        val status = appTheme.sameStatusBar
-        val enableNav = appTheme.enableNav
-
-        items += BooleanToggle(
-            BooleanToggle.ID_SAME_STATUS,
-            context.getString(RBase.string.theme_light_status_bar),
-            status,
-            this
-        )
-        items += BooleanToggle(
-            BooleanToggle.ID_ENABLE_NAV,
-            context.getString(RBase.string.theme_theme_nav_bar),
-            enableNav,
-            this
-        )
 
         items += Group(context.getString(RBase.string.theme_title))
 
@@ -285,24 +278,6 @@ class ThemeFragment :
         )
     }
 
-    override fun onBooleanToggleChange(toggleType: Int, newValue: Boolean) {
-        val context = requireContext()
-        when (toggleType) {
-            BooleanToggle.ID_SAME_STATUS -> {
-                val newAppTheme = context.appTheme.copy(sameStatusBar = newValue)
-                context.appTheme = newAppTheme
-                AppThemeUtils.configAppTheme(context, newAppTheme)
-                reload()
-            }
-            BooleanToggle.ID_ENABLE_NAV -> {
-                val newAppTheme = context.appTheme.copy(enableNav = newValue)
-                context.appTheme = newAppTheme
-                AppThemeUtils.configAppTheme(context, newAppTheme)
-                reload()
-            }
-        }
-    }
-
     override fun onStepColorClick(pos: Int, type: StepType) {
         val context = requireContext()
         ColorChooserDialog.Builder(context, RBase.string.theme_step_color_dialog_title)
@@ -343,55 +318,6 @@ class ThemeFragment :
 
 private const val NAME_CUSTOM = "Custom"
 private const val EXTRA_SCROLL_STATE = "scroll_state"
-
-private class BooleanToggle(
-    private val toggleType: Int,
-    private val title: String,
-    private var value: Boolean,
-    private val callback: Callback
-) : AbstractItem<BooleanToggle.ViewHolder>() {
-
-    interface Callback {
-        fun onBooleanToggleChange(toggleType: Int, newValue: Boolean)
-    }
-
-    override val layoutRes: Int = RComponentKey.layout.layout_list_item_with_layout
-    override val type: Int = 1
-    override fun getViewHolder(v: View): ViewHolder = ViewHolder(v)
-
-    override fun bindView(holder: ViewHolder, payloads: List<Any>) {
-        super.bindView(holder, payloads)
-        holder.run {
-            listItemWithLayout.run {
-                // FastAdapter override itemView's onClickListener
-                // So we have to override it again in the onBind.
-                delegateClickToCheckableLayout()
-
-                listItem.setPrimaryText(title)
-                getLayoutView<CompoundButton>().run {
-                    isChecked = value
-                    setOnCheckedChangeListener { _, isChecked ->
-                        if (isChecked != value) {
-                            value = isChecked
-                            callback.onBooleanToggleChange(toggleType, isChecked)
-                        }
-                    }
-                }
-            }
-        }
-    }
-
-    companion object {
-        const val ID_SAME_STATUS = 1
-        const val ID_ENABLE_NAV = 2
-    }
-
-    class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        val listItemWithLayout: ListItemWithLayout = (view as ListItemWithLayout).apply {
-            setLayoutRes(RComponentKey.layout.view_list_item_with_layout_switch)
-        }
-    }
-}
 
 private class Group(
     private val title: String

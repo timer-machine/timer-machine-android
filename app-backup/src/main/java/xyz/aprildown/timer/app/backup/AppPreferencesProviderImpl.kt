@@ -328,8 +328,6 @@ private class ThemePreferenceItem : PreferenceItem {
         map[PreferenceData.AppTheme.PREF_TYPE] = appTheme.type.toString()
         map[PreferenceData.AppTheme.PREF_PRIMARY] = appTheme.colorPrimary.toString()
         map[PreferenceData.AppTheme.PREF_SECONDARY] = appTheme.colorSecondary.toString()
-        map[PreferenceData.AppTheme.PREF_SAME_STATUS_BAR] = appTheme.sameStatusBar.toString()
-        map[PreferenceData.AppTheme.PREF_ENABLE_NAV] = appTheme.enableNav.toString()
 
         map[PreferenceData.KEY_STEP_NORMAL] = StepType.NORMAL.getTypeColor(context).toString()
         map[PreferenceData.KEY_STEP_NOTIFIER] = StepType.NOTIFIER.getTypeColor(context).toString()
@@ -344,35 +342,29 @@ private class ThemePreferenceItem : PreferenceItem {
     ) {
         prefs.ifHasKey(PreferenceData.AppTheme.PREF_PRIMARY) { primary ->
             prefs.ifHasKey(PreferenceData.AppTheme.PREF_SECONDARY) { secondary ->
-                prefs.ifHasKey(PreferenceData.AppTheme.PREF_SAME_STATUS_BAR) { sameStatus ->
-                    prefs.ifHasKey(PreferenceData.AppTheme.PREF_ENABLE_NAV) { enableNav ->
-                        PreferenceData.AppTheme(
-                            type = prefs.getOrDefault(
-                                PreferenceData.AppTheme.PREF_TYPE,
-                                PreferenceData.AppTheme.AppThemeType.TYPE_COLOR.toString()
-                            ).toInt(),
-                            colorPrimary = primary.toInt(),
-                            colorSecondary = secondary.toInt(),
-                            sameStatusBar = sameStatus.toBoolean(),
-                            enableNav = enableNav.toBoolean(),
-                        ).also {
-                            context.appTheme = it
-                            AppThemeUtils.configAppTheme(context, it)
-                        }
+                PreferenceData.AppTheme(
+                    type = prefs.getOrDefault(
+                        PreferenceData.AppTheme.PREF_TYPE,
+                        PreferenceData.AppTheme.AppThemeType.TYPE_COLOR.toString()
+                    ).toInt(),
+                    colorPrimary = primary.toInt(),
+                    colorSecondary = secondary.toInt(),
+                ).also {
+                    context.appTheme = it
+                    AppThemeUtils.configAppTheme(context, it)
+                }
 
-                        prefs.ifHasKey(PreferenceData.KEY_STEP_NORMAL) {
-                            StepType.NORMAL.saveTypeColor(context, it.toInt())
-                        }
-                        prefs.ifHasKey(PreferenceData.KEY_STEP_NOTIFIER) {
-                            StepType.NOTIFIER.saveTypeColor(context, it.toInt())
-                        }
-                        prefs.ifHasKey(PreferenceData.KEY_STEP_START) {
-                            StepType.START.saveTypeColor(context, it.toInt())
-                        }
-                        prefs.ifHasKey(PreferenceData.KEY_STEP_END) {
-                            StepType.END.saveTypeColor(context, it.toInt())
-                        }
-                    }
+                prefs.ifHasKey(PreferenceData.KEY_STEP_NORMAL) {
+                    StepType.NORMAL.saveTypeColor(context, it.toInt())
+                }
+                prefs.ifHasKey(PreferenceData.KEY_STEP_NOTIFIER) {
+                    StepType.NOTIFIER.saveTypeColor(context, it.toInt())
+                }
+                prefs.ifHasKey(PreferenceData.KEY_STEP_START) {
+                    StepType.START.saveTypeColor(context, it.toInt())
+                }
+                prefs.ifHasKey(PreferenceData.KEY_STEP_END) {
+                    StepType.END.saveTypeColor(context, it.toInt())
                 }
             }
         }

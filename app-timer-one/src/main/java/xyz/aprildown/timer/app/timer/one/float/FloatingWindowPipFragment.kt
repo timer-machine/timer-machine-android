@@ -8,7 +8,10 @@ import android.widget.CompoundButton
 import android.widget.SeekBar
 import android.widget.TextView
 import androidx.cardview.widget.CardView
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.updateLayoutParams
+import androidx.core.view.updatePadding
 import androidx.fragment.app.Fragment
 import xyz.aprildown.timer.app.base.data.FloatingWindowPip
 import xyz.aprildown.timer.app.base.utils.produceTime
@@ -19,6 +22,11 @@ import xyz.aprildown.timer.app.base.R as RBase
 class FloatingWindowPipFragment : Fragment(R.layout.fragment_floating_window_pip) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         val context = view.context
+        ViewCompat.setOnApplyWindowInsetsListener(view) { v, insets ->
+            val target = insets.getInsets(WindowInsetsCompat.Type.navigationBars())
+            v.updatePadding(bottom = target.bottom)
+            WindowInsetsCompat.CONSUMED
+        }
 
         val floatingWindowPip = FloatingWindowPip(context)
 

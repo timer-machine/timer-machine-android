@@ -86,8 +86,8 @@ class IntroActivity : BaseActivity() {
                     val createdView =
                         instruction.createInstructionView(this@IntroActivity, binding.root)
                     instructionView = createdView
-                    binding.container.removeAllViews()
-                    binding.container.addView(createdView.binding.root)
+                    binding.layoutInstruction.removeAllViews()
+                    binding.layoutInstruction.addView(createdView.binding.root)
                 } else {
                     TransitionManager.beginDelayedTransition(
                         binding.root.findViewById(R.id.container),

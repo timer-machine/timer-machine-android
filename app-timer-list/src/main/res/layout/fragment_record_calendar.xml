@@ -79,6 +79,7 @@
         android:id="@+id/listRecordCalendarEvents"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:clipToPadding="false"
         app:layoutManager="LinearLayoutManager"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
         tools:listitem="@layout/list_item_calendar_day_event" />

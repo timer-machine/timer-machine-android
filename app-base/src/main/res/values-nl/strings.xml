@@ -15,7 +15,6 @@
     </plurals>
     <string name="sample_timer_template_3_stages_3">Fase 3</string>
     <string name="behaviour_count">Aantal</string>
-    <string name="theme_light_status_bar">Lichte statusbalk</string>
     <string name="dark_theme_battery_saver">Ingesteld door batterijbesparing</string>
     <string name="dark_theme_scheduled_to">Tot</string>
     <string name="billing_cancel_anytime">Terugkerende facturering. Altijd te annuleren.</string>
@@ -239,7 +238,6 @@
     <string name="backup_app_data">Toepassingsgegevens</string>
     <string name="scheduler_set3">Planner ingesteld voor <xliff:g example="2 hours" id="HOURS">%2$s</xliff:g> vanaf nu</string>
     <string name="backup_local_backup">Lokaal</string>
-    <string name="theme_theme_nav_bar">Tint navigatiebalk</string>
     <string name="billing_under_maintenance">Onder onderhoud</string>
     <string name="record_calendar">Kalender</string>
     <string name="scheduler_repeat_every_week">Elke week herhalen</string>

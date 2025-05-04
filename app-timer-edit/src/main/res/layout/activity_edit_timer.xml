@@ -4,16 +4,20 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/layoutEditRoot"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true">
 
     <com.google.android.material.appbar.AppBarLayout
         style="@style/Widget.MaterialComponents.AppBarLayout.PrimarySurface"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:fitsSystemWindows="true"
+        app:statusBarForeground="?colorPrimarySurface">
 
         <com.google.android.material.appbar.CollapsingToolbarLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:fitsSystemWindows="true"
             app:contentScrim="?colorPrimarySurface"
             app:layout_scrollFlags="scroll|exitUntilCollapsed"
             app:titleEnabled="false"

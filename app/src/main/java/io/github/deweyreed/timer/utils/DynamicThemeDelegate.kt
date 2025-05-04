@@ -7,13 +7,17 @@ import android.view.View
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.withStyledAttributes
 import com.github.deweyreed.tools.helper.themeColor
+import com.google.android.material.appbar.AppBarLayout
 import com.nex3z.togglebuttongroup.button.CircularToggle
 import io.github.deweyreed.scrollhmspicker.ScrollHmsPicker
 import io.github.deweyreed.timer.R
 import xyz.aprildown.theme.Theme
 import xyz.aprildown.theme.ThemeInflationDelegate
+import xyz.aprildown.timer.app.base.ui.NavigationBarView
+import xyz.aprildown.timer.app.base.ui.StatusBarView
 import xyz.aprildown.timer.app.timer.list.record.RecordTimersButton
 import xyz.aprildown.timer.component.key.NameLoopView
+import com.google.android.material.R as RMaterial
 import io.github.deweyreed.scrollhmspicker.R as RScrollHmsPicker
 import xyz.aprildown.timer.component.key.R as RComponentKey
 
@@ -25,12 +29,12 @@ class DynamicThemeDelegate : ThemeInflationDelegate() {
             "View" -> View(context, attrs).apply {
                 tintBackground(this, attrs)
             }
-            "androidx.constraintlayout.widget.ConstraintLayout" ->
+            "androidx.constraintlayout.widget.ConstraintLayout" -> {
                 ConstraintLayout(context, attrs).apply {
                     tintBackground(this, attrs)
                 }
-
-            "com.nex3z.togglebuttongroup.button.CircularToggle" ->
+            }
+            "com.nex3z.togglebuttongroup.button.CircularToggle" -> {
                 CircularToggle(context, attrs).apply {
                     markerColor = Theme.get().colorSecondary
                     setTextColor(
@@ -46,7 +50,8 @@ class DynamicThemeDelegate : ThemeInflationDelegate() {
                         )
                     )
                 }
-            "io.github.deweyreed.scrollhmspicker.ScrollHmsPicker" ->
+            }
+            "io.github.deweyreed.scrollhmspicker.ScrollHmsPicker" -> {
                 ScrollHmsPicker(context, attrs).apply {
                     context.withStyledAttributes(
                         attrs,
@@ -60,7 +65,8 @@ class DynamicThemeDelegate : ThemeInflationDelegate() {
                         }
                     }
                 }
-            "xyz.aprildown.timer.component.key.NameLoopView" ->
+            }
+            "xyz.aprildown.timer.component.key.NameLoopView" -> {
                 NameLoopView(context, attrs).apply {
                     context.withStyledAttributes(attrs, RComponentKey.styleable.NameLoopView) {
                         matchThemeColor(
@@ -71,10 +77,34 @@ class DynamicThemeDelegate : ThemeInflationDelegate() {
                         }
                     }
                 }
+            }
             "xyz.aprildown.timer.app.timer.list.record.RecordTimersButton" ->
                 RecordTimersButton(context, attrs).apply {
                     applyDefaultTint(attrs)
                 }
+            "com.google.android.material.appbar.AppBarLayout" -> {
+                AppBarLayout(context, attrs).apply {
+                    applyDefaultTint(attrs)
+                    context.withStyledAttributes(attrs, RMaterial.styleable.AppBarLayout) {
+                        matchThemeColor(
+                            typedArray = this,
+                            index = RMaterial.styleable.AppBarLayout_statusBarForeground
+                        )?.let {
+                            setStatusBarForegroundColor(it)
+                        }
+                    }
+                }
+            }
+            "xyz.aprildown.timer.app.base.ui.StatusBarView" -> {
+                StatusBarView(context, attrs).apply {
+                    tintBackground(this, attrs)
+                }
+            }
+            "xyz.aprildown.timer.app.base.ui.NavigationBarView" -> {
+                NavigationBarView(context, attrs).apply {
+                    tintBackground(this, attrs)
+                }
+            }
             else -> null
         }
 

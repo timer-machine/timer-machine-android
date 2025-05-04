@@ -9,10 +9,5 @@
     <color name="colorSecondaryVariant">#007AC1</color>
     <color name="colorOnSecondary">#FFFFFF</color>
 
-    <color name="colorStatusBarLight">@color/colorPrimary</color>
-    <color name="colorStatusBarNight">@android:color/black</color>
-    <color name="colorStatusBar">@color/colorStatusBarLight</color>
-
     <color name="colorPremium">@color/md_amber_500</color>
-
 </resources>

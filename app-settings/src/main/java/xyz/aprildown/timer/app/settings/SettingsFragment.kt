@@ -11,7 +11,6 @@ import androidx.core.net.toUri
 import androidx.navigation.fragment.NavHostFragment
 import androidx.preference.ListPreference
 import androidx.preference.Preference
-import androidx.preference.PreferenceFragmentCompat
 import com.github.deweyreed.timer.component.tts.TtsBakery
 import com.github.deweyreed.tools.helper.IntentHelper
 import com.github.deweyreed.tools.helper.createChooserIntentIfDead
@@ -22,6 +21,7 @@ import xyz.aprildown.timer.app.base.data.DarkTheme
 import xyz.aprildown.timer.app.base.data.FlavorData
 import xyz.aprildown.timer.app.base.data.PreferenceData
 import xyz.aprildown.timer.app.base.data.PreferenceData.disablePhoneCallBehavior
+import xyz.aprildown.timer.app.base.ui.BasePreferenceFragmentCompat
 import xyz.aprildown.timer.app.base.ui.FlavorUiInjector
 import xyz.aprildown.timer.app.base.ui.FlavorUiInjectorQualifier
 import xyz.aprildown.timer.app.base.ui.MainCallback
@@ -39,7 +39,7 @@ import xyz.aprildown.timer.app.base.R as RBase
 
 @AndroidEntryPoint
 class SettingsFragment :
-    PreferenceFragmentCompat(),
+    BasePreferenceFragmentCompat(),
     Preference.OnPreferenceChangeListener,
     Preference.OnPreferenceClickListener {
 

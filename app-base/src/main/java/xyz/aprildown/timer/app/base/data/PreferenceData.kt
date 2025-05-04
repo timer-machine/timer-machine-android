@@ -294,8 +294,6 @@ object PreferenceData {
         val colorPrimary: Int,
         @ColorInt
         val colorSecondary: Int,
-        val sameStatusBar: Boolean = false,
-        val enableNav: Boolean = false,
     ) {
 
         @IntDef(TYPE_COLOR, TYPE_DYNAMIC_DARK, TYPE_DYNAMIC_LIGHT)
@@ -313,8 +311,6 @@ object PreferenceData {
             const val PREF_TYPE = "${PREF_PREFIX}type"
             const val PREF_PRIMARY = "${PREF_PREFIX}primary"
             const val PREF_SECONDARY = "${PREF_PREFIX}accent"
-            const val PREF_SAME_STATUS_BAR = "${PREF_PREFIX}same_status_bar"
-            const val PREF_ENABLE_NAV = "${PREF_PREFIX}enable_nav"
 
             // androidx.compose.material3.dynamicLightColorScheme
             @RequiresApi(Build.VERSION_CODES.S)
@@ -335,8 +331,6 @@ object PreferenceData {
         get() {
             val sp = safeSharedPreference
             val type = sp.getInt(AppTheme.PREF_TYPE, TYPE_COLOR)
-            val sameStatusBar = sp.getBoolean(AppTheme.PREF_SAME_STATUS_BAR, true)
-            val enableNav = sp.getBoolean(AppTheme.PREF_ENABLE_NAV, false)
 
             return when {
                 Build.VERSION.SDK_INT >= Build.VERSION_CODES.S && type == TYPE_DYNAMIC_DARK -> {
@@ -344,8 +338,6 @@ object PreferenceData {
                         type = type,
                         colorPrimary = color(AppTheme.dynamicDarkPrimaryColorRes),
                         colorSecondary = color(AppTheme.dynamicDarkSecondaryColorRes),
-                        sameStatusBar = sameStatusBar,
-                        enableNav = enableNav,
                     )
                 }
                 Build.VERSION.SDK_INT >= Build.VERSION_CODES.S && type == TYPE_DYNAMIC_LIGHT -> {
@@ -353,8 +345,6 @@ object PreferenceData {
                         type = type,
                         colorPrimary = color(AppTheme.dynamicLightPrimaryColorRes),
                         colorSecondary = color(AppTheme.dynamicLightSecondaryColorRes),
-                        sameStatusBar = sameStatusBar,
-                        enableNav = enableNav,
                     )
                 }
                 else -> {
@@ -368,8 +358,6 @@ object PreferenceData {
                             AppTheme.PREF_SECONDARY,
                             color(R.color.colorSecondary)
                         ),
-                        sameStatusBar = sameStatusBar,
-                        enableNav = enableNav,
                     )
                 }
             }
@@ -379,8 +367,6 @@ object PreferenceData {
                 putInt(AppTheme.PREF_TYPE, value.type)
                 putInt(AppTheme.PREF_PRIMARY, value.colorPrimary)
                 putInt(AppTheme.PREF_SECONDARY, value.colorSecondary)
-                putBoolean(AppTheme.PREF_SAME_STATUS_BAR, value.sameStatusBar)
-                putBoolean(AppTheme.PREF_ENABLE_NAV, value.enableNav)
             }
         }
 

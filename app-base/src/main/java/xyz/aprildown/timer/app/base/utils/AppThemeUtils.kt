@@ -24,8 +24,6 @@ object AppThemeUtils {
     fun configAppTheme(context: Context, appTheme: PreferenceData.AppTheme) {
         val primary = appTheme.colorPrimary
         val secondary = appTheme.colorSecondary
-        val sameStatusBar = appTheme.sameStatusBar
-        val enableNav = appTheme.enableNav
         Theme.edit(context) {
             colorPrimary = primary
             val darkerPrimary = darker(primary)
@@ -34,9 +32,6 @@ object AppThemeUtils {
             colorSecondary = secondary
             colorSecondaryVariant = darker(secondary)
             colorOnSecondary = calculateOnColor(secondary)
-            colorStatusBar = if (sameStatusBar) primary else darkerPrimary
-            colorNavigationBar = if (enableNav) primary else null
-            lightStatusByPrimary = true
         }
 
         fun registerColorRes(@ColorRes colorRes: Int) {
@@ -78,32 +73,6 @@ object AppThemeUtils {
             ThemeColorUtils.adjustAlpha(Color.BLACK, 0.6f)
         } else {
             Color.WHITE
-        }
-    }
-
-    fun configThemeForDark(context: Context, isDark: Boolean) {
-        val appTheme = context.appTheme
-        val primary = appTheme.colorPrimary
-        val sameStatusBar = appTheme.sameStatusBar
-        val enableNav = appTheme.enableNav
-
-        if (isDark) {
-            Theme.edit(context) {
-                val color = calculateToolbarColorDuringNight(context)
-                colorStatusBar = color
-                if (enableNav) {
-                    colorNavigationBar = color
-                }
-                lightStatusByPrimary = false
-            }
-        } else {
-            Theme.edit(context) {
-                colorStatusBar = if (sameStatusBar) primary else darker(primary)
-                if (enableNav) {
-                    colorNavigationBar = primary
-                }
-                lightStatusByPrimary = true
-            }
         }
     }
 

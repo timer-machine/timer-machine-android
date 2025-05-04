@@ -6,15 +6,29 @@
     android:layout_height="match_parent"
     app:layoutDescription="@xml/activity_intro_scene">
 
-    <FrameLayout
+    <LinearLayout
         android:id="@+id/container"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginBottom="@dimen/height_intro_panel_view"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toTopOf="@id/viewIntroPanel"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent">
+
+        <xyz.aprildown.timer.app.base.ui.StatusBarView
+            android:id="@+id/viewStatusBar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="?colorPrimarySurface" />
+
+        <FrameLayout
+            android:id="@+id/layoutInstruction"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
+
+    </LinearLayout>
 
     <xyz.aprildown.timer.app.intro.InstructionIndicatorLayout
         android:id="@+id/viewIndicator"

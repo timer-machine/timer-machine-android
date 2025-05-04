@@ -75,7 +75,6 @@ class ListItem(
 
     private fun adjustHeight(secondaryText: String?) {
         val res = context.resources
-        @Suppress("LiftReturnOrAssignment")
         if (secondaryText.isNullOrBlank()) {
             secondaryTextView.gone()
             // setMinimumHeight will trigger requestLayout which calls onMeasure

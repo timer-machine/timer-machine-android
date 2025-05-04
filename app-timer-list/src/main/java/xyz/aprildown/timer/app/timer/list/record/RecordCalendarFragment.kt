@@ -8,8 +8,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.children
 import androidx.core.view.isInvisible
+import androidx.core.view.updatePadding
 import androidx.fragment.app.Fragment
 import com.github.deweyreed.tools.helper.gone
 import com.github.deweyreed.tools.helper.setTextIfChanged
@@ -247,6 +250,12 @@ internal class RecordCalendarFragment : Fragment(R.layout.fragment_record_calend
                         }
                     )
                 }
+            }
+
+            ViewCompat.setOnApplyWindowInsetsListener(this) { v, insets ->
+                val target = insets.getInsets(WindowInsetsCompat.Type.navigationBars())
+                v.updatePadding(bottom = target.bottom)
+                WindowInsetsCompat.CONSUMED
             }
         }
     }

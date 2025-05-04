@@ -8,6 +8,14 @@
     tools:layout_height="@dimen/height_intro_panel_view"
     tools:parentTag="androidx.constraintlayout.widget.ConstraintLayout">
 
+    <xyz.aprildown.timer.app.base.ui.NavigationBarView
+        android:id="@+id/viewNavigationBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
     <ImageButton
         android:id="@+id/btnIntroPanelNext"
         android:layout_width="48dp"
@@ -15,7 +23,7 @@
         android:layout_marginEnd="8dp"
         android:background="?selectableItemBackgroundBorderless"
         android:contentDescription="@string/next"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/viewNavigationBar"
         app:layout_constraintEnd_toEndOf="parent"
         app:srcCompat="@drawable/ic_anim_arrow_right_indicator" />
 
@@ -27,7 +35,7 @@
         android:background="?selectableItemBackgroundBorderless"
         android:contentDescription="@string/exit"
         android:scaleX="-1"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/viewNavigationBar"
         app:layout_constraintStart_toStartOf="parent"
         app:srcCompat="@drawable/ic_exit" />
 
@@ -37,7 +45,7 @@
         android:layout_height="48dp"
         android:background="?selectableItemBackgroundBorderless"
         android:contentDescription="@string/previous"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/viewNavigationBar"
         app:layout_constraintStart_toEndOf="@id/btnIntroPanelExit"
         app:srcCompat="@drawable/ic_arrow_left_indicator" />
 
@@ -47,7 +55,7 @@
         android:layout_height="wrap_content"
         android:textAppearance="?textAppearanceSubtitle2"
         android:textColor="?colorPrimary"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/viewNavigationBar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@id/btnIntroPanelPrevious"

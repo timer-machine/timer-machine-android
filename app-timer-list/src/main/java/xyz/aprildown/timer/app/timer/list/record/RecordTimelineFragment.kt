@@ -3,6 +3,9 @@ package xyz.aprildown.timer.app.timer.list.record
 import android.os.Bundle
 import android.text.format.DateFormat
 import android.view.View
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowInsetsCompat
+import androidx.core.view.updatePadding
 import androidx.fragment.app.Fragment
 import com.github.deweyreed.tools.anko.dp
 import com.github.deweyreed.tools.helper.themeColor
@@ -29,6 +32,11 @@ internal class RecordTimelineFragment : Fragment(R.layout.fragment_record_timeli
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         val context = view.context
         val binding = FragmentRecordTimelineBinding.bind(view)
+        ViewCompat.setOnApplyWindowInsetsListener(binding.layoutRecordContent) { v, insets ->
+            val target = insets.getInsets(WindowInsetsCompat.Type.navigationBars())
+            v.updatePadding(bottom = target.bottom)
+            WindowInsetsCompat.CONSUMED
+        }
 
         binding.chartRecordTime.applyCommonSettings(
             durationFormatter = { it.produceTime() }

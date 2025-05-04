@@ -3,10 +3,15 @@ package xyz.aprildown.timer.app.timer.one.layout
 import android.content.Context
 import android.os.Bundle
 import android.view.View
+import android.view.ViewGroup
 import android.view.WindowManager
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowInsetsCompat
+import androidx.core.view.updateLayoutParams
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import androidx.viewpager2.widget.ViewPager2
+import com.github.deweyreed.tools.anko.dp
 import com.github.deweyreed.tools.helper.scale
 import com.github.deweyreed.tools.helper.setScale
 import com.github.deweyreed.tools.helper.triggerRipple
@@ -76,6 +81,13 @@ class OneLayoutFragment : Fragment(R.layout.fragment_one_layout) {
             binding.fab.animate().scale(1f)
                 .withEndAction { binding.fab.triggerRipple() }
                 .start()
+        }
+        ViewCompat.setOnApplyWindowInsetsListener(binding.fab) { v, insets ->
+            val target = insets.getInsets(WindowInsetsCompat.Type.navigationBars())
+            v.updateLayoutParams<ViewGroup.MarginLayoutParams> {
+                bottomMargin = context.dp(96).toInt() + target.bottom
+            }
+            insets
         }
 
         binding.viewPager.registerOnPageChangeCallback(

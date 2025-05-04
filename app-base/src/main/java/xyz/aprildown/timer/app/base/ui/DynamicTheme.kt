@@ -1,6 +1,5 @@
 package xyz.aprildown.timer.app.base.ui
 
-import android.app.Activity
 import xyz.aprildown.theme.Theme
 
 interface DynamicTheme {
@@ -10,11 +9,6 @@ interface DynamicTheme {
     val colorSecondary: Int
     val colorSecondaryVariant: Int
     val colorOnSecondary: Int
-
-    val colorStatusBar: Int
-    val colorNavigationBar: Int
-
-    fun tintSystemUi(activity: Activity)
 
     var enabled: Boolean
 
@@ -37,12 +31,6 @@ private class DynamicThemeImpl : DynamicTheme {
     override val colorSecondary: Int get() = theme.colorSecondary
     override val colorSecondaryVariant: Int get() = theme.colorSecondaryVariant
     override val colorOnSecondary: Int get() = theme.colorOnSecondary
-    override val colorStatusBar: Int get() = theme.colorStatusBar
-    override val colorNavigationBar: Int get() = theme.colorNavigationBar
-
-    override fun tintSystemUi(activity: Activity) {
-        Theme.tintSystemUi(activity)
-    }
 
     override var enabled: Boolean
         get() = Theme.get().enabled

@@ -54,7 +54,7 @@ internal class EnterLoop : StartEditInstruction(
         binding.viewEditNameLoop.loopView.run {
             showInteractionIndicator(context.color(RMaterialize.color.md_light_blue_400))
             isEnabled = true
-            setText(EditViewModel.defaultLoop.toString())
+            setText(EditViewModel.DEFAULT_LOOP.toString())
             val watcher = object : TextWatcher {
                 override fun beforeTextChanged(
                     s: CharSequence?,

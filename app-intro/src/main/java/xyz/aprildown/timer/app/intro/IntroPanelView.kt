@@ -4,8 +4,12 @@ import android.content.Context
 import android.util.AttributeSet
 import android.view.View
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.isVisible
+import androidx.core.view.updatePadding
 import androidx.viewbinding.ViewBinding
+import com.github.deweyreed.tools.helper.dimen
 import com.github.deweyreed.tools.helper.startDrawableAnimation
 import com.github.deweyreed.tools.helper.stopDrawableAnimation
 import com.github.deweyreed.tools.helper.themeColor
@@ -40,6 +44,13 @@ internal class IntroPanelView(
         }
         binding.btnIntroPanelExit.setOnClickListener {
             callback?.onExitInstruction()
+        }
+
+        ViewCompat.setOnApplyWindowInsetsListener(binding.root) { _, insets ->
+            val target = insets.getInsets(WindowInsetsCompat.Type.systemBars())
+            updatePadding(left = target.left, right = target.right)
+            minHeight = context.dimen(R.dimen.height_intro_panel_view) + target.bottom
+            insets
         }
     }
 

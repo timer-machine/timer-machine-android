@@ -6,6 +6,9 @@ import android.os.Bundle
 import android.text.format.DateUtils
 import android.view.View
 import androidx.core.content.edit
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowInsetsCompat
+import androidx.core.view.updatePadding
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.NavHostFragment
@@ -16,6 +19,7 @@ import com.github.deweyreed.tools.anko.longSnackbar
 import com.github.deweyreed.tools.arch.observeEvent
 import com.github.deweyreed.tools.helper.SoftDeleteHelper
 import com.github.deweyreed.tools.helper.color
+import com.github.deweyreed.tools.helper.dimen
 import com.github.deweyreed.tools.helper.drawable
 import com.github.deweyreed.tools.helper.getNumberFormattedQuantityString
 import com.github.deweyreed.tools.helper.tinted
@@ -104,6 +108,11 @@ class SchedulerFragment : Fragment(R.layout.fragment_scheduler), MainCallback.Fr
             layoutManager = LinearLayoutManager(context)
             adapter = schedulerAdapter
             adapter?.withEmptyView(binding.viewEmpty)
+            ViewCompat.setOnApplyWindowInsetsListener(this) { v, insets ->
+                val target = insets.getInsets(WindowInsetsCompat.Type.navigationBars())
+                v.updatePadding(bottom = context.dimen(RBase.dimen.fab_height) + target.bottom)
+                WindowInsetsCompat.CONSUMED
+            }
         }
         ItemTouchHelper(
             SpecialItemTouchHelperCallback(

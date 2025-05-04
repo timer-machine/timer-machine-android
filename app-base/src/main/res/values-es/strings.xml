@@ -346,7 +346,6 @@
     <string name="shortcut_remove_old">Por favor elimina primero el atajo previo de este temporizador</string>
     <string name="shortcut_timer_started">El temporizador ha iniciado</string>
     <string name="theme_title">Tema de la aplicación</string>
-    <string name="theme_theme_nav_bar">Colorear barra de navegación</string>
     <string name="theme_custom_title">Tema personalizado</string>
     <string name="theme_custom_primary">Color primario</string>
     <string name="theme_custom_secondary">Color de acento</string>
@@ -442,7 +441,6 @@
         <item quantity="other"><xliff:g example="7" id="number">%s</xliff:g> horas</item>
     </plurals>
     <string name="backup_app_data">Datos de aplicación</string>
-    <string name="theme_light_status_bar">Barra de estado clara</string>
     <string name="backup_wrong_saf">Framework de acceso al almacenamiento no encontrado
 \nEste dispositivo no soporta la exportación e importación</string>
     <string name="cloud_backup_backup_options">Opciones de respaldo</string>
