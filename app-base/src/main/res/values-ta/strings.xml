@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <string name="unknown">தெரியவில்லை</string>
     <string name="main_action_dark">இருண்ட கருப்பொருள்</string>
     <string name="main_action_record">பதிவுகள்</string>
@@ -132,7 +132,7 @@
     <string name="intro_save_for_later">டுடோரியலுக்குப் பிறகு இதை முயற்சி செய்யலாம்</string>
     <string name="intro_exit_previous_hint">முந்தைய படிக்குச் செல்ல, திரையின் அடிப்பகுதியில் உள்ள <b> இடது அம்பு </b> என்பதைக் சொடுக்கு செய்க.</string>
     <string name="tasker_edit_title">நேரங்குறிகருவி இயந்திர சொருகி</string>
-    <string name="tasker_event_timer_starts">&lt;Xliff: g எடுத்துக்காட்டு = \"நேரங்குறிகருவி பெயர்\" ஐடி = \"டைமர்_பேம்\"&gt;%s &lt;/xliff: g&gt; தொடங்கும் போது தூண்டுதல்</string>
+    <string name="tasker_event_timer_starts"><xliff:g example="Timer name" id="timer_name">%s</xliff:g> தொடங்கும் போது தூண்டுதல்</string>
     <string name="app_name">நேரங்குறிகருவி இயந்திரம்</string>
     <string name="ok">சரி</string>
     <string name="cancel">ரத்துசெய்</string>
@@ -259,12 +259,12 @@
     <string name="scheduler_repeat_tomorrow">நாளை</string>
     <string name="scheduler_repeat_today">இன்று</string>
     <string name="scheduler_set1">இப்போதிலிருந்து 1 நிமிடத்திற்கும் குறைவாக திட்டமிடல் அமைக்கப்படுகிறது</string>
-    <string name="scheduler_set3">&lt;Xliff: g எடுத்துக்காட்டு = \"2 மணிநேரம்\" ஐடி = \"மணிநேரம்\"&gt;%2$s &lt;/xliff: g&gt; க்கான திட்டமிடல் அமைக்கப்பட்டுள்ளது</string>
-    <string name="scheduler_set6">&lt;Xliff: g எடுத்துக்காட்டு = \"2 நாட்கள்\" ஐடி = \"நாட்கள்\"&gt;%1$s &lt;/xliff: g&gt; மற்றும் &lt;xliff: g எடுத்துக்காட்டு = \"2 நிமிடங்கள்\" ஐடி = \"நிமிடங்கள்\"&gt;%3$s &lt;/xliff: g&gt;</string>
+    <string name="scheduler_set3"><xliff:g example="2 hours" id="HOURS">%2$s</xliff:g> க்கு இப்போதிலிருந்து திட்டமிடுபவர் அமைக்கப்பட்டார்.</string>
+    <string name="scheduler_set6"><xliff:g example="2 days" id="DAYS">%1$s</xliff:g> மற்றும் <xliff:g example="2 minutes" id="MINUTES">%3$s</xliff:g> ஆகியவற்றுக்கான திட்டமிடல் இப்போது முதல் அமைக்கப்பட்டுள்ளது.</string>
     <string name="scheduler_starts_action_template">தொடக்க %1$s</string>
     <plurals name="minutes">
         <item quantity="one">1 மணித்துளி</item>
-        <item quantity="other">&lt;xliff: g எடுத்துக்காட்டு = \"7\" ஐடி = \"எண்\"&gt;%s &lt;/xliff: g&gt; நிமிடங்கள்</item>
+        <item quantity="other"><xliff:g id="NUMBER">%s</xliff:g> நிமிடங்கள்</item>
     </plurals>
     <string name="seconds_0">0 இரண்டாவது</string>
     <string name="shortcut_created">குறுக்குவழி உருவாக்கப்பட்டது</string>
@@ -357,7 +357,7 @@
     <string name="account_delete_confirmation_desp">இது <b> இல்லை </b> உங்கள் சந்தாவை பாதிக்கிறது. கூகிள் பிளே ச்டோரில் உங்கள் சந்தாவை நிர்வகிக்கலாம்.</string>
     <string name="account_deleting">கணக்கை நீக்குதல்…</string>
     <string name="account_sign_in">பதிவு / உள்நுழைக</string>
-    <string name="billing_explanation">குழுசேரைத் தட்டுவதன் மூலம், உங்கள் கட்டணம் உங்கள் Google Play Store கணக்கில் வசூலிக்கப்படும். தற்போதைய காலத்தின் முடிவில் குறைந்தது 24 மணி நேரத்திற்கு முன்பே கூகிள் பிளே ச்டோரில் உள்ள சந்தாக்களில் அதை ரத்துசெய்யும் வரை உங்கள் சந்தா அதே திட்ட நீளத்திற்கு அதே விலையில் தானாகவே புதுப்பிக்கப்படும். குழுசேர்வைத் தட்டுவதன் மூலம், \"எங்கள் &lt;xliff: g எடுத்துக்காட்டு =\" தனியுரிமைக் கொள்கை \"ஐடி =\" தனியுரிமை_போலிசி \"&gt;%1$s &lt;/xliff: g&gt; மற்றும் &lt;xliff: g எடுத்துக்காட்டு =\" விதிமுறைகள் \"ஐடி =\" விதிமுறைகள் \"&gt;%2$s &lt;/xliff: g&gt;.\"</string>
+    <string name="billing_explanation">குழுசேரைத் தட்டுவதன் மூலம், உங்கள் கட்டணம் உங்கள் Google Play Store கணக்கில் வசூலிக்கப்படும். தற்போதைய காலத்தின் முடிவில் குறைந்தது 24 மணி நேரத்திற்கு முன்பே கூகிள் பிளே ச்டோரில் உள்ள சந்தாக்களில் அதை ரத்துசெய்யும் வரை உங்கள் சந்தா அதே திட்ட நீளத்திற்கு அதே விலையில் தானாகவே புதுப்பிக்கப்படும். குழுசேர்வைத் தட்டுவதன் மூலம், எங்கள் <xliff:g example="Privacy policy" id="privacy_policy">%1$s</xliff:g> மற்றும் <xliff:g example="Terms" id="terms">%2$s</xliff:g>.</string>
     <string name="billing_under_maintenance">பராமரிப்பின் கீழ்</string>
     <string name="billing_cloud_backup_desp">கடின உழைப்பின் உங்கள் பதிவை ஒருபோதும் இழக்காதீர்கள்</string>
     <string name="billing_more_themes_title">மேலும் கருப்பொருள்கள்</string>
@@ -457,7 +457,7 @@
     <string name="time_panel_step_end_time">படி இறுதி நேரம்</string>
     <plurals name="seconds">
         <item quantity="one">1 நொடி</item>
-        <item quantity="other">&lt;xliff: g எடுத்துக்காட்டு = \"7\" ஐடி = \"எண்\"&gt;%s &lt;/xliff: g&gt; விநாடிகள்</item>
+        <item quantity="other"><xliff:g id="NUMBER">%s</xliff:g> வினாடிகள்</item>
     </plurals>
     <string name="theme_custom_secondary">உச்சரிப்பு நிறம்</string>
     <string name="cloud_backup_account_issue_notif_title">முகில் காப்புப்பிரதி தோல்வியடைந்தது</string>
@@ -487,11 +487,11 @@
     <string name="scheduler_repeat_once">ஒருமுறை</string>
     <string name="scheduler_wrong_timer_id">இந்த திட்டமிடலுக்கு ஒரு நேரங்குறிகருவி தேவை</string>
     <string name="scheduler_wrong_every_days">இந்த மதிப்பு 1 முதல் 127 வரை இருக்க வேண்டும்</string>
-    <string name="scheduler_set2">&lt;Xliff: g எடுத்துக்காட்டு = \"2 நாட்கள்\" ஐடி = \"நாட்கள்\"&gt;%1$s &lt;/xliff: g&gt; க்கான திட்டமிடல் அமைக்கப்பட்டுள்ளது</string>
-    <string name="scheduler_set5">&lt;Xliff: g எடுத்துக்காட்டு = \"2 நிமிடங்கள்\" ஐடி = \"நிமிடங்கள்\"&gt;%3$s &lt;/xliff: g&gt; க்கான திட்டமிடல் அமைக்கப்படுகிறது</string>
-    <string name="scheduler_set4">&lt;Xliff: g எடுத்துக்காட்டு = \"2 நாட்கள்\" ஐடி = \"நாட்கள்\"&gt;%1$s &lt;/xliff: g&gt; மற்றும் &lt;xliff: g எடுத்துக்காட்டு = \"2 மணிநேரம்\" ஐடி = \"மணிநேரம்\"&gt;%2$s &lt;/xliff: g&gt;</string>
-    <string name="scheduler_set7">&lt;Xliff: g எடுத்துக்காட்டு = \"2 மணிநேரம்\" ஐடி = \"மணிநேரம்\"&gt;%2$s &lt;/xliff: g&gt; மற்றும் &lt;xliff: g எடுத்துக்காட்டு = \"2 நிமிடங்கள்\" ஐடி = \"நிமிடங்கள்\"&gt;%3$s &lt;/xliff: g&gt;</string>
-    <string name="scheduler_set8">திட்டமிடுபவர் அமைக்கப்பட்டது &lt;xliff:g example=\"2 நாட்கள்\" id=\"நாட்கள்\"&gt;%1$s&lt;/xliff:g&gt;, &lt;xliff:g example=\"2 மணிநேரம்\" id=\"மணிநேரம்\"&gt;%2$s&lt;/xliff:g&gt;, and &lt;xliff:g example=\"2 நிமையங்கள்\" id=\"நிமையங்கள்\"&gt;%3$s&lt;/xliff:g&gt;இப்பொழுதிலிருந்து</string>
+    <string name="scheduler_set2"><xliff:g example="2 days" id="DAYS">%1$s</xliff:g> க்கு இப்போதிலிருந்து திட்டமிடுபவர் அமைக்கப்பட்டார்.</string>
+    <string name="scheduler_set5"><xliff:g example="2 minutes" id="MINUTES">%3$s</xliff:g> க்கு இப்போதிலிருந்து திட்டமிடுபவர் அமைக்கப்பட்டார்.</string>
+    <string name="scheduler_set4"><xliff:g example="2 days" id="DAYS">%1$s</xliff:g> மற்றும் <xliff:g example="2 hours" id="HOURS">%2$s</xliff:g> ஆகியவற்றுக்கான திட்டமிடல் இப்போது முதல் அமைக்கப்பட்டுள்ளது.</string>
+    <string name="scheduler_set7"><xliff:g example="2 hours" id="HOURS">%2$s</xliff:g> மற்றும் <xliff:g example="2 minutes" id="MINUTES">%3$s</xliff:g> ஆகியவற்றுக்கான திட்டமிடல் இப்போது முதல் அமைக்கப்பட்டுள்ளது.</string>
+    <string name="scheduler_set8"><xliff:g example="2 days" id="DAYS">%1$s</xliff:g>, <xliff:g example="2 hours" id="HOURS">%2$s</xliff:g>, மற்றும் <xliff:g example="2 minutes" id="MINUTES">%3$s</xliff:g> ஆகியவற்றுக்கான திட்டமிடல் இப்போது முதல் அமைக்கப்பட்டுள்ளது.</string>
     <string name="scheduler_schedule_failed">திட்டமிடலை அமைத்தல் %s தோல்வியுற்றது</string>
     <string name="scheduler_canceled_template">%1$s ரத்து செய்யப்பட்டன</string>
     <string name="scheduler_stops_action_template">%1$s ஐ நிறுத்துங்கள்</string>
@@ -501,11 +501,11 @@
     </plurals>
     <plurals name="days">
         <item quantity="one">1 நாள்</item>
-        <item quantity="other">&lt;xliff: g எடுத்துக்காட்டு = \"7\" ஐடி = \"எண்\"&gt;%s &lt;/xliff: g&gt; நாட்கள்</item>
+        <item quantity="other"><xliff:g id="NUMBER">%s</xliff:g> நாட்கள்</item>
     </plurals>
     <plurals name="hours">
         <item quantity="one">1 மணி நேரம்</item>
-        <item quantity="other">&lt;xliff: g எடுத்துக்காட்டு = \"7\" ஐடி = \"எண்\"&gt;%s &lt;/xliff: g&gt; மணிநேரம்</item>
+        <item quantity="other"><xliff:g id="NUMBER">%s</xliff:g> மணிநேரம்</item>
     </plurals>
     <string name="shortcut_remove_old">இந்த டைமரின் பழைய குறுக்குவழியை முதலில் நீக்கவும்</string>
     <string name="shortcut_not_support">தற்போதைய துவக்கத்தால் குறுக்குவழியை உருவாக்க முடியாது</string>
@@ -589,7 +589,7 @@
     <string name="intro_exit_confirmation">டுடோரியலில் இருந்து வெளியேறவா?</string>
     <string name="intro_exit_difficult_app_alert">டுடோரியலை முடிக்காமல், பயன்பாடு பயன்படுத்த குழப்பமாக இருக்கலாம்.</string>
     <string name="whitelist_disclaimer_yes">அனுமதிப்பட்டியல் வழிகாட்டுதலை சரிபார்க்கவும்</string>
-    <string name="tasker_event_timer_stops">&lt;Xliff: g எடுத்துக்காட்டு = \"நேரங்குறிகருவி பெயர்\" ஐடி = \"timer_name\"&gt;%s &lt;/xliff: g&gt; நிறுத்தப்படும்போது தூண்டுதல்</string>
+    <string name="tasker_event_timer_stops"><xliff:g example="Timer name" id="timer_name">%s</xliff:g> நிறுத்தப்படும்போது தூண்டுதல்</string>
     <string name="billing_ad_off_desp">பயன்பாட்டிற்கு விளம்பரமில்லாத மற்றும் திறந்த மூலமாக இருக்க உதவுங்கள்</string>
     <string name="billing_future_title">எதிர்காலத்தில் மேலும்</string>
     <string name="billing_subscription_service">இது சந்தா பணி.</string>
