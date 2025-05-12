@@ -1,6 +1,6 @@
 package xyz.aprildown.timer.presentation.stream.task
 
-import android.os.CountDownTimer
+import com.github.cardinalby.accuratecountdowntimer.AccurateCountDownTimer
 import com.github.deweyreed.tools.helper.HandlerHelper
 import xyz.aprildown.timer.presentation.stream.StreamState
 
@@ -50,17 +50,17 @@ internal class CountDownTimerTask(master: TaskMaster, countDownTime: Long) : Tas
 
     private fun onTick(millisUntilFinished: Long) {
         millisLeft = millisUntilFinished
-        master.onTick(this, millisUntilFinished)
-        tickListeners.forEach { it.onNewTime(millisUntilFinished) }
+        master.onTick(this, currentTime)
+        tickListeners.forEach { it.onNewTime(currentTime) }
     }
 
-    private inner class MyTimer(countDownTime: Long) : CountDownTimer(countDownTime, 1_000L) {
-
-        private var remainingTime = countDownTime
+    private inner class MyTimer(
+        countDownTime: Long,
+    ) : AccurateCountDownTimer(countDownTime, 1_000L) {
 
         init {
             HandlerHelper.runOnUiThread {
-                this@CountDownTimerTask.onTick(remainingTime)
+                this@CountDownTimerTask.onTick(countDownTime)
             }
         }
 
@@ -72,8 +72,7 @@ internal class CountDownTimerTask(master: TaskMaster, countDownTime: Long) : Tas
 
         override fun onTick(millisUntilFinished: Long) {
             HandlerHelper.runOnUiThread {
-                this@CountDownTimerTask.onTick(remainingTime)
-                remainingTime -= 1_000L
+                this@CountDownTimerTask.onTick(millisUntilFinished.round())
             }
         }
     }

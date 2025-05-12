@@ -2,6 +2,7 @@ package xyz.aprildown.timer.presentation.stream.task
 
 import androidx.annotation.CallSuper
 import xyz.aprildown.timer.presentation.stream.StreamState
+import kotlin.math.roundToLong
 
 internal abstract class Task(protected val master: TaskMaster) {
 
@@ -29,4 +30,8 @@ internal abstract class Task(protected val master: TaskMaster) {
      * @param add True to add amount to the current time. False to set current time to amount
      */
     abstract fun adjust(amount: Long, add: Boolean)
+
+    protected fun Long.round(): Long {
+        return (toDouble() / 1000f).roundToLong() * 1000L
+    }
 }

@@ -1,8 +1,8 @@
 package xyz.aprildown.timer.presentation.stream.task
 
-import android.os.Handler
-import android.os.Looper
-import android.os.SystemClock
+import com.github.cardinalby.accuratecountdowntimer.AccurateCountDownTimer
+import com.github.deweyreed.tools.helper.HandlerHelper
+import xyz.aprildown.timer.presentation.stream.StreamState
 
 /**
  * You must call [TaskManager.interfere] to move on.
@@ -11,68 +11,75 @@ internal class StopwatchTask(master: TaskMaster) : Task(master) {
 
     private val tickListeners = mutableListOf<TickListener>()
 
-    private val handler = Handler(Looper.getMainLooper())
-    private var currentStartTime = 0L
-    private var baseElapsedTime = 0L
-    private var currentElapsedTime = 0L
+    private var timer = MyTimer()
+    private var millisPassedBase = 0L
+    private var millisPassedCurrent = 0L
 
-    override val currentTime: Long get() = currentElapsedTime + baseElapsedTime
-
-    override fun start() {
-        super.start()
-        currentStartTime = SystemClock.elapsedRealtime()
-        currentElapsedTime = 0
-        handler.post(TickRunnable())
-    }
-
-    override fun pause() {
-        super.pause()
-        handler.removeCallbacksAndMessages(null)
-        baseElapsedTime += currentElapsedTime
-        currentElapsedTime = 0
-    }
-
-    override fun forceStop() {
-        super.forceStop()
-        handler.removeCallbacksAndMessages(null)
-    }
-
-    override fun adjust(amount: Long, add: Boolean) {
-        handler.removeCallbacksAndMessages(null)
-        baseElapsedTime += if (add) currentElapsedTime + amount else amount
-        currentElapsedTime = 0
-        if (taskState.isRunning) {
-            start()
-        } else {
-            master.onTick(this, currentTime)
-        }
-    }
-
-    /**
-     * newElapsedTime pattern: 26, 1026, 2026, 3026...
-     * So the result is 0, 1, 2, 3
-     */
-    private fun onTick(newElapsedTime: Long) {
-        currentElapsedTime = newElapsedTime
-        val time = currentTime
-        master.onTick(this, time)
-        tickListeners.forEach { it.onNewTime(time) }
-    }
+    override val currentTime: Long get() = millisPassedBase + millisPassedCurrent
 
     fun addTickListener(listener: TickListener) {
         tickListeners.add(listener)
     }
 
-    private inner class TickRunnable : Runnable {
-        override fun run() {
-            val tickStartTime = SystemClock.elapsedRealtime()
+    override fun start() {
+        super.start()
+        timer.start()
+    }
 
-            val newElapsedTime = tickStartTime - currentStartTime
-            onTick(newElapsedTime)
+    override fun pause() {
+        super.pause()
+        timer.cancel()
+        millisPassedBase += millisPassedCurrent
+        millisPassedCurrent = 0L
+        timer = MyTimer()
+    }
 
-            val tickEndTime = SystemClock.elapsedRealtime()
-            val consume = tickEndTime - tickStartTime
-            handler.postDelayed(this, 1_000L - (consume % 1_000L))
+    override fun forceStop() {
+        super.forceStop()
+        timer.cancel()
+    }
+
+    override fun adjust(amount: Long, add: Boolean) {
+        timer.cancel()
+        millisPassedBase = if (add) millisPassedBase + millisPassedCurrent + amount else amount
+        millisPassedCurrent = 0L
+        timer = MyTimer()
+        if (taskState.isRunning) {
+            timer.start()
+        }
+    }
+
+    private fun onFinish() {
+        taskState = StreamState.RESET
+        master.onTaskDone(this)
+    }
+
+    private fun onTick(millisPassed: Long) {
+        millisPassedCurrent = millisPassed
+        master.onTick(this, currentTime)
+        tickListeners.forEach { it.onNewTime(currentTime) }
+    }
+
+    private inner class MyTimer : AccurateCountDownTimer(DURATION, 1_000L) {
+
+        init {
+            HandlerHelper.runOnUiThread {
+                this@StopwatchTask.onTick(0L)
+            }
+        }
+
+        override fun onFinish() {
+            HandlerHelper.runOnUiThread {
+                this@StopwatchTask.onFinish()
+            }
+        }
+
+        override fun onTick(millisUntilFinished: Long) {
+            HandlerHelper.runOnUiThread {
+                this@StopwatchTask.onTick((DURATION - millisUntilFinished).round())
+            }
         }
     }
 }
+
+private const val DURATION = Long.MAX_VALUE

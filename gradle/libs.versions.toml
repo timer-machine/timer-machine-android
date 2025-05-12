@@ -153,6 +153,7 @@ coil-compose = "io.coil-kt:coil-compose:2.6.0"
 coil-gif = "io.coil-kt:coil-gif:2.6.0"
 zoomable = "net.engawapg.lib:zoomable:1.6.1"
 twoWayNestedScrollView = "com.github.ultimate-deej:twowaynestedscrollview:0.1.2"
+accurateCountDownTimer = "com.github.cardinalby:accurate-count-down-timer:1.0"
 
 [bundles]
 mockito-core = ["mockito-kotlin", "mockito-core"]

@@ -13,12 +13,13 @@ dependencyResolutionManagement {
         maven {
             url "https://jitpack.io"
             content {
-                includeGroup "com.github.DeweyReed"
-                includeModule "com.github.PhilJay", "MPAndroidChart"
-                includeModule "com.github.kizitonwose", "CalendarView"
-                includeModule "com.github.zawadz88", "MaterialPopupMenu"
-                includeModule "com.github.Carbs0126", "NumberPickerView"
-                includeModule "com.github.ultimate-deej", "twowaynestedscrollview"
+                includeGroup("com.github.DeweyReed")
+                includeModule("com.github.PhilJay", "MPAndroidChart")
+                includeModule("com.github.kizitonwose", "CalendarView")
+                includeModule("com.github.zawadz88", "MaterialPopupMenu")
+                includeModule("com.github.Carbs0126", "NumberPickerView")
+                includeModule("com.github.ultimate-deej", "twowaynestedscrollview")
+                includeModule("com.github.cardinalby", "accurate-count-down-timer")
             }
         }
     }

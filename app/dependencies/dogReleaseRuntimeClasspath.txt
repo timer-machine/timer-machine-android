@@ -157,6 +157,7 @@ com.github.DeweyReed:android-job:a04c817792
 com.github.DeweyReed:tools:0.8.0
 com.github.PhilJay:MPAndroidChart:v3.1.0
 com.github.bumptech.glide:disklrucache:4.16.0
+com.github.cardinalby:accurate-count-down-timer:1.0
 com.github.kizitonwose:CalendarView:1.0.4
 com.github.ultimate-deej:twowaynestedscrollview:0.1.2
 com.github.zawadz88:MaterialPopupMenu:4.1.0
