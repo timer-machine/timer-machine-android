@@ -10,6 +10,7 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.net.toUri
 import androidx.core.widget.ImageViewCompat
 import androidx.fragment.app.DialogFragment
+import com.github.deweyreed.tools.anko.toast
 import com.github.deweyreed.tools.helper.gone
 import com.github.deweyreed.tools.helper.toColorStateList
 import com.github.zawadz88.materialpopupmenu.popupMenu
@@ -36,6 +37,7 @@ import xyz.aprildown.timer.domain.entities.toNotificationAction
 import xyz.aprildown.timer.domain.entities.toScreenAction
 import xyz.aprildown.timer.domain.entities.toVibrationAction
 import xyz.aprildown.timer.domain.entities.toVoiceAction
+import xyz.aprildown.timer.domain.utils.AppTracker
 import xyz.aprildown.ultimateringtonepicker.RingtonePickerDialog
 import xyz.aprildown.ultimateringtonepicker.UltimateRingtonePicker
 import javax.inject.Inject
@@ -49,6 +51,9 @@ class UpdateStepDialog :
     @Inject
     lateinit var appNavigator: AppNavigator
 
+    @Inject
+    lateinit var appTracker: AppTracker
+
     private lateinit var binding: ItemEditStepBinding
 
     private var length = 0L
@@ -60,8 +65,15 @@ class UpdateStepDialog :
         ActivityResultContracts.PickVisualMedia()
     ) { uri ->
         if (uri == null || uri == Uri.EMPTY) return@registerForActivityResult
-        requireContext().contentResolver
-            .takePersistableUriPermission(uri, Intent.FLAG_GRANT_READ_URI_PERMISSION)
+        val context = requireContext()
+        try {
+            context.contentResolver
+                .takePersistableUriPermission(uri, Intent.FLAG_GRANT_READ_URI_PERMISSION)
+        } catch (e: Exception) {
+            appTracker.trackError(e)
+            context.toast(e.message.toString())
+            return@registerForActivityResult
+        }
         changeBehaviour(type = BehaviourType.IMAGE) {
             it.toImageAction().copy(data = uri.toString()).toBehaviourEntity()
         }

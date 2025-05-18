@@ -32,6 +32,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.github.deweyreed.tools.anko.dp
 import com.github.deweyreed.tools.anko.snackbar
+import com.github.deweyreed.tools.anko.toast
 import com.github.deweyreed.tools.arch.observeEvent
 import com.github.deweyreed.tools.helper.IntentHelper
 import com.github.deweyreed.tools.helper.gone
@@ -70,6 +71,7 @@ import xyz.aprildown.timer.domain.entities.toScreenAction
 import xyz.aprildown.timer.domain.entities.toVibrationAction
 import xyz.aprildown.timer.domain.entities.toVoiceAction
 import xyz.aprildown.timer.domain.usecases.Fruit
+import xyz.aprildown.timer.domain.utils.AppTracker
 import xyz.aprildown.timer.domain.utils.Constants
 import xyz.aprildown.timer.presentation.edit.EditViewModel
 import xyz.aprildown.timer.presentation.stream.accumulateTime
@@ -90,6 +92,9 @@ class EditActivity :
     @Inject
     lateinit var appNavigator: AppNavigator
 
+    @Inject
+    lateinit var appTracker: AppTracker
+
     private lateinit var startAdapter: ItemAdapter<EditableStep>
     private lateinit var stepAdapter: ItemAdapter<IItem<*>>
     private lateinit var endAdapter: ItemAdapter<EditableStep>
@@ -107,7 +112,13 @@ class EditActivity :
         viewModel.imagePosition = -1
         if (uri == null || uri == Uri.EMPTY) return@registerForActivityResult
         if (position == -1) return@registerForActivityResult
-        contentResolver.takePersistableUriPermission(uri, Intent.FLAG_GRANT_READ_URI_PERMISSION)
+        try {
+            contentResolver.takePersistableUriPermission(uri, Intent.FLAG_GRANT_READ_URI_PERMISSION)
+        } catch (e: Exception) {
+            appTracker.trackError(e)
+            toast(e.message.toString())
+            return@registerForActivityResult
+        }
         changeBehaviour(type = BehaviourType.IMAGE, position = position) {
             it.toImageAction().copy(data = uri.toString()).toBehaviourEntity()
         }
