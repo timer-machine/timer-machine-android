@@ -334,4 +334,6 @@
     <string name="shortcut_not_support">Der aktuelle Launcher kann keine Verknüpfung erstellen</string>
     <string name="shortcut_remove_old">Bitte löschen Sie zuerst die alte Verknüpfung dieses Timers</string>
     <string name="shortcut_timer_started">Der Timer wurde gestartet</string>
+    <string name="half_option_voice_desp">Lese „Hälfte der Zeit“ vor</string>
+    <string name="one_action_show_float">Schwebendes Fenster</string>
 </resources>
