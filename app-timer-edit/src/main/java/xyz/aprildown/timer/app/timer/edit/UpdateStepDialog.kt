@@ -97,7 +97,7 @@ class UpdateStepDialog :
         return MaterialAlertDialogBuilder(context)
             .setCancelable(false)
             .setTitle(RBase.string.edit_step)
-            .setView(view)
+            .setView(dialogBinding.root)
             .setPositiveButton(android.R.string.ok) { _, _ ->
                 onUpdate.invoke(
                     StepEntity.Step(
