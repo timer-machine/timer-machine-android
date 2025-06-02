@@ -86,7 +86,7 @@
     <string name="edit_share_as_text">Als Text teilen</string>
     <string name="edit_import_from_the_clipboard">Aus der Zwischenablage importieren</string>
     <string name="name_loop_name_hint">Name</string>
-    <string name="name_loop_loop_hint">Loop</string>
+    <string name="name_loop_loop_hint">Wiederholen</string>
     <string name="time_picker_type_panel">Eingabefeld</string>
     <string name="time_picker_type_scroll">Wählrad</string>
     <string name="behaviour_add_new">Erinnerung hinzufügen</string>
@@ -520,4 +520,12 @@
     <string name="account_sign_in">Einschreiben / anmelden</string>
     <string name="account_sign_out_confirmation">Abmelden?</string>
     <string name="help_feedback_desp">Schicken Sie ein e-Mail und bekommen eine Antwort innerhalb eines Tages</string>
+    <string name="time_panel_step_end_time">Schritt Endzeit</string>
+    <string name="notif_timer_screen_showing">%1$s weckt den Bildschirm auf</string>
+    <string name="time_panel_picker">Zeitfenster-Auswahl</string>
+    <string name="one_layout_bar">Zeitleiste</string>
+    <string name="count_times">Countdown</string>
+    <string name="one_action_tweak_time">Anpassungszeit</string>
+    <string name="notif_channel_timing_title">Zeitgesteuerte Benachrichtigung</string>
+    <string name="time_panel_timer_end_time">Timer Endzeit</string>
 </resources>
