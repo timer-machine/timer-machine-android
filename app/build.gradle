@@ -27,7 +27,7 @@ android {
         vectorDrawables.useSupportLibrary true
 
         archivesBaseName = "TimeR.Machine-v${versionName}(${versionCode})"
-        resourceConfigurations += ["en", "es", "nl", "pt", "ta", "zh-rCN", "zh-rHK", "zh-rTW"]
+        resourceConfigurations += ["en", "de", "es", "nl", "pt", "ta", "zh-rCN", "zh-rHK", "zh-rTW"]
     }
 
     buildTypes {
