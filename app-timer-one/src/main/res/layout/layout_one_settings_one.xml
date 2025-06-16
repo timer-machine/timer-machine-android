@@ -11,7 +11,7 @@
         android:layout_height="match_parent"
         app:li_divider="margin"
         app:li_layout="@layout/view_list_item_with_layout_switch"
-        app:li_textPrimary="@string/one_layout_step" />
+        app:li_textPrimary="@string/edit_step_name" />
 
     <xyz.aprildown.timer.component.key.ListItemWithLayout
         android:id="@+id/itemOneLayoutOneBar"
