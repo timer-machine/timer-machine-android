@@ -10,6 +10,8 @@ import android.widget.ProgressBar
 import android.widget.SeekBar
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.core.view.children
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import com.github.deweyreed.tools.anko.dp
 import com.github.deweyreed.tools.helper.gone
@@ -43,17 +45,19 @@ internal class OneLayoutOneFragment :
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         val context = view.context
+        val sampleSteps = ShowcaseData.getSampleSteps()
 
         view.findViewById<TextView>(R.id.textOneTime).run {
             text = 8158000L.produceTime()
         }
-        view.findViewById<TextView>(R.id.textOneStep).run {
-            text = ShowcaseData.getSampleSteps()[0].label
-        }
+        view.findViewById<ViewGroup>(R.id.layoutOneStepName)
+            .children.filterIsInstance<TextView>().first().run {
+                text = sampleSteps.first().label
+            }
         view.findViewById<TextView>(R.id.textOneLoop).text = "1/3"
         view.findViewById<StepListView>(R.id.listOneSteps).run {
             setHasFixedSize(true)
-            setTimer(TimerEntity(1, "", 1, ShowcaseData.getSampleSteps()))
+            setTimer(TimerEntity(1, "", 1, sampleSteps))
         }
         view.findViewById<FiveActionsView>(R.id.fiveActionsOne).run {
             setActionClickListener(this@OneLayoutOneFragment)
@@ -151,7 +155,7 @@ internal class OneLayoutOneFragment :
 
     private fun toggleStep(show: Boolean) {
         val view = requireView()
-        view.findViewById<LinearLayout?>(R.id.layoutTextOneStep).visibility = if (show) View.VISIBLE else View.GONE
+        view.findViewById<LinearLayout?>(R.id.layoutOneStepName).isVisible = show
     }
 
     private fun toggleTimingBar(show: Boolean) {
@@ -173,7 +177,8 @@ internal class OneLayoutOneFragment :
 
     private fun setTimeTextSize(size: Int) {
         view?.findViewById<TextView>(R.id.textOneTime)?.textSize = requireContext().dp(size)
-        view?.findViewById<TextView>(R.id.textOneStep)?.textSize = requireContext().dp(size)
+        view?.findViewById<ViewGroup>(R.id.layoutOneStepName)
+            ?.children?.filterIsInstance<TextView>()?.first()?.textSize = requireContext().dp(size)
     }
 
     private fun toggleTimePanels() {
