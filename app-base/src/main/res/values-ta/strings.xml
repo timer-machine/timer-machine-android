@@ -259,8 +259,8 @@
     <string name="scheduler_repeat_tomorrow">நாளை</string>
     <string name="scheduler_repeat_today">இன்று</string>
     <string name="scheduler_set1">இப்போதிலிருந்து 1 நிமிடத்திற்கும் குறைவாக திட்டமிடல் அமைக்கப்படுகிறது</string>
-    <string name="scheduler_set3"><xliff:g example="2 hours" id="HOURS">%2$s</xliff:g> க்கு இப்போதிலிருந்து திட்டமிடுபவர் அமைக்கப்பட்டார்.</string>
-    <string name="scheduler_set6"><xliff:g example="2 days" id="DAYS">%1$s</xliff:g> மற்றும் <xliff:g example="2 minutes" id="MINUTES">%3$s</xliff:g> ஆகியவற்றுக்கான திட்டமிடல் இப்போது முதல் அமைக்கப்பட்டுள்ளது.</string>
+    <string name="scheduler_set3"><xliff:g example="2 hours" id="HOURS">%2$s</xliff:g> க்கு இப்போதிலிருந்து திட்டமிடுபவர் அமைக்கப்பட்டார்</string>
+    <string name="scheduler_set6"><xliff:g example="2 days" id="DAYS">%1$s</xliff:g> மற்றும் <xliff:g example="2 minutes" id="MINUTES">%3$s</xliff:g> ஆகியவற்றுக்கான திட்டமிடல் இப்போது முதல் அமைக்கப்பட்டுள்ளது</string>
     <string name="scheduler_starts_action_template">தொடக்க %1$s</string>
     <plurals name="minutes">
         <item quantity="one">1 மணித்துளி</item>
@@ -487,11 +487,11 @@
     <string name="scheduler_repeat_once">ஒருமுறை</string>
     <string name="scheduler_wrong_timer_id">இந்த திட்டமிடலுக்கு ஒரு நேரங்குறிகருவி தேவை</string>
     <string name="scheduler_wrong_every_days">இந்த மதிப்பு 1 முதல் 127 வரை இருக்க வேண்டும்</string>
-    <string name="scheduler_set2"><xliff:g example="2 days" id="DAYS">%1$s</xliff:g> க்கு இப்போதிலிருந்து திட்டமிடுபவர் அமைக்கப்பட்டார்.</string>
-    <string name="scheduler_set5"><xliff:g example="2 minutes" id="MINUTES">%3$s</xliff:g> க்கு இப்போதிலிருந்து திட்டமிடுபவர் அமைக்கப்பட்டார்.</string>
-    <string name="scheduler_set4"><xliff:g example="2 days" id="DAYS">%1$s</xliff:g> மற்றும் <xliff:g example="2 hours" id="HOURS">%2$s</xliff:g> ஆகியவற்றுக்கான திட்டமிடல் இப்போது முதல் அமைக்கப்பட்டுள்ளது.</string>
-    <string name="scheduler_set7"><xliff:g example="2 hours" id="HOURS">%2$s</xliff:g> மற்றும் <xliff:g example="2 minutes" id="MINUTES">%3$s</xliff:g> ஆகியவற்றுக்கான திட்டமிடல் இப்போது முதல் அமைக்கப்பட்டுள்ளது.</string>
-    <string name="scheduler_set8"><xliff:g example="2 days" id="DAYS">%1$s</xliff:g>, <xliff:g example="2 hours" id="HOURS">%2$s</xliff:g>, மற்றும் <xliff:g example="2 minutes" id="MINUTES">%3$s</xliff:g> ஆகியவற்றுக்கான திட்டமிடல் இப்போது முதல் அமைக்கப்பட்டுள்ளது.</string>
+    <string name="scheduler_set2"><xliff:g example="2 days" id="DAYS">%1$s</xliff:g> க்கு இப்போதிலிருந்து திட்டமிடுபவர் அமைக்கப்பட்டார்</string>
+    <string name="scheduler_set5"><xliff:g example="2 minutes" id="MINUTES">%3$s</xliff:g> க்கு இப்போதிலிருந்து திட்டமிடுபவர் அமைக்கப்பட்டார்</string>
+    <string name="scheduler_set4"><xliff:g example="2 days" id="DAYS">%1$s</xliff:g> மற்றும் <xliff:g example="2 hours" id="HOURS">%2$s</xliff:g> ஆகியவற்றுக்கான திட்டமிடல் இப்போது முதல் அமைக்கப்பட்டுள்ளது</string>
+    <string name="scheduler_set7"><xliff:g example="2 hours" id="HOURS">%2$s</xliff:g> மற்றும் <xliff:g example="2 minutes" id="MINUTES">%3$s</xliff:g> ஆகியவற்றுக்கான திட்டமிடல் இப்போது முதல் அமைக்கப்பட்டுள்ளது</string>
+    <string name="scheduler_set8"><xliff:g example="2 days" id="DAYS">%1$s</xliff:g>, <xliff:g example="2 hours" id="HOURS">%2$s</xliff:g>, மற்றும் <xliff:g example="2 minutes" id="MINUTES">%3$s</xliff:g> ஆகியவற்றுக்கான திட்டமிடல் இப்போது முதல் அமைக்கப்பட்டுள்ளது</string>
     <string name="scheduler_schedule_failed">திட்டமிடலை அமைத்தல் %s தோல்வியுற்றது</string>
     <string name="scheduler_canceled_template">%1$s ரத்து செய்யப்பட்டன</string>
     <string name="scheduler_stops_action_template">%1$s ஐ நிறுத்துங்கள்</string>
