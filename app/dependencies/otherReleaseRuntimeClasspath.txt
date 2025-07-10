@@ -78,7 +78,7 @@ androidx.core:core:1.13.1
 androidx.cursoradapter:cursoradapter:1.0.0
 androidx.customview:customview-poolingcontainer:1.0.0
 androidx.customview:customview:1.1.0
-androidx.databinding:viewbinding:8.6.1
+androidx.databinding:viewbinding:8.10.1
 androidx.documentfile:documentfile:1.0.0
 androidx.drawerlayout:drawerlayout:1.1.1
 androidx.dynamicanimation:dynamicanimation:1.0.0
