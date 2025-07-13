@@ -14,6 +14,7 @@ import android.view.View
 import androidx.core.content.IntentCompat
 import androidx.core.content.edit
 import androidx.core.text.buildSpannedString
+import androidx.core.view.get
 import dagger.hilt.android.AndroidEntryPoint
 import xyz.aprildown.timer.app.base.data.PreferenceData.storedAudioTypeValue
 import xyz.aprildown.timer.app.base.ui.BaseActivity
@@ -87,8 +88,9 @@ class RingtonePickerActivity :
     }
 
     override fun onPrepareOptionsMenu(menu: Menu?): Boolean {
-        val menuItem = menu?.getItem(0)
-        menuItem?.setTitle(
+        if (menu == null) return false
+        val menuItem = menu[0]
+        menuItem.setTitle(
             buildSpannedString {
                 append("SAF")
                 if (usingSafPick) {

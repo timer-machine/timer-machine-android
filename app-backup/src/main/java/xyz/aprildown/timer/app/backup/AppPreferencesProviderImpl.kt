@@ -2,6 +2,7 @@ package xyz.aprildown.timer.app.backup
 
 import android.content.Context
 import android.content.SharedPreferences
+import androidx.core.content.edit
 import com.github.deweyreed.tools.helper.getNonNullString
 import dagger.Reusable
 import dagger.hilt.android.qualifiers.ApplicationContext
@@ -79,11 +80,11 @@ class AppPreferencesProviderImpl @Inject constructor(
     }
 
     override fun applyAppPreferences(prefs: Map<String, String>) {
-        val editor = sharedPreferences.edit()
-        PreferenceItem.getPreferenceItems().forEach { item ->
-            item.storeToApp(context, prefs, editor)
+        sharedPreferences.edit {
+            PreferenceItem.getPreferenceItems().forEach { item ->
+                item.storeToApp(context, prefs, this)
+            }
         }
-        editor.apply()
     }
 }
 

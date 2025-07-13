@@ -8,6 +8,7 @@ import android.view.ViewStub
 import android.widget.Checkable
 import android.widget.RelativeLayout
 import androidx.annotation.LayoutRes
+import androidx.core.content.withStyledAttributes
 import androidx.core.view.updateLayoutParams
 import com.github.deweyreed.tools.helper.setSelectableItemBackground
 import com.github.deweyreed.tools.R as RTools
@@ -24,17 +25,17 @@ class ListItemWithLayout(
         gravity = Gravity.CENTER_VERTICAL
         setSelectableItemBackground()
 
-        val primaryText: String?
-        val secondaryText: String?
-        val layoutRes: Int
-        val divider: Int
+        var primaryText: String? = null
+        var secondaryText: String? = null
+        var layoutRes = 0
+        var divider = 0
         if (attrs != null) {
-            val sa = context.obtainStyledAttributes(attrs, R.styleable.ListItemWithLayout)
-            primaryText = sa.getString(R.styleable.ListItemWithLayout_li_textPrimary)
-            secondaryText = sa.getString(R.styleable.ListItemWithLayout_li_textSecondary)
-            layoutRes = sa.getResourceId(R.styleable.ListItemWithLayout_li_layout, 0)
-            divider = sa.getInt(R.styleable.ListItemWithLayout_li_divider, 0)
-            sa.recycle()
+            context.withStyledAttributes(attrs, R.styleable.ListItemWithLayout) {
+                primaryText = getString(R.styleable.ListItemWithLayout_li_textPrimary)
+                secondaryText = getString(R.styleable.ListItemWithLayout_li_textSecondary)
+                layoutRes = getResourceId(R.styleable.ListItemWithLayout_li_layout, 0)
+                divider = getInt(R.styleable.ListItemWithLayout_li_divider, 0)
+            }
         } else {
             primaryText = null
             secondaryText = null

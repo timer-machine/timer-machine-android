@@ -2,6 +2,7 @@ package xyz.aprildown.timer.data.repositories
 
 import android.content.SharedPreferences
 import androidx.annotation.VisibleForTesting
+import androidx.core.content.edit
 import com.squareup.moshi.Moshi
 import dagger.Reusable
 import xyz.aprildown.timer.data.datas.StepData
@@ -49,20 +50,20 @@ internal class NotifierRepositoryImpl @Inject constructor(
     }
 
     override suspend fun set(item: StepEntity.Step?): Boolean {
-        val editor = sharedPreferences.edit()
-        if (item != null) {
-            editor.putString(
-                PREF_STEP_NOTIFIER,
-                Moshi.Builder()
-                    .add(BehaviourDataJsonAdapter())
-                    .build()
-                    .adapter(StepData.Step::class.java)
-                    .toJson(stepOnlyMapper.mapTo(item))
-            )
-        } else {
-            editor.remove(PREF_STEP_NOTIFIER)
+        sharedPreferences.edit {
+            if (item != null) {
+                putString(
+                    PREF_STEP_NOTIFIER,
+                    Moshi.Builder()
+                        .add(BehaviourDataJsonAdapter())
+                        .build()
+                        .adapter(StepData.Step::class.java)
+                        .toJson(stepOnlyMapper.mapTo(item))
+                )
+            } else {
+                remove(PREF_STEP_NOTIFIER)
+            }
         }
-        editor.apply()
         return true
     }
 

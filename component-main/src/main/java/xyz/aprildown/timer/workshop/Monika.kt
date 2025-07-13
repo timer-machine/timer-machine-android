@@ -12,6 +12,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.core.graphics.toColorInt
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -28,7 +29,7 @@ class Monika : Fragment() {
         return RecyclerView(monika).apply {
             setHasFixedSize(true)
             overScrollMode = RecyclerView.OVER_SCROLL_NEVER
-            setBackgroundColor(Color.parseColor("#fee6f4"))
+            setBackgroundColor("#fee6f4".toColorInt())
         }
     }
 

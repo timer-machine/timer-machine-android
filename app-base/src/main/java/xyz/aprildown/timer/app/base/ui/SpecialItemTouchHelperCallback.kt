@@ -7,6 +7,7 @@ import androidx.annotation.ColorInt
 import androidx.annotation.DrawableRes
 import androidx.core.graphics.BlendModeColorFilterCompat
 import androidx.core.graphics.BlendModeCompat
+import androidx.core.graphics.withSave
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
 import com.github.deweyreed.tools.helper.color
@@ -136,79 +137,81 @@ class SpecialItemTouchHelperCallback(
             (viewHolder.itemView.bottom.toFloat() - config.bottomPadding).coerceAtLeast(top)
         val width = right - left
         val height = bottom - top
-        val saveCount = c.save()
+        c.withSave {
+            initialize(context)
 
-        initialize(context)
+            val progress = abs(dX) / width
+            val swipeThreshold = getSwipeThreshold(viewHolder)
 
-        val progress = abs(dX) / width
-        val swipeThreshold = getSwipeThreshold(viewHolder)
-
-        val iconScale: Float = when (progress) {
-            in 0f..swipeThreshold -> 1f
-            in swipeThreshold..(swipeThreshold + SCALE_DISTANCE) ->
-                1f + ((progress - swipeThreshold) / SCALE_DISTANCE * ICON_SCALE_OFFSET)
-            else -> 1f + ICON_SCALE_OFFSET
-        }
-
-        if (dX > 0) {
-            c.clipRect(left, top, left + dX, bottom)
-
-            if (progress > swipeThreshold) {
-                c.drawColor(config.startActiveBackgroundColor)
-                startIcon.colorFilter = BlendModeColorFilterCompat.createBlendModeColorFilterCompat(
-                    config.startActiveIconColor,
-                    BlendModeCompat.SRC_IN
-                )
-            } else {
-                c.drawColor(config.inactiveBackgroundColor)
-                startIcon.colorFilter = BlendModeColorFilterCompat.createBlendModeColorFilterCompat(
-                    config.inactiveIconColor,
-                    BlendModeCompat.SRC_IN
-                )
+            val iconScale: Float = when (progress) {
+                in 0f..swipeThreshold -> 1f
+                in swipeThreshold..(swipeThreshold + SCALE_DISTANCE) ->
+                    1f + ((progress - swipeThreshold) / SCALE_DISTANCE * ICON_SCALE_OFFSET)
+                else -> 1f + ICON_SCALE_OFFSET
             }
 
-            val cx = left + iconPadding + startIcon.intrinsicWidth / 2f
+            if (dX > 0) {
+                c.clipRect(left, top, left + dX, bottom)
 
-            val cy = top + height / 2f
-            val halfIconSize = startIcon.intrinsicWidth * iconScale / 2f
-            startIcon.setBounds(
-                (cx - halfIconSize).toInt(),
-                (cy - halfIconSize).toInt(),
-                (cx + halfIconSize).toInt(),
-                (cy + halfIconSize).toInt()
-            )
-            startIcon.draw(c)
-        } else {
-            c.clipRect(right + dX, top, right, bottom)
+                if (progress > swipeThreshold) {
+                    c.drawColor(config.startActiveBackgroundColor)
+                    startIcon.colorFilter =
+                        BlendModeColorFilterCompat.createBlendModeColorFilterCompat(
+                            config.startActiveIconColor,
+                            BlendModeCompat.SRC_IN
+                        )
+                } else {
+                    c.drawColor(config.inactiveBackgroundColor)
+                    startIcon.colorFilter =
+                        BlendModeColorFilterCompat.createBlendModeColorFilterCompat(
+                            config.inactiveIconColor,
+                            BlendModeCompat.SRC_IN
+                        )
+                }
 
-            if (progress > swipeThreshold) {
-                c.drawColor(config.endActiveBackgroundColor)
-                endIcon.colorFilter = BlendModeColorFilterCompat.createBlendModeColorFilterCompat(
-                    config.endActiveIconColor,
-                    BlendModeCompat.SRC_IN
+                val cx = left + iconPadding + startIcon.intrinsicWidth / 2f
+
+                val cy = top + height / 2f
+                val halfIconSize = startIcon.intrinsicWidth * iconScale / 2f
+                startIcon.setBounds(
+                    (cx - halfIconSize).toInt(),
+                    (cy - halfIconSize).toInt(),
+                    (cx + halfIconSize).toInt(),
+                    (cy + halfIconSize).toInt()
                 )
+                startIcon.draw(c)
             } else {
-                c.drawColor(config.inactiveBackgroundColor)
-                endIcon.colorFilter = BlendModeColorFilterCompat.createBlendModeColorFilterCompat(
-                    config.inactiveIconColor,
-                    BlendModeCompat.SRC_IN
+                c.clipRect(right + dX, top, right, bottom)
+
+                if (progress > swipeThreshold) {
+                    c.drawColor(config.endActiveBackgroundColor)
+                    endIcon.colorFilter =
+                        BlendModeColorFilterCompat.createBlendModeColorFilterCompat(
+                            config.endActiveIconColor,
+                            BlendModeCompat.SRC_IN
+                        )
+                } else {
+                    c.drawColor(config.inactiveBackgroundColor)
+                    endIcon.colorFilter =
+                        BlendModeColorFilterCompat.createBlendModeColorFilterCompat(
+                            config.inactiveIconColor,
+                            BlendModeCompat.SRC_IN
+                        )
+                }
+
+                val cx = right - iconPadding - endIcon.intrinsicWidth / 2f
+
+                val cy = top + height / 2f
+                val halfIconSize = endIcon.intrinsicWidth * iconScale / 2f
+                endIcon.setBounds(
+                    (cx - halfIconSize).toInt(),
+                    (cy - halfIconSize).toInt(),
+                    (cx + halfIconSize).toInt(),
+                    (cy + halfIconSize).toInt()
                 )
+                endIcon.draw(c)
             }
-
-            val cx = right - iconPadding - endIcon.intrinsicWidth / 2f
-
-            val cy = top + height / 2f
-            val halfIconSize = endIcon.intrinsicWidth * iconScale / 2f
-            endIcon.setBounds(
-                (cx - halfIconSize).toInt(),
-                (cy - halfIconSize).toInt(),
-                (cx + halfIconSize).toInt(),
-                (cy + halfIconSize).toInt()
-            )
-            endIcon.draw(c)
         }
-
-        c.restoreToCount(saveCount)
 
         super.onChildDraw(c, recyclerView, viewHolder, dX, dY, actionState, isCurrentlyActive)
     }

@@ -3,7 +3,6 @@ package xyz.aprildown.timer.app.settings.theme
 import android.content.Context
 import android.content.SharedPreferences
 import android.content.res.ColorStateList
-import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
 import android.os.Parcelable
@@ -13,6 +12,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.annotation.ColorInt
+import androidx.core.graphics.toColorInt
 import androidx.core.os.BundleCompat
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
@@ -361,8 +361,7 @@ private class ThemeColor(
             val colorOnPrimary = AppThemeUtils.calculateOnColor(appThemeColor.primaryColor)
             title.setTextColor(colorOnPrimary)
             if (isPremium) {
-                TextViewCompat.setCompoundDrawablesRelativeWithIntrinsicBounds(
-                    title,
+                title.setCompoundDrawablesRelativeWithIntrinsicBounds(
                     RBase.drawable.settings_premium,
                     0,
                     0,
@@ -370,8 +369,7 @@ private class ThemeColor(
                 )
                 TextViewCompat.setCompoundDrawableTintList(title, colorOnPrimary.toColorStateList())
             } else {
-                TextViewCompat.setCompoundDrawablesRelativeWithIntrinsicBounds(
-                    title,
+                title.setCompoundDrawablesRelativeWithIntrinsicBounds(
                     0,
                     0,
                     0,
@@ -475,33 +473,33 @@ private fun getAdvancedThemes(): List<AppThemeColor> {
     val list = mutableListOf<AppThemeColor>()
     list += AppThemeColor(
         name = "Abyss Green",
-        primaryColor = Color.parseColor("#2A9D8F"),
-        secondaryColor = Color.parseColor("#E9C46A"),
+        primaryColor = "#2A9D8F".toColorInt(),
+        secondaryColor = "#E9C46A".toColorInt(),
     )
     list += AppThemeColor(
         name = "Lipstick Red",
-        primaryColor = Color.parseColor("#E63946"),
-        secondaryColor = Color.parseColor("#457B9D"),
+        primaryColor = "#E63946".toColorInt(),
+        secondaryColor = "#457B9D".toColorInt(),
     )
     list += AppThemeColor(
         name = "Chinese Violet",
-        primaryColor = Color.parseColor("#6D597A"),
-        secondaryColor = Color.parseColor("#EAAC8B"),
+        primaryColor = "#6D597A".toColorInt(),
+        secondaryColor = "#EAAC8B".toColorInt(),
     )
     list += AppThemeColor(
         name = "Black Coral",
-        primaryColor = Color.parseColor("#495867"),
-        secondaryColor = Color.parseColor("#FE5F55"),
+        primaryColor = "#495867".toColorInt(),
+        secondaryColor = "#FE5F55".toColorInt(),
     )
     list += AppThemeColor(
         name = "Chrome Orange",
-        primaryColor = Color.parseColor("#F6BD60"),
-        secondaryColor = Color.parseColor("#40916C"),
+        primaryColor = "#F6BD60".toColorInt(),
+        secondaryColor = "#40916C".toColorInt(),
     )
     list += AppThemeColor(
         name = "Middle Blue Green",
-        primaryColor = Color.parseColor("#7DCFB6"),
-        secondaryColor = Color.parseColor("#F79256"),
+        primaryColor = "#7DCFB6".toColorInt(),
+        secondaryColor = "#F79256".toColorInt(),
     )
     return list
 }

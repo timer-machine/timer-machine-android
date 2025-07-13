@@ -4,7 +4,6 @@ import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
 import android.content.ServiceConnection
-import android.net.Uri
 import android.os.Build
 import android.os.IBinder
 import android.provider.Settings
@@ -17,6 +16,7 @@ import android.widget.EditText
 import androidx.annotation.LayoutRes
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AlertDialog
+import androidx.core.net.toUri
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.NavOptions
@@ -167,7 +167,7 @@ abstract class BaseOneFragment<T : ViewBinding>(
         } else {
             context.startActivityOrNothing(
                 Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION)
-                    .setData(Uri.parse("package:${context.packageName}"))
+                    .setData("package:${context.packageName}".toUri())
                     .createChooserIntentIfDead(context)
             )
             context.longToast(RBase.string.perm_rational_floating)
