@@ -2,6 +2,7 @@ package io.github.deweyreed.timer
 
 import android.Manifest
 import android.app.Application
+import android.content.Context
 import android.content.SharedPreferences
 import android.content.res.Configuration
 import android.os.Build
@@ -10,13 +11,9 @@ import androidx.core.content.ContextCompat
 import androidx.core.content.edit
 import androidx.hilt.work.HiltWorkerFactory
 import androidx.preference.PreferenceManager
-import androidx.work.DelegatingWorkerFactory
-import coil.ImageLoader
-import coil.ImageLoaderFactory
-import coil.decode.GifDecoder
-import coil.decode.ImageDecoderDecoder
+import coil3.ImageLoader
+import coil3.SingletonImageLoader
 import com.github.deweyreed.tools.helper.hasPermissions
-import dagger.Lazy
 import dagger.hilt.android.HiltAndroidApp
 import io.github.deweyreed.timer.utils.DynamicThemeDelegate
 import kotlinx.coroutines.runBlocking
@@ -41,7 +38,7 @@ import androidx.work.Configuration as WorkManagerConfiguration
 import xyz.aprildown.timer.app.base.R as RBase
 
 @HiltAndroidApp
-class App : Application(), WorkManagerConfiguration.Provider, ImageLoaderFactory {
+class App : Application(), WorkManagerConfiguration.Provider, SingletonImageLoader.Factory {
 
     @Inject
     lateinit var sharedPreferences: SharedPreferences
@@ -50,7 +47,7 @@ class App : Application(), WorkManagerConfiguration.Provider, ImageLoaderFactory
     lateinit var prefRepo: PreferencesRepository
 
     @Inject
-    lateinit var workerFactory: Lazy<HiltWorkerFactory>
+    lateinit var workerFactory: HiltWorkerFactory
 
     @Inject
     lateinit var appTracker: AppTracker
@@ -187,14 +184,7 @@ class App : Application(), WorkManagerConfiguration.Provider, ImageLoaderFactory
     override val workManagerConfiguration: WorkManagerConfiguration
         get() {
             return WorkManagerConfiguration.Builder()
-                .setWorkerFactory(
-                    DelegatingWorkerFactory().also { delegate ->
-                        val factory = workerFactory.get()
-                        if (factory != null) {
-                            delegate.addFactory(factory)
-                        }
-                    }
-                )
+                .setWorkerFactory(workerFactory)
                 .run {
                     if (AppConfig.openDebug) {
                         setMinimumLoggingLevel(Log.VERBOSE)
@@ -205,15 +195,9 @@ class App : Application(), WorkManagerConfiguration.Provider, ImageLoaderFactory
                 .build()
         }
 
-    override fun newImageLoader(): ImageLoader {
+    override fun newImageLoader(context: Context): ImageLoader {
         return ImageLoader.Builder(this)
             .components {
-                // https://coil-kt.github.io/coil/gifs/
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
-                    add(ImageDecoderDecoder.Factory())
-                } else {
-                    add(GifDecoder.Factory())
-                }
                 add(ImageActionMapper())
             }
             .build()

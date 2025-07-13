@@ -10,7 +10,8 @@ import androidx.annotation.ColorInt
 import androidx.appcompat.widget.TooltipCompat
 import androidx.core.view.isEmpty
 import androidx.core.view.isVisible
-import coil.load
+import coil3.load
+import coil3.request.crossfade
 import com.github.deweyreed.tools.helper.setTextIfChanged
 import com.google.android.material.chip.Chip
 import xyz.aprildown.timer.component.key.R

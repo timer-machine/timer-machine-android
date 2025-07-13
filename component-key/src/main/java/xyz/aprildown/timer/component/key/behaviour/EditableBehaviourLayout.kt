@@ -14,7 +14,8 @@ import androidx.appcompat.widget.TooltipCompat
 import androidx.appcompat.widget.TooltipCompatFix
 import androidx.core.view.isEmpty
 import androidx.core.view.isVisible
-import coil.load
+import coil3.load
+import coil3.request.crossfade
 import com.github.deweyreed.tools.helper.drawable
 import com.github.deweyreed.tools.helper.setTextIfChanged
 import com.github.deweyreed.tools.helper.toColorStateList

@@ -1,8 +1,8 @@
 package xyz.aprildown.timer.component.key
 
 import androidx.core.net.toUri
-import coil.map.Mapper
-import coil.request.Options
+import coil3.map.Mapper
+import coil3.request.Options
 import xyz.aprildown.timer.domain.entities.ImageAction
 import xyz.aprildown.timer.domain.entities.ResourceContentType
 import java.io.File

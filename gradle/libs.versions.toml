@@ -9,93 +9,95 @@ targetSdk = "35"
 versionCode = "7060100"
 versionName = "7.6.1"
 
-kotlin = "1.9.25"
-dagger = "2.52"
-composeCompiler = "1.5.15"
+kotlin = "2.1.21"
+dagger = "2.56.2"
+room = "2.7.2"
 
-detekt = "1.23.7"
+detekt = "1.23.8"
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
 android-library = { id = "com.android.library", version.ref = "agp" }
 android-test = { id = "com.android.test", version.ref = "agp" }
 
-androidx-baselineprofile = "androidx.baselineprofile:1.2.4"
+androidx-baselineprofile = "androidx.baselineprofile:1.3.4"
 
 kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 kotlin-kapt = { id = "org.jetbrains.kotlin.kapt", version.ref = "kotlin" }
+ksp = "com.google.devtools.ksp:2.1.21-2.0.2"
 kotlin-parcelize = { id = "org.jetbrains.kotlin.plugin.parcelize", version.ref = "kotlin" }
+kotlin-compose = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
 
 hilt = { id = "com.google.dagger.hilt.android", version.ref = "dagger" }
+room = { id = "androidx.room", version.ref = "room" }
 
-versions = "com.github.ben-manes.versions:0.51.0"
+versions = "com.github.ben-manes.versions:0.52.0"
 dependencyGuard = "com.dropbox.dependency-guard:0.5.0"
 
 detekt = { id = "io.gitlab.arturbosch.detekt", version.ref = "detekt" }
 
-gms = "com.google.gms.google-services:4.4.2"
-firebase-crashlytics = "com.google.firebase.crashlytics:3.0.2"
+gms = "com.google.gms.google-services:4.4.3"
+firebase-crashlytics = "com.google.firebase.crashlytics:3.0.4"
 
 [libraries]
 detekt-formatting = { module = "io.gitlab.arturbosch.detekt:detekt-formatting", version.ref = "detekt" }
-desugarJdkLibs = "com.android.tools:desugar_jdk_libs:2.0.4"
+desugarJdkLibs = "com.android.tools:desugar_jdk_libs:2.1.5"
 tools = "com.github.DeweyReed:tools:0.8.0"
 
-kotlin-coroutines-android = "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.8.1"
-kotlin-coroutines-play = "org.jetbrains.kotlinx:kotlinx-coroutines-play-services:1.8.1"
-kotlin-coroutines-test = "org.jetbrains.kotlinx:kotlinx-coroutines-test:1.8.1"
+kotlin-coroutines-android = "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.10.2"
+kotlin-coroutines-play = "org.jetbrains.kotlinx:kotlinx-coroutines-play-services:1.10.2"
+kotlin-coroutines-test = "org.jetbrains.kotlinx:kotlinx-coroutines-test:1.10.2"
 
 junit = "junit:junit:4.13.2"
-mockito-kotlin = "org.mockito.kotlin:mockito-kotlin:5.3.1"
-mockito-core = "org.mockito:mockito-core:5.12.0"
-mockito-android = "org.mockito:mockito-android:5.12.0"
+mockito-kotlin = "org.mockito.kotlin:mockito-kotlin:5.4.0"
+mockito-core = "org.mockito:mockito-core:5.18.0"
+mockito-android = "org.mockito:mockito-android:5.18.0"
 androidx-test-arch = "androidx.arch.core:core-testing:2.2.0"
 
 androidx-test-core = "androidx.test:core:1.6.1"
-androidx-test-runner = "androidx.test:runner:1.6.1"
+androidx-test-runner = "androidx.test:runner:1.6.2"
 androidx-test-rules = "androidx.test:rules:1.6.1"
 androidx-test-junit = "androidx.test.ext:junit:1.2.1"
 androidx-test-espresso-core = "androidx.test.espresso:espresso-core:3.6.1"
 androidx-test-espresso-contrib = "androidx.test.espresso:espresso-contrib:3.6.1"
 androidx-test-espresso-intents = "androidx.test.espresso:espresso-intents:3.6.1"
 androidx-test-uiautomator = "androidx.test.uiautomator:uiautomator:2.3.0"
-androidx-test-benchmarkMacroJunit4 = "androidx.benchmark:benchmark-macro-junit4:1.2.4"
+androidx-test-benchmarkMacroJunit4 = "androidx.benchmark:benchmark-macro-junit4:1.3.4"
 
-androidx-appcompat = "androidx.appcompat:appcompat:1.7.0"
-androidx-fragment = "androidx.fragment:fragment:1.8.1"
-androidx-recyclerView = "androidx.recyclerview:recyclerview:1.3.2"
+androidx-appcompat = "androidx.appcompat:appcompat:1.7.1"
+androidx-fragment = "androidx.fragment:fragment:1.8.8"
+androidx-recyclerView = "androidx.recyclerview:recyclerview:1.4.0"
 androidx-viewPager2 = "androidx.viewpager2:viewpager2:1.1.0"
 androidx-preference = "androidx.preference:preference:1.2.1"
-androidx-constraintLayout = "androidx.constraintlayout:constraintlayout:2.1.4"
-androidx-lifecycle-runtime = "androidx.lifecycle:lifecycle-runtime-ktx:2.8.3"
-androidx-lifecycle-liveData = "androidx.lifecycle:lifecycle-livedata-ktx:2.8.3"
-androidx-lifecycle-viewModel = "androidx.lifecycle:lifecycle-viewmodel-ktx:2.8.3"
+androidx-constraintLayout = "androidx.constraintlayout:constraintlayout:2.2.1"
+androidx-lifecycle-runtime = "androidx.lifecycle:lifecycle-runtime-ktx:2.8.7"
+androidx-lifecycle-liveData = "androidx.lifecycle:lifecycle-livedata-ktx:2.8.7"
+androidx-lifecycle-viewModel = "androidx.lifecycle:lifecycle-viewmodel-ktx:2.8.7"
 androidx-customTabs = "androidx.browser:browser:1.8.0"
-androidx-dynamicAnimation = "androidx.dynamicanimation:dynamicanimation:1.0.0"
+androidx-dynamicAnimation = "androidx.dynamicanimation:dynamicanimation:1.1.0"
 androidx-media = "androidx.media:media:1.7.0"
-androidx-core = "androidx.core:core-ktx:1.13.1"
-androidx-collection = "androidx.collection:collection-ktx:1.4.0"
-androidx-profileinstaller = "androidx.profileinstaller:profileinstaller:1.3.1"
+androidx-core = "androidx.core:core-ktx:1.16.0"
+androidx-collection = "androidx.collection:collection-ktx:1.5.0"
+androidx-profileinstaller = "androidx.profileinstaller:profileinstaller:1.4.1"
 
-androidx-room-runtime = "androidx.room:room-runtime:2.6.1"
-androidx-room-compiler = "androidx.room:room-compiler:2.6.1"
-androidx-room-ktx = "androidx.room:room-ktx:2.6.1"
-androidx-room-test = "androidx.room:room-testing:2.6.1"
+androidx-room-runtime = { module = "androidx.room:room-runtime", version.ref = "room" }
+androidx-room-compiler = { module = "androidx.room:room-compiler", version.ref = "room" }
+androidx-room-test = { module = "androidx.room:room-testing", version.ref = "room" }
 
-androidx-navigation-fragment = "androidx.navigation:navigation-fragment-ktx:2.7.7"
-androidx-navigation-ui = "androidx.navigation:navigation-ui-ktx:2.7.7"
+androidx-navigation-fragment = "androidx.navigation:navigation-fragment-ktx:2.9.1"
+androidx-navigation-ui = "androidx.navigation:navigation-ui-ktx:2.9.1"
 
-androidx-work = "androidx.work:work-runtime-ktx:2.9.0"
+androidx-work = "androidx.work:work-runtime-ktx:2.10.2"
 
-androidx-crendential-core = "androidx.credentials:credentials:1.3.0"
-androidx-crendential-play = "androidx.credentials:credentials-play-services-auth:1.3.0"
+androidx-crendential-core = "androidx.credentials:credentials:1.5.0"
+androidx-crendential-play = "androidx.credentials:credentials-play-services-auth:1.5.0"
 
-compose-bom = "androidx.compose:compose-bom:2024.06.00"
+compose-bom = "androidx.compose:compose-bom:2025.06.01"
 compose-material = { module = "androidx.compose.material3:material3" }
 compose-icons = { module = "androidx.compose.material:material-icons-extended" }
-compose-activity = "androidx.activity:activity-compose:1.9.0"
+compose-activity = "androidx.activity:activity-compose:1.10.1"
 compose-liveData = { module = "androidx.compose.runtime:runtime-livedata" }
-compose-constraintLayout = "androidx.constraintlayout:constraintlayout-compose:1.0.1"
+compose-constraintLayout = "androidx.constraintlayout:constraintlayout-compose:1.1.1"
 materialColorUtilities = "com.materialkolor:material-color-utilities:1.5.1"
 
 material = "com.google.android.material:material:1.4.0"
@@ -110,11 +112,11 @@ hilt-navigation = "androidx.hilt:hilt-navigation-fragment:1.2.0"
 hilt-work = "androidx.hilt:hilt-work:1.2.0"
 hilt-work-compiler = "androidx.hilt:hilt-compiler:1.2.0"
 
-moshi = "com.squareup.moshi:moshi:1.15.1"
-moshi-kotlinGen = "com.squareup.moshi:moshi-kotlin-codegen:1.15.1"
+moshi-core = "com.squareup.moshi:moshi:1.15.2"
+moshi-kotlinGen = "com.squareup.moshi:moshi-kotlin-codegen:1.15.2"
 
-billing = "com.android.billingclient:billing-ktx:6.2.0"
-firebase_bom = "com.google.firebase:firebase-bom:33.2.0"
+billing = "com.android.billingclient:billing-ktx:7.1.1"
+firebase_bom = "com.google.firebase:firebase-bom:33.16.0"
 firebase_auth = { module = "com.google.firebase:firebase-auth-ktx" }
 firebase_storage = { module = "com.google.firebase:firebase-storage-ktx" }
 firebase_crashlytics = { module = "com.google.firebase:firebase-crashlytics-ktx" }
@@ -122,7 +124,7 @@ playServices_googleId = "com.google.android.libraries.identity.googleid:googleid
 playServices_review = "com.google.android.play:review-ktx:2.0.2"
 
 androidJob = "com.github.DeweyReed:android-job:a04c817792"
-okio = "com.squareup.okio:okio:3.9.0"
+okio = "com.squareup.okio:okio:3.10.2"
 permission = "pub.devrel:easypermissions:3.0.0"
 
 fastAdapter = "com.mikepenz:fastadapter:5.7.0"
@@ -148,9 +150,8 @@ ultimateRingtonePicker = "com.github.DeweyReed:UltimateRingtonePicker:3.3.0"
 zip4j = "net.lingala.zip4j:zip4j:2.11.5"
 taskerPlugin = "com.joaomgcd:taskerpluginlibrary:0.4.10"
 diskLruCache = "com.github.bumptech.glide:disklrucache:4.16.0"
-coil = "io.coil-kt:coil:2.6.0"
-coil-compose = "io.coil-kt:coil-compose:2.6.0"
-coil-gif = "io.coil-kt:coil-gif:2.6.0"
+coil = "io.coil-kt.coil3:coil-compose:3.2.0"
+coil-gif = "io.coil-kt.coil3:coil-gif:3.2.0"
 zoomable = "net.engawapg.lib:zoomable:1.6.1"
 twoWayNestedScrollView = "com.github.ultimate-deej:twowaynestedscrollview:0.1.2"
 accurateCountDownTimer = "com.github.cardinalby:accurate-count-down-timer:1.0"

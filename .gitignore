@@ -675,3 +675,4 @@ obj/
 
 !/*/src/*/res/raw/**
 !*.jar
+.kotlin

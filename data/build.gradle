@@ -2,27 +2,24 @@ plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.kapt)
+    alias(libs.plugins.ksp)
     alias(libs.plugins.hilt)
+    alias(libs.plugins.room)
 }
 
 android {
     namespace 'xyz.aprildown.timer.data'
     defaultConfig {
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-        javaCompileOptions {
-            annotationProcessorOptions {
-                arguments += [
-                        "room.schemaLocation"  : "$projectDir/schemas".toString(),
-                        "room.incremental"     : "true",
-                        "room.expandProjection": "true"
-                ]
-            }
-        }
     }
 
     sourceSets {
         androidTest.assets.srcDirs += files("$projectDir/schemas".toString())
     }
+}
+
+room {
+    schemaDirectory("$projectDir/schemas")
 }
 
 dependencies {
@@ -34,14 +31,13 @@ dependencies {
     androidTestImplementation libs.androidx.room.test
 
     implementation libs.androidx.room.runtime
-    implementation libs.androidx.room.ktx
-    kapt libs.androidx.room.compiler
+    ksp libs.androidx.room.compiler
 
     implementation libs.hilt.android
     kapt libs.hilt.compiler
 
-    implementation libs.moshi
-    kapt libs.moshi.kotlinGen
+    implementation libs.moshi.core
+    ksp libs.moshi.kotlinGen
 
     implementation libs.androidJob
 
