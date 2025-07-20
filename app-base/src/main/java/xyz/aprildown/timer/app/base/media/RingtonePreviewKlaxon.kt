@@ -32,18 +32,16 @@ object RingtonePreviewKlaxon {
     fun start(
         context: Context,
         uri: Uri,
-        crescendoDuration: Long,
         loop: Boolean,
         audioFocusType: Int,
-        streamType: Int
+        streamType: Int,
     ) {
         stop(context)
         getAsyncRingtonePlayer(context).play(
             ringtoneUri = uri,
-            crescendoDuration = crescendoDuration,
             loop = loop,
             audioFocusType = audioFocusType,
-            streamType = streamType
+            streamType = streamType,
         )
     }
 

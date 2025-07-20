@@ -112,6 +112,13 @@ androidx.lifecycle:lifecycle-viewmodel-savedstate-android:2.9.0
 androidx.lifecycle:lifecycle-viewmodel-savedstate:2.9.0
 androidx.lifecycle:lifecycle-viewmodel:2.9.0
 androidx.loader:loader:1.0.0
+androidx.media3:media3-common:1.7.1
+androidx.media3:media3-container:1.7.1
+androidx.media3:media3-database:1.7.1
+androidx.media3:media3-datasource:1.7.1
+androidx.media3:media3-decoder:1.7.1
+androidx.media3:media3-exoplayer:1.7.1
+androidx.media3:media3-extractor:1.7.1
 androidx.media:media:1.7.0
 androidx.navigation:navigation-common-android:2.9.1
 androidx.navigation:navigation-common:2.9.1
@@ -176,7 +183,9 @@ com.google.dagger:dagger-lint-aar:2.56.2
 com.google.dagger:dagger:2.56.2
 com.google.dagger:hilt-android:2.56.2
 com.google.dagger:hilt-core:2.56.2
-com.google.guava:listenablefuture:1.0
+com.google.guava:failureaccess:1.0.2
+com.google.guava:guava:33.3.1-android
+com.google.guava:listenablefuture:9999.0-empty-to-avoid-conflict-with-guava
 com.jakewharton.timber:timber:5.0.1
 com.joaomgcd:taskerpluginlibrary:0.4.10
 com.materialkolor:material-color-utilities-android:1.5.1
@@ -225,6 +234,7 @@ org.jetbrains.compose.ui:ui-unit:1.8.0
 org.jetbrains.compose.ui:ui-util:1.8.0
 org.jetbrains.compose.ui:ui:1.8.0
 org.jetbrains.kotlin:kotlin-android-extensions-runtime:2.1.21
+org.jetbrains.kotlin:kotlin-bom:1.8.0
 org.jetbrains.kotlin:kotlin-parcelize-runtime:2.1.21
 org.jetbrains.kotlin:kotlin-stdlib-common:2.1.21
 org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.8.21

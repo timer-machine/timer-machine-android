@@ -303,7 +303,6 @@ private class WelcomingTextToSpeech(
                 RingtonePreviewKlaxon.start(
                     context = application,
                     uri = speechUri,
-                    crescendoDuration = 0L,
                     loop = false,
                     audioFocusType = 0, // AudioManager.AUDIOFOCUS_NONE
                     streamType = streamType

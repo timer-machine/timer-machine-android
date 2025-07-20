@@ -23,6 +23,7 @@ dependencies {
     api libs.androidx.constraintLayout
     implementation libs.androidx.customTabs
     implementation libs.androidx.media
+    implementation libs.androidx.media3.player
     api libs.androidx.fragment
 
     api libs.material

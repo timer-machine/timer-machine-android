@@ -338,7 +338,6 @@ class MachineService :
         RingtonePreviewKlaxon.start(
             context = this,
             uri = uri,
-            crescendoDuration = 250,
             loop = loop,
             audioFocusType = storedAudioFocusType,
             streamType = storedAudioTypeValue

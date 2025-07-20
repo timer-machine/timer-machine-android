@@ -76,6 +76,7 @@ androidx-lifecycle-viewModel = "androidx.lifecycle:lifecycle-viewmodel-ktx:2.8.7
 androidx-customTabs = "androidx.browser:browser:1.8.0"
 androidx-dynamicAnimation = "androidx.dynamicanimation:dynamicanimation:1.1.0"
 androidx-media = "androidx.media:media:1.7.0"
+androidx-media3-player = "androidx.media3:media3-exoplayer:1.7.1"
 androidx-core = "androidx.core:core-ktx:1.16.0"
 androidx-collection = "androidx.collection:collection-ktx:1.5.0"
 androidx-profileinstaller = "androidx.profileinstaller:profileinstaller:1.4.1"
