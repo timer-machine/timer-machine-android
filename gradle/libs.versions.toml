@@ -70,9 +70,9 @@ androidx-recyclerView = "androidx.recyclerview:recyclerview:1.4.0"
 androidx-viewPager2 = "androidx.viewpager2:viewpager2:1.1.0"
 androidx-preference = "androidx.preference:preference:1.2.1"
 androidx-constraintLayout = "androidx.constraintlayout:constraintlayout:2.2.1"
-androidx-lifecycle-runtime = "androidx.lifecycle:lifecycle-runtime-ktx:2.8.7"
-androidx-lifecycle-liveData = "androidx.lifecycle:lifecycle-livedata-ktx:2.8.7"
-androidx-lifecycle-viewModel = "androidx.lifecycle:lifecycle-viewmodel-ktx:2.8.7"
+androidx-lifecycle-runtime = "androidx.lifecycle:lifecycle-runtime-ktx:2.9.1"
+androidx-lifecycle-liveData = "androidx.lifecycle:lifecycle-livedata-ktx:2.9.1"
+androidx-lifecycle-viewModel = "androidx.lifecycle:lifecycle-viewmodel-ktx:2.9.1"
 androidx-customTabs = "androidx.browser:browser:1.8.0"
 androidx-dynamicAnimation = "androidx.dynamicanimation:dynamicanimation:1.1.0"
 androidx-media = "androidx.media:media:1.7.0"
@@ -93,7 +93,7 @@ androidx-work = "androidx.work:work-runtime-ktx:2.10.2"
 androidx-crendential-core = "androidx.credentials:credentials:1.5.0"
 androidx-crendential-play = "androidx.credentials:credentials-play-services-auth:1.5.0"
 
-compose-bom = "androidx.compose:compose-bom:2025.06.01"
+compose-bom = "androidx.compose:compose-bom:2025.07.00"
 compose-material = { module = "androidx.compose.material3:material3" }
 compose-icons = { module = "androidx.compose.material:material-icons-extended" }
 compose-activity = "androidx.activity:activity-compose:1.10.1"
@@ -117,20 +117,20 @@ moshi-core = "com.squareup.moshi:moshi:1.15.2"
 moshi-kotlinGen = "com.squareup.moshi:moshi-kotlin-codegen:1.15.2"
 
 billing = "com.android.billingclient:billing-ktx:7.1.1"
-firebase_bom = "com.google.firebase:firebase-bom:33.16.0"
-firebase_auth = { module = "com.google.firebase:firebase-auth-ktx" }
-firebase_storage = { module = "com.google.firebase:firebase-storage-ktx" }
-firebase_crashlytics = { module = "com.google.firebase:firebase-crashlytics-ktx" }
-playServices_googleId = "com.google.android.libraries.identity.googleid:googleid:1.1.1"
-playServices_review = "com.google.android.play:review-ktx:2.0.2"
+firebase-bom = "com.google.firebase:firebase-bom:34.0.0"
+firebase-auth = { module = "com.google.firebase:firebase-auth" }
+firebase-storage = { module = "com.google.firebase:firebase-storage" }
+firebase-crashlytics = { module = "com.google.firebase:firebase-crashlytics" }
+playServices-googleId = "com.google.android.libraries.identity.googleid:googleid:1.1.1"
+playServices-review = "com.google.android.play:review-ktx:2.0.2"
 
 androidJob = "com.github.DeweyReed:android-job:a04c817792"
-okio = "com.squareup.okio:okio:3.10.2"
+okio = "com.squareup.okio:okio:3.15.0"
 permission = "pub.devrel:easypermissions:3.0.0"
 
 fastAdapter = "com.mikepenz:fastadapter:5.7.0"
-fastAdapter_binding = "com.mikepenz:fastadapter-extensions-binding:5.7.0"
-fastAdapter_expandable = "com.mikepenz:fastadapter-extensions-expandable:5.7.0"
+fastAdapter-binding = "com.mikepenz:fastadapter-extensions-binding:5.7.0"
+fastAdapter-expandable = "com.mikepenz:fastadapter-extensions-expandable:5.7.0"
 
 materialDialog-core = "com.afollestad.material-dialogs:core:0.9.6.0"
 materialDialog-common = "com.afollestad.material-dialogs:commons:0.9.6.0"
@@ -179,8 +179,8 @@ compose = [
     "compose-constraintLayout",
 ]
 firebase-auth = [
-    "firebase_auth",
+    "firebase-auth",
     "androidx-crendential-core",
     "androidx-crendential-play",
-    "playServices_googleId",
+    "playServices-googleId",
 ]
