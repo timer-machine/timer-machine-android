@@ -1,3 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="app_name">TimeR Machine</string>
+    <string name="cancel">Kozóngela</string>
+    <string name="settings">Mabongamisi</string>
+    <string name="delete">Kolímuisa</string>
+    <string name="discard">Kobóákisa</string>
+    <string name="save">Kobómbisa</string>
+    <string name="ok">OK</string>
 </resources>
