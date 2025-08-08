@@ -8,8 +8,8 @@ import androidx.lifecycle.Observer
 import androidx.work.CoroutineWorker
 import androidx.work.WorkerParameters
 import com.github.deweyreed.tools.arch.Event
-import com.google.firebase.auth.ktx.auth
-import com.google.firebase.ktx.Firebase
+import com.google.firebase.Firebase
+import com.google.firebase.auth.auth
 import dagger.assisted.Assisted
 import dagger.assisted.AssistedInject
 import kotlinx.coroutines.Dispatchers

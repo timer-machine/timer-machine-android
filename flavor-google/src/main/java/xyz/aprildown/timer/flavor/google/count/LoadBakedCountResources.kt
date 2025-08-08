@@ -1,9 +1,9 @@
 package xyz.aprildown.timer.flavor.google.count
 
 import android.content.Context
-import com.google.firebase.ktx.Firebase
+import com.google.firebase.Firebase
 import com.google.firebase.storage.StorageException
-import com.google.firebase.storage.ktx.storage
+import com.google.firebase.storage.storage
 import dagger.Reusable
 import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.CoroutineDispatcher

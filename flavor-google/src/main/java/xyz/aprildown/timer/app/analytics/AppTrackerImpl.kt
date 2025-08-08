@@ -1,8 +1,8 @@
 package xyz.aprildown.timer.app.analytics
 
 import android.content.Context
-import com.google.firebase.crashlytics.ktx.crashlytics
-import com.google.firebase.ktx.Firebase
+import com.google.firebase.Firebase
+import com.google.firebase.crashlytics.crashlytics
 import dagger.Reusable
 import xyz.aprildown.timer.domain.utils.AppTracker
 import javax.inject.Inject

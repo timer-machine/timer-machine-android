@@ -1,7 +1,7 @@
 package xyz.aprildown.timer.flavor.google.utils
 
-import com.google.firebase.ktx.Firebase
-import com.google.firebase.storage.ktx.storage
+import com.google.firebase.Firebase
+import com.google.firebase.storage.storage
 
 internal fun setUpFirebaseStorage() {
     Firebase.storage.run {

@@ -20,7 +20,6 @@ import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.preference.Preference
-import androidx.preference.PreferenceFragmentCompat
 import androidx.preference.SwitchPreferenceCompat
 import com.github.deweyreed.tools.anko.longSnackbar
 import com.github.deweyreed.tools.anko.newTask
@@ -32,15 +31,16 @@ import com.github.deweyreed.tools.helper.startActivityOrNothing
 import com.google.android.libraries.identity.googleid.GetSignInWithGoogleOption
 import com.google.android.libraries.identity.googleid.GoogleIdTokenCredential
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import com.google.firebase.Firebase
 import com.google.firebase.auth.GoogleAuthProvider
-import com.google.firebase.auth.ktx.auth
-import com.google.firebase.ktx.Firebase
-import com.google.firebase.storage.ktx.storage
+import com.google.firebase.auth.auth
+import com.google.firebase.storage.storage
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.ensureActive
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.tasks.await
 import xyz.aprildown.timer.app.base.data.FlavorData
+import xyz.aprildown.timer.app.base.ui.BasePreferenceFragmentCompat
 import xyz.aprildown.timer.app.base.utils.NavigationUtils.subLevelNavigate
 import xyz.aprildown.timer.domain.usecases.Fruit
 import xyz.aprildown.timer.flavor.google.BillingActivity
@@ -59,7 +59,7 @@ import javax.inject.Inject
 import xyz.aprildown.timer.app.base.R as RBase
 
 @AndroidEntryPoint
-internal class CloudBackupFragment : PreferenceFragmentCompat() {
+internal class CloudBackupFragment : BasePreferenceFragmentCompat() {
 
     private val viewModel by hiltNavGraphViewModels<CloudBackupViewModel>(RBase.id.dest_cloud_backup)
 

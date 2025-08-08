@@ -2,6 +2,7 @@ plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.kapt)
+    alias(libs.plugins.ksp)
     alias(libs.plugins.hilt)
 }
 
@@ -23,7 +24,7 @@ dependencies {
     kapt libs.hilt.compiler
     implementation libs.hilt.navigation
     implementation libs.hilt.work
-    kapt libs.hilt.work.compiler
+    ksp libs.hilt.work.compiler
 
     implementation libs.billing
 

@@ -8,8 +8,8 @@ import androidx.lifecycle.liveData
 import androidx.lifecycle.switchMap
 import com.github.deweyreed.tools.arch.Event
 import com.github.deweyreed.tools.arch.EventObserver
-import com.google.firebase.auth.ktx.auth
-import com.google.firebase.ktx.Firebase
+import com.google.firebase.Firebase
+import com.google.firebase.auth.auth
 import com.google.firebase.storage.StorageMetadata
 import com.google.firebase.storage.StorageReference
 import dagger.Lazy
