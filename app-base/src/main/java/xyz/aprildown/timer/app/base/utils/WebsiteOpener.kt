@@ -11,7 +11,7 @@ import xyz.aprildown.timer.app.base.data.DarkTheme
 import xyz.aprildown.timer.app.base.data.PreferenceData.appTheme
 import xyz.aprildown.timer.app.base.ui.newDynamicTheme
 
-private fun Context.openWebsiteWithCustomTabs(url: String) {
+fun Context.openLink(url: String) {
     val darkTheme = DarkTheme(this)
     val appTheme = appTheme
     val cti = CustomTabsIntent.Builder()
@@ -48,7 +48,7 @@ private fun Context.openWebsiteWithCustomTabs(url: String) {
             CustomTabColorSchemeParams.Builder()
                 .apply {
                     val color =
-                        AppThemeUtils.calculateToolbarColorDuringNight(this@openWebsiteWithCustomTabs)
+                        AppThemeUtils.calculateToolbarColorDuringNight(this@openLink)
                     setToolbarColor(color)
                     setSecondaryToolbarColor(color)
                 }
@@ -65,8 +65,4 @@ private fun Context.openWebsiteWithCustomTabs(url: String) {
         } catch (_: ActivityNotFoundException) {
         }
     }
-}
-
-fun Context.openLink(url: String) {
-    openWebsiteWithCustomTabs(url)
 }
