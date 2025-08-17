@@ -21,7 +21,6 @@ import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
 import android.media.AudioManager
-import android.media.RingtoneManager
 import android.net.Uri
 import android.os.Handler
 import android.os.HandlerThread
@@ -139,8 +138,8 @@ internal class AsyncRingtonePlayer(private val mContext: Context) {
             val inTelephoneCall = isInTelephoneCall(context)
             var alarmNoise: Uri? = ringtoneUri
             // Fall back to the system default alarm if the database does not have an alarm stored.
-            if (alarmNoise == null) {
-                alarmNoise = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_ALARM)
+            if (alarmNoise == null || alarmNoise == Uri.EMPTY) {
+                alarmNoise = getFallbackRingtoneUri(context)
             }
 
             mExoPlayer = ExoPlayer.Builder(context).build()
@@ -157,7 +156,7 @@ internal class AsyncRingtonePlayer(private val mContext: Context) {
                 // If alarmNoise is a custom ringtone on the sd card the app must be granted
                 // android.permission.READ_EXTERNAL_STORAGE. Pre-M this is ensured at app
                 // installation time. M+, this permission can be revoked by the user any time.
-                mExoPlayer?.setMediaItem(MediaItem.fromUri(alarmNoise!!))
+                mExoPlayer?.setMediaItem(MediaItem.fromUri(alarmNoise))
 
                 startPlayback(inTelephoneCall)
             } catch (_: Throwable) {
