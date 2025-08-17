@@ -21,7 +21,6 @@ import androidx.navigation.contains
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupWithNavController
-import com.github.deweyreed.tools.anko.dp
 import com.github.deweyreed.tools.anko.longSnackbar
 import com.github.deweyreed.tools.anko.toast
 import com.github.deweyreed.tools.arch.doOnStart
@@ -219,15 +218,7 @@ class MainActivity :
                 fragment.onFabClick(it)
             }
         }
-        ViewCompat.setOnApplyWindowInsetsListener(binding.mainRoot.fab) { view, insets ->
-            val target =
-                insets.getInsets(WindowInsetsCompat.Type.navigationBars())
-            view.updatePadding(bottom = dp(16).toInt() + target.bottom)
-            insets
-        }
         volumeControlStream = storedAudioTypeValue
-        // Theme will do this for us.
-        // drawerLayout.setStatusBarBackgroundColor(withDynamicTheme { colorStatusBar })
         binding.mainRoot.toolbar.setNavigationOnClickListener { binding.drawer.open() }
     }
 
@@ -336,8 +327,7 @@ class MainActivity :
 
         binding.slider.addStickyFooterItem(createThemeDrawerItem())
         ViewCompat.setOnApplyWindowInsetsListener(binding.slider) { view, insets ->
-            val target =
-                insets.getInsets(WindowInsetsCompat.Type.navigationBars())
+            val target = insets.getInsets(WindowInsetsCompat.Type.navigationBars())
             view.updatePadding(bottom = target.bottom)
             insets
         }
