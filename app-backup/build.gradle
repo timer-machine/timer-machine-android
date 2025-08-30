@@ -22,6 +22,7 @@ dependencies {
     testImplementation libs.bundles.mockito.core
 
     implementation libs.androidx.preference
+    implementation libs.androidx.documentFile
 
     implementation platform(libs.compose.bom)
     implementation libs.bundles.compose
