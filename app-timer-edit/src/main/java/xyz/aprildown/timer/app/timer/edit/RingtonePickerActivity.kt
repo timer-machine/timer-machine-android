@@ -3,11 +3,12 @@ package xyz.aprildown.timer.app.timer.edit
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
+import android.graphics.Typeface
 import android.media.RingtoneManager
 import android.net.Uri
 import android.os.Bundle
 import android.text.Spanned
-import android.text.style.ForegroundColorSpan
+import android.text.style.StyleSpan
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
@@ -18,7 +19,6 @@ import androidx.core.view.get
 import dagger.hilt.android.AndroidEntryPoint
 import xyz.aprildown.timer.app.base.data.PreferenceData.storedAudioTypeValue
 import xyz.aprildown.timer.app.base.ui.BaseActivity
-import xyz.aprildown.timer.app.base.ui.newDynamicTheme
 import xyz.aprildown.tools.helper.safeSharedPreference
 import xyz.aprildown.ultimateringtonepicker.RingtonePickerFragment
 import xyz.aprildown.ultimateringtonepicker.UltimateRingtonePicker
@@ -95,7 +95,7 @@ class RingtonePickerActivity :
                 append("SAF")
                 if (usingSafPick) {
                     setSpan(
-                        ForegroundColorSpan(newDynamicTheme.colorSecondary),
+                        StyleSpan(Typeface.BOLD_ITALIC),
                         0,
                         length,
                         Spanned.SPAN_EXCLUSIVE_EXCLUSIVE
