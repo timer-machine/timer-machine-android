@@ -68,6 +68,13 @@ private fun lightFromCorePalette(core: CorePalette, secondary: CorePalette = cor
         outline = Color(core.n2.tone(50)),
         outlineVariant = Color(core.n2.tone(80)),
         scrim = Color(core.n1.tone(0)),
+        surfaceBright = Color(core.n1.tone(98)),
+        surfaceContainer = Color(core.n1.tone(94)),
+        surfaceContainerHigh = Color(core.n1.tone(92)),
+        surfaceContainerHighest = Color(core.n1.tone(90)),
+        surfaceContainerLow = Color(core.n1.tone(96)),
+        surfaceContainerLowest = Color(core.n1.tone(100)),
+        surfaceDim = Color(core.n1.tone(87)),
     )
 }
 
@@ -104,5 +111,12 @@ private fun darkFromCorePalette(core: CorePalette, secondary: CorePalette = core
         outline = Color(core.n2.tone(60)),
         outlineVariant = Color(core.n2.tone(30)),
         scrim = Color(core.n1.tone(0)),
+        surfaceBright = Color(core.n1.tone(24)),
+        surfaceContainer = Color(core.n1.tone(12)),
+        surfaceContainerHigh = Color(core.n1.tone(17)),
+        surfaceContainerHighest = Color(core.n1.tone(22)),
+        surfaceContainerLow = Color(core.n1.tone(10)),
+        surfaceContainerLowest = Color(core.n1.tone(14)),
+        surfaceDim = Color(core.n1.tone(6)),
     )
 }
