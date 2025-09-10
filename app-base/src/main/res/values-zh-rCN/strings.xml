@@ -417,7 +417,7 @@
     <!--Import-->
     <string name="import_data_title">导入应用数据</string>
     <string name="import_data_summary">将文件中的数据添加到本应用</string>
-    <string name="import_error">导入失败，请重试。\n\n可能的解决方案：\n1. 重新导入一次。\n2. 更新应用到最新版。\n3. 清空应用数据，然后再次导入。</string>
+    <string name="import_error">导入失败，请重试。\n\n可尝试以下方法：\n1. 重新导入一次。\n2. 将应用更新到最新版。\n3. 清空应用数据，然后再次导入。</string>
     <string name="import_path_title">选择导入文件(.json/.tmd)</string>
     <string name="import_select_location">选择文件</string>
     <string name="import_no_file">需要选择一个导入文件</string>
