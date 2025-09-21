@@ -6,12 +6,12 @@ plugins {
 }
 
 android {
-    namespace 'xyz.aprildown.timer.app.analytics'
+    namespace = "xyz.aprildown.timer.app.analytics"
 }
 
 dependencies {
-    implementation project(':app-base')
+    implementation(project(':app-base'))
 
-    implementation libs.hilt.android
-    kapt libs.hilt.compiler
+    implementation(libs.hilt.android)
+    kapt(libs.hilt.compiler)
 }

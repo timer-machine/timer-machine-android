@@ -6,17 +6,17 @@ plugins {
 }
 
 android {
-    namespace 'xyz.aprildown.timer.app.timer.run'
+    namespace = "xyz.aprildown.timer.app.timer.run"
 }
 
 dependencies {
-    implementation project(':data')
-    implementation project(':app-base')
-    implementation project(':component-tts')
+    implementation(project(':data'))
+    implementation(project(':app-base'))
+    implementation(project(':component-tts'))
 
-    implementation libs.androidx.media
+    implementation(libs.androidx.media)
 
-    implementation libs.hilt.android
-    kapt libs.hilt.compiler
+    implementation(libs.hilt.android)
+    kapt(libs.hilt.compiler)
 
 }

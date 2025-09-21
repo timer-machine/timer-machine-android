@@ -6,23 +6,23 @@ plugins {
 }
 
 android {
-    namespace 'xyz.aprildown.timer.app.timer.list'
+    namespace = "xyz.aprildown.timer.app.timer.list"
 }
 
 dependencies {
-    implementation project(':app-base')
-    implementation project(':component-key')
+    implementation(project(':app-base'))
+    implementation(project(':component-key'))
 
-    implementation libs.hilt.android
-    kapt libs.hilt.compiler
+    implementation(libs.hilt.android)
+    kapt(libs.hilt.compiler)
 
-    implementation libs.fastAdapter
-    implementation libs.fastAdapter.binding
-    implementation libs.fastAdapter.expandable
+    implementation(libs.fastAdapter)
+    implementation(libs.fastAdapter.binding)
+    implementation(libs.fastAdapter.expandable)
 
-    implementation libs.calendarView
-    implementation libs.chart
-    implementation libs.materialPopupMenu
-    implementation libs.permission
+    implementation(libs.calendarView)
+    implementation(libs.chart)
+    implementation(libs.materialPopupMenu)
+    implementation(libs.permission)
 
 }

@@ -6,15 +6,15 @@ plugins {
 }
 
 android {
-    namespace 'xyz.aprildown.timer.domain'
+    namespace = "xyz.aprildown.timer.domain"
     buildTypes {
         debug {
-            buildConfigField "boolean", "SHOW_FIRST_TIME", "Boolean.parseBoolean(\"false\")"
-            buildConfigField "boolean", "OPEN_DEBUG", "Boolean.parseBoolean(\"true\")"
+            buildConfigField("boolean", "SHOW_FIRST_TIME", "Boolean.parseBoolean(\"false\")")
+            buildConfigField("boolean", "OPEN_DEBUG", "Boolean.parseBoolean(\"true\")")
         }
         release {
-            buildConfigField "boolean", "SHOW_FIRST_TIME", "true"
-            buildConfigField "boolean", "OPEN_DEBUG", "false"
+            buildConfigField("boolean", "SHOW_FIRST_TIME", "true")
+            buildConfigField("boolean", "OPEN_DEBUG", "false")
         }
     }
     buildFeatures {
@@ -23,26 +23,26 @@ android {
 }
 
 dependencies {
-    api libs.tools
+    api(libs.tools)
 
-    api libs.kotlin.coroutines.android
+    api(libs.kotlin.coroutines.android)
 
-    testImplementation libs.junit
-    testImplementation libs.kotlin.coroutines.test
-    testImplementation libs.bundles.mockito.core
+    testImplementation(libs.junit)
+    testImplementation(libs.kotlin.coroutines.test)
+    testImplementation(libs.bundles.mockito.core)
 
-    api libs.androidx.appcompat
-    implementation libs.androidx.preference
-    api libs.androidx.core
-    api libs.androidx.collection
+    api(libs.androidx.appcompat)
+    implementation(libs.androidx.preference)
+    api(libs.androidx.core)
+    api(libs.androidx.collection)
 
-    api libs.androidx.lifecycle.liveData
+    api(libs.androidx.lifecycle.liveData)
 
-    api libs.timber
+    api(libs.timber)
 
-    implementation libs.hilt.android
-    kapt libs.hilt.compiler
+    implementation(libs.hilt.android)
+    kapt(libs.hilt.compiler)
 
-    api libs.okio
+    api(libs.okio)
 
 }

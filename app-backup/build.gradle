@@ -7,30 +7,30 @@ plugins {
 }
 
 android {
-    namespace 'xyz.aprildown.timer.app.backup'
+    namespace = "xyz.aprildown.timer.app.backup"
     buildFeatures {
         compose true
     }
 }
 
 dependencies {
-    implementation project(':app-base')
-    implementation project(':component-key')
+    implementation(project(':app-base'))
+    implementation(project(':component-key'))
 
-    testImplementation libs.junit
-    testImplementation libs.kotlin.coroutines.test
-    testImplementation libs.bundles.mockito.core
+    testImplementation(libs.junit)
+    testImplementation(libs.kotlin.coroutines.test)
+    testImplementation(libs.bundles.mockito.core)
 
-    implementation libs.androidx.preference
-    implementation libs.androidx.documentFile
+    implementation(libs.androidx.preference)
+    implementation(libs.androidx.documentFile)
 
-    implementation platform(libs.compose.bom)
-    implementation libs.bundles.compose
+    implementation(platform(libs.compose.bom))
+    implementation(libs.bundles.compose)
 
-    implementation libs.hilt.android
-    kapt libs.hilt.compiler
+    implementation(libs.hilt.android)
+    kapt(libs.hilt.compiler)
 
-    implementation libs.okio
-    implementation libs.permission
+    implementation(libs.okio)
+    implementation(libs.permission)
 
 }

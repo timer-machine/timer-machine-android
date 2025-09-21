@@ -5,8 +5,8 @@ plugins {
 }
 
 android {
-    namespace 'io.github.deweyreed.timer.baselineprofile'
-    compileSdk libs.versions.compileSdk.get().toInteger()
+    namespace = "io.github.deweyreed.timer.baselineprofile"
+    compileSdk = libs.versions.compileSdk.get().toInteger()
 
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_17
@@ -18,10 +18,10 @@ android {
     }
 
     defaultConfig {
-        minSdk 28
-        targetSdk libs.versions.targetSdk.get().toInteger()
+        minSdk = 28
+        targetSdk = libs.versions.targetSdk.get().toInteger()
 
-        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
     targetProjectPath = ":app"
@@ -32,7 +32,6 @@ android {
         google { dimension = "market" }
         other { dimension = "market" }
     }
-
 }
 
 baselineProfile {
@@ -40,10 +39,10 @@ baselineProfile {
 }
 
 dependencies {
-    implementation libs.androidx.test.junit
-    implementation libs.androidx.test.espresso.core
-    implementation libs.androidx.test.uiautomator
-    implementation libs.androidx.test.benchmarkMacroJunit4
+    implementation(libs.androidx.test.junit)
+    implementation(libs.androidx.test.espresso.core)
+    implementation(libs.androidx.test.uiautomator)
+    implementation(libs.androidx.test.benchmarkMacroJunit4)
 }
 
 androidComponents {

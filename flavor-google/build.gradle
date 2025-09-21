@@ -7,36 +7,36 @@ plugins {
 }
 
 android {
-    namespace 'xyz.aprildown.timer.flavor.google'
+    namespace = "xyz.aprildown.timer.flavor.google"
 }
 
 dependencies {
-    implementation project(':app-base')
-    implementation project(':component-key')
+    implementation(project(':app-base'))
+    implementation(project(':component-key'))
 
-    implementation libs.kotlin.coroutines.play
+    implementation(libs.kotlin.coroutines.play)
 
-    implementation libs.androidx.preference
+    implementation(libs.androidx.preference)
 
-    implementation libs.androidx.work
+    implementation(libs.androidx.work)
 
-    implementation libs.hilt.android
-    kapt libs.hilt.compiler
-    implementation libs.hilt.navigation
-    implementation libs.hilt.work
-    ksp libs.hilt.work.compiler
+    implementation(libs.hilt.android)
+    kapt(libs.hilt.compiler)
+    implementation(libs.hilt.navigation)
+    implementation(libs.hilt.work)
+    ksp(libs.hilt.work.compiler)
 
-    implementation libs.billing
+    implementation(libs.billing)
 
-    implementation platform(libs.firebase.bom)
-    implementation libs.bundles.firebase.auth
-    implementation libs.firebase.storage
-    implementation libs.firebase.crashlytics
-    implementation libs.playServices.review
+    implementation(platform(libs.firebase.bom))
+    implementation(libs.bundles.firebase.auth)
+    implementation(libs.firebase.storage)
+    implementation(libs.firebase.crashlytics)
+    implementation(libs.playServices.review)
 
-    implementation libs.fastAdapter
-    implementation libs.fastAdapter.binding
+    implementation(libs.fastAdapter)
+    implementation(libs.fastAdapter.binding)
 
-    implementation libs.zip4j
+    implementation(libs.zip4j)
 
 }

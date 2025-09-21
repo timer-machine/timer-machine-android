@@ -18,23 +18,23 @@ plugins {
 }
 
 subprojects {
-    apply from: rootProject.file('detekt.gradle')
+    apply from: rootProject.file("detekt.gradle")
 
     afterEvaluate {
         if (project.plugins.hasPlugin(libs.plugins.android.application.get().pluginId) ||
                 project.plugins.hasPlugin(libs.plugins.android.library.get().pluginId)
         ) {
             android {
-                compileSdkVersion libs.versions.compileSdk.get() as Integer
+                compileSdk = libs.versions.compileSdk.get() as Integer
 
                 defaultConfig {
-                    minSdk libs.versions.minSdk.get() as Integer
-                    targetSdk libs.versions.targetSdk.get() as Integer
-                    vectorDrawables.useSupportLibrary true
+                    minSdk = libs.versions.minSdk.get() as Integer
+                    targetSdk = libs.versions.targetSdk.get() as Integer
+                    vectorDrawables.useSupportLibrary = true
                 }
 
                 compileOptions {
-                    coreLibraryDesugaringEnabled true
+                    coreLibraryDesugaringEnabled = true
                     sourceCompatibility = JavaVersion.VERSION_17
                     targetCompatibility = JavaVersion.VERSION_17
                 }
@@ -49,12 +49,12 @@ subprojects {
                 }
 
                 buildFeatures {
-                    viewBinding true
+                    viewBinding = true
                 }
             }
 
             dependencies {
-                coreLibraryDesugaring libs.desugarJdkLibs
+                coreLibraryDesugaring(libs.desugarJdkLibs)
             }
         }
     }

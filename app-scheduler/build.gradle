@@ -6,16 +6,16 @@ plugins {
 }
 
 android {
-    namespace 'xyz.aprildown.timer.app.scheduler'
+    namespace = "xyz.aprildown.timer.app.scheduler"
 }
 
 dependencies {
-    implementation project(':app-base')
+    implementation(project(':app-base'))
 
-    implementation libs.hilt.android
-    kapt libs.hilt.compiler
+    implementation(libs.hilt.android)
+    kapt(libs.hilt.compiler)
 
-    implementation libs.materialPopupMenu
-    implementation libs.toggleButtonGroup
+    implementation(libs.materialPopupMenu)
+    implementation(libs.toggleButtonGroup)
 
 }

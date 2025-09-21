@@ -6,20 +6,20 @@ plugins {
 }
 
 android {
-    namespace 'xyz.aprildown.timer.app.intro'
+    namespace = "xyz.aprildown.timer.app.intro"
 }
 
 dependencies {
-    implementation project(':app-base')
-    implementation project(':component-key')
-    implementation project(':app-timer-list')
-    implementation project(':app-timer-edit')
-    implementation project(':app-timer-one')
+    implementation(project(':app-base'))
+    implementation(project(':component-key'))
+    implementation(project(':app-timer-list'))
+    implementation(project(':app-timer-edit'))
+    implementation(project(':app-timer-one'))
 
-    implementation libs.hilt.android
-    kapt libs.hilt.compiler
+    implementation(libs.hilt.android)
+    kapt(libs.hilt.compiler)
 
-    implementation libs.flexbox
-    implementation libs.konfetti
+    implementation(libs.flexbox)
+    implementation(libs.konfetti)
 
 }

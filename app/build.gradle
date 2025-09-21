@@ -12,19 +12,19 @@ plugins {
 }
 
 def keystoreProperties = new Properties()
-def keystorePropertiesFile = rootProject.file('local.properties')
+def keystorePropertiesFile = rootProject.file("local.properties")
 if (keystorePropertiesFile.exists()) {
     keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
 }
 
 android {
-    namespace 'io.github.deweyreed.timer'
+    namespace = "io.github.deweyreed.timer"
     defaultConfig {
-        applicationId "io.github.deweyreed.timer"
-        versionCode libs.versions.versionCode.get() as Integer
-        versionName libs.versions.versionName.get()
-        testInstrumentationRunner "io.github.deweyreed.timer.TestRunner"
-        vectorDrawables.useSupportLibrary true
+        applicationId = "io.github.deweyreed.timer"
+        versionCode = libs.versions.versionCode.get() as Integer
+        versionName = libs.versions.versionName.get()
+        testInstrumentationRunner = "io.github.deweyreed.timer.TestRunner"
+        vectorDrawables.useSupportLibrary = true
 
         archivesBaseName = "TimeR.Machine-v${versionName}(${versionCode})"
         resourceConfigurations += ["en", "de", "es", "nl", "pt", "ta", "zh-rCN", "zh-rHK", "zh-rTW"]
@@ -32,19 +32,19 @@ android {
 
     buildTypes {
         release {
-            minifyEnabled true
-            shrinkResources true
-            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            minifyEnabled = true
+            shrinkResources = true
+            proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
         }
     }
 
-    if (keystoreProperties['storeFile'] != null) {
+    if (keystoreProperties["storeFile"] != null) {
         signingConfigs {
             debug {
-                storeFile file(keystoreProperties['storeFile'])
-                storePassword keystoreProperties['storePassword']
-                keyAlias keystoreProperties['keyAlias']
-                keyPassword keystoreProperties['keyPassword']
+                storeFile = file(keystoreProperties["storeFile"])
+                storePassword = keystoreProperties["storePassword"]
+                keyAlias = keystoreProperties["keyAlias"]
+                keyPassword = keystoreProperties["keyPassword"]
             }
         }
     }
@@ -53,19 +53,17 @@ android {
     productFlavors {
         dog {
             isDefault = true
-            dimension "market"
-            versionNameSuffix "-dog"
-            applicationIdSuffix ".dog"
+            dimension = "market"
+            versionNameSuffix = "-dog"
+            applicationIdSuffix = ".dog"
         }
-
         google {
-            dimension "market"
-            applicationIdSuffix ".google"
+            dimension = "market"
+            applicationIdSuffix = ".google"
         }
-
         other {
-            dimension "market"
-            applicationIdSuffix ".other"
+            dimension = "market"
+            applicationIdSuffix = ".other"
         }
     }
     dependenciesInfo {
@@ -73,7 +71,7 @@ android {
     }
 
     compileOptions {
-        coreLibraryDesugaringEnabled true
+        coreLibraryDesugaringEnabled = true
         sourceCompatibility = JavaVersion.VERSION_17
         targetCompatibility = JavaVersion.VERSION_17
     }
@@ -95,85 +93,85 @@ android {
     }
 
     lint {
-        checkDependencies true
-        warningsAsErrors true
+        checkDependencies = true
+        warningsAsErrors = true
     }
 }
 
 dependencies {
-    implementation project(':domain')
-    implementation project(':data')
-    implementation project(':presentation')
-    implementation project(':app-base')
-    implementation project(':app-scheduler')
-    implementation project(':app-backup')
-    implementation project(':app-settings')
-    implementation project(':app-tasker')
-    implementation project(':app-intro')
-    implementation project(':app-timer-edit')
-    implementation project(':app-timer-run')
-    implementation project(':app-timer-list')
-    implementation project(':app-timer-one')
-    implementation project(':component-key')
-    implementation project(':component-main')
-    implementation project(':component-settings')
-    implementation project(':component-tts')
-    googleImplementation project(':flavor-google')
-    dogImplementation project(':app-analytics-fake')
-    otherImplementation project(':app-analytics-fake')
+    implementation(project(':domain'))
+    implementation(project(':data'))
+    implementation(project(':presentation'))
+    implementation(project(':app-base'))
+    implementation(project(':app-scheduler'))
+    implementation(project(':app-backup'))
+    implementation(project(':app-settings'))
+    implementation(project(':app-tasker'))
+    implementation(project(':app-intro'))
+    implementation(project(':app-timer-edit'))
+    implementation(project(':app-timer-run'))
+    implementation(project(':app-timer-list'))
+    implementation(project(':app-timer-one'))
+    implementation(project(':component-key'))
+    implementation(project(':component-main'))
+    implementation(project(':component-settings'))
+    implementation(project(':component-tts'))
+    googleImplementation(project(':flavor-google'))
+    dogImplementation(project(':app-analytics-fake'))
+    otherImplementation(project(':app-analytics-fake'))
 
-    baselineProfile project(':baselineprofile')
+    baselineProfile(project(':baselineprofile'))
 
-    implementation libs.tools
+    implementation(libs.tools)
 
-    implementation libs.kotlin.coroutines.android
+    implementation(libs.kotlin.coroutines.android)
 
-    androidTestImplementation libs.bundles.mockito.android
-    androidTestImplementation libs.bundles.androidx.test
-    androidTestImplementation libs.bundles.androidx.test.espresso
-    androidTestImplementation libs.hmsPicker
-    androidTestImplementation libs.scrollHmsPicker
-    androidTestImplementation libs.hilt.testing
-    kaptAndroidTest libs.hilt.compiler
+    androidTestImplementation(libs.bundles.mockito.android)
+    androidTestImplementation(libs.bundles.androidx.test)
+    androidTestImplementation(libs.bundles.androidx.test.espresso)
+    androidTestImplementation(libs.hmsPicker)
+    androidTestImplementation(libs.scrollHmsPicker)
+    androidTestImplementation(libs.hilt.testing)
+    kaptAndroidTest(libs.hilt.compiler)
 
-    implementation libs.androidx.appcompat
-    implementation libs.androidx.recyclerView
-    implementation libs.androidx.viewPager2
-    implementation libs.androidx.preference
-    implementation libs.androidx.constraintLayout
-    implementation libs.androidx.lifecycle.runtime
-    implementation libs.androidx.lifecycle.liveData
-    implementation libs.androidx.lifecycle.viewModel
-    implementation libs.androidx.profileinstaller
+    implementation(libs.androidx.appcompat)
+    implementation(libs.androidx.recyclerView)
+    implementation(libs.androidx.viewPager2)
+    implementation(libs.androidx.preference)
+    implementation(libs.androidx.constraintLayout)
+    implementation(libs.androidx.lifecycle.runtime)
+    implementation(libs.androidx.lifecycle.liveData)
+    implementation(libs.androidx.lifecycle.viewModel)
+    implementation(libs.androidx.profileinstaller)
 
-    implementation libs.material
+    implementation(libs.material)
 
-    debugImplementation libs.leakCannary
+    debugImplementation(libs.leakCannary)
 
-    implementation libs.androidx.room.runtime
+    implementation(libs.androidx.room.runtime)
 
-    implementation libs.androidx.navigation.fragment
-    implementation libs.androidx.navigation.ui
+    implementation(libs.androidx.navigation.fragment)
+    implementation(libs.androidx.navigation.ui)
 
-    implementation libs.androidx.work
+    implementation(libs.androidx.work)
 
-    implementation libs.hilt.android
-    kapt libs.hilt.compiler
-    implementation libs.hilt.work
+    implementation(libs.hilt.android)
+    kapt(libs.hilt.compiler)
+    implementation(libs.hilt.work)
 
-    implementation libs.okio
-    implementation libs.permission
+    implementation(libs.okio)
+    implementation(libs.permission)
 
-    implementation libs.flexbox
-    implementation libs.materialDrawer
-    implementation libs.scrollHmsPicker
-    implementation libs.theme
-    implementation libs.toggleButtonGroup
-    implementation libs.ultimateRingtonePicker
-    implementation libs.coil
-    implementation libs.coil.gif
+    implementation(libs.flexbox)
+    implementation(libs.materialDrawer)
+    implementation(libs.scrollHmsPicker)
+    implementation(libs.theme)
+    implementation(libs.toggleButtonGroup)
+    implementation(libs.ultimateRingtonePicker)
+    implementation(libs.coil)
+    implementation(libs.coil.gif)
 
-    androidTestCompileOnly libs.taskerPlugin
+    androidTestCompileOnly(libs.taskerPlugin)
 }
 
 android.applicationVariants.configureEach { variant ->
@@ -190,12 +188,12 @@ android.applicationVariants.configureEach { variant ->
 
 dependencyGuard {
     configuration("dogReleaseRuntimeClasspath") {
-        modules true
+        modules = true
     }
     configuration("googleReleaseRuntimeClasspath") {
-        modules true
+        modules = true
     }
     configuration("otherReleaseRuntimeClasspath") {
-        modules true
+        modules = true
     }
 }

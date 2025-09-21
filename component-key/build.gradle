@@ -6,25 +6,25 @@ plugins {
 }
 
 android {
-    namespace 'xyz.aprildown.timer.component.key'
+    namespace = "xyz.aprildown.timer.component.key"
     buildFeatures {
-        compose true
+        compose = true
     }
 }
 
 dependencies {
-    implementation project(':app-base')
+    implementation(project(':app-base'))
 
-    implementation libs.androidx.preference
+    implementation(libs.androidx.preference)
 
-    implementation platform(libs.compose.bom)
-    implementation libs.bundles.compose
+    implementation(platform(libs.compose.bom))
+    implementation(libs.bundles.compose)
 
-    implementation libs.flexbox
-    implementation libs.hmsPicker
-    implementation libs.materialPopupMenu
-    implementation libs.scrollHmsPicker
-    implementation libs.coil
-    implementation libs.zoomable
+    implementation(libs.flexbox)
+    implementation(libs.hmsPicker)
+    implementation(libs.materialPopupMenu)
+    implementation(libs.scrollHmsPicker)
+    implementation(libs.coil)
+    implementation(libs.zoomable)
 
 }

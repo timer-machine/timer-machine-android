@@ -6,23 +6,23 @@ plugins {
 }
 
 android {
-    namespace 'xyz.aprildown.timer.app.timer.one'
+    namespace = "xyz.aprildown.timer.app.timer.one"
 }
 
 dependencies {
-    implementation project(':app-base')
-    implementation project(':component-key')
-    implementation project(':component-settings')
+    implementation(project(':app-base'))
+    implementation(project(':component-key'))
+    implementation(project(':component-settings'))
 
-    implementation libs.androidx.dynamicAnimation
+    implementation(libs.androidx.dynamicAnimation)
 
-    implementation libs.hilt.android
-    kapt libs.hilt.compiler
+    implementation(libs.hilt.android)
+    kapt(libs.hilt.compiler)
 
-    implementation libs.fastAdapter
+    implementation(libs.fastAdapter)
 
-    implementation libs.chromeMenu
-    implementation libs.flexbox
-    implementation libs.materialPopupMenu
+    implementation(libs.chromeMenu)
+    implementation(libs.flexbox)
+    implementation(libs.materialPopupMenu)
 
 }

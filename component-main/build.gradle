@@ -4,15 +4,15 @@ plugins {
 }
 
 android {
-    namespace 'xyz.aprildown.timer.workshop'
+    namespace = "xyz.aprildown.timer.workshop"
 }
 
 dependencies {
-    implementation project(':app-base')
+    implementation(project(':app-base'))
 
-    implementation libs.androidx.preference
+    implementation(libs.androidx.preference)
 
-    implementation libs.fastAdapter
-    implementation libs.fastAdapter.binding
+    implementation(libs.fastAdapter)
+    implementation(libs.fastAdapter.binding)
 
 }

@@ -1,6 +1,12 @@
 pluginManagement {
     repositories {
-        google()
+        google {
+            content {
+                includeGroupByRegex("com\\.android.*")
+                includeGroupByRegex("com\\.google.*")
+                includeGroupByRegex("androidx.*")
+            }
+        }
         mavenCentral()
         gradlePluginPortal()
     }
@@ -11,7 +17,7 @@ dependencyResolutionManagement {
         google()
         mavenCentral()
         maven {
-            url "https://jitpack.io"
+            url = uri("https://jitpack.io")
             content {
                 includeGroup("com.github.DeweyReed")
                 includeModule("com.github.PhilJay", "MPAndroidChart")
@@ -25,18 +31,26 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = 'TimerMachine'
+rootProject.name = "TimerMachine"
 
-include ':domain'
-include ':data'
-include ':presentation'
-include ':app-base'
-include ':component-key', ':component-settings', ':component-tts'
-include ':app-scheduler', ':app-settings', ':app-backup', ':app-tasker'
-include ':app-timer-run', ':app-timer-edit'
-include ':app-timer-list', ':app-timer-one'
-include ':component-main', ':app-analytics-fake'
-include ':flavor-google'
-include ':app-intro'
-include ':app'
-include ':baselineprofile'
+include(":domain")
+include(":data")
+include(":presentation")
+include(":app-base")
+include(":component-key")
+include(":component-settings")
+include(":component-tts")
+include(":app-scheduler")
+include(":app-settings")
+include(":app-backup")
+include(":app-tasker")
+include(":app-timer-run")
+include(":app-timer-edit")
+include(":app-timer-list")
+include(":app-timer-one")
+include(":component-main")
+include(":app-analytics-fake")
+include(":flavor-google")
+include(":app-intro")
+include(":app")
+include(":baselineprofile")

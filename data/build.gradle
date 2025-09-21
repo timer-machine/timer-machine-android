@@ -8,9 +8,9 @@ plugins {
 }
 
 android {
-    namespace 'xyz.aprildown.timer.data'
+    namespace = "xyz.aprildown.timer.data"
     defaultConfig {
-        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
     sourceSets {
@@ -23,22 +23,22 @@ room {
 }
 
 dependencies {
-    implementation project(':domain')
+    implementation(project(':domain'))
 
-    androidTestImplementation libs.kotlin.coroutines.test
-    androidTestImplementation libs.bundles.androidx.test
-    androidTestImplementation libs.bundles.androidx.test.espresso
-    androidTestImplementation libs.androidx.room.test
+    androidTestImplementation(libs.kotlin.coroutines.test)
+    androidTestImplementation(libs.bundles.androidx.test)
+    androidTestImplementation(libs.bundles.androidx.test.espresso)
+    androidTestImplementation(libs.androidx.room.test)
 
-    implementation libs.androidx.room.runtime
-    ksp libs.androidx.room.compiler
+    implementation(libs.androidx.room.runtime)
+    ksp(libs.androidx.room.compiler)
 
-    implementation libs.hilt.android
-    kapt libs.hilt.compiler
+    implementation(libs.hilt.android)
+    kapt(libs.hilt.compiler)
 
-    implementation libs.moshi.core
-    ksp libs.moshi.kotlinGen
+    implementation(libs.moshi.core)
+    ksp(libs.moshi.kotlinGen)
 
-    implementation libs.androidJob
+    implementation(libs.androidJob)
 
 }

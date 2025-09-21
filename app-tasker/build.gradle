@@ -6,14 +6,14 @@ plugins {
 }
 
 android {
-    namespace 'xyz.aprildown.timer.app.tasker'
+    namespace = "xyz.aprildown.timer.app.tasker"
 }
 
 dependencies {
-    implementation project(':app-base')
+    implementation(project(':app-base'))
 
-    implementation libs.hilt.android
-    kapt libs.hilt.compiler
+    implementation(libs.hilt.android)
+    kapt(libs.hilt.compiler)
 
-    implementation libs.taskerPlugin
+    implementation(libs.taskerPlugin)
 }

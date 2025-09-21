@@ -6,20 +6,20 @@ plugins {
 }
 
 android {
-    namespace 'xyz.aprildown.timer.app.timer.edit'
+    namespace = "xyz.aprildown.timer.app.timer.edit"
 }
 
 dependencies {
-    implementation project(':app-base')
-    implementation project(':component-key')
+    implementation(project(':app-base'))
+    implementation(project(':component-key'))
 
-    implementation libs.hilt.android
-    kapt libs.hilt.compiler
+    implementation(libs.hilt.android)
+    kapt(libs.hilt.compiler)
 
-    implementation libs.fastAdapter
+    implementation(libs.fastAdapter)
 
-    implementation libs.flexbox
-    implementation libs.materialPopupMenu
-    implementation libs.ultimateRingtonePicker
-    implementation libs.twoWayNestedScrollView
+    implementation(libs.flexbox)
+    implementation(libs.materialPopupMenu)
+    implementation(libs.ultimateRingtonePicker)
+    implementation(libs.twoWayNestedScrollView)
 }

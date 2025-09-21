@@ -4,10 +4,10 @@ plugins {
 }
 
 android {
-    namespace 'xyz.aprildown.timer.component.settings'
+    namespace = "xyz.aprildown.timer.component.settings"
 }
 
 dependencies {
-    implementation project(':app-base')
-    implementation project(':component-key')
+    implementation(project(':app-base'))
+    implementation(project(':component-key'))
 }
