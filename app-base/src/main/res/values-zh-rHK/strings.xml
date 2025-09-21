@@ -417,7 +417,7 @@
     <!--Import-->
     <string name="import_data_title">導入應用數據</string>
     <string name="import_data_summary">將文件中的數據添加到本應用</string>
-    <string name="import_error">導入失敗，請重試。\n\n可能的解決方案：\n1. 重新導入一次。\n2. 更新應用到最新版。\n3. 清空應用數據，然後再次導入。</string>
+    <string name="import_error">導入失敗，請重試。\n\n可嘗試以下方法：\n1. 重新導入一次。\n2. 將應用更新到最新版。\n3. 清空應用數據，然後再次導入。</string>
     <string name="import_path_title">選擇導入文件(.json/.tmd)</string>
     <string name="import_select_location">選擇文件</string>
     <string name="import_no_file">需要選擇一個導入文件</string>
