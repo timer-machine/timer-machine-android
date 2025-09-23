@@ -1,0 +1,61 @@
+import com.android.build.api.dsl.CommonExtension
+import org.gradle.api.JavaVersion
+import org.gradle.api.Project
+import org.gradle.api.artifacts.VersionCatalog
+import org.gradle.api.artifacts.VersionCatalogsExtension
+import org.gradle.kotlin.dsl.dependencies
+import org.gradle.kotlin.dsl.getByType
+import org.jetbrains.kotlin.compose.compiler.gradle.ComposeCompilerGradlePluginExtension
+import org.jetbrains.kotlin.gradle.dsl.JvmTarget
+import org.jetbrains.kotlin.gradle.dsl.KotlinAndroidProjectExtension
+
+internal val Project.libs: VersionCatalog
+    get() = extensions.getByType<VersionCatalogsExtension>().named("libs")
+
+internal fun Project.configureKotlin() {
+    val libs = libs
+    extensions.getByType<KotlinAndroidProjectExtension>().run {
+        compilerOptions {
+            jvmTarget.set(
+                JvmTarget.fromTarget(libs.findVersion("jvmTarget").get().toString())
+            )
+        }
+    }
+}
+
+internal fun Project.configureAndroid(commonExtension: CommonExtension<*, *, *, *, *, *>) {
+    val libs = libs
+    commonExtension.run {
+        compileSdk = libs.findVersion("compileSdk").get().toString().toInt()
+        defaultConfig {
+            minSdk = libs.findVersion("minSdk").get().toString().toInt()
+
+            testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+            vectorDrawables.useSupportLibrary = true
+        }
+        compileOptions {
+            isCoreLibraryDesugaringEnabled = true
+            val javaVersion =
+                JavaVersion.toVersion(libs.findVersion("jvmTarget").get().toString())
+            sourceCompatibility = javaVersion
+            targetCompatibility = javaVersion
+        }
+        dependencies {
+            "coreLibraryDesugaring"(libs.findLibrary("desugarJdkLibs").get())
+        }
+    }
+}
+
+internal fun Project.configureCompose(commonExtension: CommonExtension<*, *, *, *, *, *>) {
+    val libs = libs
+    commonExtension.buildFeatures.compose = true
+    extensions.getByType<ComposeCompilerGradlePluginExtension>().run {
+        stabilityConfigurationFiles.addAll(
+            isolated.rootProject.projectDirectory.file("stability-config.conf"),
+        )
+    }
+    dependencies {
+        "implementation"(platform(libs.findLibrary("compose-bom").get()))
+        "implementation"(libs.findBundle("compose").get())
+    }
+}

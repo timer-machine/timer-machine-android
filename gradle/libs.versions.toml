@@ -1,4 +1,6 @@
 [versions]
+jvmTarget = "17"
+
 agp = "8.10.1"
 
 compileSdk = "36"
@@ -38,6 +40,11 @@ detekt = { id = "io.gitlab.arturbosch.detekt", version.ref = "detekt" }
 
 gms = "com.google.gms.google-services:4.4.3"
 firebase-crashlytics = "com.google.firebase.crashlytics:3.0.4"
+
+convention-android-application = { id = "convention-android-application" }
+convention-android-library = { id = "convention-android-library" }
+convention-android-libraryCompose = { id = "convention-android-libraryCompose" }
+convention-hilt = { id = "convention-hilt" }
 
 [libraries]
 detekt-formatting = { module = "io.gitlab.arturbosch.detekt:detekt-formatting", version.ref = "detekt" }

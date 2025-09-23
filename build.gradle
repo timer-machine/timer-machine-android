@@ -44,7 +44,7 @@ subprojects {
                     freeCompilerArgs += [
                             "-P",
                             "plugin:androidx.compose.compiler.plugins.kotlin:stabilityConfigurationPath=" +
-                                    project.rootDir.absolutePath + "/compose_compiler_config.conf"
+                                    project.rootDir.absolutePath + "/stability-config.conf"
                     ]
                 }
 
