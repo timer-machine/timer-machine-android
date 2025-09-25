@@ -1,8 +1,6 @@
 plugins {
-    alias(libs.plugins.android.library)
-    alias(libs.plugins.kotlin.android)
-    alias(libs.plugins.kotlin.kapt)
-    alias(libs.plugins.hilt)
+    alias(libs.plugins.convention.android.library)
+    alias(libs.plugins.convention.hilt)
 }
 
 android {
@@ -39,9 +37,6 @@ dependencies {
     api(libs.androidx.lifecycle.liveData)
 
     api(libs.timber)
-
-    implementation(libs.hilt.android)
-    kapt(libs.hilt.compiler)
 
     api(libs.okio)
 

@@ -1,9 +1,7 @@
 plugins {
-    alias(libs.plugins.android.library)
-    alias(libs.plugins.kotlin.android)
-    alias(libs.plugins.kotlin.kapt)
+    alias(libs.plugins.convention.android.library)
+    alias(libs.plugins.convention.hilt)
     alias(libs.plugins.ksp)
-    alias(libs.plugins.hilt)
 }
 
 android {
@@ -11,12 +9,10 @@ android {
 }
 
 dependencies {
-    implementation(project(':app-base'))
+    implementation(project(":app-base"))
 
     implementation(libs.androidx.work)
 
-    implementation(libs.hilt.android)
-    kapt(libs.hilt.compiler)
     implementation(libs.hilt.work)
     ksp(libs.hilt.work.compiler)
 

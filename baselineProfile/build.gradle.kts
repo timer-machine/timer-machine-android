@@ -6,31 +6,35 @@ plugins {
 
 android {
     namespace = "io.github.deweyreed.timer.baselineprofile"
-    compileSdk = libs.versions.compileSdk.get().toInteger()
+    compileSdk = libs.versions.compileSdk.get().toInt()
 
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_17
-        targetCompatibility = JavaVersion.VERSION_17
-    }
-
-    kotlinOptions {
-        jvmTarget = JavaVersion.VERSION_17.toString()
+        val javaVersion = JavaVersion.toVersion(libs.versions.jvmTarget.get())
+        sourceCompatibility = javaVersion
+        targetCompatibility = javaVersion
     }
 
     defaultConfig {
         minSdk = 28
-        targetSdk = libs.versions.targetSdk.get().toInteger()
+        targetSdk = libs.versions.targetSdk.get().toInt()
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
     targetProjectPath = ":app"
 
-    flavorDimensions += ["market"]
+    flavorDimensions.add("market")
     productFlavors {
-        dog { dimension = "market" }
-        google { dimension = "market" }
-        other { dimension = "market" }
+        create("dog") { dimension = "market" }
+        create("google") { dimension = "market" }
+        create("other") { dimension = "market" }
+    }
+}
+
+kotlin {
+    compilerOptions {
+        jvmTarget = org.jetbrains.kotlin.gradle.dsl.JvmTarget
+            .fromTarget(libs.versions.jvmTarget.get())
     }
 }
 
@@ -47,10 +51,10 @@ dependencies {
 
 androidComponents {
     onVariants(selector().all()) { v ->
-        def artifactsLoader = v.artifacts.getBuiltArtifactsLoader()
+        val artifactsLoader = v.artifacts.getBuiltArtifactsLoader()
         v.instrumentationRunnerArguments.put(
                 "targetAppId",
-                v.testedApks.map { artifactsLoader.load(it)?.applicationId }
+            v.testedApks.map { checkNotNull(artifactsLoader.load(it)).applicationId }
         )
     }
 }

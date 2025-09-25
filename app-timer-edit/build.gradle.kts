@@ -1,8 +1,6 @@
 plugins {
-    alias(libs.plugins.android.library)
-    alias(libs.plugins.kotlin.android)
-    alias(libs.plugins.kotlin.kapt)
-    alias(libs.plugins.hilt)
+    alias(libs.plugins.convention.android.library)
+    alias(libs.plugins.convention.hilt)
 }
 
 android {
@@ -10,11 +8,8 @@ android {
 }
 
 dependencies {
-    implementation(project(':app-base'))
-    implementation(project(':component-key'))
-
-    implementation(libs.hilt.android)
-    kapt(libs.hilt.compiler)
+    implementation(project(":app-base"))
+    implementation(project(":component-key"))
 
     implementation(libs.fastAdapter)
 

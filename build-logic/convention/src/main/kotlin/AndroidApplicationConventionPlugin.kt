@@ -31,6 +31,8 @@ class AndroidApplicationConventionPlugin : Plugin<Project> {
             extensions.getByType<BasePluginExtension>().run {
                 archivesName.set("TimeR.Machine-v${versionName}(${versionCode})")
             }
+
+            configureDetekt()
         }
     }
 }

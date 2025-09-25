@@ -1,20 +1,15 @@
 plugins {
-    alias(libs.plugins.android.library)
-    alias(libs.plugins.kotlin.android)
-    alias(libs.plugins.kotlin.kapt)
-    alias(libs.plugins.kotlin.compose)
-    alias(libs.plugins.hilt)
+    alias(libs.plugins.convention.android.library)
+    alias(libs.plugins.convention.android.libraryCompose)
+    alias(libs.plugins.convention.hilt)
 }
 
 android {
     namespace = "xyz.aprildown.timer.app.base"
-    buildFeatures {
-        compose = true
-    }
 }
 
 dependencies {
-    api(project(':presentation'))
+    api(project(":presentation"))
 
     testImplementation(libs.junit)
 
@@ -31,12 +26,7 @@ dependencies {
     api(libs.androidx.navigation.fragment)
     api(libs.androidx.navigation.ui)
 
-    implementation(platform(libs.compose.bom))
-    implementation(libs.bundles.compose)
     implementation(libs.materialColorUtilities)
-
-    implementation(libs.hilt.android)
-    kapt(libs.hilt.compiler)
 
     implementation(libs.fastAdapter)
 

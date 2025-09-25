@@ -1,19 +1,14 @@
 plugins {
-    alias(libs.plugins.android.library)
-    alias(libs.plugins.kotlin.android)
-    alias(libs.plugins.kotlin.kapt)
-    alias(libs.plugins.hilt)
+    alias(libs.plugins.convention.android.library)
+    alias(libs.plugins.convention.hilt)
 }
 
 android {
     namespace = "xyz.aprildown.timer.presentation"
-    defaultConfig {
-        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
-    }
 }
 
 dependencies {
-    api(project(':domain'))
+    api(project(":domain"))
 
     testImplementation(libs.junit)
     testImplementation(libs.kotlin.coroutines.test)
@@ -28,9 +23,6 @@ dependencies {
     api(libs.androidx.lifecycle.runtime)
     api(libs.androidx.lifecycle.liveData)
     api(libs.androidx.lifecycle.viewModel)
-
-    implementation(libs.hilt.android)
-    kapt(libs.hilt.compiler)
 
     implementation(libs.accurateCountDownTimer)
 }

@@ -1,24 +1,17 @@
 plugins {
-    alias(libs.plugins.android.library)
-    alias(libs.plugins.kotlin.android)
+    alias(libs.plugins.convention.android.library)
+    alias(libs.plugins.convention.android.libraryCompose)
     alias(libs.plugins.kotlin.parcelize)
-    alias(libs.plugins.kotlin.compose)
 }
 
 android {
     namespace = "xyz.aprildown.timer.component.key"
-    buildFeatures {
-        compose = true
-    }
 }
 
 dependencies {
-    implementation(project(':app-base'))
+    implementation(project(":app-base"))
 
     implementation(libs.androidx.preference)
-
-    implementation(platform(libs.compose.bom))
-    implementation(libs.bundles.compose)
 
     implementation(libs.flexbox)
     implementation(libs.hmsPicker)

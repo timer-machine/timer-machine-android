@@ -18,6 +18,8 @@ class AndroidLibraryConventionPlugin : Plugin<Project> {
             extensions.getByType<LibraryExtension>().run {
                 configureAndroid(this)
             }
+
+            configureDetekt()
         }
     }
 }

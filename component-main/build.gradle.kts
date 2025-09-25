@@ -1,6 +1,5 @@
 plugins {
-    alias(libs.plugins.android.library)
-    alias(libs.plugins.kotlin.android)
+    alias(libs.plugins.convention.android.library)
 }
 
 android {
@@ -8,7 +7,7 @@ android {
 }
 
 dependencies {
-    implementation(project(':app-base'))
+    implementation(project(":app-base"))
 
     implementation(libs.androidx.preference)
 

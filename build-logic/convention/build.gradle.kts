@@ -24,6 +24,7 @@ dependencies {
     compileOnly(plugin(libs.plugins.kotlin.compose))
     compileOnly(plugin(libs.plugins.kotlin.kapt))
     compileOnly(plugin(libs.plugins.hilt))
+    compileOnly(plugin(libs.plugins.detekt))
 }
 
 private fun plugin(plugin: Provider<PluginDependency>): Provider<String> {

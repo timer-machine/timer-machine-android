@@ -1,20 +1,15 @@
 plugins {
-    alias(libs.plugins.android.library)
-    alias(libs.plugins.kotlin.android)
-    alias(libs.plugins.kotlin.kapt)
+    alias(libs.plugins.convention.android.library)
+    alias(libs.plugins.convention.hilt)
     alias(libs.plugins.ksp)
-    alias(libs.plugins.hilt)
     alias(libs.plugins.room)
 }
 
 android {
     namespace = "xyz.aprildown.timer.data"
-    defaultConfig {
-        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
-    }
 
     sourceSets {
-        androidTest.assets.srcDirs += files("$projectDir/schemas".toString())
+        getByName("androidTest").assets.srcDir("$projectDir/schemas")
     }
 }
 
@@ -23,7 +18,7 @@ room {
 }
 
 dependencies {
-    implementation(project(':domain'))
+    implementation(project(":domain"))
 
     androidTestImplementation(libs.kotlin.coroutines.test)
     androidTestImplementation(libs.bundles.androidx.test)
@@ -32,9 +27,6 @@ dependencies {
 
     implementation(libs.androidx.room.runtime)
     ksp(libs.androidx.room.compiler)
-
-    implementation(libs.hilt.android)
-    kapt(libs.hilt.compiler)
 
     implementation(libs.moshi.core)
     ksp(libs.moshi.kotlinGen)
