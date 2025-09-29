@@ -28,7 +28,7 @@ dependencies {
 
     implementation(libs.materialColorUtilities)
 
-    implementation(libs.fastAdapter)
+    implementation(libs.fastAdapter.core)
 
     implementation(libs.materialPopupMenu)
     api(libs.materialize)

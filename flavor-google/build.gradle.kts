@@ -30,7 +30,7 @@ dependencies {
     implementation(libs.firebase.crashlytics)
     implementation(libs.playServices.review)
 
-    implementation(libs.fastAdapter)
+    implementation(libs.fastAdapter.core)
     implementation(libs.fastAdapter.binding)
 
     implementation(libs.zip4j)

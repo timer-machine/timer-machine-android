@@ -14,7 +14,7 @@ dependencies {
 
     implementation(libs.androidx.dynamicAnimation)
 
-    implementation(libs.fastAdapter)
+    implementation(libs.fastAdapter.core)
 
     implementation(libs.chromeMenu)
     implementation(libs.flexbox)

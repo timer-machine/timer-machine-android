@@ -15,7 +15,7 @@ dependencies {
 
     implementation(libs.androidx.preference)
 
-    implementation(libs.fastAdapter)
+    implementation(libs.fastAdapter.core)
 
     implementation(libs.materialDialog.core)
     implementation(libs.materialDialog.common)

@@ -136,7 +136,7 @@ androidJob = "com.github.DeweyReed:android-job:a04c817792"
 okio = "com.squareup.okio:okio:3.15.0"
 permission = "pub.devrel:easypermissions:3.0.0"
 
-fastAdapter = "com.mikepenz:fastadapter:5.7.0"
+fastAdapter-core = "com.mikepenz:fastadapter:5.7.0"
 fastAdapter-binding = "com.mikepenz:fastadapter-extensions-binding:5.7.0"
 fastAdapter-expandable = "com.mikepenz:fastadapter-extensions-expandable:5.7.0"
 

@@ -11,7 +11,7 @@ dependencies {
     implementation(project(":app-base"))
     implementation(project(":component-key"))
 
-    implementation(libs.fastAdapter)
+    implementation(libs.fastAdapter.core)
     implementation(libs.fastAdapter.binding)
     implementation(libs.fastAdapter.expandable)
 
