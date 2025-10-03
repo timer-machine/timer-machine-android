@@ -41,12 +41,10 @@ class OneActivity : BaseActivity(), OneActivityInterface {
 
         volumeControlStream = storedAudioTypeValue
 
-        if (savedInstanceState == null) {
-            viewModel.setTimerId(
-                intent?.getIntExtra(Constants.EXTRA_TIMER_ID, TimerEntity.NULL_ID)
-                    ?: TimerEntity.NULL_ID
-            )
-        }
+        viewModel.setTimerId(
+            intent?.getIntExtra(Constants.EXTRA_TIMER_ID, TimerEntity.NULL_ID)
+                ?: TimerEntity.NULL_ID
+        )
     }
 
     override fun onSupportNavigateUp(): Boolean {
