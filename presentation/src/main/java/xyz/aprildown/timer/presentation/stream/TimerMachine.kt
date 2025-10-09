@@ -102,17 +102,21 @@ internal class TimerMachine(
 
     override fun provideNextTask(): Task? {
         if (currentIndex == theLastIndex) return null
-        val (nextIndex, _) = getNextIndexWithStep(
-            timer.steps,
-            timer.loop,
-            currentIndex
-        )
 
-        val (_, nextStepAfterNext) = getNextIndexWithStep(
-            timer.steps,
-            timer.loop,
-            nextIndex
-        )
+        var nextIndex: TimerIndex = currentIndex
+        do {
+            nextIndex = getNextIndexWithStep(timer.steps, timer.loop, nextIndex).first
+            val skip = timer.shouldSkip(nextIndex)
+            val isLast = nextIndex == theLastIndex
+            when {
+                skip && isLast -> return null
+                skip -> continue
+                else -> break
+            }
+        } while (true)
+
+        val (_, nextStepAfterNext) =
+            getNextIndexWithStep(timer.steps, timer.loop, nextIndex)
 
         currentIndex = nextIndex
         return timer.getStep(nextIndex)?.toTask(

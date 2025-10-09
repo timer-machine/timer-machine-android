@@ -15,7 +15,6 @@ import xyz.aprildown.timer.domain.entities.TimerEntity
 import xyz.aprildown.timer.domain.usecases.timer.FindTimerInfo
 import xyz.aprildown.timer.domain.usecases.timer.GetTimer
 import xyz.aprildown.timer.domain.usecases.timer.SaveTimer
-import xyz.aprildown.timer.domain.utils.AppTracker
 import xyz.aprildown.timer.presentation.BaseViewModel
 import xyz.aprildown.timer.presentation.R
 import xyz.aprildown.timer.presentation.StreamMachineIntentProvider
@@ -39,7 +38,6 @@ class OneViewModel @Inject constructor(
     private val saveTimer: SaveTimer,
     private val findTimerInfo: FindTimerInfo,
     val streamMachineIntentProvider: StreamMachineIntentProvider,
-    private val appTracker: AppTracker,
 ) : BaseViewModel(mainDispatcher), TimerMachineListener {
 
     private var timerId: Int = TimerEntity.NULL_ID
@@ -300,7 +298,7 @@ class OneViewModel @Inject constructor(
         timerCurrentIndex.value = index
 
         timerStepTime = timer.value?.getStep(index)?.length ?: 0L
-        elapsedBaseTime = timer.value?.getTimeBeforeIndex(index, appTracker) ?: 0L
+        elapsedBaseTime = timer.value?.getTimeBeforeIndex(index) ?: 0L
         elapsedCurrentTime.value = 0L
     }
 

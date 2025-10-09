@@ -19,6 +19,7 @@ val BehaviourType.iconRes: Int
         BehaviourType.NOTIFICATION -> RBase.drawable.ic_notification
         BehaviourType.FLASHLIGHT -> RBase.drawable.ic_flashlight
         BehaviourType.IMAGE -> RBase.drawable.ic_image
+        BehaviourType.SKIP -> RBase.drawable.ic_skip
     }
 
 val BehaviourType.nameRes: Int
@@ -35,6 +36,7 @@ val BehaviourType.nameRes: Int
         BehaviourType.NOTIFICATION -> RBase.string.behaviour_notification
         BehaviourType.FLASHLIGHT -> RBase.string.behaviour_flashlight
         BehaviourType.IMAGE -> RBase.string.behaviour_image
+        BehaviourType.SKIP -> RBase.string.behaviour_skip
     }
 
 val BehaviourType.despRes: Int
@@ -51,4 +53,5 @@ val BehaviourType.despRes: Int
         BehaviourType.NOTIFICATION -> RBase.string.behaviour_notification_help
         BehaviourType.FLASHLIGHT -> RBase.string.behaviour_flashlight_help
         BehaviourType.IMAGE -> RBase.string.behaviour_image_help
+        BehaviourType.SKIP -> RBase.string.behaviour_skip_help
     }

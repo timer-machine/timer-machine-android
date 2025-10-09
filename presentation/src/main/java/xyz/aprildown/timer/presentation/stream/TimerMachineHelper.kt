@@ -5,11 +5,12 @@ import android.text.SpannableStringBuilder
 import xyz.aprildown.timer.domain.entities.BehaviourEntity
 import xyz.aprildown.timer.domain.entities.BehaviourType
 import xyz.aprildown.timer.domain.entities.HalfAction
+import xyz.aprildown.timer.domain.entities.SkipAction
 import xyz.aprildown.timer.domain.entities.StepEntity
 import xyz.aprildown.timer.domain.entities.TimerEntity
 import xyz.aprildown.timer.domain.entities.VoiceAction
 import xyz.aprildown.timer.domain.entities.toHalfAction
-import xyz.aprildown.timer.domain.utils.AppTracker
+import xyz.aprildown.timer.domain.entities.toSkipAction
 
 /**
  * The whole work is doubled because we need to check loop index.
@@ -310,6 +311,26 @@ internal fun getPrevIndexWithStep(
 
 // region list getters
 
+private inline fun TimerEntity.forEachStep(
+    block: (index: TimerIndex, group: StepEntity.Group?, step: StepEntity.Step) -> Unit,
+) {
+    var index = getFirstIndex()
+    val lastIndex = getLastIndex()
+    var step = getStep(index)
+    while (step != null) {
+        block(index, getGroup(index), step)
+
+        if (index == lastIndex) break
+
+        index = getNextIndexWithStep(
+            steps = steps,
+            totalLoop = loop,
+            currentIndex = index,
+        ).first
+        step = getStep(index)
+    }
+}
+
 fun List<StepEntity>.getStep(index: TimerIndex.Step): StepEntity.Step? {
     val i = index.stepIndex
     return if (i in indices) this[i] as? StepEntity.Step else null
@@ -373,51 +394,39 @@ fun TimerEntity.getTimerLoop(index: TimerIndex): Int = when (index) {
 }
 
 fun TimerEntity.getTotalTime(): Long {
-    return steps.accumulateTime() * loop + (startStep?.length ?: 0L) + (endStep?.length ?: 0L)
+    var time = 0L
+    forEachStep { index, _, step ->
+        if (!shouldSkip(index)) {
+            time += step.length
+        }
+    }
+    return time
 }
 
-fun TimerEntity.getTimeBeforeIndex(
-    index: TimerIndex,
-    appTracker: AppTracker? = null
+fun TimerEntity.getTimeBeforeIndex(index: TimerIndex): Long {
+    var time = 0L
+    forEachStep { currentIndex, _, step ->
+        if (currentIndex == index) return time
+        if (!shouldSkip(currentIndex)) {
+            time += step.length
+        }
+    }
+    return time
+}
+
+fun List<StepEntity>.accumulateTime(
+    loop: Int,
+    start: StepEntity.Step? = null,
+    end: StepEntity.Step? = null,
 ): Long {
-    return when (index) {
-        TimerIndex.Start -> 0L
-        is TimerIndex.Step ->
-            (startStep?.length ?: 0L) +
-                steps.accumulateTime() * index.loopIndex +
-                steps.subList(0, index.stepIndex).accumulateTime()
-        is TimerIndex.Group -> {
-            when (val step = steps[index.stepIndex]) {
-                is StepEntity.Group -> {
-                    val groupTimeBeforeIndex =
-                        step.steps.accumulateTime() * index.groupStepIndex.loopIndex +
-                            step.steps.subList(0, index.groupStepIndex.stepIndex).accumulateTime()
-                    (startStep?.length ?: 0L) +
-                        steps.accumulateTime() * index.loopIndex +
-                        steps.subList(0, index.stepIndex).accumulateTime() +
-                        groupTimeBeforeIndex
-                }
-                is StepEntity.Step -> {
-                    appTracker?.trackError(IllegalStateException("getTimeBeforeIndex $index -> $this"))
-                    (startStep?.length ?: 0L) +
-                        steps.accumulateTime() * index.loopIndex +
-                        steps.subList(0, index.stepIndex).accumulateTime()
-                }
-            }
-        }
-        TimerIndex.End -> getTotalTime() - (endStep?.length ?: 0L)
-    }
-}
-
-fun List<StepEntity>.accumulateTime(): Long {
-    var total = 0L
-    forEach {
-        total += when (it) {
-            is StepEntity.Step -> it.length
-            is StepEntity.Group -> it.steps.accumulateTime() * it.loop
-        }
-    }
-    return total
+    return TimerEntity(
+        id = TimerEntity.NULL_ID,
+        name = "",
+        loop = loop,
+        steps = this,
+        startStep = start,
+        endStep = end,
+    ).getTotalTime()
 }
 
 // endregion list getters
@@ -901,4 +910,31 @@ fun BehaviourEntity.useTts(): Boolean {
         else -> Unit
     }
     return false
+}
+
+internal fun TimerEntity.shouldSkip(index: TimerIndex): Boolean {
+    return when (index) {
+        TimerIndex.Start -> startStep?.shouldSkip(loopIndex = 0, maxLoop = loop) == true
+        is TimerIndex.Step -> {
+            getStep(index)?.shouldSkip(loopIndex = index.loopIndex, maxLoop = loop) == true
+        }
+        is TimerIndex.Group -> {
+            getStep(index)?.shouldSkip(
+                loopIndex = index.loopIndex,
+                maxLoop = getGroup(index)?.loop ?: 0
+            ) == true
+        }
+        TimerIndex.End -> endStep?.shouldSkip(loopIndex = loop - 1, maxLoop = loop) == true
+    }
+}
+
+internal fun StepEntity.Step.shouldSkip(loopIndex: Int, maxLoop: Int): Boolean {
+    val target =
+        behaviour.find { it.type == BehaviourType.SKIP }?.toSkipAction()?.target
+            ?: return false
+    return when (target) {
+        SkipAction.Target.Last -> loopIndex == maxLoop - 1
+        SkipAction.Target.First -> loopIndex == 0
+        is SkipAction.Target.Loops -> target.loopIndices.any { it == loopIndex }
+    }
 }

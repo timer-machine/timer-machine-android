@@ -26,9 +26,11 @@ package xyz.aprildown.timer.domain.entities
  *     empty for now
  * IMAGE:
  *     str1: The image path
+ * SKIP:
+ *     str1: The loops
  */
 enum class BehaviourType {
-    MUSIC, VIBRATION, SCREEN, HALT, VOICE, BEEP, HALF, COUNT, NOTIFICATION, FLASHLIGHT, IMAGE;
+    MUSIC, VIBRATION, SCREEN, VOICE, HALT, SKIP, BEEP, HALF, COUNT, NOTIFICATION, FLASHLIGHT, IMAGE;
 
     val hasBoolValue: Boolean
         get() = this == MUSIC || this == BEEP
@@ -391,3 +393,47 @@ fun BehaviourEntity.toImageAction(): ImageAction {
 }
 
 // endregion Image
+
+// region Skip
+
+data class SkipAction(val target: Target) : Action {
+    sealed interface Target {
+        data object First : Target
+        data object Last : Target
+        data class Loops(val loopIndices: Set<Int>) : Target {
+            val loopNumbers: List<Int> get() = loopIndices.map { it + 1 }
+        }
+    }
+
+    override fun toBehaviourEntity(): BehaviourEntity {
+        return BehaviourEntity(
+            type = BehaviourType.SKIP,
+            str1 = when (target) {
+                Target.First -> "-1"
+                Target.Last -> "-2"
+                is Target.Loops -> target.loopIndices.joinToString(",")
+            },
+        )
+    }
+}
+
+fun BehaviourEntity.toSkipAction(): SkipAction {
+    require(type == BehaviourType.SKIP)
+    return SkipAction(
+        target = when (str1) {
+            "-1" -> SkipAction.Target.First
+            "-2" -> SkipAction.Target.Last
+            else -> {
+                val loops =
+                    str1.split(",").mapNotNull { it.toIntOrNull() }.toSet()
+                if (loops.isNotEmpty()) {
+                    SkipAction.Target.Loops(loops)
+                } else {
+                    SkipAction.Target.Last
+                }
+            }
+        },
+    )
+}
+
+// endregion Skip

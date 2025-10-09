@@ -68,6 +68,7 @@ import xyz.aprildown.timer.domain.entities.toImageAction
 import xyz.aprildown.timer.domain.entities.toMusicAction
 import xyz.aprildown.timer.domain.entities.toNotificationAction
 import xyz.aprildown.timer.domain.entities.toScreenAction
+import xyz.aprildown.timer.domain.entities.toSkipAction
 import xyz.aprildown.timer.domain.entities.toVibrationAction
 import xyz.aprildown.timer.domain.entities.toVoiceAction
 import xyz.aprildown.timer.domain.usecases.Fruit
@@ -811,13 +812,28 @@ class EditActivity :
                         onPick = { onImageAdd(position) },
                     )
                 }
+                BehaviourType.SKIP -> {
+                    addSkipItems(
+                        context = this@EditActivity,
+                        action = current.toSkipAction(),
+                        onLoopsChange = { target ->
+                            changeBehaviour(BehaviourType.SKIP, position) {
+                                it.toSkipAction().copy(target = target).toBehaviourEntity()
+                            }
+                            postUpdateTotalTime()
+                        },
+                    )
+                }
                 else -> Unit
             }
             section {
                 item {
                     label = getString(RBase.string.delete)
                     icon = RBase.drawable.ic_delete
-                    callback = { layout.removeBehaviour(type) }
+                    callback = {
+                        layout.removeBehaviour(type)
+                        postUpdateTotalTime()
+                    }
                 }
             }
         }.show(this, view)
@@ -881,6 +897,12 @@ class EditActivity :
         }
     }
 
+    override fun onBehaviourAdded(type: BehaviourType) {
+        if (type == BehaviourType.SKIP) {
+            postUpdateTotalTime()
+        }
+    }
+
     override fun onImageAdd(position: Int) {
         viewModel.imagePosition = position
         pickImageLauncher.launch(
@@ -905,7 +927,7 @@ class EditActivity :
         Runnable {
             val internalSteps = getStepEntityFromFastAdapter(
                 doOnGroup = { group, steps ->
-                    group.totalTime = steps.accumulateTime() * group.loop
+                    group.totalTime = steps.accumulateTime(loop = group.loop)
                     fastAdapter.notifyItemChanged(
                         fastAdapter.getPosition(group),
                         EditableGroup.TotalTimeChanged
@@ -915,9 +937,11 @@ class EditActivity :
             val startStep = startAdapter.getSingleStepFromAdapter()
             val endStep = endAdapter.getSingleStepFromAdapter()
             binding.viewEditStepInfo.setDuration(
-                (startStep?.length ?: 0) +
-                    internalSteps.accumulateTime() * (viewModel.loop.value ?: 1) +
-                    (endStep?.length ?: 0)
+                internalSteps.accumulateTime(
+                    loop = viewModel.loop.value ?: 1,
+                    start = startStep,
+                    end = endStep,
+                )
             )
         }
     }

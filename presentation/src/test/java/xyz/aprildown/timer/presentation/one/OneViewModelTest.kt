@@ -55,8 +55,7 @@ class OneViewModelTest {
             GetTimer(dispatcher, timerRepository),
             SaveTimer(dispatcher, timerRepository, appDataRepository),
             FindTimerInfo(dispatcher, timerRepository),
-            intentProvider,
-            mock()
+            intentProvider
         )
         viewModel.timer.observeForever(timerObserver)
         viewModel.editTimerEvent.observeForever(editTimerObserver)

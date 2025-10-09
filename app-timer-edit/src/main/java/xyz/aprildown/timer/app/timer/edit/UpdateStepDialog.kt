@@ -35,6 +35,7 @@ import xyz.aprildown.timer.domain.entities.toImageAction
 import xyz.aprildown.timer.domain.entities.toMusicAction
 import xyz.aprildown.timer.domain.entities.toNotificationAction
 import xyz.aprildown.timer.domain.entities.toScreenAction
+import xyz.aprildown.timer.domain.entities.toSkipAction
 import xyz.aprildown.timer.domain.entities.toVibrationAction
 import xyz.aprildown.timer.domain.entities.toVoiceAction
 import xyz.aprildown.timer.domain.utils.AppTracker
@@ -300,6 +301,17 @@ class UpdateStepDialog :
                 }
                 BehaviourType.IMAGE -> {
                     addImageItems(context = context, onPick = ::onImageAdding)
+                }
+                BehaviourType.SKIP -> {
+                    addSkipItems(
+                        context = context,
+                        action = current.toSkipAction(),
+                        onLoopsChange = { target ->
+                            changeBehaviour(BehaviourType.SKIP) {
+                                it.toSkipAction().copy(target = target).toBehaviourEntity()
+                            }
+                        },
+                    )
                 }
                 else -> Unit
             }

@@ -4,6 +4,7 @@ import org.junit.Assert.assertEquals
 import org.junit.Assert.assertNull
 import org.junit.Test
 import xyz.aprildown.timer.domain.TestData
+import xyz.aprildown.timer.domain.entities.SkipAction
 import xyz.aprildown.timer.domain.entities.StepEntity
 
 class TimerMachineHelperKtTest {
@@ -549,7 +550,7 @@ class TimerMachineHelperKtTest {
         assertEquals(
             timer.startStep!!.length +
                 (steps[0] as StepEntity.Step).length +
-                (steps[1] as StepEntity.Group).let { it.steps.accumulateTime() * it.loop },
+                (steps[1] as StepEntity.Group).let { it.steps.accumulateTime(it.loop) },
             timer.getTimeBeforeIndex(TimerIndex.Step(loopIndex = 0, stepIndex = 2))
         )
     }
@@ -561,10 +562,48 @@ class TimerMachineHelperKtTest {
         assertEquals(
             timer.startStep!!.length +
                 (steps[0] as StepEntity.Step).length +
-                (steps[1] as StepEntity.Group).let { it.steps.accumulateTime() * it.loop } +
+                (steps[1] as StepEntity.Group).let { it.steps.accumulateTime(it.loop) } +
                 (steps[2] as StepEntity.Step).length +
                 (steps[3] as StepEntity.Step).length,
-            timer.getTimeBeforeIndex(TimerIndex.Step(loopIndex = 0, stepIndex = 4))
+            timer.getTimeBeforeIndex(
+                TimerIndex.Group(
+                    loopIndex = 0,
+                    stepIndex = 4,
+                    groupStepIndex = TimerIndex.Step(loopIndex = 0, stepIndex = 0),
+                )
+            )
+        )
+    }
+
+    @Test
+    fun `time before loop 0 step 4 but skip`() {
+        var timer = TestData.fakeTimerAdvanced
+        val steps = timer.steps
+        timer = timer.copy(
+            steps = steps.mapIndexed { index, step ->
+                if (index == 2) {
+                    val s = step as StepEntity.Step
+                    s.copy(
+                        behaviour = s.behaviour + SkipAction(SkipAction.Target.Loops(setOf(0)))
+                            .toBehaviourEntity(),
+                    )
+                } else {
+                    step
+                }
+            }
+        )
+        assertEquals(
+            timer.startStep!!.length +
+                (steps[0] as StepEntity.Step).length +
+                (steps[1] as StepEntity.Group).let { it.steps.accumulateTime(it.loop) } +
+                (steps[3] as StepEntity.Step).length,
+            timer.getTimeBeforeIndex(
+                TimerIndex.Group(
+                    loopIndex = 0,
+                    stepIndex = 4,
+                    groupStepIndex = TimerIndex.Step(loopIndex = 0, stepIndex = 0),
+                )
+            )
         )
     }
 
@@ -572,7 +611,7 @@ class TimerMachineHelperKtTest {
     fun `time before loop 1 step 0`() {
         val timer = TestData.fakeTimerAdvanced
         assertEquals(
-            timer.startStep!!.length + timer.steps.accumulateTime(),
+            timer.startStep!!.length + timer.steps.accumulateTime(1),
             timer.getTimeBeforeIndex(TimerIndex.Step(loopIndex = 1, stepIndex = 0))
         )
     }
@@ -582,7 +621,7 @@ class TimerMachineHelperKtTest {
         val timer = TestData.fakeTimerAdvanced
         assertEquals(
             timer.startStep!!.length +
-                timer.steps.accumulateTime() * (timer.loop - 1),
+                timer.steps.accumulateTime(timer.loop - 1),
             timer.getTimeBeforeIndex(TimerIndex.Step(loopIndex = timer.loop - 1, stepIndex = 0))
         )
     }
@@ -594,9 +633,9 @@ class TimerMachineHelperKtTest {
         val groupSteps = TestData.fakeStepD.steps
         assertEquals(
             timer.startStep!!.length +
-                steps.accumulateTime() * 2 +
+                steps.accumulateTime(2) +
                 (steps[0] as StepEntity.Step).length +
-                groupSteps.accumulateTime() +
+                groupSteps.accumulateTime(1) +
                 (groupSteps[0] as StepEntity.Step).length,
             timer.getTimeBeforeIndex(
                 TimerIndex.Group(
@@ -616,12 +655,12 @@ class TimerMachineHelperKtTest {
         val groupSteps = group.steps
         assertEquals(
             timer.startStep!!.length +
-                steps.accumulateTime() * 3 +
+                steps.accumulateTime(3) +
                 (steps[0] as StepEntity.Step).length +
-                groupSteps.accumulateTime() * group.loop +
+                groupSteps.accumulateTime(group.loop) +
                 (steps[2] as StepEntity.Step).length +
                 (steps[3] as StepEntity.Step).length +
-                groupSteps.accumulateTime() +
+                groupSteps.accumulateTime(1) +
                 (groupSteps[0] as StepEntity.Step).length +
                 (groupSteps[1] as StepEntity.Step).length,
             timer.getTimeBeforeIndex(

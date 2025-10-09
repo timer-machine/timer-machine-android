@@ -5,12 +5,14 @@ import xyz.aprildown.timer.domain.entities.BehaviourEntity
 import xyz.aprildown.timer.domain.entities.BehaviourType
 import xyz.aprildown.timer.domain.entities.CountAction
 import xyz.aprildown.timer.domain.entities.HalfAction
+import xyz.aprildown.timer.domain.entities.SkipAction
 import xyz.aprildown.timer.domain.entities.VibrationAction
 import xyz.aprildown.timer.domain.entities.toBeepAction
 import xyz.aprildown.timer.domain.entities.toCountAction
 import xyz.aprildown.timer.domain.entities.toHalfAction
 import xyz.aprildown.timer.domain.entities.toMusicAction
 import xyz.aprildown.timer.domain.entities.toNotificationAction
+import xyz.aprildown.timer.domain.entities.toSkipAction
 import xyz.aprildown.timer.domain.entities.toVibrationAction
 import xyz.aprildown.timer.domain.entities.toVoiceAction
 import xyz.aprildown.timer.app.base.R as RBase
@@ -73,6 +75,25 @@ internal fun BehaviourEntity.getChipText(context: Context): String {
         BehaviourType.NOTIFICATION -> {
             val duration = toNotificationAction().duration
             if (duration != 0) "${getDefaultName()} $duration" else null
+        }
+        BehaviourType.SKIP -> {
+            buildString {
+                append(getDefaultName())
+                append(" ")
+                append(
+                    when (val target = toSkipAction().target) {
+                        SkipAction.Target.First -> {
+                            context.getString(RBase.string.behaviour_skip_first)
+                        }
+                        SkipAction.Target.Last -> {
+                            context.getString(RBase.string.behaviour_skip_last)
+                        }
+                        is SkipAction.Target.Loops -> {
+                            target.loopNumbers.joinToString()
+                        }
+                    }
+                )
+            }
         }
         else -> null
     } ?: getDefaultName()

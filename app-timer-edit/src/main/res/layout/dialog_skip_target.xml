@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:paddingTop="8dp">
+
+    <FrameLayout
+        android:id="@+id/layoutFirst"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingStart="20dp"
+        android:paddingEnd="20dp">
+
+        <RadioButton
+            android:id="@+id/radioFirst"
+            android:layout_width="match_parent"
+            android:layout_height="?listPreferredItemHeightSmall"
+            android:gravity="center_vertical"
+            android:paddingStart="20dp"
+            android:paddingEnd="0dp"
+            android:text="@string/behaviour_skip_first"
+            android:textAppearance="?android:textAppearanceMedium"
+            android:textColor="?textColorAlertDialogListItem" />
+
+    </FrameLayout>
+
+    <FrameLayout
+        android:id="@+id/layoutLast"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingStart="20dp"
+        android:paddingEnd="20dp">
+
+        <RadioButton
+            android:id="@+id/radioLast"
+            android:layout_width="match_parent"
+            android:layout_height="?listPreferredItemHeightSmall"
+            android:gravity="center_vertical"
+            android:paddingStart="20dp"
+            android:paddingEnd="0dp"
+            android:text="@string/behaviour_skip_last"
+            android:textAppearance="?android:textAppearanceMedium"
+            android:textColor="?textColorAlertDialogListItem" />
+
+    </FrameLayout>
+
+    <LinearLayout
+        android:id="@+id/layoutLoops"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingStart="20dp"
+        android:paddingEnd="20dp">
+
+        <RadioButton
+            android:id="@+id/radioLoops"
+            android:layout_width="wrap_content"
+            android:layout_height="?listPreferredItemHeightSmall"
+            android:gravity="center_vertical"
+            android:paddingStart="20dp"
+            android:paddingEnd="0dp" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/textInput"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/behaviour_skip_loops">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/edit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="1 2 3"
+                android:imeOptions="actionDone"
+                android:importantForAutofill="no"
+                android:inputType="number|text"
+                android:selectAllOnFocus="true"
+                tools:ignore="HardcodedText" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+    </LinearLayout>
+
+</LinearLayout>

@@ -45,6 +45,9 @@ class EditableBehaviourLayout(
         )
 
         @EmptySuper
+        fun onBehaviourAdded(type: BehaviourType): Unit = Unit
+
+        @EmptySuper
         fun onImageAdding(): Unit = Unit
 
         @EmptySuper
@@ -93,6 +96,7 @@ class EditableBehaviourLayout(
                                     } else {
                                         addStubBehaviour(BehaviourEntity(type), true)
                                     }
+                                    listener?.onBehaviourAdded(type)
                                 }
                             }
                         }

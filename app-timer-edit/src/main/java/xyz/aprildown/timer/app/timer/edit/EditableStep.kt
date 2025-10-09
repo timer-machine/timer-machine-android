@@ -22,6 +22,7 @@ import xyz.aprildown.timer.app.base.utils.setTime
 import xyz.aprildown.timer.component.key.RoundTextView
 import xyz.aprildown.timer.component.key.behaviour.EditableBehaviourLayout
 import xyz.aprildown.timer.domain.entities.BehaviourEntity
+import xyz.aprildown.timer.domain.entities.BehaviourType
 import xyz.aprildown.timer.domain.entities.ImageAction
 import xyz.aprildown.timer.domain.entities.StepType
 import xyz.aprildown.timer.app.base.R as RBase
@@ -58,6 +59,8 @@ class EditableStep(
             current: BehaviourEntity,
             position: Int
         )
+
+        fun onBehaviourAdded(type: BehaviourType)
 
         fun onImageAdd(position: Int)
         fun onImageCheck(position: Int, action: ImageAction)
@@ -125,6 +128,10 @@ class EditableStep(
 
                     override fun onImageAdding() {
                         handler.onImageAdd(bindingAdapterPosition)
+                    }
+
+                    override fun onBehaviourAdded(type: BehaviourType) {
+                        handler.onBehaviourAdded(type)
                     }
 
                     override fun onImageContentClick(action: ImageAction) {

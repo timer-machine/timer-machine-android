@@ -280,6 +280,12 @@
 
     <string name="image_pick">Pick an image</string>
 
+    <string name="behaviour_skip">Skip</string>
+    <string name="behaviour_skip_help">Skip this step in some loops</string>
+    <string name="behaviour_skip_first">In the first loop</string>
+    <string name="behaviour_skip_last">In the last loop</string>
+    <string name="behaviour_skip_loops">Loops</string>
+
     <!--Sample timers strings-->
     <string name="sample_timer_template_title">Timer Template</string>
     <string name="sample_timer_template_prepare">Prepare</string>

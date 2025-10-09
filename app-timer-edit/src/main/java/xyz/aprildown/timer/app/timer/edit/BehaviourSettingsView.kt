@@ -17,6 +17,7 @@ import xyz.aprildown.timer.app.base.data.PreferenceData.useVoiceContent2
 import xyz.aprildown.timer.app.base.media.getMediaDuration
 import xyz.aprildown.timer.app.timer.edit.media.BeepDialog
 import xyz.aprildown.timer.app.timer.edit.media.HalfDialog
+import xyz.aprildown.timer.app.timer.edit.media.SkipDialog
 import xyz.aprildown.timer.app.timer.edit.media.VibrationDialog
 import xyz.aprildown.timer.app.timer.edit.media.VoiceDialog
 import xyz.aprildown.timer.app.timer.edit.voice.VoiceVariableDialog
@@ -29,6 +30,7 @@ import xyz.aprildown.timer.domain.entities.HalfAction
 import xyz.aprildown.timer.domain.entities.MusicAction
 import xyz.aprildown.timer.domain.entities.NotificationAction
 import xyz.aprildown.timer.domain.entities.ScreenAction
+import xyz.aprildown.timer.domain.entities.SkipAction
 import xyz.aprildown.timer.domain.entities.VibrationAction
 import xyz.aprildown.timer.domain.entities.VoiceAction
 import xyz.aprildown.timer.domain.utils.Constants
@@ -330,6 +332,40 @@ internal fun MaterialPopupMenuBuilder.addImageItems(
         item {
             label = context.getString(RBase.string.image_pick)
             callback = onPick
+        }
+    }
+}
+
+internal fun MaterialPopupMenuBuilder.addSkipItems(
+    context: Context,
+    action: SkipAction,
+    onLoopsChange: (SkipAction.Target) -> Unit,
+) {
+    section {
+        item {
+            label = buildString {
+                append(context.getString(RBase.string.behaviour_skip_loops))
+                append(": ")
+                append(
+                    when (val target = action.target) {
+                        SkipAction.Target.First -> {
+                            context.getString(RBase.string.behaviour_skip_first)
+                        }
+                        SkipAction.Target.Last -> {
+                            context.getString(RBase.string.behaviour_skip_last)
+                        }
+                        is SkipAction.Target.Loops -> {
+                            target.loopNumbers.joinToString()
+                        }
+                    }
+                )
+            }
+            callback = {
+                SkipDialog(context).showTargetDialog(
+                    oldTarget = action.target,
+                    func = onLoopsChange,
+                )
+            }
         }
     }
 }
