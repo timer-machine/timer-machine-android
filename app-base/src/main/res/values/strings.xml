@@ -277,14 +277,12 @@
 
     <string name="behaviour_image">Image</string>
     <string name="behaviour_image_help">Attach an image for the step</string>
-
     <string name="image_pick">Pick an image</string>
 
     <string name="behaviour_skip">Skip</string>
     <string name="behaviour_skip_help">Skip this step in some loops</string>
-    <string name="behaviour_skip_first">In the first loop</string>
-    <string name="behaviour_skip_last">In the last loop</string>
-    <string name="behaviour_skip_loops">Loops</string>
+    <string name="skip_first">In the first loop</string>
+    <string name="skip_last">In the last loop</string>
 
     <!--Sample timers strings-->
     <string name="sample_timer_template_title">Timer Template</string>

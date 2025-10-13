@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -20,7 +21,7 @@
             android:gravity="center_vertical"
             android:paddingStart="20dp"
             android:paddingEnd="0dp"
-            android:text="@string/behaviour_skip_first"
+            android:text="@string/skip_first"
             android:textAppearance="?android:textAppearanceMedium"
             android:textColor="?textColorAlertDialogListItem" />
 
@@ -40,7 +41,7 @@
             android:gravity="center_vertical"
             android:paddingStart="20dp"
             android:paddingEnd="0dp"
-            android:text="@string/behaviour_skip_last"
+            android:text="@string/skip_last"
             android:textAppearance="?android:textAppearanceMedium"
             android:textColor="?textColorAlertDialogListItem" />
 
@@ -68,13 +69,13 @@
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/behaviour_skip_loops">
+            android:hint="@string/name_loop_loop_hint"
+            app:placeholderText="0 1 2">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/edit"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="1 2 3"
                 android:imeOptions="actionDone"
                 android:importantForAutofill="no"
                 android:inputType="number|text"

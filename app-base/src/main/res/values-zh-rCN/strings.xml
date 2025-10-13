@@ -223,6 +223,10 @@
     <string name="behaviour_image">图片</string>
     <string name="behaviour_image_help">为该步骤附加一张图片</string>
     <string name="image_pick">选择图片</string>
+    <string name="behaviour_skip">跳过</string>
+    <string name="behaviour_skip_help">在某些循环中跳过此步骤</string>
+    <string name="skip_first">在首次循环中</string>
+    <string name="skip_last">在末次循环中</string>
     <!--Sample timers strings-->
     <string name="sample_timer_template_title">计时器模板</string>
     <string name="sample_timer_template_prepare">准备</string>

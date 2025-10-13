@@ -344,15 +344,15 @@ internal fun MaterialPopupMenuBuilder.addSkipItems(
     section {
         item {
             label = buildString {
-                append(context.getString(RBase.string.behaviour_skip_loops))
+                append(context.getString(RBase.string.name_loop_loop_hint))
                 append(": ")
                 append(
                     when (val target = action.target) {
                         SkipAction.Target.First -> {
-                            context.getString(RBase.string.behaviour_skip_first)
+                            context.getString(RBase.string.skip_first)
                         }
                         SkipAction.Target.Last -> {
-                            context.getString(RBase.string.behaviour_skip_last)
+                            context.getString(RBase.string.skip_last)
                         }
                         is SkipAction.Target.Loops -> {
                             target.loopNumbers.joinToString()

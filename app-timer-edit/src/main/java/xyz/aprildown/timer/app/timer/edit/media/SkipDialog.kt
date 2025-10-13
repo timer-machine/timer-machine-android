@@ -12,7 +12,7 @@ import xyz.aprildown.timer.app.base.R as RBase
 internal class SkipDialog(private val context: Context) {
     fun showTargetDialog(oldTarget: SkipAction.Target, func: (SkipAction.Target) -> Unit) {
         val builder = MaterialAlertDialogBuilder(context)
-            .setTitle(RBase.string.behaviour_skip_loops)
+            .setTitle(RBase.string.name_loop_loop_hint)
             .setPositiveButton(RBase.string.ok, null)
             .setNegativeButton(RBase.string.cancel, null)
 

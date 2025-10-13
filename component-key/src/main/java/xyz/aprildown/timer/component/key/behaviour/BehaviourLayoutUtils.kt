@@ -83,10 +83,10 @@ internal fun BehaviourEntity.getChipText(context: Context): String {
                 append(
                     when (val target = toSkipAction().target) {
                         SkipAction.Target.First -> {
-                            context.getString(RBase.string.behaviour_skip_first)
+                            context.getString(RBase.string.skip_first)
                         }
                         SkipAction.Target.Last -> {
-                            context.getString(RBase.string.behaviour_skip_last)
+                            context.getString(RBase.string.skip_last)
                         }
                         is SkipAction.Target.Loops -> {
                             target.loopNumbers.joinToString()
