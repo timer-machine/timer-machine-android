@@ -616,4 +616,8 @@
     <string name="behaviour_image_help">Voeg een afbeelding bij de stap</string>
     <string name="image_pick">Kies een afbeelding</string>
     <string name="music_trim_step_duration">Stap duur inkorten</string>
+    <string name="behaviour_skip">Overslaan</string>
+    <string name="behaviour_skip_help">Deze stap bij enkele lussen overslaan</string>
+    <string name="skip_first">Bij de eerste lus</string>
+    <string name="skip_last">Bij de laatste lus</string>
 </resources>
