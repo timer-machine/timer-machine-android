@@ -49,7 +49,7 @@
     <string name="about_source_code">Code source</string>
     <string name="about_developer">Développeur</string>
     <string name="about_more_apps_from_me">D\'autres applis faites par moi</string>
-    <string name="whitelist_location">Vous pouvez trouver le guide de la liste blanche dans « Aide et remarques ».</string>
+    <string name="whitelist_location">Vous pouvez trouver les recommandations pour la liste blanche dans « Aide et remarques ».</string>
     <string name="billing_help_email_title">Problème de facturation de TimeR Machine</string>
     <string name="help_feedback_desp">Envoyez un courriel et recevez une réponse dans les 24 heures</string>
     <string name="terms_of_service">Conditions</string>
@@ -59,8 +59,8 @@
     <string name="main_action_help">Aide et remarques</string>
     <string name="main_action_settings">Paramètres</string>
     <string name="intro_location">Vous pouvez trouver le tutoriel dans « Aide et remarques »</string>
-    <string name="pref_category_notif">Notifications</string>
-    <string name="pref_audio_focus_type_title">Type de mise au point audio</string>
+    <string name="pref_category_notif">Notifications Android</string>
+    <string name="pref_audio_focus_type_title">Interaction avec les autres sons</string>
     <string name="pref_open_notif_setting">Ouvrir les paramètres de notification</string>
     <string name="account_delete">Supprimer le compte et toutes les sauvegardes</string>
     <string name="account_delete_confirmation_title">Supprimer le compte et toutes les données sauvegardées ?</string>
@@ -394,11 +394,11 @@
     <string name="import_restart_content">Redémarrer l\'application pour prendre en compte les changements ?</string>
     <string name="import_restart">Redémarrer</string>
     <string name="help_tutorial">Tutoriel</string>
-    <string name="help_tutorial_desp">Démarrer ici</string>
+    <string name="help_tutorial_desp">Démarrez ici</string>
     <string name="help_tips_tricks">Trucs et astuces</string>
     <string name="help_tips_tricks_desp">Obtenez le meilleur de cette application</string>
-    <string name="help_whitelist">Guide pour la liste approuvée</string>
-    <string name="help_whitelist_desp">Empêcher les fabricants de téléphones de tuer cette app pendant qu\'elle s\'exécute</string>
+    <string name="help_whitelist">Recommandations pour la liste blanche</string>
+    <string name="help_whitelist_desp">Empêchez les fabricants de téléphones de tuer cette appli pendant qu\'elle s\'exécute</string>
     <string name="help_tts">Configuration de la synthèse vocale</string>
     <string name="help_tts_desp">La parole et les comptes à rebours dépendent de cela</string>
     <string name="help_tts_test_read_content">Cliquer ici pour essayer de convertir ce texte en parole</string>
@@ -407,7 +407,7 @@
     <string name="help_tts_test_instruction">Non. Je voudrais voir les instructions</string>
     <string name="help_tts_test_system_settings">Non. Je voudrais vérifier les paramètres système</string>
     <string name="help_qa">Questions fréquentes</string>
-    <string name="help_feedback">Retours sur l\'application</string>
+    <string name="help_feedback">Vos retours sur l\'application</string>
     <string name="dark_theme_title">Activation du mode sombre</string>
     <string name="dark_theme_manual">Manuellement</string>
     <string name="dark_theme_scheduled">Selon l\'heure</string>
@@ -417,11 +417,11 @@
     <string name="dark_theme_battery_saver">Selon l\'économiseur de batterie</string>
     <string name="dark_theme_scheduled_dark_now">Bascule vers le mode sombre</string>
     <string name="dark_theme_scheduled_light_now">Bascule vers le mode clair</string>
-    <string name="tweak_time_title">Ajustement des paramètres d\'heure</string>
+    <string name="tweak_time_title">Ajustement de la durée en cours d\'étape</string>
     <string name="tweak_time_main_title">Boutons principaux</string>
     <string name="tweak_time_overflow_title">Boutons en débordement</string>
     <string name="pref_category_title_app">Paramètres de l\'application</string>
-    <string name="pref_category_title_timer_setting">Paramètres du minuteur</string>
+    <string name="pref_category_title_timer_setting">Paramètres des minuteurs</string>
     <string name="pref_screen_title">Luminosité de l\'écran</string>
     <string name="pref_screen_title_on">Conserver l\'écran allumé</string>
     <string name="pref_screen_title_dim">Estomper l\'écran</string>
@@ -483,7 +483,7 @@
     <string name="beep_count_intro_0_meaning">0 pour conserver les bips jusqu\'à la fin de l\'étape</string>
     <string name="beep_sound">Son du bip</string>
     <string name="beep_respect_other">Respect des autres sons</string>
-    <string name="pref_tweak_time_title">Ajustement avancé du temps</string>
+    <string name="pref_tweak_time_title">Ajustement avancé de la durée d\'étape</string>
     <string name="pref_tweak_time_on">Activé</string>
     <string name="pref_tweak_time_off">Désactivé</string>
     <string name="settings_floating_window_pip">Fenêtre flottante et PiP</string>
@@ -516,7 +516,7 @@
     <string name="pref_reminder_baked_count_on">Activé</string>
     <string name="pref_reminder_baked_count_off">Désactivé</string>
     <string name="pref_reminder_baked_count_downloading">Téléchargement de ressources…</string>
-    <string name="pref_category_title_scheduler_setting">Paramètres de planificateurs</string>
+    <string name="pref_category_title_scheduler_setting">Paramètres des planificateurs</string>
     <string name="pref_audio_focus_title_pause">Mettre en pause les autres sons</string>
     <string name="pref_audio_focus_title_stop">Arrêter les autres sons</string>
     <string name="pref_audio_focus_title_lower">Assourdir les autres sons</string>
@@ -547,7 +547,7 @@
     <string name="intro_start_timer_done">La mise en place est terminée ! Cliquez sur ✔ en haut de l\'écran pour <b>enregistrer le minuteur</b>.</string>
     <string name="intro_start_run_timer"><b>Cliquez sur le minuteur</b> pour aller à l\'écran d\'exécution.</string>
     <string name="intro_start_timer_time">Cette partie montre <b>le temps restant</b>, le nombre de répétitions restantes et le bouton d\'ajustement de la durée.</string>
-    <string name="intro_start_timer_steps">Cette partie montre <b>La liste des étapes</b> et met en valeur <b>l\'étape en train de s\'exécuter</b>.</string>
+    <string name="intro_start_timer_steps">Cette partie montre <b>la liste des étapes</b> et met en valeur <b>l\'étape en train de s\'exécuter</b>.</string>
     <string name="intro_start_timer_buttons">Ceci est le panneau de contrôle. Il contient <b>Arrêter, Étape précédente, Démarrer/Pause, Étape suivante</b> et bien d\'autres options.</string>
     <string name="intro_start_finish"><b>Félicitations ! Vous avez fini ce tutoriel.</b></string>
     <string name="intro_start_edit_behaviour">Le clic vous permet de modifier le rappel. Pour l\'instant, veuillez d\'abord terminer le tutoriel</string>
@@ -556,13 +556,13 @@
     <string name="intro_exit_confirmation">Sortir du tutoriel ?</string>
     <string name="intro_exit_difficult_app_alert">Sans terminer le tutoriel, l\'utilisation de l\'appli pourrait être déroutante.</string>
     <string name="intro_exit_previous_hint">Pour retourner à l\'étape précédente, cliquer sur la <b>flèche à gauche</b> en bas de l\'écran.</string>
-    <string name="tip_missed_timer"><b>Certains minuteurs sont arrêtés anormalement !</b>\n\nC\'est probablement parce que le système tue les applis en tâche de fond. <b>Pour résoudre ce problème, veuillez envisager d\'ajouter cette appli à la liste des applis approuvées, dans les paramètres systèmes.</b></string>
+    <string name="tip_missed_timer"><b>Certains minuteurs sont arrêtés anormalement !</b>\n\nC\'est probablement parce que le système tue les applis en tâche de fond. <b>Pour résoudre ce problème, veuillez envisager d\'ajouter cette appli à la liste blanche des applis approuvées, dans les paramètres systèmes.</b></string>
     <string name="update_title">Journal des modifications</string>
     <string name="tasker_edit_title">TimeR Machine Plugin</string>
     <string name="tasker_event_timer_starts">Déclenchement lorsque %s démarre</string>
     <string name="tasker_event_timer_stops">Déclenchement lorsque %s s\'arrête</string>
-    <string name="whitelist_disclaimer"><b>Plusieurs fabricants d\'appareils Android pourraient tuer les applications en cours lorsque l\'écran s’éteint ou lors de la bascule vers une autre appli</b>, ce qui est un problème Android tristement célèbre.\n\nCette appli fait de son mieux pour rendre le service correctement, mais il y a toujours un risque d\'échec.\n\n<b>Merci d\'ajouter cette appli à la liste des applis approuvées dans les paramètres système</b>.</string>
-    <string name="whitelist_disclaimer_yes">Consulter les recommandations pour l\'ajout à la liste des applications approuvées</string>
+    <string name="whitelist_disclaimer"><b>Plusieurs fabricants d\'appareils Android pourraient tuer les applications en cours lorsque l\'écran s’éteint ou lors de la bascule vers une autre appli</b>, ce qui est un problème Android tristement célèbre.\n\nCette appli fait de son mieux pour rendre le service correctement, mais il y a toujours un risque d\'échec.\n\n<b>Merci d\'ajouter cette appli à la liste blanche des applis approuvées dans les paramètres système</b>.</string>
+    <string name="whitelist_disclaimer_yes">Consulter les recommandations pour l\'ajout à la liste blanche des applications approuvées</string>
     <string name="whitelist_disclaimer_no">Non, je comprends les conséquences</string>
     <string name="whitelist_disclaimer_no_confirmation">Passer les recommandations ?</string>
     <string name="whitelist_don_t_kill_desp">Un site web qui propose plusieurs solutions</string>
@@ -605,4 +605,5 @@
     <string name="billing_help_contact">Contact</string>
     <string name="whitelist_intro">La plupart des fabricants d\'appareils Android ferment par la force les applications qui s\'exécutent en tâche de fond, ce qui empêche ces applis de vous avertir comme elles le doivent.\n\nVeuillez autoriser le lancement au démarrage du téléphone, ainsi que l\'exécution en tâche de fond, désactivez l\'optimisation de la batterie, etc dans les paramètres.\n\nVoici quelques instructions :</string>
     <string name="pref_screen_timing_title">Gestion de la luminosité</string>
+    <string name="pref_media_style_notification">Notifications avec icônes d\'action</string>
 </resources>
