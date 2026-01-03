@@ -79,7 +79,7 @@
         <item quantity="many">%1$s de minuteurs</item>
         <item quantity="other">%1$s minuteurs</item>
     </plurals>
-    <string name="timer_pick_required">Cliquer ici pour choisir un minuteur</string>
+    <string name="timer_pick_required">Cliquez ici pour choisir un minuteur</string>
     <string name="timer_pick_hint">Choisir un minuteur</string>
     <string name="trash_done_template">%s mis à la corbeille</string>
     <string name="main_action_record">Statistiques</string>
@@ -171,12 +171,12 @@
     <string name="half_option_vibration">Vibration</string>
     <string name="half_option_vibration_desp">Motif normal, deux fois</string>
     <string name="half_content">Moitié du temps</string>
-    <string name="behaviour_count">Nombre</string>
-    <string name="behaviour_count_help">Compte à rebours les dernières secondes</string>
+    <string name="behaviour_count">Compte à rebours</string>
+    <string name="behaviour_count_help">Compte à rebours des dernières secondes de l\'étape</string>
     <string name="count_times">Nombre</string>
     <string name="count_times_desp">* Indiquer le nombre de secondes à compter à rebours à la fin de l\'étape</string>
     <string name="behaviour_notification">Notification</string>
-    <string name="behaviour_notification_help">Montrer une autre notification au début de l\'étape</string>
+    <string name="behaviour_notification_help">Affiche une notification Android</string>
     <string name="notification_duration">Durée</string>
     <string name="notification_duration_desp_usage">Indiquer le nombre de secondes avant que la notification ne soit automatiquement masquée</string>
     <string name="notification_duration_desp_0_meaning">0 pour ne pas masquer automatiquement</string>
@@ -184,10 +184,10 @@
     <string name="behaviour_flashlight">Lampe du flash</string>
     <string name="behaviour_flashlight_help">Fait clignoter la lampe du flash</string>
     <string name="behaviour_image">Image</string>
-    <string name="behaviour_image_help">Lier une image à cette étape</string>
+    <string name="behaviour_image_help">Associe une image à cette étape</string>
     <string name="image_pick">Choisir une image</string>
     <string name="behaviour_skip">Passer</string>
-    <string name="behaviour_skip_help">Passer cette étape lors de certaines répétitions</string>
+    <string name="behaviour_skip_help">Ignore cette étape lors de certaines répétitions</string>
     <string name="skip_first">Première répétition</string>
     <string name="skip_last">Dernière répétition</string>
     <string name="sample_timer_template_title">Modèle de minuteur</string>
@@ -430,9 +430,9 @@
     <string name="edit_more_show_notif">Afficher la notification des minuteurs</string>
     <string name="edit_more_notif_count">Afficher le temps restant dans la notification</string>
     <string name="edit_more_trigger">Après la fin du minuteur, démarrer</string>
-    <string name="behaviour_halt_help">Transforme l\'étape en chronomètre : le temps est compté sans limite, jusqu\'à ce que vous passiez manuellement à l\'étape suivante</string>
+    <string name="behaviour_halt_help">Transforme l\'étape en chronomètre : le temps est compté sans limite, jusqu\'à ce que vous passiez manuellement à l\'étape suivante.\nLes rappels \"Moitié\" et \"Compte à rebours\" sont ignorés</string>
     <string name="behaviour_voice">Parole</string>
-    <string name="behaviour_voice_help">Lis le nom de cette étape</string>
+    <string name="behaviour_voice_help">Lit le nom de cette étape</string>
     <string name="voice_content_title">Texte parlé</string>
     <string name="voice_content_info_empty">* Si le champ reste vide, le nom de l\'étape sera lu.</string>
     <string name="voice_content_group_variables">* Lorsque la description d\'une variable commence par « (Group) », cela signifie que lorsque l\'étape est dans un groupe, le calcul des valeurs se base sur ce groupe plutôt que sur le minuteur complet.</string>
@@ -477,7 +477,7 @@
     <string name="voice_variable_other_clock_time_desp">Heure courante</string>
     <string name="tts_error_template">Erreur de synthèse vocale : %s</string>
     <string name="behaviour_beep">Bip</string>
-    <string name="behaviour_beep_help">Faire un bip chaque seconde</string>
+    <string name="behaviour_beep_help">Fait un bip chaque seconde</string>
     <string name="beep_count_title">Nombre de bips</string>
     <string name="beep_count_intro_usage">Indiquer le temps après lequel le bip doit s\'arrêter</string>
     <string name="beep_count_intro_0_meaning">0 pour conserver les bips jusqu\'à la fin de l\'étape</string>
@@ -517,7 +517,7 @@
     <string name="pref_reminder_baked_count_off">Désactivé</string>
     <string name="pref_reminder_baked_count_downloading">Téléchargement de ressources…</string>
     <string name="pref_category_title_scheduler_setting">Paramètres de planificateurs</string>
-    <string name="pref_audio_focus_title_pause">Mettre ne pause les autres sons</string>
+    <string name="pref_audio_focus_title_pause">Mettre en pause les autres sons</string>
     <string name="pref_audio_focus_title_stop">Arrêter les autres sons</string>
     <string name="pref_audio_focus_title_lower">Assourdir les autres sons</string>
     <string name="pref_audio_focus_title_none">Aucun</string>
@@ -537,13 +537,13 @@
     <string name="intro_start_enter_loop">Un minuteur est une liste d\'étapes qui s\'exécuteront, dans l\'ordre, le nombre de fois souhaitées.\nSaisissez <b>5</b> pour le nombre de <b>Répétitions</b>.</string>
     <string name="intro_start_step_card">Chaque fiche représente une étape du plan.</string>
     <string name="intro_start_step_time">Cliquez sur <b>la durée à côté du nom de l\'étape</b> et modifiez cette durée à <b>3 minutes</b>.</string>
-    <string name="intro_start_notifier">Lors de son exécution, un minuteur enchaîne chaque étape pour en décompter le temps. \n\nPar défaut, le passage à l\'étape suivante se fait sans arrêt ni notification. Si vous souhaitez être averti, <b>vous devez définir des rappels</b>. \n\nGénéralement, ces rappels se déclenchent en début de séquence. Il peut ainsi être nécessaire d\'ajouter des étapes d\'information, dont le rôle sera le déclenchement de ces rappels.</string>
-    <string name="intro_start_add_notifier">Cliquez sur le bouton <b>Information</b> pour ajouter une étape de rappel après la course.</string>
+    <string name="intro_start_notifier">Lors de son exécution, un minuteur enchaîne chaque étape pour en décompter le temps. \nPar défaut, le passage à l\'étape suivante se fait sans arrêt ni notification. Si vous souhaitez être averti, <b>vous devez définir des rappels</b>.</string>
+    <string name="intro_start_add_notifier">La plupart des rappels se déclenchent en début d\'étape.\nCliquez sur le bouton <b>Étape d\'Information</b>. Cela permet l\'ajout d\'un rappel après la fin de l\'étape de course.</string>
     <string name="intro_start_add_reminder">Cliquez sur ➕ sous la durée de l\'étape pour ajouter des rappels. Ajoutez <b>Musique</b> et <b>Vibration</b>.</string>
     <string name="intro_start_reminder_usage">Vous pouvez faire <b>un appui long sur un rappel pour vérifier comment l\'utiliser</b>, aussi bien sur les rappels déjà ajoutés que lors de la sélection.</string>
-    <string name="intro_start_add_walk_step">Ajoutez une étape <b>Normale</b> pour la marche.</string>
+    <string name="intro_start_add_walk_step">Ajoutez une <b>Étape normale</b> pour la marche.</string>
     <string name="intro_start_walk_step_name">Indiquez le temps de marche à <b>2 minutes</b>.</string>
-    <string name="intro_start_walk_notifier">Ajoutez une autre étape d\'<b>Information</b> pour être <b>averti après la marche</b>.</string>
+    <string name="intro_start_walk_notifier">Ajoutez une autre <b>Étape d\'information</b> pour être <b>averti après la marche</b>.</string>
     <string name="intro_start_timer_done">La mise en place est terminée ! Cliquez sur ✔ en haut de l\'écran pour <b>enregistrer le minuteur</b>.</string>
     <string name="intro_start_run_timer"><b>Cliquez sur le minuteur</b> pour aller à l\'écran d\'exécution.</string>
     <string name="intro_start_timer_time">Cette partie montre <b>le temps restant</b>, le nombre de répétitions restantes et le bouton d\'ajustement de la durée.</string>
