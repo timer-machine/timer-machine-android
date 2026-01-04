@@ -114,9 +114,9 @@
     <string name="edit_delete_group">Supprimer le groupe</string>
     <string name="edit_step">Modifier l\'étape</string>
     <string name="edit_add_step">Ajouter une étape</string>
-    <string name="edit_add_normal">Étape\nnormale</string>
+    <string name="edit_add_normal">Étape normale</string>
     <string name="edit_add_normal_desp">Ajouter une étape normale</string>
-    <string name="edit_add_notifier">Étape\nd\'information</string>
+    <string name="edit_add_notifier">Étape d\'information</string>
     <string name="edit_add_group">Groupe</string>
     <string name="edit_add_group_desp">Un groupe a son propre nom et nombre de répétitions et il peut contenir des étapes</string>
     <string name="edit_add_start">Étape de début</string>
