@@ -20,4 +20,5 @@ internal object BroadcastConstants {
     const val ACTION_TIMER_LIST_RESPONSE = "io.github.deweyreed.timer.BROADCAST_TIMER_LIST"
     const val EXTRA_TIMER_IDS = "timer_ids"
     const val EXTRA_TIMER_NAMES = "timer_names"
+    const val EXTRA_TIMER_REMAINING = "timer_remaining"
 }

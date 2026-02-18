@@ -56,15 +56,21 @@ class TimerBroadcastReceiver : BroadcastReceiver() {
             Constants.NOTIF_ID_SCREEN,
             Constants.NOTIF_ID_NOTIFICATION
         )
-        val timerIds = nm.activeNotifications
-            .map { it.id }
-            .filter { it !in systemNotifIds }
+        val notifMap = nm.activeNotifications
+            .filter { it.id !in systemNotifIds }
+            .associateBy { it.id }
 
-        val timerInfos = runBlocking { presenter.getTimerInfoForIds(timerIds) }
+        val timerInfos = runBlocking { presenter.getTimerInfoForIds(notifMap.keys.toList()) }
+
+        val remaining = timerInfos.map { (id, _) ->
+            notifMap[id]?.notification?.extras
+                ?.getCharSequence("android.text")?.toString() ?: ""
+        }
 
         val responseIntent = Intent(BroadcastConstants.ACTION_TIMER_LIST_RESPONSE).apply {
             putExtra(BroadcastConstants.EXTRA_TIMER_IDS, timerInfos.map { it.first }.toIntArray())
             putExtra(BroadcastConstants.EXTRA_TIMER_NAMES, timerInfos.map { it.second }.toTypedArray())
+            putExtra(BroadcastConstants.EXTRA_TIMER_REMAINING, remaining.toTypedArray())
         }
         context.sendBroadcast(responseIntent)
     }
