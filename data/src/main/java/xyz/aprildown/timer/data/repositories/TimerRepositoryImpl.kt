@@ -90,6 +90,10 @@ internal class TimerRepositoryImpl @Inject constructor(
         return timerDao.findTimerInfo(timerId)?.fromWithMapper(timerInfoMapper)
     }
 
+    override suspend fun getTimerInfoByName(name: String): TimerInfo? {
+        return timerDao.findTimerInfoByName(name)?.fromWithMapper(timerInfoMapper)
+    }
+
     override suspend fun getTimerInfo(folderId: Long): List<TimerInfo> {
         return timerDao.getTimerInfo(folderId).fromWithMapper(timerInfoMapper)
     }

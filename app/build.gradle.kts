@@ -107,6 +107,7 @@ dependencies {
     implementation(project(":app-backup"))
     implementation(project(":app-settings"))
     implementation(project(":app-tasker"))
+    implementation(project(":app-broadcast"))
     implementation(project(":app-intro"))
     implementation(project(":app-timer-edit"))
     implementation(project(":app-timer-run"))

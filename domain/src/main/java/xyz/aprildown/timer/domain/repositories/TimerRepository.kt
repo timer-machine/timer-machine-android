@@ -11,6 +11,7 @@ interface TimerRepository {
     suspend fun save(item: TimerEntity): Boolean
     suspend fun delete(id: Int)
     suspend fun getTimerInfoByTimerId(timerId: Int): TimerInfo?
+    suspend fun getTimerInfoByName(name: String): TimerInfo?
     fun getTimerInfoFlow(folderId: Long): Flow<List<TimerInfo>>
     suspend fun getTimerInfo(folderId: Long): List<TimerInfo>
     suspend fun changeTimerFolder(timerId: Int, folderId: Long)

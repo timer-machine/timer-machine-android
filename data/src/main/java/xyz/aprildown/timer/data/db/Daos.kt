@@ -24,6 +24,9 @@ internal interface TimerDao {
     @Query("SELECT id, name, folderId FROM TimerItem WHERE id = :timerId")
     suspend fun findTimerInfo(timerId: Int): TimerInfoData?
 
+    @Query("SELECT id, name, folderId FROM TimerItem WHERE name = :name COLLATE NOCASE LIMIT 1")
+    suspend fun findTimerInfoByName(name: String): TimerInfoData?
+
     @Query("SELECT id, name, folderId FROM TimerItem WHERE folderId = :folderId")
     suspend fun getTimerInfo(folderId: Long): List<TimerInfoData>
 

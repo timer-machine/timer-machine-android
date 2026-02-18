@@ -12,4 +12,5 @@ interface StreamMachineIntentProvider {
     fun moveIntent(id: Int, index: TimerIndex): Intent
     fun resetIntent(id: Int): Intent
     fun adjustTimeIntent(id: Int, amount: Long): Intent
+    fun stopAllIntent(): Intent
 }
