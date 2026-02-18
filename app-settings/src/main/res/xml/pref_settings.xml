@@ -136,6 +136,14 @@
             app:key="key_media_style_notification"
             app:title="@string/pref_media_style_notification" />
 
+        <Preference
+            app:icon="@drawable/settings_notifications"
+            app:key="key_reset_permission_reminders"
+            app:persistent="false"
+            app:singleLineTitle="false"
+            app:title="@string/pref_reset_permission_reminders"
+            app:summary="@string/pref_reset_permission_reminders_summary" />
+
     </PreferenceCategory>
 
     <PreferenceCategory app:title="@string/pref_category_title_audio">

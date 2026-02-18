@@ -3,19 +3,25 @@ package xyz.aprildown.timer.app.timer.list
 import android.Manifest
 import android.content.ComponentName
 import android.content.Context
+import android.content.Intent
 import android.content.ServiceConnection
 import android.graphics.Typeface
 import android.os.Build
 import android.os.Bundle
 import android.os.IBinder
+import android.os.PowerManager
+import android.provider.Settings
 import android.text.Spanned
 import android.text.style.StyleSpan
+import android.widget.CheckBox
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
 import android.view.View
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.annotation.StringRes
 import androidx.core.content.edit
+import androidx.core.net.toUri
 import androidx.core.text.buildSpannedString
 import androidx.core.view.MenuProvider
 import androidx.core.view.ViewCompat
@@ -144,16 +150,23 @@ class TimerFragment :
         }
     }
 
+    private var hasCheckedPermissionsThisResume = false
+
     override fun onResume() {
         super.onResume()
         ScreenWakeLock.acquireScreenWakeLock(
             context = requireActivity(),
             screenTiming = getString(RBase.string.pref_screen_timing_value_timer)
         )
+        if (!hasCheckedPermissionsThisResume) {
+            hasCheckedPermissionsThisResume = true
+            view?.post { checkPermissions() }
+        }
     }
 
     override fun onPause() {
         super.onPause()
+        hasCheckedPermissionsThisResume = false
         ScreenWakeLock.releaseScreenLock(
             context = requireActivity(),
             screenTiming = getString(RBase.string.pref_screen_timing_value_timer)
@@ -593,6 +606,94 @@ class TimerFragment :
                 }
             }
         }
+    }
+
+    private fun checkPermissions() {
+        val context = context ?: return
+        if (viewModel.tips.value != TipManager.TIP_NO_MORE) return
+
+        val prefs = context.safeSharedPreference
+
+        // Check notification permission (Android 13+)
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU &&
+            !context.hasPermissions(Manifest.permission.POST_NOTIFICATIONS)
+        ) {
+            if (!prefs.getBoolean(PreferenceData.PREF_SUPPRESS_NOTIFICATION_CHECK, false)) {
+                if (!shouldShowRequestPermissionRationale(Manifest.permission.POST_NOTIFICATIONS)) {
+                    postNotificationsLauncher.launch(Manifest.permission.POST_NOTIFICATIONS)
+                } else {
+                    showPermissionDialog(
+                        title = RBase.string.permission_notifications_title,
+                        message = RBase.string.permission_notifications_message,
+                        suppressKey = PreferenceData.PREF_SUPPRESS_NOTIFICATION_CHECK,
+                        onEnable = {
+                            startActivity(
+                                Intent(Settings.ACTION_APP_NOTIFICATION_SETTINGS)
+                                    .putExtra(Settings.EXTRA_APP_PACKAGE, context.packageName)
+                            )
+                        }
+                    )
+                }
+                return
+            }
+        }
+
+        // Check battery optimization
+        val pm = context.getSystemService(PowerManager::class.java)
+        if (pm != null && !pm.isIgnoringBatteryOptimizations(context.packageName)) {
+            if (!prefs.getBoolean(PreferenceData.PREF_SUPPRESS_BATTERY_CHECK, false)) {
+                showPermissionDialog(
+                    title = RBase.string.permission_battery_title,
+                    message = RBase.string.permission_battery_message,
+                    suppressKey = PreferenceData.PREF_SUPPRESS_BATTERY_CHECK,
+                    onEnable = {
+                        startActivity(
+                            @Suppress("BatteryLife")
+                            Intent(Settings.ACTION_REQUEST_IGNORE_BATTERY_OPTIMIZATIONS)
+                                .setData("package:${context.packageName}".toUri())
+                        )
+                    }
+                )
+            }
+        }
+    }
+
+    private fun showPermissionDialog(
+        @StringRes title: Int,
+        @StringRes message: Int,
+        suppressKey: String,
+        onEnable: () -> Unit
+    ) {
+        val context = context ?: return
+        val checkBox = CheckBox(context).apply {
+            setText(RBase.string.permission_dont_ask_again)
+        }
+        val container = android.widget.FrameLayout(context).apply {
+            val horizontalMargin = context.dp(24).toInt()
+            addView(checkBox, android.widget.FrameLayout.LayoutParams(
+                android.widget.FrameLayout.LayoutParams.WRAP_CONTENT,
+                android.widget.FrameLayout.LayoutParams.WRAP_CONTENT
+            ).apply {
+                marginStart = horizontalMargin
+                marginEnd = horizontalMargin
+            })
+        }
+        MaterialAlertDialogBuilder(context)
+            .setTitle(title)
+            .setMessage(message)
+            .setView(container)
+            .setPositiveButton(RBase.string.permission_enable) { _, _ ->
+                if (checkBox.isChecked) {
+                    context.safeSharedPreference.edit { putBoolean(suppressKey, true) }
+                }
+                onEnable()
+            }
+            .setNegativeButton(RBase.string.permission_not_now) { _, _ ->
+                if (checkBox.isChecked) {
+                    context.safeSharedPreference.edit { putBoolean(suppressKey, true) }
+                }
+            }
+            .show()
     }
 
     private val mConnection: ServiceConnection = object : ServiceConnection {

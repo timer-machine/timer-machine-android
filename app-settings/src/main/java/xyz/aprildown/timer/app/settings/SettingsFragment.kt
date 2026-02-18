@@ -4,6 +4,7 @@ import android.Manifest
 import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Build
+import androidx.core.content.edit
 import android.os.Bundle
 import android.provider.Settings
 import androidx.activity.result.contract.ActivityResultContracts
@@ -12,6 +13,7 @@ import androidx.navigation.fragment.NavHostFragment
 import androidx.preference.ListPreference
 import androidx.preference.Preference
 import com.github.deweyreed.timer.component.tts.TtsBakery
+import com.github.deweyreed.tools.anko.snackbar
 import com.github.deweyreed.tools.helper.IntentHelper
 import com.github.deweyreed.tools.helper.createChooserIntentIfDead
 import com.github.deweyreed.tools.helper.hasPermissions
@@ -171,6 +173,14 @@ class SettingsFragment :
                 NavHostFragment.findNavController(this)
                     .subLevelNavigate(RBase.id.dest_about)
             }
+            KEY_RESET_PERMISSION_REMINDERS -> {
+                sharedPreferences.edit {
+                    putBoolean(PreferenceData.PREF_SUPPRESS_NOTIFICATION_CHECK, false)
+                    putBoolean(PreferenceData.PREF_SUPPRESS_BATTERY_CHECK, false)
+                }
+                (requireActivity() as MainCallback.ActivityCallback).snackbarView
+                    .snackbar(getString(RBase.string.pref_permission_reminders_reset))
+            }
             else -> return false
         }
         return true
@@ -221,6 +231,7 @@ class SettingsFragment :
         }
 
         findPreference<Preference>(KEY_NOTIF_SETTING)?.onPreferenceClickListener = this
+        findPreference<Preference>(KEY_RESET_PERMISSION_REMINDERS)?.onPreferenceClickListener = this
 
         findPreference<Preference>(KEY_AUDIO_VOLUME)?.run {
             onPreferenceClickListener = this@SettingsFragment
@@ -330,6 +341,7 @@ private const val KEY_PHONE_CALL = PreferenceData.KEY_PHONE_CALL
 private const val KEY_WEEK_START = PreferenceData.KEY_WEEK_START
 
 private const val KEY_NOTIF_SETTING = "key_notif_setting"
+private const val KEY_RESET_PERMISSION_REMINDERS = "key_reset_permission_reminders"
 
 private const val KEY_AUDIO_VOLUME = "key_audio_volume"
 

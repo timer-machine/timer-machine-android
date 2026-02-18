@@ -445,4 +445,7 @@ object PreferenceData {
     var SharedPreferences.isTtsBakeryOpen: Boolean
         get() = getBoolean(PREF_IS_TTS_BAKERY_OPEN, AppConfig.openDebug)
         set(value) = edit { putBoolean(PREF_IS_TTS_BAKERY_OPEN, value) }
+
+    const val PREF_SUPPRESS_NOTIFICATION_CHECK = "pref_suppress_notification_permission_check"
+    const val PREF_SUPPRESS_BATTERY_CHECK = "pref_suppress_battery_optimization_check"
 }

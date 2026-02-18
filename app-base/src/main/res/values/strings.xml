@@ -830,6 +830,18 @@
 
     <string name="whitelist_settings_template">System setting %d</string>
 
+    <!--Permission checks-->
+    <string name="permission_notifications_title">Enable Notifications</string>
+    <string name="permission_notifications_message">Timer Machine needs notification permission to show timer countdowns and alerts when timers expire. Without it, timers will run silently.</string>
+    <string name="permission_battery_title">Disable Battery Optimization</string>
+    <string name="permission_battery_message">Battery optimization may stop timers from running in the background. Please disable it for Timer Machine to ensure reliable timer operation.</string>
+    <string name="permission_enable">Enable</string>
+    <string name="permission_not_now">Not now</string>
+    <string name="permission_dont_ask_again">Don\'t ask again</string>
+    <string name="pref_reset_permission_reminders">Reset permission reminders</string>
+    <string name="pref_reset_permission_reminders_summary">Re-enable notification and battery optimization prompts</string>
+    <string name="pref_permission_reminders_reset">Permission reminders re-enabled</string>
+
     <!--Account-->
     <string name="account_sign_out_confirmation">Sign out?</string>
     <string name="account_sign_out">Sign Out</string>
