@@ -82,6 +82,12 @@ class BroadcastPresenter @Inject constructor(
         return streamMachineIntentProvider.stopAllIntent()
     }
 
+    suspend fun getTimerInfoForIds(ids: List<Int>): List<Pair<Int, String>> {
+        return ids.mapNotNull { id ->
+            findTimerInfo(id)?.let { info -> id to info.name }
+        }
+    }
+
     private suspend fun resolveTimerId(intent: Intent): Int? {
         val id = intent.getIntExtra(
             BroadcastConstants.EXTRA_TIMER_ID, TimerEntity.NULL_ID

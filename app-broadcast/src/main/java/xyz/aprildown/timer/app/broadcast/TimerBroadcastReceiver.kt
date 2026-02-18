@@ -10,6 +10,7 @@ import androidx.core.content.ContextCompat
 import androidx.core.content.getSystemService
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.runBlocking
+import xyz.aprildown.timer.domain.utils.Constants
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -21,7 +22,14 @@ class TimerBroadcastReceiver : BroadcastReceiver() {
     override fun onReceive(context: Context, intent: Intent) {
         if (intent.action != BroadcastConstants.ACTION_TIMER_CONTROL) return
 
+        val command = intent.getStringExtra(BroadcastConstants.EXTRA_COMMAND) ?: return
+
         try {
+            if (command == BroadcastConstants.COMMAND_LIST) {
+                handleList(context)
+                return
+            }
+
             val serviceIntent = runBlocking { presenter.handleIntent(intent) }
                 ?: return
 
@@ -39,6 +47,26 @@ class TimerBroadcastReceiver : BroadcastReceiver() {
         } catch (e: Exception) {
             Log.e(TAG, "Failed to handle broadcast timer control", e)
         }
+    }
+
+    private fun handleList(context: Context) {
+        val nm = context.getSystemService<NotificationManager>() ?: return
+        val systemNotifIds = setOf(
+            Constants.NOTIF_ID_SERVICE,
+            Constants.NOTIF_ID_SCREEN,
+            Constants.NOTIF_ID_NOTIFICATION
+        )
+        val timerIds = nm.activeNotifications
+            .map { it.id }
+            .filter { it !in systemNotifIds }
+
+        val timerInfos = runBlocking { presenter.getTimerInfoForIds(timerIds) }
+
+        val responseIntent = Intent(BroadcastConstants.ACTION_TIMER_LIST_RESPONSE).apply {
+            putExtra(BroadcastConstants.EXTRA_TIMER_IDS, timerInfos.map { it.first }.toIntArray())
+            putExtra(BroadcastConstants.EXTRA_TIMER_NAMES, timerInfos.map { it.second }.toTypedArray())
+        }
+        context.sendBroadcast(responseIntent)
     }
 
     companion object {

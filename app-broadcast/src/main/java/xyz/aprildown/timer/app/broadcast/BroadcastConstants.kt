@@ -15,4 +15,9 @@ internal object BroadcastConstants {
     const val COMMAND_RESUME = "resume"
     const val COMMAND_RESET = "reset"
     const val COMMAND_DISMISS = "dismiss"
+    const val COMMAND_LIST = "list"
+
+    const val ACTION_TIMER_LIST_RESPONSE = "io.github.deweyreed.timer.BROADCAST_TIMER_LIST"
+    const val EXTRA_TIMER_IDS = "timer_ids"
+    const val EXTRA_TIMER_NAMES = "timer_names"
 }
