@@ -1,12 +1,14 @@
 package xyz.aprildown.timer.app.settings
 
 import android.Manifest
+import android.app.NotificationManager
 import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Build
 import android.os.Bundle
 import android.provider.Settings
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.core.content.getSystemService
 import androidx.core.net.toUri
 import androidx.navigation.fragment.NavHostFragment
 import androidx.preference.ListPreference
@@ -148,6 +150,26 @@ class SettingsFragment :
                     )
                 }
             }
+            KEY_FULL_SCREEN_NOTIFICATIONS -> {
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.UPSIDE_DOWN_CAKE) {
+                    val settingsIntent = Intent(
+                        Settings.ACTION_MANAGE_APP_USE_FULL_SCREEN_INTENT,
+                        "package:${context.packageName}".toUri()
+                    )
+                    startActivityOrNothing(
+                        settingsIntent.createChooserIntentIfDead(context),
+                        wrongMessageRes = RBase.string.no_action_found
+                    )
+                } else {
+                    val settingsIntent = Intent(Settings.ACTION_APP_NOTIFICATION_SETTINGS)
+                        .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                        .putExtra(Settings.EXTRA_APP_PACKAGE, context.packageName)
+                    startActivityOrNothing(
+                        settingsIntent.createChooserIntentIfDead(context),
+                        wrongMessageRes = RBase.string.no_action_found
+                    )
+                }
+            }
             KEY_AUDIO_VOLUME -> {
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
                     startActivityOrNothing(Intent(Settings.Panel.ACTION_VOLUME))
@@ -221,6 +243,16 @@ class SettingsFragment :
         }
 
         findPreference<Preference>(KEY_NOTIF_SETTING)?.onPreferenceClickListener = this
+
+        findPreference<Preference>(KEY_FULL_SCREEN_NOTIFICATIONS)?.run {
+            onPreferenceClickListener = this@SettingsFragment
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.UPSIDE_DOWN_CAKE) {
+                val nm = requireContext().getSystemService<NotificationManager>()
+                isVisible = nm != null && !nm.canUseFullScreenIntent()
+            } else {
+                isVisible = false
+            }
+        }
 
         findPreference<Preference>(KEY_AUDIO_VOLUME)?.run {
             onPreferenceClickListener = this@SettingsFragment
@@ -330,6 +362,7 @@ private const val KEY_PHONE_CALL = PreferenceData.KEY_PHONE_CALL
 private const val KEY_WEEK_START = PreferenceData.KEY_WEEK_START
 
 private const val KEY_NOTIF_SETTING = "key_notif_setting"
+private const val KEY_FULL_SCREEN_NOTIFICATIONS = "key_full_screen_notifications"
 
 private const val KEY_AUDIO_VOLUME = "key_audio_volume"
 

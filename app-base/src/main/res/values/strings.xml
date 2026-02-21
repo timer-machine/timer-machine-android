@@ -830,6 +830,10 @@
 
     <string name="whitelist_settings_template">System setting %d</string>
 
+    <!--Permission settings-->
+    <string name="pref_full_screen_notifications">Full-screen notifications</string>
+    <string name="pref_full_screen_notifications_summary">Allow timer alerts to display over other apps</string>
+
     <!--Account-->
     <string name="account_sign_out_confirmation">Sign out?</string>
     <string name="account_sign_out">Sign Out</string>

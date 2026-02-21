@@ -136,6 +136,14 @@
             app:key="key_media_style_notification"
             app:title="@string/pref_media_style_notification" />
 
+        <Preference
+            app:icon="@drawable/settings_notifications"
+            app:key="key_full_screen_notifications"
+            app:persistent="false"
+            app:singleLineTitle="false"
+            app:title="@string/pref_full_screen_notifications"
+            app:summary="@string/pref_full_screen_notifications_summary" />
+
     </PreferenceCategory>
 
     <PreferenceCategory app:title="@string/pref_category_title_audio">
