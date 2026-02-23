@@ -52,9 +52,7 @@
     <string name="intro_start_step_time">Klik op <b>de tijd naast de stapnaam</b> en verander de tijd in <b>3 minuten</b>.</string>
     <string name="edit_add_notifier">Meldinggever</string>
     <string name="beep_count_title">Piep aantal</string>
-    <string name="tip_missed_timer"><b> Sommige timers worden abnormaal gestopt!</b>
-\n
-\nDit komt waarschijnlijk omdat het systeem de app op de achtergrond stopt. <b>Om dit probleem op te lossen, kun je deze app in de systeeminstellingen op de Witte lijst zetten.</b></string>
+    <string name="tip_missed_timer"><b>Sommige timers worden abnormaal gestopt!</b> \n \nDit komt waarschijnlijk omdat het systeem de app op de achtergrond stopt. <b>Om dit probleem op te lossen, kun je deze app in de systeeminstellingen op de Witte lijst zetten.</b></string>
     <string name="pref_title_other">Overige</string>
     <string name="help_tts_test_yes">Ja!</string>
     <string name="one_layout_time_size">Tijd tekstgrootte</string>
