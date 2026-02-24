@@ -599,26 +599,26 @@
     <string name="billing_help_email_title">Проблема с оплатой TimeR Machine</string>
     <string name="scheduler_schedule_failed">Ошибка настройки планировщика %s</string>
     <plurals name="days">
-        <item quantity="one"></item>
-        <item quantity="few">1 день</item>
+        <item quantity="one">1 день</item>
+        <item quantity="few"><xliff:g example="7" id="number">%s</xliff:g> дня</item>
         <item quantity="many"><xliff:g example="7" id="number">%s</xliff:g> дней</item>
         <item quantity="other"><xliff:g example="7" id="number">%s</xliff:g> дней</item>
     </plurals>
     <plurals name="hours">
-        <item quantity="one"></item>
-        <item quantity="few">1 час</item>
+        <item quantity="one">1 час</item>
+        <item quantity="few"><xliff:g example="7" id="number">%s</xliff:g> часа</item>
         <item quantity="many"><xliff:g example="7" id="number">%s</xliff:g> часов</item>
         <item quantity="other"><xliff:g example="7" id="number">%s</xliff:g> часов</item>
     </plurals>
     <plurals name="minutes">
-        <item quantity="one"></item>
-        <item quantity="few">1 минута</item>
+        <item quantity="one">1 минута</item>
+        <item quantity="few"><xliff:g example="7" id="number">%s</xliff:g> минуты</item>
         <item quantity="many"><xliff:g example="7" id="number">%s</xliff:g> минут</item>
         <item quantity="other"><xliff:g example="7" id="number">%s</xliff:g> минут</item>
     </plurals>
     <plurals name="seconds">
-        <item quantity="one"></item>
-        <item quantity="few">1 секунда</item>
+        <item quantity="one">1 секунда</item>
+        <item quantity="few"><xliff:g example="7" id="number">%s</xliff:g> секунды</item>
         <item quantity="many"><xliff:g example="7" id="number">%s</xliff:g> секунд</item>
         <item quantity="other"><xliff:g example="7" id="number">%s</xliff:g> секунд</item>
     </plurals>
