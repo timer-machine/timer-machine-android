@@ -172,14 +172,16 @@ dependencies {
     androidTestCompileOnly(libs.taskerPlugin)
 }
 
-android.applicationVariants.configureEach {
-    if (flavorName != "google") {
-        val variantNameCapitalized = name.replaceFirstChar {
+androidComponents.onVariants { variant ->
+    if (variant.flavorName != "google") {
+        val variantNameCapitalized = variant.name.replaceFirstChar {
             if (it.isLowerCase()) it.titlecase(Locale.getDefault()) else it.toString()
         }
         project.tasks.named("process${variantNameCapitalized}GoogleServices").getOrNull()
             ?.enabled = false
         project.tasks.named("injectCrashlyticsMappingFileId${variantNameCapitalized}")
+            .getOrNull()?.enabled = false
+        project.tasks.named("injectCrashlyticsVersionControlInfo${variantNameCapitalized}")
             .getOrNull()?.enabled = false
         try {
             project.tasks.named("uploadCrashlyticsMappingFile${variantNameCapitalized}")

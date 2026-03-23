@@ -7,14 +7,14 @@ plugins {
 
 android {
     namespace = "xyz.aprildown.timer.data"
-
-    sourceSets {
-        getByName("androidTest").assets.srcDir("$projectDir/schemas")
-    }
 }
 
 room {
     schemaDirectory("$projectDir/schemas")
+}
+
+androidComponents.onVariants { variant ->
+    variant.androidTest?.sources?.assets?.addStaticSourceDirectory("$projectDir/schemas")
 }
 
 dependencies {

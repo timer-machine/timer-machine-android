@@ -23,28 +23,29 @@ internal fun Project.configureKotlin() {
             jvmTarget.set(
                 JvmTarget.fromTarget(libs.findVersion("jvmTarget").get().toString())
             )
+            freeCompilerArgs.add("-Xannotation-default-target=param-property")
         }
     }
 }
 
-internal fun Project.configureAndroid(commonExtension: CommonExtension<*, *, *, *, *, *>) {
+internal fun Project.configureAndroid(commonExtension: CommonExtension) {
     val libs = libs
     commonExtension.run {
         compileSdk = libs.findVersion("compileSdk").get().toString().toInt()
-        defaultConfig {
+        defaultConfig.run {
             minSdk = libs.findVersion("minSdk").get().toString().toInt()
 
             testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
             vectorDrawables.useSupportLibrary = true
         }
-        compileOptions {
+        compileOptions.run {
             isCoreLibraryDesugaringEnabled = true
             val javaVersion =
                 JavaVersion.toVersion(libs.findVersion("jvmTarget").get().toString())
             sourceCompatibility = javaVersion
             targetCompatibility = javaVersion
         }
-        buildFeatures {
+        buildFeatures.run {
             viewBinding = true
         }
         dependencies {
@@ -53,7 +54,7 @@ internal fun Project.configureAndroid(commonExtension: CommonExtension<*, *, *, 
     }
 }
 
-internal fun Project.configureCompose(commonExtension: CommonExtension<*, *, *, *, *, *>) {
+internal fun Project.configureCompose(commonExtension: CommonExtension) {
     val libs = libs
     commonExtension.buildFeatures.compose = true
     extensions.getByType<ComposeCompilerGradlePluginExtension>().run {

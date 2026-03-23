@@ -155,7 +155,7 @@ internal class OneLayoutOneFragment :
 
     private fun toggleStep(show: Boolean) {
         val view = requireView()
-        view.findViewById<LinearLayout?>(R.id.layoutOneStepName).isVisible = show
+        view.findViewById<LinearLayout>(R.id.layoutOneStepName).isVisible = show
     }
 
     private fun toggleTimingBar(show: Boolean) {

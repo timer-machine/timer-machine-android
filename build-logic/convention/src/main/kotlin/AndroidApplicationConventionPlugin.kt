@@ -12,7 +12,6 @@ class AndroidApplicationConventionPlugin : Plugin<Project> {
             val libs = libs
 
             apply(plugin = libs.findPlugin("android-application").get().get().pluginId)
-            apply(plugin = libs.findPlugin("kotlin-android").get().get().pluginId)
             apply(plugin = libs.findPlugin("kotlin-compose").get().get().pluginId)
 
             configureKotlin()
