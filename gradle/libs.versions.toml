@@ -161,7 +161,7 @@ taskerPlugin = "com.joaomgcd:taskerpluginlibrary:0.4.10"
 diskLruCache = "com.github.bumptech.glide:disklrucache:5.0.5"
 coil = "io.coil-kt.coil3:coil-compose:3.4.0"
 coil-gif = "io.coil-kt.coil3:coil-gif:3.4.0"
-zoomable = "net.engawapg.lib:zoomable:1.6.1"
+zoomable = "me.saket.telephoto:zoomable:0.18.0"
 twoWayNestedScrollView = "com.github.ultimate-deej:twowaynestedscrollview:0.1.2"
 accurateCountDownTimer = "com.github.cardinalby:accurate-count-down-timer:1.0"
 

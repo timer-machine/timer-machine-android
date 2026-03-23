@@ -271,8 +271,8 @@ com.nex3z:toggle-button-group:1.2.3
 com.squareup.moshi:moshi:1.15.2
 com.squareup.okio:okio-jvm:3.17.0
 com.squareup.okio:okio:3.17.0
-dev.drewhamilton.poko:poko-annotations-jvm:0.15.2
-dev.drewhamilton.poko:poko-annotations:0.15.2
+dev.drewhamilton.poko:poko-annotations-jvm:0.18.7
+dev.drewhamilton.poko:poko-annotations:0.18.7
 io.coil-kt.coil3:coil-android:3.4.0
 io.coil-kt.coil3:coil-compose-android:3.4.0
 io.coil-kt.coil3:coil-compose-core-android:3.4.0
@@ -284,8 +284,11 @@ io.coil-kt.coil3:coil-gif:3.4.0
 io.coil-kt.coil3:coil:3.4.0
 jakarta.inject:jakarta.inject-api:2.0.1
 javax.inject:javax.inject:1
+me.saket.telephoto:annotations-android:0.18.0
+me.saket.telephoto:annotations:0.18.0
+me.saket.telephoto:zoomable-android:0.18.0
+me.saket.telephoto:zoomable:0.18.0
 me.zhanghai.android.materialprogressbar:library:1.4.2
-net.engawapg.lib:zoomable:1.6.1
 net.lingala.zip4j:zip4j:2.11.6
 nl.dionsegijn:konfetti:1.3.2
 org.jetbrains.androidx.lifecycle:lifecycle-common:2.9.6
