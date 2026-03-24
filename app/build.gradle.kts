@@ -6,14 +6,14 @@ plugins {
     alias(libs.plugins.convention.hilt)
 
     alias(libs.plugins.dependencyGuard)
-    alias(libs.plugins.androidx.baselineprofile)
+    // alias(libs.plugins.androidx.baselineprofile)
 
     alias(libs.plugins.gms)
     alias(libs.plugins.firebase.crashlytics)
 }
 
 val keystoreProperties = Properties()
-val keystorePropertiesFile = rootProject.file("local.properties")
+val keystorePropertiesFile: File = rootProject.file("local.properties")
 if (keystorePropertiesFile.exists()) {
     keystorePropertiesFile.inputStream().use {
         keystoreProperties.load(it)
@@ -120,7 +120,7 @@ dependencies {
     "dogImplementation"(project(":app-analytics-fake"))
     "otherImplementation"(project(":app-analytics-fake"))
 
-    baselineProfile(project(":baselineprofile"))
+    // baselineProfile(project(":baselineprofile"))
 
     implementation(libs.tools)
 

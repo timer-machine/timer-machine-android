@@ -11,7 +11,7 @@ plugins {
     alias(libs.plugins.dependencyGuard) apply false
     alias(libs.plugins.detekt) apply false
     alias(libs.plugins.android.test) apply false
-    alias(libs.plugins.androidx.baselineprofile) apply false
+    // alias(libs.plugins.androidx.baselineprofile) apply false
     alias(libs.plugins.gms) apply false
     alias(libs.plugins.firebase.crashlytics) apply false
 }
