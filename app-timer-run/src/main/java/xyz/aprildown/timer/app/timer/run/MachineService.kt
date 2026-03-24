@@ -102,7 +102,7 @@ class MachineService :
         binder = MachineBinder(presenter)
         presenter.takeView(this@MachineService)
         presenter.addAllListener(this)
-        notificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+        notificationManager = getSystemService(NOTIFICATION_SERVICE) as NotificationManager
         notificationManager.buildChannelIfNecessary(this)
     }
 

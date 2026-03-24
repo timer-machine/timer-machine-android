@@ -29,6 +29,7 @@ import com.github.deweyreed.tools.helper.startActivityOrNothing
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import xyz.aprildown.timer.app.base.ui.AppNavigator
 import xyz.aprildown.timer.app.base.ui.StepUpdater
+import xyz.aprildown.timer.app.base.utils.ScreenWakeLock
 import xyz.aprildown.timer.app.base.utils.ShortcutHelper
 import xyz.aprildown.timer.app.timer.one.float.FloatingTimer
 import xyz.aprildown.timer.component.key.DurationPicker
@@ -176,11 +177,22 @@ abstract class BaseOneFragment<T : ViewBinding>(
 
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onPictureInPictureModeChanged(isInPictureInPictureMode: Boolean) {
+        val context = requireContext()
         if (isInPictureInPictureMode) {
             pipHelper?.showPipView()
+
+            ScreenWakeLock.acquireScreenWakeLock(
+                context = context,
+                screenTiming = getString(RBase.string.pref_screen_timing_value_timer)
+            )
         } else {
             pipHelper?.dismissPipView()
             pipHelper = null
+
+            ScreenWakeLock.releaseScreenLock(
+                context = context,
+                screenTiming = getString(RBase.string.pref_screen_timing_value_timer)
+            )
         }
     }
 

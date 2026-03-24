@@ -2,6 +2,7 @@ package xyz.aprildown.timer.app.base.utils
 
 import android.content.Context
 import android.os.PowerManager
+import androidx.core.content.getSystemService
 import xyz.aprildown.timer.app.base.R
 import xyz.aprildown.timer.app.base.data.PreferenceData
 import xyz.aprildown.tools.helper.safeSharedPreference
@@ -14,34 +15,26 @@ object ScreenWakeLock {
     fun acquireScreenWakeLock(context: Context, screenTiming: String) {
         if (!isValidLocation(context, screenTiming)) return
 
-        fun getPowerManager(): PowerManager {
-            return context.applicationContext.getSystemService(Context.POWER_SERVICE) as PowerManager
-        }
-
-        val wl = when (
-            context.safeSharedPreference.getString(
+        if (sScreenWakeLock == null) {
+            val screenPref = context.safeSharedPreference.getString(
                 PreferenceData.KEY_SCREEN,
                 context.getString(R.string.pref_screen_value_default)
             )
-        ) {
-            context.getString(R.string.pref_screen_value_keep) -> {
-                getPowerManager().newWakeLock(
-                    @Suppress("DEPRECATION") PowerManager.SCREEN_BRIGHT_WAKE_LOCK,
-                    LOG_TAG
-                )
+            val level = when (screenPref) {
+                context.getString(R.string.pref_screen_value_keep) -> {
+                    @Suppress("DEPRECATION") PowerManager.SCREEN_BRIGHT_WAKE_LOCK
+                }
+                context.getString(R.string.pref_screen_value_dim) -> {
+                    @Suppress("DEPRECATION") PowerManager.SCREEN_DIM_WAKE_LOCK
+                }
+                else -> return
             }
-            context.getString(R.string.pref_screen_value_dim) -> {
-                getPowerManager().newWakeLock(
-                    @Suppress("DEPRECATION") PowerManager.SCREEN_DIM_WAKE_LOCK,
-                    LOG_TAG
-                )
-            }
-            else -> return
+            sScreenWakeLock = context.getSystemService<PowerManager>()?.newWakeLock(level, LOG_TAG)
+            sScreenWakeLock?.setReferenceCounted(true)
         }
-        sScreenWakeLock = wl
-        wl.setReferenceCounted(false)
+
         @Suppress("WakelockTimeout")
-        wl.acquire()
+        sScreenWakeLock?.acquire()
     }
 
     private fun isValidLocation(context: Context, screenTiming: String): Boolean {
@@ -57,7 +50,9 @@ object ScreenWakeLock {
         val wl = sScreenWakeLock
         if (wl != null && wl.isHeld) {
             wl.release()
+            if (!wl.isHeld) {
+                sScreenWakeLock = null
+            }
         }
-        sScreenWakeLock = null
     }
 }
