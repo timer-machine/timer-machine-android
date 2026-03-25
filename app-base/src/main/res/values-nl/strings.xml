@@ -449,6 +449,7 @@
     <string name="pref_media_style_notification">Media-stijl melding</string>
     <string name="theme_step_color_title">Stapkleur</string>
     <string name="about_version">Versie</string>
+    <string name="about_licenses">Open source licenties</string>
     <string name="voice_variable_other_clock_time_desp">Huidige kloktijd</string>
     <string name="pref_audio_focus_title_pause">Overige geluiden pauzeren</string>
     <string name="enable">Inschakelen</string>

@@ -506,6 +506,7 @@
     <string name="pref_about_title">Sobre</string>
     <string name="about_version">Versão</string>
     <string name="about_source_code">Código-fonte</string>
+    <string name="about_licenses">Licenças de código aberto</string>
     <string name="about_developer">Desenvolvedor</string>
     <string name="about_more_apps_from_me">Mais aplicativos feitos por mim</string>
     <string name="share_content">TimeR Machine, um ótimo aplicativo temporizador de intervalos e atividade física</string>

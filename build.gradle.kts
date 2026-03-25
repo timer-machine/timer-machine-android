@@ -14,6 +14,7 @@ plugins {
     // alias(libs.plugins.androidx.baselineprofile) apply false
     alias(libs.plugins.gms) apply false
     alias(libs.plugins.firebase.crashlytics) apply false
+    alias(libs.plugins.aboutLibraries) apply false
 }
 
 tasks.withType<com.github.benmanes.gradle.versions.updates.DependencyUpdatesTask> {

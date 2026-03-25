@@ -760,6 +760,7 @@
 
     <string name="about_version">Version</string>
     <string name="about_source_code">Source code</string>
+    <string name="about_licenses">Open source licenses</string>
     <string name="about_developer">Developer</string>
     <string name="about_more_apps_from_me">More apps from me</string>
 

@@ -40,6 +40,11 @@
             app:persistent="false"
             app:title="@string/terms_of_service" />
 
+        <Preference
+            app:key="key_licenses"
+            app:persistent="false"
+            app:title="@string/about_licenses" />
+
     </PreferenceCategory>
 
     <PreferenceCategory app:title="@string/about_developer">

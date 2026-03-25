@@ -173,6 +173,7 @@
     <string name="scheduler_starts_action_template">Start %1$s</string>
     <string name="scheduler_stops_action_template">Stopp %1$s</string>
     <string name="theme_custom_title">Egendefinert drakt</string>
+    <string name="about_licenses">Lisenser for åpen kildekode</string>
     <plurals name="days">
         <item quantity="one">1 dag</item>
         <item quantity="other"><xliff:g example="7" id="number">%s</xliff:g> dager</item>

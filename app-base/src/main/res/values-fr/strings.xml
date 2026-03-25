@@ -47,6 +47,7 @@
     <string name="pref_about_title">À propos</string>
     <string name="about_version">Version</string>
     <string name="about_source_code">Code source</string>
+    <string name="about_licenses">Licences open source</string>
     <string name="about_developer">Développeur</string>
     <string name="about_more_apps_from_me">D\'autres applis faites par moi</string>
     <string name="whitelist_location">Vous pouvez trouver les recommandations pour la liste blanche dans « Aide et remarques ».</string>

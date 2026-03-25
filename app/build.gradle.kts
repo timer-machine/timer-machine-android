@@ -10,6 +10,8 @@ plugins {
 
     alias(libs.plugins.gms)
     alias(libs.plugins.firebase.crashlytics)
+
+    alias(libs.plugins.aboutLibraries)
 }
 
 val keystoreProperties = Properties()
@@ -170,6 +172,7 @@ dependencies {
     implementation(libs.ultimateRingtonePicker)
     implementation(libs.coil)
     implementation(libs.coil.gif)
+    implementation(libs.aboutLibraries)
 
     androidTestCompileOnly(libs.taskerPlugin)
 }

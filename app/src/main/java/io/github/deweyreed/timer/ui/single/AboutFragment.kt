@@ -78,6 +78,18 @@ class AboutPreferenceFragment : BasePreferenceFragmentCompat() {
             true
         }
 
+        findPreference<Preference>("key_licenses")?.setOnPreferenceClickListener {
+            val fm = parentFragment?.childFragmentManager
+                ?: return@setOnPreferenceClickListener false
+
+            fm.beginTransaction()
+                .replace(R.id.fragmentContainer, LicensesFragment())
+                .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
+                .addToBackStack(null)
+                .commit()
+            true
+        }
+
         findPreference<Preference>("key_about_more_apps")?.setOnPreferenceClickListener {
             startActivityOrNothing(
                 IntentHelper.intent("https://play.google.com/store/apps/dev?id=7518578900930550082")

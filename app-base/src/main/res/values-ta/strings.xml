@@ -577,6 +577,7 @@
     <string name="rate_five_stars">இந்த பயன்பாட்டை 5 நட்சத்திரங்களை மதிப்பிடுங்கள்</string>
     <string name="about_developer">உருவாக்குநர்</string>
     <string name="about_more_apps_from_me">என்னிடமிருந்து கூடுதல் பயன்பாடுகள்</string>
+    <string name="about_licenses">திறந்த மூல உரிமங்கள்</string>
     <string name="pref_about_title">பற்றி</string>
     <string name="about_version">பதிப்பு</string>
     <string name="about_source_code">மூலக் குறியீடு</string>

@@ -536,6 +536,7 @@
     <string name="pref_about_title">关于</string>
     <string name="about_version">版本</string>
     <string name="about_source_code">源代码</string>
+    <string name="about_licenses">开源许可</string>
     <string name="about_developer">开发者</string>
     <string name="about_more_apps_from_me">更多应用</string>
     <string name="share_content">计时机器，一个可高度自定义的循环/锻炼计时器</string>

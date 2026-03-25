@@ -522,6 +522,7 @@
     <string name="pref_about_title">Acerca de</string>
     <string name="about_version">Versión</string>
     <string name="about_source_code">Código fuente</string>
+    <string name="about_licenses">Licencias de código abierto</string>
     <string name="about_developer">Desarrollador</string>
     <string name="about_more_apps_from_me">Más aplicaciones mías</string>
     <string name="share_content">TimeR Machine, una gran aplicación de cronómetro de intervalos/entrenamientos</string>

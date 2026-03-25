@@ -541,6 +541,7 @@
     <string name="pref_about_title">О приложении</string>
     <string name="about_version">Версия</string>
     <string name="about_source_code">Исходный код</string>
+    <string name="about_licenses">Лицензии открытого ПО</string>
     <string name="about_developer">Разработчик</string>
     <string name="about_more_apps_from_me">Другие мои приложения</string>
     <string name="share_content">TimeR Machine — отличный таймер интервалов/тренировок</string>

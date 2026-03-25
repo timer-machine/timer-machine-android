@@ -462,6 +462,7 @@
     <string name="rate_five_stars">Dieses Programm mit 5 Sternen bewerten</string>
     <string name="pref_recommend">Teilen Sie dieses Programm</string>
     <string name="about_source_code">Quellcode</string>
+    <string name="about_licenses">Open-Source-Lizenzen</string>
     <string name="share_content">TimeR Machine, einegroßartiges Intervall-Training-Zeitmeß-Programm</string>
     <string name="intro_start_welcome">Willkommen!\nKlicken Sie unten auf den <b>Rechtspfeil</b>, um die Anleitung zu starten.</string>
     <string name="intro_start_sample_timer_step4">Ende des Spaziergangs</string>
