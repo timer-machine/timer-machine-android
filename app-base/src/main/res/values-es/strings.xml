@@ -135,7 +135,7 @@
     <string name="pref_reminder_baked_count_off">Deshabilitado</string>
     <string name="cancel">Cancelar</string>
     <string name="app_name">TimeR Machine</string>
-    <string name="ok">Ok</string>
+    <string name="ok">OK</string>
     <string name="more">Más</string>
     <string name="undo">Deshacer</string>
     <string name="delete">Eliminar</string>
@@ -400,7 +400,7 @@
     <string name="intro_start_create_timer">Toca ➕ para crear un nuevo temporizador.</string>
     <string name="intro_start_add_notifier">Toca el botón <b>Notificador</b> para añadir un paso que te recuerde al terminar la carrera.</string>
     <string name="intro_start_add_walk_step">Añade una etapa <b>normal</b> para caminata.</string>
-    <string name="intro_start_walk_notifier">Añade <b>otro notificador</b> para<b>que te recuerde al terminar la caminata</b>.</string>
+    <string name="intro_start_walk_notifier">Añade <b>otro notificador</b> para <b>que te recuerde al terminar la caminata</b>.</string>
     <string name="intro_start_run_timer"><b>Toca el temporizador</b> para acceder a la pantalla de ejecución.</string>
     <string name="intro_start_timer_steps">Esta parte muestra <b>la lista de etapas</b> y resalta <b>la etapa en ejecución</b>.</string>
     <string name="intro_start_timer_buttons">Este es el panel de control. Aquí verás <b>Detener, Etapa anterior, Iniciar/Pausar, Etapa siguiente</b> y más opciones.</string>
@@ -579,13 +579,11 @@
     <string name="billing_help_contact">Contacto</string>
     <string name="billing_help_email_title">Problema de facturación de TimeR Machine</string>
     <string name="intro_exit_previous_hint">Para volver al paso anterior, toca en la <b>flecha izquierda</b> en la parte inferior de la pantalla.</string>
-    <string name="tip_missed_timer"><b>¡Algunos temporizadores se han detenido anormalmente!</b>
-\n
-\nEsto se debe probablemente porque el sistema detuvo la aplicación en segundo plano. <b>Para resolver este problema, por favor considera agregar esta aplicación a la lista blanca en los ajustes del sistema.</b></string>
+    <string name="tip_missed_timer"><b>¡Algunos temporizadores se han detenido anormalmente!</b> \n \nEsto probablemente ha pasado pues el sistema encerró la aplicación en segundo plano. <b>Para resolver este problema, por favor considere agregar esta aplicación a la lista de permisión en los ajustes del sistema.</b></string>
     <string name="billing_help_title">Ayuda</string>
     <string name="pref_category_title_app">Ajustes de la aplicación</string>
     <string name="help_feedback_desp">Envía un correo electrónico y recibe respuesta en 24 horas</string>
-    <string name="billing_explanation">Al pulsar Suscribirse, el pago se cargará a su cuenta de Google Play Store. Su suscripción se renovará automáticamente por la misma duración del plan al mismo precio hasta que la cancele en Suscripciones en Google Play Store al menos 24 horas antes de que finalice el periodo actual. Al tocar Suscribirse, aceptas nuestra <xliff:g example="Privacy policy" id="privacy_policy">%1$s</xliff:g> y <xliff:g example="Terms" id="terms">%2$s</xliff:g>.</string>
+    <string name="billing_explanation">Al pulsar Suscribirse, el pago se cargará a su cuenta de Google Play Store. Su suscripción se renovará automáticamente por la misma duración del plan al mismo precio hasta que la cancele en Suscripciones en Google Play Store al menos 24 horas antes de que finalice el periodo actual. Al tocar Suscribirse, aceptas nuestra <xliff:g example="Política de Privacidad" id="privacy_policy">%1$s</xliff:g> y nuestros <xliff:g example="Términos de Uso" id="terms">%2$s</xliff:g>.</string>
     <string name="scheduler_set1">Programador fijado para dentro de 1 minuto</string>
     <string name="scheduler_set5">Programador configurado para <xliff:g example="2 minutes" id="MINUTES">%3$s</xliff:g> a partir de ahora</string>
     <string name="scheduler_set7">Programador establecido para <xliff:g example="2 hours" id="HOURS">%2$s</xliff:g> y <xliff:g example="2 minutes" id="MINUTES">%3$s</xliff:g> a partir de ahora</string>
@@ -623,4 +621,9 @@
     <string name="image_pick">Elige una imagen</string>
     <string name="behaviour_image">Imagen</string>
     <string name="behaviour_image_help">Adjuntar una imagen para el paso</string>
+    <string name="music_trim_step_duration">Ajuste la duración de la etapa</string>
+    <string name="behaviour_skip">Saltar</string>
+    <string name="behaviour_skip_help">Saltar este paso en algunas series</string>
+    <string name="skip_first">En la primera serie</string>
+    <string name="skip_last">En la última serie</string>
 </resources>
