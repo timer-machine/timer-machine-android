@@ -431,7 +431,7 @@
     <string name="import_data_title">Importar dados do aplicativo</string>
     <string name="import_data_summary">Importar dados do aplicativo a partir de um arquivo</string>
     <string name="import_select_location">Selecionar arquivo</string>
-    <string name="import_error">Importação falhou. Tente novamente.\n\nPossíveis soluções:\n1. Importe novamente.\n2. Atualize o aplicativo para a versão mais recente.\n3. Limpe os dados do aplicativo e então importe novamente.</string>
+    <string name="import_error">A importação falhou. Tente novamente.\n\nPossíveis soluções:\n1. Importe novamente.\n2. Atualize o aplicativo para a versão mais recente.\n3. Limpe os dados do aplicativo e então importe novamente.</string>
     <string name="import_path_title">Selecione um arquivo para importar (.json/.tmd)</string>
     <string name="import_no_file">Nenhum arquivo disponível</string>
     <string name="import_empty_file">O arquivo está vazio</string>
@@ -569,6 +569,42 @@
     <string name="intro_start_timer_time">Esta parte mostra <b>o tempo restante</b>, as séries restantes e o botão para ajustar o tempo.</string>
     <string name="whitelist_disclaimer"><b>Muitos fabricantes de aparelhos Android podem encerrar os apps quando a tela estiver desligada ou ao mudar a outro app</b>, o que é um problema conhecido do Android.\n\nEste app tenta da melhor maneira cumprir sua função, mas ainda existe a chance de falhar.\n\n<b>Por favor adicione este app à lista de autorização nas configurações do sistema</b>.</string>
     <string name="intro_exit_confirmation">Sair do tutorial?</string>
-    <string name="tip_missed_timer"><b>Alguns temporizadores pararam anormalmente!</b>\n\nIsso pode acontecer quando o sistema encerra o app em segundo plano. <b>Para resolver este problema, por favor considere adicionar este app à lista de autorizações nas configurações do sistema.</b></string>
+    <string name="tip_missed_timer"><b>Alguns temporizadores pararam de maneira anormal!</b>\n\nIsso pode acontecer quando o sistema encerra o app em segundo plano. <b>Para resolver este problema, por favor considere adicionar este app à lista de autorizações nas configurações do sistema.</b></string>
     <string name="tasker_event_timer_stops">Ativar quando <xliff:g example="Timer name" id="timer_name">%s</xliff:g> para</string>
+    <string name="behaviour_skip">Saltar</string>
+    <string name="behaviour_skip_help">Saltar esse passo em alguns ciclos</string>
+    <string name="skip_first">No primeiro ciclo</string>
+    <string name="skip_last">No último ciclo</string>
+    <string name="account_delete_confirmation_desp">Isso <b>NÃO</b> afeta a sua assinatura. Você pode gerir a sua assinatura na Google Play Store.</string>
+    <string name="account_deleting">Eliminando conta…</string>
+    <string name="account_sign_in">Registrar / Entrar</string>
+    <string name="billing_iap">Compras dentro do aplicativo</string>
+    <string name="billing_loading">Carregando</string>
+    <string name="billing_purchase">Comprar</string>
+    <string name="billing_subscribe">Assinar</string>
+    <string name="billing_owned">Comprado</string>
+    <string name="billing_per_year">/Ano</string>
+    <string name="billing_explanation">Clicando em Assinar, o pagamento será cobrado na sua conta da Google Play Store. Sua assinatura se renovará automaticamente para a mesma duração pelo mesmo preço até ser cancelada manualmente na Google Play Store, em Assinaturas, ao menos 24 horas antes do fim do período corrente. Ao clicar em Assinar,\" você concorda com a nossa <xliff:g example="Política de Privacidade" id="privacy_policy">%1$s</xliff:g> e com os nossos <xliff:g example="Termos de Uso" id="terms">%2$s</xliff:g>.</string>
+    <string name="billing_cancel_anytime">Cobrança recorrente. Cancele em qualquer momento.</string>
+    <string name="billing_not_supported">Assinaturas não estão disponíveis no momento</string>
+    <string name="billing_connect_issue">Houve um erro na conexão com a Google Play.\n\nPode ser um problema temporário, por favor tente novamente em alguns minutos.</string>
+    <string name="billing_manage_subscription">Gerir assinatura</string>
+    <string name="billing_under_maintenance">Em manutenção</string>
+    <string name="billing_cloud_backup_title">Backup na nuvem</string>
+    <string name="billing_cloud_backup_desp">Nunca perca o registro do seu trabalho árduo</string>
+    <string name="billing_more_themes_title">Mais temas</string>
+    <string name="billing_more_themes_desp">Cores escolhidas cuidadosamente e perfeitas para o app</string>
+    <string name="billing_dynamic_themes_title">Temas dinâmicos</string>
+    <string name="billing_baked_count_title">Som de contagem gravado</string>
+    <string name="billing_baked_count_desp">Sons de contagem regressiva rápidos e consistentes</string>
+    <string name="billing_ad_off_title">Sem anúncios</string>
+    <string name="billing_ad_off_desp">Ajude o app a continuar gratuito, sem anúncios e de código aberto</string>
+    <string name="billing_future_title">Mais no futuro</string>
+    <string name="billing_future_desp">A sua ajuda melhora o aplicativo!</string>
+    <string name="billing_a_part_of_iap">Isso é parte das compras dentro do app.</string>
+    <string name="billing_subscription_service">Este é um serviço de assinatura.</string>
+    <string name="billing_help_title">Ajuda</string>
+    <string name="billing_help_contact">Contato</string>
+    <string name="billing_help_email_title">Problema de cobrança do TimeR Machine</string>
+    <string name="music_trim_step_duration">Ajuste a duração da etapa</string>
 </resources>
