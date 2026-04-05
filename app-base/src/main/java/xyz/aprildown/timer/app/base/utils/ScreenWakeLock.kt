@@ -22,10 +22,12 @@ object ScreenWakeLock {
             )
             val level = when (screenPref) {
                 context.getString(R.string.pref_screen_value_keep) -> {
-                    @Suppress("DEPRECATION") PowerManager.SCREEN_BRIGHT_WAKE_LOCK
+                    @Suppress("DEPRECATION")
+                    PowerManager.SCREEN_BRIGHT_WAKE_LOCK
                 }
                 context.getString(R.string.pref_screen_value_dim) -> {
-                    @Suppress("DEPRECATION") PowerManager.SCREEN_DIM_WAKE_LOCK
+                    @Suppress("DEPRECATION")
+                    PowerManager.SCREEN_DIM_WAKE_LOCK
                 }
                 else -> return
             }
