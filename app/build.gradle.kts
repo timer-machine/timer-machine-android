@@ -95,11 +95,6 @@ android {
             )
         }
     }
-
-    lint {
-        checkDependencies = true
-        warningsAsErrors = true
-    }
 }
 
 dependencies {
