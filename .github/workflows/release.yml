@@ -1,0 +1,51 @@
+name: Release APK
+
+on:
+  push:
+    tags:
+      - "*"
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup JDK 17
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+
+      - name: Setup Gradle
+        uses: gradle/actions/setup-gradle@v5
+
+      - name: Grant execute permission for gradlew
+        run: chmod +x gradlew
+
+      - name: Guard dependencies
+        run: ./gradlew dependencyGuard
+
+      - name: Run Detekt
+        run: ./gradlew detekt
+
+      - name: Configure Keystore
+        run: |
+          echo "${{ secrets.KEYSTORE_FILE }}" > keystore.asc
+          gpg -d --passphrase "${{ secrets.KEYSTORE_PASSPHRASE }}" --batch keystore.asc > app/keystore
+          echo "storeFile=app/keystore" >> local.properties
+          echo "storePassword=${{ secrets.KEYSTORE_STORE_PASSWORD }}" >> local.properties
+          echo "keyAlias=${{ secrets.KEYSTORE_KEY_ALIAS }}" >> local.properties
+          echo "keyPassword=${{ secrets.KEYSTORE_KEY_PASSWORD }}" >> local.properties
+
+      - name: Build Other Release APK
+        run: ./gradlew app:assembleOtherRelease
+
+      - name: Create Prerelease and Upload APK
+        uses: softprops/action-gh-release@v2
+        with:
+          body: "See [CHANGELOG.md](https://github.com/timer-machine/timer-machine-android/blob/develop/CHANGELOG.md)"
+          files: app/build/outputs/apk/other/release/*.apk
