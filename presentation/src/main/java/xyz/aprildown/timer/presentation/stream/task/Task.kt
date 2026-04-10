@@ -6,10 +6,20 @@ import kotlin.math.roundToLong
 
 internal abstract class Task(protected val master: TaskMaster) {
 
+    private val tickListeners = mutableListOf<TickListener>()
+
     var taskState: StreamState =
         StreamState.RESET
         internal set
     open val currentTime: Long = 0L
+
+    fun addTickListener(listener: TickListener) {
+        tickListeners.add(listener)
+    }
+
+    protected fun tick() {
+        tickListeners.forEach { it.onNewTime(currentTime) }
+    }
 
     @CallSuper
     open fun start() {

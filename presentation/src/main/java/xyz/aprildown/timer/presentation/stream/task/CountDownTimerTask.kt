@@ -5,18 +5,10 @@ import com.github.deweyreed.tools.helper.HandlerHelper
 import xyz.aprildown.timer.presentation.stream.StreamState
 
 internal class CountDownTimerTask(master: TaskMaster, countDownTime: Long) : Task(master) {
-
-    // We place tickListeners before timer because MyTimer will onTick in the init
-    private val tickListeners = mutableListOf<TickListener>()
-
     private var timer = MyTimer(countDownTime)
     private var millisLeft = countDownTime
 
     override val currentTime: Long get() = millisLeft
-
-    fun addTickListener(listener: TickListener) {
-        tickListeners.add(listener)
-    }
 
     override fun start() {
         super.start()
@@ -51,7 +43,7 @@ internal class CountDownTimerTask(master: TaskMaster, countDownTime: Long) : Tas
     private fun onTick(millisUntilFinished: Long) {
         millisLeft = millisUntilFinished
         master.onTick(this, currentTime)
-        tickListeners.forEach { it.onNewTime(currentTime) }
+        tick()
     }
 
     private inner class MyTimer(

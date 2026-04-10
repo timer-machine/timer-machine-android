@@ -126,58 +126,50 @@ internal class TimerMachine(
 
     private fun StepEntity.Step.toTask(useTtsNextStep: Boolean = false): Task {
         val behaviour = behaviour
-        return if (behaviour.find { it.type == BehaviourType.HALT } != null) {
-            StopwatchTask(this@TimerMachine).apply {
-                behaviour.forEach {
-                    when (it.type) {
-                        BehaviourType.BEEP -> {
-                            addTickListener(BeepTickListener(beep = listener::beep))
-                        }
-                        else -> Unit
-                    }
-                }
-            }
+        val countUp = behaviour.find { it.type == BehaviourType.HALT } != null
+        return if (countUp) {
+            StopwatchTask(master = this@TimerMachine)
         } else {
-            CountDownTimerTask(
-                this@TimerMachine,
-                length
-            ).apply {
-                behaviour.forEach { behaviour ->
-                    when (behaviour.type) {
-                        BehaviourType.BEEP -> {
-                            addTickListener(BeepTickListener(beep = listener::beep))
-                        }
-                        BehaviourType.HALF -> {
-                            addTickListener(
-                                HalfTickListener(
-                                    total = length,
-                                    half = { listener.notifyHalf(behaviour.toHalfAction().option) },
-                                )
-                            )
-                        }
-                        BehaviourType.COUNT -> {
-                            val action = behaviour.toCountAction()
-                            addTickListener(
-                                CountTickListener(
-                                    times = action.times,
-                                    count = if (action.beep) {
-                                        {
-                                            if (it.isNotBlank()) {
-                                                listener.beep()
-                                            }
-                                        }
-                                    } else {
-                                        { listener.countRead(it) }
-                                    },
-                                )
-                            )
-                        }
-                        else -> Unit
-                    }
-                }
-
+            CountDownTimerTask(master = this@TimerMachine, countDownTime = length).apply {
                 if (useTtsNextStep) {
                     addTickListener(WarmUpTtsListener(warmUp = { listener.countRead("") }))
+                }
+            }
+        }.apply {
+            behaviour.forEach { item ->
+                when (item.type) {
+                    BehaviourType.BEEP -> {
+                        addTickListener(BeepTickListener(beep = listener::beep))
+                    }
+                    BehaviourType.HALF -> {
+                        addTickListener(
+                            HalfTickListener(
+                                total = length,
+                                countUp = countUp,
+                                half = { listener.notifyHalf(item.toHalfAction().option) },
+                            )
+                        )
+                    }
+                    BehaviourType.COUNT -> {
+                        val action = item.toCountAction()
+                        addTickListener(
+                            CountTickListener(
+                                times = action.times,
+                                total = length,
+                                countUp = countUp,
+                                count = if (action.beep) {
+                                    {
+                                        if (it.isNotBlank()) {
+                                            listener.beep()
+                                        }
+                                    }
+                                } else {
+                                    { listener.countRead(it) }
+                                },
+                            )
+                        )
+                    }
+                    else -> Unit
                 }
             }
         }
@@ -190,19 +182,21 @@ internal class TimerMachine(
     }
 
     private class HalfTickListener(
-        total: Long,
+        private val total: Long,
+        private val countUp: Boolean = false,
         private val half: () -> Unit,
     ) : TickListener {
-
-        /**
-         * Plus one second to make some warm up time.
-         */
-        private val notifyTime: Long = total / 2 + 1000
 
         private var isNotified = false
 
         override fun onNewTime(newTime: Long) {
-            if (!isNotified && newTime < notifyTime) {
+            if (isNotified) return
+            val isPassed = if (countUp) {
+                newTime > total / 2 - 1000
+            } else {
+                newTime < total / 2 + 1000
+            }
+            if (isPassed) {
                 isNotified = true
                 half()
             }
@@ -211,6 +205,8 @@ internal class TimerMachine(
 
     private class CountTickListener(
         private var times: Int,
+        private val total: Long = 0L,
+        private val countUp: Boolean = false,
         private val count: (String) -> Unit,
     ) : TickListener {
 
@@ -218,14 +214,18 @@ internal class TimerMachine(
         private var isWarmedUp = false
 
         override fun onNewTime(newTime: Long) {
-            val remainingSeconds = newTime / 1000
+            val remainingSeconds = if (countUp) {
+                (total - newTime) / 1000
+            } else {
+                newTime / 1000
+            }
             if (!isWarmedUp && remainingSeconds <= warmUpTime) {
                 isWarmedUp = true
                 count("")
             }
             if (remainingSeconds <= times && times > 0) {
                 times--
-                count(remainingSeconds.toInt().toString())
+                count((newTime / 1000).toString())
             }
         }
     }

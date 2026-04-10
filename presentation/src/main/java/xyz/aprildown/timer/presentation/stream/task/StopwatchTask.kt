@@ -9,17 +9,11 @@ import xyz.aprildown.timer.presentation.stream.StreamState
  */
 internal class StopwatchTask(master: TaskMaster) : Task(master) {
 
-    private val tickListeners = mutableListOf<TickListener>()
-
     private var timer = MyTimer()
     private var millisPassedBase = 0L
     private var millisPassedCurrent = 0L
 
     override val currentTime: Long get() = millisPassedBase + millisPassedCurrent
-
-    fun addTickListener(listener: TickListener) {
-        tickListeners.add(listener)
-    }
 
     override fun start() {
         super.start()
@@ -57,7 +51,7 @@ internal class StopwatchTask(master: TaskMaster) : Task(master) {
     private fun onTick(millisPassed: Long) {
         millisPassedCurrent = millisPassed
         master.onTick(this, currentTime)
-        tickListeners.forEach { it.onNewTime(currentTime) }
+        tick()
     }
 
     private inner class MyTimer : AccurateCountDownTimer(DURATION, 1_000L) {
