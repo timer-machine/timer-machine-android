@@ -3,9 +3,6 @@ description: Setup Android
 runs:
   using: "composite"
   steps:
-    - name: Checkout
-      uses: actions/checkout@v4
-
     - name: Setup JDK 17
       uses: actions/setup-java@v4
       with:
