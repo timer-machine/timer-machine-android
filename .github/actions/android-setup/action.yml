@@ -14,9 +14,12 @@ runs:
 
     - name: Grant execute permission for gradlew
       run: chmod +x gradlew
+      shell: bash
 
     - name: Guard dependencies
       run: ./gradlew dependencyGuard
+      shell: bash
 
     - name: Run Detekt
       run: ./gradlew detekt
+      shell: bash
