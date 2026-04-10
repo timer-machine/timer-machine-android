@@ -29,5 +29,5 @@ jobs:
       - name: Create Prerelease and Upload APK
         uses: softprops/action-gh-release@v2
         with:
-          body: "See [CHANGELOG.md](https://github.com/timer-machine/timer-machine-android/blob/develop/CHANGELOG.md)"
+          body: "See [CHANGELOG.md](https://github.com/timer-machine/timer-machine-android/blob/main/CHANGELOG.md)"
           files: app/build/outputs/apk/other/release/*.apk
