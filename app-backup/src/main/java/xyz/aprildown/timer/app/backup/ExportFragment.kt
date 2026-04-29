@@ -120,8 +120,10 @@ class ExportFragment : Fragment() {
                     checkNotNull(contentResolver.openOutputStream(uri)).sink()
                 },
                 delete = {
-                    // ContentResolver.delete doesn't work
-                    documentFile?.delete()
+                    if (documentFile?.length() == 0L) {
+                        // ContentResolver.delete doesn't work
+                        documentFile.delete()
+                    }
                 },
             ),
             name = documentFile?.name?.takeIf { it.isNotBlank() } ?: uri.toString(),
