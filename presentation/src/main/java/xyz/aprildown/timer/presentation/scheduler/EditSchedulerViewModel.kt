@@ -12,6 +12,7 @@ import xyz.aprildown.timer.domain.entities.TimerInfo
 import xyz.aprildown.timer.domain.usecases.scheduler.AddScheduler
 import xyz.aprildown.timer.domain.usecases.scheduler.GetScheduler
 import xyz.aprildown.timer.domain.usecases.scheduler.SaveScheduler
+import xyz.aprildown.timer.domain.usecases.scheduler.SetSchedulerEnable
 import xyz.aprildown.timer.domain.usecases.timer.FindTimerInfo
 import xyz.aprildown.timer.presentation.BaseViewModel
 import javax.inject.Inject
@@ -31,6 +32,9 @@ class EditSchedulerViewModel @Inject constructor(
     private val _schedulerWithTimerInfo = MutableLiveData<Pair<SchedulerEntity, TimerInfo?>>()
     val schedulerWithTimerInfo: LiveData<Pair<SchedulerEntity, TimerInfo?>> =
         _schedulerWithTimerInfo
+
+    private val _saveResult = MutableLiveData<SetSchedulerEnable.Result?>()
+    val saveResult: LiveData<SetSchedulerEnable.Result?> = _saveResult
 
     fun load(schedulerId: Int) = launch {
         if (schedulerWithTimerInfo.value == null) {
@@ -63,15 +67,13 @@ class EditSchedulerViewModel @Inject constructor(
         return isNewScheduler || newScheduler.hashCode() == schedulerHash
     }
 
-    fun saveScheduler(
-        newScheduler: SchedulerEntity,
-        onDone: (() -> Unit)? = null
-    ) = launch {
-        if (isNewScheduler) {
+    fun saveScheduler(newScheduler: SchedulerEntity) = launch {
+        val scheduleResult: SetSchedulerEnable.Result? = if (isNewScheduler) {
             addScheduler(newScheduler)
+            null
         } else {
-            saveSchedulerUseCase(newScheduler)
+            saveSchedulerUseCase(newScheduler).scheduleResult
         }
-        onDone?.invoke()
+        _saveResult.value = scheduleResult
     }
 }

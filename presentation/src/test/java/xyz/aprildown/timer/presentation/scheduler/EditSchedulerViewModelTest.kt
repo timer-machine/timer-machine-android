@@ -5,6 +5,7 @@ import androidx.lifecycle.Observer
 import kotlinx.coroutines.test.StandardTestDispatcher
 import kotlinx.coroutines.test.TestScope
 import kotlinx.coroutines.test.runTest
+import org.junit.Assert.assertEquals
 import org.junit.Assert.assertNull
 import org.junit.Assert.assertTrue
 import org.junit.Rule
@@ -21,6 +22,7 @@ import xyz.aprildown.timer.domain.entities.toTimerInfo
 import xyz.aprildown.timer.domain.usecases.scheduler.AddScheduler
 import xyz.aprildown.timer.domain.usecases.scheduler.GetScheduler
 import xyz.aprildown.timer.domain.usecases.scheduler.SaveScheduler
+import xyz.aprildown.timer.domain.usecases.scheduler.SetSchedulerEnable
 import xyz.aprildown.timer.domain.usecases.timer.FindTimerInfo
 
 class EditSchedulerViewModelTest {
@@ -83,6 +85,8 @@ class EditSchedulerViewModelTest {
     fun `save new scheduler`() = runTest {
         val viewModel = getViewModel()
         val new = TestData.fakeSchedulerB.copy(id = SchedulerEntity.NEW_ID)
+        val saveResults = mutableListOf<SetSchedulerEnable.Result?>()
+        viewModel.saveResult.observeForever { saveResults.add(it) }
         viewModel.load(SchedulerEntity.NEW_ID).join()
         viewModel.saveScheduler(new).join()
 
@@ -92,6 +96,8 @@ class EditSchedulerViewModelTest {
             assertNull(firstValue.second)
         }
         verify(addScheduler).invoke(new)
+        assertEquals(1, saveResults.size)
+        assertNull(saveResults[0])
 
         verifyNoMoreInteractionsForAll()
     }
@@ -99,11 +105,21 @@ class EditSchedulerViewModelTest {
     @Test
     fun `save scheduler`() = runTest {
         val viewModel = getViewModel()
-        val old = TestData.fakeSchedulerA.copy(enable = 0)
-        val new = TestData.fakeSchedulerB.copy(id = old.id, enable = 0)
+        val old = TestData.fakeSchedulerA.copy(enable = 1)
+        val new = TestData.fakeSchedulerB.copy(id = old.id, enable = 1)
         val timerInfo = TestData.fakeTimerAdvanced.toTimerInfo()
+        val scheduledTime = 123456789L
+        val scheduledResult = SetSchedulerEnable.Result.Scheduled(scheduledTime)
         whenever(getScheduler.invoke(old.id)).thenReturn(old)
         whenever(findTimerInfo.invoke(old.timerId)).thenReturn(timerInfo)
+        whenever(saveScheduler.invoke(new)).thenReturn(
+            SaveScheduler.Result(
+                saved = true,
+                scheduleResult = scheduledResult
+            )
+        )
+        val saveResults = mutableListOf<SetSchedulerEnable.Result?>()
+        viewModel.saveResult.observeForever { saveResults.add(it) }
 
         viewModel.load(old.id).join()
 
@@ -114,6 +130,35 @@ class EditSchedulerViewModelTest {
         viewModel.saveScheduler(new).join()
 
         verify(saveScheduler).invoke(new)
+        assertEquals(1, saveResults.size)
+        assertEquals(scheduledResult, saveResults[0])
+
+        verifyNoMoreInteractionsForAll()
+    }
+
+    @Test
+    fun `save scheduler fails`() = runTest {
+        val viewModel = getViewModel()
+        val old = TestData.fakeSchedulerA.copy(enable = 1)
+        val new = TestData.fakeSchedulerB.copy(id = old.id, enable = 1)
+        val timerInfo = TestData.fakeTimerAdvanced.toTimerInfo()
+        whenever(getScheduler.invoke(old.id)).thenReturn(old)
+        whenever(findTimerInfo.invoke(old.timerId)).thenReturn(timerInfo)
+        whenever(saveScheduler.invoke(new)).thenReturn(SaveScheduler.Result(saved = false))
+        val saveResults = mutableListOf<SetSchedulerEnable.Result?>()
+        viewModel.saveResult.observeForever { saveResults.add(it) }
+
+        viewModel.load(old.id).join()
+
+        verify(getScheduler).invoke(old.id)
+        verify(findTimerInfo).invoke(old.timerId)
+        verify(schedulerWithTimerInfoObserver).onChanged(old to timerInfo)
+
+        viewModel.saveScheduler(new).join()
+
+        verify(saveScheduler).invoke(new)
+        assertEquals(1, saveResults.size)
+        assertNull(saveResults[0])
 
         verifyNoMoreInteractionsForAll()
     }

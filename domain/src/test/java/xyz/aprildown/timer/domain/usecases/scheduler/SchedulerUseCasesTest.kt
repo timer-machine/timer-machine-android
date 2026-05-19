@@ -89,14 +89,77 @@ class SchedulerUseCasesTest {
 
         assertEquals(
             false,
-            useCase(new.copy(id = SchedulerEntity.NULL_ID))
+            useCase(new.copy(id = SchedulerEntity.NULL_ID)).saved
         )
         verify(schedulerRepository, never()).item(TestData.fakeSchedulerId)
         verify(schedulerExecutor, never()).cancel(old)
         verify(schedulerRepository, never()).add(new)
         verify(appDataRepository, never()).notifyDataChanged()
 
-        assertEquals(true, useCase(new))
+        val scheduledTime = 123456789L
+        whenever(schedulerExecutor.schedule(new)).thenReturn(
+            SetSchedulerEnable.Result.Scheduled(scheduledTime)
+        )
+        val result = useCase(new)
+        assertEquals(true, result.saved)
+        assertEquals(SetSchedulerEnable.Result.Scheduled::class, result.scheduleResult!!::class)
+        assertEquals(
+            scheduledTime,
+            (result.scheduleResult as SetSchedulerEnable.Result.Scheduled).time
+        )
+        verify(schedulerRepository).item(TestData.fakeSchedulerId)
+        verify(schedulerExecutor).cancel(old)
+        verify(schedulerRepository).save(new)
+        verify(schedulerExecutor).schedule(new)
+        verify(appDataRepository).notifyDataChanged()
+
+        verifyNoMoreInteractions(schedulerRepository)
+        verifyNoMoreInteractions(schedulerExecutor)
+        verifyNoMoreInteractions(appDataRepository)
+    }
+
+    @Test
+    fun `save with disabled scheduler`() = runTest {
+        val old = TestData.fakeSchedulerA.copy(id = TestData.fakeSchedulerId)
+        val new = TestData.fakeSchedulerB.copy(id = TestData.fakeSchedulerId, enable = 0)
+        whenever(schedulerRepository.item(TestData.fakeSchedulerId)).thenReturn(old)
+        whenever(schedulerRepository.save(new)).thenReturn(true)
+        val useCase = SaveScheduler(
+            dispatcher = StandardTestDispatcher(testScheduler),
+            repository = schedulerRepository,
+            executor = schedulerExecutor,
+            appDataRepository = appDataRepository,
+        )
+
+        val result = useCase(new)
+        assertEquals(true, result.saved)
+        assertNull(result.scheduleResult)
+        verify(schedulerRepository).item(TestData.fakeSchedulerId)
+        verify(schedulerExecutor).cancel(old)
+        verify(schedulerRepository).save(new)
+        verify(appDataRepository).notifyDataChanged()
+
+        verifyNoMoreInteractions(schedulerRepository)
+        verifyNoMoreInteractions(schedulerExecutor)
+        verifyNoMoreInteractions(appDataRepository)
+    }
+
+    @Test
+    fun `save fails`() = runTest {
+        val old = TestData.fakeSchedulerA.copy(id = TestData.fakeSchedulerId)
+        val new = TestData.fakeSchedulerB.copy(id = TestData.fakeSchedulerId)
+        whenever(schedulerRepository.item(TestData.fakeSchedulerId)).thenReturn(old)
+        whenever(schedulerRepository.save(new)).thenReturn(false)
+        val useCase = SaveScheduler(
+            dispatcher = StandardTestDispatcher(testScheduler),
+            repository = schedulerRepository,
+            executor = schedulerExecutor,
+            appDataRepository = appDataRepository,
+        )
+
+        val result = useCase(new)
+        assertEquals(false, result.saved)
+        assertNull(result.scheduleResult)
         verify(schedulerRepository).item(TestData.fakeSchedulerId)
         verify(schedulerExecutor).cancel(old)
         verify(schedulerRepository).save(new)

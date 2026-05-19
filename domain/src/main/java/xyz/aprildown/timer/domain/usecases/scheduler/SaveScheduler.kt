@@ -16,14 +16,24 @@ class SaveScheduler @Inject constructor(
     private val repository: SchedulerRepository,
     private val executor: SchedulerExecutor,
     private val appDataRepository: AppDataRepository
-) : CoroutinesUseCase<SchedulerEntity, Boolean>(dispatcher) {
-    override suspend fun create(params: SchedulerEntity): Boolean {
-        if (params.isNull) return false
+) : CoroutinesUseCase<SchedulerEntity, SaveScheduler.Result>(dispatcher) {
 
-        // Cancel the old scheduler before updating it
+    data class Result(
+        val saved: Boolean,
+        val scheduleResult: SetSchedulerEnable.Result? = null,
+    )
+
+    override suspend fun create(params: SchedulerEntity): Result {
+        if (params.isNull) return Result(saved = false)
+
         repository.item(params.id)?.let { executor.cancel(it) }
-        return repository.save(params).also {
-            appDataRepository.notifyDataChanged()
+        val saved = repository.save(params)
+        val scheduleResult = if (saved && params.enable == 1) {
+            executor.schedule(params)
+        } else {
+            null
         }
+        appDataRepository.notifyDataChanged()
+        return Result(saved = saved, scheduleResult = scheduleResult)
     }
 }

@@ -201,32 +201,7 @@ class SchedulerFragment : Fragment(R.layout.fragment_scheduler), MainCallback.Fr
 
     private fun setUpObservers() {
         viewModel.scheduleEvent.observeEvent(viewLifecycleOwner) {
-            mainCallback.snackbarView.longSnackbar(
-                when (it) {
-                    is SetSchedulerEnable.Result.Scheduled -> {
-                        it.time.formatElapsedTimeUntilScheduler(resources)
-                    }
-                    is SetSchedulerEnable.Result.Canceled -> {
-                        getString(
-                            RBase.string.scheduler_canceled_template,
-                            resources.getNumberFormattedQuantityString(
-                                RBase.plurals.schedulers,
-                                it.count
-                            )
-                        )
-                    }
-                    is SetSchedulerEnable.Result.Failed -> {
-                        getString(
-                            RBase.string.scheduler_schedule_failed,
-                            if (it.message.isNullOrBlank()) {
-                                ""
-                            } else {
-                                it.message
-                            }
-                        )
-                    }
-                }
-            )
+            mainCallback.snackbarView.longSnackbar(it.toScheduleSnackbarMessage(resources))
         }
     }
 }
@@ -265,4 +240,18 @@ private fun Long.formatElapsedTimeUntilScheduler(res: Resources): String {
         (if (showDays) 1 else 0) or (if (showHours) 2 else 0) or if (showMinutes) 4 else 0
 
     return String.format(formats[index], daySeq, hourSeq, minSeq)
+}
+
+internal fun SetSchedulerEnable.Result.toScheduleSnackbarMessage(resources: Resources): String {
+    return when (this) {
+        is SetSchedulerEnable.Result.Scheduled -> time.formatElapsedTimeUntilScheduler(resources)
+        is SetSchedulerEnable.Result.Canceled -> resources.getString(
+            RBase.string.scheduler_canceled_template,
+            resources.getNumberFormattedQuantityString(RBase.plurals.schedulers, count)
+        )
+        is SetSchedulerEnable.Result.Failed -> resources.getString(
+            RBase.string.scheduler_schedule_failed,
+            if (message.isNullOrBlank()) "" else message
+        )
+    }
 }

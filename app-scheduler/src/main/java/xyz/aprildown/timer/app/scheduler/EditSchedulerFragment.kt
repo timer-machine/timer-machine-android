@@ -24,7 +24,7 @@ import androidx.core.widget.doAfterTextChanged
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
-import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.fragment.findNavController
 import com.github.deweyreed.tools.anko.longSnackbar
 import com.github.deweyreed.tools.helper.getNumberFormattedQuantityString
 import com.github.deweyreed.tools.helper.gone
@@ -113,11 +113,21 @@ class EditSchedulerFragment : Fragment(R.layout.fragment_edit_scheduler), MenuPr
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         val context = view.context
+        val navController = findNavController()
         setUpViews(view)
         viewModel.load(arguments?.getInt(ARG_ID) ?: SchedulerEntity.NEW_ID)
         viewModel.schedulerWithTimerInfo.observe(viewLifecycleOwner) {
             bindViewsWithScheduler(context, it.first, it.second)
+        }
+        viewModel.saveResult.observe(viewLifecycleOwner) { scheduleResult ->
+            if (scheduleResult != null) {
+                mainCallback.snackbarView.longSnackbar(
+                    scheduleResult.toScheduleSnackbarMessage(resources)
+                )
+            }
+            navController.popBackStack()
         }
     }
 
@@ -311,9 +321,7 @@ class EditSchedulerFragment : Fragment(R.layout.fragment_edit_scheduler), MenuPr
     }
 
     private fun saveScheduler() {
-        viewModel.saveScheduler(getCurrentScheduler()) {
-            NavHostFragment.findNavController(this).popBackStack()
-        }
+        viewModel.saveScheduler(getCurrentScheduler())
     }
 
     private fun getCurrentScheduler(): SchedulerEntity {
@@ -323,15 +331,15 @@ class EditSchedulerFragment : Fragment(R.layout.fragment_edit_scheduler), MenuPr
             mode = SchedulerRepeatMode.ONCE
         }
         return SchedulerEntity(
-            viewModel.schedulerWithTimerInfo.value?.first?.id ?: SchedulerEntity.NEW_ID,
-            selectedTimerId,
-            editName?.text.toString(),
-            selectedAction,
-            timePicker?.hours ?: 0,
-            timePicker?.minutes ?: 0,
-            mode,
-            repeatContent,
-            0
+            id = viewModel.schedulerWithTimerInfo.value?.first?.id ?: SchedulerEntity.NEW_ID,
+            timerId = selectedTimerId,
+            label = editName?.text.toString(),
+            action = selectedAction,
+            hour = timePicker?.hours ?: 0,
+            minute = timePicker?.minutes ?: 0,
+            repeatMode = mode,
+            days = repeatContent,
+            enable = viewModel.schedulerWithTimerInfo.value?.first?.enable ?: 0,
         )
     }
 
