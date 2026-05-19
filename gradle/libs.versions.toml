@@ -1,7 +1,7 @@
 [versions]
 jvmTarget = "17"
 
-agp = "9.1.0"
+agp = "9.1.1"
 
 compileSdk = "36"
 minSdk = "23"
@@ -17,7 +17,7 @@ room = "2.8.4"
 
 detekt = "1.23.8"
 
-aboutLibraries = "14.0.0-b03"
+aboutLibraries = "14.2.0"
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
@@ -34,13 +34,13 @@ kotlin-compose = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "ko
 hilt = { id = "com.google.dagger.hilt.android", version.ref = "dagger" }
 room = { id = "androidx.room", version.ref = "room" }
 
-versions = "com.github.ben-manes.versions:0.53.0"
+versions = "com.github.ben-manes.versions:0.54.0"
 dependencyGuard = "com.dropbox.dependency-guard:0.5.0"
 
 detekt = { id = "io.gitlab.arturbosch.detekt", version.ref = "detekt" }
 
 gms = "com.google.gms.google-services:4.4.4"
-firebase-crashlytics = "com.google.firebase.crashlytics:3.0.6"
+firebase-crashlytics = "com.google.firebase.crashlytics:3.0.7"
 
 aboutLibraries = { id = "com.mikepenz.aboutlibraries.plugin.android", version.ref = "aboutLibraries" }
 
@@ -80,13 +80,13 @@ androidx-recyclerView = "androidx.recyclerview:recyclerview:1.4.0"
 androidx-viewPager2 = "androidx.viewpager2:viewpager2:1.1.0"
 androidx-preference = "androidx.preference:preference:1.2.1"
 androidx-constraintLayout = "androidx.constraintlayout:constraintlayout:2.2.1"
-androidx-lifecycle-runtime = "androidx.lifecycle:lifecycle-runtime-ktx:2.10.0"
-androidx-lifecycle-liveData = "androidx.lifecycle:lifecycle-livedata-ktx:2.10.0"
-androidx-lifecycle-viewModel = "androidx.lifecycle:lifecycle-viewmodel-ktx:2.10.0"
-androidx-customTabs = "androidx.browser:browser:1.9.0"
+androidx-lifecycle-runtime = "androidx.lifecycle:lifecycle-runtime:2.10.0"
+androidx-lifecycle-liveData = "androidx.lifecycle:lifecycle-livedata:2.10.0"
+androidx-lifecycle-viewModel = "androidx.lifecycle:lifecycle-viewmodel:2.10.0"
+androidx-customTabs = "androidx.browser:browser:1.10.0"
 androidx-dynamicAnimation = "androidx.dynamicanimation:dynamicanimation:1.1.0"
 androidx-media = "androidx.media:media:1.7.1"
-androidx-media3-player = "androidx.media3:media3-exoplayer:1.9.3"
+androidx-media3-player = "androidx.media3:media3-exoplayer:1.10.1"
 androidx-core = "androidx.core:core-ktx:1.17.0"
 androidx-collection = "androidx.collection:collection-ktx:1.6.0"
 androidx-profileinstaller = "androidx.profileinstaller:profileinstaller:1.4.1"
@@ -96,15 +96,15 @@ androidx-room-runtime = { module = "androidx.room:room-runtime", version.ref = "
 androidx-room-compiler = { module = "androidx.room:room-compiler", version.ref = "room" }
 androidx-room-test = { module = "androidx.room:room-testing", version.ref = "room" }
 
-androidx-navigation-fragment = "androidx.navigation:navigation-fragment-ktx:2.9.7"
-androidx-navigation-ui = "androidx.navigation:navigation-ui-ktx:2.9.7"
+androidx-navigation-fragment = "androidx.navigation:navigation-fragment:2.9.8"
+androidx-navigation-ui = "androidx.navigation:navigation-ui:2.9.8"
 
-androidx-work = "androidx.work:work-runtime-ktx:2.11.1"
+androidx-work = "androidx.work:work-runtime-ktx:2.11.2"
 
-androidx-crendential-core = "androidx.credentials:credentials:1.5.0"
-androidx-crendential-play = "androidx.credentials:credentials-play-services-auth:1.5.0"
+androidx-crendential-core = "androidx.credentials:credentials:1.6.0"
+androidx-crendential-play = "androidx.credentials:credentials-play-services-auth:1.6.0"
 
-compose-bom = "androidx.compose:compose-bom:2026.03.00"
+compose-bom = "androidx.compose:compose-bom:2026.03.01"
 compose-material = { module = "androidx.compose.material3:material3" }
 compose-icons = { module = "androidx.compose.material:material-icons-extended" }
 compose-activity = "androidx.activity:activity-compose:1.13.0"
@@ -128,7 +128,7 @@ moshi-core = "com.squareup.moshi:moshi:1.15.2"
 moshi-kotlinGen = "com.squareup.moshi:moshi-kotlin-codegen:1.15.2"
 
 billing = "com.android.billingclient:billing-ktx:7.1.1"
-firebase-bom = "com.google.firebase:firebase-bom:34.11.0"
+firebase-bom = "com.google.firebase:firebase-bom:34.13.0"
 firebase-auth = { module = "com.google.firebase:firebase-auth" }
 firebase-storage = { module = "com.google.firebase:firebase-storage" }
 firebase-crashlytics = { module = "com.google.firebase:firebase-crashlytics" }
@@ -164,7 +164,7 @@ taskerPlugin = "com.joaomgcd:taskerpluginlibrary:0.4.10"
 diskLruCache = "com.github.bumptech.glide:disklrucache:5.0.5"
 coil = "io.coil-kt.coil3:coil-compose:3.4.0"
 coil-gif = "io.coil-kt.coil3:coil-gif:3.4.0"
-zoomable = "me.saket.telephoto:zoomable:0.18.0"
+zoomable = "me.saket.telephoto:zoomable:0.19.0"
 twoWayNestedScrollView = "com.github.ultimate-deej:twowaynestedscrollview:0.1.2"
 accurateCountDownTimer = "com.github.cardinalby:accurate-count-down-timer:1.0"
 aboutLibraries = { module = "com.mikepenz:aboutlibraries-compose-m3", version.ref = "aboutLibraries" }
