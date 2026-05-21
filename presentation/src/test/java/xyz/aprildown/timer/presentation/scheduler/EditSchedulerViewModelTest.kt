@@ -103,7 +103,36 @@ class EditSchedulerViewModelTest {
     }
 
     @Test
-    fun `save scheduler`() = runTest {
+    fun `save disabled scheduler`() = runTest {
+        val viewModel = getViewModel()
+        val old = TestData.fakeSchedulerA.copy(enable = 0)
+        val new = TestData.fakeSchedulerB.copy(id = old.id, enable = 0)
+        val timerInfo = TestData.fakeTimerAdvanced.toTimerInfo()
+        whenever(getScheduler.invoke(old.id)).thenReturn(old)
+        whenever(findTimerInfo.invoke(old.timerId)).thenReturn(timerInfo)
+        whenever(saveScheduler.invoke(new)).thenReturn(
+            SaveScheduler.Result(saved = true, scheduleResult = null)
+        )
+        val saveResults = mutableListOf<SetSchedulerEnable.Result?>()
+        viewModel.saveResult.observeForever { saveResults.add(it) }
+
+        viewModel.load(old.id).join()
+
+        verify(getScheduler).invoke(old.id)
+        verify(findTimerInfo).invoke(old.timerId)
+        verify(schedulerWithTimerInfoObserver).onChanged(old to timerInfo)
+
+        viewModel.saveScheduler(new).join()
+
+        verify(saveScheduler).invoke(new)
+        assertEquals(1, saveResults.size)
+        assertNull(saveResults[0])
+
+        verifyNoMoreInteractionsForAll()
+    }
+
+    @Test
+    fun `save enabled scheduler`() = runTest {
         val viewModel = getViewModel()
         val old = TestData.fakeSchedulerA.copy(enable = 1)
         val new = TestData.fakeSchedulerB.copy(id = old.id, enable = 1)
