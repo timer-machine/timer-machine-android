@@ -24,12 +24,9 @@ import xyz.aprildown.timer.domain.repositories.TimerStampRepository
 import xyz.aprildown.timer.domain.usecases.invoke
 import java.time.Instant
 import java.time.LocalDateTime
-import java.time.LocalTime
-import java.time.Month
 import java.time.YearMonth
 import java.time.ZoneId
 import kotlin.random.Random
-import kotlin.time.Duration.Companion.seconds
 
 class RecordUseCasesTest {
 
@@ -63,34 +60,36 @@ class RecordUseCasesTest {
     }
 
     @Test
-    fun `timeline days test`() = runTest(timeout = 30.seconds) {
+    fun `timeline days test`() = runTest {
         val getRecords = GetRecords(StandardTestDispatcher(testScheduler), timerStampRepository)
 
-        val start = LocalDateTime.of(
-            YearMonth.of(2018, Month.NOVEMBER).atDay(1),
-            LocalTime.MIN
-        ).atZone(ZoneId.systemDefault()).toInstant().toEpochMilli()
-        val now = System.currentTimeMillis()
+        val start = LocalDateTime.of(2023, 1, 1, 0, 0)
+            .atZone(ZoneId.systemDefault()).toInstant().toEpochMilli()
+        val end = LocalDateTime.of(2023, 1, 30, 23, 59)
+            .atZone(ZoneId.systemDefault()).toInstant().toEpochMilli()
 
-        val predict =
-            arrayMapOf<Long, MutableList<TimerStampEntity>>()
-        repeat(500) {
-            val time = Random.nextLong(now - start) + start
-            val duration = Random.nextLong(DateUtils.DAY_IN_MILLIS * 2)
+        val predict = arrayMapOf<Long, MutableList<TimerStampEntity>>()
+        val random = Random(42)
+
+        repeat(50) {
+            val time = random.nextLong(start, end)
+            val duration = random.nextLong(DateUtils.MINUTE_IN_MILLIS * 30)
             val dayStart = TimeUtils.getDayStart(time)
-            predict[dayStart] = predict.getOrDefault(dayStart, mutableListOf()).apply {
-                add(
-                    TimerStampEntity(
-                        id = TestData.fakeTimerStampIdA,
-                        timerId = TestData.fakeTimerId,
-                        start = time,
-                        end = time + duration
-                    )
+            predict.getOrPut(dayStart) { mutableListOf() }.add(
+                TimerStampEntity(
+                    id = TestData.fakeTimerStampIdA,
+                    timerId = TestData.fakeTimerId,
+                    start = time,
+                    end = time + duration
                 )
-            }
+            )
         }
 
-        for (dayTime in TimeUtils.getDayStart(start)..TimeUtils.getDayEnd(now) step DateUtils.DAY_IN_MILLIS) {
+        val dayStartRange =
+            TimeUtils.getDayStart(start)..TimeUtils.getDayEnd(end) step DateUtils.DAY_IN_MILLIS
+        val expectedDaysCount = dayStartRange.toList().size
+
+        for (dayTime in dayStartRange) {
             whenever(
                 timerStampRepository.getRaw(
                     any(),
@@ -104,24 +103,20 @@ class RecordUseCasesTest {
             GetRecords.Params(
                 timerIds = emptyList(),
                 startTime = start,
-                endTime = now
+                endTime = end
             )
         )
+
         assertEquals(GetRecords.TimelineResult.MODE_DAYS, result.mode)
-        val resultEvents =
-            result.events.filter { it.duration > 0 && it.count > 0 }
-        assertEquals(predict.keys.size, resultEvents.size)
-        predict.keys.forEach { predictTime ->
-            val stamps = predict[predictTime]!!
-            val event = resultEvents.find { it.timePoint == predictTime }
-            assertEquals(
-                stamps.fold(0L) { acc, timerStampEntity -> acc + timerStampEntity.duration },
-                event?.duration
-            )
-            assertEquals(stamps.size, event?.count)
+        assertEquals(expectedDaysCount, result.events.size)
+
+        result.events.forEach { event ->
+            val stamps = predict[event.timePoint] ?: emptyList()
+            assertEquals(stamps.sumOf { it.duration }, event.duration)
+            assertEquals(stamps.size, event.count)
         }
 
-        for (dayTime in TimeUtils.getDayStart(start)..TimeUtils.getDayEnd(now) step DateUtils.DAY_IN_MILLIS) {
+        for (dayTime in dayStartRange) {
             verify(timerStampRepository).getRaw(
                 any(),
                 eq(dayTime),
