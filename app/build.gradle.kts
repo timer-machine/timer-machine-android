@@ -26,6 +26,7 @@ android {
     namespace = "io.github.deweyreed.timer"
     defaultConfig {
         applicationId = "io.github.deweyreed.timer"
+        testInstrumentationRunner = "io.github.deweyreed.timer.TestRunner"
         androidResources.localeFilters += setOf(
             "en",
             "de",
