@@ -4,12 +4,18 @@ import android.content.Intent
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.Observer
 import com.github.deweyreed.tools.arch.Event
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.emptyFlow
 import kotlinx.coroutines.test.StandardTestDispatcher
 import kotlinx.coroutines.test.TestScope
+import kotlinx.coroutines.test.resetMain
 import kotlinx.coroutines.test.runTest
+import kotlinx.coroutines.test.setMain
+import org.junit.After
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertTrue
+import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import org.mockito.kotlin.any
@@ -39,10 +45,10 @@ import xyz.aprildown.timer.domain.usecases.timer.GetTimerInfoFlow
 import xyz.aprildown.timer.presentation.StreamMachineIntentProvider
 import xyz.aprildown.timer.presentation.stream.StreamState
 
+@OptIn(ExperimentalCoroutinesApi::class)
 class TimerViewModelTest {
 
-    @JvmField
-    @Rule
+    @get:Rule
     val instantExecutorRule = InstantTaskExecutorRule()
 
     private val getTimerInfoFlow: GetTimerInfoFlow = mock()
@@ -114,6 +120,16 @@ class TimerViewModelTest {
         verifyNoMoreInteractionsForAll()
 
         return viewModel
+    }
+
+    @Before
+    fun before() {
+        Dispatchers.setMain(StandardTestDispatcher())
+    }
+
+    @After
+    fun after() {
+        Dispatchers.resetMain()
     }
 
     @Test

@@ -3,10 +3,16 @@ package xyz.aprildown.timer.presentation.timer
 import android.text.format.DateUtils
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.Observer
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.StandardTestDispatcher
 import kotlinx.coroutines.test.TestScope
+import kotlinx.coroutines.test.resetMain
 import kotlinx.coroutines.test.runTest
+import kotlinx.coroutines.test.setMain
+import org.junit.After
 import org.junit.Assert.assertTrue
+import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import org.mockito.kotlin.any
@@ -28,6 +34,7 @@ import xyz.aprildown.timer.domain.usecases.invoke
 import xyz.aprildown.timer.domain.usecases.record.GetRecords
 import xyz.aprildown.timer.domain.usecases.timer.GetTimerInfo
 
+@OptIn(ExperimentalCoroutinesApi::class)
 class RecordViewModelTest {
 
     @get:Rule
@@ -38,6 +45,16 @@ class RecordViewModelTest {
     private val folderSortByRule: FolderSortByRule = mock()
     private val getTimerInfo: GetTimerInfo = mock()
     private val preferencesRepository: PreferencesRepository = mock()
+
+    @Before
+    fun before() {
+        Dispatchers.setMain(StandardTestDispatcher())
+    }
+
+    @After
+    fun after() {
+        Dispatchers.resetMain()
+    }
 
     @Test
     fun `initial load`() = runTest {
