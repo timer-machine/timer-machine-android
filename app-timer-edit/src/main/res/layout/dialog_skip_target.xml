@@ -70,7 +70,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/name_loop_loop_hint"
-            app:placeholderText="0 1 2">
+            app:placeholderText="1 2 3">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/edit"
