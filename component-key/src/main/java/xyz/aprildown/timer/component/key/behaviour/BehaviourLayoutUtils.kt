@@ -89,7 +89,7 @@ internal fun BehaviourEntity.getChipText(context: Context): String {
                             context.getString(RBase.string.skip_last)
                         }
                         is SkipAction.Target.Loops -> {
-                            target.loopNumbers.joinToString()
+                            target.loopNumbers.joinToString(separator = " ")
                         }
                     }
                 )
