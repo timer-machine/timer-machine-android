@@ -920,7 +920,7 @@ internal fun TimerEntity.shouldSkip(index: TimerIndex): Boolean {
         }
         is TimerIndex.Group -> {
             getStep(index)?.shouldSkip(
-                loopIndex = index.loopIndex,
+                loopIndex = index.groupStepIndex.loopIndex,
                 maxLoop = getGroup(index)?.loop ?: 0
             ) == true
         }
