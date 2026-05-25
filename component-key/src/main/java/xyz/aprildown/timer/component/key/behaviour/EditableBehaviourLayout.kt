@@ -6,7 +6,6 @@ import android.util.AttributeSet
 import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
-import android.view.View.OnClickListener
 import android.widget.ImageButton
 import androidx.annotation.ColorInt
 import androidx.annotation.EmptySuper
@@ -166,6 +165,7 @@ class EditableBehaviourLayout(
         val newView = generateBehaviourView(type)
         addView(newView, indexOfChild(binding.layoutBottomBar))
         data[type] = newView to behaviour
+        setViewWithEntity(behaviour)
 
         if (fromUser) {
             // If not fromUser, we update after add all behaviours.
@@ -217,7 +217,7 @@ class EditableBehaviourLayout(
     private fun createNewBehaviourChip(
         behaviourType: BehaviourType,
         @ColorInt chipColor: Int
-    ): Chip = (View.inflate(context, R.layout.view_behavior_chip, null) as Chip).apply {
+    ): Chip = (inflate(context, R.layout.view_behavior_chip, null) as Chip).apply {
         setChipIconResource(behaviourType.iconRes)
         setText(behaviourType.nameRes)
         chipBackgroundColor = chipColor.toColorStateList()
