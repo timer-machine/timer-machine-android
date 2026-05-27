@@ -12,7 +12,7 @@
 - Fixed: The app deletes a non-empty backup file when canceling export
 - Fixed: Screen brightness setting won't work with PiP
 - Fixed: Timer-running screen goes blank after configuration changes or process death
-- Fixed: Half and Count reminders don't work with loops
+- Fixed: Half and Count reminders don't work with Halt
 
 ## Before
 
