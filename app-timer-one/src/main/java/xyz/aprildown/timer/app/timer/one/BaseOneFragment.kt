@@ -189,10 +189,7 @@ abstract class BaseOneFragment<T : ViewBinding>(
             pipHelper?.dismissPipView()
             pipHelper = null
 
-            ScreenWakeLock.releaseScreenLock(
-                context = context,
-                screenTiming = getString(RBase.string.pref_screen_timing_value_timer)
-            )
+            ScreenWakeLock.releaseScreenLock()
         }
     }
 

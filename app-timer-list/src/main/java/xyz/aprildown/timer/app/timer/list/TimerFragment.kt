@@ -154,10 +154,7 @@ class TimerFragment :
 
     override fun onPause() {
         super.onPause()
-        ScreenWakeLock.releaseScreenLock(
-            context = requireActivity(),
-            screenTiming = getString(RBase.string.pref_screen_timing_value_timer)
-        )
+        ScreenWakeLock.releaseScreenLock()
     }
 
     override fun onStop() {

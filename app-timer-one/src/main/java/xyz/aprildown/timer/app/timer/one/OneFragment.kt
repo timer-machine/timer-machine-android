@@ -31,6 +31,7 @@ import xyz.aprildown.timer.app.base.data.PreferenceData.oneOneTimeSize
 import xyz.aprildown.timer.app.base.data.PreferenceData.oneOneUsingStep
 import xyz.aprildown.timer.app.base.data.PreferenceData.oneOneUsingTimingBar
 import xyz.aprildown.timer.app.base.data.PreferenceData.timePanels
+import xyz.aprildown.timer.app.base.utils.ScreenWakeLock
 import xyz.aprildown.timer.app.base.utils.produceTime
 import xyz.aprildown.timer.app.timer.one.databinding.FragmentOneBinding
 import xyz.aprildown.timer.app.timer.one.layout.TweakTimeLayout
@@ -302,6 +303,11 @@ class OneFragment :
                             toast = context.toast(RBase.string.pref_screen_title_on)
                         }
                     }
+                    ScreenWakeLock.releaseScreenLock()
+                    ScreenWakeLock.acquireScreenWakeLock(
+                        context = context,
+                        screenTiming = getString(RBase.string.pref_screen_timing_value_timer)
+                    )
                     menuItem.updateState()
                     return true
                 }

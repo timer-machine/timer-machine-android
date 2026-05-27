@@ -75,10 +75,7 @@ class OneActivity : BaseActivity(), OneActivityInterface {
 
     override fun onPause() {
         super.onPause()
-        ScreenWakeLock.releaseScreenLock(
-            context = this,
-            screenTiming = getString(RBase.string.pref_screen_timing_value_timer)
-        )
+        ScreenWakeLock.releaseScreenLock()
     }
 
     override fun setToolbarTitle(title: String) {

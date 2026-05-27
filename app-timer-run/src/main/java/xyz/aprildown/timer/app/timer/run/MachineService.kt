@@ -217,10 +217,7 @@ class MachineService :
 
     override fun cleanUpWorkArea() {
         ServiceWakeLock.releaseCpuLock()
-        ScreenWakeLock.releaseScreenLock(
-            context = this,
-            screenTiming = getString(RBase.string.pref_screen_timing_value_service)
-        )
+        ScreenWakeLock.releaseScreenLock()
         phoneCallReceiver?.unregister()
         phoneCallReceiver = null
         phoneCallPausedTimerIds = null
