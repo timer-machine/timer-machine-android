@@ -314,19 +314,23 @@ internal fun getPrevIndexWithStep(
 private inline fun TimerEntity.forEachStep(
     block: (index: TimerIndex, group: StepEntity.Group?, step: StepEntity.Step) -> Unit,
 ) {
-    var index = getFirstIndex()
-    val lastIndex = getLastIndex()
+    var index = getFirstIndexOrNull() ?: return
+    val lastIndex = getLastIndexOrNull() ?: return
     var step = getStep(index)
     while (step != null) {
         block(index, getGroup(index), step)
 
         if (index == lastIndex) break
 
-        index = getNextIndexWithStep(
-            steps = steps,
-            totalLoop = loop,
-            currentIndex = index,
-        ).first
+        index = if (steps.isNotEmpty()) {
+            getNextIndexWithStep(
+                steps = steps,
+                totalLoop = loop,
+                currentIndex = index,
+            ).first
+        } else {
+            lastIndex
+        }
         step = getStep(index)
     }
 }
@@ -356,8 +360,9 @@ fun TimerEntity.getGroup(index: TimerIndex): StepEntity.Group? {
     return steps.getOrNull(index.stepIndex) as? StepEntity.Group
 }
 
-fun TimerEntity.getFirstIndex(): TimerIndex {
+fun TimerEntity.getFirstIndexOrNull(): TimerIndex? {
     if (startStep != null) return TimerIndex.Start
+    if (steps.isEmpty()) return if (endStep != null) TimerIndex.End else null
     return when (steps[0]) {
         is StepEntity.Step -> TimerIndex.Step(loopIndex = 0, stepIndex = 0)
         is StepEntity.Group -> TimerIndex.Group(
@@ -368,8 +373,13 @@ fun TimerEntity.getFirstIndex(): TimerIndex {
     }
 }
 
-fun TimerEntity.getLastIndex(): TimerIndex {
+fun TimerEntity.getFirstIndex(): TimerIndex {
+    return checkNotNull(getFirstIndexOrNull()) { "No first index $this" }
+}
+
+fun TimerEntity.getLastIndexOrNull(): TimerIndex? {
     if (endStep != null) return TimerIndex.End
+    if (steps.isEmpty()) return if (startStep != null) TimerIndex.Start else null
     val lastIndex = steps.size - 1
     return when (val last = steps[lastIndex]) {
         is StepEntity.Step -> TimerIndex.Step(loopIndex = loop - 1, stepIndex = lastIndex)
@@ -384,6 +394,10 @@ fun TimerEntity.getLastIndex(): TimerIndex {
             )
         }
     }
+}
+
+fun TimerEntity.getLastIndex(): TimerIndex {
+    return checkNotNull(getLastIndexOrNull()) { "No last index $this" }
 }
 
 fun TimerEntity.getTimerLoop(index: TimerIndex): Int = when (index) {
