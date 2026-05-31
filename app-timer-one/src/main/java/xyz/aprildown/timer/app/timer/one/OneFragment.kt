@@ -5,19 +5,11 @@ import android.content.Context
 import android.content.pm.PackageManager
 import android.os.Build
 import android.os.Bundle
-import android.view.Menu
-import android.view.MenuInflater
-import android.view.MenuItem
 import android.view.View
-import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.core.content.edit
-import androidx.core.view.MenuItemCompat
-import androidx.core.view.MenuProvider
 import androidx.core.view.isVisible
 import com.github.deweyreed.tools.anko.dp
 import com.github.deweyreed.tools.anko.snackbar
-import com.github.deweyreed.tools.anko.toast
 import com.github.deweyreed.tools.arch.observeEvent
 import com.github.deweyreed.tools.arch.observeNonNull
 import com.github.deweyreed.tools.helper.hasPermissions
@@ -31,7 +23,6 @@ import xyz.aprildown.timer.app.base.data.PreferenceData.oneOneTimeSize
 import xyz.aprildown.timer.app.base.data.PreferenceData.oneOneUsingStep
 import xyz.aprildown.timer.app.base.data.PreferenceData.oneOneUsingTimingBar
 import xyz.aprildown.timer.app.base.data.PreferenceData.timePanels
-import xyz.aprildown.timer.app.base.utils.ScreenWakeLock
 import xyz.aprildown.timer.app.base.utils.produceTime
 import xyz.aprildown.timer.app.timer.one.databinding.FragmentOneBinding
 import xyz.aprildown.timer.app.timer.one.layout.TweakTimeLayout
@@ -42,7 +33,6 @@ import xyz.aprildown.timer.domain.entities.StepEntity
 import xyz.aprildown.timer.presentation.stream.TimerIndex
 import xyz.aprildown.timer.presentation.stream.getNiceLoopString
 import xyz.aprildown.timer.presentation.stream.getStep
-import xyz.aprildown.tools.helper.safeSharedPreference
 import xyz.aprildown.timer.app.base.R as RBase
 
 @AndroidEntryPoint
@@ -55,10 +45,9 @@ class OneFragment :
     ) {}
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        val context = view.context
+        super.onViewCreated(view, savedInstanceState)
         val binding = FragmentOneBinding.bind(view)
         setUpViews(binding)
-        setUpMenu(context)
         applySettings(binding)
         setUpObservers(binding)
     }
@@ -224,96 +213,6 @@ class OneFragment :
                 }
             }
         }.show(context, view)
-    }
-
-    private fun setUpMenu(context: Context) {
-        val sharedPreferences = context.safeSharedPreference
-        activity?.addMenuProvider(
-            object : MenuProvider {
-                private val id = View.generateViewId()
-                private var toast: Toast? = null
-
-                override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
-                    val menuItem =
-                        menu.add(0, id, 0, RBase.string.pref_screen_title)
-                    MenuItemCompat.setContentDescription(
-                        menuItem,
-                        context.getString(RBase.string.pref_screen_title)
-                    )
-                    menuItem.setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM)
-                    menuItem.updateState()
-                }
-
-                private fun MenuItem.updateState() {
-                    when (
-                        sharedPreferences.getString(
-                            PreferenceData.KEY_SCREEN,
-                            context.getString(RBase.string.pref_screen_value_default)
-                        )
-                    ) {
-                        context.getString(RBase.string.pref_screen_value_keep) -> {
-                            setIcon(RBase.drawable.settings_brightness_keep)
-                            setTitle(RBase.string.pref_screen_title_on)
-                        }
-                        context.getString(RBase.string.pref_screen_value_dim) -> {
-                            setIcon(RBase.drawable.settings_brightness_dim)
-                            setTitle(RBase.string.pref_screen_title_dim)
-                        }
-                        else -> {
-                            setIcon(RBase.drawable.settings_brightness)
-                            setTitle(RBase.string.pref_screen_title_default)
-                        }
-                    }
-                }
-
-                override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
-                    if (menuItem.itemId != id) return false
-                    toast?.cancel()
-                    when (
-                        context.safeSharedPreference.getString(
-                            PreferenceData.KEY_SCREEN,
-                            context.getString(RBase.string.pref_screen_value_default)
-                        )
-                    ) {
-                        context.getString(RBase.string.pref_screen_value_keep) -> {
-                            sharedPreferences.edit {
-                                putString(
-                                    PreferenceData.KEY_SCREEN,
-                                    context.getString(RBase.string.pref_screen_value_dim)
-                                )
-                            }
-                            toast = context.toast(RBase.string.pref_screen_title_dim)
-                        }
-                        context.getString(RBase.string.pref_screen_value_dim) -> {
-                            sharedPreferences.edit {
-                                putString(
-                                    PreferenceData.KEY_SCREEN,
-                                    context.getString(RBase.string.pref_screen_value_default)
-                                )
-                            }
-                            toast = context.toast(RBase.string.pref_screen_title_default)
-                        }
-                        else -> {
-                            sharedPreferences.edit {
-                                putString(
-                                    PreferenceData.KEY_SCREEN,
-                                    context.getString(RBase.string.pref_screen_value_keep)
-                                )
-                            }
-                            toast = context.toast(RBase.string.pref_screen_title_on)
-                        }
-                    }
-                    ScreenWakeLock.releaseScreenLock()
-                    ScreenWakeLock.acquireScreenWakeLock(
-                        context = context,
-                        screenTiming = getString(RBase.string.pref_screen_timing_value_timer)
-                    )
-                    menuItem.updateState()
-                    return true
-                }
-            },
-            viewLifecycleOwner
-        )
     }
 
     private fun applySettings(binding: FragmentOneBinding) {

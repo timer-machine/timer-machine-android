@@ -5,28 +5,39 @@ import android.content.Context
 import android.content.Intent
 import android.content.ServiceConnection
 import android.os.Build
+import android.os.Bundle
 import android.os.IBinder
 import android.provider.Settings
 import android.text.InputType
 import android.text.format.DateUtils
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import android.widget.CompoundButton
 import android.widget.EditText
+import android.widget.Toast
 import androidx.annotation.LayoutRes
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AlertDialog
+import androidx.core.content.edit
 import androidx.core.net.toUri
+import androidx.core.view.MenuItemCompat
+import androidx.core.view.MenuProvider
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.NavOptions
 import androidx.navigation.fragment.NavHostFragment
 import androidx.viewbinding.ViewBinding
 import com.github.deweyreed.tools.anko.longToast
+import com.github.deweyreed.tools.anko.toast
 import com.github.deweyreed.tools.arch.Event
 import com.github.deweyreed.tools.helper.createChooserIntentIfDead
+import com.github.deweyreed.tools.helper.getNonNullString
 import com.github.deweyreed.tools.helper.startActivityOrNothing
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import xyz.aprildown.timer.app.base.data.PreferenceData
 import xyz.aprildown.timer.app.base.ui.AppNavigator
 import xyz.aprildown.timer.app.base.ui.StepUpdater
 import xyz.aprildown.timer.app.base.utils.ScreenWakeLock
@@ -42,6 +53,7 @@ import xyz.aprildown.timer.presentation.stream.StreamState
 import xyz.aprildown.timer.presentation.stream.TimerIndex
 import xyz.aprildown.timer.presentation.stream.getLoop
 import xyz.aprildown.timer.presentation.stream.getStep
+import xyz.aprildown.tools.helper.safeSharedPreference
 import javax.inject.Inject
 import javax.inject.Provider
 import xyz.aprildown.timer.app.base.R as RBase
@@ -64,6 +76,103 @@ abstract class BaseOneFragment<T : ViewBinding>(
     private var isBind = false
 
     private var pipHelper: PipHelper? = null
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        setUpMenu()
+    }
+
+    private fun setUpMenu() {
+        val context = requireContext()
+        val sharedPreferences = context.safeSharedPreference
+        activity?.addMenuProvider(
+            object : MenuProvider {
+                private val id = View.generateViewId()
+                private var toast: Toast? = null
+
+                override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
+                    val menuItem =
+                        menu.add(0, id, 0, RBase.string.pref_screen_title)
+                    MenuItemCompat.setContentDescription(
+                        menuItem,
+                        context.getString(RBase.string.pref_screen_title)
+                    )
+                    menuItem.setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM)
+                    menuItem.updateState()
+                }
+
+                private fun MenuItem.updateState() {
+                    when (
+                        sharedPreferences.getString(
+                            PreferenceData.KEY_SCREEN,
+                            context.getString(RBase.string.pref_screen_value_default)
+                        )
+                    ) {
+                        context.getString(RBase.string.pref_screen_value_keep) -> {
+                            setIcon(RBase.drawable.settings_brightness_keep)
+                            setTitle(RBase.string.pref_screen_title_on)
+                        }
+                        context.getString(RBase.string.pref_screen_value_dim) -> {
+                            setIcon(RBase.drawable.settings_brightness_dim)
+                            setTitle(RBase.string.pref_screen_title_dim)
+                        }
+                        else -> {
+                            setIcon(RBase.drawable.settings_brightness)
+                            setTitle(RBase.string.pref_screen_title_default)
+                        }
+                    }
+                }
+
+                override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
+                    if (menuItem.itemId != id) return false
+                    toast?.cancel()
+                    when (
+                        context.safeSharedPreference.getString(
+                            PreferenceData.KEY_SCREEN,
+                            context.getString(RBase.string.pref_screen_value_default)
+                        )
+                    ) {
+                        context.getString(RBase.string.pref_screen_value_keep) -> {
+                            sharedPreferences.edit {
+                                putString(
+                                    PreferenceData.KEY_SCREEN,
+                                    context.getString(RBase.string.pref_screen_value_dim)
+                                )
+                            }
+                            toast = context.toast(RBase.string.pref_screen_title_dim)
+                        }
+                        context.getString(RBase.string.pref_screen_value_dim) -> {
+                            sharedPreferences.edit {
+                                putString(
+                                    PreferenceData.KEY_SCREEN,
+                                    context.getString(RBase.string.pref_screen_value_default)
+                                )
+                            }
+                            toast = context.toast(RBase.string.pref_screen_title_default)
+                        }
+                        else -> {
+                            sharedPreferences.edit {
+                                putString(
+                                    PreferenceData.KEY_SCREEN,
+                                    context.getString(RBase.string.pref_screen_value_keep)
+                                )
+                            }
+                            toast = context.toast(RBase.string.pref_screen_title_on)
+                        }
+                    }
+                    val timing = sharedPreferences.getNonNullString(
+                        name = PreferenceData.KEY_SCREEN_TIMING,
+                        default = context.getString(RBase.string.pref_screen_timing_value_default),
+                    )
+                    ScreenWakeLock.releaseScreenLock(context = context, screenTiming = timing)
+                    ScreenWakeLock.acquireScreenWakeLock(context = context, screenTiming = timing)
+                    menuItem.updateState()
+                    return true
+                }
+            },
+            viewLifecycleOwner
+        )
+    }
 
     override fun onStart() {
         super.onStart()
@@ -189,7 +298,10 @@ abstract class BaseOneFragment<T : ViewBinding>(
             pipHelper?.dismissPipView()
             pipHelper = null
 
-            ScreenWakeLock.releaseScreenLock()
+            ScreenWakeLock.releaseScreenLock(
+                context = context,
+                screenTiming = getString(RBase.string.pref_screen_timing_value_timer),
+            )
         }
     }
 

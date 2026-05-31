@@ -57,7 +57,8 @@ object ScreenWakeLock {
         ) == screenTiming
     }
 
-    fun releaseScreenLock() {
+    fun releaseScreenLock(context: Context, screenTiming: String) {
+        if (!isValidLocation(context, screenTiming)) return
         val wl = sScreenWakeLock
         if (wl != null && wl.isHeld) {
             wl.release()
