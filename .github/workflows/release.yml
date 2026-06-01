@@ -29,7 +29,7 @@ jobs:
       - name: Build Other Release APK
         run: ./gradlew app:assembleOtherRelease
 
-      - name: Create Prerelease and Upload APK
+      - name: Create Release and Upload APK
         uses: softprops/action-gh-release@v2
         with:
           body: "See [CHANGELOG.md](https://github.com/timer-machine/timer-machine-android/blob/main/CHANGELOG.md)"
