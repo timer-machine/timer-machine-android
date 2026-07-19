@@ -23,7 +23,7 @@
     <string name="cancel">Cancella</string>
     <string name="settings">Impostazioni</string>
     <string name="more">Altro</string>
-    <string name="undo">Indietro</string>
+    <string name="undo">Annulla</string>
     <string name="understand">Ho capito</string>
     <string name="start">Start</string>
     <string name="pause">Pausa</string>
@@ -158,7 +158,7 @@
     <string name="voice_step_duration">Durata del passaggio</string>
     <string name="edit_cant_move_start">Non è possibile muovere il passaggio iniziale</string>
     <string name="voice_variable_step_end_time_desp">Tempo di fine del passaggio</string>
-    <string name="edit_more_trigger">Inizia (di nuovo) dopo la fine del cronometro</string>
+    <string name="edit_more_trigger">Al termine del timer, avvia</string>
     <string name="voice_variable_timer_remaining_desp">Cronometro: tempo rimanente</string>
     <string name="voice_variable_group_name_desp">Nome del gruppo</string>
     <string name="voice_variable_timer_end_time_desp">Cronometro: tempo di fine</string>
@@ -187,7 +187,7 @@
     <string name="voice_variable_timer_remaining_percent_desp">Cronometro: tempo rimanente in %</string>
     <string name="voice_variable_group_end_time_desp">Tempo di fine del gruppo</string>
     <string name="beep_count_intro_0_meaning">0 riproduce il bip (in continuazione) fino alla fine del passaggio</string>
-    <string name="half_option">Memo a metà</string>
+    <string name="half_option">Promemoria intermedio</string>
     <string name="half_option_music">Musica</string>
     <string name="beep_respect_other">Rispetta gli altri suoni</string>
     <string name="beep_count_intro_usage">Inserire la durata del suono del bip</string>
@@ -606,4 +606,5 @@
     <string name="help_tutorial">Tutorial</string>
     <string name="help_feedback">Feedback</string>
     <string name="pref_screen_timing_title">Intervallo di applicazione luminosità dello schermo</string>
+    <string name="music_trim_step_duration">Regola la durata del passaggio</string>
 </resources>
