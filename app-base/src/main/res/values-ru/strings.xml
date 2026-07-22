@@ -309,7 +309,7 @@
     <string name="scheduler_set5">Планировщик сработает через <xliff:g example="2 minutes" id="MINUTES">%3$s</xliff:g></string>
     <string name="scheduler_set6">Планировщик сработает через <xliff:g example="2 days" id="DAYS">%1$s</xliff:g> и <xliff:g example="2 minutes" id="MINUTES">%3$s</xliff:g></string>
     <string name="help_whitelist">Инструкция по белому списку</string>
-    <string name="pref_screen_title">Яркость экрана</string>
+    <string name="pref_screen_title">Не выключать экран</string>
     <string name="pref_screen_title_on">Держать экран включённым</string>
     <string name="pref_screen_title_dim">Приглушить экран</string>
     <string name="whitelist_disclaimer_yes">Перейти к инструкции по снятию ограничений</string>
@@ -486,7 +486,7 @@
     <string name="pref_category_title_app">Настройки приложения</string>
     <string name="pref_category_title_timer_setting">Настройки таймера</string>
     <string name="pref_screen_title_default">Использовать системную по умолчанию</string>
-    <string name="pref_screen_timing_title">Тайминг яркости экрана приложения</string>
+    <string name="pref_screen_timing_title">Когда не выключать экран</string>
     <string name="pref_screen_timing_title_open">Когда приложение открыто</string>
     <string name="pref_screen_timing_title_running">Когда приложение открыто и запущен любой таймер</string>
     <string name="pref_notifier_plus_title">При добавлении времени на уведомлении</string>

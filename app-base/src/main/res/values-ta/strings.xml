@@ -314,9 +314,9 @@
     <string name="tweak_time_main_title">முதன்மையான பொத்தான்கள்</string>
     <string name="tweak_time_overflow_title">வழிதல் பொத்தான்கள்</string>
     <string name="pref_category_title_app">பயன்பாட்டு அமைப்புகள்</string>
-    <string name="pref_screen_title">திரை ஒளி</string>
+    <string name="pref_screen_title">திரையை இயக்கத்தில் வைத்திரு</string>
     <string name="pref_screen_title_default">கணினி இயல்புநிலையைப் பயன்படுத்தவும்</string>
-    <string name="pref_screen_timing_title">திரை ஒளி பயன்பாட்டு நேரம்</string>
+    <string name="pref_screen_timing_title">திரையை எப்போது இயக்கத்தில் வைப்பது</string>
     <string name="pref_tweak_time_off">முடக்கப்பட்டது</string>
     <string name="settings_floating_window_pip">மிதக்கும் சாளரம் &amp; பிப்</string>
     <string name="settings_floating_window_pip_auto_close_off">ஒரு நேரங்குறிகருவி முடிவடையும் போது, மிதக்கும் சாளரத்தை அல்லது பிப் திறந்து வைக்கவும்</string>

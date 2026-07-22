@@ -452,7 +452,7 @@
     <string name="tweak_time_overflow_title">Pulsanti in Overflow</string>
     <string name="pref_category_title_app">Impostazioni Applicazione</string>
     <string name="pref_category_title_timer_setting">Impostazioni Timer</string>
-    <string name="pref_screen_title">Luminosità Schermo</string>
+    <string name="pref_screen_title">Mantieni lo schermo acceso</string>
     <string name="pref_screen_title_on">Mantieni lo schermo acceso</string>
     <string name="pref_screen_title_dim">Oscura lo schermo</string>
     <string name="pref_screen_title_default">Usa il valore predefinito di sistema</string>
@@ -605,5 +605,5 @@
     <string name="help_email_title">Feedback su TimeR Machine</string>
     <string name="help_tutorial">Tutorial</string>
     <string name="help_feedback">Feedback</string>
-    <string name="pref_screen_timing_title">Intervallo di applicazione luminosità dello schermo</string>
+    <string name="pref_screen_timing_title">Quando mantenere lo schermo acceso</string>
 </resources>

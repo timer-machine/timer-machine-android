@@ -471,11 +471,11 @@
     <string name="pref_category_title_app">應用設置</string>
     <!--Timer preferences-->
     <string name="pref_category_title_timer_setting">計時器設置</string>
-    <string name="pref_screen_title">屏幕亮度</string>
+    <string name="pref_screen_title">保持屏幕常亮</string>
     <string name="pref_screen_title_on">常亮</string>
     <string name="pref_screen_title_dim">暗淡</string>
     <string name="pref_screen_title_default">默認</string>
-    <string name="pref_screen_timing_title">屏幕亮度應用時機</string>
+    <string name="pref_screen_timing_title">何時保持屏幕常亮</string>
     <string name="pref_screen_timing_title_open">當使用應用時</string>
     <string name="pref_screen_timing_title_running">當使用應用且有計時器運行時</string>
     <string name="pref_notifier_plus_title">在通知步驟增加時間時</string>

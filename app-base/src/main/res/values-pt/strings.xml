@@ -473,11 +473,11 @@
     <string name="tweak_time_overflow_title">Botões de transbordamento</string>
     <string name="pref_category_title_app">Configurações do aplicativo</string>
     <string name="pref_category_title_timer_setting">Configurações de temporizador</string>
-    <string name="pref_screen_title">Brilho da tela</string>
+    <string name="pref_screen_title">Manter a tela ligada</string>
     <string name="pref_screen_title_on">Manter a tela ligada</string>
     <string name="pref_screen_title_dim">Escurecer a tela</string>
     <string name="pref_screen_title_default">Usar padrão do sistema</string>
-    <string name="pref_screen_timing_title">Tempo de aplicação do brilho da tela</string>
+    <string name="pref_screen_timing_title">Quando manter a tela ligada</string>
     <string name="pref_screen_timing_title_open">Quando o aplicativo está aberto</string>
     <string name="pref_screen_timing_title_running">Quando o aplicativo está aberto e há algum temporizador em execução</string>
     <string name="pref_notifier_plus_title">Quando adicionar tempo num notificador</string>

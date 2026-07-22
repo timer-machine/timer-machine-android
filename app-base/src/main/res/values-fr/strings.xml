@@ -423,7 +423,7 @@
     <string name="tweak_time_overflow_title">Boutons en débordement</string>
     <string name="pref_category_title_app">Paramètres de l\'application</string>
     <string name="pref_category_title_timer_setting">Paramètres des minuteurs</string>
-    <string name="pref_screen_title">Luminosité de l\'écran</string>
+    <string name="pref_screen_title">Garder l\'écran allumé</string>
     <string name="pref_screen_title_on">Conserver l\'écran allumé</string>
     <string name="pref_screen_title_dim">Estomper l\'écran</string>
     <string name="pref_screen_title_default">Utiliser le fonctionnement par défaut du système</string>
@@ -605,6 +605,6 @@
     <string name="billing_help_title">Aide</string>
     <string name="billing_help_contact">Contact</string>
     <string name="whitelist_intro">La plupart des fabricants d\'appareils Android ferment par la force les applications qui s\'exécutent en tâche de fond, ce qui empêche ces applis de vous avertir comme elles le doivent.\n\nVeuillez autoriser le lancement au démarrage du téléphone, ainsi que l\'exécution en tâche de fond, désactivez l\'optimisation de la batterie, etc dans les paramètres.\n\nVoici quelques instructions :</string>
-    <string name="pref_screen_timing_title">Gestion de la luminosité</string>
+    <string name="pref_screen_timing_title">Quand garder l\'écran allumé</string>
     <string name="pref_media_style_notification">Notifications avec icônes d\'action</string>
 </resources>

@@ -490,8 +490,8 @@
     <string name="tweak_time_main_title">Botones principales</string>
     <string name="tweak_time_overflow_title">Botones de desbordamiento</string>
     <string name="pref_category_title_timer_setting">Ajustes de temporizador</string>
-    <string name="pref_screen_title">Brillo de la pantalla</string>
-    <string name="pref_screen_timing_title">Tiempo de aplicación del brillo de la pantalla</string>
+    <string name="pref_screen_title">Mantener la pantalla encendida</string>
+    <string name="pref_screen_timing_title">Cuándo mantener la pantalla encendida</string>
     <string name="pref_notifier_plus_title">Cuando añadas tiempo en un notificador</string>
     <string name="pref_tweak_time_title">Ajustes de horario avanzados</string>
     <string name="settings_floating_window_pip_auto_close_on">Cuando finalice un temporizador, cierre la ventana flotante o PIP</string>

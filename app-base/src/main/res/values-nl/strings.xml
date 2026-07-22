@@ -145,7 +145,7 @@
     <string name="edit_add_group">Groep</string>
     <string name="unknown">Onbekend</string>
     <string name="intro_exit_confirmation">De inleiding verlaten?</string>
-    <string name="pref_screen_timing_title">Schermhelderheid Applicatietiming</string>
+    <string name="pref_screen_timing_title">Wanneer het scherm aan blijft</string>
     <string name="billing_loading">Laden</string>
     <plurals name="days">
         <item quantity="one">1 dag</item>
@@ -286,7 +286,7 @@
     <string name="edit_import_from_the_clipboard">Importeren van klembord</string>
     <string name="theme_pick_presets">Voorinstellingen</string>
     <string name="exit">Verlaten</string>
-    <string name="pref_screen_title">Schermhelderheid</string>
+    <string name="pref_screen_title">Scherm aan houden</string>
     <string name="stop">Stop</string>
     <string name="scheduler_set5">Planner ingesteld voor <xliff:g example="2 minutes" id="MINUTES">%3$s</xliff:g> vanaf nu</string>
     <string name="behaviour_half">Halverwege</string>
