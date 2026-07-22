@@ -3,9 +3,9 @@ jvmTarget = "17"
 
 agp = "9.1.1"
 
-compileSdk = "36"
+compileSdk = "37"
 minSdk = "23"
-targetSdk = "36"
+targetSdk = "37"
 
 # F-Droid depends on the format of the two lines below to update
 versionCode = "7080001"
