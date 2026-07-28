@@ -1,7 +1,7 @@
 [versions]
 jvmTarget = "17"
 
-agp = "9.1.1"
+agp = "9.2.1"
 
 compileSdk = "37"
 minSdk = "23"

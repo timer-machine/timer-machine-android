@@ -39,20 +39,16 @@ tasks {
 
 gradlePlugin {
     plugins {
-        register("androidApplication") {
-            id = libs.plugins.convention.android.application.get().pluginId
+        register(libs.plugins.convention.android.application.get().pluginId) {
             implementationClass = "AndroidApplicationConventionPlugin"
         }
-        register("androidLibrary") {
-            id = libs.plugins.convention.android.library.get().pluginId
+        register(libs.plugins.convention.android.library.get().pluginId) {
             implementationClass = "AndroidLibraryConventionPlugin"
         }
-        register("androidLibraryCompose") {
-            id = libs.plugins.convention.android.libraryCompose.get().pluginId
+        register(libs.plugins.convention.android.libraryCompose.get().pluginId) {
             implementationClass = "AndroidLibraryComposeConventionPlugin"
         }
-        register("hilt") {
-            id = libs.plugins.convention.hilt.get().pluginId
+        register(libs.plugins.convention.hilt.get().pluginId) {
             implementationClass = "HiltConventionPlugin"
         }
     }
