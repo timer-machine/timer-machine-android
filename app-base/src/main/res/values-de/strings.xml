@@ -376,7 +376,7 @@
     <string name="pref_reminder">Erinnerung</string>
     <string name="pref_audio_focus_title_none">Keiner</string>
     <string name="pref_audio_type_title_media">Medien</string>
-    <string name="pref_audio_type_title_notification">Mitteilung</string>
+    <string name="pref_audio_type_title_notification">Benachrichtigung</string>
     <string name="pref_audio_type_title_alarm">Alarm</string>
     <string name="pref_audio_volume_title">Lautstärke</string>
     <string name="pref_about_title">Über</string>
@@ -424,7 +424,7 @@
     <string name="pref_tweak_time_off">Ausgeschaltet</string>
     <string name="pref_tts_bakery_off">Generieren Sie die Audiodatei jedes Text-automatisch-vorlesen-Inhalts für ein schnelleres Vorlesen</string>
     <string name="pref_reminder_baked_count_on">Eingeschaltet</string>
-    <string name="pref_category_notif">Mitteilungen</string>
+    <string name="pref_category_notif">Benachrichtigungen</string>
     <string name="intro_start_add_reminder">Klicken Sie auf ➕ unter der Schrittdauer, um eine Erinnerung hinzuzufügen. Fügen Sie <b>Musik</b> und <b>Vibrationen</b> hinzu.</string>
     <string name="billing_loading">Laden</string>
     <string name="billing_purchase">Kauf</string>
@@ -497,7 +497,7 @@
     <string name="import_wipe_warning">Dies wird aktuelle Daten löschen und dann die neuen Daten hinzufügen</string>
     <string name="pref_week_start_title">Woche beginnt am</string>
     <string name="pref_category_title_scheduler_setting">Zeitplaner-Einstellungen</string>
-    <string name="pref_open_notif_setting">Mitteilungs-Einstellungen öffnen</string>
+    <string name="pref_open_notif_setting">Benachrichtigungs-Einstellungen öffnen</string>
     <string name="pref_audio_focus_title_stop">Andere Musik stoppen</string>
     <string name="pref_audio_focus_title_pause">Andere Musik pausieren</string>
     <string name="intro_start_sample_timer_step2">Ende des Laufs</string>
@@ -569,4 +569,10 @@
     <string name="dark_theme_battery_saver">Durch Batteriesparmodus eingestellt</string>
     <string name="dark_theme_scheduled_dark_now">Zum dunklen Design gewechselt</string>
     <string name="dark_theme_scheduled_light_now">Switched to the light theme</string>
+    <string name="pref_screen_title">Bildschirm immer an lassen</string>
+    <string name="pref_screen_title_on">Bildschirm eingeschaltet lassen</string>
+    <string name="pref_screen_title_dim">Bildschirm dimmen</string>
+    <string name="pref_screen_title_default">Systemvoreinstellung</string>
+    <string name="pref_screen_timing_title_open">Wenn die App geöffnet ist</string>
+    <string name="pref_screen_timing_title_running">Wenn die App geöffnet ist und ein Timer läuft</string>
 </resources>
