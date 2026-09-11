@@ -8,7 +8,6 @@ import android.view.View
 import android.widget.ImageView
 import androidx.annotation.ColorInt
 import androidx.annotation.StringRes
-import androidx.core.os.bundleOf
 import androidx.fragment.app.DialogFragment
 import com.afollestad.materialdialogs.color.ColorChooserDialog
 import com.github.deweyreed.tools.helper.requireCallback
@@ -120,10 +119,10 @@ internal class CustomThemeDialog : DialogFragment(), ColorChooserDialog.ColorCal
 
         fun newInstance(@ColorInt primary: Int, @ColorInt secondary: Int): CustomThemeDialog =
             CustomThemeDialog().apply {
-                arguments = bundleOf(
-                    ARG_PRIMARY to primary,
-                    ARG_SECONDARY to secondary
-                )
+                arguments = Bundle().apply {
+                    putInt(ARG_PRIMARY, primary)
+                    putInt(ARG_SECONDARY, secondary)
+                }
             }
     }
 }

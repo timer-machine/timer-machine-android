@@ -157,7 +157,7 @@ class TimerViewModel @Inject constructor(
 
     fun deleteCurrentFolder() {
         val currentId = currentFolderId.value ?: return
-        launch(NonCancellable) {
+        launch {
             deleteFolder.get().invoke(currentId)
             refreshFolders()
             if (currentId != FolderEntity.FOLDER_DEFAULT && currentId != FolderEntity.FOLDER_TRASH) {
@@ -209,7 +209,7 @@ class TimerViewModel @Inject constructor(
         }
     }
 
-    fun deleteTimer(id: Int) = launch(NonCancellable) {
+    fun deleteTimer(id: Int) = launch {
         deleteTimer.get().invoke(id)
     }
 

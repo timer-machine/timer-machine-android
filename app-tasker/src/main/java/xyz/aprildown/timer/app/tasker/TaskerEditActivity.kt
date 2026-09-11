@@ -1,6 +1,5 @@
 package xyz.aprildown.timer.app.tasker
 
-import android.app.Activity
 import android.app.NotificationManager
 import android.content.Context
 import android.os.Build
@@ -10,7 +9,6 @@ import android.view.MenuItem
 import androidx.activity.viewModels
 import androidx.core.content.ContextCompat
 import androidx.core.content.getSystemService
-import androidx.core.os.bundleOf
 import com.joaomgcd.taskerpluginlibrary.action.TaskerPluginRunnerAction
 import com.joaomgcd.taskerpluginlibrary.config.TaskerPluginConfig
 import com.joaomgcd.taskerpluginlibrary.config.TaskerPluginConfigHelper
@@ -57,14 +55,17 @@ class TaskerEditActivity : BaseActivity(), TaskerPluginConfig<Unit> {
             TaskerInputInfos.fromBundle(
                 this,
                 Unit,
-                bundleOf(
-                    TASKER_TIMER_ID to (currentTimerInfo?.id ?: TimerEntity.NULL_ID),
-                    TASKER_ACTION to if (binding.radioTaskerEditStart.isChecked) {
-                        TASKER_ACTION_START
-                    } else {
-                        TASKER_ACTION_STOP
-                    }
-                )
+                Bundle().apply {
+                    putInt(TASKER_TIMER_ID, currentTimerInfo?.id ?: TimerEntity.NULL_ID)
+                    putString(
+                        TASKER_ACTION,
+                        if (binding.radioTaskerEditStart.isChecked) {
+                            TASKER_ACTION_START
+                        } else {
+                            TASKER_ACTION_STOP
+                        }
+                    )
+                }
             )
         )
 
@@ -121,7 +122,7 @@ class TaskerEditActivity : BaseActivity(), TaskerPluginConfig<Unit> {
                 return true
             }
             android.R.id.home -> {
-                setResult(Activity.RESULT_CANCELED)
+                setResult(RESULT_CANCELED)
                 finish()
                 return true
             }

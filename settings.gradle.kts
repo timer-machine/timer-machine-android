@@ -57,5 +57,4 @@ include(":app-analytics-fake")
 include(":flavor-google")
 include(":app-intro")
 include(":app")
-// TODO: Wait for a stable release that supports AGP 9
-// include(":baselineprofile")
+include(":baselineprofile")

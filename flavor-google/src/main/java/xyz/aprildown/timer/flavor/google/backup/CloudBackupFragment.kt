@@ -54,8 +54,8 @@ import xyz.aprildown.timer.flavor.google.showErrorDialog
 import xyz.aprildown.timer.flavor.google.utils.IapPromotionDialog
 import xyz.aprildown.timer.flavor.google.utils.causeFirstMessage
 import xyz.aprildown.tools.helper.safeSharedPreference
-import java.util.UUID
 import javax.inject.Inject
+import kotlin.uuid.Uuid
 import xyz.aprildown.timer.app.base.R as RBase
 
 @AndroidEntryPoint
@@ -293,7 +293,7 @@ internal class CloudBackupFragment : BasePreferenceFragmentCompat() {
                                 GetSignInWithGoogleOption.Builder(
                                     context.getString(R.string.default_web_client_id)
                                 )
-                                    .setNonce(UUID.randomUUID().toString())
+                                    .setNonce(Uuid.random().toHexDashString())
                                     .build()
                             )
                             .build()
@@ -316,7 +316,7 @@ internal class CloudBackupFragment : BasePreferenceFragmentCompat() {
             } catch (e: Exception) {
                 ensureActive()
                 e.printStackTrace()
-                requireView().longSnackbar(e.localizedMessage?.toString().toString())
+                requireView().longSnackbar(e.message.toString())
             }
         }
     }
@@ -357,9 +357,8 @@ internal class CloudBackupFragment : BasePreferenceFragmentCompat() {
                         CloudBackup.cancel(context, currentBackupState)
                         onAccountPaymentChanged()
                     } catch (e: Exception) {
-                        requireView().longSnackbar(
-                            e.localizedMessage?.toString().toString()
-                        )
+                        ensureActive()
+                        requireView().longSnackbar(e.message.toString())
                     } finally {
                         loadingDialog.dismiss()
                     }
@@ -410,7 +409,8 @@ internal class CloudBackupFragment : BasePreferenceFragmentCompat() {
                     CloudBackup.cancel(context, currentBackupState)
                     onAccountPaymentChanged()
                 } catch (e: Exception) {
-                    requireView().longSnackbar(e.localizedMessage?.toString().toString())
+                    ensureActive()
+                    requireView().longSnackbar(e.message.toString())
                 } finally {
                     loadingDialog.dismiss()
                 }

@@ -22,6 +22,7 @@ import android.content.Intent
 import android.content.IntentFilter
 import android.media.AudioManager
 import android.net.Uri
+import android.os.Bundle
 import android.os.Handler
 import android.os.HandlerThread
 import android.os.Looper
@@ -30,7 +31,6 @@ import android.telecom.TelecomManager
 import androidx.core.content.ContextCompat
 import androidx.core.content.getSystemService
 import androidx.core.os.BundleCompat
-import androidx.core.os.bundleOf
 import androidx.media3.common.AudioAttributes
 import androidx.media3.common.C
 import androidx.media3.common.MediaItem
@@ -83,12 +83,12 @@ internal class AsyncRingtonePlayer(private val mContext: Context) {
         synchronized(this) {
             val message = mHandler.obtainMessage(messageCode)
             if (ringtoneUri != null) {
-                message.data = bundleOf(
-                    RINGTONE_URI_KEY to ringtoneUri,
-                    LOOP to loop,
-                    AUDIO_FOCUS_TYPE to audioFocusType,
-                    STREAM_TYPE to streamType
-                )
+                message.data = Bundle().apply {
+                    putParcelable(RINGTONE_URI_KEY, ringtoneUri)
+                    putBoolean(LOOP, loop)
+                    putInt(AUDIO_FOCUS_TYPE, audioFocusType)
+                    putInt(STREAM_TYPE, streamType)
+                }
             }
 
             mHandler.sendMessage(message)

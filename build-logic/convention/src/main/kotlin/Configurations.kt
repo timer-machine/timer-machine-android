@@ -23,7 +23,6 @@ internal fun Project.configureKotlin() {
             jvmTarget.set(
                 JvmTarget.fromTarget(libs.findVersion("jvmTarget").get().toString())
             )
-            freeCompilerArgs.add("-Xannotation-default-target=param-property")
         }
     }
 }

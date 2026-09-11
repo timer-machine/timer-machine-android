@@ -4,6 +4,7 @@ import android.app.Application
 import android.content.Context
 import android.media.AudioManager
 import android.net.Uri
+import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.speech.tts.TextToSpeech
@@ -11,9 +12,11 @@ import android.speech.tts.UtteranceProgressListener
 import android.text.format.DateUtils
 import androidx.core.content.getSystemService
 import androidx.core.net.toUri
-import androidx.core.os.bundleOf
 import androidx.core.os.postDelayed
 import com.github.deweyreed.timer.component.tts.TtsSpeaker.onDone
+import com.github.deweyreed.timer.component.tts.TtsSpeaker.onStart
+import com.github.deweyreed.timer.component.tts.TtsSpeaker.oneShot
+import com.github.deweyreed.timer.component.tts.TtsSpeaker.scheduleClean
 import com.github.deweyreed.tools.anko.longToast
 import com.github.deweyreed.tools.helper.HandlerHelper
 import kotlinx.coroutines.Dispatchers
@@ -326,9 +329,9 @@ private class WelcomingTextToSpeech(
             textToSpeech.speak(
                 text,
                 TextToSpeech.QUEUE_FLUSH,
-                bundleOf(
-                    TextToSpeech.Engine.KEY_PARAM_STREAM to streamType
-                ),
+                Bundle().apply {
+                    putInt(TextToSpeech.Engine.KEY_PARAM_STREAM, streamType)
+                },
                 text.hashCode().toString()
             )
             if (isTtsBakeryOpen) {

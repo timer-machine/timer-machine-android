@@ -7,7 +7,6 @@ import android.view.ViewStub
 import android.widget.CompoundButton
 import androidx.annotation.LayoutRes
 import androidx.appcompat.app.AlertDialog
-import androidx.core.os.bundleOf
 import androidx.core.view.isVisible
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.viewModels
@@ -68,7 +67,7 @@ class TimerPicker : DialogFragment() {
 
         dialog.setOnShowListener {
             dialog.getButton(AlertDialog.BUTTON_POSITIVE).setOnClickListener {
-                val allSelected = selectExtension.selectedItems.mapNotNull { it as? TimerItem }
+                val allSelected = selectExtension.selectedItems.filterIsInstance<TimerItem>()
                 if (allSelected.isNotEmpty()) {
                     val firstFolder = allSelected.first().parent as? FolderItem
                     callback?.invoke(
@@ -211,10 +210,10 @@ class TimerPicker : DialogFragment() {
             f: (AppNavigator.PickTimerResult) -> Unit
         ): TimerPicker {
             return TimerPicker().apply {
-                arguments = bundleOf(
-                    EXTRA_MULTI to multi,
-                    EXTRA_SELECT to select.toIntArray()
-                )
+                arguments = Bundle().apply {
+                    putBoolean(EXTRA_MULTI, multi)
+                    putIntArray(EXTRA_SELECT, select.toIntArray())
+                }
                 callback = f
             }
         }

@@ -6,7 +6,7 @@ plugins {
     alias(libs.plugins.convention.hilt)
 
     alias(libs.plugins.dependencyGuard)
-    // alias(libs.plugins.androidx.baselineprofile)
+    alias(libs.plugins.androidx.baselineprofile)
 
     alias(libs.plugins.gms)
     alias(libs.plugins.firebase.crashlytics)
@@ -60,13 +60,9 @@ android {
             signingConfigs.findByName(signingConfigName)?.let {
                 signingConfig = it
             }
-
-            isMinifyEnabled = true
-            isShrinkResources = true
-            proguardFiles(
-                getDefaultProguardFile("proguard-android-optimize.txt"),
-                "proguard-rules.pro"
-            )
+            optimization {
+                enable = true
+            }
         }
     }
 
@@ -126,7 +122,7 @@ dependencies {
     "dogImplementation"(project(":app-analytics-fake"))
     "otherImplementation"(project(":app-analytics-fake"))
 
-    // baselineProfile(project(":baselineprofile"))
+    baselineProfile(project(":baselineprofile"))
 
     implementation(libs.tools)
 

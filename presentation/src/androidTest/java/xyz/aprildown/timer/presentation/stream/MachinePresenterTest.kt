@@ -21,7 +21,9 @@ import xyz.aprildown.timer.domain.repositories.AppDataRepository
 import xyz.aprildown.timer.domain.repositories.TimerRepository
 import xyz.aprildown.timer.domain.usecases.record.AddTimerStamp
 import xyz.aprildown.timer.domain.usecases.timer.GetTimer
+import kotlin.time.Duration.Companion.milliseconds
 import kotlin.time.Duration.Companion.minutes
+import kotlin.time.Duration.Companion.seconds
 
 @RunWith(AndroidJUnit4::class)
 @LargeTest
@@ -66,9 +68,9 @@ class MachinePresenterTest {
             assertFalse(view.vibrating)
             assertFalse(view.showingScreen)
             assertFalse(view.reading)
-            delay(100)
+            delay(100.milliseconds)
             assertTrue(view.remaining in 58_000..60_000)
-            delay(5_000)
+            delay(5.seconds)
             assertTrue(view.remaining in 54_000..56_000)
 
             presenter.pauseTimer(id)
@@ -79,7 +81,7 @@ class MachinePresenterTest {
             presenter.startTimer(id)
             assertTrue(view.running)
             assertTrue(view.timerIdAndState[id]?.isRunning ?: false)
-            delay(5_000)
+            delay(5.seconds)
             assertTrue(view.remaining in 49_000..54_000)
 
             // To second step
@@ -91,7 +93,7 @@ class MachinePresenterTest {
             assertTrue(view.vibrating)
             assertFalse(view.showingScreen)
             assertFalse(view.reading)
-            delay(100)
+            delay(100.milliseconds)
             assertTrue(view.remaining in 4_500..5_100)
 
             // plus one causing go back to the last step
@@ -137,8 +139,7 @@ class MachinePresenterTest {
             timerIdAndState.remove(id)
         }
 
-        override fun stopForegroundState() {
-        }
+        override fun stopForegroundState() = Unit
 
         override fun createForegroundNotif() {
             running = true

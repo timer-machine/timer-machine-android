@@ -14,7 +14,6 @@ import android.widget.EditText
 import android.widget.ScrollView
 import android.widget.TextView
 import androidx.activity.OnBackPressedCallback
-import androidx.core.os.bundleOf
 import androidx.core.view.MenuProvider
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
@@ -393,6 +392,10 @@ class EditSchedulerFragment : Fragment(R.layout.fragment_edit_scheduler), MenuPr
     companion object {
         private const val ARG_ID = "id"
 
-        fun getBundle(schedulerId: Int): Bundle = bundleOf(ARG_ID to schedulerId)
+        fun getBundle(schedulerId: Int): Bundle {
+            return Bundle().apply {
+                putInt(ARG_ID, schedulerId)
+            }
+        }
     }
 }

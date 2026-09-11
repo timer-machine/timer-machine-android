@@ -19,9 +19,9 @@ import kotlinx.coroutines.withContext
 import timber.log.Timber
 import xyz.aprildown.timer.domain.di.IoDispatcher
 import java.io.File
-import java.util.UUID
 import kotlin.coroutines.resume
 import kotlin.coroutines.resumeWithException
+import kotlin.uuid.Uuid
 
 @HiltWorker
 internal class TtsBakeryWorker @AssistedInject constructor(
@@ -76,7 +76,7 @@ internal class TtsBakeryWorker @AssistedInject constructor(
         if (!folder.exists()) {
             folder.mkdirs()
         }
-        val file = File(folder, UUID.randomUUID().toString())
+        val file = File(folder, Uuid.random().toHexDashString())
         textToSpeech.synthesizeToFile(text, file)
         TtsBakeryDiskCache.put(applicationContext, text, file)
     }
